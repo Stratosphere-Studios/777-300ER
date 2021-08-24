@@ -1,0 +1,1 @@
+The files in this folder all came from the default 737-800 (which is legal). Obviously there are some differences but I plan to use some of these on the 777 instead of the ugly default displays until @matt726+S finishes the custom ones.

@@ -59,4 +59,4 @@ Potatohead123: Landing gear, cockpit, engines.
 
 [mSparks43](https://github.com/msparks43/) and the [Sparky744 Project](https://github.com/mSparks43/747-400), along with all its contributors: XTLua, help, and some borrowed code (within license restrictions)
 
-[Spherrical](https://github.com/Spherrical/): Graphics, bot development.
+[Spherrical](https://github.com/Spherrical/): Graphic Designer and Bot Development
