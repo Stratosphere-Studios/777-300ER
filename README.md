@@ -25,7 +25,7 @@ A: As we are very early in development, and have no release date at this time.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
-A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwMRt) You can also see a detailed changelog [here](https://github.com/StratosphereStudios/777/commits/main).
+A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwMRt) You can also see a detailed changelog [here](https://github.com/Stratosphere-Studios/777/commits/main).
 
 **Q: What is the black console window that appears when I start the aircraft?**
 
@@ -33,11 +33,11 @@ A: Don't close it. It helps the developers find bugs and fix them. If you close 
 
 **Q: How do I start the aircraft?**
 
-A: As of now, you can't start the plane from cold and dark because systems have not been implemented yet. For now, enable "Start with engines running" in the aircraft menu. When systems are implemented, you should follow the checklists and manuals found [here.](https://github.com/StratosphereStudios/777/tree/main/Documentation)
+A: As of now, you can't start the plane from cold and dark because systems have not been implemented yet. For now, enable "Start with engines running" in the aircraft menu. When systems are implemented, you should follow the checklists and manuals found [here.](https://github.com/Stratosphere-Studios/777/tree/main/Documentation)
 
 **Q: How can I contribute to this aircraft?**
 
-A: Please use the [Github issue page](https://github.com/StratosphereStudios/777/issues) to report any problems you find. This will greatly help us fix issues.
+A: Please use the [Github issue page](https://github.com/Stratosphere-Studios/777/issues) to report any problems you find. This will greatly help us fix issues.
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
