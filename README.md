@@ -11,10 +11,11 @@ Freeware Boeing 777-300ER for X-Plane 11, made by Stratosphere Studios
 
 (As of June 21, 2021):
 
-- Work in progress fuselage
+- Work in progress cabin. Majority of cockpit modeling and texturing is complete.
+- Work in progress exterior. Modelling nearly complete, texturing is still a WIP.
 - Work in progress animations
 - High quality GE90 FMOD Soundpack
-- Basic manipulator code for systems (which will come soon)
+- Basic manipulator code (Both FMSs, the MCP, radios, and part of the overhead.
 - Nearly complete 3D cockpit
 
 ## FAQ
@@ -46,12 +47,15 @@ Just extract the aircraft folder and move it to your X-Plane aircraft folder. Fo
 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) in order to use this aircraft.
 
+## OLD REPOSITORY
+If you want to see more update history, you can check our [old repository.](https://github.com/StratosphereStudios/777)
+
 ## CREDITS
-[Nathroxer (Head)](https://github.com/nathroxer): Cockpit, instruments, animations, aircraft exterior, acf file.
+[Nathroxer (Head)](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[Matt726](https://github.com/Matt726-S): Sounds, Documentation.
+[Matt726](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
-[Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model, documenation
+[Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model + other aircraft data, manipulators, documenation, Github management.
 
 [zeta976](https://github.com/zeta976): Modeling, airfoils, flight model, documentation.
 
@@ -59,6 +63,7 @@ Potatohead123: Landing gear, cockpit, engines.
 
 [mSparks43](https://github.com/msparks43/) and the [Sparky744 Project](https://github.com/mSparks43/747-400), along with all its contributors: XTLua, help, and some borrowed code (within license restrictions)
 
-[Spherrrical](https://github.com/Spherrrical/): Graphic Designer and Bot Development
+Phill Paysse: Fuselage and wings.
 
+[Spherrrical](https://github.com/Spherrrical/): Graphicdesign, Discord bot, Github management.
 
