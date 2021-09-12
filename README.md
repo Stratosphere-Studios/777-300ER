@@ -55,7 +55,7 @@ If you want to see more update history, you can check our [old repository.](http
 
 [Matt726](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
-[Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model + other aircraft data, manipulators, documenation, Github management.
+[Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model + other aircraft data, manipulators, readme, Github management.
 
 [zeta976](https://github.com/zeta976): Modeling, airfoils, flight model, documentation.
 
