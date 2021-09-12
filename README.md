@@ -65,5 +65,5 @@ Potatohead123: Landing gear, cockpit, engines.
 
 Phill Paysse: Fuselage and wings.
 
-[Spherrrical](https://github.com/Spherrrical/): Graphicdesign, Discord bot, Github management.
+[Spherrrical](https://github.com/Spherrrical/): Graphic design, Discord bot, Github management.
 
