@@ -30,4 +30,4 @@ If applicable, add screenshots or videos to help explain your problem.
 
 
 
-**IMPORTANT: Make sure you have read the readme instructions BEFORE you post this issue. If you still have the issue, please ensure you have filled out all entries above with CLEAR, CONCISE answers. If so, you may delete this line and post your issue. Deleting this line shows that you have read the readme!**
+**IMPORTANT: Make sure you have read the readme instructions BEFORE you post this issue. If you still have the issue, please ensure you have filled out all entries above with CLEAR, CONCISE answers. If so, you may delete this message and post your issue. Deleting this messahe shows that you have read the readme!**
