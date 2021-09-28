@@ -571,7 +571,6 @@ end
 --function before_physics()
 
 function after_physics()
-   print("XTLua Works! MAKE THE MANIPULATORS NATHROXER, I ALREADY MADE THE COMMANDS FOR THEM, YOU HAVE NO EXCUSE")
 end
 
 --function after_replay()
