@@ -77,10 +77,10 @@ simDR_enginesRunning                      = find_dataref("sim/flightmodel/engine
 
 function B777_ovhd_c_ext_pwr_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[7] == 0 then 
-         if simDR_groundSpeed < 5 and simDR_onGround == 1 or (simDR_enginesRunning[0] == 1 or simDR_enginesRunning[1] == 1) then
+      if B777DR_ovhd_ctr_button_positions[7] == 0 then  
+         B777DR_ovhd_ctr_button_positions[7] = 1
+         if simDR_groundSpeed < 5 and simDR_onGround == 1 and simDR_enginesRunning[0] == 0 and simDR_enginesRunning[1] == 0 then
             simCMD_ovhd_gpu_on:once()
-            B777DR_ovhd_ctr_button_positions[7] = 1
          end
       elseif B777DR_ovhd_ctr_button_positions[7] == 1 then
          simCMD_ovhd_gpu_off:once()
