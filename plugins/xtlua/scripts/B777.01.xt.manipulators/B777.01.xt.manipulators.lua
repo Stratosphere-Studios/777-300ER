@@ -68,6 +68,8 @@ B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit
 
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/buttons/position", "array[18]")
 
+B777DR_anim_test                          = deferred_dataref("Strato/777/anim_test", "number")
+
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
 --*************************************************************************************--
@@ -531,6 +533,19 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 --GEAR LEVER USES DEFAULT DATAREF: sim/cockpit/switches/gear_handle_status
 
+
+
+function B777_anim_test_CMDhandler()
+	B777DR_anim_test = B777_set_animation_position(0, 10, 0, 10, 5)
+end
+
+B777CMD_anim_test                         = deferred_command("Strato/B777/anim_test", "Animation Test", B777_anim_test_CMDhandler)
+
+function B777_anim_test_rst()
+	B777DR_anim_test = 0
+end
+
+	
 --*************************************************************************************--
 --**                                       CODE                                      **--
 --*************************************************************************************--
@@ -548,6 +563,16 @@ function B777_set_animation_position(current_value, target, min, max, speed)
        return current_value + ((target - current_value) * fps_factor)
    end
 
+end
+
+function B777_anim_test_CMDhandler()
+	B777DR_anim_test = B777_set_animation_position(0, 10, 0, 10, 5)
+end
+
+B777CMD_anim_test                         = deferred_command("Strato/B777/anim_test", "Animation Test", B777_anim_test_CMDhandler)
+
+function B777_anim_test_rst()
+	B777DR_anim_test = 0
 end
 
 --*************************************************************************************--
@@ -571,6 +596,11 @@ end
 --function before_physics()
 
 function after_physics()
+	if B777DR_anim_test == 10 then
+		if is_timer_scheduled(B777_anim_test_rst) == false then
+			run_after_time(B777_anim_test_rst, 2)
+		end
+	end
 end
 
 --function after_replay()
