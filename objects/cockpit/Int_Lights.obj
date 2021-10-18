@@ -1,0 +1,10 @@
+I
+800
+OBJ
+
+POINT_COUNTS	0	0	0	0
+
+	LIGHT_PARAM	airplane_landing_sp 0.00000077 0.75200212 -32.134426 1 1 1 0 10 1
+	LIGHT_PARAM	airplane_landing_sp 0.00000077 0.75200212 -32.980621 1 1 1 0 10 1
+
+# Build with Blender 2.91.2 (build b'5be9ef417703'). Exported with XPlane2Blender 4.0.0-beta.2+88.20200622173550
