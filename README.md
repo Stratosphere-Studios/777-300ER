@@ -9,14 +9,12 @@ Freeware Boeing 777-300ER for X-Plane 11, made by Stratosphere Studios
 
 ## FEATURES:
 
-(As of June 21, 2021):
+(As of October 29, 2021):
 
-- Work in progress cabin. Majority of cockpit modeling and texturing is complete.
-- Work in progress exterior. Modelling nearly complete, texturing is still a WIP.
-- Work in progress animations
-- High quality GE90 FMOD Soundpack
-- Basic manipulator code (Both FMSs, the MCP, radios, and part of the overhead.
-- Nearly complete 3D cockpit
+- Work in progress cabin, exterior texturing, and animations.
+- Completed cockpit modelling/texturing, improvements still to come.
+- High quality GE90 FMOD Soundpack.
+- A few manipulators in 3D cockpit, and their code (Both FMSs, the MCP, radios, and part of the overhead).
 
 ## FAQ
 
