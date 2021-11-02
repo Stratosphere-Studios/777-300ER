@@ -9,14 +9,12 @@ Freeware Boeing 777-300ER for X-Plane 11, made by Stratosphere Studios
 
 ## FEATURES:
 
-(As of June 21, 2021):
+(As of October 29, 2021):
 
-- Work in progress cabin. Majority of cockpit modeling and texturing is complete.
-- Work in progress exterior. Modelling nearly complete, texturing is still a WIP.
-- Work in progress animations
-- High quality GE90 FMOD Soundpack
-- Basic manipulator code (Both FMSs, the MCP, radios, and part of the overhead.
-- Nearly complete 3D cockpit
+- Work in progress cabin, exterior texturing, and animations.
+- Completed cockpit modelling/texturing, improvements still to come.
+- High quality GE90 FMOD Soundpack.
+- A few manipulators in 3D cockpit, and their code (Both FMSs, the MCP, radios, and part of the overhead).
 
 ## FAQ
 
@@ -61,7 +59,7 @@ If you want to see more update history, you can check our [old repository.](http
 
 Potatohead123: Landing gear, cockpit, engines.
 
-[mSparks43](https://github.com/msparks43/) and the [Sparky744 Project](https://github.com/mSparks43/747-400), along with all its contributors: XTLua, help, and some borrowed code (within license restrictions)
+[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: XTLua, help, and some borrowed code (within license restrictions)
 
 Phill Paysse: Fuselage and wings.
 
