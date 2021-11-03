@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -3.965217590
+P _door/0/_ang_now -52.136726379
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 3.965217590
+P _door/1/_ang_now 52.136726379
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 3.965217590
+P _door/2/_ang_now 52.136726379
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 49.061531067
+P _door/3/_ang_now 0.0
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -49.061531067
+P _door/4/_ang_now 0.0
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -46.479347229
+P _door/7/_ang_now 0.0
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 46.479347229
+P _door/8/_ang_now 0.0
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -3.965217590
+P _door/9/_ang_now -52.136726379
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,7 +213,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 5.319190979
+P _gear/0/_lonN 69.939506531
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303177.593750000
 P _gear/0/_stat_def 0.387719005
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -0.725344658
+P _gear/1/_axiN -9.537205696
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 18.0
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -3.965217590
+P _gear/1/_latN -52.136726379
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -8.177942276
+P _gear/1/_lonN 1.808833122
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303177.593750000
-P _gear/1/_stat_def 1.087627888
+P _gear/1/_stat_def 1.087627769
 P _gear/1/_steerdeg_hispeed 0.0
 P _gear/1/_steerdeg_lospeed 0.0
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.870000005
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 0.725344658
+P _gear/2/_axiN 9.537205696
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -18.0
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 3.965217590
+P _gear/2/_latN 52.136726379
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -8.177942276
+P _gear/2/_lonN 1.808833122
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303177.593750000
-P _gear/2/_stat_def 1.087627888
+P _gear/2/_stat_def 1.087627769
 P _gear/2/_steerdeg_hispeed 0.0
 P _gear/2/_steerdeg_lospeed 0.0
 P _gear/2/_strut_comp 0.0
@@ -682,7 +682,7 @@ P _obja/15/_v10_att_z_acf_prt_ref 100.0
 P _obja/15/_v10_is_internal 141358
 P _obja/15/_v10_steers_with_gear 0
 P _obja/16/_obj_flags 20
-P _obja/16/_v10_att_file_stl fues_1.obj
+P _obja/16/_v10_att_file_stl fuse_1.obj
 P _obja/16/_v10_att_part -1
 P _obja/16/_v10_att_phi_ref 0.0
 P _obja/16/_v10_att_psi_ref 0.0
@@ -693,7 +693,7 @@ P _obja/16/_v10_att_z_acf_prt_ref 100.0
 P _obja/16/_v10_is_internal 568614
 P _obja/16/_v10_steers_with_gear 0
 P _obja/17/_obj_flags 20
-P _obja/17/_v10_att_file_stl fues_2.obj
+P _obja/17/_v10_att_file_stl fuse_2.obj
 P _obja/17/_v10_att_part -1
 P _obja/17/_v10_att_phi_ref 0.0
 P _obja/17/_v10_att_psi_ref 0.0
@@ -704,7 +704,7 @@ P _obja/17/_v10_att_z_acf_prt_ref 100.0
 P _obja/17/_v10_is_internal 939942
 P _obja/17/_v10_steers_with_gear 0
 P _obja/18/_obj_flags 20
-P _obja/18/_v10_att_file_stl fues_3.obj
+P _obja/18/_v10_att_file_stl fuse_3.obj
 P _obja/18/_v10_att_part -1
 P _obja/18/_v10_att_phi_ref 0.0
 P _obja/18/_v10_att_psi_ref 0.0
@@ -791,6 +791,28 @@ P _obja/24/_v10_att_y_acf_prt_ref 0.0
 P _obja/24/_v10_att_z_acf_prt_ref 100.0
 P _obja/24/_v10_is_internal 271598
 P _obja/24/_v10_steers_with_gear 0
+P _obja/25/_obj_flags 9
+P _obja/25/_v10_att_file_stl cockpit/cockpit_glass.obj
+P _obja/25/_v10_att_part -1
+P _obja/25/_v10_att_phi_ref 0.0
+P _obja/25/_v10_att_psi_ref 0.0
+P _obja/25/_v10_att_the_ref 0.0
+P _obja/25/_v10_att_x_acf_prt_ref 0.0
+P _obja/25/_v10_att_y_acf_prt_ref 0.0
+P _obja/25/_v10_att_z_acf_prt_ref 100.0
+P _obja/25/_v10_is_internal 301946
+P _obja/25/_v10_steers_with_gear 0
+P _obja/26/_obj_flags 16
+P _obja/26/_v10_att_file_stl glass.obj
+P _obja/26/_v10_att_part -1
+P _obja/26/_v10_att_phi_ref 0.0
+P _obja/26/_v10_att_psi_ref 0.0
+P _obja/26/_v10_att_the_ref 0.0
+P _obja/26/_v10_att_x_acf_prt_ref 0.0
+P _obja/26/_v10_att_y_acf_prt_ref 0.0
+P _obja/26/_v10_att_z_acf_prt_ref 100.0
+P _obja/26/_v10_is_internal 48270
+P _obja/26/_v10_steers_with_gear 0
 P _obja/3/_obj_flags 9
 P _obja/3/_v10_att_file_stl cockpit/cockpit_main.obj
 P _obja/3/_v10_att_part -1
@@ -824,8 +846,8 @@ P _obja/5/_v10_att_y_acf_prt_ref 0.0
 P _obja/5/_v10_att_z_acf_prt_ref 100.0
 P _obja/5/_v10_is_internal 892160
 P _obja/5/_v10_steers_with_gear 0
-P _obja/6/_obj_flags 13
-P _obja/6/_v10_att_file_stl cockpit/main_pnl.obj
+P _obja/6/_obj_flags 9
+P _obja/6/_v10_att_file_stl cockpit/manips.obj
 P _obja/6/_v10_att_part -1
 P _obja/6/_v10_att_phi_ref 0.0
 P _obja/6/_v10_att_psi_ref 0.0
@@ -833,10 +855,10 @@ P _obja/6/_v10_att_the_ref 0.0
 P _obja/6/_v10_att_x_acf_prt_ref 0.0
 P _obja/6/_v10_att_y_acf_prt_ref 0.0
 P _obja/6/_v10_att_z_acf_prt_ref 100.0
-P _obja/6/_v10_is_internal 474048
+P _obja/6/_v10_is_internal 772534
 P _obja/6/_v10_steers_with_gear 0
-P _obja/7/_obj_flags 9
-P _obja/7/_v10_att_file_stl cockpit/manips.obj
+P _obja/7/_obj_flags 13
+P _obja/7/_v10_att_file_stl cockpit/main_pnl.obj
 P _obja/7/_v10_att_part -1
 P _obja/7/_v10_att_phi_ref 0.0
 P _obja/7/_v10_att_psi_ref 0.0
@@ -844,7 +866,7 @@ P _obja/7/_v10_att_the_ref 0.0
 P _obja/7/_v10_att_x_acf_prt_ref 0.0
 P _obja/7/_v10_att_y_acf_prt_ref 0.0
 P _obja/7/_v10_att_z_acf_prt_ref 100.0
-P _obja/7/_v10_is_internal 772534
+P _obja/7/_v10_is_internal 474048
 P _obja/7/_v10_steers_with_gear 0
 P _obja/8/_obj_flags 13
 P _obja/8/_v10_att_file_stl cockpit/mcp.obj
@@ -868,7 +890,7 @@ P _obja/9/_v10_att_y_acf_prt_ref 0.0
 P _obja/9/_v10_att_z_acf_prt_ref 100.0
 P _obja/9/_v10_is_internal 777586
 P _obja/9/_v10_steers_with_gear 0
-P _obja/count 25
+P _obja/count 27
 P _panel_inst_3d 0
 P _part/0/_bot_s1 0.0
 P _part/0/_bot_s2 0.015625000
@@ -44793,7 +44815,7 @@ P acf/_has_get_tow 0
 P acf/_has_get_tow_new 0
 P acf/_has_give_tow 0
 P acf/_has_ground_pwr 1
-P acf/_has_hsi 1
+P acf/_has_hsi 0
 P acf/_has_pre_rotate 0
 P acf/_has_push_back 1
 P acf/_has_radio_alt_callout 1
@@ -45635,108 +45657,24 @@ PROPERTIES_END
 PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
-rad_CDU739_2d CDU739_2d.png
-  POS 798.500000 59.000000
+gen_rotary test
+  POS 429.500000 1333.000000
+  IMAGE meme
   DATAREF 
-  LIGHT_MODE MECHANICAL
+  SHOW_EQUAL 0.000000 sim/cockpit2/controls/gear_handle_down
+  LIGHT_MODE GLASS_AUTO
   LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_screen_2_HM blank_Medium_HM.png
-  POS 459.000000 197.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_asi_trend el_asi_trend.png
-  POS -109.000000 614.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_horizon el_horizon.png
-  POS 456.000000 187.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_altitude el_altitude.png
-  POS 527.000000 191.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_hsi_semiround el_hsi_semi_Circle.
-  POS 456.000000 110.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_vvi_vert el_vvi_vert.png
-  POS 555.000000 191.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_airspeed el_airspeed.png
-  POS 397.000000 191.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-EFIS_map_s_HM map_s_HM.png
-  POS 460.000000 -30.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-ECAM_carter ECAM_carter.png
-  POS -163.000000 933.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-ECAM_pie_EPR ECAM_pie_EPR.png
-  POS -132.500000 764.500000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-ECAM_pie_MP ECAM_pie_mp.png
-  POS -122.000000 703.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
-
-ECAM_mode_FAIL mode_FAIL.png
-  POS -146.000000 508.000000
-  DATAREF 
-  LIGHT_MODE MECHANICAL
-  LIGHT_RHEOSTAT 0
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 1.000000
+  BUS_SRC 4
+  CORNERS 0.000000 -1.000000  0.000000 0.000000  0.000000 0.000000  0.000000 -1.000000
+  DIGITS 1
+  ROTARY_TYPE NO_CLICK
+  CLICK_RADIUS 0.000000
+  CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
 
 PANEL_3D_END
