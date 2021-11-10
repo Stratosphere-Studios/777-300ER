@@ -102,6 +102,6 @@ B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
 
-B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/buttons/position", "array[18]")
+B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
 B777DR_anim_test                          = deferred_dataref("Strato/777/anim_test", "number")

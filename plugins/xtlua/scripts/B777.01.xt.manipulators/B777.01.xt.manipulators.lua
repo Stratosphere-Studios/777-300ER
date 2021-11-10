@@ -66,7 +66,7 @@ B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
 
-B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/buttons/position", "array[18]")
+B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
 B777DR_anim_test                          = deferred_dataref("Strato/777/anim_test", "number")
 
@@ -120,8 +120,6 @@ simCMD_ovhd_gen_1_on                    = find_command("sim/electrical/generator
 simCMD_ovhd_gen_1_off                   = find_command("sim/electrical/generator_1_off")
 simCMD_ovhd_gen_2_on                    = find_command("sim/electrical/generator_2_on")
 simCMD_ovhd_gen_2_off                   = find_command("sim/electrical/generator_2_off")
-simCMD_ovhd_gpu_on                      = find_command("sim/electrical/GPU_on")
-simCMD_ovhd_gpu_off                     = find_command("sim/electrical/GPU_off")
 
 --Aft-----
 
@@ -452,18 +450,6 @@ function B777_ovhd_c_eng_gen_r_switch_CMDhandler(phase, duration)
    end
 end
 
-function B777_ovhd_c_ext_pwr_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[7] == 0 then
-         simCMD_ovhd_gpu_on:once()
-         B777DR_ovhd_ctr_button_positions[7] = 1
-      elseif B777DR_ovhd_ctr_button_positions[7] == 1 then
-         simCMD_ovhd_gpu_off:once()
-         B777DR_ovhd_ctr_button_positions[7] = 0
-      end
-   end
-end
-
 --Aft-----
 
 
@@ -596,11 +582,19 @@ end
 --function before_physics()
 
 function after_physics()
+
 	if B777DR_anim_test == 10 then
 		if is_timer_scheduled(B777_anim_test_rst) == false then
 			run_after_time(B777_anim_test_rst, 2)
 		end
 	end
+
+   for i = 1, #B777DR_button_cover_positions do
+      if B777DR_button_cover_positions[i] == 1 then
+         print("Cover"..i.."open!")
+      end
+   end
+
 end
 
 --function after_replay()

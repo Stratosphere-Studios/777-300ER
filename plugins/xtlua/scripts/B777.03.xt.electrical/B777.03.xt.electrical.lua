@@ -45,7 +45,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 simDR_onGround                            = find_dataref("sim/flightmodel/failures/onground_any")
 simDR_groundSpeed                         = find_dataref("sim/flightmodel/position/groundspeed")
 simDR_enginesRunning                      = find_dataref("sim/flightmodel/engine/ENGN_running")
-
+simDR_gpuConnected                        = find_dataref("sim/cockpit/electrical/gpu_on")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -69,7 +69,8 @@ simDR_enginesRunning                      = find_dataref("sim/flightmodel/engine
 --**                                 X-PLANE COMMANDS                                **--
 --*************************************************************************************--
 
-
+simCMD_ovhd_gpu_on                      = find_command("sim/electrical/GPU_on")
+simCMD_ovhd_gpu_off                     = find_command("sim/electrical/GPU_off")
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
@@ -77,15 +78,16 @@ simDR_enginesRunning                      = find_dataref("sim/flightmodel/engine
 
 function B777_ovhd_c_ext_pwr_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[7] == 0 then  
-         B777DR_ovhd_ctr_button_positions[7] = 1
-         if simDR_groundSpeed < 5 and simDR_onGround == 1 and simDR_enginesRunning[0] == 0 and simDR_enginesRunning[1] == 0 then
-            simCMD_ovhd_gpu_on:once()
-         end
-      elseif B777DR_ovhd_ctr_button_positions[7] == 1 then
+      B777DR_ovhd_ctr_button_positions[7] = 1
+      if simDR_gpuConnected == 0 and simDR_groundSpeed < 5 and simDR_onGround == 1 and simDR_enginesRunning[0] == 0 and simDR_enginesRunning[1] == 0 then
+         simCMD_ovhd_gpu_on:once()
+      elseif simDR_gpuConnected == 1 then
          simCMD_ovhd_gpu_off:once()
-         B777DR_ovhd_ctr_button_positions[7] = 0
       end
+   elseif phase == 1 then
+      B777DR_ovhd_ctr_button_positions[7] = 1
+   elseif phase == 2 then
+      B777DR_ovhd_ctr_button_positions[7] = 0
    end
 end
 
@@ -117,6 +119,10 @@ end
 
 --function before_physics()
 
---function after_physics()
+function after_physics()
+   if simDR_gpuConnected == 1 and (simDR_groundSpeed > 5 or simDR_onGround ~= 1 or simDR_enginesRunning[0] ~= 0 or simDR_enginesRunning[1] ~= 0) then
+      simCMD_ovhd_gpu_off:once()
+   end
+end
 
 --function after_replay()
