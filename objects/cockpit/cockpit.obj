@@ -4,7 +4,7 @@ OBJ
 
 GLOBAL_cockpit_lit
 TEXTURE	../../cockpit_3d/-PANELS-/panel.png
-POINT_COUNTS	5784	0	0	5784
+POINT_COUNTS	5916	0	0	5916
 
 VT	-0.20485961	0.32429722	-33.361488	0	0.92759699	0.37358239	1	1
 VT	-0.20485961	0.31935635	-33.34922	0	0.92759699	0.37358239	1	0
@@ -2154,6 +2154,138 @@ VT	0.13735989	0.5847522	-33.561714	-1	0.00022384472	-0.0000578	0.58029437	0.4197
 VT	0.13735989	0.5847522	-33.561714	-1	0.00022384472	-0.0000578	0.58029437	0.4197056
 VT	0.13735989	0.59165037	-33.535	-1	0.00022384472	-0.0000578	0.58029437	0.0802944
 VT	0.13734853	0.54409546	-33.52272	-1	0.00022384472	-0.0000578	0.91970563	0.080294386
+VT	0.21419612	0.23718624	-32.297268	0.25904715	0	-0.96586466	0.91666669	1
+VT	0.20872018	0.23718624	-32.298737	0.25904715	0	-0.96586466	1	1
+VT	0.20872018	0.21528247	-32.298737	0.25904715	0	-0.96586466	1	0.5
+VT	0.21419612	0.21528247	-32.297268	0.25904715	0	-0.96586466	0.91666669	0.5
+VT	0.21419612	0.23718624	-32.297268	0.25904715	0	-0.96586466	0.91666669	1
+VT	0.20872018	0.21528247	-32.298737	0.25904715	0	-0.96586466	1	0.5
+VT	0.2182048	0.23718625	-32.293259	0.70715553	0	-0.70705801	0.83333337	1
+VT	0.21419612	0.23718624	-32.297268	0.70715553	0	-0.70705801	0.91666669	1
+VT	0.21419612	0.21528247	-32.297268	0.70715553	0	-0.70705801	0.91666669	0.5
+VT	0.2182048	0.21528247	-32.293259	0.70715553	0	-0.70705801	0.83333337	0.5
+VT	0.2182048	0.23718625	-32.293259	0.70715553	0	-0.70705801	0.83333337	1
+VT	0.21419612	0.21528247	-32.297268	0.70715553	0	-0.70705801	0.91666669	0.5
+VT	0.21967207	0.23718625	-32.287785	0.96590453	0	-0.25889847	0.75000006	1
+VT	0.2182048	0.23718625	-32.293259	0.96590453	0	-0.25889847	0.83333337	1
+VT	0.2182048	0.21528247	-32.293259	0.96590453	0	-0.25889847	0.83333337	0.5
+VT	0.21967207	0.21528247	-32.287785	0.96590453	0	-0.25889847	0.75000006	0.5
+VT	0.21967207	0.23718625	-32.287785	0.96590453	0	-0.25889847	0.75000006	1
+VT	0.2182048	0.21528247	-32.293259	0.96590453	0	-0.25889847	0.83333337	0.5
+VT	0.21820478	0.23718625	-32.28231	0.96590364	0	0.25890198	0.66666675	1
+VT	0.21967207	0.23718625	-32.287785	0.96590364	0	0.25890198	0.75000006	1
+VT	0.21967207	0.21528247	-32.287785	0.96590364	0	0.25890198	0.75000006	0.5
+VT	0.21820478	0.21528247	-32.28231	0.96590364	0	0.25890198	0.66666675	0.5
+VT	0.21820478	0.23718625	-32.28231	0.96590364	0	0.25890198	0.66666675	1
+VT	0.21967207	0.21528247	-32.287785	0.96590364	0	0.25890198	0.75000006	0.5
+VT	0.21419612	0.23718625	-32.278301	0.70715743	0	0.70705622	0.58333343	1
+VT	0.21820478	0.23718625	-32.28231	0.70715743	0	0.70705622	0.66666675	1
+VT	0.21820478	0.21528247	-32.28231	0.70715743	0	0.70705622	0.66666675	0.5
+VT	0.21419612	0.21528248	-32.278301	0.70715743	0	0.70705622	0.58333343	0.5
+VT	0.21419612	0.23718625	-32.278301	0.70715743	0	0.70705622	0.58333343	1
+VT	0.21820478	0.21528247	-32.28231	0.70715743	0	0.70705622	0.66666675	0.5
+VT	0.20872018	0.23718625	-32.276833	0.25904694	0	0.96586478	0.50000012	1
+VT	0.21419612	0.23718625	-32.278301	0.25904694	0	0.96586478	0.58333343	1
+VT	0.21419612	0.21528248	-32.278301	0.25904694	0	0.96586478	0.58333343	0.5
+VT	0.20872018	0.21528248	-32.276833	0.25904694	0	0.96586478	0.50000012	0.5
+VT	0.20872018	0.23718625	-32.276833	0.25904694	0	0.96586478	0.50000012	1
+VT	0.21419612	0.21528248	-32.278301	0.25904694	0	0.96586478	0.58333343	0.5
+VT	0.20324424	0.23718625	-32.278301	-0.25904694	0	0.96586478	0.41666678	1
+VT	0.20872018	0.23718625	-32.276833	-0.25904694	0	0.96586478	0.50000012	1
+VT	0.20872018	0.21528248	-32.276833	-0.25904694	0	0.96586478	0.50000012	0.5
+VT	0.20324424	0.21528248	-32.278301	-0.25904694	0	0.96586478	0.41666678	0.5
+VT	0.20324424	0.23718625	-32.278301	-0.25904694	0	0.96586478	0.41666678	1
+VT	0.20872018	0.21528248	-32.276833	-0.25904694	0	0.96586478	0.50000012	0.5
+VT	0.19923557	0.23718625	-32.28231	-0.70715928	0	0.70705426	0.33333343	1
+VT	0.20324424	0.23718625	-32.278301	-0.70715928	0	0.70705426	0.41666678	1
+VT	0.20324424	0.21528248	-32.278301	-0.70715928	0	0.70705426	0.41666678	0.5
+VT	0.19923557	0.21528247	-32.28231	-0.70715928	0	0.70705426	0.33333343	0.5
+VT	0.19923557	0.23718625	-32.28231	-0.70715928	0	0.70705426	0.33333343	1
+VT	0.20324424	0.21528248	-32.278301	-0.70715928	0	0.70705426	0.41666678	0.5
+VT	0.19776829	0.23718625	-32.287785	-0.96590364	0	0.25890198	0.25000009	1
+VT	0.19923557	0.23718625	-32.28231	-0.96590364	0	0.25890198	0.33333343	1
+VT	0.19923557	0.21528247	-32.28231	-0.96590364	0	0.25890198	0.33333343	0.5
+VT	0.19776829	0.21528247	-32.287785	-0.96590364	0	0.25890198	0.25000009	0.5
+VT	0.19776829	0.23718625	-32.287785	-0.96590364	0	0.25890198	0.25000009	1
+VT	0.19923557	0.21528247	-32.28231	-0.96590364	0	0.25890198	0.33333343	0.5
+VT	0.19923556	0.23718625	-32.293259	-0.96590453	0	-0.25889847	0.16666675	1
+VT	0.19776829	0.23718625	-32.287785	-0.96590453	0	-0.25889847	0.25000009	1
+VT	0.19776829	0.21528247	-32.287785	-0.96590453	0	-0.25889847	0.25000009	0.5
+VT	0.19923556	0.21528247	-32.293259	-0.96590453	0	-0.25889847	0.16666675	0.5
+VT	0.19923556	0.23718625	-32.293259	-0.96590453	0	-0.25889847	0.16666675	1
+VT	0.19776829	0.21528247	-32.287785	-0.96590453	0	-0.25889847	0.25000009	0.5
+VT	0.20872018	0.23718624	-32.298737	0.00000065	1	-0.00000062	0.25	0.49000001
+VT	0.21419612	0.23718624	-32.297268	0.00000065	1	-0.00000062	0.37	0.45784611
+VT	0.2182048	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.45784611	0.37
+VT	0.19923556	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.042153835	0.36999989
+VT	0.20324422	0.23718624	-32.297268	0.00000065	1	-0.00000062	0.12999986	0.45784602
+VT	0.20872018	0.23718624	-32.298737	0.00000065	1	-0.00000062	0.25	0.49000001
+VT	0.19923557	0.23718625	-32.28231	0.00000065	1	-0.00000062	0.042153955	0.12999994
+VT	0.19776829	0.23718625	-32.287785	0.00000065	1	-0.00000062	0.010000005	0.2499999
+VT	0.19923556	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.042153835	0.36999989
+VT	0.20872018	0.23718625	-32.276833	0.00000065	1	-0.00000062	0.25000003	0.010000005
+VT	0.20324424	0.23718625	-32.278301	0.00000065	1	-0.00000062	0.13000005	0.04215388
+VT	0.19923557	0.23718625	-32.28231	0.00000065	1	-0.00000062	0.042153955	0.12999994
+VT	0.21820478	0.23718625	-32.28231	0.00000065	1	-0.00000062	0.45784611	0.13
+VT	0.21419612	0.23718625	-32.278301	0.00000065	1	-0.00000062	0.37	0.04215391
+VT	0.20872018	0.23718625	-32.276833	0.00000065	1	-0.00000062	0.25000003	0.010000005
+VT	0.2182048	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.45784611	0.37
+VT	0.21967207	0.23718625	-32.287785	0.00000065	1	-0.00000062	0.49000001	0.24999999
+VT	0.21820478	0.23718625	-32.28231	0.00000065	1	-0.00000062	0.45784611	0.13
+VT	0.19923556	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.042153835	0.36999989
+VT	0.20872018	0.23718624	-32.298737	0.00000065	1	-0.00000062	0.25	0.49000001
+VT	0.2182048	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.45784611	0.37
+VT	0.20872018	0.23718625	-32.276833	0.00000065	1	-0.00000062	0.25000003	0.010000005
+VT	0.19923557	0.23718625	-32.28231	0.00000065	1	-0.00000062	0.042153955	0.12999994
+VT	0.19923556	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.042153835	0.36999989
+VT	0.2182048	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.45784611	0.37
+VT	0.21820478	0.23718625	-32.28231	0.00000065	1	-0.00000062	0.45784611	0.13
+VT	0.20872018	0.23718625	-32.276833	0.00000065	1	-0.00000062	0.25000003	0.010000005
+VT	0.2182048	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.45784611	0.37
+VT	0.20872018	0.23718625	-32.276833	0.00000065	1	-0.00000062	0.25000003	0.010000005
+VT	0.19923556	0.23718625	-32.293259	0.00000065	1	-0.00000062	0.042153835	0.36999989
+VT	0.20324422	0.23718624	-32.297268	-0.70715743	0	-0.70705622	0.08333341	1
+VT	0.19923556	0.23718625	-32.293259	-0.70715743	0	-0.70705622	0.16666675	1
+VT	0.19923556	0.21528247	-32.293259	-0.70715743	0	-0.70705622	0.16666675	0.5
+VT	0.20324422	0.21528247	-32.297268	-0.70715743	0	-0.70705622	0.08333341	0.5
+VT	0.20324422	0.23718624	-32.297268	-0.70715743	0	-0.70705622	0.08333341	1
+VT	0.19923556	0.21528247	-32.293259	-0.70715743	0	-0.70705622	0.16666675	0.5
+VT	0.20872018	0.23718624	-32.298737	-0.25904715	0	-0.96586466	0.00000007	1
+VT	0.20324422	0.23718624	-32.297268	-0.25904715	0	-0.96586466	0.08333341	1
+VT	0.20324422	0.21528247	-32.297268	-0.25904715	0	-0.96586466	0.08333341	0.5
+VT	0.20872018	0.21528247	-32.298737	-0.25904715	0	-0.96586466	0.00000007	0.5
+VT	0.20872018	0.23718624	-32.298737	-0.25904715	0	-0.96586466	0.00000007	1
+VT	0.20324422	0.21528247	-32.297268	-0.25904715	0	-0.96586466	0.08333341	0.5
+VT	0.21419612	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.87	0.45784611
+VT	0.20872018	0.21528247	-32.298737	0.00000097	-1	0.00000062	0.75	0.49000001
+VT	0.20324422	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.62999988	0.45784602
+VT	0.21967207	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.99000001	0.24999999
+VT	0.2182048	0.21528247	-32.293259	0.00000097	-1	0.00000062	0.95784611	0.37
+VT	0.21419612	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.87	0.45784611
+VT	0.21419612	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.87	0.04215391
+VT	0.21820478	0.21528247	-32.28231	0.00000097	-1	0.00000062	0.95784611	0.13
+VT	0.21967207	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.99000001	0.24999999
+VT	0.20324424	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.63000005	0.04215388
+VT	0.20872018	0.21528248	-32.276833	0.00000097	-1	0.00000062	0.75000006	0.010000005
+VT	0.21419612	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.87	0.04215391
+VT	0.19776829	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.50999999	0.2499999
+VT	0.19923557	0.21528247	-32.28231	0.00000097	-1	0.00000062	0.54215395	0.12999994
+VT	0.20324424	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.63000005	0.04215388
+VT	0.20324422	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.62999988	0.45784602
+VT	0.19923556	0.21528247	-32.293259	0.00000097	-1	0.00000062	0.54215384	0.36999989
+VT	0.19776829	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.50999999	0.2499999
+VT	0.21967207	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.99000001	0.24999999
+VT	0.21419612	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.87	0.45784611
+VT	0.20324422	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.62999988	0.45784602
+VT	0.20324424	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.63000005	0.04215388
+VT	0.21419612	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.87	0.04215391
+VT	0.21967207	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.99000001	0.24999999
+VT	0.20324422	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.62999988	0.45784602
+VT	0.19776829	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.50999999	0.2499999
+VT	0.20324424	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.63000005	0.04215388
+VT	0.20324422	0.21528247	-32.297268	0.00000097	-1	0.00000062	0.62999988	0.45784602
+VT	0.20324424	0.21528248	-32.278301	0.00000097	-1	0.00000062	0.63000005	0.04215388
+VT	0.21967207	0.21528247	-32.287785	0.00000097	-1	0.00000062	0.99000001	0.24999999
 VT	-0.24282102	0.30202767	-33.30603	-0.0040562977	-0.93124974	-0.36435896	0.25	0.49000001
 VT	-0.24465011	0.30370578	-33.310299	-0.0040562977	-0.93124974	-0.36435896	0.41970563	0.41970563
 VT	-0.24921615	0.30443761	-33.312119	-0.0040562977	-0.93124974	-0.36435896	0.49000001	0.24999999
@@ -6369,10 +6501,25 @@ IDX10	5740	5741	5742	5743	5744	5745	5746	5747	5748	5749
 IDX10	5750	5751	5752	5753	5754	5755	5756	5757	5758	5759
 IDX10	5760	5761	5762	5763	5764	5765	5766	5767	5768	5769
 IDX10	5770	5771	5772	5773	5774	5775	5776	5777	5778	5779
-IDX	5780
-IDX	5781
-IDX	5782
-IDX	5783
+IDX10	5780	5781	5782	5783	5784	5785	5786	5787	5788	5789
+IDX10	5790	5791	5792	5793	5794	5795	5796	5797	5798	5799
+IDX10	5800	5801	5802	5803	5804	5805	5806	5807	5808	5809
+IDX10	5810	5811	5812	5813	5814	5815	5816	5817	5818	5819
+IDX10	5820	5821	5822	5823	5824	5825	5826	5827	5828	5829
+IDX10	5830	5831	5832	5833	5834	5835	5836	5837	5838	5839
+IDX10	5840	5841	5842	5843	5844	5845	5846	5847	5848	5849
+IDX10	5850	5851	5852	5853	5854	5855	5856	5857	5858	5859
+IDX10	5860	5861	5862	5863	5864	5865	5866	5867	5868	5869
+IDX10	5870	5871	5872	5873	5874	5875	5876	5877	5878	5879
+IDX10	5880	5881	5882	5883	5884	5885	5886	5887	5888	5889
+IDX10	5890	5891	5892	5893	5894	5895	5896	5897	5898	5899
+IDX10	5900	5901	5902	5903	5904	5905	5906	5907	5908	5909
+IDX	5910
+IDX	5911
+IDX	5912
+IDX	5913
+IDX	5914
+IDX	5915
 
 	ATTR_draw_disable
 	ATTR_manip_command	button	sim/FMS/key_A	
@@ -6582,239 +6729,241 @@ IDX	5783
 	TRIS	2028 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit/switches/gear_handle_status	Landing Gear Handle
 	TRIS	2064 84
+	ATTR_manip_axis_knob	rotate_medium	0	1	0	0	sim/cockpit2/switches/panel_brightness_ratio[0]	
+	TRIS	2148 132
 	ATTR_manip_command	button	sim/FMS/key_5	
-	TRIS	2148 18
+	TRIS	2280 18
 	ATTR_manip_command	button	sim/FMS/key_4	
-	TRIS	2166 18
+	TRIS	2298 18
 	ATTR_manip_command	button	sim/FMS/key_8	
-	TRIS	2184 18
+	TRIS	2316 18
 	ATTR_manip_command	button	sim/FMS/key_7	
-	TRIS	2202 18
+	TRIS	2334 18
 	ATTR_manip_command	button	sim/FMS2/key_0	
-	TRIS	2220 18
+	TRIS	2352 18
 	ATTR_manip_command	button	sim/FMS2/key_3	
-	TRIS	2238 18
+	TRIS	2370 18
 	ATTR_manip_command	button	sim/FMS/key_2	
-	TRIS	2256 18
+	TRIS	2388 18
 	ATTR_manip_command	button	sim/FMS/key_1	
-	TRIS	2274 18
+	TRIS	2406 18
 	ATTR_manip_command	button	sim/FMS/key_6	
-	TRIS	2292 18
+	TRIS	2424 18
 	ATTR_manip_command	button	sim/FMS/key_9	
-	TRIS	2310 18
+	TRIS	2442 18
 	ATTR_manip_command	button	sim/FMS/key_minus	
-	TRIS	2328 18
+	TRIS	2460 18
 	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio[0]	Left Throttle
-	TRIS	2346 84
+	TRIS	2478 84
 	ATTR_manip_command_knob	rotate_small	sim/radios/stby_com1_fine_up	sim/radios/stby_com1_fine_down	
-	TRIS	2430 84
+	TRIS	2562 84
 	ATTR_manip_command_knob	rotate_medium	sim/radios/stby_com1_coarse_up	sim/radios/stby_com1_coarse_down	
-	TRIS	2514 84
+	TRIS	2646 84
 	ATTR_manip_axis_knob	rotate_small	0	1	0.1	0.2	sim/cockpit2/radios/actuators/audio_volume_com1	
-	TRIS	2598 84
+	TRIS	2730 84
 	ATTR_manip_axis_knob	rotate_small	0	1	0.1	0.2	sim/cockpit2/radios/actuators/audio_volume_com2	
-	TRIS	2682 84
+	TRIS	2814 84
 	ATTR_manip_command	button	sim/FMS2/key_period	
-	TRIS	2766 18
+	TRIS	2898 18
 	ATTR_manip_command	button	sim/FMS2/key_minus	
-	TRIS	2784 18
+	TRIS	2916 18
 	ATTR_manip_command_knob	rotate_small	sim/transponder/transponder_hundreds_up	sim/transponder/transponder_hundreds_down	
-	TRIS	2802 84
+	TRIS	2934 84
 	ATTR_manip_command_knob	rotate_medium	sim/transponder/transponder_thousands_up	sim/transponder/transponder_thousands_down	
-	TRIS	2886 84
+	TRIS	3018 84
 	ATTR_manip_command_knob	rotate_medium	sim/transponder/transponder_ones_up	sim/transponder/transponder_ones_down	
-	TRIS	2970 84
+	TRIS	3102 84
 	ATTR_manip_command_knob	rotate_small	sim/transponder/transponder_tens_up	sim/transponder/transponder_tens_down	
-	TRIS	3054 84
+	TRIS	3186 84
 	ATTR_manip_command_knob	rotate_small	sim/radios/stby_com2_fine_up	sim/radios/stby_com2_fine_down	
-	TRIS	3138 84
+	TRIS	3270 84
 	ATTR_manip_command_knob	rotate_medium	sim/radios/stby_com2_coarse_up	sim/radios/stby_com2_coarse_down	
-	TRIS	3222 84
+	TRIS	3354 84
 	ATTR_manip_command	button	sim/FMS2/key_9	
-	TRIS	3306 18
+	TRIS	3438 18
 	ATTR_manip_command	button	sim/FMS2/key_6	
-	TRIS	3324 18
+	TRIS	3456 18
 	ATTR_manip_command	button	sim/FMS2/key_1	
-	TRIS	3342 18
+	TRIS	3474 18
 	ATTR_manip_command	button	sim/FMS2/key_2	
-	TRIS	3360 18
+	TRIS	3492 18
 	ATTR_manip_command	button	sim/FMS2/key_7	
-	TRIS	3378 18
+	TRIS	3510 18
 	ATTR_manip_command	button	sim/FMS2/key_8	
-	TRIS	3396 18
+	TRIS	3528 18
 	ATTR_manip_command	button	sim/FMS2/key_4	
-	TRIS	3414 18
+	TRIS	3546 18
 	ATTR_manip_command	button	sim/FMS2/key_5	
-	TRIS	3432 18
+	TRIS	3564 18
 	ATTR_manip_command_knob	rotate_small	sim/autopilot/altitude_up	sim/autopilot/altitude_down	Autopilot Altitude
-	TRIS	3450 84
+	TRIS	3582 84
 	ATTR_manip_command_knob	rotate_small	sim/autopilot/heading_up	sim/autopilot/heading_down	Autopilot Heading
-	TRIS	3534 84
+	TRIS	3666 84
 	ATTR_manip_command	button	sim/instruments/barometer_2992	Reset Altimeter Setting to Standard
-	TRIS	3618 18
+	TRIS	3750 18
 	ATTR_manip_command	button	Strato/B777/button_switch/efis/tfc	Show Air Traffic on ND
-	TRIS	3636 18
+	TRIS	3768 18
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgSel	Heading Select Mode
-	TRIS	3654 84
+	TRIS	3786 84
 	ATTR_manip_command	button	sim/FMS/key_period	
-	TRIS	3738 18
+	TRIS	3870 18
 	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio[1]	Right Throttle
-	TRIS	3756 84
+	TRIS	3888 84
 	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio_all	Throttle (Both)
-	TRIS	3840 84
+	TRIS	3972 84
 	ATTR_manip_none
-	TRIS	3924 84
-	TRIS	4008 84
-	TRIS	4092 84
+	TRIS	4056 84
+	TRIS	4140 84
+	TRIS	4224 84
 	ATTR_manip_command	button	sim/FMS/key_0	
-	TRIS	4176 18
+	TRIS	4308 18
 	ATTR_manip_command	button	sim/FMS/key_3	
-	TRIS	4194 18
+	TRIS	4326 18
 	ATTR_manip_command	button	sim/FMS/key_0	
-	TRIS	4212 18
+	TRIS	4344 18
 	ATTR_manip_command_knob	rotate_medium	sim/autopilot/airspeed_up	sim/autopilot/airspeed_down	Autopilot Airspeed
-	TRIS	4230 84
+	TRIS	4362 84
 	ATTR_manip_command_knob	rotate_small	sim/instruments/barometer_up	sim/instruments/barometer_down	Captain Altimeter Setting (currently only inHg)
-	TRIS	4314 84
+	TRIS	4446 84
 	ATTR_manip_command_knob	hand	sim/instruments/barometer_copilot_up	sim/instruments/barometer_copilot_down	Copilot Altimeter Setting (currently only inHg)
-	TRIS	4398 84
+	TRIS	4530 84
 	ATTR_manip_command	button	sim/instruments/barometer_2992	Reset Altimeter Setting to Standard
-	TRIS	4482 18
+	TRIS	4614 18
 	ATTR_manip_command_knob	rotate_medium	sim/autopilot/bank_limit_up	sim/autopilot/bank_limit_down	Autopilot Bank Limit
-	TRIS	4500 84
+	TRIS	4632 84
 	ATTR_manip_command	button	sim/FMS/exec	
-	TRIS	4584 6
-	ATTR_manip_command	button	sim/FMS/prog	
-	TRIS	4590 6
-	ATTR_manip_command	button	sim/FMS/hold	
-	TRIS	4596 6
-	ATTR_manip_command	button	sim/FMS/legs	
-	TRIS	4602 6
-	ATTR_manip_command	button	sim/FMS/fix	
-	TRIS	4608 6
-	ATTR_manip_command	button	sim/FMS/init	
-	TRIS	4614 6
-	ATTR_manip_command	button	sim/FMS/dep_arr	
-	TRIS	4620 6
-	ATTR_manip_command	button	sim/FMS/ls_6l	
-	TRIS	4626 6
-	ATTR_manip_command	button	sim/FMS2/ls_6r	
-	TRIS	4632 6
-	ATTR_manip_command	button	sim/FMS2/ls_5r	
-	TRIS	4638 6
-	ATTR_manip_command	button	sim/FMS/ls_5l	
-	TRIS	4644 6
-	ATTR_manip_command	button	sim/FMS/ls_4l	
-	TRIS	4650 6
-	ATTR_manip_command	button	sim/FMS2/ls_4r	
-	TRIS	4656 6
-	ATTR_manip_command	button	sim/FMS2/ls_3r	
-	TRIS	4662 6
-	ATTR_manip_command	button	sim/FMS/ls_3l	
-	TRIS	4668 6
-	ATTR_manip_command	button	sim/FMS/ls_2l	
-	TRIS	4674 6
-	ATTR_manip_command	button	sim/FMS2/ls_2r	
-	TRIS	4680 6
-	ATTR_manip_command	button	sim/FMS2/ls_1r	
-	TRIS	4686 6
-	ATTR_manip_command	button	sim/FMS/ls_1l	
-	TRIS	4692 6
-	ATTR_manip_command	button	sim/FMS/index	
-	TRIS	4698 6
-	ATTR_manip_command	button	sim/FMS/next	
-	TRIS	4704 6
-	ATTR_manip_command	button	sim/FMS/prev	
-	TRIS	4710 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/spd	Autothrottle Speed Mode
 	TRIS	4716 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_1	Engage Autopilot 1
+	ATTR_manip_command	button	sim/FMS/prog	
 	TRIS	4722 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/flch	Level Change Mode
+	ATTR_manip_command	button	sim/FMS/hold	
 	TRIS	4728 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vnav	Vertical Navigation Mode
+	ATTR_manip_command	button	sim/FMS/legs	
 	TRIS	4734 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/lnav	Lateral Navigation Mode
+	ATTR_manip_command	button	sim/FMS/fix	
 	TRIS	4740 6
-	ATTR_manip_command	button	sim/FMS/clb	
+	ATTR_manip_command	button	sim/FMS/init	
 	TRIS	4746 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgHold	Heading Hold Mode
+	ATTR_manip_command	button	sim/FMS/dep_arr	
 	TRIS	4752 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/altHold	Altitude Hold Mode
+	ATTR_manip_command	button	sim/FMS/ls_6l	
 	TRIS	4758 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/app	Approach Mode
+	ATTR_manip_command	button	sim/FMS2/ls_6r	
 	TRIS	4764 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vs	Vertical Speed Mode
+	ATTR_manip_command	button	sim/FMS2/ls_5r	
 	TRIS	4770 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/loc	Localizer Mode
+	ATTR_manip_command	button	sim/FMS/ls_5l	
 	TRIS	4776 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_2	Engage Autopilot 2
+	ATTR_manip_command	button	sim/FMS/ls_4l	
 	TRIS	4782 6
-	ATTR_manip_command	button	sim/FMS/ls_1r	
+	ATTR_manip_command	button	sim/FMS2/ls_4r	
 	TRIS	4788 6
-	ATTR_manip_command	button	sim/FMS/ls_2r	
+	ATTR_manip_command	button	sim/FMS2/ls_3r	
 	TRIS	4794 6
-	ATTR_manip_command	button	sim/FMS/ls_3r	
+	ATTR_manip_command	button	sim/FMS/ls_3l	
 	TRIS	4800 6
-	ATTR_manip_command	button	sim/FMS/ls_4r	
+	ATTR_manip_command	button	sim/FMS/ls_2l	
 	TRIS	4806 6
-	ATTR_manip_command	button	sim/FMS/ls_5r	
+	ATTR_manip_command	button	sim/FMS2/ls_2r	
 	TRIS	4812 6
-	ATTR_manip_command	button	sim/FMS/ls_6r	
+	ATTR_manip_command	button	sim/FMS2/ls_1r	
 	TRIS	4818 6
-	ATTR_manip_command	button	sim/FMS2/ls_1l	
+	ATTR_manip_command	button	sim/FMS/ls_1l	
 	TRIS	4824 6
-	ATTR_manip_command	button	sim/FMS2/ls_2l	
+	ATTR_manip_command	button	sim/FMS/index	
 	TRIS	4830 6
-	ATTR_manip_command	button	sim/FMS2/prog	
+	ATTR_manip_command	button	sim/FMS/next	
 	TRIS	4836 6
-	ATTR_manip_command	button	sim/FMS2/exec	
+	ATTR_manip_command	button	sim/FMS/prev	
 	TRIS	4842 6
-	ATTR_manip_command	button	sim/FMS/navrad	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/spd	Autothrottle Speed Mode
 	TRIS	4848 6
-	ATTR_manip_command	button	sim/FMS/fpln	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_1	Engage Autopilot 1
 	TRIS	4854 6
-	ATTR_manip_command	button	sim/FMS2/fpln	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/flch	Level Change Mode
 	TRIS	4860 6
-	ATTR_manip_command	button	sim/FMS2/navrad	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vnav	Vertical Navigation Mode
 	TRIS	4866 6
-	ATTR_manip_command	button	sim/FMS2/prev	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/lnav	Lateral Navigation Mode
 	TRIS	4872 6
-	ATTR_manip_command	button	sim/FMS2/next	
+	ATTR_manip_command	button	sim/FMS/clb	
 	TRIS	4878 6
-	ATTR_manip_command	button	sim/FMS2/index	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgHold	Heading Hold Mode
 	TRIS	4884 6
-	ATTR_manip_command	button	sim/FMS2/dep_arr	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/altHold	Altitude Hold Mode
 	TRIS	4890 6
-	ATTR_manip_command	button	sim/FMS2/init	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/app	Approach Mode
 	TRIS	4896 6
-	ATTR_manip_command	button	sim/FMS2/fix	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vs	Vertical Speed Mode
 	TRIS	4902 6
-	ATTR_manip_command	button	sim/FMS2/legs	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/loc	Localizer Mode
 	TRIS	4908 6
-	ATTR_manip_command	button	sim/FMS2/hold	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_2	Engage Autopilot 2
 	TRIS	4914 6
-	ATTR_manip_command	button	sim/FMS2/ls_3l	
+	ATTR_manip_command	button	sim/FMS/ls_1r	
 	TRIS	4920 6
-	ATTR_manip_command	button	sim/FMS2/ls_4l	
+	ATTR_manip_command	button	sim/FMS/ls_2r	
 	TRIS	4926 6
-	ATTR_manip_command	button	sim/FMS2/ls_5l	
+	ATTR_manip_command	button	sim/FMS/ls_3r	
 	TRIS	4932 6
-	ATTR_manip_command	button	sim/FMS2/ls_6l	
+	ATTR_manip_command	button	sim/FMS/ls_4r	
 	TRIS	4938 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/sta	Show VORs on ND
+	ATTR_manip_command	button	sim/FMS/ls_5r	
 	TRIS	4944 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/wpt	Show GPS Waypoints on ND
+	ATTR_manip_command	button	sim/FMS/ls_6r	
 	TRIS	4950 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/wxr	Show Weather Radar on ND
+	ATTR_manip_command	button	sim/FMS2/ls_1l	
 	TRIS	4956 6
-	ATTR_manip_command	button	sim/FMS2/clb	
+	ATTR_manip_command	button	sim/FMS2/ls_2l	
 	TRIS	4962 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/apt	Show Airports on ND
+	ATTR_manip_command	button	sim/FMS2/prog	
 	TRIS	4968 6
+	ATTR_manip_command	button	sim/FMS2/exec	
+	TRIS	4974 6
+	ATTR_manip_command	button	sim/FMS/navrad	
+	TRIS	4980 6
+	ATTR_manip_command	button	sim/FMS/fpln	
+	TRIS	4986 6
+	ATTR_manip_command	button	sim/FMS2/fpln	
+	TRIS	4992 6
+	ATTR_manip_command	button	sim/FMS2/navrad	
+	TRIS	4998 6
+	ATTR_manip_command	button	sim/FMS2/prev	
+	TRIS	5004 6
+	ATTR_manip_command	button	sim/FMS2/next	
+	TRIS	5010 6
+	ATTR_manip_command	button	sim/FMS2/index	
+	TRIS	5016 6
+	ATTR_manip_command	button	sim/FMS2/dep_arr	
+	TRIS	5022 6
+	ATTR_manip_command	button	sim/FMS2/init	
+	TRIS	5028 6
+	ATTR_manip_command	button	sim/FMS2/fix	
+	TRIS	5034 6
+	ATTR_manip_command	button	sim/FMS2/legs	
+	TRIS	5040 6
+	ATTR_manip_command	button	sim/FMS2/hold	
+	TRIS	5046 6
+	ATTR_manip_command	button	sim/FMS2/ls_3l	
+	TRIS	5052 6
+	ATTR_manip_command	button	sim/FMS2/ls_4l	
+	TRIS	5058 6
+	ATTR_manip_command	button	sim/FMS2/ls_5l	
+	TRIS	5064 6
+	ATTR_manip_command	button	sim/FMS2/ls_6l	
+	TRIS	5070 6
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/sta	Show VORs on ND
+	TRIS	5076 6
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/wpt	Show GPS Waypoints on ND
+	TRIS	5082 6
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/wxr	Show Weather Radar on ND
+	TRIS	5088 6
+	ATTR_manip_command	button	sim/FMS2/clb	
+	TRIS	5094 6
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/apt	Show Airports on ND
+	TRIS	5100 6
 	ATTR_manip_none
 	ATTR_shiny_rat	0.5
 	ATTR_draw_enable
-	TRIS	4974 810
+	TRIS	5106 810
 
 # Build with Blender 2.91.2 (build b'5be9ef417703'). Exported with XPlane2Blender 4.0.0-beta.2+88.20200622173550

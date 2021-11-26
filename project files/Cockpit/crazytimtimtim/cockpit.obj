@@ -6729,7 +6729,7 @@ IDX	5915
 	TRIS	2028 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit/switches/gear_handle_status	Landing Gear Handle
 	TRIS	2064 84
-	ATTR_manip_axis_knob	hand	0	1	0	0	sim/cockpit2/switches/panel_brightness_ratio[0]	
+	ATTR_manip_axis_knob	rotate_medium	0	1	0.0099999998	0	sim/cockpit2/switches/panel_brightness_ratio[0]	
 	TRIS	2148 132
 	ATTR_manip_command	button	sim/FMS/key_5	
 	TRIS	2280 18
