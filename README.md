@@ -12,9 +12,9 @@ Freeware Boeing 777-300ER for X-Plane 11, made by Stratosphere Studios
 (As of October 29, 2021):
 
 - Work in progress cabin, exterior texturing, and animations.
-- Completed cockpit modelling/texturing, improvements still to come.
-- High quality GE90 FMOD Soundpack.
-- A few manipulators in 3D cockpit, and their code (FMCs, MCP, all switch covers, radios, transponders, ext lights, elec panel).
+- Completed cockpit modeling/texturing, improvements still to come.
+- High-quality GE90 FMOD Soundpack.
+- A few manipulators in the 3D cockpit, and their code (FMCs, MCP, all switch covers, radios, transponders, ext lights, elec panel).
 
 ## FAQ
 
@@ -43,7 +43,7 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 ## INSTALLATION
 Just extract the aircraft folder and move it to your X-Plane aircraft folder. For stable releases, look [here](https://github.com/StratosphereStudios/777/releases) (none yet), and for all the latest updates, go [here](https://github.com/StratosphereStudios/777), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 
-If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) in order to use this aircraft.
+If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
 
 ## OLD REPOSITORY
 If you want to see more update history, you can check our [old repository.](https://github.com/StratosphereStudios/777)
@@ -63,5 +63,4 @@ Potatohead123: Landing gear, cockpit, engines.
 
 Phill Paysse: Fuselage and wings.
 
-[Spherrrical](https://github.com/Spherrrical/): Graphic design, Discord bot, Github management.
-
+[Spherrrical](https://github.com/Spherrrical/): Graphic design, Discord bot.
