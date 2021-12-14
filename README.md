@@ -40,6 +40,14 @@ A: Please use the [Github issue page](https://github.com/Stratosphere-Studios/77
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
+**Q: Why is my aircraft broken, I get error message, and half the models are gone?
+
+A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft which show up in the X-Plane menu. One of them is an experimental one we are using to test our new flightmodel work. This one does not have an icon in the X-Plane menu, and it is fairly broken. Make sure you select the aircraft that has the icon!
+
+**Q: Even after following the above instructions my aircraft is still broken?**
+
+A: Please remember this aircraft is still in the works. By downloading from github, you our downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
+
 ## INSTALLATION
 Just extract the aircraft folder and move it to your X-Plane aircraft folder. For stable releases, look [here](https://github.com/StratosphereStudios/777/releases) (none yet), and for all the latest updates, go [here](https://github.com/StratosphereStudios/777), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 
