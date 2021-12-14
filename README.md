@@ -40,7 +40,7 @@ A: Please use the [Github issue page](https://github.com/Stratosphere-Studios/77
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Why is my aircraft broken, I get error message, and half the models are gone?
+**Q: Why is my aircraft broken, I get error message, and half the models are gone?**
 
 A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft which show up in the X-Plane menu. One of them is an experimental one we are using to test our new flightmodel work. This one does not have an icon in the X-Plane menu, and it is fairly broken. Make sure you select the aircraft that has the icon!
 
