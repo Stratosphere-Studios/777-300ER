@@ -134,7 +134,7 @@ function update()
         [3] = "BEFORE TAXI",
         [4] = "BEFORE TAKEOFF",
         [5] = "AFTER TAKEOFF",
-        [6] = "PRE-DECENT",
+        [6] = "PRE-DESCENT",
         [7] = "APPROACH",
         [8] = "LANDING",
         [9] = "SHUT DOWN",
