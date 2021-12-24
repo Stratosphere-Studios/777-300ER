@@ -216,7 +216,7 @@ P _gear/0/_lonE 0.0
 P _gear/0/_lonN 0.0
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
-P _gear/0/_stat_def 0.387207031
+P _gear/0/_stat_def 0.387207061
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -250,7 +250,7 @@ P _gear/1/_lonE -9.0
 P _gear/1/_lonN -9.0
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087793469
+P _gear/1/_stat_def 1.087793350
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -284,7 +284,7 @@ P _gear/2/_lonE -9.0
 P _gear/2/_lonN -9.0
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087793469
+P _gear/2/_stat_def 1.087793350
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -2358,7 +2358,7 @@ P _part/0/_part_phi 0.0
 P _part/0/_part_psi 0.0
 P _part/0/_part_rad 0.0
 P _part/0/_part_specs_eq 0
-P _part/0/_part_specs_invis 0
+P _part/0/_part_specs_invis 1
 P _part/0/_part_tex 0
 P _part/0/_part_the 0.300000012
 P _part/0/_part_x -30.0
@@ -3828,7 +3828,7 @@ P _part/1/_part_phi 0.0
 P _part/1/_part_psi 0.0
 P _part/1/_part_rad 0.0
 P _part/1/_part_specs_eq 0
-P _part/1/_part_specs_invis 0
+P _part/1/_part_specs_invis 1
 P _part/1/_part_tex 0
 P _part/1/_part_the 0.300000012
 P _part/1/_part_x 30.0
@@ -5298,7 +5298,7 @@ P _part/10/_part_phi 0.0
 P _part/10/_part_psi 0.0
 P _part/10/_part_rad 0.0
 P _part/10/_part_specs_eq 1
-P _part/10/_part_specs_invis 0
+P _part/10/_part_specs_invis 1
 P _part/10/_part_tex 0
 P _part/10/_part_the 0.0
 P _part/10/_part_x -35.009998322
@@ -6768,7 +6768,7 @@ P _part/11/_part_phi 0.0
 P _part/11/_part_psi 0.0
 P _part/11/_part_rad 0.0
 P _part/11/_part_specs_eq 1
-P _part/11/_part_specs_invis 0
+P _part/11/_part_specs_invis 1
 P _part/11/_part_tex 0
 P _part/11/_part_the 0.0
 P _part/11/_part_x 35.009998322
@@ -8238,7 +8238,7 @@ P _part/12/_part_phi 0.0
 P _part/12/_part_psi 0.0
 P _part/12/_part_rad 0.0
 P _part/12/_part_specs_eq 1
-P _part/12/_part_specs_invis 0
+P _part/12/_part_specs_invis 1
 P _part/12/_part_tex 0
 P _part/12/_part_the 0.0
 P _part/12/_part_x -74.480003357
@@ -9708,7 +9708,7 @@ P _part/13/_part_phi 0.0
 P _part/13/_part_psi 0.0
 P _part/13/_part_rad 0.0
 P _part/13/_part_specs_eq 1
-P _part/13/_part_specs_invis 0
+P _part/13/_part_specs_invis 1
 P _part/13/_part_tex 0
 P _part/13/_part_the 0.0
 P _part/13/_part_x 74.480003357
@@ -11178,7 +11178,7 @@ P _part/14/_part_phi 0.0
 P _part/14/_part_psi 0.0
 P _part/14/_part_rad 0.0
 P _part/14/_part_specs_eq 1
-P _part/14/_part_specs_invis 0
+P _part/14/_part_specs_invis 1
 P _part/14/_part_tex 0
 P _part/14/_part_the 0.0
 P _part/14/_part_x -103.839996338
@@ -12648,7 +12648,7 @@ P _part/15/_part_phi 0.0
 P _part/15/_part_psi 0.0
 P _part/15/_part_rad 0.0
 P _part/15/_part_specs_eq 1
-P _part/15/_part_specs_invis 0
+P _part/15/_part_specs_invis 1
 P _part/15/_part_tex 0
 P _part/15/_part_the 0.0
 P _part/15/_part_x 103.839996338
@@ -14118,7 +14118,7 @@ P _part/16/_part_phi 0.0
 P _part/16/_part_psi 0.0
 P _part/16/_part_rad 0.0
 P _part/16/_part_specs_eq 1
-P _part/16/_part_specs_invis 0
+P _part/16/_part_specs_invis 1
 P _part/16/_part_tex 0
 P _part/16/_part_the 0.0
 P _part/16/_part_x -0.0
@@ -15588,7 +15588,7 @@ P _part/17/_part_phi 0.0
 P _part/17/_part_psi 0.0
 P _part/17/_part_rad 0.0
 P _part/17/_part_specs_eq 1
-P _part/17/_part_specs_invis 0
+P _part/17/_part_specs_invis 1
 P _part/17/_part_tex 0
 P _part/17/_part_the 0.0
 P _part/17/_part_x 0.0
@@ -17058,7 +17058,7 @@ P _part/19/_part_phi 0.0
 P _part/19/_part_psi 0.0
 P _part/19/_part_rad 0.0
 P _part/19/_part_specs_eq 1
-P _part/19/_part_specs_invis 0
+P _part/19/_part_specs_invis 1
 P _part/19/_part_tex 0
 P _part/19/_part_the 0.0
 P _part/19/_part_x 0.0
@@ -18528,7 +18528,7 @@ P _part/48/_part_phi 0.0
 P _part/48/_part_psi 0.0
 P _part/48/_part_rad 2.0
 P _part/48/_part_specs_eq 1
-P _part/48/_part_specs_invis 0
+P _part/48/_part_specs_invis 1
 P _part/48/_part_tex 0
 P _part/48/_part_the 0.0
 P _part/48/_part_x 30.0
@@ -19998,7 +19998,7 @@ P _part/49/_part_phi 0.0
 P _part/49/_part_psi 0.0
 P _part/49/_part_rad 2.0
 P _part/49/_part_specs_eq 1
-P _part/49/_part_specs_invis 0
+P _part/49/_part_specs_invis 1
 P _part/49/_part_tex 0
 P _part/49/_part_the 0.0
 P _part/49/_part_x -30.0
@@ -21468,7 +21468,7 @@ P _part/56/_part_phi 0.0
 P _part/56/_part_psi 0.0
 P _part/56/_part_rad 10.300000191
 P _part/56/_part_specs_eq 1
-P _part/56/_part_specs_invis 0
+P _part/56/_part_specs_invis 1
 P _part/56/_part_tex 0
 P _part/56/_part_the 0.0
 P _part/56/_part_x 0.0
@@ -22938,7 +22938,7 @@ P _part/57/_part_phi 0.0
 P _part/57/_part_psi 0.0
 P _part/57/_part_rad 11.0
 P _part/57/_part_specs_eq 1
-P _part/57/_part_specs_invis 0
+P _part/57/_part_specs_invis 1
 P _part/57/_part_tex 0
 P _part/57/_part_the 0.0
 P _part/57/_part_x 0.0
@@ -24408,7 +24408,7 @@ P _part/77/_part_phi 0.0
 P _part/77/_part_psi 0.0
 P _part/77/_part_rad 6.699999809
 P _part/77/_part_specs_eq 1
-P _part/77/_part_specs_invis 0
+P _part/77/_part_specs_invis 1
 P _part/77/_part_tex 0
 P _part/77/_part_the 0.0
 P _part/77/_part_x -30.0
@@ -25878,7 +25878,7 @@ P _part/78/_part_phi 0.0
 P _part/78/_part_psi 0.0
 P _part/78/_part_rad 6.699999809
 P _part/78/_part_specs_eq 1
-P _part/78/_part_specs_invis 0
+P _part/78/_part_specs_invis 1
 P _part/78/_part_tex 0
 P _part/78/_part_the 0.0
 P _part/78/_part_x 30.0
@@ -27348,7 +27348,7 @@ P _part/8/_part_phi 0.0
 P _part/8/_part_psi 0.0
 P _part/8/_part_rad 0.0
 P _part/8/_part_specs_eq 1
-P _part/8/_part_specs_invis 0
+P _part/8/_part_specs_invis 1
 P _part/8/_part_tex 0
 P _part/8/_part_the 0.0
 P _part/8/_part_x -10.010000229
@@ -28818,7 +28818,7 @@ P _part/85/_part_phi 0.0
 P _part/85/_part_psi 0.0
 P _part/85/_part_rad 3.0
 P _part/85/_part_specs_eq 0
-P _part/85/_part_specs_invis 0
+P _part/85/_part_specs_invis 1
 P _part/85/_part_tex 0
 P _part/85/_part_the 0.0
 P _part/85/_part_x 0.0
@@ -30288,7 +30288,7 @@ P _part/86/_part_phi 0.0
 P _part/86/_part_psi 0.0
 P _part/86/_part_rad 3.0
 P _part/86/_part_specs_eq 0
-P _part/86/_part_specs_invis 0
+P _part/86/_part_specs_invis 1
 P _part/86/_part_tex 0
 P _part/86/_part_the 0.0
 P _part/86/_part_x 16.500000000
@@ -31758,7 +31758,7 @@ P _part/87/_part_phi 0.0
 P _part/87/_part_psi 0.0
 P _part/87/_part_rad 3.0
 P _part/87/_part_specs_eq 0
-P _part/87/_part_specs_invis 0
+P _part/87/_part_specs_invis 1
 P _part/87/_part_tex 0
 P _part/87/_part_the 0.0
 P _part/87/_part_x -16.500000000
@@ -33228,7 +33228,7 @@ P _part/9/_part_phi 0.0
 P _part/9/_part_psi 0.0
 P _part/9/_part_rad 0.0
 P _part/9/_part_specs_eq 1
-P _part/9/_part_specs_invis 0
+P _part/9/_part_specs_invis 1
 P _part/9/_part_tex 0
 P _part/9/_part_the 0.0
 P _part/9/_part_x 10.010000229
