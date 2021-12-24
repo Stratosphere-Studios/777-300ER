@@ -24,6 +24,8 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
+testNum = deferred_dataref("testNum", "number")
+
 --*************************************************************************************--
 --**                            XTLUA GLOBAL VARIABLES                               **--
 --*************************************************************************************--
@@ -138,7 +140,7 @@ function B777_ap_engage_switch_1_CMDhandler(phase, duration)   -- A/P ENGAGE BUT
       B777DR_mcp_button_positions[1] = 1
       simCMD_ap_servos_on:once()
       -- might need some other stuff here as well
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[1] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[1] = 0
@@ -149,7 +151,7 @@ function B777_ap_engage_switch_2_CMDhandler(phase, duration)   -- A/P ENGAGE BUT
    if phase == 0 then
       B777DR_mcp_button_positions[2] = 1
       simCMD_ap_servos_on_2:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[2] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[2] = 0
@@ -160,7 +162,7 @@ function B777_ap_loc_switch_CMDhandler(phase, duration)        -- A/P LOCALIZER 
    if phase == 0 then
       B777DR_mcp_button_positions[3] = 1                       --TODO: FIND CMD
       B777CMD_ap_servos_on:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[3] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[3] = 0
@@ -171,7 +173,7 @@ function B777_ap_app_switch_CMDhandler(phase, duration)        -- A/P APPROACH B
    if phase == 0 then
       B777DR_mcp_button_positions[4] = 1
       simCMD_ap_servos_on:once()                              --TODO: FIND CMD
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[4] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[4] = 0
@@ -182,7 +184,7 @@ function B777_ap_altHold_switch_CMDhandler(phase, duration)    -- A/P ALTITUDE H
    if phase == 0 then
       B777DR_mcp_button_positions[5] = 1
       simCMD_ap_altArm:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[5] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[5] = 0
@@ -193,7 +195,7 @@ function B777_ap_vs_switch_CMDhandler(phase, duration)         -- A/P VERTICAL S
    if phase == 0 then
       B777DR_mcp_button_positions[6] = 1
       simCMD_ap_vs:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[6] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[6] = 0
@@ -204,7 +206,7 @@ function B777_ap_hdgHold_switch_CMDhandler(phase, duration)    -- A/P HEADING HO
    if phase == 0 then
       B777DR_mcp_button_positions[7] = 1
       simCMD_ap_hdgHold:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[7] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[7] = 0
@@ -215,7 +217,7 @@ function B777_ap_hdgSel_switch_CMDhandler(phase, duration)     -- A/P HEADING SE
    if phase == 0 then
       B777DR_mcp_button_positions[8] = 1
       B777CMD_ap_servos_on:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[8] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[8] = 0
@@ -226,7 +228,7 @@ function B777_ap_lnav_switch_CMDhandler(phase, duration)       -- A/P LNAV BUTTO
    if phase == 0 then
       B777DR_mcp_button_positions[9] = 1
       simCMD_ap_lnav:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[9] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[9] = 0
@@ -237,7 +239,7 @@ function B777_ap_vnav_switch_CMDhandler(phase, duration)       -- A/P  VNAV BUTT
    if phase == 0 then
       B777DR_mcp_button_positions[10] = 1
       simCMD_ap_vnav:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[10] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[10] = 0
@@ -248,7 +250,7 @@ function B777_ap_flch_switch_CMDhandler(phase, duration)       -- A/P FLCH (LEVE
    if phase == 0 then
       B777DR_mcp_button_positions[11] = 1
       simCMD_ap_flch:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[11] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[11] = 0
@@ -308,7 +310,7 @@ function B777_autothrottle_spd_switch_CMDhandler(phase, duration)
          end
       end
       B777DR_mcp_button_positions[16] = 1
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_mcp_button_positions[16] = 1
    elseif phase == 2 then
       B777DR_mcp_button_positions[16] = 0
@@ -322,7 +324,7 @@ function B777_efis_wxr_switch_CMDhandler(phase, duration)
    if phase == 0 then
       B777DR_efis_button_positions[1] = 1
       simCMD_efis_wxr:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_efis_button_positions[1] = 1
    elseif phase == 2 then
       B777DR_efis_button_positions[1] = 0
@@ -335,7 +337,7 @@ function B777_efis_sta_switch_CMDhandler(phase, duration)
    if phase == 0 then
       B777DR_efis_button_positions[2] = 1
       simCMD_efis_vor:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_efis_button_positions[2] = 1
    elseif phase == 2 then
       B777DR_efis_button_positions[2] = 0
@@ -346,7 +348,7 @@ function B777_efis_wpt_switch_CMDhandler(phase, duration)
    if phase == 0 then
       B777DR_efis_button_positions[3] = 1
       simCMD_efis_fix:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_efis_button_positions[3] = 1
    elseif phase == 2 then
       B777DR_efis_button_positions[3] = 0
@@ -357,7 +359,7 @@ function B777_efis_tfc_switch_CMDhandler(phase, duration)
    if phase == 0 then
       B777DR_efis_button_positions[4] = 1
       simCMD_EFIS_tcas:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_efis_button_positions[4] = 1
    elseif phase == 2 then
       B777DR_efis_button_positions[4] = 0
@@ -368,7 +370,7 @@ function B777_efis_apt_switch_CMDhandler(phase, duration)
    if phase == 0 then
       B777DR_efis_button_positions[6] = 1
       simCMD_efis_apt:once()
-   elseif phase == 1 then
+   -- elseif phase == 1 then
       B777DR_efis_button_positions[6] = 1
    elseif phase == 2 then
       B777DR_efis_button_positions[6] = 0
@@ -519,19 +521,6 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 --GEAR LEVER USES DEFAULT DATAREF: sim/cockpit/switches/gear_handle_status
 
-
-
-function B777_anim_test_CMDhandler()
-	B777DR_anim_test = B777_set_animation_position(0, 10, 0, 10, 5)
-end
-
-B777CMD_anim_test                         = deferred_command("Strato/B777/anim_test", "Animation Test", B777_anim_test_CMDhandler)
-
-function B777_anim_test_rst()
-	B777DR_anim_test = 0
-end
-
-	
 --*************************************************************************************--
 --**                                       CODE                                      **--
 --*************************************************************************************--
@@ -548,6 +537,20 @@ function B777_set_animation_position(current_value, target, min, max, speed)
    else
        return current_value + ((target - current_value) * fps_factor)
    end
+
+end
+
+----- TERNARY CONDITIONAL ---------------------------------------------------------------
+function B777_ternary(condition, ifTrue, ifFalse)
+   if condition then return ifTrue else return ifFalse end
+end
+
+----- RESCALE ---------------------------------------------------------------------------
+function B777_rescale(in1, out1, in2, out2, x)
+
+   if x < in1 then return out1 end
+   if x > in2 then return out2 end
+   return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
 
 end
 
