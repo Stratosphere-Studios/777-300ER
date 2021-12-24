@@ -1,2 +1,4 @@
 radio display borders
 center_ped_1_textures
+gs and mcp in manips blend
+flc control anims
