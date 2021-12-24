@@ -1,10 +1,10 @@
 --[[
 *****************************************************************************************
-* Script Name:
-* Author Name:
-* Script Description:
+* Script Name: misc
+* Author Name: Crazytimtimtim
+* Script Description: (Init) misc system code for systems that don't have enough for their own module.
 *****************************************************************************************
---]]
+--
 
 --replace create_command
 function deferred_command(name,desc,nilFunc)
@@ -29,4 +29,4 @@ end
 --*************************************************************************************--
 --**                             CREATE CUSTOM DATAREFS                              **--
 --*************************************************************************************--
-
+]]

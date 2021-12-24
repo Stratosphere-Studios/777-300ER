@@ -21,7 +21,7 @@ function deferred_dataref(name,type,notifier)
 	dref=XLuaCreateDataRef(name, type,"yes",notifier)
 	return wrap_dref_any(dref,type)
 end
-
+testNum1 = deferred_dataref("testNum", "number")
 --*************************************************************************************--
 --**                              CREATE CUSTOM COMMANDS                             **--
 --*************************************************************************************--

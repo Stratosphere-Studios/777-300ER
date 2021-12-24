@@ -8,6 +8,7 @@ local white = {1.0, 1.0, 1.0, 1.0}
 local opensans = loadFont("OpenSans-Bold.ttf")
 local home = 1
 local bfrstart = 0
+local eicasMode = globalProperty("Strato/777/displays/eicas_mode")
 
 ------------------------------------------
 local preflightsurr = 0
@@ -41,6 +42,7 @@ local green = {0, 1, 0, 1}
 
 function update()
 
+if get(eicasMode) == 10 then
     function chelist(X)
         loc = 1
         col = "cel"
@@ -467,10 +469,7 @@ function update()
             
         end
     end
+end
     
 
 end
-
-
-
-   
