@@ -250,7 +250,7 @@ P _gear/1/_lonE -9.0
 P _gear/1/_lonN -9.0
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087793469
+P _gear/1/_stat_def 1.087793231
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -284,7 +284,7 @@ P _gear/2/_lonE -9.0
 P _gear/2/_lonN -9.0
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087793469
+P _gear/2/_stat_def 1.087793231
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -615,7 +615,7 @@ P _obja/1/_v10_att_y_acf_prt_ref 0.0
 P _obja/1/_v10_att_z_acf_prt_ref 100.0
 P _obja/1/_v10_is_internal 411142
 P _obja/1/_v10_steers_with_gear 0
-P _obja/10/_obj_flags 13
+P _obja/10/_obj_flags 9
 P _obja/10/_v10_att_file_stl cockpit/ovhd_2.obj
 P _obja/10/_v10_att_part -1
 P _obja/10/_v10_att_phi_ref 0.0
@@ -637,7 +637,7 @@ P _obja/11/_v10_att_y_acf_prt_ref 0.0
 P _obja/11/_v10_att_z_acf_prt_ref 100.0
 P _obja/11/_v10_is_internal 912572
 P _obja/11/_v10_steers_with_gear 0
-P _obja/12/_obj_flags 13
+P _obja/12/_obj_flags 9
 P _obja/12/_v10_att_file_stl cockpit/yokes.obj
 P _obja/12/_v10_att_part -1
 P _obja/12/_v10_att_phi_ref 0.0
