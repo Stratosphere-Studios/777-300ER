@@ -6,14 +6,14 @@ panelHeight3d = 4096
 sasl.options.set3DRendering(true)
 sasl.options.setAircraftPanelRendering(true)
 sasl.options.setInteractivity(true)
-addSearchPath(moduleDirectory.."/Custom Module/Eicas/Engine")
-addSearchPath(moduleDirectory.."/Custom Module/Eicas/fcs")
+addSearchPath(moduleDirectory.."/Custom Module/EICASCHECK")
+addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 
 
 
 components = {
 
-	EFB {
+	eicascheck {
 		position = {2130 ,30, 4096, 4096},
 		visible = true,
 	},
