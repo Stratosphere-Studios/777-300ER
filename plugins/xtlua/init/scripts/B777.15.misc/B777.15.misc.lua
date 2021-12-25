@@ -4,7 +4,7 @@
 * Author Name: Crazytimtimtim
 * Script Description: (Init) misc system code for systems that don't have enough for their own module.
 *****************************************************************************************
---
+--]]
 
 --replace create_command
 function deferred_command(name,desc,nilFunc)
@@ -29,4 +29,5 @@ end
 --*************************************************************************************--
 --**                             CREATE CUSTOM DATAREFS                              **--
 --*************************************************************************************--
-]]
+
+B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")

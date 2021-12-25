@@ -18,13 +18,12 @@ end
 
 --replace create_dataref
 function deferred_dataref(name,nilType,callFunction)
-  if callFunction~=nil then
-    print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-    end
-    return find_dataref(name)
+   if callFunction~=nil then
+      print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
+   end
+   return find_dataref(name)
 end
 
-testNum = deferred_dataref("testNum", "number")
 
 --*************************************************************************************--
 --**                            XTLUA GLOBAL VARIABLES                               **--
@@ -49,7 +48,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 simDR_autothrottle_enabled                = find_dataref("sim/cockpit2/autopilot/autothrottle_enabled")
-
+simDR_shadow			                     = find_dataref("sim/private/controls/shadow/total_fade_ratio")
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -71,6 +70,8 @@ B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
 B777DR_anim_test                          = deferred_dataref("Strato/777/anim_test", "number")
+
+testNum = deferred_dataref("testNum", "number")
 
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
@@ -525,21 +526,22 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 --**                                       CODE                                      **--
 --*************************************************************************************--
 
--- ANIMATION UTILITY
+----- ANIMATION UTILITY -----------------------------------------------------------------
 function B777_set_animation_position(current_value, target, min, max, speed)
 
    local fps_factor = math.min(1.0, speed * SIM_PERIOD)
 
    if target >= (max - 0.001) and current_value >= (max - 0.01) then
-       return max
+      return max
    elseif target <= (min + 0.001) and current_value <= (min + 0.01) then
       return min
    else
-       return current_value + ((target - current_value) * fps_factor)
+      return current_value + ((target - current_value) * fps_factor)
    end
 
 end
 
+--[[
 ----- TERNARY CONDITIONAL ---------------------------------------------------------------
 function B777_ternary(condition, ifTrue, ifFalse)
    if condition then return ifTrue else return ifFalse end
@@ -553,6 +555,7 @@ function B777_rescale(in1, out1, in2, out2, x)
    return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
 
 end
+]]
 
 function B777_anim_test_CMDhandler()
 	B777DR_anim_test = B777_set_animation_position(0, 10, 0, 10, 5)
@@ -576,6 +579,7 @@ end
 
 function flight_start()
    print("Lua Loaded")
+   simDR_shadow = 0.8
 end
 
 function flight_crash()
@@ -591,12 +595,6 @@ function after_physics()
 			run_after_time(B777_anim_test_rst, 2)
 		end
 	end
-
-   for i = 1, #B777DR_button_cover_positions do
-      if B777DR_button_cover_positions[i] == 1 then
-         print("Cover"..i.."open!")
-      end
-   end
 
 end
 
