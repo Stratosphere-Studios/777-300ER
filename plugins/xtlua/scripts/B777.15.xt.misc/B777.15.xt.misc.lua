@@ -49,6 +49,7 @@ local B777_avg_eag_pos = 0
 
 simDR_ldg_gear_pos                        = find_dataref("sim/aircraft/parts/acf_gear_deploy")
 simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/eagle_claw_angle_deg")
+simDR_onGround                            = find_dataref('sim/flightmodel/failures/onground_any')
 
 
 --*************************************************************************************--
@@ -75,6 +76,8 @@ B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_ea
 
 simCMD_ldg_gear_up                      = find_command("sim/flight_controls/landing_gear_up")
 simCMD_ldg_gear_down                    = find_command("sim/flight_controls/landing_gear_down")
+simCMD_reverser_toggle_1                = find_command("sim/engines/thrust_reverse_toggle_1")
+simCMD_reverser_toggle_2                = find_command("sim/engines/thrust_reverse_toggle_2")
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
@@ -125,12 +128,23 @@ function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when land
    end
 end
 
+----- THRUST REVERSERS -------------------------------------------------------------------
+
+function sim_reverser_toggle_CMDhandler(phase, duration)
+   if phase == 0 then
+      if simDR_onGround == 1 then
+         simCMD_reverser_toggle_1:once()
+         simCMD_reverser_toggle_2:once()
+      end
+   end
+end
 
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
 
 simCMD_landing_gear_toggle = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
+simCMD_reverser_toggle = replace_command("sim/engines/thrust_reverse_toggle", sim_reverser_toggle_CMDhandler)
 
 --*************************************************************************************--
 --**                                      CODE                                       **--
