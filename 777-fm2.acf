@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now 0.0
+P _door/0/_ang_now -28.354270935
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 0.0
+P _door/1/_ang_now 28.354270935
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 0.0
+P _door/2/_ang_now 28.354270935
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 95.0
+P _door/3/_ang_now 0.0
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -95.0
+P _door/4/_ang_now 0.0
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -90.0
+P _door/7/_ang_now 0.0
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 90.0
+P _door/8/_ang_now 0.0
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now 0.0
+P _door/9/_ang_now -28.354270935
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,7 +213,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 0.0
+P _gear/0/_lonN 38.036216736
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
 P _gear/0/_stat_def 0.571922064
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN 0.0
+P _gear/1/_axiN -5.186756134
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.600000381
 P _gear/1/_gear_y -4.679999828
 P _gear/1/_gear_z 106.360000610
 P _gear/1/_latE 0.0
-P _gear/1/_latN 0.0
+P _gear/1/_latN -28.354270935
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -9.0
+P _gear/1/_lonN -3.121675491
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.273760080
+P _gear/1/_stat_def 1.273760200
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.910000026
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 0.0
+P _gear/2/_axiN 5.186756134
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.679999828
 P _gear/2/_gear_z 106.360000610
 P _gear/2/_latE 0.0
-P _gear/2/_latN 0.0
+P _gear/2/_latN 28.354270935
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -9.0
+P _gear/2/_lonN -3.121675491
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.273760080
+P _gear/2/_stat_def 1.273760200
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -35064,9 +35064,9 @@ P _wing/9/_yawbr/9 0
 P _wing/9/_yawbr/count 10
 P _wing/count 56
 P _wpna/count 24
-P acf/_APU_cooldown_time 0.001000000
+P acf/_APU_cooldown_time 60.0
 P acf/_APU_door_time 10.0
-P acf/_APU_spooldn_time 60.0
+P acf/_APU_spooldn_time 15.0
 P acf/_APU_spoolup_time 60.0
 P acf/_AShi_G_k 0.0
 P acf/_AShi_Gdot_k 0.0
@@ -36930,11 +36930,11 @@ P acf/_esys_amperage/204 0.0
 P acf/_esys_amperage/215 0.0
 P acf/_esys_amperage/30 1.0
 P acf/_esys_amperage/31 1.0
-P acf/_esys_amperage/32 0.200000003
+P acf/_esys_amperage/32 0.400000006
 P acf/_esys_amperage/33 0.0
 P acf/_esys_amperage/34 0.0
 P acf/_esys_amperage/35 0.0
-P acf/_esys_amperage/36 0.0
+P acf/_esys_amperage/36 3.0
 P acf/_esys_amperage/37 0.0
 P acf/_esys_amperage/38 50.0
 P acf/_esys_amperage/42 0.0
@@ -36972,7 +36972,7 @@ P acf/_esys_amperage/rel_avionics_fan 0.0
 P acf/_esys_amperage/rel_bad_fuel 0.0
 P acf/_esys_amperage/rel_bus0 1.0
 P acf/_esys_amperage/rel_bus1 1.0
-P acf/_esys_amperage/rel_bus2 0.200000003
+P acf/_esys_amperage/rel_bus2 0.400000006
 P acf/_esys_amperage/rel_bus3 0.0
 P acf/_esys_amperage/rel_bus4 0.0
 P acf/_esys_amperage/rel_bus5 0.0
@@ -37040,7 +37040,7 @@ P acf/_esys_amperage/rel_ignitr4 0.0
 P acf/_esys_amperage/rel_ignitr5 0.0
 P acf/_esys_amperage/rel_ignitr6 0.0
 P acf/_esys_amperage/rel_ignitr7 0.0
-P acf/_esys_amperage/rel_inverter0 0.0
+P acf/_esys_amperage/rel_inverter0 3.0
 P acf/_esys_amperage/rel_inverter1 0.0
 P acf/_esys_amperage/rel_lites_beac 1.0
 P acf/_esys_amperage/rel_lites_hud 0.0
@@ -37077,7 +37077,7 @@ P acf/_esys_bus_bit_add/117 1
 P acf/_esys_bus_bit_add/120 1
 P acf/_esys_bus_bit_add/124 1
 P acf/_esys_bus_bit_add/125 1
-P acf/_esys_bus_bit_add/126 1
+P acf/_esys_bus_bit_add/126 2
 P acf/_esys_bus_bit_add/127 1
 P acf/_esys_bus_bit_add/128 3
 P acf/_esys_bus_bit_add/129 3
@@ -37221,7 +37221,7 @@ P acf/_esys_bus_bit_add/rel_ignitr6 0
 P acf/_esys_bus_bit_add/rel_ignitr7 0
 P acf/_esys_bus_bit_add/rel_inverter0 3
 P acf/_esys_bus_bit_add/rel_inverter1 0
-P acf/_esys_bus_bit_add/rel_lites_beac 1
+P acf/_esys_bus_bit_add/rel_lites_beac 2
 P acf/_esys_bus_bit_add/rel_lites_hud 0
 P acf/_esys_bus_bit_add/rel_lites_ins 3
 P acf/_esys_bus_bit_add/rel_lites_land 3
@@ -37373,9 +37373,9 @@ P acf/_gear_EQ 1
 P acf/_gear_can_ret_on_ground 0
 P acf/_gear_extend_protect 0
 P acf/_gear_pumps 1.0
-P acf/_gear_warn_above_flap_rat 0.500000000
-P acf/_gear_warn_below_kias 200.0
-P acf/_gear_warn_below_thro_pct 50.0
+P acf/_gear_warn_above_flap_rat 0.519999981
+P acf/_gear_warn_below_kias 180.0
+P acf/_gear_warn_below_thro_pct 45.0
 P acf/_generator_design_rpm_rat 0.250000000
 P acf/_get_tow/0 0.0
 P acf/_get_tow/1 0.0
@@ -37490,7 +37490,7 @@ P acf/_hide_prop_at_90_vect 0
 P acf/_hoops_hud_EQ 0
 P acf/_hud_tapes_track_vector 0
 P acf/_hyd_brakes 1
-P acf/_hyd_ele_pump_0123 2
+P acf/_hyd_ele_pump_0123 3
 P acf/_hyd_engn_pump_0123/0 1
 P acf/_hyd_engn_pump_0123/1 2
 P acf/_hyd_engn_pump_0123/2 0
@@ -37505,10 +37505,10 @@ P acf/_hyd_flightcons 1
 P acf/_hyd_gear 1
 P acf/_hyd_gear_fail_mode 0
 P acf/_hyd_gear_fail_speed 200.0
-P acf/_hyd_max_p 3750.0
+P acf/_hyd_max_p 4343.750000000
 P acf/_hyd_max_p_RAT 2000.0
-P acf/_hyd_max_p_ele 2000.0
-P acf/_hyd_max_p_eng 3000.0
+P acf/_hyd_max_p_ele 3100.0
+P acf/_hyd_max_p_eng 3475.0
 P acf/_hyd_max_p_rot 0.0
 P acf/_hyd_nw_steer 1
 P acf/_hyd_prop_pump_0123/0 0
@@ -37559,7 +37559,7 @@ P acf/_jett_xyz/1 0.0
 P acf/_jett_xyz/2 0.0
 P acf/_jett_xyz/count 3
 P acf/_lo_speed_is_position 0
-P acf/_load_alt_presel_on_alt_hit 0
+P acf/_load_alt_presel_on_alt_hit 1
 P acf/_load_presel_on_asi_hit 1
 P acf/_load_presel_on_vvi_hit 1
 P acf/_lock_n1 0.0
@@ -38184,7 +38184,7 @@ P acf/_vect_rate 15.0
 P acf/_vectarmY 0.0
 P acf/_vectarmZ 0.0
 P acf/_version Newer WIP flightmodel, other aspects such as visuals may be broken or outdated.
-P acf/_vvi_but_adjusts_pitch 0
+P acf/_vvi_but_adjusts_pitch 1
 P acf/_warn_airliner 1
 P acf/_warn_alt_app_100 0
 P acf/_warn_alt_app_1000 1
