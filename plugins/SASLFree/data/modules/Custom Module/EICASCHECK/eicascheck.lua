@@ -18,7 +18,7 @@ local white = {1.0, 1.0, 1.0, 1.0}
 local opensans = loadFont("BoeingFont.ttf")
 addSearchPath(moduleDirectory .. "/Custom Module/EICASCHECK")
 addSearchPath(moduleDirectory .. "/Custom Module/CURSOR")
-local eicasmode = globalPropertyf("Strato/777/displays/eicas_mode")
+
 -----------------------------------------
 local preflightscroll = 1
 -----------------------------------------
@@ -61,7 +61,8 @@ local downarrow = loadImage("Downarrow.png")
 local green = {0, 1, 0, 1}
 
 function update()
-
+    local eicasmode = globalPropertyf("Strato/777/displays/eicas_mode")
+    print(get(eicasmode))
     function chelist(X)
         loc = 1
         col = "cel"
@@ -278,7 +279,7 @@ function update()
         elseif get(home) == 0 then
 
         end
-        print(get(preflightscroll))
+        
         -----------------------------------------------
 
         if get(bfrstart) == 1 then
@@ -646,5 +647,11 @@ function update()
         elseif get(preflightpage) == 0 then
         end
 
+    else
+        function draw()
+            
+        end
+           
     end
+    
 end
