@@ -1,1 +1,0 @@
-This folder contains 3-rd party SASL or Lua modules.
