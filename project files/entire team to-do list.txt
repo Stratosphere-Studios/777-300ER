@@ -27,10 +27,10 @@
   - landing gear eagle claw dataref
   - new flightmodel (control geometry, viewpoint stuff)
   - custom fms
-  - test thrust reversers only on ground
   - check if landing light/taxi/rwy turnoff dimming similar to 744
   - clock code
   - make sure existing manips work and make list of anim drs and light drs for each
+  - rename cmds/drs for toggle switch to "toggle_switch"
   - mcp display options (as/mach, mag/true hdg, etc)
   - rest of displays (fcom is a good ref!)
   - ALL THE SYSTEMS AHHHH (match fcom and CBTs!)

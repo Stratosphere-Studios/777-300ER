@@ -88,7 +88,10 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 --GEAR LEVER USES DEFAULT DATAREF: sim/cockpit/switches/gear_handle_status
 
-B777CMD_anim_test                         = deferred_command("Strato/B777/anim_test", "Animation Test", B777_anim_test_CMDhandler)
+
+---OTHER---------------
+
+B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_switch/cockpit_door", "Cockpit Door Knob", B777_cockpit_door_CMDhandler)
 
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
@@ -104,4 +107,4 @@ B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit
 
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
-B777DR_anim_test                          = deferred_dataref("Strato/777/anim_test", "number")
+B777DR_cockpit_door_pos                   = deferred_dataref("Strato/777/cockpit_door_pos", "number")

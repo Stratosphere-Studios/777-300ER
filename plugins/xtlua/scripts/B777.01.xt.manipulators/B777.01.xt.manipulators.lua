@@ -69,7 +69,7 @@ B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit
 
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
-B777DR_anim_test                          = deferred_dataref("Strato/777/anim_test", "number")
+B777DR_cockpit_door_pos                   = deferred_dataref("Strato/777/cockpit_door_pos", "number")
 
 testNum = deferred_dataref("testNum", "number")
 
@@ -455,6 +455,13 @@ end
 
 --Aft-----
 
+---OTHER---------------
+
+function B777_cockpit_door_CMDhandler(phase, duration)
+   if phase == 0 then
+      B777DR_cockpit_door_pos = 1 - B777DR_cockpit_door_pos
+   end
+end
 
 --*************************************************************************************--
 --**                              CREATE CUSTOM COMMANDS                             **--
@@ -522,6 +529,10 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 --GEAR LEVER USES DEFAULT DATAREF: sim/cockpit/switches/gear_handle_status
 
+---OTHER---------------
+
+B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_switch/cockpit_door", "Cockpit Door Knob", B777_cockpit_door_CMDhandler)
+
 --*************************************************************************************--
 --**                                       CODE                                      **--
 --*************************************************************************************--
@@ -541,7 +552,7 @@ function B777_set_animation_position(current_value, target, min, max, speed)
 
 end
 
---[[
+
 ----- TERNARY CONDITIONAL ---------------------------------------------------------------
 function B777_ternary(condition, ifTrue, ifFalse)
    if condition then return ifTrue else return ifFalse end
@@ -554,17 +565,6 @@ function B777_rescale(in1, out1, in2, out2, x)
    if x > in2 then return out2 end
    return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
 
-end
-]]
-
-function B777_anim_test_CMDhandler()
-	B777DR_anim_test = B777_set_animation_position(0, 10, 0, 10, 5)
-end
-
-B777CMD_anim_test                         = deferred_command("Strato/B777/anim_test", "Animation Test", B777_anim_test_CMDhandler)
-
-function B777_anim_test_rst()
-	B777DR_anim_test = 0
 end
 
 --*************************************************************************************--
@@ -589,12 +589,6 @@ end
 --function before_physics()
 
 function after_physics()
-
-	if B777DR_anim_test == 10 then
-		if is_timer_scheduled(B777_anim_test_rst) == false then
-			run_after_time(B777_anim_test_rst, 2)
-		end
-	end
 
 end
 
