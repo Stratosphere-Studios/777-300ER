@@ -1,0 +1,39 @@
+- Nathroxer:
+  - new datarefs for flight control animations
+  - redo wingflex once new flightmodel is out
+  - animate doors anbd cockpit door
+  - exterior lights
+  - button animations and lights
+  - cockpit floodlights
+  - cabin textures
+  - model ipad efb
+  - reduce texture sizes
+  - fix glass
+  - fix clock display uv map
+
+- Matt726:
+  - Display textures (and some displays?)
+  - fmod
+
+- Cactus2456
+  - efb and eicas (+ Saharsh)
+  - pfd
+
+- Zeta
+  - new landing gear and animations
+
+- Crazytimtimtim
+  - manipulators (using Noah's refs)
+  - landing gear eagle claw dataref
+  - new flightmodel (control geometry, viewpoint stuff)
+  - custom fms
+  - test thrust reversers only on ground
+  - check if landing light/taxi/rwy turnoff dimming similar to 744
+  - clock code
+  - make sure existing manips work and make list of anim drs and light drs for each
+  - mcp display options (as/mach, mag/true hdg, etc)
+  - rest of displays (fcom is a good ref!)
+  - ALL THE SYSTEMS AHHHH (match fcom and CBTs!)
+
+- Nutshell
+  - review new flightmodel before release

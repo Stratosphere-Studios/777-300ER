@@ -1,2 +1,0 @@
-reduce texture sizes
-flc control anims
