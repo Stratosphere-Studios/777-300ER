@@ -63,6 +63,7 @@ simDR_onGround                            = find_dataref('sim/flightmodel/failur
 --*************************************************************************************--
 
 B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
+B777DR_cockpit_door_pos                 = deferred_dataref("Strato/777/cockpit_door_pos", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
