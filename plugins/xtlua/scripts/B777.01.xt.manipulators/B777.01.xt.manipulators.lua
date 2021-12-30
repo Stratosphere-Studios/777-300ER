@@ -42,6 +42,8 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --**                                 CREATE VARIABLES                                **--
 --*************************************************************************************--
 
+local B777_cockpit_door_anim = 0
+local B777_cockpit_door_target = 0
 
 --*************************************************************************************--
 --**                               FIND X-PLANE DATAREFS                             **--
@@ -459,7 +461,7 @@ end
 
 function B777_cockpit_door_CMDhandler(phase, duration)
    if phase == 0 then
-      B777DR_cockpit_door_pos = 1 - B777DR_cockpit_door_pos
+      B777_cockpit_door_target = 1 - B777DR_cockpit_door_pos
    end
 end
 
@@ -589,7 +591,8 @@ end
 --function before_physics()
 
 function after_physics()
-
+   B777DR_cockpit_door_pos = B777_set_animation_position(B777DR_cockpit_door_pos, B777_cockpit_door_target, 0.0, 1.0, 5)
+   print(B777DR_cockpit_door_pos)
 end
 
 --function after_replay()
