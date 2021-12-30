@@ -38,9 +38,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 
 local B777_avg_gear_pos = 1
 local B777_eag_claw_sync = 1
-local B777_lower_eag = 0
-local B777_raise_eag = 0
-local B777_avg_eag_pos = 0
+local B777_eag_target = 0
 
 
 --*************************************************************************************--
@@ -109,7 +107,7 @@ function gearUp()
 end
 
 function eagClawUp()
-   B777_raise_eag = 1               -- raise eagle claw
+   B777_eag_target = 19             -- raise eagle claw
    run_after_time(eagClawSync, 5)   -- synchronise custom eagle claw and default
 end
 
@@ -117,8 +115,8 @@ function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when land
    if phase == 0 then
       if B777_avg_gear_pos > 0.9 then                 -- if gear down
          B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
-         B777_lower_eag = 1                           -- bring custom eagle claw to pointing up position
-         run_after_time(gearUp, 5)                   -- gear up once eagle claw neutral
+         B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
+         run_after_time(gearUp, 5)                    -- gear up once eagle claw neutral
 
       elseif B777_avg_gear_pos < 0.1 then             -- if gear up
          B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
@@ -168,7 +166,6 @@ simCMD_reverser_toggle = replace_command("sim/engines/thrust_reverse_toggle", si
 
 function after_physics()
    B777_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
-   B777_avg_eag_pos = (B777DR_custom_eagle_claw[1] + B777DR_custom_eagle_claw[2]) / 2
 
    if B777_eag_claw_sync == 1 then
       B777DR_custom_eagle_claw[1] = simDR_eag_claw_pos[1]
@@ -180,26 +177,9 @@ function after_physics()
       B777DR_custom_eagle_claw = 0
    end
 
---[[
-   print("eag claw sync: "..B777_eag_claw_sync)
-   print("avg gear pos: "..B777_avg_gear_pos)
-   print("avg eag claw positon: "..B777_avg_eag_pos)
-   print("Raise Eag: "..B777_raise_eag.."Lower eag: "..B777_lower_eag )
-]]
-   if B777_raise_eag == 1 then
-      B777DR_custom_eagle_claw[1] = B777_set_animation_position(B777DR_custom_eagle_claw[1], 19, 0, 19, 2) -- bring custom eagle claw to pointing up position
-      B777DR_custom_eagle_claw[2] = B777_set_animation_position(B777DR_custom_eagle_claw[2], 19, 0, 19, 2)
-   end
-
-   if B777_lower_eag == 1 then
-      B777DR_custom_eagle_claw[1] = B777_set_animation_position(B777DR_custom_eagle_claw[1], 0, 0, 19, 2) -- return custom eagle claw to neutral
-      B777DR_custom_eagle_claw[2] = B777_set_animation_position(B777DR_custom_eagle_claw[2], 0, 0, 19, 2)
-   end
-
-   if B777_avg_eag_pos == 0 then
-      B777_lower_eag = 0
-   elseif B777_avg_eag_pos == 19 then
-      B777_raise_eag = 0
+   if B777_eag_claw_sync == 0 then
+      B777DR_custom_eagle_claw[1] = B777_set_animation_position(B777DR_custom_eagle_claw[1], B777_eag_target, 0, 19, 2)
+      B777DR_custom_eagle_claw[2] = B777_set_animation_position(B777DR_custom_eagle_claw[2], B777_eag_target, 0, 19, 2)
    end
 
 end
