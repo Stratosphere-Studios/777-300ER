@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -13.749214172
+P _door/0/_ang_now -26.996044159
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 13.749214172
+P _door/1/_ang_now 26.996044159
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 13.749214172
+P _door/2/_ang_now 26.996044159
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -13.749214172
+P _door/9/_ang_now -26.996044159
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,10 +213,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 18.444068909
+P _gear/0/_lonN 36.214202881
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
-P _gear/0/_stat_def 0.571922123
+P _gear/0/_stat_def 0.571922064
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -2.515100479
+P _gear/1/_axiN -4.938301086
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.600000381
 P _gear/1/_gear_y -4.679999828
 P _gear/1/_gear_z 106.360000610
 P _gear/1/_latE 0.0
-P _gear/1/_latN -13.749214172
+P _gear/1/_latN -26.996044159
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -6.149553299
+P _gear/1/_lonN -3.403259277
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.273760200
+P _gear/1/_stat_def 1.273759961
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.910000026
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 2.515100479
+P _gear/2/_axiN 4.938301086
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.679999828
 P _gear/2/_gear_z 106.360000610
 P _gear/2/_latE 0.0
-P _gear/2/_latN 13.749214172
+P _gear/2/_latN 26.996044159
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -6.149553299
+P _gear/2/_lonN -3.403259277
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.273760200
+P _gear/2/_stat_def 1.273759961
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -591,8 +591,8 @@ P _lite/9/_v10_is_internal 12
 P _lite/9/_v10_steers_with_gear 0
 P _lite/9/_width 0.0
 P _lite/count 16
-P _lite_equip/_land_lite_off_on_retract_EQ 1
-P _lite_equip/_taxi_lite_off_on_retract_EQ 0
+P _lite_equip/_land_lite_off_on_retract_EQ 0
+P _lite_equip/_taxi_lite_off_on_retract_EQ 1
 P _obja/0/_obj_flags 13
 P _obja/0/_v10_att_file_stl cockpit/center_ped_1.obj
 P _obja/0/_v10_att_part -1
@@ -35799,7 +35799,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Nathroxer + Team
-P acf/_auto_cowl_flaps_EQ 1
+P acf/_auto_cowl_flaps_EQ 0
 P acf/_auto_engage_BC_deg 0.0
 P acf/_auto_omega_fire 0.0
 P acf/_auto_omega_idle 0.0
