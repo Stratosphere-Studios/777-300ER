@@ -576,7 +576,6 @@ function after_physics()
       B777DR_mcp_button_pos[i] = B777_set_animation_position(B777DR_mcp_button_pos[i], B777DR_mcp_button_target[i], 0.0, 1.0, 10)
    end
 
-   print(B777DR_mcp_button_pos[1])
 end
 
 --function after_replay()
