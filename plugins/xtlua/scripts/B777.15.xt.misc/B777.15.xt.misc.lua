@@ -108,7 +108,7 @@ end
 
 function eagClawUp()
    B777_eag_target = 19             -- raise eagle claw
-   run_after_time(eagClawSync, 5)   -- synchronise custom eagle claw and default
+   run_after_time(eagClawSync, 4)   -- synchronise custom eagle claw and default
 end
 
 function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when landing gear toggled
@@ -116,7 +116,7 @@ function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when land
       if B777_avg_gear_pos > 0.9 then                 -- if gear down
          B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
          B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
-         run_after_time(gearUp, 5)                    -- gear up once eagle claw neutral
+         run_after_time(gearUp, 4)                    -- gear up once eagle claw neutral
 
       elseif B777_avg_gear_pos < 0.1 then             -- if gear up
          B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
@@ -178,8 +178,8 @@ function after_physics()
    end
 
    if B777_eag_claw_sync == 0 then
-      B777DR_custom_eagle_claw[1] = B777_set_animation_position(B777DR_custom_eagle_claw[1], B777_eag_target, 0, 19, 2)
-      B777DR_custom_eagle_claw[2] = B777_set_animation_position(B777DR_custom_eagle_claw[2], B777_eag_target, 0, 19, 2)
+      B777DR_custom_eagle_claw[1] = B777_set_animation_position(B777DR_custom_eagle_claw[1], B777_eag_target, 0, 19, 0.5)
+      B777DR_custom_eagle_claw[2] = B777_set_animation_position(B777DR_custom_eagle_claw[2], B777_eag_target, 0, 19, 0.5)
    end
 
 end

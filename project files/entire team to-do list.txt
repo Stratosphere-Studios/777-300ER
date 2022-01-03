@@ -11,6 +11,7 @@
   - fix glass
   - fix clock display uv map
   - reduce visibility of slanted things above doors
+  - texture landing gear
 
 - Matt726:
   - Display textures (and some displays?)
