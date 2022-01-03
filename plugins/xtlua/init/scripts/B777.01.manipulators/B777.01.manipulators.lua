@@ -89,9 +89,16 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 --GEAR LEVER USES DEFAULT DATAREF: sim/cockpit/switches/gear_handle_status
 
+---CENTER PED 1 (FWD)----------
+
+B777CMD_ctr1_at_disco                     = deferred_command("Strato/B777/button_switch/ctr1/at_disco", "Autothrottle Disconnect", B777_ctr1_at_disco_CMDhandler)
+B777CMD_ctr1_toga                         = deferred_command("Strato/B777/button_switch/ctr1/toga", "TOGA switch", B777_ctr1_toga_CMDhandler)
+
+
 ---OTHER---------------
 
 B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_switch/cockpit_door", "Cockpit Door Knob", B777_cockpit_door_CMDhandler)
+
 
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
@@ -105,6 +112,8 @@ B777DR_efis_button_positions              = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/fwd/buttons/position", "array[20]")
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
+
+B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[5]")
 
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 

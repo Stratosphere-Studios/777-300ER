@@ -43,6 +43,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 local B777_cockpit_door_target = 0
+local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 
 --*************************************************************************************--
 --**                               FIND X-PLANE DATAREFS                             **--
@@ -68,6 +69,8 @@ B777DR_efis_button_positions              = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/fwd/buttons/position", "array[20]")
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
+
+B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[5]")
 
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
@@ -97,6 +100,7 @@ simCMD_ap_vnav                           = find_command("sim/autopilot/FMS")
 simCMD_ap_disco                          = find_command("sim/autopilot/disconnect")
 simCMD_at_spd                            = find_command("sim/autopilot/autothrottle")
 simCMD_at_clbcon                         = find_command("sim/autopilot/autothrottle_n1epr")
+simCMD_at_off                            = find_command("sim/autopilot/autothrottle_off")
 --[[simCMD_fd_capt_on                        = find_command("sim/autopilot/fdir_on")
 simCMD_fd_capt_off                       = find_command("sim/autopilot/servos_fdir_off")
 simCMD_fd_fo_on                          = find_command("sim/autopilot/fdir2_on")
@@ -132,6 +136,8 @@ simCMD_ovhd_gen_2_off                   = find_command("sim/electrical/generator
 
 ---MISC----------
 
+---CENTER PED----------
+simCMD_toga                             = find_command("sim/engines/TOGA_power")
 
 --*************************************************************************************--
 --**                                CUSTOM COMMAND HANDLERS                          **--
@@ -253,7 +259,7 @@ end
 
 function B777_fd_capt_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
    if phase == 0 then
-      B777DR_mcp_button_target[13] = 1- B777DR_mcp_button_target[13]
+      B777DR_mcp_button_target[13] = 1 - B777DR_mcp_button_target[13]
       simCMD_fd_capt:once()
    end
 end
@@ -281,6 +287,9 @@ end]]
 
 function B777_autothrottle_switch_CMDhandler(phase, duration)
    if phase == 0 then
+      if B777_mcp_button_target[15] == 1 then
+         simCMD_at_off:once()
+      end
       B777DR_mcp_button_target[15] = 1 - B777DR_mcp_button_target[15]
    end
 end
@@ -443,6 +452,28 @@ function B777_cockpit_door_CMDhandler(phase, duration)
    end
 end
 
+
+
+---CENTER PEDESTAL FWD----------
+
+function B777_ctr1_at_disco_CMDhandler(phase, duration)
+   if phase == 0 then
+      B777_ctr1_button_target[2] = 1
+      simCMD_toga:once()
+   elseif phase == 2 then
+      B777_ctr1_button_target[2] = 0
+   end
+end
+
+function B777_ctr1_at_disco_CMDhandler(phase, duration)
+   if phase == 0 then
+      B777_ctr1_button_target[1] = 1
+      simCMD_at_off:once()
+   elseif phase == 2 then
+      B777_ctr1_button_target[1] = 0
+   end
+end
+
 --*************************************************************************************--
 --**                              CREATE CUSTOM COMMANDS                             **--
 --*************************************************************************************--
@@ -510,6 +541,12 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 --GEAR LEVER USES DEFAULT DATAREF: sim/cockpit/switches/gear_handle_status
 
+---CENTER PED 1 (FWD)----------
+
+B777CMD_ctr1_at_disco                     = deferred_command("Strato/B777/button_switch/ctr1/at_disco", "Autothrottle Disconnect", B777_ctr1_at_disco_CMDhandler)
+B777CMD_ctr1_toga                         = deferred_command("Strato/B777/button_switch/ctr1/toga", "TOGA switch", B777_ctr1_toga_CMDhandler)
+
+
 ---OTHER---------------
 
 B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_switch/cockpit_door", "Cockpit Door Knob", B777_cockpit_door_CMDhandler)
@@ -576,6 +613,9 @@ function after_physics()
       B777DR_mcp_button_pos[i] = B777_set_animation_position(B777DR_mcp_button_pos[i], B777DR_mcp_button_target[i], 0.0, 1.0, 10)
    end
 
+   for i = 1, 5 do
+   B777DR_ctr1_button_pos[i] = B777_set_animation_position(B777DR_ctr1_button_pos[i], B777_ctr1_button_target[i], 0.0, 1.0, 10)
+   end
 end
 
 --function after_replay()
