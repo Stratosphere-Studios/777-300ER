@@ -12,6 +12,7 @@
   - fix clock display uv map
   - reduce visibility of slanted things above doors
   - texture landing gear
+  - finish modelling/texture ipad efb
 
 - Matt726:
   - Display textures (and some displays?)
