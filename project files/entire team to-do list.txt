@@ -11,8 +11,9 @@
   - fix glass
   - fix clock display uv map
   - reduce visibility of slanted things above doors
-  - texture landing gear
+  - texture landing gear, make hot brake glow
   - finish modelling/texture ipad efb
+  - enable normal metalness for all objects that need it.
 
 - Matt726:
   - Display textures (and some displays?)
