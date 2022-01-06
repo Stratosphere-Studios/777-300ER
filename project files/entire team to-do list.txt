@@ -14,6 +14,9 @@
   - texture landing gear, make hot brake glow
   - finish modelling/texture ipad efb
   - enable normal metalness for all objects that need it.
+  - RAT (animate spinning using sim/flightmodel/position/indicated_airspeed , raise/lower using sim/operation/failures/ram_air_turbine_on
+     (will make a custom, smoothly animated DR soon but for now use default)
+  - animate APU inlet door
 
 - Matt726:
   - Display textures (and some displays?)
@@ -35,6 +38,7 @@
   - clock code
   - make sure existing manips work and make list of anim drs and light drs for each
   - fix flight director switch code
+  - custom RAT dataref (use anim tool with target being the default dr)
   - rename cmds/drs for toggle switch to "toggle_switch"
   - mcp display options (as/mach, mag/true hdg, etc)
   - rest of displays (fcom is a good ref!)
