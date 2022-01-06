@@ -31,7 +31,7 @@ B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_swit
 --**                             CREATE CUSTOM DATAREFS                              **--
 --*************************************************************************************--
 B777DR_displayed_hdg                   = deferred_dataref("Strato/777/displays/hdg", "number") -- what the MCP heading display actually shows
-B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number") -- whether it is showing the magnetic heading or true heading
+B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number")
 
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what pages the lower eicas is on
 

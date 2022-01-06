@@ -10,6 +10,10 @@
   - reduce texture sizes
   - fix glass
   - fix clock display uv map
+  - reduce visibility of slanted things above doors
+  - texture landing gear, make hot brake glow
+  - finish modelling/texture ipad efb
+  - enable normal metalness for all objects that need it.
 
 - Matt726:
   - Display textures (and some displays?)
@@ -24,16 +28,20 @@
 
 - Crazytimtimtim
   - manipulators (using Noah's refs)
-  - landing gear eagle claw dataref
+  - landing gear eagle claw dataref - done
   - new flightmodel (control geometry, viewpoint stuff)
   - custom fms
   - check if landing light/taxi/rwy turnoff dimming similar to 744
   - clock code
   - make sure existing manips work and make list of anim drs and light drs for each
+  - fix flight director switch code
   - rename cmds/drs for toggle switch to "toggle_switch"
   - mcp display options (as/mach, mag/true hdg, etc)
   - rest of displays (fcom is a good ref!)
+  - idea for bank limit knob - 6 pos. anim pos dr, set default dr using that UNLESS in auto. auto varies btw 15-25 deg depending on true airspeed
   - ALL THE SYSTEMS AHHHH (match fcom and CBTs!)
 
 - Nutshell
   - review new flightmodel before release
+
+Random note: We should include the CSS system in the EFB. It would be cool.
