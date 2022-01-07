@@ -22,7 +22,7 @@ Freeware Boeing 777-300ER for X-Plane 11, made by Stratosphere Studios
 
 A: As we are very early in development, and have no release date at this time.
 
-**Q: WHere can I download official liveries?**
+**Q: Where can I download official liveries?**
 
 A: You can download the official Stratosphere livery for various aircraft, including this 777, from our repository [here](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository will also include other liveries for the 777 aside from the Stratosphere one in the future.
 
