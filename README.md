@@ -73,6 +73,6 @@ Potatohead123: Landing gear, cockpit, engines.
 
 [mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: XTLua, help, and some borrowed code (within license restrictions)
 
-Phill Paysse: Fuselage and wings.
+Phil Paysse: Fuselage and wings.
 
 [Spherrrical](https://github.com/Spherrrical/): Graphic design, Discord bot.
