@@ -31,12 +31,13 @@
 
 - Crazytimtimtim
   - manipulators (using Noah's refs)
-  - landing gear eagle claw dataref - done
-  - new flightmodel (control geometry, viewpoint stuff)
+  - replace default toggle command to command up and down default cmds (3 total cmds replaced, indiv up and down cmds will just set the default gear handle pos dr)
+  - new flightmodel (control geometry)
   - custom fms
+  - implement new animation code
   - check if landing light/taxi/rwy turnoff dimming similar to 744
   - clock code
-  - make sure existing manips work and make list of anim drs and light drs for each
+  - make sure exis
   - fix flight director switch code
   - custom RAT dataref (use anim tool with target being the default dr)
   - rename cmds/drs for toggle switch to "toggle_switch"

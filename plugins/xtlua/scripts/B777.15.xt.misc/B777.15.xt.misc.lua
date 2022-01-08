@@ -82,18 +82,10 @@ simCMD_reverser_toggle_2                = find_command("sim/engines/thrust_rever
 --*************************************************************************************--
 
 ----- ANIMATION UTILITY -----------------------------------------------------------------
-function B777_set_animation_position(current_value, target, min, max, speed)
-
-   local fps_factor = math.min(1.0, speed * SIM_PERIOD)
-
-   if target >= (max - 0.001) and current_value >= (max - 0.01) then
-      return max
-   elseif target <= (min + 0.001) and current_value <= (min + 0.01) then
-      return min
-   else
-      return current_value + ((target - current_value) * fps_factor)
-   end
-
+function B777_animate(target, variable, speed)
+   if math.abs(target - variable) < 0.1 then return target end
+   variable = variable + ((target - variable) * (speed * SIM_PERIOD))
+   return variable
 end
 
 ----- LANDING GEAR ----------------------------------------------------------------------
@@ -178,8 +170,8 @@ function after_physics()
    end
 
    if B777_eag_claw_sync == 0 then
-      B777DR_custom_eagle_claw[1] = B777_set_animation_position(B777DR_custom_eagle_claw[1], B777_eag_target, 0, 19, 0.5)
-      B777DR_custom_eagle_claw[2] = B777_set_animation_position(B777DR_custom_eagle_claw[2], B777_eag_target, 0, 19, 0.5)
+      B777DR_custom_eagle_claw[1] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
+      B777DR_custom_eagle_claw[2] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
    end
 
 end

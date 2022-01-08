@@ -62,7 +62,7 @@ local green = {0, 1, 0, 1}
 
 function update()
     local eicasmode = globalPropertyf("Strato/777/displays/eicas_mode")
-    print(get(eicasmode))
+--  print(get(eicasmode))
     function chelist(X)
         loc = 1
         col = "cel"
