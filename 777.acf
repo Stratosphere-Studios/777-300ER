@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -15.350120544
+P _door/0/_ang_now -81.417190552
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 15.350120544
+P _door/1/_ang_now 81.417190552
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 15.350120544
+P _door/2/_ang_now 81.417190552
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 0.0
+P _door/3/_ang_now 88.247955322
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now 0.0
+P _door/4/_ang_now -88.247955322
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -134,7 +134,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now 0.0
+P _door/5/_ang_now -86.801666260
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -142,7 +142,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 0.0
+P _door/6/_ang_now 86.801666260
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now 0.0
+P _door/7/_ang_now -83.603332520
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 0.0
+P _door/8/_ang_now 83.603332520
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -15.350120544
+P _door/9/_ang_now -81.417190552
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,10 +213,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 20.591629028
+P _gear/0/_lonN 109.218185425
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
-P _gear/0/_stat_def 0.387207031
+P _gear/0/_stat_def 0.387207061
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -2.807949066
+P _gear/1/_axiN -14.893388748
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,11 +243,11 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -15.350120544
+P _gear/1/_latN -81.417190552
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -5.817657471
+P _gear/1/_lonN 7.879174232
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
 P _gear/1/_stat_def 1.087793112
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 2.807949066
+P _gear/2/_axiN 14.893388748
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,11 +277,11 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 15.350120544
+P _gear/2/_latN 81.417190552
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -5.817657471
+P _gear/2/_lonN 7.879174232
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
 P _gear/2/_stat_def 1.087793112
@@ -42022,7 +42022,7 @@ PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
 gen_rotary LCD Background
-  POS 3050.928223 2197.999756
+  POS 3050.928223 2201.999756
   IMAGE LCD_Background
   DATAREF 
   SIZE 3.250000
@@ -42045,11 +42045,12 @@ gen_rotary LCD Background
 GROUP Captain PFD
   GROUP_OPEN
   GROUP Artificial Horizon
+    GROUP_OPEN
     gen_rotary AH
-      POS 1300.000000 2048.000000
+      POS 595.000000 1779.714355
       IMAGE PFD/artificial_horizon/horizon_colors
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42067,10 +42068,10 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_Markings
-      POS 1300.000000 2048.000000
+      POS 594.857178 1778.856934
       IMAGE PFD/artificial_horizon/horizon_label
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42088,10 +42089,10 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_dual_cue
-      POS 1302.000000 2048.500000
+      POS 596.000000 1780.500000
       IMAGE PFD/artificial_horizon/dual_cue
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42109,10 +42110,10 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_fd_pitch
-      POS 1301.500000 2057.000000
+      POS 595.500000 1799.000000
       IMAGE PFD/artificial_horizon/fd_pitch
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42130,10 +42131,10 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_fd_roll
-      POS 1301.000000 2057.500000
+      POS 595.000000 1799.500000
       IMAGE PFD/artificial_horizon/fd_roll
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42151,10 +42152,10 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_mask_blue
-      POS 1301.500000 2202.500000
+      POS 595.500000 2067.500000
       IMAGE PFD/artificial_horizon/blue_mask
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.420000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42172,10 +42173,10 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_Mask
-      POS 1346.000000 2047.000000
+      POS 674.000000 1799.000000
       IMAGE PFD/artificial_horizon/horizon_mask
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42194,11 +42195,12 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP AFDS
+    GROUP_OPEN
     gen_rotary AFDS_background
-      POS 1302.500000 2393.500000
+      POS 620.500000 2381.500000
       IMAGE PFD/AFDS_mode/afds_background
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42217,11 +42219,12 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP ASI
+    GROUP_OPEN
     gen_rotary ASI_background
-      POS 1044.500000 2057.500000
+      POS 133.500000 1799.357178
       IMAGE PFD/alt_spd_background
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42240,11 +42243,12 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP VSI
+    GROUP_OPEN
     gen_rotary VSI_background
-      POS 1665.500000 2057.500000
+      POS 1257.500000 1799.500000
       IMAGE PFD/vertical_speed_indicator/vsi_background
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42263,11 +42267,12 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP ALT
+    GROUP_OPEN
     gen_rotary alt_background
-      POS 1565.500000 2057.500000
+      POS 1073.500000 1799.500000
       IMAGE PFD/alt_spd_background
       DATAREF 
-      SIZE 0.750000
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42286,10 +42291,10 @@ GROUP Captain PFD
 
   END_GROUP
   gen_rotary spd_alt_window
-    POS 1344.500000 2050.000000
+    POS 678.500000 1783.999878
     IMAGE PFD/spd_alt_window
     DATAREF 
-    SIZE 0.750000
+    SIZE 1.350000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -42710,6 +42715,7 @@ GROUP Radios
 
 END_GROUP
 GROUP MCP
+  GROUP_OPEN
   gen_rotary VS_label
     POS 3702.714355 2811.856934
     IMAGE MCP/VS
@@ -42899,6 +42905,7 @@ GROUP MCP
 
 END_GROUP
 GROUP Trim
+  GROUP_OPEN
 END_GROUP
 GROUP FMSs
   GROUP Left

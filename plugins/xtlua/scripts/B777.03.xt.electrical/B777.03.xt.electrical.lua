@@ -47,6 +47,8 @@ simDR_groundSpeed                         = find_dataref("sim/flightmodel/positi
 simDR_enginesRunning                      = find_dataref("sim/flightmodel/engine/ENGN_running")
 simDR_gpuConnected                        = find_dataref("sim/cockpit/electrical/gpu_on")
 
+B777DR_ovhd_ctr_button_target             = find_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target")
+
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -78,16 +80,14 @@ simCMD_ovhd_gpu_off                     = find_command("sim/electrical/GPU_off")
 
 function B777_ovhd_c_ext_pwr_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      B777DR_ovhd_ctr_button_positions[7] = 1
+      B777DR_ovhd_ctr_button_target[7] = 1
       if simDR_gpuConnected == 0 and simDR_groundSpeed < 5 and simDR_onGround == 1 and simDR_enginesRunning[0] == 0 and simDR_enginesRunning[1] == 0 then
          simCMD_ovhd_gpu_on:once()
       elseif simDR_gpuConnected == 1 then
          simCMD_ovhd_gpu_off:once()
       end
-   elseif phase == 1 then
-      B777DR_ovhd_ctr_button_positions[7] = 1
    elseif phase == 2 then
-      B777DR_ovhd_ctr_button_positions[7] = 0
+      B777DR_ovhd_ctr_button_target[7] = 0
    end
 end
 

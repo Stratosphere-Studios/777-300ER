@@ -9,7 +9,7 @@
   - model ipad efb
   - reduce texture sizes
   - fix glass
-  - fix clock display uv map
+  - fix clock and efb display uv map
   - reduce visibility of slanted things above doors
   - texture landing gear, make hot brake glow
   - finish modelling/texture ipad efb

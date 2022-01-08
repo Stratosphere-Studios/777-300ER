@@ -70,6 +70,8 @@ B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
 
+B777DR_ovhd_ctr_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target", "array[46]")
+
 B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[5]")
 
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
@@ -96,17 +98,16 @@ simCMD_ap_altArm                         = find_command("sim/autopilot/altitude_
 simCMD_ap_flch                           = find_command("sim/autopilot/level_change")
 simCMD_ap_vs                             = find_command("sim/autopilot/vertical_speed")
 simCMD_ap_lnav                           = find_command("sim/autopilot/gpss")
-simCMD_ap_vnav                           = find_command("sim/autopilot/FMS")
+simCMD_ap_fms_vnav                       = find_command("sim/autopilot/FMS")
 simCMD_ap_disco                          = find_command("sim/autopilot/disconnect")
+simCMD_ap_loc                            = find_command("sim/autopilot/NAV")
 simCMD_at_spd                            = find_command("sim/autopilot/autothrottle")
 simCMD_at_clbcon                         = find_command("sim/autopilot/autothrottle_n1epr")
 simCMD_at_off                            = find_command("sim/autopilot/autothrottle_off")
---[[simCMD_fd_capt_on                        = find_command("sim/autopilot/fdir_on")
+simCMD_fd_capt_on                        = find_command("sim/autopilot/fdir_on")
 simCMD_fd_capt_off                       = find_command("sim/autopilot/servos_fdir_off")
 simCMD_fd_fo_on                          = find_command("sim/autopilot/fdir2_on")
-simCMD_fd_fo_off                         = find_command("sim/autopilot/servos_fdir2_off")]]
-simCMD_fd_capt                           = find_command("sim/autopilot/fdir_toggle")
-simCMD_fd_fo                             = find_command("sim/autopilot/fdir2_toggle")
+simCMD_fd_fo_off                         = find_command("sim/autopilot/servos_fdir2_off")
 
 ---EFIS----------
 simCMD_efis_wxr                          = find_command("sim/instruments/EFIS_wxr")
@@ -123,7 +124,10 @@ simCMD_efis_apt                          = find_command("sim/instruments/EFIS_ap
 
 --Center-----
 
-simCMD_ovhd_bat_toggle                  = find_command("sim/electrical/batteries_toggle")
+simCMD_ovhd_bat_1_on                    = find_command("sim/electrical/battery_1_on")
+simCMD_ovhd_bat_1_off                   = find_command("sim/electrical/battery_1_off")
+simCMD_ovhd_bat_2_on                    = find_command("sim/electrical/battery_2_on")
+simCMD_ovhd_bat_2_off                   = find_command("sim/electrical/battery_2_off")
 simCMD_ovhd_apu_gen_on                  = find_command("sim/electrical/APU_generator_on")
 simCMD_ovhd_apu_gen_off                 = find_command("sim/electrical/APU_generator_off")
 simCMD_ovhd_gen_1_on                    = find_command("sim/electrical/generator_1_on")
@@ -169,8 +173,8 @@ end
 
 function B777_ap_loc_switch_CMDhandler(phase, duration)        -- A/P LOCALIZER BUTTON
    if phase == 0 then
-      B777DR_mcp_button_target[3] = 1                       --TODO: FIND CMD
---      B777CMD_ap_servos_on:once()
+      B777DR_mcp_button_target[3] = 1
+      simCMD_ap_loc:once()
    elseif phase == 2 then
       B777DR_mcp_button_target[3] = 0
    end
@@ -233,7 +237,7 @@ end
 function B777_ap_vnav_switch_CMDhandler(phase, duration)       -- A/P  VNAV BUTTON
    if phase == 0 then
       B777DR_mcp_button_target[10] = 1
-      simCMD_ap_vnav:once()
+      simCMD_ap_fms_vnav:once()
    elseif phase == 2 then
       B777DR_mcp_button_target[10] = 0
    end
@@ -259,31 +263,27 @@ end
 
 function B777_fd_capt_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
    if phase == 0 then
-      B777DR_mcp_button_target[13] = 1 - B777DR_mcp_button_target[13]
-      simCMD_fd_capt:once()
+      if B777DR_mcp_button_target[13] == 1 then
+         B777DR_mcp_button_target[13] = 0
+         simCMD_fd_capt_off:once()
+      elseif B777DR_mcp_button_target[13] == 0 then
+         B777DR_mcp_button_target[13] = 1
+         simCMD_fd_capt_on:once()
+      end
    end
 end
-
---[[function B777_fd_capt_up_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
-   if phase == 0 then
-         simCMD_fd_capt_on:once()
-         B777DR_mcp_button_target[13] = 1
-   end
-end]]
 
 function B777_fd_fo_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
    if phase == 0 then
-      B777DR_mcp_button_target[14] = 1 - B777DR_mcp_button_target[14]
-      simCMD_fd_fo:once()
+      if B777DR_mcp_button_target[14] == 1 then
+         B777DR_mcp_button_target[14] = 0
+         simCMD_fd_fo_off:once()
+      elseif B777DR_mcp_button_target[14] == 0 then
+         B777DR_mcp_button_target[14] = 1
+         simCMD_fd_fo_on:once()
+      end
    end
 end
-
---[[function B777_fd_fo_up_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
-   if phase == 0 then
-         simCMD_fd_fo_on:once()
-         B777DR_mcp_button_target[14] = 1
-   end
-end]]
 
 function B777_autothrottle_switch_CMDhandler(phase, duration)
    if phase == 0 then
@@ -376,19 +376,26 @@ end
 
 function B777_ovhd_c_batt_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      B777DR_ovhd_ctr_button_positions[1] = 1 - B777DR_ovhd_ctr_button_positions[1]
-      simCMD_ovhd_bat_toggle:once()
+      if B777DR_ovhd_ctr_button_target[1] == 1 then
+         B777DR_ovhd_ctr_button_target[1] = 0
+         simCMD_ovhd_bat_1_off:once()
+         simCMD_ovhd_bat_2_off:once()
+      elseif B777DR_ovhd_ctr_button_target[1] == 0 then
+         B777DR_ovhd_ctr_button_target[1] = 1
+         simCMD_ovhd_bat_1_on:once()
+         simCMD_ovhd_bat_2_on:once()
+      end
    end
 end
 
 function B777_ovhd_c_apu_gen_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[2] == 0 then
+      if B777DR_ovhd_ctr_button_target[2] == 0 then
          simCMD_ovhd_apu_gen_on:once()
-         B777DR_ovhd_ctr_button_positions[2] = 1
-      elseif B777DR_ovhd_ctr_button_positions[2] == 1 then
+         B777DR_ovhd_ctr_button_target[2] = 1
+      elseif B777DR_ovhd_ctr_button_target[2] == 1 then
          simCMD_ovhd_apu_gen_off:once()
-         B777DR_ovhd_ctr_button_positions[2] = 0
+         B777DR_ovhd_ctr_button_target[2] = 0
       end
    end
 end
@@ -398,21 +405,20 @@ end
 
 function B777_ovhd_c_bus_tie_l_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      B777DR_ovhd_ctr_button_positions[3] = 1 - B777DR_ovhd_ctr_button_positions[3]
-      if B777DR_ovhd_ctr_button_positions[3] == 0 then
-         B777DR_ovhd_ctr_button_positions[3] = 1
-      elseif B777DR_ovhd_ctr_button_positions[3] == 1 then
-         B777DR_ovhd_ctr_button_positions[3] = 0
+      if B777DR_ovhd_ctr_button_target[3] == 0 then
+         B777DR_ovhd_ctr_button_target[3] = 1
+      elseif B777DR_ovhd_ctr_button_target[3] == 1 then
+         B777DR_ovhd_ctr_button_target[3] = 0
       end
    end
 end
 
 function B777_ovhd_c_bus_tie_r_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[4] == 0 then
-         B777DR_ovhd_ctr_button_positions[4] = 1
-      elseif B777DR_ovhd_ctr_button_positions[4] == 1 then
-         B777DR_ovhd_ctr_button_positions[4] = 0
+      if B777DR_ovhd_ctr_button_target[4] == 0 then
+         B777DR_ovhd_ctr_button_target[4] = 1
+      elseif B777DR_ovhd_ctr_button_target[4] == 1 then
+         B777DR_ovhd_ctr_button_target[4] = 0
       end
    end
 end
@@ -420,24 +426,24 @@ end
 
 function B777_ovhd_c_eng_gen_l_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[5] == 0 then
+      if B777DR_ovhd_ctr_button_target[5] == 0 then
          simCMD_ovhd_gen_1_on:once()
-         B777DR_ovhd_ctr_button_positions[5] = 1
-      elseif B777DR_ovhd_ctr_button_positions[5] == 1 then
+         B777DR_ovhd_ctr_button_target[5] = 1
+      elseif B777DR_ovhd_ctr_button_target[5] == 1 then
          simCMD_ovhd_gen_1_off:once()
-         B777DR_ovhd_ctr_button_positions[5] = 0
+         B777DR_ovhd_ctr_button_target[5] = 0
       end
    end
 end
 
 function B777_ovhd_c_eng_gen_r_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_ovhd_ctr_button_positions[6] == 0 then
+      if B777DR_ovhd_ctr_button_target[6] == 0 then
          simCMD_ovhd_gen_2_on:once()
-         B777DR_ovhd_ctr_button_positions[6] = 1
-      elseif B777DR_ovhd_ctr_button_positions[6] == 1 then
+         B777DR_ovhd_ctr_button_target[6] = 1
+      elseif B777DR_ovhd_ctr_button_target[6] == 1 then
          simCMD_ovhd_gen_2_off:once()
-         B777DR_ovhd_ctr_button_positions[6] = 0
+         B777DR_ovhd_ctr_button_target[6] = 0
       end
    end
 end
@@ -448,7 +454,7 @@ end
 
 function B777_cockpit_door_CMDhandler(phase, duration)
    if phase == 0 then
-      B777_cockpit_door_target = 1 - B777DR_cockpit_door_pos
+      B777_cockpit_door_target = 1 - B777_cockpit_door_target
    end
 end
 
@@ -456,7 +462,7 @@ end
 
 ---CENTER PEDESTAL FWD----------
 
-function B777_ctr1_at_disco_CMDhandler(phase, duration)
+function B777_ctr1_toga_CMDhandler(phase, duration)
    if phase == 0 then
       B777_ctr1_button_target[2] = 1
       simCMD_toga:once()
@@ -570,6 +576,12 @@ function B777_set_animation_position(current_value, target, min, max, speed)
 
 end
 
+--NEW ANIMATION UTILITY
+function B777_animate(target, variable, speed)
+   if math.abs(target - variable) < 0.1 then return target end
+   variable = variable + ((target - variable) * (speed * SIM_PERIOD))
+   return variable
+end
 
 ----- TERNARY CONDITIONAL ---------------------------------------------------------------
 function B777_ternary(condition, ifTrue, ifFalse)
@@ -607,15 +619,20 @@ end
 --function before_physics()
 
 function after_physics()
-   B777DR_cockpit_door_pos = B777_set_animation_position(B777DR_cockpit_door_pos, B777_cockpit_door_target, 0.0, 1.0, 4)
+   B777DR_cockpit_door_pos = B777_animate(B777_cockpit_door_target, B777DR_cockpit_door_pos, 4)
 
    for i = 1, 18 do
-      B777DR_mcp_button_pos[i] = B777_set_animation_position(B777DR_mcp_button_pos[i], B777DR_mcp_button_target[i], 0.0, 1.0, 10)
+      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 10)
    end
 
    for i = 1, 5 do
-   B777DR_ctr1_button_pos[i] = B777_set_animation_position(B777DR_ctr1_button_pos[i], B777_ctr1_button_target[i], 0.0, 1.0, 10)
+      B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 10)
    end
+
+   for i = 1, 7 do
+      B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 10)
+   end
+
 end
 
 --function after_replay()
