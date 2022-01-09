@@ -3,7 +3,6 @@
   - redo wingflex once new flightmodel is out
   - animate doors anbd cockpit door
   - exterior lights ( https://developer.x-plane.com/article/airplane-parameterized-light-guide/ AND https://www.youtube.com/watch?v=ingB_EYyC2U )
-  - button animations and lights
   - cockpit floodlights
   - cabin textures
   - reduce texture sizes
@@ -14,7 +13,6 @@
   - model/texture external light fixtures
   - model button switch covers
   - fix passenger oxygen switch - says NO instead of ON
-  - fix wings not casting shadows
 
 
 - Matt726:
