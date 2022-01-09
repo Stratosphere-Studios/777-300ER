@@ -17,6 +17,9 @@
   - RAT (animate spinning using sim/flightmodel/position/indicated_airspeed , raise/lower using sim/operation/failures/ram_air_turbine_on
      (will make a custom, smoothly animated DR soon but for now use default)
   - model/texture external light fixtures
+  - model button switch covers
+  - fix passenger oxygen switch - says NO inastad of ON
+
 
 - Matt726:
   - Display textures (and some displays?)
