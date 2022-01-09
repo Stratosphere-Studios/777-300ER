@@ -6,7 +6,6 @@
   - button animations and lights
   - cockpit floodlights
   - cabin textures
-  - model ipad efb
   - reduce texture sizes
   - fix glass
   - fix clock and efb display uv map
@@ -18,7 +17,7 @@
      (will make a custom, smoothly animated DR soon but for now use default)
   - model/texture external light fixtures
   - model button switch covers
-  - fix passenger oxygen switch - says NO inastad of ON
+  - fix passenger oxygen switch - says NO instead of ON
 
 
 - Matt726:
@@ -52,4 +51,4 @@
 - Nutshell
   - review new flightmodel before release
 
-Random note: We should include the CSS system in the EFB. It would be cool.
+Random note: We should include the CSS (cabin crew controls) system in the EFB. It would be cool.
