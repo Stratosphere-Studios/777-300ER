@@ -12,6 +12,9 @@
   - reduce visibility of slanted things above doors
   - texture landing gear, make hot brake glow
   - model/texture external light fixtures
+  - model button switch covers
+  - fix passenger oxygen switch - says NO instead of ON
+
 
 - Matt726:
   - Display textures (and some displays?)
@@ -44,4 +47,4 @@
 - Nutshell
   - review new flightmodel before release
 
-Random note: We should include the CSS system in the EFB. It would be cool.
+Random note: We should include the CSS (cabin crew controls) system in the EFB. It would be cool.
