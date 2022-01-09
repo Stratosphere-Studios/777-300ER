@@ -152,7 +152,7 @@ simCMD_toga                             = find_command("sim/engines/TOGA_power")
 function B777_ap_engage_switch_1_CMDhandler(phase, duration)   -- A/P ENGAGE BUTTON L
    if phase == 0 then
       B777DR_mcp_button_target[1] = 1
-      if B777DR_mcp_button_target[12] == 0 then
+      if B777DR_mcp_button_target[12] == 0 and (B777DR_mcp_button_target[13] == 1 or B777DR_mcp_button_target[14] == 1) then
          simCMD_ap_servos_on:once()
       end
    elseif phase == 2 then
@@ -163,7 +163,7 @@ end
 function B777_ap_engage_switch_2_CMDhandler(phase, duration)   -- A/P ENGAGE BUTTON R
    if phase == 0 then
       B777DR_mcp_button_target[2] = 1
-      if B777DR_mcp_button_target[12] == 0 then
+      if B777DR_mcp_button_target[12] == 0 and (B777DR_mcp_button_target[13] == 1 or B777DR_mcp_button_target[14] == 1) then
          simCMD_ap_servos_on2:once()
       end
    elseif phase == 2 then
@@ -622,15 +622,15 @@ function after_physics()
    B777DR_cockpit_door_pos = B777_animate(B777_cockpit_door_target, B777DR_cockpit_door_pos, 4)
 
    for i = 1, 18 do
-      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 10)
+      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 20)
    end
 
    for i = 1, 5 do
-      B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 10)
+      B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 20)
    end
 
    for i = 1, 7 do
-      B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 10)
+      B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 20)
    end
 
 end
