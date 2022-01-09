@@ -13,7 +13,7 @@
   - model/texture external light fixtures
   - model button switch covers
   - fix passenger oxygen switch - says NO instead of ON
-
+  - button lights and animations
 
 - Matt726:
   - Display textures (and some displays?)
