@@ -9,7 +9,8 @@
   - fix glass
   - fix clock and efb display uv map
   - reduce visibility of slanted things above doors
-  - texture landing gear, make hot brake glow
+  - texture landing gear, make hot brake glow 
+  - Animate landing gear doors (or Zeta)
   - model/texture external light fixtures
   - model button switch covers
   - fix passenger oxygen switch - says NO instead of ON
@@ -24,7 +25,10 @@
   - pfd
 
 - Zeta
-  - new landing gear and animations
+  - Main gear steering
+  - Tires rotation
+  - Unwrap new landing gear
+  - Animate landing gear doors (or Nathroxer)
 
 - Crazytimtimtim
   - manipulators (using Noah's refs)
