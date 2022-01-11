@@ -51,6 +51,9 @@ local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 
 simDR_shadow			                     = find_dataref("sim/private/controls/shadow/total_fade_ratio")
 
+simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
+simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
+
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -152,7 +155,7 @@ simCMD_toga                             = find_command("sim/engines/TOGA_power")
 function B777_ap_engage_switch_1_CMDhandler(phase, duration)   -- A/P ENGAGE BUTTON L
    if phase == 0 then
       B777DR_mcp_button_target[1] = 1
-      if B777DR_mcp_button_target[12] == 0 and (B777DR_mcp_button_target[13] == 1 or B777DR_mcp_button_target[14] == 1) then
+      if B777DR_mcp_button_target[12] == 0 and simDR_yoke_pitch <= 0.25 and simDR_yoke_roll <= 0.25 then
          simCMD_ap_servos_on:once()
       end
    elseif phase == 2 then
@@ -163,7 +166,7 @@ end
 function B777_ap_engage_switch_2_CMDhandler(phase, duration)   -- A/P ENGAGE BUTTON R
    if phase == 0 then
       B777DR_mcp_button_target[2] = 1
-      if B777DR_mcp_button_target[12] == 0 and (B777DR_mcp_button_target[13] == 1 or B777DR_mcp_button_target[14] == 1) then
+      if B777DR_mcp_button_target[12] == 0 and simDR_yoke_pitch <= 0.25 and simDR_yoke_roll <= 0.25 then
          simCMD_ap_servos_on2:once()
       end
    elseif phase == 2 then
@@ -287,10 +290,12 @@ end
 
 function B777_autothrottle_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777_mcp_button_target[15] == 1 then
+      if B777DR_mcp_button_target[15] == 1 then
          simCMD_at_off:once()
+         B777DR_mcp_button_target[15] = 0
+      else
+         B777DR_mcp_button_target[15] = 1
       end
-      B777DR_mcp_button_target[15] = 1 - B777DR_mcp_button_target[15]
    end
 end
 
