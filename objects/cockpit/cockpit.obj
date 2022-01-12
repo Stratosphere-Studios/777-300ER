@@ -4,7 +4,7 @@ OBJ
 
 GLOBAL_cockpit_lit
 TEXTURE	../../cockpit_3d/-PANELS-/panel.png
-POINT_COUNTS	6435	0	0	6435
+POINT_COUNTS	6447	0	0	6447
 
 VT	-0.20901637	0.30849525	-33.317318	0	0.92759699	0.37358239	1	1
 VT	-0.20901637	0.30355439	-33.30505	0	0.92759699	0.37358239	1	0
@@ -1071,6 +1071,18 @@ VT	0.15160447	0.21459605	-32.616047	0	1	-0	0.72869503	0.84580678
 VT	0.19582942	0.21459605	-32.616047	0	1	-0	0.87794363	0.84601986
 VT	0.19582942	0.21459605	-32.58865	0	1	-0	0.87807572	0.75411952
 VT	0.15160447	0.21459605	-32.616047	0	1	-0	0.72869503	0.84580678
+VT	-1.1125449	0.6608808	-33.074329	0.60325199	0.56707358	0.56081587	0.33162668	0.66766948
+VT	-1.2199668	0.63994056	-32.937607	0.60325199	0.56707358	0.56081587	0.00000104	0.66766948
+VT	-1.2882384	0.74908477	-32.974529	0.60325199	0.56707358	0.56081587	0.00000104	0.9212693
+VT	-1.1808165	0.77002501	-33.111256	0.60325199	0.56707358	0.56081587	0.33163047	0.92127323
+VT	-1.1125449	0.6608808	-33.074329	0.60325199	0.56707358	0.56081587	0.33162668	0.66766948
+VT	-1.2882384	0.74908477	-32.974529	0.60325199	0.56707358	0.56081587	0.00000104	0.9212693
+VT	1.1125449	0.6608808	-33.074329	-0.60325211	0.56707364	0.56081575	0.00000471	0.66766948
+VT	1.1808165	0.77002501	-33.111256	-0.60325211	0.56707364	0.56081575	0.00000092	0.92127055
+VT	1.2882384	0.74908477	-32.974529	-0.60325211	0.56707364	0.56081575	0.33162692	0.92126662
+VT	1.2199668	0.63994056	-32.937607	-0.60325211	0.56707364	0.56081575	0.33162692	0.66766948
+VT	1.1125449	0.6608808	-33.074329	-0.60325211	0.56707364	0.56081575	0.00000471	0.66766948
+VT	1.2882384	0.74908477	-32.974529	-0.60325211	0.56707364	0.56081575	0.33162692	0.92126662
 VT	-0.18275252	0.22002308	-32.793552	0	1	-0	0.875	0.75
 VT	-0.18275252	0.22002308	-32.800617	0	1	-0	0.875	0.5
 VT	-0.17091843	0.22002308	-32.800617	0	1	-0	0.625	0.5
@@ -7085,11 +7097,14 @@ IDX10	6390	6391	6392	6393	6394	6395	6396	6397	6398	6399
 IDX10	6400	6401	6402	6403	6404	6405	6406	6407	6408	6409
 IDX10	6410	6411	6412	6413	6414	6415	6416	6417	6418	6419
 IDX10	6420	6421	6422	6423	6424	6425	6426	6427	6428	6429
-IDX	6430
-IDX	6431
-IDX	6432
-IDX	6433
-IDX	6434
+IDX10	6430	6431	6432	6433	6434	6435	6436	6437	6438	6439
+IDX	6440
+IDX	6441
+IDX	6442
+IDX	6443
+IDX	6444
+IDX	6445
+IDX	6446
 
 	ANIM_begin
 	ANIM_trans	-1.05759	0.71065003	-31.216591	-1.05759	0.71065003	-31.216591
@@ -7099,7 +7114,7 @@ IDX	6434
 	ANIM_rotate_end
 		ATTR_draw_disable
 		ATTR_manip_command	button	Strato/B777/knob_switch/cockpit_door	Cockpit Door Open/Close
-		TRIS	3189 84
+		TRIS	3201 84
 	ANIM_end
 	ATTR_manip_command	button	sim/FMS/key_A	
 	TRIS	0 6
@@ -7224,384 +7239,384 @@ IDX	6434
 	ATTR_manip_toggle	button	1	0		Switch Cover
 	TRIS	360 36
 	ATTR_manip_command	button	sim/radios/com1_standy_flip	
-	TRIS	1065 6
+	TRIS	1077 6
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/fd/capt	Captain Flight Director Switch
-	TRIS	1071 36
+	TRIS	1083 36
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/switch_1	Autothrottle Arm
-	TRIS	1107 36
+	TRIS	1119 36
 	ATTR_manip_command	button	sim/autopilot/knots_mach_toggle	Switch between Knots/Mach
-	TRIS	1143 36
+	TRIS	1155 36
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/fd/fo	First Officer Flight Director Switch
-	TRIS	1179 36
+	TRIS	1191 36
 	ATTR_manip_command	button	sim/radios/com2_standy_flip	
-	TRIS	1215 6
+	TRIS	1227 6
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[3]	Right Wing Landing Lights
-	TRIS	1221 108
+	TRIS	1233 108
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/MAGtrk	Switch between MAG/TRK
-	TRIS	1329 36
+	TRIS	1341 36
 	ATTR_manip_command_knob	up_down	sim/autopilot/vertical_speed_up	sim/autopilot/vertical_speed_down	V/S Knob
-	TRIS	1365 36
+	TRIS	1377 36
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/disengage	A/P Disengage Bar
-	TRIS	1401 36
+	TRIS	1413 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ctr1/toga	TOGA
-	TRIS	1437 36
-	TRIS	1473 36
+	TRIS	1449 36
+	TRIS	1485 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/controls/parking_brake_ratio	Parking Brake
-	TRIS	1509 36
+	TRIS	1521 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/taxi_light_on	Taxi Lights (Nose)
-	TRIS	1545 36
+	TRIS	1557 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[4]	Left Wing Runway Turnoff Lights
-	TRIS	1581 36
+	TRIS	1593 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[1]	Left Wing Landing Lights
-	TRIS	1617 108
+	TRIS	1629 108
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[2]	Nose (Center) Landing Lights
-	TRIS	1725 108
+	TRIS	1737 108
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/strobe_lights_on	Strobe Lights (Wingtips & Tail)
-	TRIS	1833 36
+	TRIS	1845 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[5]	Right Wing Runway Turnoff Lights
-	TRIS	1869 36
+	TRIS	1881 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit/electrical/nav_lights_on	Toggle Nav Lights
-	TRIS	1905 36
+	TRIS	1917 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit/electrical/beacon_lights_on	Toggle Beacon Lights
-	TRIS	1941 36
+	TRIS	1953 36
 	ATTR_manip_command	button		APU Generator
-	TRIS	1977 36
+	TRIS	1989 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ovhd_c/eng_gen2	Right Engine Generator
-	TRIS	2013 36
+	TRIS	2025 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ovhd_c/batt	Battery Switch
-	TRIS	2049 36
+	TRIS	2061 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ovhd_c/eng_gen1	Left Engine Generator
-	TRIS	2085 36
+	TRIS	2097 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ovhd_c/ext_pwr	Ground Power (GPU) Switch
-	TRIS	2121 36
+	TRIS	2133 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/ram_air_turbine_on	Ram Air Turbine
-	TRIS	2157 36
+	TRIS	2169 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[5]	Right Fuel Jettison Nozzle Switch Cover
-	TRIS	2193 36
+	TRIS	2205 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[2]	Right Generator Drive Disconnect Switch Cover
-	TRIS	2229 36
+	TRIS	2241 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[1]	Left Generator Drive Disconnect Switch Cover
-	TRIS	2265 36
+	TRIS	2277 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[4]	Left Fuel Jettison Nozzle Switch Cover
-	TRIS	2301 36
+	TRIS	2313 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[15]	Left Electronic Engine Control Switch Cover
-	TRIS	2337 36
+	TRIS	2349 36
 	ATTR_manip_toggle	button	1	0		Switch Cover
-	TRIS	2373 36
+	TRIS	2385 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[3]	Ram Air Turbine Switch Cover
-	TRIS	2409 36
+	TRIS	2421 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[10]	Right Electronic Engine Control Switch Cover
-	TRIS	2445 36
+	TRIS	2457 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[9]	DISCH Switch Cover
-	TRIS	2481 36
+	TRIS	2493 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[11]	Left Stabilizer Trim Cutout Switch Cover
-	TRIS	2517 36
+	TRIS	2529 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[12]	Left Stabilizer Trim Cutout Switch Cover
-	TRIS	2553 36
+	TRIS	2565 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[7]	Emergency Lights Switch Cover
-	TRIS	2589 36
+	TRIS	2601 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[6]	Primary Flight Computers Switch Cover
-	TRIS	2625 36
+	TRIS	2637 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[8]	Passenger Oxygen Switch Cover
-	TRIS	2661 36
+	TRIS	2673 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[13]	Switch Cover
-	TRIS	2697 36
+	TRIS	2709 36
 	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[14]	Switch Cover
-	TRIS	2733 36
+	TRIS	2745 36
 	ATTR_manip_toggle	button	1	0	sim/cockpit/switches/gear_handle_status	Landing Gear Handle
-	TRIS	2769 84
+	TRIS	2781 84
 	ATTR_manip_axis_knob	rotate_medium	0	1	0.0099999998	0.1	sim/cockpit2/switches/panel_brightness_ratio[1]	Overhead Panel Brightness
-	TRIS	2853 84
+	TRIS	2865 84
 	ATTR_manip_axis_knob	rotate_medium	0	1	0.0099999998	0.1	sim/cockpit2/switches/panel_brightness_ratio[2]	Main Panel Brightness
-	TRIS	2937 84
+	TRIS	2949 84
 	ATTR_manip_axis_knob	rotate_medium	0	1	0.0099999998	0.1	sim/cockpit2/switches/panel_brightness_ratio[3]	Main Panel Brightness
-	TRIS	3021 84
+	TRIS	3033 84
 	ATTR_manip_axis_knob	rotate_medium	0	1	0.0099999998	0.1	sim/cockpit2/switches/panel_brightness_ratio[0]	Center Pedestal Panel Brightness
-	TRIS	3105 84
+	TRIS	3117 84
 	ATTR_manip_command	button	sim/FMS/key_0	
-	TRIS	3273 18
+	TRIS	3285 18
 	ATTR_manip_command	button	sim/FMS/key_3	
-	TRIS	3291 18
+	TRIS	3303 18
 	ATTR_manip_command	button	sim/FMS/key_period	
-	TRIS	3309 18
+	TRIS	3321 18
 	ATTR_manip_command	button	sim/FMS/key_minus	
-	TRIS	3327 18
+	TRIS	3339 18
 	ATTR_manip_command	button	sim/FMS/key_9	
-	TRIS	3345 18
+	TRIS	3357 18
 	ATTR_manip_command	button	sim/FMS/key_6	
-	TRIS	3363 18
+	TRIS	3375 18
 	ATTR_manip_command	button	sim/FMS/key_1	
-	TRIS	3381 18
+	TRIS	3393 18
 	ATTR_manip_command	button	sim/FMS/key_2	
-	TRIS	3399 18
+	TRIS	3411 18
 	ATTR_manip_command	button	sim/FMS/key_7	
-	TRIS	3417 18
+	TRIS	3429 18
 	ATTR_manip_command	button	sim/FMS/key_8	
-	TRIS	3435 18
+	TRIS	3447 18
 	ATTR_manip_command	button	sim/FMS/key_4	
-	TRIS	3453 18
+	TRIS	3465 18
 	ATTR_manip_command	button	sim/FMS/key_5	
-	TRIS	3471 18
+	TRIS	3483 18
 	ATTR_manip_command	button	sim/FMS2/key_0	
-	TRIS	3489 18
+	TRIS	3501 18
 	ATTR_manip_command	button	sim/FMS2/key_6	
-	TRIS	3507 18
+	TRIS	3519 18
 	ATTR_manip_command	button	sim/FMS2/key_5	
-	TRIS	3525 18
+	TRIS	3537 18
 	ATTR_manip_command	button	sim/FMS2/key_4	
-	TRIS	3543 18
+	TRIS	3555 18
 	ATTR_manip_command	button	sim/FMS2/key_8	
-	TRIS	3561 18
+	TRIS	3573 18
 	ATTR_manip_command	button	sim/FMS2/key_7	
-	TRIS	3579 18
+	TRIS	3591 18
 	ATTR_manip_command	button	sim/FMS2/key_2	
-	TRIS	3597 18
+	TRIS	3609 18
 	ATTR_manip_command	button	sim/FMS2/key_1	
-	TRIS	3615 18
+	TRIS	3627 18
 	ATTR_manip_command	button	sim/FMS2/key_9	
-	TRIS	3633 18
+	TRIS	3645 18
 	ATTR_manip_command	button	sim/FMS2/key_minus	
-	TRIS	3651 18
+	TRIS	3663 18
 	ATTR_manip_command	button	sim/FMS2/key_period	
-	TRIS	3669 18
+	TRIS	3681 18
 	ATTR_manip_command	button	sim/FMS2/key_3	
-	TRIS	3687 18
+	TRIS	3699 18
 	ATTR_manip_command	button	sim/FMS/key_5	
-	TRIS	3705 18
+	TRIS	3717 18
 	ATTR_manip_command	button	sim/FMS/key_4	
-	TRIS	3723 18
+	TRIS	3735 18
 	ATTR_manip_command	button	sim/FMS/key_8	
-	TRIS	3741 18
+	TRIS	3753 18
 	ATTR_manip_command	button	sim/FMS/key_7	
-	TRIS	3759 18
+	TRIS	3771 18
 	ATTR_manip_command	button	Strato/B777/button_switch/ctr1/at_disco	Autothrottle Disconnect
-	TRIS	3777 84
+	TRIS	3789 84
 	ATTR_manip_command	button	sim/FMS/key_2	
-	TRIS	3861 18
+	TRIS	3873 18
 	ATTR_manip_command	button	sim/FMS/key_1	
-	TRIS	3879 18
+	TRIS	3891 18
 	ATTR_manip_command	button	sim/FMS/key_6	
-	TRIS	3897 18
+	TRIS	3909 18
 	ATTR_manip_command	button	sim/FMS/key_9	
-	TRIS	3915 18
+	TRIS	3927 18
 	ATTR_manip_command	button	sim/FMS/key_minus	
-	TRIS	3933 18
+	TRIS	3945 18
 	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio[0]	Left Throttle
-	TRIS	3951 84
+	TRIS	3963 84
 	ATTR_manip_command_knob	rotate_small	sim/radios/stby_com1_fine_up	sim/radios/stby_com1_fine_down	
-	TRIS	4035 84
+	TRIS	4047 84
 	ATTR_manip_command_knob	rotate_medium	sim/radios/stby_com1_coarse_up	sim/radios/stby_com1_coarse_down	
-	TRIS	4119 84
+	TRIS	4131 84
 	ATTR_manip_axis_knob	rotate_small	0	1	0.1	0.2	sim/cockpit2/radios/actuators/audio_volume_com1	
-	TRIS	4203 84
+	TRIS	4215 84
 	ATTR_manip_axis_knob	rotate_small	0	1	0.1	0.2	sim/cockpit2/radios/actuators/audio_volume_com2	
-	TRIS	4287 84
+	TRIS	4299 84
 	ATTR_manip_command	button	Strato/B777/button_switch/ctr1/at_disco	Autothrottle Disconnect
-	TRIS	4371 84
+	TRIS	4383 84
 	ATTR_manip_command_knob	rotate_medium	sim/autopilot/bank_limit_up	sim/autopilot/bank_limit_down	Autopilot Bank Limit
-	TRIS	4455 84
+	TRIS	4467 84
 	ATTR_manip_command_knob	rotate_small	sim/transponder/transponder_hundreds_up	sim/transponder/transponder_hundreds_down	
-	TRIS	4539 84
+	TRIS	4551 84
 	ATTR_manip_command_knob	rotate_medium	sim/transponder/transponder_thousands_up	sim/transponder/transponder_thousands_down	
-	TRIS	4623 84
+	TRIS	4635 84
 	ATTR_manip_command_knob	rotate_medium	sim/transponder/transponder_ones_up	sim/transponder/transponder_ones_down	
-	TRIS	4707 84
+	TRIS	4719 84
 	ATTR_manip_command_knob	rotate_small	sim/transponder/transponder_tens_up	sim/transponder/transponder_tens_down	
-	TRIS	4791 84
+	TRIS	4803 84
 	ATTR_manip_command_knob	rotate_small	sim/radios/stby_com2_fine_up	sim/radios/stby_com2_fine_down	
-	TRIS	4875 84
+	TRIS	4887 84
 	ATTR_manip_command_knob	rotate_medium	sim/radios/stby_com2_coarse_up	sim/radios/stby_com2_coarse_down	
-	TRIS	4959 84
+	TRIS	4971 84
 	ATTR_manip_command	button	sim/FMS2/key_1	
-	TRIS	5043 18
+	TRIS	5055 18
 	ATTR_manip_command	button	sim/FMS2/key_2	
-	TRIS	5061 18
+	TRIS	5073 18
 	ATTR_manip_command	button	sim/FMS2/key_4	
-	TRIS	5079 18
+	TRIS	5091 18
 	ATTR_manip_command	button	sim/FMS2/key_5	
-	TRIS	5097 18
+	TRIS	5109 18
 	ATTR_manip_command_knob	rotate_small	sim/autopilot/altitude_up	sim/autopilot/altitude_down	Autopilot Altitude
-	TRIS	5115 84
+	TRIS	5127 84
 	ATTR_manip_command_knob	rotate_small	sim/autopilot/heading_up	sim/autopilot/heading_down	Autopilot Heading
-	TRIS	5199 84
+	TRIS	5211 84
 	ATTR_manip_command	button	sim/instruments/barometer_2992	Reset Altimeter Setting to Standard
-	TRIS	5283 18
+	TRIS	5295 18
 	ATTR_manip_command	button	Strato/B777/button_switch/efis/tfc	Show Air Traffic on ND
-	TRIS	5301 18
+	TRIS	5313 18
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgSel	Heading Select Mode
-	TRIS	5319 84
+	TRIS	5331 84
 	ATTR_manip_command	button	sim/FMS/key_period	
-	TRIS	5403 18
+	TRIS	5415 18
 	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio[1]	Right Throttle
-	TRIS	5421 84
+	TRIS	5433 84
 	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio_all	Throttle (Both)
-	TRIS	5505 84
+	TRIS	5517 84
 	ATTR_manip_command	button	sim/FMS/key_3	
-	TRIS	5589 18
+	TRIS	5601 18
 	ATTR_manip_command	button	sim/FMS/key_0	
-	TRIS	5607 18
+	TRIS	5619 18
 	ATTR_manip_command_knob	rotate_medium	sim/autopilot/airspeed_up	sim/autopilot/airspeed_down	Autopilot Airspeed
-	TRIS	5625 84
+	TRIS	5637 84
 	ATTR_manip_command_knob	rotate_small	sim/instruments/barometer_up	sim/instruments/barometer_down	Captain Altimeter Setting (currently only inHg)
-	TRIS	5709 84
+	TRIS	5721 84
 	ATTR_manip_command_knob	rotate_small	sim/instruments/barometer_copilot_up	sim/instruments/barometer_copilot_down	Copilot Altimeter Setting (currently only inHg)
-	TRIS	5793 84
+	TRIS	5805 84
 	ATTR_manip_command	button	sim/instruments/barometer_2992	Reset Altimeter Setting to Standard
-	TRIS	5877 18
+	TRIS	5889 18
 	ATTR_manip_command_knob	rotate_medium	sim/autopilot/bank_limit_up	sim/autopilot/bank_limit_down	Autopilot Bank Limit
-	TRIS	5895 84
+	TRIS	5907 84
 	ATTR_manip_command	button	sim/FMS/exec	
-	TRIS	5979 6
-	ATTR_manip_command	button	sim/FMS/prog	
-	TRIS	5985 6
-	ATTR_manip_command	button	sim/FMS/hold	
 	TRIS	5991 6
-	ATTR_manip_command	button	sim/FMS/legs	
+	ATTR_manip_command	button	sim/FMS/prog	
 	TRIS	5997 6
-	ATTR_manip_command	button	sim/FMS/fix	
+	ATTR_manip_command	button	sim/FMS/hold	
 	TRIS	6003 6
-	ATTR_manip_command	button	sim/FMS/init	
+	ATTR_manip_command	button	sim/FMS/legs	
 	TRIS	6009 6
-	ATTR_manip_command	button	sim/FMS/dep_arr	
+	ATTR_manip_command	button	sim/FMS/fix	
 	TRIS	6015 6
-	ATTR_manip_command	button	sim/FMS/ls_6l	
+	ATTR_manip_command	button	sim/FMS/init	
 	TRIS	6021 6
-	ATTR_manip_command	button	sim/FMS2/fpln	
+	ATTR_manip_command	button	sim/FMS/dep_arr	
 	TRIS	6027 6
-	ATTR_manip_command	button	sim/FMS2/navrad	
+	ATTR_manip_command	button	sim/FMS/ls_6l	
 	TRIS	6033 6
-	ATTR_manip_command	button	sim/FMS/ls_5l	
+	ATTR_manip_command	button	sim/FMS2/fpln	
 	TRIS	6039 6
-	ATTR_manip_command	button	sim/FMS/ls_4l	
+	ATTR_manip_command	button	sim/FMS2/navrad	
 	TRIS	6045 6
-	ATTR_manip_command	button	sim/FMS2/clb	
+	ATTR_manip_command	button	sim/FMS/ls_5l	
 	TRIS	6051 6
-	ATTR_manip_command	button	sim/FMS2/prev	
+	ATTR_manip_command	button	sim/FMS/ls_4l	
 	TRIS	6057 6
-	ATTR_manip_command	button	sim/FMS/ls_3l	
+	ATTR_manip_command	button	sim/FMS2/clb	
 	TRIS	6063 6
-	ATTR_manip_command	button	sim/FMS/ls_2l	
+	ATTR_manip_command	button	sim/FMS2/prev	
 	TRIS	6069 6
-	ATTR_manip_command	button	sim/FMS2/next	
+	ATTR_manip_command	button	sim/FMS/ls_3l	
 	TRIS	6075 6
-	ATTR_manip_command	button	sim/FMS2/index	
+	ATTR_manip_command	button	sim/FMS/ls_2l	
 	TRIS	6081 6
-	ATTR_manip_command	button	sim/FMS/ls_1l	
+	ATTR_manip_command	button	sim/FMS2/next	
 	TRIS	6087 6
-	ATTR_manip_command	button	sim/FMS/index	
+	ATTR_manip_command	button	sim/FMS2/index	
 	TRIS	6093 6
-	ATTR_manip_command	button	sim/FMS/next	
+	ATTR_manip_command	button	sim/FMS/ls_1l	
 	TRIS	6099 6
-	ATTR_manip_command	button	sim/FMS/prev	
+	ATTR_manip_command	button	sim/FMS/index	
 	TRIS	6105 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/spd	Autothrottle Speed Mode
+	ATTR_manip_command	button	sim/FMS/next	
 	TRIS	6111 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_1	Engage Autopilot 1
+	ATTR_manip_command	button	sim/FMS/prev	
 	TRIS	6117 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/flch	Level Change Mode
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/spd	Autothrottle Speed Mode
 	TRIS	6123 6
-	ATTR_manip_command	button	sim/autopilot/FMS	Vertical Navigation Mode
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_1	Engage Autopilot 1
 	TRIS	6129 6
-	ATTR_manip_command	button	sim/autopilot/gpss	Lateral Navigation Mode
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/flch	Level Change Mode
 	TRIS	6135 6
-	ATTR_manip_command	button	sim/FMS/clb	
+	ATTR_manip_command	button	sim/autopilot/FMS	Vertical Navigation Mode
 	TRIS	6141 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgHold	Heading Hold Mode
+	ATTR_manip_command	button	sim/autopilot/gpss	Lateral Navigation Mode
 	TRIS	6147 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/altHold	Altitude Hold Mode
+	ATTR_manip_command	button	sim/FMS/clb	
 	TRIS	6153 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/app	Approach Mode
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgHold	Heading Hold Mode
 	TRIS	6159 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vs	Vertical Speed Mode
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/altHold	Altitude Hold Mode
 	TRIS	6165 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/loc	Localizer Mode
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/app	Approach Mode
 	TRIS	6171 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_2	Engage Autopilot 2
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vs	Vertical Speed Mode
 	TRIS	6177 6
-	ATTR_manip_command	button	sim/FMS/ls_1r	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/loc	Localizer Mode
 	TRIS	6183 6
-	ATTR_manip_command	button	sim/FMS/ls_2r	
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/engage_2	Engage Autopilot 2
 	TRIS	6189 6
-	ATTR_manip_command	button	sim/FMS/ls_3r	
+	ATTR_manip_command	button	sim/FMS/ls_1r	
 	TRIS	6195 6
-	ATTR_manip_command	button	sim/FMS/ls_4r	
+	ATTR_manip_command	button	sim/FMS/ls_2r	
 	TRIS	6201 6
-	ATTR_manip_command	button	sim/FMS/ls_5r	
+	ATTR_manip_command	button	sim/FMS/ls_3r	
 	TRIS	6207 6
-	ATTR_manip_command	button	sim/FMS/ls_6r	
+	ATTR_manip_command	button	sim/FMS/ls_4r	
 	TRIS	6213 6
-	ATTR_manip_command	button	sim/FMS2/ls_1l	
+	ATTR_manip_command	button	sim/FMS/ls_5r	
 	TRIS	6219 6
-	ATTR_manip_command	button	sim/FMS2/ls_2l	
+	ATTR_manip_command	button	sim/FMS/ls_6r	
 	TRIS	6225 6
-	ATTR_manip_command	button	sim/FMS2/ls_3l	
+	ATTR_manip_command	button	sim/FMS2/ls_1l	
 	TRIS	6231 6
-	ATTR_manip_command	button	sim/FMS2/ls_4l	
+	ATTR_manip_command	button	sim/FMS2/ls_2l	
 	TRIS	6237 6
-	ATTR_manip_command	button	sim/FMS/navrad	
+	ATTR_manip_command	button	sim/FMS2/ls_3l	
 	TRIS	6243 6
-	ATTR_manip_command	button	sim/FMS/fpln	
+	ATTR_manip_command	button	sim/FMS2/ls_4l	
 	TRIS	6249 6
-	ATTR_manip_command	button	sim/FMS2/ls_5l	
+	ATTR_manip_command	button	sim/FMS/navrad	
 	TRIS	6255 6
-	ATTR_manip_command	button	sim/FMS2/ls_6l	
+	ATTR_manip_command	button	sim/FMS/fpln	
 	TRIS	6261 6
-	ATTR_manip_command	button	sim/FMS2/dep_arr	
+	ATTR_manip_command	button	sim/FMS2/ls_5l	
 	TRIS	6267 6
-	ATTR_manip_command	button	sim/FMS2/init	
+	ATTR_manip_command	button	sim/FMS2/ls_6l	
 	TRIS	6273 6
-	ATTR_manip_command	button	sim/FMS2/fix	
+	ATTR_manip_command	button	sim/FMS2/dep_arr	
 	TRIS	6279 6
-	ATTR_manip_command	button	sim/FMS2/legs	
+	ATTR_manip_command	button	sim/FMS2/init	
 	TRIS	6285 6
-	ATTR_manip_command	button	sim/FMS2/hold	
+	ATTR_manip_command	button	sim/FMS2/fix	
 	TRIS	6291 6
-	ATTR_manip_command	button	sim/FMS2/prog	
+	ATTR_manip_command	button	sim/FMS2/legs	
 	TRIS	6297 6
-	ATTR_manip_command	button	sim/FMS2/exec	
+	ATTR_manip_command	button	sim/FMS2/hold	
 	TRIS	6303 6
-	ATTR_manip_command	button	sim/FMS2/ls_6r	
+	ATTR_manip_command	button	sim/FMS2/prog	
 	TRIS	6309 6
-	ATTR_manip_command	button	sim/FMS2/ls_5r	
+	ATTR_manip_command	button	sim/FMS2/exec	
 	TRIS	6315 6
-	ATTR_manip_command	button	sim/FMS2/ls_4r	
+	ATTR_manip_command	button	sim/FMS2/ls_6r	
 	TRIS	6321 6
-	ATTR_manip_command	button	sim/FMS2/ls_3r	
+	ATTR_manip_command	button	sim/FMS2/ls_5r	
 	TRIS	6327 6
-	ATTR_manip_command	button	sim/FMS2/ls_2r	
+	ATTR_manip_command	button	sim/FMS2/ls_4r	
 	TRIS	6333 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/sta	Show VORs on ND
+	ATTR_manip_command	button	sim/FMS2/ls_3r	
 	TRIS	6339 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/wpt	Show GPS Waypoints on ND
+	ATTR_manip_command	button	sim/FMS2/ls_2r	
 	TRIS	6345 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/wxr	Show Weather Radar on ND
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/sta	Show VORs on ND
 	TRIS	6351 6
-	ATTR_manip_command	button	sim/FMS2/ls_1r	
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/wpt	Show GPS Waypoints on ND
 	TRIS	6357 6
-	ATTR_manip_command	button	Strato/B777/button_switch/efis/apt	Show Airports on ND
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/wxr	Show Weather Radar on ND
 	TRIS	6363 6
-	ATTR_manip_push	button	3	3	Strato/777/displays/eicas_mode	Eicas Electrical Page
+	ATTR_manip_command	button	sim/FMS2/ls_1r	
 	TRIS	6369 6
-	ATTR_manip_push	button	8	8	Strato/777/displays/eicas_mode	Eicas Hydraulic Page
+	ATTR_manip_command	button	Strato/B777/button_switch/efis/apt	Show Airports on ND
 	TRIS	6375 6
-	ATTR_manip_push	button	6	6	Strato/777/displays/eicas_mode	Eicas Fuel Page
+	ATTR_manip_push	button	3	3	Strato/777/displays/eicas_mode	Eicas Electrical Page
 	TRIS	6381 6
-	ATTR_manip_push	button	1	1	Strato/777/displays/eicas_mode	Eicas Air Page
+	ATTR_manip_push	button	8	8	Strato/777/displays/eicas_mode	Eicas Hydraulic Page
 	TRIS	6387 6
-	ATTR_manip_push	button	2	2	Strato/777/displays/eicas_mode	Eicas Door Page
+	ATTR_manip_push	button	6	6	Strato/777/displays/eicas_mode	Eicas Fuel Page
 	TRIS	6393 6
-	ATTR_manip_push	button	7	7	Strato/777/displays/eicas_mode	Eicas Gear Page
+	ATTR_manip_push	button	1	1	Strato/777/displays/eicas_mode	Eicas Air Page
 	TRIS	6399 6
-	ATTR_manip_push	button	5	5	Strato/777/displays/eicas_mode	Eicas Flight Control Page
+	ATTR_manip_push	button	2	2	Strato/777/displays/eicas_mode	Eicas Door Page
 	TRIS	6405 6
-	ATTR_manip_push	button	10	10	Strato/777/displays/eicas_mode	Eicas Checklist Page
+	ATTR_manip_push	button	7	7	Strato/777/displays/eicas_mode	Eicas Gear Page
 	TRIS	6411 6
-	ATTR_manip_push	button	4	4	Strato/777/displays/eicas_mode	Eicas Engine Page
+	ATTR_manip_push	button	5	5	Strato/777/displays/eicas_mode	Eicas Flight Control Page
 	TRIS	6417 6
-	ATTR_manip_toggle	button	9	9	Strato/777/displays/eicas_mode	Eicas STAT Page
+	ATTR_manip_push	button	10	10	Strato/777/displays/eicas_mode	Eicas Checklist Page
 	TRIS	6423 6
-	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/clbcon	Autothrottle CLB/CON Mode
+	ATTR_manip_push	button	4	4	Strato/777/displays/eicas_mode	Eicas Engine Page
 	TRIS	6429 6
+	ATTR_manip_toggle	button	9	9	Strato/777/displays/eicas_mode	Eicas STAT Page
+	TRIS	6435 6
+	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/clbcon	Autothrottle CLB/CON Mode
+	TRIS	6441 6
 	ATTR_manip_none
 	ATTR_draw_enable
 	ATTR_cockpit
@@ -7611,6 +7626,6 @@ IDX	6434
 	TRIS	414 6
 	TRIS	420 6
 	TRIS	426 6
-	TRIS	432 633
+	TRIS	432 645
 
-# Build with Blender 3.0.0 (build b'f1cca3055776'). Exported with XPlane2Blender 4.2.0-alpha.1+101.20211103174028
+# Build with Blender 2.91.2 (build b'5be9ef417703'). Exported with XPlane2Blender 4.0.0-beta.2+88.20200622173550
