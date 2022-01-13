@@ -4,7 +4,10 @@ OBJ
 
 POINT_COUNTS	0	0	0	0
 
-	LIGHT_PARAM	airplane_landing_sp 0.26692972 -2.4066942 -29.580872 0.9 0.9 0.9 0 150 0.5
-	LIGHT_PARAM	airplane_landing_sp -0.25282726 -2.4066942 -29.580872 0.9 0.9 0.9 0 150 0.5
+	LIGHT_PARAM	airplane_landing_glow 0.26692972 -2.4066942 -29.580872 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow -0.25282726 -2.4066942 -29.580872 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_sp 0 -2.4066942 -29.580872 0.9 0.9 0.9 0 150 0.5
+	LIGHT_PARAM	airplane_landing_glow 0.3095805 -2.6638153 -29.579504 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow -0.29547933 -2.6638153 -29.579504 0 0 0 0 1 
 
 # Build with Blender 2.91.2 (build b'5be9ef417703'). Exported with XPlane2Blender 4.0.0-beta.2+88.20200622173550
