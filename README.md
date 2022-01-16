@@ -69,6 +69,8 @@ If you want to see more update history, you can check our [old repository.](http
 
 [zeta976](https://github.com/zeta976): Modeling, airfoils, flight model, documentation.
 
+[Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS, SASL integration.
+
 Potatohead123: Landing gear, cockpit, engines.
 
 [mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: XTLua, help, and some borrowed code (within license restrictions)
