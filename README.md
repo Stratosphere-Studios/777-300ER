@@ -67,7 +67,7 @@ If you want to see more update history, you can check our [old repository.](http
 
 [Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model + other aircraft data, manipulators, readme, Github management.
 
-[zeta976](https://github.com/zeta976): Modeling, airfoils, flight model, documentation.
+[zeta976](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
 [Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS, SASL integration.
 
