@@ -6,12 +6,10 @@
   - cockpit floodlights
   - cabin textures
   - reduce texture sizes
-  - fix clock display uv map
   - reduce visibility of slanted things above doors
   - texture landing gear, make hot brake glow
   - model/texture external light fixtures
   - model button switch covers
-  - fix passenger oxygen switch - says NO instead of ON
   - button lights and animations
 
 - Matt726:
