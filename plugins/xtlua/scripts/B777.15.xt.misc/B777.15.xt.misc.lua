@@ -47,8 +47,10 @@ local B777_eag_target = 0
 
 simDR_ldg_gear_pos                        = find_dataref("sim/aircraft/parts/acf_gear_deploy")
 simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/eagle_claw_angle_deg")
-simDR_onGround                            = find_dataref('sim/flightmodel/failures/onground_any')
+simDR_onGround                            = find_dataref("sim/flightmodel/failures/onground_any")
+simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")
 
+--replace the up, down, and toggle. make toggle run replaced up and down (new gear up/down tilt gear)
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -72,8 +74,6 @@ B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_ea
 --**                                 X-PLANE COMMANDS                                **--
 --*************************************************************************************--
 
-simCMD_ldg_gear_up                      = find_command("sim/flight_controls/landing_gear_up")
-simCMD_ldg_gear_down                    = find_command("sim/flight_controls/landing_gear_down")
 simCMD_reverser_toggle_1                = find_command("sim/engines/thrust_reverse_toggle_1")
 simCMD_reverser_toggle_2                = find_command("sim/engines/thrust_reverse_toggle_2")
 
@@ -95,25 +95,38 @@ function eagClawSync()
 end
 
 function gearUp()
-   simCMD_ldg_gear_up:once()
+   simDR_gear_handle = 0
 end
 
 function eagClawUp()
    B777_eag_target = 19             -- raise eagle claw
-   run_after_time(eagClawSync, 4)   -- synchronise custom eagle claw and default
+   if not is_timer_scheduled(eagClawSync) then
+      run_after_time(eagClawSync, 4)   -- synchronise custom eagle claw and default
+   end
+end
+
+function sim_landing_gear_up(phase, duration)         
+   B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
+   B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
+   if not is_timer_scheduled(gearUp) then
+      run_after_time(gearUp, 4)                    -- gear up once eagle claw neutral
+   end
+end
+
+function sim_landing_gear_down(phase, duration)
+   B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
+   simDR_gear_handle = 1                        -- bring gear down
+   if not is_timer_scheduled(eagClawUp) then
+      run_after_time(eagClawUp, 20)                -- put custom eagle claw in the "pointing up" position once gear down
+   end
 end
 
 function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when landing gear toggled
    if phase == 0 then
-      if B777_avg_gear_pos > 0.9 then                 -- if gear down
-         B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
-         B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
-         run_after_time(gearUp, 4)                    -- gear up once eagle claw neutral
-
-      elseif B777_avg_gear_pos < 0.1 then             -- if gear up
-         B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
-         simCMD_ldg_gear_down:once()                  -- bring gear down
-         run_after_time(eagClawUp, 20)                -- put custom eagle claw in the "pointing up" position once gear down
+      if simDR_gear_handle == 1 then                 -- if gear down
+         simCMD_ldg_gear_up:once()
+      elseif simDR_gear_handle == 0 then             -- if gear up
+         simCMD_ldg_gear_down:once()
       end
    end
 end
@@ -135,6 +148,9 @@ end
 
 simCMD_landing_gear_toggle = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
 simCMD_reverser_toggle = replace_command("sim/engines/thrust_reverse_toggle", sim_reverser_toggle_CMDhandler)
+
+simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
+simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
 
 --*************************************************************************************--
 --**                                      CODE                                       **--

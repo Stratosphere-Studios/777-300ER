@@ -1,0 +1,19 @@
+ah and fds
+
+AFDS/fma annuns
+
+glideslope + localizer indicators
+
+engine indicators on eicas
+
+airspeed, mach and alt
+
+altm settings
+
+ils/dme info
+
+hdg indicator
+
+vspeed indicator
+
+code basic instant irs

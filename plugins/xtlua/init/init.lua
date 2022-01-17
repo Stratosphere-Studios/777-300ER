@@ -172,34 +172,30 @@ end
 --------------------------------------------------------------------------------
 
 function make_command_obj(in_cmd, in_name)
-	print("make_command_obj ")
 	return { 
 		start = function(self)
-		
 			if self.cmd == nil then
 				self.cmd = XLuaFindCommand(self.name)
 				if self.cmd == nil then
-					error("Unable to find command:"..self.name)
+					error("Unable to find command:"..name)
 				end
 			end
 			XLuaCommandStart(self.cmd)
 		end,
 		stop = function(self)
-			
 			if self.cmd == nil then
 				self.cmd = XLuaFindCommand(self.name)
 				if self.cmd == nil then
-					error("Unable to find command:"..self.name)
+					error("Unable to find command:"..name)
 				end
 			end
 			XLuaCommandStop(self.cmd)
 		end,
 		once = function(self)
-
 			if self.cmd == nil then
 				self.cmd = XLuaFindCommand(self.name)
 				if self.cmd == nil then
-					error("Unable to find command:"..self.name)
+					error("Unable to find command:"..name)
 				end
 			end
 			XLuaCommandOnce(self.cmd)

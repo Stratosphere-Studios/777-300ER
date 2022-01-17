@@ -111,7 +111,7 @@ function wrap_dref_any_deferred(in_dref)
 			if self.arr ~= nil then
 				return self.arr
 			end
-			t = XTLuaGetDataRefType(self.dref)
+			t = XLuaGetDataRefType(self.dref)
 			b = string.find(t,"%[")
 			if b ~= nil then
 				dim = tonumber(string.sub(t,b+1,-2))
@@ -133,7 +133,7 @@ function wrap_dref_any_deferred(in_dref)
 			if self.arr ~= nil then
 				return self.arr
 			end
-			t = XTLuaGetDataRefType(self.dref)
+			t = XLuaGetDataRefType(self.dref)
 			if t == "string" then
 				return XTLuaSetString(self.dref,v)
 			elseif t == "number" then
@@ -168,12 +168,12 @@ end
 
 function find_dataref(name)	
 	dref = XTLuaFindDataRef(name)
-	t = XTLuaGetDataRefType(dref)
+	t = XLuaGetDataRefType(dref)
 	return wrap_dref_any(dref,t)
 end
 
 function create_dataref(name,type,notifier)
-  error("create_dataref unsupported - use init script")
+  error("create_dataref unsupported - use xLua")
 	--[[if notifier == nil then
 		dref = XLuaCreateDataRef(name,type,"no",nil)
 	else
@@ -191,7 +191,7 @@ function make_command_obj(in_cmd, in_name)
 	return { 
 		start = function(self)
 			if self.cmd == nil then
-				self.cmd = XTLuaFindCommand(self.name)
+				self.cmd = XLuaFindCommand(self.name)
 				if self.cmd == nil then
 					error("Unable to find command:"..name)
 				end
@@ -200,7 +200,7 @@ function make_command_obj(in_cmd, in_name)
 		end,
 		stop = function(self)
 			if self.cmd == nil then
-				self.cmd = XTLuaFindCommand(self.name)
+				self.cmd = XLuaFindCommand(self.name)
 				if self.cmd == nil then
 					error("Unable to find command:"..name)
 				end
@@ -209,7 +209,7 @@ function make_command_obj(in_cmd, in_name)
 		end,
 		once = function(self)
 			if self.cmd == nil then
-				self.cmd = XTLuaFindCommand(self.name)
+				self.cmd = XLuaFindCommand(self.name)
 				if self.cmd == nil then
 					error("Unable to find command:"..name)
 				end
@@ -222,19 +222,25 @@ function make_command_obj(in_cmd, in_name)
 end
 
 function find_command(name)
-	c = XTLuaFindCommand(name)
+	c = XLuaFindCommand(name)
 	return make_command_obj(c,name)
 end
 
+function create_command(name,desc,handler)
+	c = XLuaCreateCommand(name,desc)
+	XTLuaReplaceCommand(c,handler)
+	return make_command_obj(c)
+end
+
 function replace_command(name, func)
-	c = XTLuaFindCommand(name)
+	c = XLuaFindCommand(name)
 	XTLuaReplaceCommand(c,func)
 	return make_command_obj(c)
 end	
 
 function wrap_command(name, before, after)
-	c = XTLuaFindCommand(name)
-	XTLuaWrapCommand(c,before,after)
+	c = XLuaFindCommand(name)
+	XLuaWrapCommand(c,before,after)
 	return make_command_obj(c)
 end
 
@@ -245,16 +251,16 @@ end
 function run_timer(func,delay,rep)
 	tobj = all_timers[func]
 	if tobj == nil then
-		tobj = XTLuaCreateTimer(func)
+		tobj = XLuaCreateTimer(func)
 		all_timers[func] = tobj
 	end
-	XTLuaRunTimer(tobj,delay,rep)
+	XLuaRunTimer(tobj,delay,rep)
 end
 
 function stop_timer(func)
 	tobj = all_timers[func]
 	if tobj ~= nil then
-		XTLuaRunTimer(tobj, -1.0, -1.0)
+		XLuaRunTimer(tobj, -1.0, -1.0)
 	end
 end
 
@@ -263,7 +269,7 @@ function is_timer_scheduled(func)
 	if tobj == nil then
 		return false
 	end
-	return XTLuaIsTimerScheduled(tobj)
+	return XLuaIsTimerScheduled(tobj)
 end
 
 function run_at_interval(func, interval)
