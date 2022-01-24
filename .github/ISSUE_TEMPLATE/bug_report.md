@@ -16,7 +16,7 @@ Describe your bug here.
 ### Version
  - OS: [e.g. Windows]
  - X-Plane Version [e.g. 11.50]
- - 777 Download Date [e.g. Jan. 1 2021]
+ - The date you downloaded the plane [e.g. Jan. 1 2021]
 
 
 
