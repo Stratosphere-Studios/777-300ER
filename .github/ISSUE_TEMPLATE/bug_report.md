@@ -16,7 +16,7 @@ Describe your bug here.
 ### Version
  - OS: [e.g. Windows]
  - X-Plane Version [e.g. 11.50]
- - 777 Version [e.g. v1.0]
+ - 777 Download Date [e.g. Jan. 1 2021]
 
 
 
