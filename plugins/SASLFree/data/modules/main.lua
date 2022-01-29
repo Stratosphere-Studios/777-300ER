@@ -13,7 +13,7 @@ addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 
 components = {
 
-	test{},
+	
 
 	eicascheck {
 		position = {2130 ,30, 4096, 4096},
