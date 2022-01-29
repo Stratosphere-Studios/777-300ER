@@ -1,11 +1,10 @@
 - Nathroxer:
   - new datarefs for flight control animations
   - redo wingflex once new flightmodel is out
-  - animate doors and cockpit door
+  - animate doors
   - exterior lights ( https://developer.x-plane.com/article/airplane-parameterized-light-guide/ AND https://www.youtube.com/watch?v=ingB_EYyC2U )
   - cockpit floodlights
   - cabin textures
-  - reduce texture sizes
   - reduce visibility of slanted things above doors
   - texture landing gear, make hot brake glow
   - model/texture external light fixtures
