@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -0.348365784
+P _door/0/_ang_now -0.163284302
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 0.348365784
+P _door/1/_ang_now 0.163284302
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 0.348365784
+P _door/2/_ang_now 0.163284302
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 90.964096069
+P _door/3/_ang_now 93.108291626
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -90.964096069
+P _door/4/_ang_now -93.108291626
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -86.176513672
+P _door/7/_ang_now -88.207855225
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 86.176513672
+P _door/8/_ang_now 88.207855225
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -0.348365784
+P _door/9/_ang_now -0.163284302
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,10 +213,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 0.467315674
+P _gear/0/_lonN 0.219039917
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
-P _gear/0/_stat_def 0.387206972
+P _gear/0/_stat_def 0.387207001
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -0.063724518
+P _gear/1/_axiN -0.029869080
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -0.348365784
+P _gear/1/_latN -0.163284302
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -8.927778244
+P _gear/1/_lonN -8.966148376
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087793112
+P _gear/1/_stat_def 1.087793350
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 0.063724518
+P _gear/2/_axiN 0.029869080
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 0.348365784
+P _gear/2/_latN 0.163284302
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -8.927778244
+P _gear/2/_lonN -8.966148376
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087793112
+P _gear/2/_stat_def 1.087793350
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -42969,10 +42969,11 @@ GROUP MCP
 
 END_GROUP
 GROUP FMSs
+  GROUP_OPEN
   GROUP Left
     GROUP_OPEN
     rad_CDU739 CDU739_screen.png
-      POS 1650.000000 3576.000000
+      POS 1663.000000 3576.000000
       DATAREF 
       SIZE 2.000000
       LIGHT_MODE MECHANICAL
@@ -42984,10 +42985,28 @@ GROUP FMSs
   GROUP Center
     GROUP_OPEN
   END_GROUP
+  rad_CDU739 CDU739_screen2.png
+    POS 2286.428467 3577.285645
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE MECHANICAL
+    LIGHT_RHEOSTAT 0
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+
   GROUP Right
     GROUP_OPEN
   END_GROUP
 END_GROUP
+rad_CDU739 CDU739_screen3.png
+  POS 2912.000000 3577.142822
+  DATAREF 
+  SIZE 2.000000
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+
 GROUP Isfd
   gen_rotary Background
     POS 3830.000000 3576.000000
@@ -43190,7 +43209,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_rotary pitch_trim_1
-    POS 1774.000000 2883.000000
+    POS 1774.500000 2883.000000
     IMAGE trims/pitch_trim_base
     DATAREF 
     SIZE 0.500000
@@ -43209,7 +43228,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_rotary pitch_trim_1_anim_1
-    POS 1774.000000 2883.000000
+    POS 1774.500000 2883.000000
     IMAGE trims/pitch_trim_anim_0
     DATAREF 
     SIZE 0.500000
@@ -43228,7 +43247,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_rotary pitch_trim_1_anim_2
-    POS 1774.000000 2883.000000
+    POS 1774.500000 2883.000000
     IMAGE trims/pitch_trim_anim_1
     DATAREF 
     SIZE 0.500000
@@ -43247,7 +43266,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_rotary pitch_trim_2
-    POS 1496.857178 2883.285645
+    POS 1496.500000 2883.000000
     IMAGE trims/pitch_trim_base
     DATAREF 
     SIZE 0.500000
@@ -43266,7 +43285,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_rotary pitch_trim_2_anim_1
-    POS 1496.857178 2883.285645
+    POS 1496.500000 2883.000000
     IMAGE trims/pitch_trim_anim_0
     DATAREF 
     SIZE 0.500000
@@ -43285,7 +43304,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_rotary pitch_trim_2_anim_2
-    POS 1496.857178 2883.285645
+    POS 1496.500000 2883.000000
     IMAGE trims/pitch_trim_anim_1
     DATAREF 
     SIZE 0.500000
