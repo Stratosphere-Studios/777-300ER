@@ -54,7 +54,7 @@ function deferred_command(name,desc,realFunc)
  --**                              CREATE CUSTOM DATAREFS                             **--
  --*************************************************************************************--
  
- 
+ fuel_flow                = deferred_dataref("Strato/777/cockpit/fuel/pumps", "array[4]")
  
  --*************************************************************************************--
  --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -101,7 +101,9 @@ function deferred_command(name,desc,realFunc)
  --function before_physics()
  
  --function after_physics()
- 
+
  --function after_replay()
  
- 
+function fuel_flow(phase,duration)
+   fuel_flow = 0 
+end
