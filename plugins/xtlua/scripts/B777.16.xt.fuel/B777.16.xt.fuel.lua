@@ -2,7 +2,7 @@
 *****************************************************************************************
 * Script Name: fuel
 * Author Name: nathroxer001
-* Script Description: Cockpit instrument code
+* Script Description: fuel system code
 *****************************************************************************************
 --]]
 
@@ -36,7 +36,8 @@ function deferred_command(name,desc,realFunc)
  --**                                CREATE VARIABLES                                 **--
  --*************************************************************************************--
  
- 
+target_pos_fuel_pumps = {0}
+
  
  --*************************************************************************************--
  --**                              FIND X-PLANE DATAREFS                              **--
@@ -54,8 +55,16 @@ function deferred_command(name,desc,realFunc)
  --**                              CREATE CUSTOM DATAREFS                             **--
  --*************************************************************************************--
  
- B777DR_fuel_flow                = deferred_dataref("Strato/777/cockpit/fuel/pumps", "array[4]")
- 
+ B777DR_fuel_pumps_fwd_l               = deferred_dataref("Strato/777/cockpit/fuel/fwd_l", "number")
+ B777DR_fuel_pumps_aft_l               = deferred_dataref("Strato/777/cockpit/fuel/aft_l", "boolean")
+ B777DR_fuel_pumps_fwd_r               = deferred_dataref("Strato/777/cockpit/fuel/fwd_r", "boolean")
+ B777DR_fuel_pumps_aft_r               = deferred_dataref("Strato/777/cockpit/fuel/aft_r", "boolean")
+ B777DR_fuel_pumps_ctr_l               = deferred_dataref("Strato/777/cockpit/fuel/ctr_l", "boolean")
+ B777DR_fuel_pumps_ctr_r               = deferred_dataref("Strato/777/cockpit/fuel/ctr_r", "boolean")
+ B777DR_fuel_pumps_cross_fwd           = deferred_dataref("Strato/777/cockpit/fuel/cross_fwd", "boolean")
+ B777DR_fuel_pumps_cross_aft           = deferred_dataref("Strato/777/cockpit/fuel/cross_aft", "boolean")
+
+
  --*************************************************************************************--
  --**                             X-PLANE COMMAND HANDLERS                            **--
  --*************************************************************************************--
@@ -72,19 +81,43 @@ function deferred_command(name,desc,realFunc)
  --**                             CUSTOM COMMAND HANDLERS                             **--
  --*************************************************************************************--
  
- 
- 
+
+ function B777_fuel_pumps_fwd_l_CMD_handler(phase, duration)
+   if phase == 0 then
+      target_pos_fuel_pumps[1] = 1 - target_pos_fuel_pumps[1]
+   end
+end
+
+function animate_fuel_pump_fwd_1()
+   B777DR_fuel_pumps_fwd_l = func_animate_slowly(target_pos_fuel_pumps[1], B777DR_fuel_pumps_fwd_l, 0.2)
+end
+
  --*************************************************************************************--
  --**                             CREATE CUSTOM COMMANDS                               **--
  --*************************************************************************************--
- 
- 
- 
+
+ B777CMD_fuel_pumps_fwd_l               = deferred_command("Strato/777/cockpit/fuel/fwd_l", "fuel_fwd_1", B777_fuel_pumps_fwd_l_CMD_handler)
+ B777CMD_fuel_pumps_aft_l               = deferred_command("Strato/777/cockpit/fuel/aft_l", "boolean")
+ B777CMD_fuel_pumps_fwd_r               = deferred_command("Strato/777/cockpit/fuel/fwd_r", "boolean")
+ B777CMD_fuel_pumps_aft_r               = deferred_command("Strato/777/cockpit/fuel/aft_r", "boolean")
+ B777CMD_fuel_pumps_ctr_l               = deferred_command("Strato/777/cockpit/fuel/ctr_l", "boolean")
+ B777DR_fuel_pumps_ctr_r                = deferred_command("Strato/777/cockpit/fuel/ctr_r", "boolean")
+ B777DR_fuel_pumps_cross_fwd            = deferred_command("Strato/777/cockpit/fuel/cross_fwd", "boolean")
+ B777DR_fuel_pumps_cross_aft            = deferred_command("Strato/777/cockpit/fuel/cross_aft", "boolean")
+
  --*************************************************************************************--
  --**                                      CODE                                       **--
  --*************************************************************************************--
  
- 
+ function func_animate_slowly(reference_value, animated_VALUE, anim_speed)
+   if math.abs(reference_value - animated_VALUE) < 0.1 then return reference_value end
+   animated_VALUE = animated_VALUE + ((reference_value - animated_VALUE) * (anim_speed * SIM_PERIOD))
+   return animated_VALUE
+end
+
+function animate_fuel_pump_fwd_1()
+   B777DR_fuel_pumps_fwd_l = func_animate_slowly(target_pos_fuel_pumps[1], B777DR_fuel_pumps_fwd_l, 0.2)
+end
  
  --*************************************************************************************--
  --**                                  EVENT CALLBACKS                                **--
@@ -101,9 +134,8 @@ function deferred_command(name,desc,realFunc)
  --function before_physics()
  
  --function after_physics()
-
+function after_physics()
+   animate_fuel_pump_fwd_1()
+end
  --function after_replay()
  
-function fuel_flow(phase, duration)
-   B777DR_fuel_flow = 0 
-end
