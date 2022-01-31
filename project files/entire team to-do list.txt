@@ -10,7 +10,6 @@
   - model/texture external light fixtures
   - model button switch covers
   - button lights and animations
-  - fix stab trim indicator textures (info in github issue)
 
 - Matt726:
   - Display textures (and some displays?)
