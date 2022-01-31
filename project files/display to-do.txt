@@ -16,4 +16,7 @@ hdg indicator
 
 vspeed indicator
 
-code basic instant irs
+code irs by longitude
+irs_alignment_time = 5+(longitude_degrees / (90/11))
+
+5 + long
