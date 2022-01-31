@@ -10,7 +10,7 @@
   - model/texture external light fixtures
   - model button switch covers
   - button lights and animations
-  - fix stab trim indicator textures
+  - fix stab trim indicator textures (info in github issue)
 
 - Matt726:
   - Display textures (and some displays?)
@@ -18,7 +18,6 @@
 
 - Cactus2456
   - efb and eicas (+ Saharsh)
-  - pfd
 
 - Zeta
   - new landing gear and animations
@@ -37,6 +36,7 @@
   - rename cmds/drs for toggle switch to "toggle_switch"
   - mcp display options (as/mach, mag/true hdg, etc)
   - rest of displays (fcom is a good ref!)
+  - code adiru alignment by longitude - adiru_alignment_time = 5+(longitude_degrees / (90/11)) (equator - 5 mins, poles - 15 mins. Check vids online. Include align time on nd.
   - idea for bank limit knob - 6 pos. anim pos dr, set default dr using that UNLESS in auto. auto varies btw 15-25 deg depending on true airspeed
   - ALL THE SYSTEMS AHHHH (match fcom and CBTs!)
 
