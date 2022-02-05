@@ -31,4 +31,4 @@ end
 --*************************************************************************************--
 
 B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
-B777DR_cockpit_panel_lights             = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[5]")
+B777DR_cockpit_panel_lights             = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
