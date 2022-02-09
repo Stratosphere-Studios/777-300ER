@@ -7981,8 +7981,7 @@ IDX	6908
 	TRIS	6201 84
 	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_dome_light	Overhead Panel Brightness
 	TRIS	6285 84
-	ATTR_manip_push	hand	1	0	Strato/777/cockpit/cockpit_ovhd__fire_test	apu fire test
-	ATTR_manip_wheel	1
+	ATTR_manip_command	button	Strato/777/cockpit/cockpit_ovhd_fire_test_cmd	apu fire test
 	TRIS	6369 84
 	ATTR_manip_command	button	sim/FMS/exec	
 	TRIS	6453 6
