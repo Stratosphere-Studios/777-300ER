@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -81.021469116
+P _door/0/_ang_now -50.087661743
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 81.021469116
+P _door/1/_ang_now 50.087661743
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 81.021469116
+P _door/2/_ang_now 50.087661743
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 83.663337708
+P _door/3/_ang_now 0.0
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -83.663337708
+P _door/4/_ang_now 0.0
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -134,7 +134,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now -84.630004883
+P _door/5/_ang_now 0.0
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -142,7 +142,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 84.630004883
+P _door/6/_ang_now 0.0
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -79.260009766
+P _door/7/_ang_now 0.0
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 79.260009766
+P _door/8/_ang_now 0.0
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -81.021469116
+P _door/9/_ang_now -50.087661743
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,10 +213,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 108.687332153
+P _gear/0/_lonN 67.190765381
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
-P _gear/0/_stat_def 0.387206972
+P _gear/0/_stat_def 0.387207031
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -14.821000099
+P _gear/1/_axiN -9.162377357
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,11 +243,11 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -81.021469116
+P _gear/1/_latN -50.087661743
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN 7.797133446
+P _gear/1/_lonN 1.384027481
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
 P _gear/1/_stat_def 1.087793231
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 14.821000099
+P _gear/2/_axiN 9.162377357
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,11 +277,11 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 81.021469116
+P _gear/2/_latN 50.087661743
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN 7.797133446
+P _gear/2/_lonN 1.384027481
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
 P _gear/2/_stat_def 1.087793231
@@ -651,7 +651,7 @@ P _panel_inst_3d 0
 P _part/0/_bot_s1 0.0
 P _part/0/_bot_s2 0.015625000
 P _part/0/_bot_t1 0.255859375
-P _part/0/_bot_t2 0.379882813
+P _part/0/_bot_t2 0.379882812
 P _part/0/_geo_xyz/0,0,0 0.0
 P _part/0/_geo_xyz/0,0,1 0.0
 P _part/0/_geo_xyz/0,0,2 0.100000001
@@ -2117,11 +2117,11 @@ P _part/0/_s_dim 20
 P _part/0/_top_s1 0.0
 P _part/0/_top_s2 0.015625000
 P _part/0/_top_t1 0.255859375
-P _part/0/_top_t2 0.379882813
+P _part/0/_top_t2 0.379882812
 P _part/1/_bot_s1 0.0
 P _part/1/_bot_s2 0.015625000
 P _part/1/_bot_t1 0.255859375
-P _part/1/_bot_t2 0.379882813
+P _part/1/_bot_t2 0.379882812
 P _part/1/_geo_xyz/0,0,0 0.0
 P _part/1/_geo_xyz/0,0,1 0.0
 P _part/1/_geo_xyz/0,0,2 0.100000001
@@ -3587,7 +3587,7 @@ P _part/1/_s_dim 20
 P _part/1/_top_s1 0.0
 P _part/1/_top_s2 0.015625000
 P _part/1/_top_t1 0.255859375
-P _part/1/_top_t2 0.379882813
+P _part/1/_top_t2 0.379882812
 P _part/10/_bot_s1 0.509999990
 P _part/10/_bot_s2 0.754000008
 P _part/10/_bot_t1 0.0
@@ -6813,7 +6813,7 @@ P _part/12/_geo_xyz/13,10,1 6.528047562
 P _part/12/_geo_xyz/13,10,2 136.665573120
 P _part/12/_geo_xyz/13,11,0 -100.227752686
 P _part/12/_geo_xyz/13,11,1 6.620981216
-P _part/12/_geo_xyz/13,11,2 135.497070313
+P _part/12/_geo_xyz/13,11,2 135.497070312
 P _part/12/_geo_xyz/13,12,0 -100.207565308
 P _part/12/_geo_xyz/13,12,1 6.806847572
 P _part/12/_geo_xyz/13,12,2 134.951766968
@@ -6834,7 +6834,7 @@ P _part/12/_geo_xyz/13,17,1 0.0
 P _part/12/_geo_xyz/13,17,2 0.0
 P _part/12/_geo_xyz/13,2,0 -100.146987915
 P _part/12/_geo_xyz/13,2,1 7.364446640
-P _part/12/_geo_xyz/13,2,2 135.497070313
+P _part/12/_geo_xyz/13,2,2 135.497070312
 P _part/12/_geo_xyz/13,3,0 -100.136894226
 P _part/12/_geo_xyz/13,3,1 7.457380295
 P _part/12/_geo_xyz/13,3,2 136.665573120
@@ -6867,7 +6867,7 @@ P _part/12/_geo_xyz/14,10,1 6.528047562
 P _part/12/_geo_xyz/14,10,2 136.665573120
 P _part/12/_geo_xyz/14,11,0 -100.227752686
 P _part/12/_geo_xyz/14,11,1 6.620981216
-P _part/12/_geo_xyz/14,11,2 135.497070313
+P _part/12/_geo_xyz/14,11,2 135.497070312
 P _part/12/_geo_xyz/14,12,0 -100.207565308
 P _part/12/_geo_xyz/14,12,1 6.806847572
 P _part/12/_geo_xyz/14,12,2 134.951766968
@@ -6888,7 +6888,7 @@ P _part/12/_geo_xyz/14,17,1 0.0
 P _part/12/_geo_xyz/14,17,2 0.0
 P _part/12/_geo_xyz/14,2,0 -100.146987915
 P _part/12/_geo_xyz/14,2,1 7.364446640
-P _part/12/_geo_xyz/14,2,2 135.497070313
+P _part/12/_geo_xyz/14,2,2 135.497070312
 P _part/12/_geo_xyz/14,3,0 -100.136894226
 P _part/12/_geo_xyz/14,3,1 7.457380295
 P _part/12/_geo_xyz/14,3,2 136.665573120
@@ -8283,7 +8283,7 @@ P _part/13/_geo_xyz/13,10,1 6.528047562
 P _part/13/_geo_xyz/13,10,2 136.665573120
 P _part/13/_geo_xyz/13,11,0 100.227752686
 P _part/13/_geo_xyz/13,11,1 6.620981216
-P _part/13/_geo_xyz/13,11,2 135.497070313
+P _part/13/_geo_xyz/13,11,2 135.497070312
 P _part/13/_geo_xyz/13,12,0 100.207565308
 P _part/13/_geo_xyz/13,12,1 6.806847572
 P _part/13/_geo_xyz/13,12,2 134.951766968
@@ -8304,7 +8304,7 @@ P _part/13/_geo_xyz/13,17,1 0.0
 P _part/13/_geo_xyz/13,17,2 0.0
 P _part/13/_geo_xyz/13,2,0 100.146987915
 P _part/13/_geo_xyz/13,2,1 7.364446640
-P _part/13/_geo_xyz/13,2,2 135.497070313
+P _part/13/_geo_xyz/13,2,2 135.497070312
 P _part/13/_geo_xyz/13,3,0 100.136894226
 P _part/13/_geo_xyz/13,3,1 7.457380295
 P _part/13/_geo_xyz/13,3,2 136.665573120
@@ -8337,7 +8337,7 @@ P _part/13/_geo_xyz/14,10,1 6.528047562
 P _part/13/_geo_xyz/14,10,2 136.665573120
 P _part/13/_geo_xyz/14,11,0 100.227752686
 P _part/13/_geo_xyz/14,11,1 6.620981216
-P _part/13/_geo_xyz/14,11,2 135.497070313
+P _part/13/_geo_xyz/14,11,2 135.497070312
 P _part/13/_geo_xyz/14,12,0 100.207565308
 P _part/13/_geo_xyz/14,12,1 6.806847572
 P _part/13/_geo_xyz/14,12,2 134.951766968
@@ -8358,7 +8358,7 @@ P _part/13/_geo_xyz/14,17,1 0.0
 P _part/13/_geo_xyz/14,17,2 0.0
 P _part/13/_geo_xyz/14,2,0 100.146987915
 P _part/13/_geo_xyz/14,2,1 7.364446640
-P _part/13/_geo_xyz/14,2,2 135.497070313
+P _part/13/_geo_xyz/14,2,2 135.497070312
 P _part/13/_geo_xyz/14,3,0 100.136894226
 P _part/13/_geo_xyz/14,3,1 7.457380295
 P _part/13/_geo_xyz/14,3,2 136.665573120
@@ -10239,7 +10239,7 @@ P _part/14/_geo_xyz/4,10,1 -0.185226694
 P _part/14/_geo_xyz/4,10,2 141.958129883
 P _part/14/_geo_xyz/4,11,0 -106.233062744
 P _part/14/_geo_xyz/4,11,1 -0.156728625
-P _part/14/_geo_xyz/4,11,2 141.231445313
+P _part/14/_geo_xyz/4,11,2 141.231445312
 P _part/14/_geo_xyz/4,12,0 -106.233062744
 P _part/14/_geo_xyz/4,12,1 -0.113981493
 P _part/14/_geo_xyz/4,12,2 141.024856567
@@ -11709,7 +11709,7 @@ P _part/15/_geo_xyz/4,10,1 -0.185226694
 P _part/15/_geo_xyz/4,10,2 141.958129883
 P _part/15/_geo_xyz/4,11,0 106.233062744
 P _part/15/_geo_xyz/4,11,1 -0.156728625
-P _part/15/_geo_xyz/4,11,2 141.231445313
+P _part/15/_geo_xyz/4,11,2 141.231445312
 P _part/15/_geo_xyz/4,12,0 106.233062744
 P _part/15/_geo_xyz/4,12,1 -0.113981493
 P _part/15/_geo_xyz/4,12,2 141.024856567
@@ -12521,22 +12521,22 @@ P _part/16/_geo_xyz/1,9,0 -4.427340984
 P _part/16/_geo_xyz/1,9,1 3.243609190
 P _part/16/_geo_xyz/1,9,2 204.735107422
 P _part/16/_geo_xyz/10,0,0 -22.136703491
-P _part/16/_geo_xyz/10,0,1 5.418045521
+P _part/16/_geo_xyz/10,0,1 5.418045998
 P _part/16/_geo_xyz/10,0,2 209.574874878
 P _part/16/_geo_xyz/10,1,0 -22.136703491
-P _part/16/_geo_xyz/10,1,1 5.418045521
+P _part/16/_geo_xyz/10,1,1 5.418045998
 P _part/16/_geo_xyz/10,1,2 209.987457275
 P _part/16/_geo_xyz/10,10,0 -22.136703491
-P _part/16/_geo_xyz/10,10,1 5.418045521
+P _part/16/_geo_xyz/10,10,1 5.418045998
 P _part/16/_geo_xyz/10,10,2 213.013000488
 P _part/16/_geo_xyz/10,11,0 -22.136703491
-P _part/16/_geo_xyz/10,11,1 5.418045521
+P _part/16/_geo_xyz/10,11,1 5.418045998
 P _part/16/_geo_xyz/10,11,2 210.950119019
 P _part/16/_geo_xyz/10,12,0 -22.136703491
-P _part/16/_geo_xyz/10,12,1 5.418045521
+P _part/16/_geo_xyz/10,12,1 5.418045998
 P _part/16/_geo_xyz/10,12,2 209.987457275
 P _part/16/_geo_xyz/10,13,0 -22.136703491
-P _part/16/_geo_xyz/10,13,1 5.418045521
+P _part/16/_geo_xyz/10,13,1 5.418045998
 P _part/16/_geo_xyz/10,13,2 209.574874878
 P _part/16/_geo_xyz/10,14,0 0.0
 P _part/16/_geo_xyz/10,14,1 0.0
@@ -12551,28 +12551,28 @@ P _part/16/_geo_xyz/10,17,0 0.0
 P _part/16/_geo_xyz/10,17,1 0.0
 P _part/16/_geo_xyz/10,17,2 0.0
 P _part/16/_geo_xyz/10,2,0 -22.136703491
-P _part/16/_geo_xyz/10,2,1 5.418045521
+P _part/16/_geo_xyz/10,2,1 5.418045998
 P _part/16/_geo_xyz/10,2,2 210.950119019
 P _part/16/_geo_xyz/10,3,0 -22.136703491
-P _part/16/_geo_xyz/10,3,1 5.418045521
+P _part/16/_geo_xyz/10,3,1 5.418045998
 P _part/16/_geo_xyz/10,3,2 213.013000488
 P _part/16/_geo_xyz/10,4,0 -22.136703491
-P _part/16/_geo_xyz/10,4,1 5.418045521
+P _part/16/_geo_xyz/10,4,1 5.418045998
 P _part/16/_geo_xyz/10,4,2 215.763504028
 P _part/16/_geo_xyz/10,5,0 -22.136703491
-P _part/16/_geo_xyz/10,5,1 5.418045521
+P _part/16/_geo_xyz/10,5,1 5.418045998
 P _part/16/_geo_xyz/10,5,2 219.278930664
 P _part/16/_geo_xyz/10,6,0 -22.136703491
-P _part/16/_geo_xyz/10,6,1 5.418045521
+P _part/16/_geo_xyz/10,6,1 5.418045998
 P _part/16/_geo_xyz/10,6,2 223.327377319
 P _part/16/_geo_xyz/10,7,0 -22.136703491
-P _part/16/_geo_xyz/10,7,1 5.418045521
+P _part/16/_geo_xyz/10,7,1 5.418045998
 P _part/16/_geo_xyz/10,7,2 223.327377319
 P _part/16/_geo_xyz/10,8,0 -22.136703491
-P _part/16/_geo_xyz/10,8,1 5.418045521
+P _part/16/_geo_xyz/10,8,1 5.418045998
 P _part/16/_geo_xyz/10,8,2 219.278930664
 P _part/16/_geo_xyz/10,9,0 -22.136703491
-P _part/16/_geo_xyz/10,9,1 5.418045521
+P _part/16/_geo_xyz/10,9,1 5.418045998
 P _part/16/_geo_xyz/10,9,2 215.763504028
 P _part/16/_geo_xyz/11,0,0 -26.564044952
 P _part/16/_geo_xyz/11,0,1 5.961654663
@@ -13439,22 +13439,22 @@ P _part/16/_geo_xyz/8,9,0 -17.709363937
 P _part/16/_geo_xyz/8,9,1 4.874436378
 P _part/16/_geo_xyz/8,9,2 213.006393433
 P _part/16/_geo_xyz/9,0,0 -22.136703491
-P _part/16/_geo_xyz/9,0,1 5.418045521
+P _part/16/_geo_xyz/9,0,1 5.418045998
 P _part/16/_geo_xyz/9,0,2 209.574874878
 P _part/16/_geo_xyz/9,1,0 -22.136703491
-P _part/16/_geo_xyz/9,1,1 5.418045521
+P _part/16/_geo_xyz/9,1,1 5.418045998
 P _part/16/_geo_xyz/9,1,2 209.987457275
 P _part/16/_geo_xyz/9,10,0 -22.136703491
-P _part/16/_geo_xyz/9,10,1 5.418045521
+P _part/16/_geo_xyz/9,10,1 5.418045998
 P _part/16/_geo_xyz/9,10,2 213.013000488
 P _part/16/_geo_xyz/9,11,0 -22.136703491
-P _part/16/_geo_xyz/9,11,1 5.418045521
+P _part/16/_geo_xyz/9,11,1 5.418045998
 P _part/16/_geo_xyz/9,11,2 210.950119019
 P _part/16/_geo_xyz/9,12,0 -22.136703491
-P _part/16/_geo_xyz/9,12,1 5.418045521
+P _part/16/_geo_xyz/9,12,1 5.418045998
 P _part/16/_geo_xyz/9,12,2 209.987457275
 P _part/16/_geo_xyz/9,13,0 -22.136703491
-P _part/16/_geo_xyz/9,13,1 5.418045521
+P _part/16/_geo_xyz/9,13,1 5.418045998
 P _part/16/_geo_xyz/9,13,2 209.574874878
 P _part/16/_geo_xyz/9,14,0 0.0
 P _part/16/_geo_xyz/9,14,1 0.0
@@ -13469,28 +13469,28 @@ P _part/16/_geo_xyz/9,17,0 0.0
 P _part/16/_geo_xyz/9,17,1 0.0
 P _part/16/_geo_xyz/9,17,2 0.0
 P _part/16/_geo_xyz/9,2,0 -22.136703491
-P _part/16/_geo_xyz/9,2,1 5.418045521
+P _part/16/_geo_xyz/9,2,1 5.418045998
 P _part/16/_geo_xyz/9,2,2 210.950119019
 P _part/16/_geo_xyz/9,3,0 -22.136703491
-P _part/16/_geo_xyz/9,3,1 5.418045521
+P _part/16/_geo_xyz/9,3,1 5.418045998
 P _part/16/_geo_xyz/9,3,2 213.013000488
 P _part/16/_geo_xyz/9,4,0 -22.136703491
-P _part/16/_geo_xyz/9,4,1 5.418045521
+P _part/16/_geo_xyz/9,4,1 5.418045998
 P _part/16/_geo_xyz/9,4,2 215.763504028
 P _part/16/_geo_xyz/9,5,0 -22.136703491
-P _part/16/_geo_xyz/9,5,1 5.418045521
+P _part/16/_geo_xyz/9,5,1 5.418045998
 P _part/16/_geo_xyz/9,5,2 219.278930664
 P _part/16/_geo_xyz/9,6,0 -22.136703491
-P _part/16/_geo_xyz/9,6,1 5.418045521
+P _part/16/_geo_xyz/9,6,1 5.418045998
 P _part/16/_geo_xyz/9,6,2 223.327377319
 P _part/16/_geo_xyz/9,7,0 -22.136703491
-P _part/16/_geo_xyz/9,7,1 5.418045521
+P _part/16/_geo_xyz/9,7,1 5.418045998
 P _part/16/_geo_xyz/9,7,2 223.327377319
 P _part/16/_geo_xyz/9,8,0 -22.136703491
-P _part/16/_geo_xyz/9,8,1 5.418045521
+P _part/16/_geo_xyz/9,8,1 5.418045998
 P _part/16/_geo_xyz/9,8,2 219.278930664
 P _part/16/_geo_xyz/9,9,0 -22.136703491
-P _part/16/_geo_xyz/9,9,1 5.418045521
+P _part/16/_geo_xyz/9,9,1 5.418045998
 P _part/16/_geo_xyz/9,9,2 215.763504028
 P _part/16/_geo_xyz/i_count 20
 P _part/16/_geo_xyz/j_count 18
@@ -13991,22 +13991,22 @@ P _part/17/_geo_xyz/1,9,0 4.427340984
 P _part/17/_geo_xyz/1,9,1 3.243609190
 P _part/17/_geo_xyz/1,9,2 204.735107422
 P _part/17/_geo_xyz/10,0,0 22.136703491
-P _part/17/_geo_xyz/10,0,1 5.418045521
+P _part/17/_geo_xyz/10,0,1 5.418045998
 P _part/17/_geo_xyz/10,0,2 209.574874878
 P _part/17/_geo_xyz/10,1,0 22.136703491
-P _part/17/_geo_xyz/10,1,1 5.418045521
+P _part/17/_geo_xyz/10,1,1 5.418045998
 P _part/17/_geo_xyz/10,1,2 209.987457275
 P _part/17/_geo_xyz/10,10,0 22.136703491
-P _part/17/_geo_xyz/10,10,1 5.418045521
+P _part/17/_geo_xyz/10,10,1 5.418045998
 P _part/17/_geo_xyz/10,10,2 213.013000488
 P _part/17/_geo_xyz/10,11,0 22.136703491
-P _part/17/_geo_xyz/10,11,1 5.418045521
+P _part/17/_geo_xyz/10,11,1 5.418045998
 P _part/17/_geo_xyz/10,11,2 210.950119019
 P _part/17/_geo_xyz/10,12,0 22.136703491
-P _part/17/_geo_xyz/10,12,1 5.418045521
+P _part/17/_geo_xyz/10,12,1 5.418045998
 P _part/17/_geo_xyz/10,12,2 209.987457275
 P _part/17/_geo_xyz/10,13,0 22.136703491
-P _part/17/_geo_xyz/10,13,1 5.418045521
+P _part/17/_geo_xyz/10,13,1 5.418045998
 P _part/17/_geo_xyz/10,13,2 209.574874878
 P _part/17/_geo_xyz/10,14,0 0.0
 P _part/17/_geo_xyz/10,14,1 0.0
@@ -14021,28 +14021,28 @@ P _part/17/_geo_xyz/10,17,0 0.0
 P _part/17/_geo_xyz/10,17,1 0.0
 P _part/17/_geo_xyz/10,17,2 0.0
 P _part/17/_geo_xyz/10,2,0 22.136703491
-P _part/17/_geo_xyz/10,2,1 5.418045521
+P _part/17/_geo_xyz/10,2,1 5.418045998
 P _part/17/_geo_xyz/10,2,2 210.950119019
 P _part/17/_geo_xyz/10,3,0 22.136703491
-P _part/17/_geo_xyz/10,3,1 5.418045521
+P _part/17/_geo_xyz/10,3,1 5.418045998
 P _part/17/_geo_xyz/10,3,2 213.013000488
 P _part/17/_geo_xyz/10,4,0 22.136703491
-P _part/17/_geo_xyz/10,4,1 5.418045521
+P _part/17/_geo_xyz/10,4,1 5.418045998
 P _part/17/_geo_xyz/10,4,2 215.763504028
 P _part/17/_geo_xyz/10,5,0 22.136703491
-P _part/17/_geo_xyz/10,5,1 5.418045521
+P _part/17/_geo_xyz/10,5,1 5.418045998
 P _part/17/_geo_xyz/10,5,2 219.278930664
 P _part/17/_geo_xyz/10,6,0 22.136703491
-P _part/17/_geo_xyz/10,6,1 5.418045521
+P _part/17/_geo_xyz/10,6,1 5.418045998
 P _part/17/_geo_xyz/10,6,2 223.327377319
 P _part/17/_geo_xyz/10,7,0 22.136703491
-P _part/17/_geo_xyz/10,7,1 5.418045521
+P _part/17/_geo_xyz/10,7,1 5.418045998
 P _part/17/_geo_xyz/10,7,2 223.327377319
 P _part/17/_geo_xyz/10,8,0 22.136703491
-P _part/17/_geo_xyz/10,8,1 5.418045521
+P _part/17/_geo_xyz/10,8,1 5.418045998
 P _part/17/_geo_xyz/10,8,2 219.278930664
 P _part/17/_geo_xyz/10,9,0 22.136703491
-P _part/17/_geo_xyz/10,9,1 5.418045521
+P _part/17/_geo_xyz/10,9,1 5.418045998
 P _part/17/_geo_xyz/10,9,2 215.763504028
 P _part/17/_geo_xyz/11,0,0 26.564044952
 P _part/17/_geo_xyz/11,0,1 5.961654663
@@ -14909,22 +14909,22 @@ P _part/17/_geo_xyz/8,9,0 17.709363937
 P _part/17/_geo_xyz/8,9,1 4.874436378
 P _part/17/_geo_xyz/8,9,2 213.006393433
 P _part/17/_geo_xyz/9,0,0 22.136703491
-P _part/17/_geo_xyz/9,0,1 5.418045521
+P _part/17/_geo_xyz/9,0,1 5.418045998
 P _part/17/_geo_xyz/9,0,2 209.574874878
 P _part/17/_geo_xyz/9,1,0 22.136703491
-P _part/17/_geo_xyz/9,1,1 5.418045521
+P _part/17/_geo_xyz/9,1,1 5.418045998
 P _part/17/_geo_xyz/9,1,2 209.987457275
 P _part/17/_geo_xyz/9,10,0 22.136703491
-P _part/17/_geo_xyz/9,10,1 5.418045521
+P _part/17/_geo_xyz/9,10,1 5.418045998
 P _part/17/_geo_xyz/9,10,2 213.013000488
 P _part/17/_geo_xyz/9,11,0 22.136703491
-P _part/17/_geo_xyz/9,11,1 5.418045521
+P _part/17/_geo_xyz/9,11,1 5.418045998
 P _part/17/_geo_xyz/9,11,2 210.950119019
 P _part/17/_geo_xyz/9,12,0 22.136703491
-P _part/17/_geo_xyz/9,12,1 5.418045521
+P _part/17/_geo_xyz/9,12,1 5.418045998
 P _part/17/_geo_xyz/9,12,2 209.987457275
 P _part/17/_geo_xyz/9,13,0 22.136703491
-P _part/17/_geo_xyz/9,13,1 5.418045521
+P _part/17/_geo_xyz/9,13,1 5.418045998
 P _part/17/_geo_xyz/9,13,2 209.574874878
 P _part/17/_geo_xyz/9,14,0 0.0
 P _part/17/_geo_xyz/9,14,1 0.0
@@ -14939,28 +14939,28 @@ P _part/17/_geo_xyz/9,17,0 0.0
 P _part/17/_geo_xyz/9,17,1 0.0
 P _part/17/_geo_xyz/9,17,2 0.0
 P _part/17/_geo_xyz/9,2,0 22.136703491
-P _part/17/_geo_xyz/9,2,1 5.418045521
+P _part/17/_geo_xyz/9,2,1 5.418045998
 P _part/17/_geo_xyz/9,2,2 210.950119019
 P _part/17/_geo_xyz/9,3,0 22.136703491
-P _part/17/_geo_xyz/9,3,1 5.418045521
+P _part/17/_geo_xyz/9,3,1 5.418045998
 P _part/17/_geo_xyz/9,3,2 213.013000488
 P _part/17/_geo_xyz/9,4,0 22.136703491
-P _part/17/_geo_xyz/9,4,1 5.418045521
+P _part/17/_geo_xyz/9,4,1 5.418045998
 P _part/17/_geo_xyz/9,4,2 215.763504028
 P _part/17/_geo_xyz/9,5,0 22.136703491
-P _part/17/_geo_xyz/9,5,1 5.418045521
+P _part/17/_geo_xyz/9,5,1 5.418045998
 P _part/17/_geo_xyz/9,5,2 219.278930664
 P _part/17/_geo_xyz/9,6,0 22.136703491
-P _part/17/_geo_xyz/9,6,1 5.418045521
+P _part/17/_geo_xyz/9,6,1 5.418045998
 P _part/17/_geo_xyz/9,6,2 223.327377319
 P _part/17/_geo_xyz/9,7,0 22.136703491
-P _part/17/_geo_xyz/9,7,1 5.418045521
+P _part/17/_geo_xyz/9,7,1 5.418045998
 P _part/17/_geo_xyz/9,7,2 223.327377319
 P _part/17/_geo_xyz/9,8,0 22.136703491
-P _part/17/_geo_xyz/9,8,1 5.418045521
+P _part/17/_geo_xyz/9,8,1 5.418045998
 P _part/17/_geo_xyz/9,8,2 219.278930664
 P _part/17/_geo_xyz/9,9,0 22.136703491
-P _part/17/_geo_xyz/9,9,1 5.418045521
+P _part/17/_geo_xyz/9,9,1 5.418045998
 P _part/17/_geo_xyz/9,9,2 215.763504028
 P _part/17/_geo_xyz/i_count 20
 P _part/17/_geo_xyz/j_count 18
@@ -25700,7 +25700,7 @@ P _part/8/_geo_xyz/1,0,0 -13.106751442
 P _part/8/_geo_xyz/1,0,1 -2.840431213
 P _part/8/_geo_xyz/1,0,2 75.451515198
 P _part/8/_geo_xyz/1,1,0 -12.983632088
-P _part/8/_geo_xyz/1,1,1 -1.905245543
+P _part/8/_geo_xyz/1,1,1 -1.905245423
 P _part/8/_geo_xyz/1,1,2 76.718841553
 P _part/8/_geo_xyz/1,10,0 -13.475429535
 P _part/8/_geo_xyz/1,10,1 -5.640816689
@@ -25727,7 +25727,7 @@ P _part/8/_geo_xyz/1,17,0 0.0
 P _part/8/_geo_xyz/1,17,1 0.0
 P _part/8/_geo_xyz/1,17,2 0.0
 P _part/8/_geo_xyz/1,2,0 -12.868005753
-P _part/8/_geo_xyz/1,2,1 -1.026973009
+P _part/8/_geo_xyz/1,2,1 -1.026972771
 P _part/8/_geo_xyz/1,2,2 79.630020142
 P _part/8/_geo_xyz/1,3,0 -12.831733704
 P _part/8/_geo_xyz/1,3,1 -0.751462698
@@ -25748,7 +25748,7 @@ P _part/8/_geo_xyz/1,8,0 -13.393535614
 P _part/8/_geo_xyz/1,8,1 -5.018773079
 P _part/8/_geo_xyz/1,8,2 106.234527588
 P _part/8/_geo_xyz/1,9,0 -13.512893677
-P _part/8/_geo_xyz/1,9,1 -5.925382614
+P _part/8/_geo_xyz/1,9,1 -5.925383091
 P _part/8/_geo_xyz/1,9,2 93.858695984
 P _part/8/_geo_xyz/10,0,0 -25.694854736
 P _part/8/_geo_xyz/10,0,1 -1.289652348
@@ -26294,7 +26294,7 @@ P _part/8/_geo_xyz/2,0,0 -13.106751442
 P _part/8/_geo_xyz/2,0,1 -2.840431213
 P _part/8/_geo_xyz/2,0,2 75.451515198
 P _part/8/_geo_xyz/2,1,0 -12.983632088
-P _part/8/_geo_xyz/2,1,1 -1.905245543
+P _part/8/_geo_xyz/2,1,1 -1.905245423
 P _part/8/_geo_xyz/2,1,2 76.718841553
 P _part/8/_geo_xyz/2,10,0 -13.475429535
 P _part/8/_geo_xyz/2,10,1 -5.640816689
@@ -26321,7 +26321,7 @@ P _part/8/_geo_xyz/2,17,0 0.0
 P _part/8/_geo_xyz/2,17,1 0.0
 P _part/8/_geo_xyz/2,17,2 0.0
 P _part/8/_geo_xyz/2,2,0 -12.868005753
-P _part/8/_geo_xyz/2,2,1 -1.026973009
+P _part/8/_geo_xyz/2,2,1 -1.026972771
 P _part/8/_geo_xyz/2,2,2 79.630020142
 P _part/8/_geo_xyz/2,3,0 -12.831733704
 P _part/8/_geo_xyz/2,3,1 -0.751462698
@@ -26342,7 +26342,7 @@ P _part/8/_geo_xyz/2,8,0 -13.393535614
 P _part/8/_geo_xyz/2,8,1 -5.018773079
 P _part/8/_geo_xyz/2,8,2 106.234527588
 P _part/8/_geo_xyz/2,9,0 -13.512893677
-P _part/8/_geo_xyz/2,9,1 -5.925382614
+P _part/8/_geo_xyz/2,9,1 -5.925383091
 P _part/8/_geo_xyz/2,9,2 93.858695984
 P _part/8/_geo_xyz/3,0,0 -16.252595901
 P _part/8/_geo_xyz/3,0,1 -2.443773985
@@ -31580,7 +31580,7 @@ P _part/9/_geo_xyz/1,0,0 13.106751442
 P _part/9/_geo_xyz/1,0,1 -2.840431213
 P _part/9/_geo_xyz/1,0,2 75.451515198
 P _part/9/_geo_xyz/1,1,0 12.983632088
-P _part/9/_geo_xyz/1,1,1 -1.905245543
+P _part/9/_geo_xyz/1,1,1 -1.905245423
 P _part/9/_geo_xyz/1,1,2 76.718841553
 P _part/9/_geo_xyz/1,10,0 13.475429535
 P _part/9/_geo_xyz/1,10,1 -5.640816689
@@ -31607,7 +31607,7 @@ P _part/9/_geo_xyz/1,17,0 0.0
 P _part/9/_geo_xyz/1,17,1 0.0
 P _part/9/_geo_xyz/1,17,2 0.0
 P _part/9/_geo_xyz/1,2,0 12.868005753
-P _part/9/_geo_xyz/1,2,1 -1.026973009
+P _part/9/_geo_xyz/1,2,1 -1.026972771
 P _part/9/_geo_xyz/1,2,2 79.630020142
 P _part/9/_geo_xyz/1,3,0 12.831733704
 P _part/9/_geo_xyz/1,3,1 -0.751462698
@@ -31628,7 +31628,7 @@ P _part/9/_geo_xyz/1,8,0 13.393535614
 P _part/9/_geo_xyz/1,8,1 -5.018773079
 P _part/9/_geo_xyz/1,8,2 106.234527588
 P _part/9/_geo_xyz/1,9,0 13.512893677
-P _part/9/_geo_xyz/1,9,1 -5.925382614
+P _part/9/_geo_xyz/1,9,1 -5.925383091
 P _part/9/_geo_xyz/1,9,2 93.858695984
 P _part/9/_geo_xyz/10,0,0 25.694854736
 P _part/9/_geo_xyz/10,0,1 -1.289652348
@@ -32174,7 +32174,7 @@ P _part/9/_geo_xyz/2,0,0 13.106751442
 P _part/9/_geo_xyz/2,0,1 -2.840431213
 P _part/9/_geo_xyz/2,0,2 75.451515198
 P _part/9/_geo_xyz/2,1,0 12.983632088
-P _part/9/_geo_xyz/2,1,1 -1.905245543
+P _part/9/_geo_xyz/2,1,1 -1.905245423
 P _part/9/_geo_xyz/2,1,2 76.718841553
 P _part/9/_geo_xyz/2,10,0 13.475429535
 P _part/9/_geo_xyz/2,10,1 -5.640816689
@@ -32201,7 +32201,7 @@ P _part/9/_geo_xyz/2,17,0 0.0
 P _part/9/_geo_xyz/2,17,1 0.0
 P _part/9/_geo_xyz/2,17,2 0.0
 P _part/9/_geo_xyz/2,2,0 12.868005753
-P _part/9/_geo_xyz/2,2,1 -1.026973009
+P _part/9/_geo_xyz/2,2,1 -1.026972771
 P _part/9/_geo_xyz/2,2,2 79.630020142
 P _part/9/_geo_xyz/2,3,0 12.831733704
 P _part/9/_geo_xyz/2,3,1 -0.751462698
@@ -32222,7 +32222,7 @@ P _part/9/_geo_xyz/2,8,0 13.393535614
 P _part/9/_geo_xyz/2,8,1 -5.018773079
 P _part/9/_geo_xyz/2,8,2 106.234527588
 P _part/9/_geo_xyz/2,9,0 13.512893677
-P _part/9/_geo_xyz/2,9,1 -5.925382614
+P _part/9/_geo_xyz/2,9,1 -5.925383091
 P _part/9/_geo_xyz/2,9,2 93.858695984
 P _part/9/_geo_xyz/3,0,0 16.252595901
 P _part/9/_geo_xyz/3,0,1 -2.443773985
@@ -36062,7 +36062,7 @@ P _wing/16/_crib_y_arm/10 0.0
 P _wing/16/_crib_y_arm/2 3.787218332
 P _wing/16/_crib_y_arm/3 4.330827713
 P _wing/16/_crib_y_arm/4 4.874436378
-P _wing/16/_crib_y_arm/5 5.418045521
+P _wing/16/_crib_y_arm/5 5.418045998
 P _wing/16/_crib_y_arm/6 5.961654663
 P _wing/16/_crib_y_arm/7 6.505264282
 P _wing/16/_crib_y_arm/8 7.048872948
@@ -36422,7 +36422,7 @@ P _wing/17/_crib_y_arm/10 0.0
 P _wing/17/_crib_y_arm/2 3.787218332
 P _wing/17/_crib_y_arm/3 4.330827713
 P _wing/17/_crib_y_arm/4 4.874436378
-P _wing/17/_crib_y_arm/5 5.418045521
+P _wing/17/_crib_y_arm/5 5.418045998
 P _wing/17/_crib_y_arm/6 5.961654663
 P _wing/17/_crib_y_arm/7 6.505264282
 P _wing/17/_crib_y_arm/8 7.048872948
@@ -41755,29 +41755,8 @@ PROPERTIES_END
 PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
-gen_rotary layout
-  POS 2061.500000 1784.000000
-  IMAGE layout
-  DATAREF 
-  SIZE 0
-  LIGHT_MODE GLASS_AUTO
-  LIGHT_RHEOSTAT 0
-  BUS_SRC 1
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 6.000000
-  DIGITS 1
-  ROTARY_TYPE NO_CLICK
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  OFFSET 0.000000
-  STEP1 1.000000
-  STEP2 1.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-
 gen_rotary logo
-  POS 699.714294 2999.500000
+  POS 699.000000 2999.500000
   IMAGE StratoFull
   DATAREF 
   SIZE 1.750000
@@ -41798,7 +41777,7 @@ gen_rotary logo
   CLICK_DY 0
 
 gen_rotary LCD Background
-  POS 3025.357178 2170.000488
+  POS 3025.500000 2170.000000
   IMAGE LCD_Background
   DATAREF 
   SIZE 3.250000
@@ -41820,7 +41799,9 @@ gen_rotary LCD Background
   CLICK_DY 0
 
 GROUP Captain PFD
+  GROUP_OPEN
   GROUP Artificial Horizon
+    GROUP_OPEN
     GROUP Horizon
       GROUP_OPEN
       gen_needle AH
@@ -41830,14 +41811,14 @@ GROUP Captain PFD
         SIZE 1.350000
         CLIP
         LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
+        LIGHT_RHEOSTAT 11
         BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 90.000000 -90.000000
+        KEY_FRAME 0.000000 90.000000 1.000000
+        KEY_FRAME 45.000000 45.000000
         IS_DRAGGABLE 0
         OFFSET 0.000000
         DEFLECT_SRC PITCH_AHRS
-        DEFLECT_PIX 613.000000
+        DEFLECT_PIX 674.000000
 
       gen_needle AH_Markings
         POS 595.000000 1779.000000
@@ -41848,12 +41829,12 @@ GROUP Captain PFD
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 90.000000 -90.000000
+        KEY_FRAME 0.000000 90.000000 1.000000
+        KEY_FRAME 45.000000 45.000000
         IS_DRAGGABLE 0
         OFFSET 0.000000
         DEFLECT_SRC PITCH_AHRS
-        DEFLECT_PIX 613.000000
+        DEFLECT_PIX 674.000000
 
     END_GROUP
     gen_rotary AH_dual_cue
