@@ -36,7 +36,6 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --**                                CREATE VARIABLES                                 **--
 --*************************************************************************************--
 
-local B777_avg_gear_pos = 1
 local B777_eag_claw_sync = 1
 local B777_eag_target = 0
 
@@ -65,7 +64,8 @@ simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/
 B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
 B777DR_cockpit_panel_lights             = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
 B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
-
+B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
+B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_gear_pos", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -176,14 +176,14 @@ simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/l
 --function before_physics()
 
 function after_physics()
-   B777_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
+   B777DR_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
 
    if B777_eag_claw_sync == 1 then
       B777DR_custom_eagle_claw[1] = simDR_eag_claw_pos[1]
       B777DR_custom_eagle_claw[2] = simDR_eag_claw_pos[2]
    end
 
-   if B777_avg_gear_pos < 0.9 then
+   if B777DR_avg_gear_pos < 0.9 then
       B777_eag_claw_sync = 0
       B777DR_custom_eagle_claw = 0
    end
@@ -191,6 +191,12 @@ function after_physics()
    if B777_eag_claw_sync == 0 then
       B777DR_custom_eagle_claw[1] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
       B777DR_custom_eagle_claw[2] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
+   end
+
+   if B777DR_avg_gear_pos == 0 then
+      B777DR_ldg_gear_kill = 1
+   else
+      B777DR_ldg_gear_kill = 0
    end
 
 end

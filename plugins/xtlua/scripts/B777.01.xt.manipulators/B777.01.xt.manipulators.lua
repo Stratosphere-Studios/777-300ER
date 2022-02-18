@@ -54,6 +54,8 @@ simDR_shadow			                     = find_dataref("sim/private/controls/shadow/
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 
+B777DR_pfd_mtrs_capt                      = find_dataref("Strato/777/displays/mtrs_capt")
+
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -370,6 +372,14 @@ function B777_efis_apt_switch_CMDhandler(phase, duration)
    end
 end
 
+function B777_efis_mtrs_capt_CMDhandler(phase, duration)
+	if phase == 0 then
+		B777DR_pfd_mtrs_capt = 1 - B777DR_pfd_mtrs_capt
+      B777DR_efis_button_positions[7] = 1
+   elseif phase == 2 then
+      B777DR_efis_button_positions[7] = 0
+	end
+end
 
 ---OVERHEAD----------
 
@@ -524,6 +534,7 @@ B777CMD_efis_sta_button                   = deferred_command("Strato/B777/button
 B777CMD_efis_wpt_button                   = deferred_command("Strato/B777/button_switch/efis/wpt", "ND Waypoint Button", B777_efis_wpt_switch_CMDhandler)
 B777CMD_efis_tfc_button                   = deferred_command("Strato/B777/button_switch/efis/tfc", "ND Traffic Button", B777_efis_tfc_switch_CMDhandler)
 B777CMD_efis_apt_button                   = deferred_command("Strato/B777/button_switch/efis/apt", "ND Airport Button", B777_efis_apt_switch_CMDhandler)
+B777CMD_efis_mtrs_capt                    = deferred_command("Strato/B777/button_switch/efis/mtrs_capt", "Toggle Meters on PFD (Captain)", B777_efis_mtrs_capt_CMDhandler)
 
 ---OVERHEAD----------
 
