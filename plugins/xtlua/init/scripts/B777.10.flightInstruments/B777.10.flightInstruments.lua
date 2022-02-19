@@ -30,8 +30,13 @@ B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_swit
 --*************************************************************************************--
 --**                             CREATE CUSTOM DATAREFS                              **--
 --*************************************************************************************--
+B777DR_total_fuel_lbs                  = deferred_dataref("Strato/777/displays/total_fuel_lbs", "number")
+B777DR_r_fuel_lbs                      = deferred_dataref("Strato/777/displays/r_fuel_lbs", "number")
+B777DR_l_fuel_lbs                      = deferred_dataref("Strato/777/displays/l_fuel_lbs", "number")
+
 B777DR_displayed_hdg                   = deferred_dataref("Strato/777/displays/hdg", "number") -- what the MCP heading display actually shows
 B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number")
+B777DR_pfd_mtrs_capt                   = deferred_dataref("Strato/777/displays/mtrs_capt", "number")
 
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what pages the lower eicas is on
 
@@ -40,3 +45,6 @@ B777DR_displayed_com1_stby_khz         = deferred_dataref("Strato/777/displays/c
 
 B777DR_displayed_com2_act_khz          = deferred_dataref("Strato/777/displays/com2_act_khz", "number") -- COM2 Radio Active Display
 B777DR_displayed_com2_stby_khz         = deferred_dataref("Strato/777/displays/com2_stby_khz", "number") -- COM2 Radio Standby Display
+
+B777DR_vs_capt_indicator               = deferred_dataref("Strato/777/displays/vvi_capt", "number")
+B777DR_ias_capt_indicator              = deferred_dataref("Strato/777/displays/ias_capt", "number")

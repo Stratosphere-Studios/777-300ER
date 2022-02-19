@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -30.679637909
+P _door/0/_ang_now -59.470302582
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 30.679637909
+P _door/1/_ang_now 59.470302582
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 30.679637909
+P _door/2/_ang_now 59.470302582
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -30.679637909
+P _door/9/_ang_now -59.470302582
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,10 +213,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 41.155609131
+P _gear/0/_lonN 79.777236938
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
-P _gear/0/_stat_def 0.571922064
+P _gear/0/_stat_def 0.571922183
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -5.612129211
+P _gear/1/_axiN -10.878713608
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.600000381
 P _gear/1/_gear_y -4.679999828
 P _gear/1/_gear_z 106.360000610
 P _gear/1/_latE 0.0
-P _gear/1/_latN -30.679637909
+P _gear/1/_latN -59.470302582
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -2.639587402
+P _gear/1/_lonN 3.329208851
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.273759842
+P _gear/1/_stat_def 1.273759604
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.910000026
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 5.612129211
+P _gear/2/_axiN 10.878713608
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.679999828
 P _gear/2/_gear_z 106.360000610
 P _gear/2/_latE 0.0
-P _gear/2/_latN 30.679637909
+P _gear/2/_latN 59.470302582
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -2.639587402
+P _gear/2/_lonN 3.329208851
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.273759842
+P _gear/2/_stat_def 1.273759604
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -35102,7 +35102,7 @@ P acf/_ASlo_the_V 0.0
 P acf/_ASlo_the_k 0.0
 P acf/_ASlo_thedot_k 0.0
 P acf/_CHT_is_C 0
-P acf/_EGT_is_C 0
+P acf/_EGT_is_C 1
 P acf/_FBW_apply_P_to_engine/0 0
 P acf/_FBW_apply_P_to_engine/1 0
 P acf/_FBW_apply_P_to_engine/2 0
@@ -35798,7 +35798,7 @@ P acf/_ann_wav_file/count 197
 P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
-P acf/_author Nathroxer + Team
+P acf/_author Stratosphere Studios
 P acf/_auto_cowl_flaps_EQ 0
 P acf/_auto_engage_BC_deg 0.0
 P acf/_auto_omega_fire 0.0
@@ -36042,7 +36042,7 @@ P acf/_bus_gen_is_on/7 1
 P acf/_bus_gen_is_on/count 8
 P acf/_buses_always_tied 0
 P acf/_bypass_ratio 9.0
-P acf/_callsign Boeing 77W
+P acf/_callsign Stratosphere 777
 P acf/_camera_fov_zoom 60.0
 P acf/_camera_offset_phi 0.0
 P acf/_camera_offset_psi 0.0
@@ -37397,7 +37397,7 @@ P acf/_govnr_EQ 0
 P acf/_govnr_del 0.010000000
 P acf/_govnr_dot 0.010000000
 P acf/_green_hi_CHT 280.0
-P acf/_green_hi_EGT 924.0
+P acf/_green_hi_EGT 1050.0
 P acf/_green_hi_EPR 4.0
 P acf/_green_hi_FF 9999.0
 P acf/_green_hi_ITT 544.0
@@ -37411,7 +37411,7 @@ P acf/_green_hi_bat_volt 210.0
 P acf/_green_hi_fuelP 24.0
 P acf/_green_hi_gen_amp 0.0
 P acf/_green_hi_gen_volt 29.0
-P acf/_green_hi_oilP 99.0
+P acf/_green_hi_oilP 100.0
 P acf/_green_hi_oilT 54.0
 P acf/_green_hi_pwr 0.0
 P acf/_green_hi_vac 4.800000191
@@ -37432,7 +37432,7 @@ P acf/_green_lo_bat_volt 190.0
 P acf/_green_lo_fuelP 12.0
 P acf/_green_lo_gen_amp 0.0
 P acf/_green_lo_gen_volt 27.0
-P acf/_green_lo_oilP 15.0
+P acf/_green_lo_oilP 58.0
 P acf/_green_lo_oilT 0.0
 P acf/_green_lo_pwr 0.0
 P acf/_green_lo_vac 3.200000048
@@ -37580,7 +37580,7 @@ P acf/_manufacturer Boeing
 P acf/_mast_bump_cyclic_ailn 0.0
 P acf/_mast_bump_cyclic_roll 0.0
 P acf/_max_CHT 350.0
-P acf/_max_EGT 1922.0
+P acf/_max_EGT 1095.0
 P acf/_max_ITT 1180.0
 P acf/_max_MP_limit 29.899999619
 P acf/_max_bat_amp 47.0
@@ -37631,7 +37631,7 @@ P acf/_no_hydro_force_mult_flcons 1.0
 P acf/_nom_bat_volt 20.0
 P acf/_nom_fuelP 30.0
 P acf/_nom_gen_volt 28.0
-P acf/_nom_oilP 70.0
+P acf/_nom_oilP 80.0
 P acf/_notes Newer WIP flightmodel, other aspects such as visuals may be broken or outdated.
 P acf/_num_batteries 2
 P acf/_num_braking_wheels 0.0
@@ -37753,7 +37753,7 @@ P acf/_radiator_frontal_area 0.0
 P acf/_radiator_in_propwash 0
 P acf/_radio_alt_callout_advance 80.0
 P acf/_red_hi_CHT 350.0
-P acf/_red_hi_EGT 950.0
+P acf/_red_hi_EGT 1095.0
 P acf/_red_hi_EPR 4.199999809
 P acf/_red_hi_FF 9999.0
 P acf/_red_hi_ITT 1180.0
@@ -37767,7 +37767,7 @@ P acf/_red_hi_bat_volt 220.0
 P acf/_red_hi_fuelP 30.0
 P acf/_red_hi_gen_amp 782.0
 P acf/_red_hi_gen_volt 30.0
-P acf/_red_hi_oilP 99.0
+P acf/_red_hi_oilP 110.0
 P acf/_red_hi_oilT 290.0
 P acf/_red_hi_pwr 0.0
 P acf/_red_hi_vac 8.0
@@ -37788,7 +37788,7 @@ P acf/_red_lo_bat_volt 180.0
 P acf/_red_lo_fuelP 0.0
 P acf/_red_lo_gen_amp 0.0
 P acf/_red_lo_gen_volt 26.0
-P acf/_red_lo_oilP 13.0
+P acf/_red_lo_oilP 0.0
 P acf/_red_lo_oilT 0.0
 P acf/_red_lo_pwr 0.0
 P acf/_red_lo_vac 0.0
@@ -38045,7 +38045,7 @@ P acf/_tail_rot_with_v2_kts 0.0
 P acf/_tail_rotor_lf_trim_rat 0.0
 P acf/_tail_rotor_rt_trim_rat 0.0
 P acf/_tail_with_coll 0.0
-P acf/_tailnum N5017V
+P acf/_tailnum SS777
 P acf/_tailrotor_EQ 0
 P acf/_takeoff_trim_11 0.500000000
 P acf/_tank_part_en/0 0
@@ -38307,7 +38307,7 @@ P acf/_yel_lo_bat_volt 0
 P acf/_yel_lo_fuelP 0
 P acf/_yel_lo_gen_amp 0
 P acf/_yel_lo_gen_volt 0
-P acf/_yel_lo_oilP 1
+P acf/_yel_lo_oilP 0
 P acf/_yel_lo_oilT 0
 P acf/_yel_lo_pwr 0
 P acf/_yel_lo_vac 0
