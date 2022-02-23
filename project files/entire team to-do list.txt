@@ -1,10 +1,9 @@
 - Nathroxer:
-  - new datarefs for flight control animations
-  - redo wingflex once new flightmodel is out
+  - Re-animate wingflex and flight controls once new flightmodel is released
   - animate doors
   - exterior lights ( https://developer.x-plane.com/article/airplane-parameterized-light-guide/ AND https://www.youtube.com/watch?v=ingB_EYyC2U )
   - cockpit floodlights
-  - cabin textures
+  - cabin
   - reduce visibility of slanted things above doors
   - texture landing gear, make hot brake glow
   - model/texture external light fixtures
@@ -13,7 +12,7 @@
 
 - Matt726:
   - Display textures (and some displays?)
-  - fmod
+  - update datarefs (buttons, cockpit door are done)
 
 - Cactus2456
   - efb and eicas (+ Saharsh)
@@ -29,11 +28,9 @@
   - implement new animation code
   - check if landing light/taxi/rwy turnoff dimming similar to 744
   - clock code
-  - make sure exis
   - fix flight director switch code
   - custom RAT dataref (use anim tool with target being the default dr)
   - rename cmds/drs for toggle switch to "toggle_switch"
-  - mcp display options (as/mach, mag/true hdg, etc)
   - rest of displays (fcom is a good ref!)
   - code adiru alignment by longitude - adiru_alignment_time = 5+(longitude_degrees / (90/11)) (equator - 5 mins, poles - 15 mins. Check vids online. Include align time on nd.
   - idea for bank limit knob - 6 pos. anim pos dr, set default dr using that UNLESS in auto. auto varies btw 15-25 deg depending on true airspeed
