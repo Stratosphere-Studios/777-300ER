@@ -35,3 +35,7 @@ B777DR_cockpit_panel_lights             = deferred_dataref("Strato/777/cockpit/c
 B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
 B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
 B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_gear_pos", "number")
+B777DR_door_mode                        = deferred_dataref("Strato/777/cockpit/door_mode","number")
+B777DR_door_light                       = deferred_dataref("Strato/777/cockpit/door_lights","array[3]")
+
+B777DR_door_anim                        = find_dataref("Strato/777/cockpit_door_pos")
