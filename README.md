@@ -1,5 +1,5 @@
 # Stratosphere Studios 777-300ER
-Freeware Boeing 777-300ER for X-Plane 11, made by Stratosphere Studios
+Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studios.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
 
@@ -51,6 +51,15 @@ A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft 
 **Q: Even after following the above instructions my aircraft is still broken?**
 
 A: Please remember this aircraft is still in the works. By downloading from github, you our downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
+
+**Q: Will this aircraft support X-Pane 12?**
+
+A: Of course!
+
+**Q: Why are the physics broken/the plane won't take off/I can barely controle the aircraft?**
+
+A: We know the physics are very broken currenty. We're working on it.
+
 
 ## INSTALLATION
 Just extract the aircraft folder and move it to your X-Plane aircraft folder. For stable releases, look [here](https://github.com/StratosphereStudios/777/releases) (none yet), and for all the latest updates, go [here](https://github.com/StratosphereStudios/777), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
