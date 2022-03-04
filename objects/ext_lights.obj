@@ -2,6 +2,7 @@ I
 800
 OBJ
 
+GLOBAL_cockpit_lit
 POINT_COUNTS	0	0	0	0
 
 	LIGHT_PARAM	airplane_landing_glow 0.26692972 -2.4066942 -29.580872 0 0 0 0 1 
@@ -9,5 +10,16 @@ POINT_COUNTS	0	0	0	0
 	LIGHT_PARAM	airplane_landing_sp 0 -2.4066942 -29.580872 0.9 0.9 0.9 0 150 0.5
 	LIGHT_PARAM	airplane_landing_glow 0.3095805 -2.6638153 -29.579504 0 0 0 0 1 
 	LIGHT_PARAM	airplane_landing_glow -0.29547933 -2.6638153 -29.579504 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow -8.0170584 2.2127488 36.942799 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow -3.4443784 -0.87962902 -7.7377439 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_sp -3.4443784 -0.89623976 -7.8978643 0.9 0.9 0.9 0 150 0.5
+	LIGHT_PARAM	airplane_landing_sp 3.44438 -0.89623976 -7.8978643 0.9 0.9 0.9 0 150 0.5
+	LIGHT_PARAM	airplane_landing_glow 3.44438 -0.87962902 -7.7377439 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow 0 3.3629179 -22.098515 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow -31.426151 2.1136968 11.232847 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow -32.352917 2.2342947 13.749272 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow 31.426201 2.1136968 11.232847 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow 32.352901 2.2342947 13.749272 0 0 0 0 1 
+	LIGHT_PARAM	airplane_landing_glow 8.0170603 2.2127488 36.942799 0 0 0 0 1 
 
-# Build with Blender 2.91.2 (build b'5be9ef417703'). Exported with XPlane2Blender 4.0.0-beta.2+88.20200622173550
+# Build with Blender 3.0.1 (build b'dc2d18018171'). Exported with XPlane2Blender 4.1.0-beta.2+104.20220106141815
