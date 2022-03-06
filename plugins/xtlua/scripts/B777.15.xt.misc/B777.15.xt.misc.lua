@@ -48,7 +48,6 @@ simDR_ldg_gear_pos                        = find_dataref("sim/aircraft/parts/acf
 simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/eagle_claw_angle_deg")
 simDR_onGround                            = find_dataref("sim/flightmodel/failures/onground_any")
 simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")
-B777DR_door_anim                          = find_dataref("Strato/777/cockpit_door_pos")
 
 --replace the up, down, and toggle. make toggle run replaced up and down (new gear up/down tilt gear)
 
@@ -67,8 +66,6 @@ B777DR_cockpit_panel_lights             = deferred_dataref("Strato/777/cockpit/c
 B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
 B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
 B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_gear_pos", "number")
-B777DR_door_mode                        = deferred_dataref("Strato/777/cockpit/door_mode","number")
-B777DR_door_light                       = deferred_dataref("Strato/777/cockpit/door_lights","array[3]")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -205,20 +202,6 @@ function after_physics()
       B777DR_ldg_gear_kill = 1
    else
       B777DR_ldg_gear_kill = 0
-   end
-   
-   if B777DR_door_anim == 1 then
-      B777DR_door_light[2] = 1
-      B777DR_door_light[1] = 1
-   elseif B777DR_door_anim == 0 then
-      B777DR_door_light[1] = 0
-      if B777DR_door_mode == 3 then
-         B777DR_door_light[2] = 0
-      elseif B777DR_door_mode == 2 then
-         B777DR_door_light[2] = 1
-      elseif B777DR_door_mode == 1 then
-         B777DR_door_light[2] = 1
-      end
    end
 
 end
