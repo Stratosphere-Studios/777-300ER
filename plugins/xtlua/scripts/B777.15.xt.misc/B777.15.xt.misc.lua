@@ -168,10 +168,6 @@ simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/l
 
 --function aircraft_load()
 
-function aircraft_load()
-   B777DR_door_mode = 2
-end
-
 --function aircraft_unload()
 
 --function flight_start()
