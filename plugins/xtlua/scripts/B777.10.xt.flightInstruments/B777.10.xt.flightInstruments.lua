@@ -116,6 +116,91 @@ end
 B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_switch/mcp/MAGtrk", "Switch between true and magnetic heading", B777_mcp_magTRK_CMDhandler)
 
 
+function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(4)
+	end
+end
+
+function B777_efis_lEicas_stat_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(9)
+	end
+end
+
+function B777_efis_lEicas_elec_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(3)
+	end
+end
+
+function B777_efis_lEicas_hyd_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(8)
+	end
+end
+
+function B777_efis_lEicas_fuel_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(6)
+	end
+end
+
+function B777_efis_lEicas_air_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(1)
+	end
+end
+
+function B777_efis_lEicas_door_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(2)
+	end
+end
+
+function B777_efis_lEicas_gear_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(7)
+	end
+end
+
+function B777_efis_lEicas_fctl_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(5)
+	end
+end
+
+function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(4)
+	end
+end
+
+function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		setEicasPage(10)
+	end
+end
+
+function setEicasPage(id)
+	if B777DR_eicas_mode == id then
+		B777DR_eicas_mode = 0
+	else
+		B777DR_eicas_mode = id
+	end
+end
+
+B777CMD_efis_lEicas_eng              = deferred_command("Strato/B777/button_switch/efis/lEicas/eng", "Lower Eicas ENG Page", B777_efis_lEicas_eng_switch_CMDhandler)
+B777CMD_efis_lEicas_stat             = deferred_command("Strato/B777/button_switch/efis/lEicas/stat", "Lower Eicas STAT Page", B777_efis_lEicas_stat_switch_CMDhandler)
+B777CMD_efis_lEicas_elec             = deferred_command("Strato/B777/button_switch/efis/lEicas/elec", "Lower Eicas ELEC Page", B777_efis_lEicas_elec_switch_CMDhandler)
+B777CMD_efis_lEicas_hyd              = deferred_command("Strato/B777/button_switch/efis/lEicas/hyd", "Lower Eicas HYD Page", B777_efis_lEicas_hyd_switch_CMDhandler)
+B777CMD_efis_lEicas_fuel             = deferred_command("Strato/B777/button_switch/efis/lEicas/fuel", "Lower Eicas FUEL Page", B777_efis_lEicas_fuel_switch_CMDhandler)
+B777CMD_efis_lEicas_air              = deferred_command("Strato/B777/button_switch/efis/lEicas/air", "Lower Eicas AIR Page", B777_efis_lEicas_air_switch_CMDhandler)
+B777CMD_efis_lEicas_door             = deferred_command("Strato/B777/button_switch/efis/lEicas/door", "Lower Eicas DOOR Page", B777_efis_lEicas_door_switch_CMDhandler)
+B777CMD_efis_lEicas_gear             = deferred_command("Strato/B777/button_switch/efis/lEicas/gear", "Lower Eicas GEAR Page", B777_efis_lEicas_gear_switch_CMDhandler)
+B777CMD_efis_lEicas_fctl             = deferred_command("Strato/B777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
+B777CMD_efis_lEicas_cam              = deferred_command("Strato/B777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
+
 --*************************************************************************************--
 --**                                      CODE                                       **--
 --*************************************************************************************--

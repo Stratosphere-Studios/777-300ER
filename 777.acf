@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -42.481281281
+P _door/0/_ang_now -18.726692200
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 42.481281281
+P _door/1/_ang_now 18.726692200
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 42.481281281
+P _door/2/_ang_now 18.726692200
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -42.481281281
+P _door/9/_ang_now -18.726692200
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,7 +213,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 56.987083435
+P _gear/0/_lonN 25.121170044
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
 P _gear/0/_stat_def 0.387207001
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -7.770966053
+P _gear/1/_axiN -3.425614357
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -42.481281281
+P _gear/1/_latN -18.726692200
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -0.192905426
+P _gear/1/_lonN -5.117636681
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087793231
+P _gear/1/_stat_def 1.087793469
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 7.770966053
+P _gear/2/_axiN 3.425614357
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 42.481281281
+P _gear/2/_latN 18.726692200
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -0.192905426
+P _gear/2/_lonN -5.117636681
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087793231
+P _gear/2/_stat_def 1.087793469
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -39303,12 +39303,12 @@ P acf/_beta_pitch 0.0
 P acf/_beta_prop_EQ 0
 P acf/_blown_flap_cl_inc 0.0
 P acf/_blown_flap_min_engag 0.0
-P acf/_board_1/0 -10.500000000
-P acf/_board_1/1 -2.400000095
-P acf/_board_1/2 21.700000763
+P acf/_board_1/0 -10.0
+P acf/_board_1/1 -1.0
+P acf/_board_1/2 7.0
 P acf/_board_1/count 3
 P acf/_board_2/0 -10.500000000
-P acf/_board_2/1 -2.400000095
+P acf/_board_2/1 -1.0
 P acf/_board_2/2 160.0
 P acf/_board_2/count 3
 P acf/_boost_max_seconds 0.0
@@ -39494,7 +39494,7 @@ P acf/_bus_gen_is_on/count 8
 P acf/_buses_always_tied 0
 P acf/_bypass_ratio 9.0
 P acf/_callsign Stratosphere 777
-P acf/_camera_fov_zoom 60.0
+P acf/_camera_fov_zoom 40.0
 P acf/_camera_offset_phi 0.0
 P acf/_camera_offset_psi 0.0
 P acf/_camera_offset_the 0.0
@@ -40783,12 +40783,12 @@ P acf/_flaps_with_vector 0
 P acf/_flare_max 0
 P acf/_fly_like_a_helo 0
 P acf/_folding_prop_EQ 0
-P acf/_food_1/0 9.500000000
-P acf/_food_1/1 -2.400000095
-P acf/_food_1/2 21.700000763
+P acf/_food_1/0 10.0
+P acf/_food_1/1 -1.0
+P acf/_food_1/2 7.0
 P acf/_food_1/count 3
-P acf/_food_2/0 9.500000000
-P acf/_food_2/1 -2.400000095
+P acf/_food_2/0 10.500000000
+P acf/_food_2/1 -1.0
 P acf/_food_2/2 160.0
 P acf/_food_2/count 3
 P acf/_frc_damp_brak_lb 0.0
@@ -40812,11 +40812,11 @@ P acf/_frc_stickshaker_freq 0.0
 P acf/_frc_stickshaker_lb 0.0
 P acf/_fuel_1/0 -65.0
 P acf/_fuel_1/1 0.0
-P acf/_fuel_1/2 100.0
+P acf/_fuel_1/2 110.0
 P acf/_fuel_1/count 3
 P acf/_fuel_2/0 65.0
 P acf/_fuel_2/1 0.0
-P acf/_fuel_2/2 100.0
+P acf/_fuel_2/2 110.0
 P acf/_fuel_2/count 3
 P acf/_fuel_intro_time_jet 28.0
 P acf/_fuel_intro_time_prop 5.0
@@ -41769,7 +41769,7 @@ PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
 gen_rotary logo
-  POS 699.714294 2999.500000
+  POS 699.000000 2999.500000
   IMAGE StratoFull
   DATAREF 
   SIZE 1.750000
@@ -41790,7 +41790,7 @@ gen_rotary logo
   CLICK_DY 0
 
 gen_rotary LCD Background
-  POS 3025.357178 2170.000488
+  POS 3023.500000 2170.000000
   IMAGE LCD_Background
   DATAREF 
   SIZE 3.250000
@@ -41811,8 +41811,794 @@ gen_rotary LCD Background
   CLICK_DX 0
   CLICK_DY 0
 
-GROUP Captain PFD
+GROUP Lower Eicas
+  HIDE
+  EFIS_camera Camera
+    POS 3414.000000 416.000000
+    DATAREF 
+    SHOW_EQUAL 10.000000 Strato/777/displays/eicas_mode
+    SIZE 10.000000
+    LIGHT_MODE MECHANICAL
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+
+  gen_rotary LCD Background
+    POS 3479.500000 347.000000
+    IMAGE LCD_Background
+    DATAREF 
+    SHOW_LESS 9.000000 Strato/777/displays/eicas_mode
+    SIZE 2.200000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  GROUP AIR
+    SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/AIR/air_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+  END_GROUP
+  GROUP DOOR
+    SHOW_EQUAL 2.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/ELEC/elec_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+  END_GROUP
+  GROUP ELEC
+    SHOW_EQUAL 3.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3410.000000 413.000000
+      IMAGE EICAS lower/ELEC/elec_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED bat_volts
+      POS 3037.000000 -123.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/electrical/battery_voltage_actual_volts[0]
+      SIZE 1.750000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED bat_amps
+      POS 3039.142822 -182.785721
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/electrical/battery_amps[0]
+      SIZE 1.750000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED Mach
+      POS 3895.857178 -182.928574
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED Mach
+      POS 3895.000000 -125.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+  END_GROUP
+  GROUP ENG
+    SHOW_EQUAL 4.000000 Strato/777/displays/eicas_mode
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/ENG/eng_background
+      DATAREF 
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED N2_1
+      POS 3057.000000 902.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/N2_percent[0]
+      SIZE 1.650000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 4
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED N2_2
+      POS 3402.000000 901.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/N2_percent[1]
+      SIZE 1.650000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 4
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED ff_L
+      POS 2960.000000 666.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/fuel_flow_kg_sec[0]
+      SIZE 1.650000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 7.936641
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED ff_R
+      POS 3329.000000 666.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/fuel_flow_kg_sec[1]
+      SIZE 1.650000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 7.936641
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED oil_press_L
+      POS 2962.000000 480.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/oil_pressure_psi[0]
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED oil_press_R
+      POS 3320.000000 480.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/oil_pressure_psi[1]
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED oil_temp_L
+      POS 2963.000000 216.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED oil_temp_R
+      POS 3321.000000 216.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED oil_qty_L
+      POS 2970.000000 48.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 21.000000
+      DIGITS 2
+      DECIMALS 0
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED oil_qty_R
+      POS 3300.000000 48.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 21.000000
+      DIGITS 2
+      DECIMALS 0
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+  END_GROUP
+  GROUP FCTL
+    SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/FCTL/fctl_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+  END_GROUP
+  GROUP FUEL
+    SHOW_EQUAL 6.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/FUEL/fuel_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED fuel_total
+      POS 3537.000000 1019.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/aircraft/weight/acf_m_fuel_tot
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1000.000000 1.000000
+      DIGITS 4
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED fuel_L
+      POS 3015.000000 579.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF Strato/777/displays/l_fuel_lbs
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1000.000000 1.000000
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED fuel_R
+      POS 3916.000000 580.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF Strato/777/displays/r_fuel_lbs
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1000.000000 1.000000
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+  END_GROUP
+  GROUP GEAR
+    SHOW_EQUAL 7.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/GEAR/gear_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+  END_GROUP
+  GROUP HYD
+    SHOW_EQUAL 8.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/HYD/HYD_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+  END_GROUP
+  GROUP STAT
+    SHOW_EQUAL 9.000000 Strato/777/displays/eicas_mode
+    HIDE
+    gen_rotary Background
+      POS 3412.000000 413.000000
+      IMAGE EICAS lower/STAT/stat_background
+      DATAREF 
+      SIZE 1.350000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED Mach
+      POS 3292.000000 683.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED APU_EGT
+      POS 3649.000000 686.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit2/electrical/APU_EGT_c
+      SIZE 1.750000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED hyd_R_qty
+      POS 3862.857178 938.214294
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit/misc/hydraulic_quantity2
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 2
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED hyd_L_qty
+      POS 3207.000000 937.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/cockpit/misc/hydraulic_quantity
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 2
+      PERIOD_WIDTH 15
+      LED_ROWS 1
+
+    gen_LED Mach
+      POS 3206.571533 880.071899
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED Mach
+      POS 3872.000000 880.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED Mach
+      POS 3541.000000 937.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+    gen_LED Mach
+      POS 3538.000000 880.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SIZE 2.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 1
+
+  END_GROUP
+END_GROUP
+EFIS_map_s_HM map_s_HM.png
+  POS 2062.000000 1807.000000
+  DATAREF 
+  SIZE 6.600000
+  LIGHT_MODE MECHANICAL
+  LIGHT_RHEOSTAT 0
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 1.000000
+
+gen_rotary LCD Background
+  POS 3414.500000 1786.000000
+  IMAGE LCD_Background
+  DATAREF 
+  SIZE 2.000000
+  LIGHT_MODE GLASS_AUTO
+  LIGHT_RHEOSTAT 0
+  BUS_SRC 1
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 6.000000
+  DIGITS 1
+  ROTARY_TYPE NO_CLICK
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
+GROUP Upper Eicas
   GROUP_OPEN
+  gen_rotary Background
+    POS 3414.000000 1796.000000
+    IMAGE EICAS upper/eng_background
+    DATAREF 
+    SIZE 1.360000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_LED N1_1
+    POS 3014.000000 2293.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/engine/indicators/N1_percent[0]
+    SIZE 1.650000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 4
+    DECIMALS 1
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_LED N1_2
+    POS 3382.000000 2293.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/engine/indicators/N1_percent[1]
+    SIZE 1.650000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 4
+    DECIMALS 1
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_LED EGT_1
+    POS 3020.000000 1958.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
+    SIZE 1.650000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 4
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_LED EGT_2
+    POS 3389.000000 1958.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
+    SIZE 1.650000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 4
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_LED fuel
+    POS 3921.000000 1197.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF Strato/777/displays/total_fuel_lbs
+    SIZE 1.500000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1000.000000 1.000000
+    DIGITS 4
+    DECIMALS 1
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+END_GROUP
+GROUP Captain PFD
   gen_rotary template
     POS 650.500000 1819.000000
     IMAGE PFD/_Diagram
@@ -42030,317 +42816,7 @@ GROUP Captain PFD
 
     END_GROUP
   END_GROUP
-  GROUP AFDS
-    GROUP_OPEN
-    gen_rotary AFDS_background
-      POS 595.500000 2381.500000
-      IMAGE PFD/AFDS_mode/afds_background
-      DATAREF 
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary AP
-      POS 594.500000 2217.500000
-      IMAGE PFD/AFDS/ap
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autopilot_on
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary lnav
-      POS 594.000000 2398.500000
-      IMAGE PFD/AFDS_mode/roll/lnav
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/gpss_status
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary hdg hold
-      POS 596.000000 2398.500000
-      IMAGE PFD/AFDS_mode/roll/hdg_hold
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_hold_status
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary hdg sel
-      POS 596.000000 2398.500000
-      IMAGE PFD/AFDS_mode/roll/hdg_sel
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_status
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary loc
-      POS 595.500000 2398.500000
-      IMAGE PFD/AFDS_mode/roll/loc
-      DATAREF 
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary alt
-      POS 837.500000 2398.500000
-      IMAGE PFD/AFDS_mode/pitch/alt
-      DATAREF 
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary gs
-      POS 838.000000 2398.500000
-      IMAGE PFD/AFDS_mode/pitch/gs
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/glideslope_status
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary vs
-      POS 838.000000 2398.500000
-      IMAGE PFD/AFDS_mode/pitch/vs
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/vvi_status
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary idle
-      POS 352.000000 2398.500000
-      IMAGE PFD/AFDS_mode/autothrottle/idle
-      DATAREF 
-      SHOW_EQUAL 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary flt dir
-      POS 589.500000 2217.500000
-      IMAGE PFD/AFDS/flt_dir
-      DATAREF 
-      SHOW_LESS 0.000000 sim/cockpit2/autopilot/autopilot_on
-      SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/flight_director
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary gs armed
-      POS 838.000000 2361.500000
-      IMAGE PFD/AFDS_mode/pitch/armed/gs_armed
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/glideslope_status
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary THR REF
-      POS 351.500000 2398.500000
-      IMAGE PFD/AFDS_mode/autothrottle/thr_ref
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/autothrottle_enabled
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary SPD
-      POS 351.500000 2398.500000
-      IMAGE PFD/AFDS_mode/autothrottle/spd
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-  END_GROUP
   GROUP VSI
-    GROUP_OPEN
     gen_rotary VSI_background
       POS 1253.500000 1799.500000
       IMAGE PFD/vertical_speed_indicator/vsi_background
@@ -42429,7 +42905,6 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP ASI
-    GROUP_OPEN
     gen_rotary ASI_background
       POS 133.500000 1799.500000
       IMAGE PFD/alt_spd_background
@@ -42505,7 +42980,314 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP ALT
-    GROUP_OPEN
+    GROUP FMA
+      gen_rotary FMA_background
+        POS 595.500000 2381.500000
+        IMAGE PFD/AFDS_mode/afds_background
+        DATAREF 
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary AP
+        POS 594.500000 2217.500000
+        IMAGE PFD/AFDS/ap
+        DATAREF 
+        SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autopilot_on
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary lnav
+        POS 594.000000 2398.500000
+        IMAGE PFD/AFDS_mode/roll/lnav
+        DATAREF 
+        SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/gpss_status
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary hdg hold
+        POS 596.000000 2398.500000
+        IMAGE PFD/AFDS_mode/roll/hdg_hold
+        DATAREF 
+        SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_hold_status
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary hdg sel
+        POS 596.000000 2398.500000
+        IMAGE PFD/AFDS_mode/roll/hdg_sel
+        DATAREF 
+        SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_status
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary loc
+        POS 595.500000 2398.500000
+        IMAGE PFD/AFDS_mode/roll/loc
+        DATAREF 
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary alt
+        POS 837.500000 2398.500000
+        IMAGE PFD/AFDS_mode/pitch/alt
+        DATAREF 
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary gs
+        POS 838.000000 2398.500000
+        IMAGE PFD/AFDS_mode/pitch/gs
+        DATAREF 
+        SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/glideslope_status
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary vs
+        POS 838.000000 2398.500000
+        IMAGE PFD/AFDS_mode/pitch/vs
+        DATAREF 
+        SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/vvi_status
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary idle
+        POS 352.000000 2398.500000
+        IMAGE PFD/AFDS_mode/autothrottle/idle
+        DATAREF 
+        SHOW_EQUAL 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary flt dir
+        POS 589.500000 2217.500000
+        IMAGE PFD/AFDS/flt_dir
+        DATAREF 
+        SHOW_LESS 0.000000 sim/cockpit2/autopilot/autopilot_on
+        SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/flight_director
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary gs armed
+        POS 838.000000 2361.500000
+        IMAGE PFD/AFDS_mode/pitch/armed/gs_armed
+        DATAREF 
+        SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/glideslope_status
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary THR REF
+        POS 351.500000 2398.500000
+        IMAGE PFD/AFDS_mode/autothrottle/thr_ref
+        DATAREF 
+        SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/autothrottle_enabled
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary SPD
+        POS 351.500000 2398.500000
+        IMAGE PFD/AFDS_mode/autothrottle/spd
+        DATAREF 
+        SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_enabled
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+    END_GROUP
     gen_rotary alt_background
       POS 1073.500000 1799.500000
       IMAGE PFD/alt_spd_background
@@ -42767,739 +43549,6 @@ GROUP First Officer PFD
 END_GROUP
 GROUP First Officer ND
   GROUP_OPEN
-END_GROUP
-GROUP EICAS
-  HIDE
-  GROUP Lower
-    SHOW_LESS 9.000000 Strato/777/displays/eicas_mode
-    HIDE
-    GROUP_OPEN
-    GROUP AIR
-      SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
-      HIDE
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/AIR/air_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    GROUP DOOR
-      SHOW_EQUAL 2.000000 Strato/777/displays/eicas_mode
-      HIDE
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/ELEC/elec_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    GROUP ELEC
-      SHOW_EQUAL 3.000000 Strato/777/displays/eicas_mode
-      HIDE
-      GROUP_OPEN
-      gen_rotary Background
-        POS 3410.000000 413.000000
-        IMAGE EICAS lower/ELEC/elec_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_LED bat_volts
-        POS 3037.000000 -123.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/electrical/battery_voltage_actual_volts[0]
-        SIZE 1.750000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED bat_amps
-        POS 3039.142822 -182.785721
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/electrical/battery_amps[0]
-        SIZE 1.750000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED Mach
-        POS 3895.857178 -182.928574
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED Mach
-        POS 3895.000000 -125.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-    END_GROUP
-    GROUP ENG
-      SHOW_EQUAL 4.000000 Strato/777/displays/eicas_mode
-      GROUP_OPEN
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/ENG/eng_background
-        DATAREF 
-        SIZE 1.350000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_LED N2_1
-        POS 3057.000000 902.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/N2_percent[0]
-        SIZE 1.650000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 4
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED N2_2
-        POS 3402.000000 901.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/N2_percent[1]
-        SIZE 1.650000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 4
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED ff_L
-        POS 2960.000000 666.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/fuel_flow_kg_sec[0]
-        SIZE 1.650000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 7.936641
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED ff_R
-        POS 3329.000000 666.214478
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/fuel_flow_kg_sec[1]
-        SIZE 1.650000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 7.936641
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED oil_press_L
-        POS 2962.000000 480.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/oil_pressure_psi[0]
-        SIZE 1.500000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED oil_press_R
-        POS 3320.000000 480.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/oil_pressure_psi[1]
-        SIZE 1.500000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED oil_temp_L
-        POS 2963.000000 216.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
-        SIZE 1.500000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED oil_temp_R
-        POS 3321.714355 216.214951
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
-        SIZE 1.500000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED oil_qty_L
-        POS 2970.000000 48.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
-        SIZE 1.500000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 21.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED oil_qty_R
-        POS 3300.571533 48.213509
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
-        SIZE 1.500000
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 21.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-    END_GROUP
-    GROUP FCTL
-      SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
-      HIDE
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/FCTL/fctl_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    GROUP FUEL
-      SHOW_EQUAL 6.000000 Strato/777/displays/eicas_mode
-      HIDE
-      GROUP_OPEN
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/FUEL/fuel_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_LED fuel_total
-        POS 3537.000000 1019.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/aircraft/weight/acf_m_fuel_tot
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1000.000000 1.000000
-        DIGITS 4
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED fuel_L
-        POS 3015.000000 579.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF Strato/777/displays/l_fuel_lbs
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1000.000000 1.000000
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED fuel_R
-        POS 3916.000000 580.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF Strato/777/displays/r_fuel_lbs
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1000.000000 1.000000
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-    END_GROUP
-    GROUP GEAR
-      SHOW_EQUAL 7.000000 Strato/777/displays/eicas_mode
-      HIDE
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/GEAR/gear_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    GROUP HYD
-      SHOW_EQUAL 8.000000 Strato/777/displays/eicas_mode
-      HIDE
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/HYD/HYD_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    GROUP STAT
-      SHOW_EQUAL 9.000000 Strato/777/displays/eicas_mode
-      HIDE
-      GROUP_OPEN
-      gen_rotary Background
-        POS 3412.000000 413.000000
-        IMAGE EICAS lower/STAT/stat_background
-        DATAREF 
-        SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_LED Mach
-        POS 3292.000000 683.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED APU_EGT
-        POS 3649.000000 686.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit2/electrical/APU_EGT_c
-        SIZE 1.750000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED hyd_R_qty
-        POS 3862.857178 938.214294
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit/misc/hydraulic_quantity2
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 2
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED hyd_L_qty
-        POS 3207.000000 937.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/cockpit/misc/hydraulic_quantity
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 2
-        PERIOD_WIDTH 15
-        LED_ROWS 1
-
-      gen_LED Mach
-        POS 3206.571533 880.071899
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED Mach
-        POS 3872.000000 880.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED Mach
-        POS 3541.000000 937.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-      gen_LED Mach
-        POS 3538.000000 880.500000
-        IMAGE LED_2.36R.xxxxx0.white
-        DATAREF sim/flightmodel/misc/machno
-        SIZE 2.000000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 3
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 1
-
-    END_GROUP
-  END_GROUP
-  GROUP Upper
-    GROUP_OPEN
-    gen_rotary Background
-      POS 3410.000000 1800.000000
-      IMAGE EICAS upper/eng_background
-      DATAREF 
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_LED N1_1
-      POS 3014.000000 2294.500000
-      IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/cockpit2/engine/indicators/N1_percent[0]
-      SIZE 1.650000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 360.000000 360.000000
-      DIGITS 4
-      DECIMALS 1
-      PERIOD_WIDTH 15
-      LED_ROWS 1
-
-    gen_LED N1_2
-      POS 3380.000000 2295.785645
-      IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/cockpit2/engine/indicators/N1_percent[1]
-      SIZE 1.650000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 360.000000 360.000000
-      DIGITS 4
-      DECIMALS 1
-      PERIOD_WIDTH 15
-      LED_ROWS 1
-
-    gen_LED EGT_1
-      POS 3019.714111 1965.500000
-      IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
-      SIZE 1.650000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 360.000000 360.000000
-      DIGITS 4
-      DECIMALS 0
-      PERIOD_WIDTH 15
-      LED_ROWS 1
-
-    gen_LED EGT_2
-      POS 3385.857178 1965.214233
-      IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
-      SIZE 1.650000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 360.000000 360.000000
-      DIGITS 4
-      DECIMALS 0
-      PERIOD_WIDTH 15
-      LED_ROWS 1
-
-    gen_LED fuel
-      POS 3918.000000 1210.500000
-      IMAGE LED_2.36R.xxxxx0.white
-      DATAREF Strato/777/displays/total_fuel_lbs
-      SIZE 1.500000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1000.000000 1.000000
-      DIGITS 4
-      DECIMALS 1
-      PERIOD_WIDTH 15
-      LED_ROWS 1
-
-  END_GROUP
 END_GROUP
 GROUP Radios
   GROUP COM1
@@ -43853,10 +43902,10 @@ GROUP FMSs
 END_GROUP
 GROUP Isfd
   gen_rotary Background
-    POS 3830.000000 3576.000000
+    POS 3836.142822 3564.000000
     IMAGE isfd_2_not_alligned
     DATAREF 
-    SIZE 0.500000
+    SIZE 0.520000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1

@@ -49,8 +49,6 @@ local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 --**                               FIND X-PLANE DATAREFS                             **--
 --*************************************************************************************--
 
-simDR_shadow			                     = find_dataref("sim/private/controls/shadow/total_fade_ratio")
-
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 
@@ -625,7 +623,6 @@ end
 
 function flight_start()
    print("Lua Loaded")
-   simDR_shadow = 0.8
 end
 
 function flight_crash()

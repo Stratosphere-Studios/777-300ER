@@ -49,6 +49,8 @@ simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/
 simDR_onGround                            = find_dataref("sim/flightmodel/failures/onground_any")
 simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")
 
+simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
+simDR_shadow			                     = find_dataref("sim/private/controls/shadow/total_fade_ratio")
 --replace the up, down, and toggle. make toggle run replaced up and down (new gear up/down tilt gear)
 
 --*************************************************************************************--
@@ -166,11 +168,16 @@ simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/l
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
 
---function aircraft_load()
+function aircraft_load()
+   print("misc loaded")
+end
 
 --function aircraft_unload()
 
---function flight_start()
+function flight_start()
+   simDR_shadow = 0.8
+   simDR_camera_fov = 40
+end
 
 --function flight_crash()
 
