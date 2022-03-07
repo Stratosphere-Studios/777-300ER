@@ -643,7 +643,7 @@ function after_physics()
    end
 
    for i = 1, 7 do
-      B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 20)
+      B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 10)
    end
 
 end
