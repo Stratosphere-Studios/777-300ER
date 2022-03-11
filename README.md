@@ -87,3 +87,11 @@ Potatohead123: Landing gear, cockpit, engines.
 Phil Paysse: Fuselage and wings.
 
 [Spherrrical](https://github.com/Spherrrical/): Graphic design, Discord bot.
+
+**Liveries:**
+
+A.joshua - Air India VT-ALJ, ANA JA731A, Korean Air (HL8007)
+
+CptTrxpic - Japan Airlines JA731A
+
+SIAAviationYT - Philippine Airlines RP-C7775, Qatar Airways A7-BAL, Singapore Airlines 9V-SWM
