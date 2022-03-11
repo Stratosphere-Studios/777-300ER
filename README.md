@@ -24,7 +24,7 @@ A: As we are very early in development, and have no release date at this time.
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries for the 777 from from our repository [here](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft.
+A: You can download liveries that aren't included with the 777 from from our repository [here](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft. If you are a livery painter and want us to add your livery to the repository, please let us know on the X-Plane forums, Discord, or in a Github issue on the livery repository and we'll add it.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
