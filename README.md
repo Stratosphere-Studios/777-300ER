@@ -22,9 +22,9 @@ Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studi
 
 A: As we are very early in development, and have no release date at this time.
 
-**Q: Where can I download official liveries?**
+**Q: Where can I download liveries?**
 
-A: You can download the official Stratosphere livery for various aircraft, including this 777, from our repository [here](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository will also include other liveries for the 777 aside from the Stratosphere one in the future.
+A: You can download liveries for the 777 from from our repository [here](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
@@ -90,7 +90,7 @@ Phil Paysse: Fuselage and wings.
 
 **Liveries:**
 
-A.joshua - Air India VT-ALJ, ANA JA731A, Korean Air (HL8007)
+A.joshua - Air India VT-ALJ, ANA JA731A, Korean Air HL8007
 
 CptTrxpic - Japan Airlines JA731A
 
