@@ -90,7 +90,7 @@ Phil Paysse: Fuselage and wings.
 
 **Liveries:**
 
-A.joshua - Air India VT-ALJ, ANA JA731A, Korean Air HL8007
+A.joshua - Air India VT-ALJ, ANA JA792A, Korean Air HL8007
 
 CptTrxpic - Japan Airlines JA731A
 
