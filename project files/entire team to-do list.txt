@@ -23,16 +23,14 @@
 - Crazytimtimtim
   - manipulators (using Noah's refs)
   - replace default toggle command to command up and down default cmds (3 total cmds replaced, indiv up and down cmds will just set the default gear handle pos dr)
-  - new flightmodel (control geometry)
   - custom fms
-  - implement new animation code
   - check if landing light/taxi/rwy turnoff dimming similar to 744
   - clock code
   - fix flight director switch code
   - custom RAT dataref (use anim tool with target being the default dr)
   - rename cmds/drs for toggle switch to "toggle_switch"
   - rest of displays (fcom is a good ref!)
-  - code adiru alignment by longitude - adiru_alignment_time = 5+(longitude_degrees / (90/11)) (equator - 5 mins, poles - 15 mins. Check vids online. Include align time on nd.
+  - code adiru, Check vids online. Include align time on nd. Formula is in xt.flightInstruments.lua
   - idea for bank limit knob - 6 pos. anim pos dr, set default dr using that UNLESS in auto. auto varies btw 15-25 deg depending on true airspeed
   - ALL THE SYSTEMS AHHHH (match fcom and CBTs!)
 

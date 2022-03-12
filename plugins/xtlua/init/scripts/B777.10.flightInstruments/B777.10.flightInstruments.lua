@@ -22,7 +22,7 @@ function deferred_dataref(name,type,notifier)
 end
 
 --*************************************************************************************--
---**                             CREATE CUSTOM COMMANDS                              **--
+--**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
 
 B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_switch/mcp/MAGtrk", "Switch between true and magnetic heading", B777_mcp_magTRK_CMDhandler)
@@ -38,9 +38,12 @@ B777CMD_efis_lEicas_gear             = deferred_command("Strato/B777/button_swit
 B777CMD_efis_lEicas_fctl             = deferred_command("Strato/B777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
 B777CMD_efis_lEicas_cam              = deferred_command("Strato/B777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
 
+B777CMD_fltInst_adiru_switch         = deferred_command("Strato/B777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
+
 --*************************************************************************************--
---**                             CREATE CUSTOM DATAREFS                              **--
+--**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
+
 B777DR_total_fuel_lbs                  = deferred_dataref("Strato/777/displays/total_fuel_lbs", "number")
 B777DR_r_fuel_lbs                      = deferred_dataref("Strato/777/displays/r_fuel_lbs", "number")
 B777DR_l_fuel_lbs                      = deferred_dataref("Strato/777/displays/l_fuel_lbs", "number")
@@ -59,3 +62,6 @@ B777DR_displayed_com2_stby_khz         = deferred_dataref("Strato/777/displays/c
 
 B777DR_vs_capt_indicator               = deferred_dataref("Strato/777/displays/vvi_capt", "number")
 B777DR_ias_capt_indicator              = deferred_dataref("Strato/777/displays/ias_capt", "number")
+
+B777DR_adiru_aligned                   = deferred_dataref("Strato/777/fltInst/adiru_aligned", "number")
+B777DR_adiru_align_time_remaining      = deferred_dataref("Strato/777/fltInst_adiru_align_time_remaining", "number")
