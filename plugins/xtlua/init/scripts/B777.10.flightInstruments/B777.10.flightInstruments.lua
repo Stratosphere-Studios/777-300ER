@@ -64,4 +64,4 @@ B777DR_vs_capt_indicator               = deferred_dataref("Strato/777/displays/v
 B777DR_ias_capt_indicator              = deferred_dataref("Strato/777/displays/ias_capt", "number")
 
 B777DR_adiru_aligned                   = deferred_dataref("Strato/777/fltInst/adiru_aligned", "number")
-B777DR_adiru_align_time_remaining      = deferred_dataref("Strato/777/fltInst_adiru_align_time_remaining", "number")
+B777DR_adiru_align_time_remaining_sec  = deferred_dataref("Strato/777/fltInst_adiru_align_time_remaining_sec", "number")
