@@ -15,3 +15,16 @@ ils/dme info
 hdg indicator
 
 vspeed indicator
+
+
+          EFIS_map_t_HM map_t_HM.png
+            POS 1023.000000 -95.000000
+            DATAREF 
+            SIZE 3.500000
+            COPILOT
+            HIDE
+            LIGHT_MODE MECHANICAL
+            LIGHT_RHEOSTAT 3
+            BUS_SRC 4
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 1.000000
