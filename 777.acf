@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -78.219352722
+P _door/0/_ang_now -77.808303833
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 78.219352722
+P _door/1/_ang_now 77.808303833
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 78.219352722
+P _door/2/_ang_now 77.808303833
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 51.199806213
+P _door/3/_ang_now 46.437660217
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -51.199806213
+P _door/4/_ang_now -46.437660217
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -134,7 +134,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now -69.252540588
+P _door/5/_ang_now -66.996788025
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -142,7 +142,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 69.252540588
+P _door/6/_ang_now 66.996788025
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -48.505081177
+P _door/7/_ang_now -43.993576050
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 48.505081177
+P _door/8/_ang_now 43.993576050
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -78.219352722
+P _door/9/_ang_now -77.808303833
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,10 +213,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 104.928398132
+P _gear/0/_lonN 104.376991272
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
-P _gear/0/_stat_def 0.387206972
+P _gear/0/_stat_def 0.387206912
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -14.308418274
+P _gear/1/_axiN -14.233225822
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -78.219352722
+P _gear/1/_latN -77.808303833
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN 7.216207027
+P _gear/1/_lonN 7.130989552
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087792993
+P _gear/1/_stat_def 1.087793231
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 14.308418274
+P _gear/2/_axiN 14.233225822
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 78.219352722
+P _gear/2/_latN 77.808303833
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN 7.216207027
+P _gear/2/_lonN 7.130989552
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087792993
+P _gear/2/_stat_def 1.087793231
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -41790,9 +41790,31 @@ gen_rotary LCD Background
   CLICK_DX 0
   CLICK_DY 0
 
+gen_rotary Layout
+  POS 2041.500000 1786.000000
+  IMAGE layout
+  DATAREF 
+  SHOW_EQUAL 1.000000 testNum
+  SIZE 3.980000
+  LIGHT_MODE GLASS_AUTO
+  LIGHT_RHEOSTAT 0
+  BUS_SRC 1
+  KEY_FRAME 0.000000 0.000000 1.000000
+  KEY_FRAME 1.000000 6.000000
+  DIGITS 1
+  ROTARY_TYPE NO_CLICK
+  CLICK_RADIUS 10.000000
+  CLICK_RADIUS_DY 0.000000
+  OFFSET 0.000000
+  STEP1 1.000000
+  STEP2 1.000000
+  CURSOR DEFAULT
+  CLICK_DX 0
+  CLICK_DY 0
+
 GROUP Captain ND
   GROUP ADIRU Aligned
-    SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru_aligned
+    SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
     EFIS_map_s_HM map_s_HM.png
       POS 2062.000000 1807.000000
       DATAREF 
@@ -41803,13 +41825,107 @@ GROUP Captain ND
       KEY_FRAME 1.000000 1.000000
 
   END_GROUP
+  gen_text GS
+    POS 1480.500000 2414.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/GS[0]
+    SIZE 1.750000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -50
+    OFFSET_Y -5.000000
+
+  gen_rotary Heading Box
+    POS 2049.000000 2434.500000
+    IMAGE hdg_box
+    DATAREF 
+    SHOW_LESS 1.000000 Strato/777/fltInst/adiru/status
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary hdg_fail
+    POS 2050.000000 2437.500000
+    IMAGE PFD/failure_flags/hdg_fail
+    DATAREF 
+    SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
+    SIZE 1.350000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary Aircraft Triangle
+    POS 2049.500000 1293.000000
+    IMAGE aircraft_triangle
+    DATAREF 
+    SHOW_LESS 1.000000 Strato/777/fltInst/adiru/status
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_LED Ground Speed
+    POS 1513.000000 2431.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/flightmodel/position/groundspeed[0]
+    SIZE 1.650000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 2
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
   GROUP While ADIRU Alignin
-    SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/aligning
+    SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
     gen_text TIME TO ALIGN
-      POS 1604.000000 2380.500000
-      IMAGE TXT.1.24.white
-      DATAREF 
-      SIZE 2.500000
+      POS 1490.500000 2360.000000
+      IMAGE TXT.2.28.white
+      DATAREF Strato/777/displays/txt/TIME_TO_ALIGN[0]
+      SIZE 2.000000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41819,10 +41935,10 @@ GROUP Captain ND
       OFFSET_Y -5.000000
 
     gen_LED align time min
-      POS 1595.000000 2317.500000
+      POS 1458.000000 2319.500000
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF Strato/777/fltInst/adiru/time_remaining_min[0]
-      SIZE 1.650000
+      SIZE 1.500000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41834,10 +41950,10 @@ GROUP Captain ND
       LED_ROWS 1
 
     gen_LED align time sec
-      POS 1677.000000 2317.500000
+      POS 1538.000000 2319.500000
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF Strato/777/fltInst/adiru/time_remaining_sec[0]
-      SIZE 1.650000
+      SIZE 1.500000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41849,10 +41965,10 @@ GROUP Captain ND
       LED_ROWS 1
 
     gen_LED pd1
-      POS 1604.000000 2349.500000
+      POS 1475.000000 2349.500000
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF [0]
-      SIZE 1.650000
+      SIZE 1.500000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41864,10 +41980,10 @@ GROUP Captain ND
       LED_ROWS 1
 
     gen_LED pd2
-      POS 1606.000000 2322.500000
+      POS 1475.000000 2322.500000
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF [0]
-      SIZE 1.650000
+      SIZE 1.500000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41877,6 +41993,19 @@ GROUP Captain ND
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 1
+
+    gen_text ---
+      POS 2124.500000 2420.000000
+      IMAGE TXT.2.28.white
+      DATAREF Strato/777/displays/txt/---[0]
+      SIZE 2.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 1.000000
+      OFFSET_X -50
+      OFFSET_Y -5.000000
 
   END_GROUP
 END_GROUP
@@ -42560,11 +42689,92 @@ gen_rotary LCD Background
   CLICK_DY 0
 
 GROUP Upper Eicas
+  GROUP_OPEN
   gen_rotary Background
     POS 3414.000000 1796.000000
     IMAGE EICAS upper/eng_background
     DATAREF 
     SIZE 1.360000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_LED TAT
+    POS 2928.714355 2442.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/temperature/outside_air_LE_temp_degc[0]
+    SIZE 1.650000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 2
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_rotary TAT Positive
+    POS 2861.000000 2441.500000
+    IMAGE EICAS upper/TAT_posSign
+    DATAREF 
+    SHOW_GREATER 0.000000 sim/cockpit2/temperature/outside_air_LE_temp_degc
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary TAT Negative
+    POS 2859.500000 2442.500000
+    IMAGE EICAS upper/TAT_negSign
+    DATAREF 
+    SHOW_LESS -0.010000 sim/cockpit2/temperature/outside_air_LE_temp_degc
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary TAT C
+    POS 2956.000000 2437.500000
+    IMAGE EICAS upper/TAT_degC_label
+    DATAREF 
+    SIZE 2.500000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -42662,6 +42872,7 @@ GROUP Captain PFD
     POS 650.500000 1819.000000
     IMAGE PFD/_Diagram
     DATAREF 
+    SHOW_EQUAL 1.000000 testNum
     SIZE 1.950000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
@@ -43426,9 +43637,10 @@ GROUP Captain PFD
     DIGITS 3
 
   GROUP ADIRU Not Aligned
-    SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru_aligned
+    SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
+    GROUP_OPEN
     gen_rotary hdg_fail
-      POS 593.000000 1300.500000
+      POS 594.000000 1199.500000
       IMAGE PFD/failure_flags/hdg_fail
       DATAREF 
       SIZE 1.350000
@@ -43450,7 +43662,8 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP ADIRU Aligned
-    SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/aligned
+    SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
+    GROUP_OPEN
     gen_rotary Compass Background
       POS 590.000000 1261.000000
       IMAGE PFD/Heading Track/HdgTrackBgnd
@@ -43510,7 +43723,7 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP While ADIRU Alignin
-    SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/aligning
+    SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
     gen_rotary Compass Background
       POS 590.000000 1258.000000
       IMAGE PFD/Heading Track/HdgTrackBgnd

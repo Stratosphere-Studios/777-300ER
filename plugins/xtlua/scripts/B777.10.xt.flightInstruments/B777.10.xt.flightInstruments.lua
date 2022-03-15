@@ -94,10 +94,14 @@ B777DR_displayed_com2_stby_khz         = deferred_dataref("Strato/777/displays/c
 B777DR_vs_capt_indicator               = deferred_dataref("Strato/777/displays/vvi_capt", "number")
 B777DR_ias_capt_indicator              = deferred_dataref("Strato/777/displays/ias_capt", "number")
 
-B777DR_adiru_aligned                   = deferred_dataref("Strato/777/fltInst/adiru_aligned", "number")
-B777DR_adiru_aligning                  = deferred_dataref("Strato/777/fltInst/adiru/aligning", "number")
+B777DR_adiru_status                    = deferred_dataref("Strato/777/fltInst/adiru/status", "number") -- 0 = off, 1 = aligning 2 = aligned
 B777DR_adiru_time_remaining_min        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_min", "number")
 B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_sec", "number")
+
+-- Temporary datarefs for display text until custom textures are made
+B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")	--
+B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
+B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/txt/---", "string")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -116,84 +120,10 @@ B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/ad
 --*************************************************************************************--
 
 function B777_mcp_magTRK_CMDhandler(phase, duration)
-	if phase == 0 then
-		B777DR_hdg_mode = 1 - B777DR_hdg_mode
-	end
+	if phase == 0 then B777DR_hdg_mode = 1 - B777DR_hdg_mode end
 end
 
-function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(4)
-	end
-end
 
-function B777_efis_lEicas_stat_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(9)
-	end
-end
-
-function B777_efis_lEicas_elec_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(3)
-	end
-end
-
-function B777_efis_lEicas_hyd_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(8)
-	end
-end
-
-function B777_efis_lEicas_fuel_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(6)
-	end
-end
-
-function B777_efis_lEicas_air_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(1)
-	end
-end
-
-function B777_efis_lEicas_door_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(2)
-	end
-end
-
-function B777_efis_lEicas_gear_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(7)
-	end
-end
-
-function B777_efis_lEicas_fctl_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(5)
-	end
-end
-
-function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(4)
-	end
-end
-
-function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
-	if phase == 0 then
-		setEicasPage(10)
-	end
-end
-
-function setEicasPage(id)
-	if B777DR_eicas_mode == id then
-		B777DR_eicas_mode = 0
-	else
-		B777DR_eicas_mode = id
-	end
-end
 
 function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 	if phase == 0 then
@@ -202,17 +132,38 @@ function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 			if simDR_ias_capt <= 30 then run_after_time(B777_adiru_off, 2) end					-- turn adiru off
 		elseif B777DR_ovhd_aft_button_target[1] == 0 then
 			B777DR_ovhd_aft_button_target[1] = 1												-- move button to on
-			if B777DR_adiru_aligned == 0 and B777DR_adiru_aligning == 0 then
+			if simDR_groundSpeed < 1 then
 				B777_adiru_time_remaining_min = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
-				B777DR_adiru_aligning = t1
+				B777DR_adiru_status = 1
 				countdown()
 			end
 		end
 	end
 end
 
+function B777_fltInst_adiru_align_now_CMDhandler(phase, duration)
+	if phase == 0 then B777_align_adiru() end
+end
+
+--*************************************************************************************--
+--**                             CREATE CUSTOM COMMANDS                               **--
+--*************************************************************************************--
+
+B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_switch/mcp/MAGtrk", "Switch between true and magnetic heading", B777_mcp_magTRK_CMDhandler)
+
+B777CMD_fltInst_adiru_switch         = deferred_command("Strato/B777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
+
+B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/B777/adiru_align_now", "Align ADIRU Instantly", B777_fltInst_adiru_align_now_CMDhandler)
+
+--*************************************************************************************--
+--**                                      CODE                                       **--
+--*************************************************************************************--
+
+--- Clocks ----------
+
+--- ADIRU ----------
 function countdown()
-	if B777DR_adiru_aligning == 1  then
+	if B777DR_adiru_status == 1  then
 		if B777_adiru_time_remaining_min > 1 then
 			B777_adiru_time_remaining_min = B777_adiru_time_remaining_min - 1
 			run_after_time(countdown2, 1)
@@ -228,41 +179,14 @@ function countdown2()
 end
 
 function B777_adiru_off()
-	B777DR_adiru_aligned = 0
+	B777DR_adiru_status = 0
 	B777_adiru_time_remaining_min = 0
-	B777DR_adiru_aligning = 0
 end
 
 function B777_align_adiru()
-	B777DR_adiru_aligned = 1
+	B777DR_adiru_status = 2
 	B777_adiru_time_remaining_min = 0
-	B777DR_adiru_aligning = 0
 end
-
---*************************************************************************************--
---**                             CREATE CUSTOM COMMANDS                               **--
---*************************************************************************************--
-
-B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_switch/mcp/MAGtrk", "Switch between true and magnetic heading", B777_mcp_magTRK_CMDhandler)
-
-B777CMD_efis_lEicas_eng              = deferred_command("Strato/B777/button_switch/efis/lEicas/eng", "Lower Eicas ENG Page", B777_efis_lEicas_eng_switch_CMDhandler)
-B777CMD_efis_lEicas_stat             = deferred_command("Strato/B777/button_switch/efis/lEicas/stat", "Lower Eicas STAT Page", B777_efis_lEicas_stat_switch_CMDhandler)
-B777CMD_efis_lEicas_elec             = deferred_command("Strato/B777/button_switch/efis/lEicas/elec", "Lower Eicas ELEC Page", B777_efis_lEicas_elec_switch_CMDhandler)
-B777CMD_efis_lEicas_hyd              = deferred_command("Strato/B777/button_switch/efis/lEicas/hyd", "Lower Eicas HYD Page", B777_efis_lEicas_hyd_switch_CMDhandler)
-B777CMD_efis_lEicas_fuel             = deferred_command("Strato/B777/button_switch/efis/lEicas/fuel", "Lower Eicas FUEL Page", B777_efis_lEicas_fuel_switch_CMDhandler)
-B777CMD_efis_lEicas_air              = deferred_command("Strato/B777/button_switch/efis/lEicas/air", "Lower Eicas AIR Page", B777_efis_lEicas_air_switch_CMDhandler)
-B777CMD_efis_lEicas_door             = deferred_command("Strato/B777/button_switch/efis/lEicas/door", "Lower Eicas DOOR Page", B777_efis_lEicas_door_switch_CMDhandler)
-B777CMD_efis_lEicas_gear             = deferred_command("Strato/B777/button_switch/efis/lEicas/gear", "Lower Eicas GEAR Page", B777_efis_lEicas_gear_switch_CMDhandler)
-B777CMD_efis_lEicas_fctl             = deferred_command("Strato/B777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
-B777CMD_efis_lEicas_cam              = deferred_command("Strato/B777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
-
-B777CMD_fltInst_adiru_switch         = deferred_command("Strato/B777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
-
---*************************************************************************************--
---**                                      CODE                                       **--
---*************************************************************************************--
-
---Clocks
 
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
@@ -276,9 +200,14 @@ end
 
 function flight_start()
 	B777DR_eicas_mode = 4
+	
 	if simDR_startup_running == 1 then
 		B777_align_adiru()
 	end
+
+	B777DR_txt_GS            = "GS"
+	B777DR_txt_TIME_TO_ALIGN = "TIME TO ALIGN"
+	B777DR_txt_ddd           = "---"
 end
 
 --function flight_crash()
@@ -318,7 +247,7 @@ function after_physics()
 		B777DR_ias_capt_indicator = simDR_ias_capt
 	end
 
-	if simDR_groundSpeed >= 1 and B777DR_adiru_aligning == 1 then
+	if simDR_groundSpeed >= 1 and B777DR_adiru_status == 1 then
 		stop_timer(B777_align_adiru)
 		B777_adiru_off()
 	end
@@ -326,7 +255,7 @@ function after_physics()
 	B777DR_adiru_time_remaining_min = string.format("%2.0f", math.floor(B777_adiru_time_remaining_min / 60))
 	B777DR_adiru_time_remaining_sec = math.floor(B777_adiru_time_remaining_min / 60 % 1 * 60)
 
-	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
+--	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
 end
 
