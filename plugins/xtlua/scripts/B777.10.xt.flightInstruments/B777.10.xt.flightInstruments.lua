@@ -37,10 +37,13 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 local B777_kgs_to_lbs = 2.2046226218
+local B777_adiru_time_remaining_min = 0
 
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
+
+simDR_startup_running                  = find_dataref("sim/operation/prefs/startup_running")
 
 simDR_magHDG                           = find_dataref("sim/cockpit/autopilot/heading_mag")
 simDR_trueHDG                          = find_dataref("sim/cockpit/autopilot/heading")
@@ -61,8 +64,6 @@ simDR_latitude                         = find_dataref("sim/flightmodel/position/
 simDR_groundSpeed                      = find_dataref("sim/flightmodel/position/groundspeed")
 
 B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
-
-
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -94,7 +95,9 @@ B777DR_vs_capt_indicator               = deferred_dataref("Strato/777/displays/v
 B777DR_ias_capt_indicator              = deferred_dataref("Strato/777/displays/ias_capt", "number")
 
 B777DR_adiru_aligned                   = deferred_dataref("Strato/777/fltInst/adiru_aligned", "number")
-B777DR_adiru_align_time_remaining_sec  = deferred_dataref("Strato/777/fltInst_adiru_align_time_remaining_sec", "number")
+B777DR_adiru_aligning                  = deferred_dataref("Strato/777/fltInst/adiru/aligning", "number")
+B777DR_adiru_time_remaining_min        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_min", "number")
+B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_sec", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -192,27 +195,26 @@ function setEicasPage(id)
 	end
 end
 
-local B777_adiru_aligning = false
-
 function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 	if phase == 0 then
 		if B777DR_ovhd_aft_button_target[1] == 1 then
 			B777DR_ovhd_aft_button_target[1] = 0												-- move button to off
-			if simDR_ias_capt <= 30 then run_after_time(B777_adiru_off, 3) end					-- turn adiru off
+			if simDR_ias_capt <= 30 then run_after_time(B777_adiru_off, 2) end					-- turn adiru off
 		elseif B777DR_ovhd_aft_button_target[1] == 0 then
 			B777DR_ovhd_aft_button_target[1] = 1												-- move button to on
-			B777DR_adiru_align_time_remaining_sec = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
---			run_after_time(B777_align_adiru, B777DR_adiru_align_time_remaining_sec)				-- start alignment timer
-			B777_adiru_aligning = true
-			countdown()
+			if B777DR_adiru_aligned == 0 and B777DR_adiru_aligning == 0 then
+				B777_adiru_time_remaining_min = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
+				B777DR_adiru_aligning = t1
+				countdown()
+			end
 		end
 	end
 end
 
 function countdown()
-	if B777_adiru_aligning then
-		if B777DR_adiru_align_time_remaining_sec > 1 then
-			B777DR_adiru_align_time_remaining_sec = B777DR_adiru_align_time_remaining_sec - 1
+	if B777DR_adiru_aligning == 1  then
+		if B777_adiru_time_remaining_min > 1 then
+			B777_adiru_time_remaining_min = B777_adiru_time_remaining_min - 1
 			run_after_time(countdown2, 1)
 		else
 			B777_align_adiru()
@@ -221,20 +223,20 @@ function countdown()
 end
 
 function countdown2()
-	B777DR_adiru_align_time_remaining_sec = B777DR_adiru_align_time_remaining_sec - 1
-	run_after_time(countdown)
+	B777_adiru_time_remaining_min = B777_adiru_time_remaining_min - 1
+	run_after_time(countdown, 1)
 end
 
 function B777_adiru_off()
 	B777DR_adiru_aligned = 0
-	B777DR_adiru_align_time_remaining_sec = 0
-	B777_adiru_aligning = false
+	B777_adiru_time_remaining_min = 0
+	B777DR_adiru_aligning = 0
 end
 
 function B777_align_adiru()
 	B777DR_adiru_aligned = 1
-	B777DR_adiru_align_time_remaining_sec = 0
-	B777_adiru_aligning = false
+	B777_adiru_time_remaining_min = 0
+	B777DR_adiru_aligning = 0
 end
 
 --*************************************************************************************--
@@ -274,6 +276,9 @@ end
 
 function flight_start()
 	B777DR_eicas_mode = 4
+	if simDR_startup_running == 1 then
+		B777_align_adiru()
+	end
 end
 
 --function flight_crash()
@@ -313,12 +318,15 @@ function after_physics()
 		B777DR_ias_capt_indicator = simDR_ias_capt
 	end
 
-	print("adiru alignment time (s): "..B777DR_adiru_align_time_remaining_sec)
-
-	if simDR_groundSpeed >= 1 and B777_adiru_aligning then
+	if simDR_groundSpeed >= 1 and B777DR_adiru_aligning == 1 then
 		stop_timer(B777_align_adiru)
 		B777_adiru_off()
 	end
+
+	B777DR_adiru_time_remaining_min = string.format("%2.0f", math.floor(B777_adiru_time_remaining_min / 60))
+	B777DR_adiru_time_remaining_sec = math.floor(B777_adiru_time_remaining_min / 60 % 1 * 60)
+
+	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
 end
 

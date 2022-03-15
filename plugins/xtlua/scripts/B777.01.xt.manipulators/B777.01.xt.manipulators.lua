@@ -92,6 +92,8 @@ B777DR_cockpit_door_pos                   = deferred_dataref("Strato/777/cockpit
 --**                               FIND X-PLANE COMMANDS                            **--
 --*************************************************************************************--
 
+simDR_startup_running                    = find_dataref("sim/operation/prefs/startup_running")
+
 ---MCP----------
 simCMD_ap_servos_on                      = find_command("sim/autopilot/servos_on")
 simCMD_ap_servos_on_2                    = find_command("sim/autopilot/servos2_on")
@@ -624,6 +626,10 @@ end
 
 function flight_start()
    print("Lua Loaded")
+	if simDR_startup_running == 1 then
+		B777DR_ovhd_ctr_button_target[1] = 1
+      B777DR_ovhd_aft_button_target[1] = 1
+	end
 end
 
 function flight_crash()
