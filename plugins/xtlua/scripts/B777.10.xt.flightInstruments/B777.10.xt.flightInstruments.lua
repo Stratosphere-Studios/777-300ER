@@ -97,6 +97,7 @@ B777DR_ias_capt_indicator              = deferred_dataref("Strato/777/displays/i
 B777DR_adiru_status                    = deferred_dataref("Strato/777/fltInst/adiru/status", "number") -- 0 = off, 1 = aligning 2 = aligned
 B777DR_adiru_time_remaining_min        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_min", "number")
 B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_sec", "number")
+B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltInst/adiru/aligning", "number")
 
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
@@ -259,6 +260,8 @@ function after_physics()
 
 	B777DR_adiru_time_remaining_min = string.format("%2.0f", math.floor(B777_adiru_time_remaining_min / 60))
 	B777DR_adiru_time_remaining_sec = math.floor(B777_adiru_time_remaining_min / 60 % 1 * 60)
+
+	if B777DR_adiru_status == 1 then B777DR_temp_adiru_is_aligning = 1 else B777DR_temp_adiru_is_aligning = 0 end
 
 --	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
