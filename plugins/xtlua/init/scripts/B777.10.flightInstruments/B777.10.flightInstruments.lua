@@ -61,3 +61,4 @@ B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/ad
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
 B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/txt/---", "string")
+B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")
