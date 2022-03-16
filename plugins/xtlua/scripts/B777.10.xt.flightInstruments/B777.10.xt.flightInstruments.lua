@@ -144,7 +144,7 @@ end
 
 function B777_fltInst_adiru_align_now_CMDhandler(phase, duration)
 	if phase == 0 then 
-		B777DR_ovhd_aft_button_target = 1
+		B777DR_ovhd_aft_button_target[1] = 1
 		B777_align_adiru()
 	end
 end
