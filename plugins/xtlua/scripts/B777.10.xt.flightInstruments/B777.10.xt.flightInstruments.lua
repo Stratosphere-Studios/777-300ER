@@ -99,9 +99,10 @@ B777DR_adiru_time_remaining_min        = deferred_dataref("Strato/777/fltInst/ad
 B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_sec", "number")
 
 -- Temporary datarefs for display text until custom textures are made
-B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")	--
+B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
 B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/txt/---", "string")
+B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -200,14 +201,15 @@ end
 
 function flight_start()
 	B777DR_eicas_mode = 4
-	
+
 	if simDR_startup_running == 1 then
 		B777_align_adiru()
 	end
 
-	B777DR_txt_GS            = "GS"
-	B777DR_txt_TIME_TO_ALIGN = "TIME TO ALIGN"
-	B777DR_txt_ddd           = "---"
+	B777DR_txt_GS                  = "GS"
+	B777DR_txt_TIME_TO_ALIGN       = "TIME TO ALIGN"
+	B777DR_txt_ddd                 = "---"
+	B777DR_txt_INSTANT_ADIRU_ALIGN = "INSTANT ADIRU ALIGN"
 end
 
 --function flight_crash()
