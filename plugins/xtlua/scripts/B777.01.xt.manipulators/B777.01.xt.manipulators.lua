@@ -641,20 +641,6 @@ function B777_animate(target, variable, speed)
    return variable
 end
 
------ TERNARY CONDITIONAL ---------------------------------------------------------------
-function B777_ternary(condition, ifTrue, ifFalse)
-   if condition then return ifTrue else return ifFalse end
-end
-
------ RESCALE ---------------------------------------------------------------------------
-function B777_rescale(in1, out1, in2, out2, x)
-
-   if x < in1 then return out1 end
-   if x > in2 then return out2 end
-   return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
-
-end
-
 --- Set Eicas Pages ----------
 function setEicasPage(id)
 	if B777DR_eicas_mode == id then

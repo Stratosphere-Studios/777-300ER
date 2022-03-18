@@ -73,43 +73,6 @@ B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_
 --**                             X-PLANE COMMAND HANDLERS                            **--
 --*************************************************************************************--
 
-
-
---*************************************************************************************--
---**                                 X-PLANE COMMANDS                                **--
---*************************************************************************************--
-
-simCMD_reverser_toggle_1                = find_command("sim/engines/thrust_reverse_toggle_1")
-simCMD_reverser_toggle_2                = find_command("sim/engines/thrust_reverse_toggle_2")
-
---*************************************************************************************--
---**                             CUSTOM COMMAND HANDLERS                             **--
---*************************************************************************************--
-
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-   if math.abs(target - variable) < 0.1 then return target end
-   variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-   return variable
-end
-
------ LANDING GEAR ----------------------------------------------------------------------
-
-function eagClawSync()
-   B777_eag_claw_sync = 1
-end
-
-function gearUp()
-   simDR_gear_handle = 0
-end
-
-function eagClawUp()
-   B777_eag_target = 19             -- raise eagle claw
-   if not is_timer_scheduled(eagClawSync) then
-      run_after_time(eagClawSync, 4)   -- synchronise custom eagle claw and default
-   end
-end
-
 function sim_landing_gear_up(phase, duration)         
    B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
    B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
@@ -136,7 +99,7 @@ function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when land
    end
 end
 
------ THRUST REVERSERS -------------------------------------------------------------------
+--- THRUST REVERSERS ----------
 
 function sim_reverser_toggle_CMDhandler(phase, duration)
    if phase == 0 then
@@ -147,16 +110,72 @@ function sim_reverser_toggle_CMDhandler(phase, duration)
    end
 end
 
+function sim_avionics_off() end
+function sim_avionics_on() end
+
+--*************************************************************************************--
+--**                                 X-PLANE COMMANDS                                **--
+--*************************************************************************************--
+
+simCMD_reverser_toggle_1                = find_command("sim/engines/thrust_reverse_toggle_1")
+simCMD_reverser_toggle_2                = find_command("sim/engines/thrust_reverse_toggle_2")
+
+simCMD_landing_gear_toggle              = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
+simCMD_reverser_toggle                  = replace_command("sim/engines/thrust_reverse_toggle", sim_reverser_toggle_CMDhandler)
+simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
+simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
+simCMD_avionics_off                     = replace_command("sim/systems/avionics_off", sim_avionics_off)
+simCMD_avionics_on                      = replace_command("sim/systems/avionics_on", sim_avionics_on)
+
+--*************************************************************************************--
+--**                             CUSTOM COMMAND HANDLERS                             **--
+--*************************************************************************************--
+
+----- ANIMATION UTILITY -----------------------------------------------------------------
+function B777_animate(target, variable, speed)
+   if math.abs(target - variable) < 0.1 then return target end
+   variable = variable + ((target - variable) * (speed * SIM_PERIOD))
+   return variable
+end
+
+----- TERNARY CONDITIONAL ---------------------------------------------------------------
+function B777_ternary(condition, ifTrue, ifFalse)
+   if condition then return ifTrue else return ifFalse end
+end
+
+----- RESCALE ---------------------------------------------------------------------------
+function B777_rescale(in1, out1, in2, out2, x)
+
+   if x < in1 then return out1 end
+   if x > in2 then return out2 end
+   return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
+
+end
+
+--- LANDING GEAR ----------
+
+function eagClawSync()
+   B777_eag_claw_sync = 1
+end
+
+function gearUp()
+   simDR_gear_handle = 0
+end
+
+function eagClawUp()
+   B777_eag_target = 19             -- raise eagle claw
+   if not is_timer_scheduled(eagClawSync) then
+      run_after_time(eagClawSync, 4)   -- synchronise custom eagle claw and default
+   end
+end
+
+
+
 
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
 
-simCMD_landing_gear_toggle = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
-simCMD_reverser_toggle = replace_command("sim/engines/thrust_reverse_toggle", sim_reverser_toggle_CMDhandler)
-
-simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
-simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
 
 --*************************************************************************************--
 --**                                      CODE                                       **--

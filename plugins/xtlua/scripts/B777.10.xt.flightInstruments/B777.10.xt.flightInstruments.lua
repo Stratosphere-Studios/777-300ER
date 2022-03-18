@@ -63,6 +63,8 @@ simDR_ias_capt                         = find_dataref("sim/cockpit2/gauges/indic
 simDR_latitude                         = find_dataref("sim/flightmodel/position/latitude")
 simDR_groundSpeed                      = find_dataref("sim/flightmodel/position/groundspeed")
 
+simDR_bus_voltage                      = find_dataref("sim/cockpit2/electrical/bus_volts")
+
 B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
 
 --*************************************************************************************--
@@ -253,7 +255,7 @@ function after_physics()
 		B777DR_ias_capt_indicator = simDR_ias_capt
 	end
 
-	if simDR_groundSpeed >= 1 and B777DR_adiru_status == 1 then
+	if (simDR_groundSpeed >= 1 or (simDR_bus_voltage[0] == 0 and simDR_bus_voltage[1] == 0)) and B777DR_adiru_status == 1 then
 		stop_timer(B777_align_adiru)
 		B777_adiru_off()
 	end
