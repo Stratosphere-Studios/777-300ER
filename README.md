@@ -24,7 +24,7 @@ A: As we are very early in development, and have no release date at this time.
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries that aren't included with the 777 from from our repository [here](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft. If you are a livery painter and want us to add your livery to the repository, please let us know on the X-Plane forums, Discord, or in a Github issue on the livery repository and we'll add it.
+A: You can download liveries from various authors that aren't included with the 777 from from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft. If you are a livery painter and want us to add your livery to the repository, please let us know on the X-Plane forums, Discord, or in a Github issue on the livery repository and we'll add it.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
@@ -44,7 +44,7 @@ A: Please use the [Github issue page](https://github.com/Stratosphere-Studios/77
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Why is my aircraft broken, I get error message, and half the models are gone?**
+**Q: Why is my aircraft broken, I get error messages, and half the models are gone?**
 
 A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft which show up in the X-Plane menu. One of them is an experimental one we are using to test our new flightmodel work. This one does not have an icon in the X-Plane menu, and it is fairly broken. Make sure you select the aircraft that has the icon!
 
@@ -56,13 +56,14 @@ A: Please remember this aircraft is still in the works. By downloading from gith
 
 A: Of course!
 
-**Q: Why are the physics broken/the plane won't take off/I can barely controle the aircraft?**
+**Q: Why are the physics broken/the plane won't take off/I can barely control the aircraft?**
 
 A: We know the physics are very broken currenty. We're working on it.
 
 
 ## INSTALLATION
-Just extract the aircraft folder and move it to your X-Plane aircraft folder. For stable releases, look [here](https://github.com/StratosphereStudios/777/releases) (none yet), and for all the latest updates, go [here](https://github.com/StratosphereStudios/777), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
+Go to our [Github repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
+Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
 
