@@ -58,6 +58,7 @@ simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/
 simDR_taxi_light_switch                   = find_dataref("sim/cockpit2/switches/taxi_light_on")
 simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/strobe_lights_on")
 simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
+simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/beacon_on")
 
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
@@ -701,6 +702,7 @@ function after_physics()
    B777DR_ovhd_fwd_button_positions[6] = B777_animate(simDR_taxi_light_switch, B777DR_ovhd_fwd_button_positions[6], 10)
    B777DR_ovhd_fwd_button_positions[7] = B777_animate(simDR_nav_light_switch, B777DR_ovhd_fwd_button_positions[7], 10)
    B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 10)
+   B777DR_ovhd_fwd_button_positions[9] = B777_animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 10)
 end
 
 --function after_replay()
