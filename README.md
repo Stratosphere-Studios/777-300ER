@@ -91,8 +91,10 @@ Phil Paysse: Fuselage and wings.
 
 **Liveries:**
 
-A.joshua - Air India VT-ALJ, ANA JA792A, Korean Air HL8007
+A.joshua - Air India (Star Alliance) VT-ALJ, ANA JA792A, Korean Air HL8007, Swiss Air HB-JNB
 
 CptTrxpic - Japan Airlines JA731A
 
-SIAAviationYT - Philippine Airlines RP-C7775, Qatar Airways A7-BAL, Singapore Airlines 9V-SWM
+SIAAviationYT - Philippine Airlines RP-C7775, Qatar Airways A7-BAL, Singapore Airlines (Star Alliance) 9V-SWM
+
+URL_Link - Qatar Airways (Retro) A7-BOC
