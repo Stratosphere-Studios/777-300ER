@@ -54,6 +54,11 @@ simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/
 
 B777DR_pfd_mtrs_capt                      = find_dataref("Strato/777/displays/mtrs_capt")
 
+simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/landing_lights_switch")
+simDR_taxi_light_switch                   = find_dataref("sim/cockpit2/switches/taxi_light_on")
+simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/strobe_lights_on")
+simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
+
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -64,6 +69,8 @@ B777DR_pfd_mtrs_capt                      = find_dataref("Strato/777/displays/mt
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
 
+testNum                                   = deferred_dataref("testNum", "number")
+
 B777DR_mcp_button_pos                     = deferred_dataref("Strato/777/cockpit/mcp/buttons/position", "array[18]")
 B777DR_mcp_button_target                  = deferred_dataref("Strato/777/cockpit/mcp/buttons/target", "array[18]")
 
@@ -73,6 +80,7 @@ B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
 
+B777DR_ovhd_fwd_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/fwd/buttons/target", "array[20]")
 B777DR_ovhd_ctr_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target", "array[46]")
 B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/target", "array[24]")
 
@@ -483,7 +491,6 @@ function B777_ovhd_c_bus_tie_r_switch_CMDhandler(phase, duration)
    end
 end
 
-
 function B777_ovhd_c_eng_gen_l_switch_CMDhandler(phase, duration)
    if phase == 0 then
       if B777DR_ovhd_ctr_button_target[5] == 0 then
@@ -571,7 +578,6 @@ B777CMD_mcp_ap_lnav                       = deferred_command("Strato/B777/button
 B777CMD_mcp_ap_vnav                       = deferred_command("Strato/B777/button_switch/mcp/ap/vnav", "VNAV A/P Mode", B777_ap_vnav_switch_CMDhandler)
 B777CMD_mcp_ap_flch                       = deferred_command("Strato/B777/button_switch/mcp/ap/flch", "FLCH A/P Mode", B777_ap_flch_switch_CMDhandler)
 
-
 ---EFIS CONTROL----------
 
 B777CMD_efis_lEicas_eng                   = deferred_command("Strato/B777/button_switch/efis/lEicas/eng", "Lower Eicas ENG Page", B777_efis_lEicas_eng_switch_CMDhandler)
@@ -591,7 +597,6 @@ B777CMD_efis_wpt_button                   = deferred_command("Strato/B777/button
 B777CMD_efis_tfc_button                   = deferred_command("Strato/B777/button_switch/efis/tfc", "ND Traffic Button", B777_efis_tfc_switch_CMDhandler)
 B777CMD_efis_apt_button                   = deferred_command("Strato/B777/button_switch/efis/apt", "ND Airport Button", B777_efis_apt_switch_CMDhandler)
 B777CMD_efis_mtrs_capt                    = deferred_command("Strato/B777/button_switch/efis/mtrs_capt", "Toggle Meters on PFD (Captain)", B777_efis_mtrs_capt_CMDhandler)
-
 
 ---OVERHEAD----------
 
@@ -624,7 +629,6 @@ B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button
 
 B777CMD_ctr1_at_disco                     = deferred_command("Strato/B777/button_switch/ctr1/at_disco", "Autothrottle Disconnect", B777_ctr1_at_disco_CMDhandler)
 B777CMD_ctr1_toga                         = deferred_command("Strato/B777/button_switch/ctr1/toga", "TOGA switch", B777_ctr1_toga_CMDhandler)
-
 
 ---OTHER---------------
 
@@ -689,10 +693,14 @@ function after_physics()
       B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 10)
    end
 
-   for i = 1, 24 do
-      B777DR_ovhd_aft_button_positions[i] = B777_animate(B777DR_ovhd_aft_button_target[i], B777DR_ovhd_aft_button_positions[i], 10)
-   end
+   B777DR_ovhd_aft_button_positions[1] = B777_animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 10)
 
+   for i = 1, 5 do
+      B777DR_ovhd_fwd_button_positions[i] = B777_animate(simDR_landing_light_switches[i], B777DR_ovhd_fwd_button_positions[i], 10)
+   end
+   B777DR_ovhd_fwd_button_positions[6] = B777_animate(simDR_taxi_light_switch, B777DR_ovhd_fwd_button_positions[6], 10)
+   B777DR_ovhd_fwd_button_positions[7] = B777_animate(simDR_nav_light_switch, B777DR_ovhd_fwd_button_positions[7], 10)
+   B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 10)
 end
 
 --function after_replay()
