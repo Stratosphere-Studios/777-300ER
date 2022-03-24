@@ -6,16 +6,6 @@ Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studi
 [![Discord](https://img.shields.io/discord/806746926854176789.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/eU2vWCtmFX)
 <br> [Our Discord Server](https://discord.gg/eU2vWCtmFX)
 
-
-## FEATURES:
-
-(As of October 29, 2021):
-
-- Work in progress cabin, exterior texturing, and animations.
-- Completed cockpit modeling/texturing, improvements still to come.
-- High-quality GE90 FMOD Soundpack.
-- A few manipulators in the 3D cockpit, and their code (FMCs, MCP, all switch covers, radios, transponders, ext lights, elec panel).
-
 ## FAQ
 
 **Q: When is the release date?**
@@ -44,9 +34,9 @@ A: Please use the [Github issue page](https://github.com/Stratosphere-Studios/77
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Why is my aircraft broken, I get error messages, and half the models are gone?**
+**Q: Why is my aircraft broken and/or I get error messages?**
 
-A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft which show up in the X-Plane menu. One of them is an experimental one we are using to test our new flightmodel work. This one does not have an icon in the X-Plane menu, and it is fairly broken. Make sure you select the aircraft that has the icon!
+A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft which show up in the X-Plane menu. One of them is an experimental one we are using to test our new flightmodel, but it is otherwise fairly broken. 
 
 **Q: Even after following the above instructions my aircraft is still broken?**
 
@@ -58,7 +48,7 @@ A: Of course!
 
 **Q: Why are the physics broken/the plane won't take off/I can barely control the aircraft?**
 
-A: We know the physics are very broken currenty. We're working on it.
+A: We know the physics are very broken currently. We're actively working on it.
 
 
 ## INSTALLATION
@@ -66,6 +56,8 @@ Go to our [Github repository](https://github.com/Stratosphere-Studios/777-300ER)
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
+
+I suggest you use Github Desktop to keep the aircraft updated without needing to redownload it every time.
 
 ## OLD REPOSITORY
 If you want to see more update history, you can check our [old repository.](https://github.com/StratosphereStudios/777)
