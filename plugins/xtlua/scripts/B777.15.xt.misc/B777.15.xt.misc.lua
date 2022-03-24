@@ -46,12 +46,14 @@ local B777_eag_target = 0
 
 simDR_ldg_gear_pos                        = find_dataref("sim/aircraft/parts/acf_gear_deploy")
 simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/eagle_claw_angle_deg")
-simDR_onGround                            = find_dataref("sim/flightmodel/failures/onground_any")
+simDR_whichOnGround                       = find_dataref("sim/flightmodel2/gear/on_ground")
 simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")
 
 simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
 simDR_shadow			                     = find_dataref("sim/private/controls/shadow/total_fade_ratio")
---replace the up, down, and toggle. make toggle run replaced up and down (new gear up/down tilt gear)
+
+simDR_reverser_0_fail                     = find_dataref("sim/operation/failures/rel_revers0")
+simDR_reverser_1_fail                     = find_dataref("sim/operation/failures/rel_revers1")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -99,33 +101,17 @@ function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when land
    end
 end
 
---- THRUST REVERSERS ----------
-
-function sim_reverser_toggle_CMDhandler(phase, duration)
-   if phase == 0 then
-      if simDR_onGround == 1 then
-         simCMD_reverser_toggle_1:once()
-         simCMD_reverser_toggle_2:once()
-      end
-   end
-end
-
 function sim_avionics_off() end
-function sim_avionics_on() end
 
 --*************************************************************************************--
 --**                                 X-PLANE COMMANDS                                **--
 --*************************************************************************************--
 
-simCMD_reverser_toggle_1                = find_command("sim/engines/thrust_reverse_toggle_1")
-simCMD_reverser_toggle_2                = find_command("sim/engines/thrust_reverse_toggle_2")
-
 simCMD_landing_gear_toggle              = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
-simCMD_reverser_toggle                  = replace_command("sim/engines/thrust_reverse_toggle", sim_reverser_toggle_CMDhandler)
 simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
 simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
 simCMD_avionics_off                     = replace_command("sim/systems/avionics_off", sim_avionics_off)
-simCMD_avionics_on                      = replace_command("sim/systems/avionics_on", sim_avionics_on)
+simCMD_avionics_on                      = replace_command("sim/systems/avionics_on")
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
@@ -196,9 +182,12 @@ end
 function flight_start()
    simDR_shadow = 0.8
    simDR_camera_fov = 40
+   simCMD_avionics_on:once()
 end
 
---function flight_crash()
+function flight_crash()
+   print("Bruh, why did you crash? Noob. Learn to fly.")
+end
 
 --function before_physics()
 
@@ -225,6 +214,13 @@ function after_physics()
    else
       B777DR_ldg_gear_kill = 0
    end
+
+   if simDR_whichOnGround[1] == 1 and simDR_whichOnGround[2] == 1 then
+      simDR_reverser_0_fail = 6
+      simDR_reverser_1_fail = 6
+   end
+
+   print("This windows helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error.")
 
 end
 
