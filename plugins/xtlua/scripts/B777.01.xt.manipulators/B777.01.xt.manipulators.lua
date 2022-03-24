@@ -670,12 +670,13 @@ function flight_start()
 	if simDR_startup_running == 1 then
 		B777DR_ovhd_ctr_button_target[1] = 1
       B777DR_ovhd_aft_button_target[1] = 1
+
+      simCMD_ovhd_bat_1_on:once()
+      simCMD_ovhd_bat_2_on:once()
 	end
 end
 
-function flight_crash()
-   print("Bruh, why did you crash? Noob. Learn to fly.")
-end
+--function flight_crash()
 
 --function before_physics()
 
