@@ -4,7 +4,6 @@
   - exterior lights ( https://developer.x-plane.com/article/airplane-parameterized-light-guide/ AND https://www.youtube.com/watch?v=ingB_EYyC2U )
   - cockpit floodlights
   - cabin
-  - reduce visibility of slanted things above doors
   - texture landing gear, make hot brake glow
   - model/texture external light fixtures
   - model button switch covers
