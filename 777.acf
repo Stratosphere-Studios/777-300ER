@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -10.557083130
+P _door/0/_ang_now -69.929710388
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 10.557083130
+P _door/1/_ang_now 69.929710388
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 10.557083130
+P _door/2/_ang_now 69.929710388
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -134,7 +134,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now 0.0
+P _door/5/_ang_now -23.760620117
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -142,7 +142,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 0.0
+P _door/6/_ang_now 23.760620117
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -10.557083130
+P _door/9/_ang_now -69.929710388
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,7 +213,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 14.161949158
+P _gear/0/_lonN 93.808151245
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
 P _gear/0/_stat_def 0.387207031
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -1.931174278
+P _gear/1/_axiN -12.792020798
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -10.557083130
+P _gear/1/_latN -69.929710388
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN -6.811335564
+P _gear/1/_lonN 5.497623444
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087793231
+P _gear/1/_stat_def 1.087793350
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 1.931174278
+P _gear/2/_axiN 12.792020798
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 10.557083130
+P _gear/2/_latN 69.929710388
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN -6.811335564
+P _gear/2/_lonN 5.497623444
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087793231
+P _gear/2/_stat_def 1.087793350
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -43618,7 +43618,34 @@ GROUP Captain PFD
     POS 120.500000 1830.000000
     IMAGE PFD/airspeed_indicator/ASIcrntHndrds
     DATAREF Strato/777/displays/ias_capt
-    SHOW_GREATER 100.000000 laminar/B747/gauges/indicators/airspeed_kts_pilot
+    SHOW_GREATER 100.000000 Strato/777/displays/ias_capt
+    SIZE 1.950000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 1
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 430.000000 430.000000 1.000000
+    KEY_FRAME 999.999023 430.000000
+    DIGITS 3
+
+  gen_rolling Tens
+    POS 120.500000 1830.000000
+    IMAGE PFD/airspeed_indicator/ASIcrntTens
+    DATAREF Strato/777/displays/ias_capt
+    SIZE 1.950000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 1
+    BUS_SRC 1
+    KEY_FRAME 0.000000 30.000000 1.000000
+    KEY_FRAME 30.000000 30.000000 1.000000
+    KEY_FRAME 430.000000 430.000000 1.000000
+    KEY_FRAME 999.999023 430.000000
+    DIGITS 3
+
+  gen_rolling Ones
+    POS 120.500000 1830.000000
+    IMAGE PFD/airspeed_indicator/ASIcrntOnes
+    DATAREF Strato/777/displays/ias_capt
     SIZE 1.950000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 1
@@ -43630,7 +43657,6 @@ GROUP Captain PFD
 
   GROUP ADIRU Not Aligned
     SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
-    GROUP_OPEN
     gen_rotary hdg_fail
       POS 594.000000 1199.500000
       IMAGE PFD/failure_flags/hdg_fail
@@ -43655,7 +43681,6 @@ GROUP Captain PFD
   END_GROUP
   GROUP ADIRU Aligned
     SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
-    GROUP_OPEN
     gen_rotary Compass Background
       POS 590.000000 1261.000000
       IMAGE PFD/Heading Track/HdgTrackBgnd
@@ -43759,33 +43784,6 @@ GROUP Captain PFD
       CLICK_DY 0
 
   END_GROUP
-  gen_rolling Tens
-    POS 120.500000 1830.000000
-    IMAGE PFD/airspeed_indicator/ASIcrntTens
-    DATAREF Strato/777/displays/ias_capt
-    SIZE 1.950000
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 1
-    BUS_SRC 1
-    KEY_FRAME 0.000000 30.000000 1.000000
-    KEY_FRAME 30.000000 30.000000 1.000000
-    KEY_FRAME 430.000000 430.000000 1.000000
-    KEY_FRAME 999.999023 430.000000
-    DIGITS 3
-
-  gen_rolling Ones
-    POS 120.500000 1830.000000
-    IMAGE PFD/airspeed_indicator/ASIcrntOnes
-    DATAREF Strato/777/displays/ias_capt
-    SIZE 1.950000
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 2
-    BUS_SRC 1
-    KEY_FRAME 0.000000 0.000000 1.000000
-    KEY_FRAME 430.000000 430.000000 1.000000
-    KEY_FRAME 999.999023 430.000000
-    DIGITS 3
-
   gen_LED Mach
     POS 179.000000 1283.500000
     IMAGE LED_2.36R.xxxxx0.white
@@ -44213,26 +44211,7 @@ GROUP MCP
 
 END_GROUP
 GROUP FMSs
-  GROUP Left
-    GROUP_OPEN
-    rad_CDU739 CDU739_screen.png
-      POS 1663.000000 3576.000000
-      DATAREF 
-      SIZE 2.000000
-      LIGHT_MODE MECHANICAL
-      LIGHT_RHEOSTAT 0
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 1.000000
-
-  END_GROUP
-  GROUP Center
-    GROUP_OPEN
-  END_GROUP
-  GROUP Right
-    GROUP_OPEN
-  END_GROUP
-END_GROUP
-GROUP Isfd
+  GROUP_OPEN
   gen_rotary Background
     POS 3836.000000 3564.000000
     IMAGE isfd_2_not_alligned
@@ -44254,6 +44233,400 @@ GROUP Isfd
     CLICK_DX 0
     CLICK_DY 0
 
+  GROUP Left
+    GROUP_OPEN
+    rad_CDU739 CDU739_screen.png
+      POS 1663.000000 3576.000000
+      DATAREF 
+      SIZE 2.000000
+      LIGHT_MODE MECHANICAL
+      LIGHT_RHEOSTAT 0
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 1.000000
+
+  END_GROUP
+  GROUP Right
+    GROUP_OPEN
+    gen_rotary LCD Background
+      POS 2935.500000 3623.428467
+      IMAGE LCD_Background
+      DATAREF 
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    GROUP Big White
+      GROUP_OPEN
+      gen_text LINE 1
+        POS 2935.500000 3824.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line01_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 2
+        POS 2935.356934 3784.785400
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line02_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 3
+        POS 2935.071289 3744.785400
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line03_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 4
+        POS 2934.643066 3706.356934
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line04_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 5
+        POS 2935.500000 3665.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line05_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 6
+        POS 2935.500000 3626.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line06_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 7
+        POS 2934.500000 3588.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line07_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 8
+        POS 2934.500000 3548.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line08_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 9
+        POS 2934.500000 3508.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line09_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 10
+        POS 2933.500000 3469.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line10_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 11
+        POS 2934.500000 3429.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line11_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 12
+        POS 2934.500000 3390.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line12_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 13
+        POS 2933.500000 3353.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line13_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 14
+        POS 2936.071289 3314.928467
+        IMAGE FMS/big_white
+        DATAREF strato/B777/fms1/Line14_L
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Small White
+      HIDE
+      GROUP_OPEN
+      gen_text LINE 1
+        POS 2937.356934 3826.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line01_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 2
+        POS 2937.214355 3786.785400
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line02_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 3
+        POS 2936.928711 3746.785400
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line03_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 4
+        POS 2936.500000 3708.356934
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line04_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 5
+        POS 2937.356934 3667.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line05_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 6
+        POS 2937.356934 3628.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line06_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 7
+        POS 2936.356934 3590.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line07_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 8
+        POS 2936.356934 3550.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line08_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 9
+        POS 2936.356934 3510.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line09_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 10
+        POS 2935.356934 3471.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line10_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 11
+        POS 2936.356934 3431.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line11_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 12
+        POS 2936.356934 3392.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line12_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 13
+        POS 2936.399902 3355.928467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line13_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text LINE 14
+        POS 2936.356934 3318.428467
+        IMAGE FMS/small_white
+        DATAREF strato/B777/fms1/Line14_S
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 10
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+  END_GROUP
+END_GROUP
+GROUP Isfd
 END_GROUP
 GROUP Trim
   LOCKED
@@ -44395,7 +44768,7 @@ GROUP EFB
   LOCKED
   CHAINED
   gen_rotary InstAlign Backg
-    POS 134.285721 3469.928711
+    POS 134.000000 3469.500000
     IMAGE EFB/InstAlign
     DATAREF 
     SIZE 2.000000
@@ -44418,7 +44791,7 @@ GROUP EFB
     CLICK_DY 0
 
   gen_text INSTANT ADIRU ALIGN
-    POS 140.785721 3469.428711
+    POS 140.500000 3469.000000
     IMAGE TXT.2.28.white
     DATAREF Strato/777/displays/txt/INSTANT_ADIRU_ALIGN[0]
     LOCKED
@@ -44430,5 +44803,8 @@ GROUP EFB
     OFFSET_X -100
     OFFSET_Y -12.000000
 
+END_GROUP
+GROUP Center
+  GROUP_OPEN
 END_GROUP
 PANEL_3D_END

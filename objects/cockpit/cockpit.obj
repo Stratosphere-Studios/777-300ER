@@ -4,7 +4,7 @@ OBJ
 
 GLOBAL_cockpit_lit
 TEXTURE	../../cockpit_3d/-PANELS-/panel.png
-POINT_COUNTS	7005	0	0	7005
+POINT_COUNTS	7017	0	0	7017
 
 VT	-0.20901637	0.30849525	-33.317318	0	0.92759699	0.37358239	1	1
 VT	-0.20901637	0.30355439	-33.30505	0	0.92759699	0.37358239	1	0
@@ -7005,12 +7005,24 @@ VT	0.26360887	0.83718604	-33.346519	0	0.25803867	0.96613455	0	0
 VT	0.26360887	0.84755534	-33.349289	0	0.25803867	0.96613455	0	1
 VT	0.27896988	0.84755534	-33.349289	0	0.25803867	0.96613455	1	1
 VT	0.26360887	0.83718604	-33.346519	0	0.25803867	0.96613455	0	0
-VT	-1.2594208	0.74579251	-33.001156	0.59543878	0.57856089	0.5574227	1	1
-VT	-1.2796309	0.74146771	-32.975079	0.59543878	0.57856089	0.5574227	1	0
-VT	-1.2826904	0.74615276	-32.976673	0.59543878	0.57856089	0.5574227	0	0
-VT	-1.2624803	0.75047755	-33.00275	0.59543884	0.57856089	0.55742264	0	1
-VT	-1.2594208	0.74579251	-33.001156	0.59543884	0.57856089	0.55742264	1	1
-VT	-1.2826904	0.74615276	-32.976673	0.59543884	0.57856089	0.55742264	0	0
+VT	-1.2807859	0.71830684	-33.033909	0.59543878	0.57856089	0.5574227	1	1
+VT	-1.3009961	0.71398205	-33.007832	0.59543878	0.57856089	0.5574227	1	0
+VT	-1.3040556	0.71866709	-33.009426	0.59543878	0.57856089	0.5574227	0	0
+VT	-1.2838454	0.72299188	-33.035503	0.59543884	0.57856089	0.55742264	0	1
+VT	-1.2807859	0.71830684	-33.033909	0.59543884	0.57856089	0.55742264	1	1
+VT	-1.3040556	0.71866709	-33.009426	0.59543884	0.57856089	0.55742264	0	0
+VT	0.2208147	0.32413945	-33.351437	0	0.92739296	0.37408859	1	1
+VT	0.2208147	0.319437	-33.339779	0	0.92739296	0.37408859	1	0
+VT	0.20236343	0.319437	-33.339779	0	0.92739296	0.37408859	0	0
+VT	0.20236343	0.32413945	-33.351437	0	0.92739296	0.37408859	0	1
+VT	0.2208147	0.32413945	-33.351437	0	0.92739296	0.37408859	1	1
+VT	0.20236343	0.319437	-33.339779	0	0.92739296	0.37408859	0	0
+VT	0.22110023	0.31758842	-33.33493	0	0.92739296	0.37408859	1	1
+VT	0.22110023	0.31288597	-33.323273	0	0.92739296	0.37408859	1	0
+VT	0.20264895	0.31288597	-33.323273	0	0.92739296	0.37408859	0	0
+VT	0.20264895	0.31758842	-33.33493	0	0.92739296	0.37408859	0	1
+VT	0.22110023	0.31758842	-33.33493	0	0.92739296	0.37408859	1	1
+VT	0.20264895	0.31288597	-33.323273	0	0.92739296	0.37408859	0	0
 
 IDX10	0	1	2	3	4	5	6	7	8	9
 IDX10	10	11	12	13	14	15	16	17	18	19
@@ -7712,11 +7724,14 @@ IDX10	6960	6961	6962	6963	6964	6965	6966	6967	6968	6969
 IDX10	6970	6971	6972	6973	6974	6975	6976	6977	6978	6979
 IDX10	6980	6981	6982	6983	6984	6985	6986	6987	6988	6989
 IDX10	6990	6991	6992	6993	6994	6995	6996	6997	6998	6999
-IDX	7000
-IDX	7001
-IDX	7002
-IDX	7003
-IDX	7004
+IDX10	7000	7001	7002	7003	7004	7005	7006	7007	7008	7009
+IDX	7010
+IDX	7011
+IDX	7012
+IDX	7013
+IDX	7014
+IDX	7015
+IDX	7016
 
 	ANIM_begin
 	ANIM_trans	-1.05759	0.71065003	-31.216591	-1.05759	0.71065003	-31.216591
@@ -7740,17 +7755,17 @@ IDX	7004
 	TRIS	24 6
 	ATTR_manip_command	button	sim/FMS/key_Z	
 	TRIS	30 6
-	ATTR_manip_command	button	sim/FMS2/key_Z	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/Z	
 	TRIS	36 6
-	ATTR_manip_command	button	sim/FMS2/key_U	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/U	
 	TRIS	42 6
-	ATTR_manip_command	button	sim/FMS2/key_P	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/P	
 	TRIS	48 6
-	ATTR_manip_command	button	sim/FMS2/key_K	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/K	
 	TRIS	54 6
-	ATTR_manip_command	button	sim/FMS2/key_F	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/F	
 	TRIS	60 6
-	ATTR_manip_command	button	sim/FMS2/key_A	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/A	
 	TRIS	66 6
 	ATTR_manip_command	button	sim/FMS/key_B	
 	TRIS	72 6
@@ -7800,53 +7815,53 @@ IDX	7004
 	TRIS	204 6
 	ATTR_manip_command	button	sim/FMS/key_space	
 	TRIS	210 6
-	ATTR_manip_command	button	sim/FMS2/key_space	
+	ATTR_manip_command	button	strato/B777/fms1/key/space	
 	TRIS	216 6
-	ATTR_manip_command	button	sim/FMS2/key_delete	
+	ATTR_manip_command	button	stratos/B777/fms1/key/del	
 	TRIS	222 6
-	ATTR_manip_command	button	sim/FMS2/key_slash	
+	ATTR_manip_command	button	strato/B777/fms1/key/slash	
 	TRIS	228 6
-	ATTR_manip_command	button	sim/FMS2/key_clear	
+	ATTR_manip_command	button	strato/B777/fms1/key/clear	
 	TRIS	234 6
-	ATTR_manip_command	button	sim/FMS2/key_Y	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/Y	
 	TRIS	240 6
-	ATTR_manip_command	button	sim/FMS2/key_X	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/X	
 	TRIS	246 6
-	ATTR_manip_command	button	sim/FMS2/key_W	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/W	
 	TRIS	252 6
-	ATTR_manip_command	button	sim/FMS2/key_V	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/V	
 	TRIS	258 6
-	ATTR_manip_command	button	sim/FMS2/key_Q	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/Q	
 	TRIS	264 6
-	ATTR_manip_command	button	sim/FMS2/key_R	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/R	
 	TRIS	270 6
-	ATTR_manip_command	button	sim/FMS2/key_S	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/S	
 	TRIS	276 6
-	ATTR_manip_command	button	sim/FMS2/key_T	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/D	
 	TRIS	282 6
-	ATTR_manip_command	button	sim/FMS2/key_O	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/O	
 	TRIS	288 6
-	ATTR_manip_command	button	sim/FMS2/key_N	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/N	
 	TRIS	294 6
-	ATTR_manip_command	button	sim/FMS2/key_M	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/M	
 	TRIS	300 6
-	ATTR_manip_command	button	sim/FMS2/key_L	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/L	
 	TRIS	306 6
-	ATTR_manip_command	button	sim/FMS2/key_G	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/G	
 	TRIS	312 6
-	ATTR_manip_command	button	sim/FMS2/key_H	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/H	
 	TRIS	318 6
-	ATTR_manip_command	button	sim/FMS2/key_I	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/I	
 	TRIS	324 6
-	ATTR_manip_command	button	sim/FMS2/key_J	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/J	
 	TRIS	330 6
-	ATTR_manip_command	button	sim/FMS2/key_E	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/E	
 	TRIS	336 6
-	ATTR_manip_command	button	sim/FMS2/key_D	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/D	
 	TRIS	342 6
-	ATTR_manip_command	button	sim/FMS2/key_C	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/C	
 	TRIS	348 6
-	ATTR_manip_command	button	sim/FMS2/key_B	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/B	
 	TRIS	354 6
 	ATTR_manip_toggle	button	1	0		Switch Cover
 	TRIS	360 36
@@ -7971,29 +7986,29 @@ IDX	7004
 	TRIS	3711 18
 	ATTR_manip_command	button	sim/FMS/key_5	
 	TRIS	3729 18
-	ATTR_manip_command	button	sim/FMS2/key_0	
+	ATTR_manip_command	button	strato/B777/fms1/key/minus	
 	TRIS	3747 18
-	ATTR_manip_command	button	sim/FMS2/key_6	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/6	
 	TRIS	3765 18
-	ATTR_manip_command	button	sim/FMS2/key_5	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/5	
 	TRIS	3783 18
-	ATTR_manip_command	button	sim/FMS2/key_4	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/4	
 	TRIS	3801 18
-	ATTR_manip_command	button	sim/FMS2/key_8	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/8	
 	TRIS	3819 18
-	ATTR_manip_command	button	sim/FMS2/key_7	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/7	
 	TRIS	3837 18
-	ATTR_manip_command	button	sim/FMS2/key_2	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/2	
 	TRIS	3855 18
-	ATTR_manip_command	button	sim/FMS2/key_1	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/1	
 	TRIS	3873 18
-	ATTR_manip_command	button	sim/FMS2/key_9	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/9	
 	TRIS	3891 18
-	ATTR_manip_command	button	sim/FMS2/key_minus	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/0	
 	TRIS	3909 18
-	ATTR_manip_command	button	sim/FMS2/key_period	
+	ATTR_manip_command	button	strato/B777/fms1/key/period	
 	TRIS	3927 18
-	ATTR_manip_command	button	sim/FMS2/key_3	
+	ATTR_manip_command	button	strato/B777/fms1/alphanum_key/3	
 	TRIS	3945 18
 	ATTR_manip_command	button	sim/FMS/key_5	
 	TRIS	3963 18
@@ -8107,25 +8122,25 @@ IDX	7004
 	TRIS	6579 6
 	ATTR_manip_command	button	sim/FMS/ls_6l	
 	TRIS	6585 6
-	ATTR_manip_command	button	sim/FMS2/fpln	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/fpln	
 	TRIS	6591 6
-	ATTR_manip_command	button	sim/FMS2/navrad	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/navrad	
 	TRIS	6597 6
 	ATTR_manip_command	button	sim/FMS/ls_5l	
 	TRIS	6603 6
 	ATTR_manip_command	button	sim/FMS/ls_4l	
 	TRIS	6609 6
-	ATTR_manip_command	button	sim/FMS2/clb	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/des	
 	TRIS	6615 6
-	ATTR_manip_command	button	sim/FMS2/prev	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/prev_pg	
 	TRIS	6621 6
 	ATTR_manip_command	button	sim/FMS/ls_3l	
 	TRIS	6627 6
 	ATTR_manip_command	button	sim/FMS/ls_2l	
 	TRIS	6633 6
-	ATTR_manip_command	button	sim/FMS2/next	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/next_pg	
 	TRIS	6639 6
-	ATTR_manip_command	button	sim/FMS2/index	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/fix	
 	TRIS	6645 6
 	ATTR_manip_command	button	sim/FMS/ls_1l	
 	TRIS	6651 6
@@ -8171,45 +8186,45 @@ IDX	7004
 	TRIS	6771 6
 	ATTR_manip_command	button	sim/FMS/ls_6r	
 	TRIS	6777 6
-	ATTR_manip_command	button	sim/FMS2/ls_1l	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/L1	
 	TRIS	6783 6
-	ATTR_manip_command	button	sim/FMS2/ls_2l	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/L2	
 	TRIS	6789 6
-	ATTR_manip_command	button	sim/FMS2/ls_3l	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/L3	
 	TRIS	6795 6
-	ATTR_manip_command	button	sim/FMS2/ls_4l	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/L4	
 	TRIS	6801 6
 	ATTR_manip_command	button	sim/FMS/navrad	
 	TRIS	6807 6
 	ATTR_manip_command	button	sim/FMS/fpln	
 	TRIS	6813 6
-	ATTR_manip_command	button	sim/FMS2/ls_5l	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/L5	
 	TRIS	6819 6
-	ATTR_manip_command	button	sim/FMS2/ls_6l	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/L6	
 	TRIS	6825 6
-	ATTR_manip_command	button	sim/FMS2/dep_arr	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/clb	
 	TRIS	6831 6
-	ATTR_manip_command	button	sim/FMS2/init	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/index	
 	TRIS	6837 6
-	ATTR_manip_command	button	sim/FMS2/fix	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/dir_intc	
 	TRIS	6843 6
-	ATTR_manip_command	button	sim/FMS2/legs	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/legs	
 	TRIS	6849 6
-	ATTR_manip_command	button	sim/FMS2/hold	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/dep_arr	
 	TRIS	6855 6
-	ATTR_manip_command	button	sim/FMS2/prog	
+	ATTR_manip_command	button	strato/B777/fms1/func_key/prog	
 	TRIS	6861 6
-	ATTR_manip_command	button	sim/FMS2/exec	
+	ATTR_manip_command	button	strato/B777/fms1/key/execute	
 	TRIS	6867 6
-	ATTR_manip_command	button	sim/FMS2/ls_6r	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/R6	
 	TRIS	6873 6
-	ATTR_manip_command	button	sim/FMS2/ls_5r	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/R5	
 	TRIS	6879 6
-	ATTR_manip_command	button	sim/FMS2/ls_4r	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/R4	
 	TRIS	6885 6
-	ATTR_manip_command	button	sim/FMS2/ls_3r	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/R3	
 	TRIS	6891 6
-	ATTR_manip_command	button	sim/FMS2/ls_2r	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/R2	
 	TRIS	6897 6
 	ATTR_manip_command	button	Strato/B777/button_switch/efis/sta	Show VORs on ND
 	TRIS	6903 6
@@ -8217,7 +8232,7 @@ IDX	7004
 	TRIS	6909 6
 	ATTR_manip_command	button	Strato/B777/button_switch/efis/wxr	Show Weather Radar on ND
 	TRIS	6915 6
-	ATTR_manip_command	button	sim/FMS2/ls_1r	
+	ATTR_manip_command	button	strato/B777/fms1/ls_key/R1	
 	TRIS	6921 6
 	ATTR_manip_command	button	Strato/B777/button_switch/efis/apt	Show Airports on ND
 	TRIS	6927 6
@@ -8243,6 +8258,10 @@ IDX	7004
 	TRIS	6987 6
 	ATTR_manip_command	button	Strato/B777/adiru_align_now	Instantly Align the ADIRU
 	TRIS	6999 6
+	ATTR_manip_command	button	strato/B777/fms1/func_key/crz	
+	TRIS	7005 6
+	ATTR_manip_command	button	strato/B777/fms1/func_key/hold	
+	TRIS	7011 6
 	ATTR_manip_command	button	Strato/B777/button_switch/efis/lEicas/cam	Eicas Camera Page
 	TRIS	6993 6
 	ATTR_manip_command	button	Strato/B777/button_switch/fltInst/adiru_switch	ADIRU Switch

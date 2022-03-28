@@ -111,7 +111,8 @@ simCMD_landing_gear_toggle              = replace_command("sim/flight_controls/l
 simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
 simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
 simCMD_avionics_off                     = replace_command("sim/systems/avionics_off", sim_avionics_off)
-simCMD_avionics_on                      = replace_command("sim/systems/avionics_on")
+
+simCMD_avionics_on                      = find_command("sim/systems/avionics_on")
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
@@ -220,7 +221,7 @@ function after_physics()
       simDR_reverser_1_fail = 6
    end
 
-   print("This windows helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error.")
+   --print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error.")
 
 end
 

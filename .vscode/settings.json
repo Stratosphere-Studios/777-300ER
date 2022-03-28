@@ -1,6 +1,7 @@
 {
     "Lua.diagnostics.disable": [
         "undefined-global",
-        "lowercase-global"
-    ]
+        "lowercase-global",
+    ],
+    "Lua.runtime.version": "Lua 5.1"
 }
