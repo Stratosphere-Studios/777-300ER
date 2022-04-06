@@ -83,7 +83,7 @@ Phil Paysse: Fuselage and wings.
 
 **Liveries:**
 
-A.joshua - Air India (Star Alliance) VT-ALJ, ANA JA792A, Korean Air HL8007, Swiss Air HB-JNB
+A.joshua - Air India (Star Alliance) VT-ALJ, ANA JA792A, Korean Air HL8007, Swiss Air HB-JNB, Cathay Pacific B-KPM
 
 CptTrxpic - Japan Airlines JA731A
 
