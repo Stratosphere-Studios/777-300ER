@@ -1,0 +1,9 @@
+[STRATO777 INFO]: Initializing...
+[STRATO777 INFO]: Path to module: C:\X-Plane 11/Aircraft/dev/777-300ER-master/plugins/SASLFree/data/modules/main.lua
+[STRATO777 INFO]: Loading module...
+[STRATO777 INFO]: [LUA]: loading	module
+[STRATO777 INFO]: [LUA]: loading	eicascheck
+[STRATO777 INFO]: [LUA]: including	checklist.lua
+[STRATO777 INFO]: [LUA]: loading	Cursor
+[STRATO777 INFO]: Module loaded
+[STRATO777 INFO]: [LUA]: loading	interactive

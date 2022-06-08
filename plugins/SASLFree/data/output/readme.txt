@@ -1,0 +1,1 @@
+This folder contains output information for SASL project.
