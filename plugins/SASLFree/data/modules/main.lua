@@ -32,6 +32,5 @@ components = {
 		position = {2730 , 1400, 1365, 1365},
 		visible = true,
 		fpsLimit = 50
-	},
-	fctl {}
+	}
 }
