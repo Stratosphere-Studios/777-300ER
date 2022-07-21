@@ -49,6 +49,10 @@ simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/
 simDR_whichOnGround                       = find_dataref("sim/flightmodel2/gear/on_ground")
 simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")
 
+simDR_spoiler_handle					  = find_dataref("sim/cockpit2/controls/speedbrake_ratio")
+simDR_trottle_pos						  = find_dataref("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
+simDR_onground 							  = find_dataref("sim/flightmodel/failures/onground_any")
+
 simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
 simDR_shadow			                     = find_dataref("sim/private/controls/shadow/total_fade_ratio")
 
@@ -74,6 +78,14 @@ B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
 --*************************************************************************************--
+
+function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
+	if simDR_spoiler_handle < 0 and simDR_onground == 1 and simDR_trottle_pos < 0 then --conditions for deployment in arm mode
+		simDR_spoiler_handle = 1
+	elseif simDR_trottle_pos > 0.5 and simDR_spoiler_handle > 0.5 then --automatic retraction when roo much thrust is applied
+		simDR_spoiler_handle = 0
+	end
+end
 
 function sim_landing_gear_up(phase, duration)         
    B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
@@ -193,6 +205,7 @@ end
 --function before_physics()
 
 function after_physics()
+   SetSpeedbrkHandle()
    B777DR_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
 
    if B777_eag_claw_sync == 1 then
