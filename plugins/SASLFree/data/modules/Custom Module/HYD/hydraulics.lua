@@ -29,16 +29,16 @@ engine_2_n2 = globalPropertyfae("sim/flightmodel/engine/ENGN_N2_", 2)
 
 --creating datarefs
 
-hyd_qty = createGlobalPropertyfa("777/hydraulics/qty", {0.98, 0.95, 0.97})
-hyd_pressure = createGlobalPropertyia("777/hydraulics/press", {50, 50, 50})
-demand_pumps_state = createGlobalPropertyia("777/hydraulics/pump/demand/state", {0, 0, 0, 0})
-demand_pumps_past = createGlobalPropertyia("777/hydraulics/pump/demand/past", {0, 0, 0, 0}) --this is needed for accurate schematic update on the hydraulic page of eicas since it happens with a 2/3 second delay irl
+hyd_qty = createGlobalPropertyfa("Strato/777/hydraulics/qty", {0.98, 0.95, 0.97})
+hyd_pressure = createGlobalPropertyia("Strato/777/hydraulics/press", {50, 50, 50})
+demand_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/state", {0, 0, 0, 0})
+demand_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/past", {0, 0, 0, 0}) --this is needed for accurate schematic update on the hydraulic page of eicas since it happens with a 2/3 second delay irl
 --demand_pumps_rpm = createGlobalPropertyia("777/hydraulics/pump/demand/rpm", {0, 0, 0, 0})
-primary_pumps_state = createGlobalPropertyia("777/hydraulics/pump/primary/state", {1, 0, 0, 1})
-primary_pumps_past = createGlobalPropertyia("777/hydraulics/pump/primary/past", {0, 0, 0, 0})
+primary_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/state", {1, 0, 0, 1})
+primary_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/past", {0, 0, 0, 0})
 --primary_pumps_rpm = createGlobalPropertyia("777/hydraulics/pump/primary/rpm", {0, 0, 0, 0})
-flap_tgt = createGlobalPropertyf("777/flaps/tgt", 0)
-flap_load_relief = createGlobalPropertyi("777/flaps/load_relief", 0) --set to 1 when load relief system is operating
+flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
+flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 
 set(fctl_ovrd, 1)
 timer = sasl.createTimer()
@@ -90,9 +90,9 @@ function GetSysIdx(num) --matches pump index with system index
 end
 
 function GetMaxHydPress() --since some things are driven by all 3 hydraulic systems, we need to know the maximum pressure
-	local pressure_L = globalPropertyiae("777/hydraulics/press", 1)
-	local pressure_C = globalPropertyiae("777/hydraulics/press", 2)
-	local pressure_R = globalPropertyiae("777/hydraulics/press", 3)
+	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
+	local pressure_C = globalPropertyiae("Strato/777/hydraulics/press", 2)
+	local pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 	return math.max(get(pressure_L), get(pressure_C), get(pressure_R))
 end
 
@@ -100,7 +100,7 @@ function GetFltState() --this is needed for demand pump activation during takeof
 	local gear_pos = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 	local flap_pos = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 	local throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
-	if get(gear_pos) == 1 and get(flap_pos) <= 0.5 and get(throttle_pos) >= 0.6 and get(flap_pos) > 0 then
+	if get(gear_pos) == 1 and get(flap_pos) < 0.8 and get(throttle_pos) >= 0.6 and get(flap_pos) > 0 then
 		return 1
 	elseif get(gear_pos) == 1 and get(flap_pos) >= 0.5 and get(on_ground) == 0 then
 		return 2
@@ -111,12 +111,12 @@ end
 
 function GetDemandPumpState(idx, primary_state)
 	if get(gen_1) == 1 or get(gen_2) == 1 then
-		local demand_state = globalPropertyiae("777/hydraulics/pump/demand/state", idx)
+		local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", idx)
 		if get(demand_state) == 2 then --if the pump is on, it's on
 			if idx ~= 3 then 
 				return 1
 			else
-				local demand_2 = globalPropertyiae("777/hydraulics/pump/demand/state", 2)
+				local demand_2 = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", 2)
 				if get(demand_2) == 2 then
 					return 0
 				else
@@ -125,12 +125,12 @@ function GetDemandPumpState(idx, primary_state)
 			end
 		elseif get(demand_state) == 1 then
 			local sys_idx = GetSysIdx(idx)
-			local pressure = globalPropertyiae("777/hydraulics/press", sys_idx)
+			local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
 			if get(pressure) < 2700 or GetFltState() ~= 0 or primary_state == 0 then --if the pump is in auto, turn it on only if the plane is landing/taking off or if there isn't enough pressure
 				if idx ~= 3 then
 					return 1
 				else
-					if get(globalPropertyiae("777/hydraulics/pump/demand/state", 2)) == 2 or get(globalPropertyiae("777/hydraulics/pump/demand/state", 2)) == 1 and GetFltState() == 0 then
+					if get(globalPropertyiae("Strato/777/hydraulics/pump/demand/state", 2)) == 2 or get(globalPropertyiae("777/hydraulics/pump/demand/state", 2)) == 1 and GetFltState() == 0 then
 						return 0
 					else
 						return 1
@@ -148,7 +148,7 @@ function GetDemandPumpState(idx, primary_state)
 end
 
 function GetPrimaryPumpState(idx) --this function defines primary pump logic.
-	local pump_state = globalPropertyiae("777/hydraulics/pump/primary/state", idx)
+	local pump_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", idx)
 	local apu_running = globalPropertyi("sim/cockpit2/electrical/APU_running")
 	if idx == 1 then
 		if get(pump_state) == 1 and get(engine_1_n2) >= 50 then
@@ -189,8 +189,8 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 		local primary_state = GetPrimaryPumpState(i)
 		local demand_state = GetDemandPumpState(i, primary_state)
 		local sys_idx = GetSysIdx(i)
-		local pressure = globalPropertyiae("777/hydraulics/press", sys_idx)
-		local quantity = globalPropertyfae("777/hydraulics/qty", sys_idx)
+		local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
+		local quantity = globalPropertyfae("Strato/777/hydraulics/qty", sys_idx)
 		if get(pressure) < 2700 then
 			increase = 80
 		else
@@ -258,7 +258,7 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 	end
 end
 
-function GetAilRatio(ratio)
+function GetAilRatio(ratio) --Aileron ratio gets smaller with hydraulic pressure. This is needed for morer precise simulation when the pressure is low.
 	local max_press = GetMaxHydPress()
 	if max_press <= 500 then
 		return 0
@@ -286,7 +286,7 @@ function GetAilResponseTime() --aileron response time based on pressure
 	end
 end
 
-function GetSpoilerTarget(side, yoke_cmd)
+function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 	local actual = 0
 	if side == -1 then
 		actual = get(spoilers_L)
@@ -300,10 +300,10 @@ function GetSpoilerTarget(side, yoke_cmd)
 	if get(handle_pos) > 0 and max_press >= 570 then
 		neutral = get(handle_pos) * 20
 	elseif max_press < 570 then
-		if true_airspeed >= 51 then
+		if true_airspeed >= 61 then
 			neutral = 0
-		elseif true_airspeed < 51 and true_airspeed >= 41 then
-			neutral = actual * math.abs(51 - true_airspeed) / 10
+		elseif true_airspeed < 51 and true_airspeed >= 41 then --this is for transition when the airflow becomes fast enough to move spoilers
+			neutral = actual * math.abs(61 - true_airspeed) / 20
 		else
 			neutral = actual
 		end
@@ -331,7 +331,7 @@ function GetFlapTarget()
 	flap_settings = {0, 1, 5, 15, 20, 25, 30}
 	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 	tas_limits = {-1, 136, 126, 118, 115, 102, 93} --limits in meters per second for load relief system
-	local sys_C_press = globalPropertyiae("777/hydraulics/press", 2)
+	local sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
 	if get(sys_C_press) >= 1000 then
 		local handle_pos = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 		local flap_pos = get(flaps)
@@ -343,7 +343,7 @@ function GetFlapTarget()
 				end
 				if get(flap_pos) > 5 then
 					for i = index,3,-1 do
-						if tas_limits[i] > get(tas) or i == 3 then --load relief retraction is limited to flap 5
+						if tas_limits[i] > get(tas) or i == 3 then --load relief retraction is limited to flap 5 idk why but the fcom says it
 							set(flap_tgt, flap_settings[i])
 							break
 						end
@@ -367,7 +367,7 @@ function GetFlapResponseTime()
 	flap_settings = {0, 1, 5, 15, 20, 25, 30}
 	local target = get(flap_tgt)
 	local actual = get(flaps)
-	local sys_C_press = globalPropertyiae("777/hydraulics/press", 2)
+	local sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
 	if target ~= actual then
 		if math.abs(target-actual) < 0.1 then
 			return 30
@@ -430,8 +430,8 @@ function DrawLinesEICAS()
 	for i=1,4 do
 		local primary_state = GetPrimaryPumpState(i)
 		local demand_state = GetDemandPumpState(i, primary_state)
-		local demand_past = globalPropertyiae("777/hydraulics/pump/demand/past", i)
-		local primary_past = globalPropertyiae("777/hydraulics/pump/primary/past", i)
+		local demand_past = globalPropertyiae("Strato/777/hydraulics/pump/demand/past", i)
+		local primary_past = globalPropertyiae("Strato/777/hydraulics/pump/primary/past", i)
 		local sys_idx = GetSysIdx(i)
 		if get(demand_past) == 1 or get(primary_past) == 1 then
 			if i == 1 then
@@ -459,13 +459,13 @@ function DrawLinesEICAS()
 			elseif i == 3 then
 				if get(demand_past) == 1 then
 					sasl.gl.drawTexture(line_dc2, 694, 330, 80, 640, {0, 1, 0})
-					if get(globalPropertyiae("777/hydraulics/pump/demand/past", 2)) == 0 then --this is done to prevent one arrow from being drawn multiple times
+					if get(globalPropertyiae("Strato/777/hydraulics/pump/demand/past", 2)) == 0 then --this is done to prevent one arrow from being drawn multiple times
 						DrawArrowEICAS(sys_idx)
 					end
 				end
 				if get(primary_past) == 1 then
 					sasl.gl.drawTexture(line_pc2, 753, 329, 112, 640, {0, 1, 0})
-					if get(demand_past) == 0 and get(globalPropertyiae("777/hydraulics/pump/primary/past", 2)) == 0 then
+					if get(demand_past) == 0 and get(globalPropertyiae("Strato/777/hydraulics/pump/primary/past", 2)) == 0 then
 						DrawArrowEICAS(sys_idx)
 					end
 				end
@@ -518,6 +518,21 @@ function update()
 	UpdateElevator(get(elevator)+(elevator_target - get(elevator)) * get(f_time) * ail_response_time)
 end
 
+function onAirportLoaded() --set all the pressures and pumps to normal if engines are running
+	local mixture = globalPropertyf("sim/cockpit2/engine/actuators/mixture_ratio_all")
+	if get(engine_1_n2) > 68 and get(engine_2_n2) > 68 and get(mixture) == 1 then
+		for i=1,4 do
+			local demand = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
+			local primary = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", i)
+			local sys_idx = GetSysIdx(i)
+			local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
+			set(pressure, 3000)
+			set(demand, 1)
+			set(primary, 1)
+		end
+	end
+end
+
 function draw()
 	if get(battery) == 1 or get(gen_1) == 1 or get(gen_2) == 1 then
 		local white = {1, 1, 1}
@@ -535,8 +550,8 @@ function draw()
 			sasl.gl.drawRotatedTexture(valve_open, 90, 341, 930, 68, 68, {0, 1, 0})
 			for i=1,3 do
 				local color = white 
-				local pressure = globalPropertyiae("777/hydraulics/press", i)
-				local quantity = globalPropertyfae("777/hydraulics/qty", i)
+				local pressure = globalPropertyiae("Strato/777/hydraulics/press", i)
+				local quantity = globalPropertyfae("Strato/777/hydraulics/qty", i)
 				if get(pressure) < 2500 then
 					color = amber
 				else
@@ -559,6 +574,8 @@ function draw()
 		end
 	end
 end
+
+onAirportLoaded()
 
 function onModuleDone()
 	sasl.print("Shutting down")
