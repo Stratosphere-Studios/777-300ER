@@ -7,6 +7,9 @@
 --]]
 
 addSearchPath(moduleDirectory .. "/Custom Module/HYD/graphics")
+addSearchPath(moduleDirectory .. "/Custom Module/")
+
+include("misc_tools.lua")
 
 --finding sim datarefs
 
@@ -55,29 +58,8 @@ line_pc1 = loadImage("line_pc1.png")
 line_pc2 = loadImage("line_pc2.png")
 valve_open = loadImage("valve_open.png")
 
-function round(number) --rounds everything behind the decimal
-	return math.floor(number+0.5)
-end
-
-function Round(num, dp) --rounds evcerything until a certain point
-    local mult = 10^(dp or 0)
-    return math.floor(num * mult + 0.5)/mult
-end
-
 tmp = Round(sasl.getElapsedSeconds(timer), 1)
 t = tmp
-
-function indexOf(array, value, round_)
-	if round_ == 1 then
-		value = Round(value, 2)
-	end
-    for i, v in ipairs(array) do
-        if v == value then
-            return i
-        end
-    end
-    return nil
-end
 
 function GetSysIdx(num) --matches pump index with system index
 	if num == 1 then
@@ -407,13 +389,6 @@ function UpdateFlaps(value)
 		local flap = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", i)
 		set(flap, value)
 	end
-end
-
-function DrawRect(x, y, width, height, thickness, color)
-	sasl.gl.drawWideLine(x, y, x + width, y, thickness, color)
-	sasl.gl.drawWideLine(x + width, y, x + width, y - height, thickness, color)
-	sasl.gl.drawWideLine(x + width, y - height, x, y - height, thickness, color)
-	sasl.gl.drawWideLine(x, y - height, x, y, thickness, color)
 end
 
 function DrawArrowEICAS(idx) --draws arrow for each system on eicas hydraulic page
