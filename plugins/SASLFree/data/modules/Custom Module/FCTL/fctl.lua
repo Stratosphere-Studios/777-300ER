@@ -61,7 +61,7 @@ end
 function GetAilResponseTime() --aileron response time based on pressure
 	local pressure = GetMaxHydPress()
 	if pressure > 2000 then
-		return pressure * 7 / 3200
+		return pressure * 7 / 3340
 	else
 		return 1
 	end
@@ -118,9 +118,9 @@ function GetSpoilerResponseTime() --Spoiler response time that is influenced by 
 	local pressure = GetMaxHydPress()
 	local speed = get(tas)
 	if pressure > 2000 and speed < 149 then
-		return pressure * 7 / 3200
+		return pressure * 7 / 3340
 	elseif pressure >= 570 and pressure <= 2000 then
-		return pressure * 2 / 3200
+		return pressure * 2 / 3340
 	else
 		return 1
 	end
@@ -171,7 +171,7 @@ function GetFlapResponseTime() --Flap response time that is influenced by hydrau
 		if math.abs(target-actual) < 0.1 then
 			return 30
 		else
-			return 1 * (get(sys_C_press) / 3200) / math.abs(target - actual)
+			return 1 * (get(sys_C_press) / 3340) / math.abs(target - actual)
 		end
 	else
 		return 1
