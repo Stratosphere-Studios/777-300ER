@@ -1,6 +1,16 @@
+--[[
+*****************************************************************************************
+* Script Name: fctl
+* Author Name: @bruh
+* Script Description: Code for flight controls.
+*****************************************************************************************
+--]]
+
 addSearchPath(moduleDirectory .. "/Custom Module/")
 
 include("misc_tools.lua")
+
+--getting all of the xplane datarefs
 
 outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1) --make separate datarefs for inboard and outboard ailerons
 outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 1)
@@ -14,6 +24,8 @@ yoke_roll_ratio = globalPropertyf("sim/cockpit2/controls/yoke_roll_ratio")
 yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
 yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
 tas = globalPropertyf("sim/flightmodel/position/true_airspeed") --true airspeed in meters per second. Needed for accurate drooping
+
+--creating our own datarefs
 
 flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
@@ -60,12 +72,12 @@ function GetRudderRatio()
 	if IsAcConnected() == 1 then
 		tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
 		tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
-		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then
+		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then --If airspeed provided by the sensors is reliable, modify ratio based on the formula
 			if get(tas_pilot) > 150 then
 				return ratio * (150 / get(tas_pilot))
 			end
 		else
-			if get(flaps) <= 1 then
+			if get(flaps) <= 1 then --If rudder ratio changer is in the degraded mode, there are only 2 ratios: 1.0 with flaps extended, 0.5 with flaps retracted
 				return ratio * 0.5
 			end
 		end
@@ -95,14 +107,14 @@ function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 			neutral = actual
 		end
 	end
-	if yoke_cmd * side > 0.4 and max_press >= 570 and true_airspeed < 430 then
+	if yoke_cmd * side > 0.4 and max_press >= 570 and true_airspeed < 430 then --when deflecting ailerons is not enough, deflect spoilers
 		return neutral + ((yoke_cmd * side - 0.4) / 0.6) * (20 - neutral)
 	else
 		return neutral
 	end
 end
 
-function GetSpoilerResponseTime()
+function GetSpoilerResponseTime() --Spoiler response time that is influenced by hydraulic pressure
 	local pressure = GetMaxHydPress()
 	local speed = get(tas)
 	if pressure > 2000 and speed < 149 then
@@ -150,7 +162,7 @@ function GetFlapTarget()
 	end
 end
 
-function GetFlapResponseTime()
+function GetFlapResponseTime() --Flap response time that is influenced by hydraulic pressure
 	flap_settings = {0, 1, 5, 15, 20, 25, 30}
 	local target = get(flap_tgt)
 	local actual = get(flaps)
@@ -165,6 +177,8 @@ function GetFlapResponseTime()
 		return 1
 	end
 end
+
+--these functions set a bunch of datarefs for flight controls to the same value. I guess this is needed because of something in plane maker
 
 function UpdateElevator(value)
 	for i=1,10 do
@@ -235,7 +249,7 @@ function update()
 	local R_spoiler_target = GetSpoilerTarget(1, get(yoke_roll_ratio))
 	GetFlapTarget()
 	local flap_time = GetFlapResponseTime()
-	UpdateAileron(get(outbd_ail_L)+(L_ail_target - get(outbd_ail_L))*get(f_time)*ail_response_time, -1, 1)
+	UpdateAileron(get(outbd_ail_L)+(L_ail_target - get(outbd_ail_L))*get(f_time)*ail_response_time, -1, 1) --these ginormous formulas are for smooth transitions
 	UpdateAileron(get(outbd_ail_R)+(R_ail_target - get(outbd_ail_R))*get(f_time)*ail_response_time, 1, 1)
 	UpdateAileron(get(rudder)+(rud_target - get(rudder))*get(f_time)*ail_response_time, 1, 2)
 	UpdateSpoilers(get(spoilers_L)+(L_spoiler_target - get(spoilers_L))*get(f_time)*spoiler_response_time, -1)
