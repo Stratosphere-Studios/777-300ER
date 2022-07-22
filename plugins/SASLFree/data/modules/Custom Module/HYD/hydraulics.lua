@@ -2,7 +2,7 @@
 *****************************************************************************************
 * Script Name: Hydraulic
 * Author Name: @bruh
-* Script Description: Code for Hydraulic systems. P.S. code for flight controls will be ported over to xtlua soon™
+* Script Description: Code for Hydraulic systems.
 *****************************************************************************************
 --]]
 
@@ -152,12 +152,27 @@ function GetPrimaryPumpState(idx) --this function defines primary pump logic.
 	return 0
 end
 
+function GetNWorkingHydPumps(sys_num)
+	pumps = {{1}, {2, 3}, {4}}
+	n_pumps = {1, 2, 1}
+	local num = 0
+	for i=1,n_pumps[sys_num] do
+		local primary_state = GetPrimaryPumpState(pumps[sys_num][i])
+		local demand_state = GetDemandPumpState(pumps[sys_num][i], primary_state)
+		if primary_state == 1 then
+			num = num + 1
+		end
+		if demand_state == 1 then
+			num = num + 1
+		end
+	end
+	return num
+end
+
 function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, working pumps, etc
 	for i=1,4,1 do
 		local increase = 0
 		local pumps_on = 0
-		local primary_state = GetPrimaryPumpState(i)
-		local demand_state = GetDemandPumpState(i, primary_state)
 		local sys_idx = GetSysIdx(i)
 		local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
 		local quantity = globalPropertyfae("Strato/777/hydraulics/qty", sys_idx)
@@ -166,13 +181,14 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 		else
 			increase = 20
 		end
-		if demand_state == 1 or primary_state == 1 then
-			if demand_state == 1 and primary_state == 1 then --the more pumps working per system, the faster the pressure will change
-				pumps_on = 2
+		local pumps_on = GetNWorkingHydPumps(sys_idx)
+		if pumps_on > 0 then
+			local desired_pressure = 0
+			if i == 2 or i == 3 then
+				desired_pressure = (3000 + 100 * (pumps_on - 1)) * round(get(quantity)) + 40
 			else
-				pumps_on = 1
+				desired_pressure = (3000 + 200 * (pumps_on - 1)) * round(get(quantity))
 			end
-			local desired_pressure = (3000 + 200 * (pumps_on - 1)) * round(get(quantity))
 			if get(pressure) < desired_pressure then
 				if Round(sasl.getElapsedSeconds(timer), 1) == tmp + delay then
 					if round(get(pressure)+increase*pumps_on) <= desired_pressure then
@@ -301,13 +317,12 @@ function DrawLinesEICAS()
 			set(primary_past, primary_state)
 		end
 	end
-	if round(sasl.getElapsedSeconds(timer)) >= t + 2 then
+	if Round(sasl.getElapsedSeconds(timer)) >= t + 2 then
 		t = round(sasl.getElapsedSeconds(timer))
 	end
 end
 
 function update()
-	--print(IsAcConnected())
 	UpdatePressure(0.5)
 end
 
