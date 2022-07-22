@@ -9,6 +9,7 @@ sasl.options.setInteractivity(true)
 addSearchPath(moduleDirectory.."/Custom Module/EICASCHECK")
 addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
+addSearchPath(moduleDirectory.."/Custom Module/FCTL")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS")
 
 components = {
@@ -32,5 +33,6 @@ components = {
 		position = {2730 , 1400, 1365, 1365},
 		visible = true,
 		fpsLimit = 50
-	}
+	},
+	fctl {}
 }
