@@ -27,6 +27,16 @@ function indexOf(array, value, round_) --returns index of a value in an array.
     return nil
 end
 
+function IsAcConnected() --1 if ac is connected
+	for i=1,3 do
+		local voltage = globalPropertyfae("sim/cockpit2/electrical/bus_volts", i)
+		if get(voltage) > 27 then
+			return 1
+		end
+	end
+	return 0
+end
+
 function DrawRect(x, y, width, height, thickness, color) --draws rectangle with definable line thickness
 	sasl.gl.drawWideLine(x, y, x + width, y, thickness, color)
 	sasl.gl.drawWideLine(x + width, y, x + width, y - height, thickness, color)
