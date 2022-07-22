@@ -16,7 +16,6 @@ gen_2 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 2)
 pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
 pressure_C = globalPropertyiae("Strato/777/hydraulics/press", 2)
 pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
-load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 flap_handle = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 
@@ -96,10 +95,11 @@ function updateHydEicasWarnings()
 end
 
 function draw()
-	if get(battery) == 1 or get(gen_1) == 1 or get(gen_2) == 1 then
+	flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
+	if get(battery) == 1 or IsAcConnected() == 1 then
 		UpdateFlaps()
 		updateHydEicasWarnings()
-		if get(load_relief) == 1 then
+		if get(flap_load_relief) == 1 then
 			drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 			drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 		end
