@@ -19,7 +19,33 @@ pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 flap_handle = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 
+windows = createGlobalPropertyfa("Strato/777/windows", {0, 0})
+
 font = loadFont("BoeingFont.ttf")
+
+function CheckOvht(pump_type) --Returns the second line of the overheat message
+	names = {"L", "C1", "C2", "R"}
+	ovht = {}
+	msg = ""
+	local n_ovht = 0
+	for i=1,4 do
+		local pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
+		if pump_type == 2 then --1 = primary, 2 = demand
+			pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+		end
+		if get(pump_temp) >= 75 then
+			table.insert(ovht, n_ovht + 1, names[i])
+			n_ovht = n_ovht + 1
+		end
+	end
+	msg = table.concat(ovht, ", ")
+	if pump_type == 1 then
+		msg = "PRI " .. msg
+	else
+		msg = "DEM " .. msg
+	end
+	return msg
+end
 
 function Flap_pos2Tape(pos, t_height) --calculates an offset from the top of the flap position bar
 	flap_settings = {0, 1, 5, 15, 20, 25, 30}
@@ -65,10 +91,27 @@ function UpdateFlaps() --this is for updating flap position on eicas
 	end
 end
 
-function updateHydEicasWarnings()
-	local cur_y = 1270
+function UpdateEicasAdvisory()
+	local cur_y = 1245
 	local step = 50
+	--window positions
+	local pos_w_l = globalPropertyfae("Strato/777/windows", 1)
+	local pos_w_r = globalPropertyfae("Strato/777/windows", 2)
 	--Draw cautions
+	local primary_ovht = CheckOvht(1)
+	if primary_ovht ~= "PRI " then
+		drawText(font, 850, cur_y, "HYD OVERHEAT", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+		drawText(font, 850, cur_y, primary_ovht, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+	end
+	local demand_ovht = CheckOvht(2)
+	if demand_ovht ~= "DEM " then
+		drawText(font, 850, cur_y, "HYD OVERHEAT", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+		drawText(font, 850, cur_y, demand_ovht, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+	end
 	if get(pressure_L) < 2500 and get(pressure_C) < 2500 and get(pressure_R) < 2500 then
 		drawText(font, 850, cur_y, "HYD PRESS SYS L+C+R", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
 		cur_y = cur_y - step
@@ -91,6 +134,17 @@ function updateHydEicasWarnings()
 		drawText(font, 850, cur_y, "HYD PRESS SYS R", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
 		cur_y = cur_y - step
 	end
+	--window advisory
+	if get(pos_w_l) > 0 and get(pos_w_r) == 0 then
+		drawText(font, 850, cur_y, "WINDOW FLT DECK L", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+	elseif get(pos_w_l) == 0 and get(pos_w_r) > 0 then
+		drawText(font, 850, cur_y, "WINDOW FLT DECK R", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+	elseif get(pos_w_l) > 0 and get(pos_w_r) > 0 then
+		drawText(font, 850, cur_y, "WINDOWS", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+	end
 	--drawText(font, 850, cur_y, "RAT UNLOCKED", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
 end
 
@@ -98,7 +152,7 @@ function draw()
 	flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 	if get(battery) == 1 or IsAcConnected() == 1 then
 		UpdateFlaps()
-		updateHydEicasWarnings()
+		UpdateEicasAdvisory()
 		if get(flap_load_relief) == 1 then
 			drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 			drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
