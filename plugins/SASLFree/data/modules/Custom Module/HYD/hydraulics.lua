@@ -24,15 +24,19 @@ engine_2_n2 = globalPropertyfae("sim/flightmodel/engine/ENGN_N2_", 2)
 
 --creating datarefs
 
-hyd_temps_primry = createGlobalPropertyfa("Strato/777/hydraulics/pump/primary/temperatures", {0, 0, 0, 0})
-hyd_temps_demand = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/temperatures", {0, 0, 0, 0})
+
+
 temp_acc = createGlobalPropertyfa("Strato/777/hydraulics/t_acc", {0, 0, 0})
 hyd_qty = createGlobalPropertyfa("Strato/777/hydraulics/qty", {0.98, 0.95, 0.97})
 hyd_pressure = createGlobalPropertyia("Strato/777/hydraulics/press", {50, 50, 50}) --this dataref is shared bc we need it to be readable from xtlua smh
 demand_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/state", {0, 0, 0, 0})
 demand_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/past", {0, 0, 0, 0}) --this is needed for accurate schematic update on the hydraulic page of eicas since it happens with a 2/3 second delay irl
+hyd_temps_demand = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/temperatures", {0, 0, 0, 0})
+hyd_fail_demand = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fail", {0, 0, 0, 0})
 primary_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/state", {1, 0, 0, 1})
 primary_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/past", {0, 0, 0, 0})
+hyd_temps_primary = createGlobalPropertyfa("Strato/777/hydraulics/pump/primary/temperatures", {0, 0, 0, 0})
+hyd_fail_primary = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/fail", {0, 0, 0, 0})
 
 timer = sasl.createTimer()
 sasl.startTimer(timer)
@@ -83,6 +87,10 @@ function GetFltState() --this is needed for demand pump activation during takeof
 end
 
 function GetDemandPumpState(idx, primary_state)
+	local fault = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", idx) 
+	if get(fault) == 1 then
+		return -1
+	end
 	if IsAcConnected() == 1 then
 		local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", idx)
 		local demand_2 = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", 2)
@@ -99,11 +107,11 @@ function GetDemandPumpState(idx, primary_state)
 			local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
 			local h_load = globalPropertyf("Strato/777/hydraulics/load_total")
 			local flt_state = GetFltState()
-			if get(pressure) < 2700 or flt_state ~= 0 or primary_state == 0 or get(h_load) > 0.5 then --if the pump is in auto, turn it on only if the plane is landing/taking off or if there isn't enough pressure
+			if get(pressure) < 2700 or flt_state ~= 0 or primary_state ~= 1 or get(h_load) > 0.5 then --if the pump is in auto, turn it on only if the plane is landing/taking off or if there isn't enough pressure
 				if idx ~= 3 then
 					return 1
 				else
-					if flt_state ~= 0 or get(h_load) > 0.5 then
+					if flt_state ~= 0 or get(h_load) > 0.5 or get(demand_2) == 0 then
 						return 1
 					end
 				end
@@ -116,6 +124,10 @@ end
 function GetPrimaryPumpState(idx) --this function defines primary pump logic.
 	local pump_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", idx)
 	local apu_running = globalPropertyi("sim/cockpit2/electrical/APU_running")
+	local fault = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", idx) 
+	if get(fault) == 1 then
+		return -1
+	end
 	if idx == 1 then
 		if get(pump_state) == 1 and get(engine_1_n2) >= 50 then
 			return 1
@@ -189,6 +201,8 @@ function UpdateTemperatures(delay)
 		end
 		local pumps_on_total = GetTotalPumpsWorking()
 		for i=1,4 do
+			local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
+			local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 			--pump temperatures, states
 			local primary_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i) 
 			local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
@@ -208,7 +222,6 @@ function UpdateTemperatures(delay)
 				if pumps_on_total > 0 then
 					pump_load = get(h_load) / pumps_on_total
 				end
-				--print(pump_load)
 				if get(oat) > 5 then
 					if get(t_acc) < 12.5 * pumps_on then --Updating accumulated temperature
 						set(t_acc, get(t_acc) + 2 * pump_load * pumps_on)
@@ -222,8 +235,14 @@ function UpdateTemperatures(delay)
 				end
 				local tgt_temp_p = get(oat) + get(t_acc) + 100 * pump_load * primary_state
 				set(primary_temp, get(primary_temp) + (tgt_temp_p - get(primary_temp)) * 0.4)
+				if tgt_temp_p > 110 then
+					set(primary_fail, 1)
+				end
 				local tgt_temp_d = get(oat) + get(t_acc) + 100 * pump_load * demand_state
 				set(demand_temp, get(demand_temp) + (tgt_temp_d - get(demand_temp)) * 0.4)
+				if tgt_temp_d > 110 then
+					set(demand_fail, 1)
+				end
 			else
 				set(primary_temp, get(primary_temp) + (get(oat) * 0.9 - get(primary_temp)) * 0.4)
 				set(demand_temp, get(demand_temp) + (get(oat) * 0.9 - get(demand_temp)) * 0.4)
@@ -242,19 +261,25 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 			local quantity = globalPropertyfae("Strato/777/hydraulics/qty", sys_idx)
 			local pumps_on = GetNWorkingHydPumps(sys_idx)
 			if pumps_on > 0 then
+				local primary_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i) 
+				local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+				local decrease = 0 --decrease due to performance degradation when overheating
 				local desired_pressure = 0
 				local increase = 0
 				local load_total = globalPropertyf("Strato/777/hydraulics/load_total")
 				local total_pumps = GetTotalPumpsWorking()
+				if get(primary_temp) >= 75 or get(demand_temp) >= 75 then
+					decrease = 400 / pumps_on
+				end
 				if get(pressure) < 2700 then
 					increase = 80 * (1 - get(load_total) / total_pumps) --pressure increase would vary depending on load
 				else
 					increase = 20 * (1 - get(load_total) / total_pumps)
 				end
 				if i == 2 or i == 3 then
-					desired_pressure = (3000 + 100 * (pumps_on - 1)) * round(get(quantity)) + 40 --Center hydraulic system is more powerful than others
+					desired_pressure = (3000 + 100 * (pumps_on - 1)) * round(get(quantity)) + 40 - decrease --Center hydraulic system is more powerful than others
 				else
-					desired_pressure = (3000 + 200 * (pumps_on - 1)) * round(get(quantity))
+					desired_pressure = (3000 + 200 * (pumps_on - 1)) * round(get(quantity)) - decrease 
 				end
 				if get(pressure) < desired_pressure then
 					if round(get(pressure)+increase*pumps_on) <= desired_pressure then
@@ -319,7 +344,7 @@ function DrawLinesEICAS()
 				end
 				if get(primary_past) == 1 then --this is so that lines for both primary and demand pumps can be drawn at the same time
 					sasl.gl.drawTexture(line_L, 157, 330, -90, 643, {0, 1, 0})
-					if get(demand_past) == 0 then
+					if get(demand_past) <= 0 then
 						DrawArrowEICAS(sys_idx)
 					end
 				end
@@ -330,20 +355,22 @@ function DrawLinesEICAS()
 				end
 				if get(primary_past) == 1 then
 					sasl.gl.drawTexture(line_pc1, 446, 328, 167, 643, {0, 1, 0})
-					if get(demand_past) == 0 then
+					if get(demand_past) <= 0 then
 						DrawArrowEICAS(sys_idx)
 					end
 				end
 			elseif i == 3 then
 				if get(demand_past) == 1 then
+					local demand_2 = globalPropertyiae("Strato/777/hydraulics/pump/demand/past", 2)
 					sasl.gl.drawTexture(line_dc2, 694, 330, 80, 640, {0, 1, 0})
-					if get(globalPropertyiae("Strato/777/hydraulics/pump/demand/past", 2)) == 0 then --this is done to prevent one arrow from being drawn multiple times
+					if get(demand_2) <= 0 then --this is done to prevent one arrow from being drawn multiple times
 						DrawArrowEICAS(sys_idx)
 					end
 				end
 				if get(primary_past) == 1 then
+					local primary_2 = globalPropertyiae("Strato/777/hydraulics/pump/primary/past", 2)
 					sasl.gl.drawTexture(line_pc2, 753, 329, 112, 640, {0, 1, 0})
-					if get(demand_past) == 0 and get(globalPropertyiae("Strato/777/hydraulics/pump/primary/past", 2)) == 0 then
+					if get(demand_past) <= 0 and get(primary_2) <= 0 then
 						DrawArrowEICAS(sys_idx)
 					end
 				end
@@ -354,7 +381,7 @@ function DrawLinesEICAS()
 				end
 				if get(primary_past) == 1 then
 					sasl.gl.drawTexture(line_L, 1205, 330, 90, 643, {0, 1, 0})
-					if get(demand_past) == 0 then
+					if get(demand_past) <= 0 then
 						DrawArrowEICAS(sys_idx)
 					end
 				end
@@ -429,9 +456,13 @@ function draw()
 				local sys_idx = GetSysIdx(i)
 				if primary_state == 1 then
 					DrawRect(primary_coords[1 + 2 * (i - 1)], primary_coords[2 + 2 * (i - 1)], 74, 99, 7, green)
+				elseif primary_state == -1 then
+					DrawCrossedRect(primary_coords[1 + 2 * (i - 1)], primary_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)
 				end
 				if demand_state == 1 then
 					DrawRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, green)
+				elseif demand_state == -1 then
+					DrawCrossedRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)	
 				end
 				if get(demand_pump_temp) >= 75 then
 					drawText(font, ovht_d[1 + 2 * (i - 1)], ovht_d[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
