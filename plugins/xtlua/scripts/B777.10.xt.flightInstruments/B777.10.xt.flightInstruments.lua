@@ -37,6 +37,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 local B777_kgs_to_lbs = 2.2046226218
+local B777_ft_to_mtrs = 0.3048
 local B777_adiru_time_remaining_min = 0
 
 --*************************************************************************************--
@@ -65,8 +66,16 @@ simDR_groundSpeed                      = find_dataref("sim/flightmodel/position/
 
 simDR_bus_voltage                      = find_dataref("sim/cockpit2/electrical/bus_volts")
 
+simDR_ap_airspeed                      = find_dataref("sim/cockpit/autopilot/airspeed")
+
+simDR_alt_ft_capt                      = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
+simDR_autopilot_alt                    = find_dataref("sim/cockpit/autopilot/altitude")
+
 B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
 
+simDR_aoa                             = find_dataref("sim/flightmodel2/misc/AoA_angle_degrees")
+simDR_radio_alt_capt                  = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
+simDR_onGround                        = find_dataref("sim/flightmodel/failures/onground_any")
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -83,7 +92,8 @@ B777DR_l_fuel_lbs                      = deferred_dataref("Strato/777/displays/l
 
 B777DR_displayed_hdg                   = deferred_dataref("Strato/777/displays/hdg", "number") -- what the MCP heading display actually shows
 B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number")
-B777DR_pfd_mtrs_capt                   = deferred_dataref("Strato/777/displays/mtrs_capt", "number")
+B777DR_alt_mtrs_capt                   = deferred_dataref("Strato/777/displays/alt_mtrs_capt", "number")
+B777DR_autopilot_alt_mtrs_capt         = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what pages the lower eicas is on
 
@@ -100,6 +110,10 @@ B777DR_adiru_status                    = deferred_dataref("Strato/777/fltInst/ad
 B777DR_adiru_time_remaining_min        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_min", "number")
 B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_sec", "number")
 B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltInst/adiru/aligning", "number")
+
+B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
+B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
+B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
@@ -195,6 +209,10 @@ function B777_align_adiru()
 	B777_adiru_time_remaining_min = 0
 end
 
+function disableRAOutline()
+	B777DR_outlined_RA = 0
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
@@ -267,6 +285,22 @@ function after_physics()
 
 --	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
+	B777DR_airspeed_bug_diff = simDR_ap_airspeed - B777DR_ias_capt_indicator
+	B777DR_alt_mtrs_capt = simDR_alt_ft_capt * B777_ft_to_mtrs
+	B777DR_autopilot_alt_mtrs_capt = simDR_autopilot_alt * B777_ft_to_mtrs
+
+	if simDR_onGround == 1 then
+		B777DR_displayed_aoa = 0
+	else
+		B777DR_displayed_aoa = simDR_aoa
+	end
+
+	if simDR_onGround == 0 then
+		if simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2490 and simDR_vs_capt < 0 then
+			B777DR_outlined_RA = 1
+			if not is_timer_scheduled(disableRAOutline) then run_after_time(disableRAOutline, 10) end
+		end
+	end
 end
 
 --function after_replay()

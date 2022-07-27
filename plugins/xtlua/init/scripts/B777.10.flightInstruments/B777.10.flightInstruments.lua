@@ -41,7 +41,8 @@ B777DR_l_fuel_lbs                      = deferred_dataref("Strato/777/displays/l
 
 B777DR_displayed_hdg                   = deferred_dataref("Strato/777/displays/hdg", "number") -- what the MCP heading display actually shows
 B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number")
-B777DR_pfd_mtrs_capt                   = deferred_dataref("Strato/777/displays/mtrs_capt", "number")
+B777DR_alt_mtrs_capt                   = deferred_dataref("Strato/777/displays/alt_mtrs_capt", "number")
+B777DR_autopilot_alt_mtrs_capt         = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what pages the lower eicas is on
 
@@ -58,6 +59,10 @@ B777DR_adiru_status                    = deferred_dataref("Strato/777/fltInst/ad
 B777DR_adiru_time_remaining_min        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_min", "number")
 B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/adiru/time_remaining_sec", "number")
 B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltInst/adiru/aligning", "number")
+
+B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
+B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
+B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
