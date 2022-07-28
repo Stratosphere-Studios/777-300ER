@@ -5,5 +5,11 @@
 [STRATO777 INFO]: [LUA]: loading	eicascheck
 [STRATO777 INFO]: [LUA]: including	checklist.lua
 [STRATO777 INFO]: [LUA]: loading	Cursor
+[STRATO777 INFO]: [LUA]: loading	hydraulics
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	eicas
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	fctl
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: Module loaded
 [STRATO777 INFO]: [LUA]: loading	interactive
