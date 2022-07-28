@@ -73,6 +73,8 @@ If you want to see more update history, you can check our [old repository.](http
 
 [Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS, SASL integration.
 
+[BRUHegg](https://github.com/BRUHegg): Code for various systems
+
 Potatohead123: Landing gear, cockpit, engines.
 
 [mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: XTLua, help, and some borrowed code (within license restrictions)
