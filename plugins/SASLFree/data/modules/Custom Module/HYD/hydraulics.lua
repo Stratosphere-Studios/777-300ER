@@ -233,15 +233,19 @@ function UpdateTemperatures(delay)
 						set(t_acc, get(t_acc) - 0.4) --if oat is too small, decrease accumulated temperature
 					end
 				end
-				local tgt_temp_p = get(oat) + get(t_acc) + 100 * pump_load * primary_state
-				set(primary_temp, get(primary_temp) + (tgt_temp_p - get(primary_temp)) * 0.4)
-				if tgt_temp_p > 110 then
-					set(primary_fail, 1)
+				if get(primary_fail) == 0 then
+					local tgt_temp_p = get(oat) + get(t_acc) + 100 * pump_load * primary_state
+					set(primary_temp, get(primary_temp) + (tgt_temp_p - get(primary_temp)) * 0.4)
+					if tgt_temp_p > 110 then
+						set(primary_fail, 1)
+					end
 				end
-				local tgt_temp_d = get(oat) + get(t_acc) + 100 * pump_load * demand_state
-				set(demand_temp, get(demand_temp) + (tgt_temp_d - get(demand_temp)) * 0.4)
-				if tgt_temp_d > 110 then
-					set(demand_fail, 1)
+				if get(demand_fail) == 0 then
+					local tgt_temp_d = get(oat) + get(t_acc) + 100 * pump_load * demand_state
+					set(demand_temp, get(demand_temp) + (tgt_temp_d - get(demand_temp)) * 0.4)
+					if tgt_temp_d > 110 then
+						set(demand_fail, 1)
+					end
 				end
 			else
 				set(primary_temp, get(primary_temp) + (get(oat) * 0.9 - get(primary_temp)) * 0.4)
