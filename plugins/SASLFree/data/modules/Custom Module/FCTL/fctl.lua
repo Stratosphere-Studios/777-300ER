@@ -12,10 +12,10 @@ include("misc_tools.lua")
 
 --getting all of the xplane datarefs
 
+fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
 outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1) --make separate datarefs for inboard and outboard ailerons
 outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 1)
 spoilers_L = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 1)
-fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
 spoilers_R = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 1)
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 elevator = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",1)
@@ -27,10 +27,21 @@ tas = globalPropertyf("sim/flightmodel/position/true_airspeed") --true airspeed 
 
 --creating our own datarefs
 
+hyd_load = createGlobalPropertyfa("Strato/777/hydraulics/load", {0, 0, 0, 0, 0, 0, 0})
+hyd_load_total = createGlobalPropertyf("Strato/777/hydraulics/load_total", 0)
 flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 
 set(fctl_ovrd, 1)
+
+function UpdateLoad()
+	local l = 0
+	for i=1,7 do
+		hyd_load = globalPropertyfae("Strato/777/hydraulics/load", i)
+		l = l + get(hyd_load)
+	end
+	set(hyd_load_total, l)
+end
 
 function GetMaxHydPress() --since some things are driven by all 3 hydraulic systems, we need to know the maximum pressure
 	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
@@ -67,14 +78,31 @@ function GetAilResponseTime() --aileron response time based on pressure
 	end
 end
 
+function GetAilTarget(side, yoke_cmd)
+	local ail_ratio = GetAilRatio(36)
+	local ail_neutral = GetAilNeutral(side, ail_ratio)
+	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 3)
+	if side == 1 then
+		h_load = globalPropertyfae("Strato/777/hydraulics/load", 4)
+	end
+	if ail_ratio > 0 then
+		set(h_load, math.abs((ail_ratio / 2) * yoke_cmd) * (0.3 / ail_ratio))
+	else
+		set(h_load, 0)
+	end
+	return ail_neutral + (ail_ratio / 2) * yoke_cmd
+end
+
 function GetRudderRatio()
-	ratio = GetAilRatio(40)
+	ratio = GetAilRatio(54)
 	if IsAcConnected() == 1 then
 		tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
 		tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
 		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then --If airspeed provided by the sensors is reliable, modify ratio based on the formula
-			if get(tas_pilot) > 150 then
-				return ratio * (150 / get(tas_pilot))
+			if get(tas_pilot) > 135 and get(tas_pilot) >= 269 then
+				return ratio - (get(tas_pilot) - 135) * (36 / 115)
+			elseif get(tas_pilot) > 269 then
+				return 12
 			end
 		else
 			if get(flaps) <= 1 then --If rudder ratio changer is in the degraded mode, there are only 2 ratios: 1.0 with flaps extended, 0.5 with flaps retracted
@@ -87,10 +115,12 @@ end
 
 function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 	local actual = 0
+	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 1)
 	if side == -1 then
 		actual = get(spoilers_L)
 	else
 		actual = get(spoilers_R)
+		h_load = globalPropertyfae("Strato/777/hydraulics/load", 2)
 	end
 	local handle_pos = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
 	local true_airspeed = get(tas)
@@ -108,8 +138,15 @@ function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 		end
 	end
 	if yoke_cmd * side > 0.4 and max_press >= 570 and true_airspeed < 430 then --when deflecting ailerons is not enough, deflect spoilers
-		return neutral + ((yoke_cmd * side - 0.4) / 0.6) * (20 - neutral)
+		local tgt = neutral + ((yoke_cmd * side - 0.4) / 0.6) * (20 - neutral)
+		set(h_load, math.abs(tgt - neutral) * 0.0075)
+		return tgt
 	else
+		if max_press > 100 then
+			set(h_load, math.abs(actual - neutral) * 0.0075)
+		else
+			set(h_load, 0)
+		end
 		return neutral
 	end
 end
@@ -126,11 +163,12 @@ function GetSpoilerResponseTime() --Spoiler response time that is influenced by 
 	end
 end
 
-function GetFlapTarget()
+function SetFlapTarget()
 	flap_settings = {0, 1, 5, 15, 20, 25, 30}
 	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 	tas_limits = {-1, 136, 126, 118, 115, 102, 93} --limits in meters per second for load relief system
 	local sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
+	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 5)
 	if get(sys_C_press) >= 1000 then
 		local handle_pos = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 		local flap_pos = get(flaps)
@@ -160,6 +198,11 @@ function GetFlapTarget()
 	else
 		set(flap_tgt, get(flaps))
 	end
+	if get(flap_tgt) ~= get(flaps) then --update load dataref
+		set(h_load, 0.2)
+	else
+		set(h_load, 0)
+	end
 end
 
 function GetFlapResponseTime() --Flap response time that is influenced by hydraulic pressure
@@ -176,6 +219,28 @@ function GetFlapResponseTime() --Flap response time that is influenced by hydrau
 	else
 		return 1
 	end
+end
+
+function GetElevatorTarget(yoke_cmd)
+	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 6)
+	local elevator_ratio = GetAilRatio(40)
+	if elevator_ratio > 0 then
+		set(h_load, math.abs((elevator_ratio / 2) * yoke_cmd * (0.3 / elevator_ratio)))
+	else
+		set(h_load, 0)
+	end
+	return (elevator_ratio / 2) * yoke_cmd * -1
+end
+
+function GetRudderTarget(yoke_cmd)
+	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 7)
+	local rud_ratio = GetRudderRatio()
+	if rud_ratio > 0 then
+		set(h_load, math.abs((rud_ratio / 2) * yoke_cmd) * (0.3 / rud_ratio))
+	else
+		set(h_load, 0)
+	end
+	return (rud_ratio / 2) * yoke_cmd
 end
 
 --these functions set a bunch of datarefs for flight controls to the same value. I guess this is needed because of something in plane maker
@@ -233,21 +298,18 @@ function UpdateFlaps(value)
 end
 
 function update()
+	UpdateLoad()
 	local f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
-	local ail_ratio = GetAilRatio(36)
 	local rud_ratio = GetRudderRatio()
-	local elevator_ratio = GetAilRatio(40)
-	local c_L_ail_neutral = GetAilNeutral(-1, ail_ratio)
-	local c_R_ail_neutral = GetAilNeutral(1, ail_ratio)
-	local elevator_target = (elevator_ratio / 2) * get(yoke_pitch_ratio) * -1
-	local L_ail_target = c_L_ail_neutral + (ail_ratio / 2) * get(yoke_roll_ratio)
-	local R_ail_target = c_R_ail_neutral + (ail_ratio / 2) * get(yoke_roll_ratio)
-	local rud_target = (rud_ratio / 2) * get(yoke_heading_ratio)
-	local ail_response_time = GetAilResponseTime()
-	local spoiler_response_time = GetSpoilerResponseTime()
+	local elevator_target = GetElevatorTarget(get(yoke_pitch_ratio))
+	local L_ail_target = GetAilTarget(-1, get(yoke_roll_ratio))
+	local R_ail_target = GetAilTarget(1, get(yoke_roll_ratio))
 	local L_spoiler_target = GetSpoilerTarget(-1, get(yoke_roll_ratio))
 	local R_spoiler_target = GetSpoilerTarget(1, get(yoke_roll_ratio))
-	GetFlapTarget()
+	local rud_target = GetRudderTarget(get(yoke_heading_ratio))
+	local ail_response_time = GetAilResponseTime()
+	local spoiler_response_time = GetSpoilerResponseTime()
+	SetFlapTarget()
 	local flap_time = GetFlapResponseTime()
 	UpdateAileron(get(outbd_ail_L)+(L_ail_target - get(outbd_ail_L))*get(f_time)*ail_response_time, -1, 1) --these ginormous formulas are for smooth transitions
 	UpdateAileron(get(outbd_ail_R)+(R_ail_target - get(outbd_ail_R))*get(f_time)*ail_response_time, 1, 1)

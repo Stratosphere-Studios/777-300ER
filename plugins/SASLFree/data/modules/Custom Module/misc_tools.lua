@@ -43,3 +43,12 @@ function DrawRect(x, y, width, height, thickness, color) --draws rectangle with 
 	sasl.gl.drawWideLine(x + width, y - height, x, y - height, thickness, color)
 	sasl.gl.drawWideLine(x, y - height, x, y, thickness, color)
 end
+
+function DrawCrossedRect(x, y, width, height, thickness, color) --draws rectangle with definable line thickness
+	sasl.gl.drawWideLine(x, y, x + width, y, thickness, color)
+	sasl.gl.drawWideLine(x + width, y, x + width, y - height, thickness, color)
+	sasl.gl.drawWideLine(x + width, y - height, x, y - height, thickness, color)
+	sasl.gl.drawWideLine(x, y - height, x, y, thickness, color)
+	sasl.gl.drawWideLine(x, y, x + width, y - height, thickness, color)
+	sasl.gl.drawWideLine(x + width, y, x, y - height, thickness, color)
+end
