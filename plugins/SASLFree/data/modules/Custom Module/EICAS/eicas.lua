@@ -23,10 +23,11 @@ windows = createGlobalPropertyfa("Strato/777/windows", {0, 0})
 
 font = loadFont("BoeingFont.ttf")
 
-function CheckOvht(pump_type) --Returns the second line of the overheat message
+function CheckOvht(pump_type, cur_y, step) --Returns the second line of the overheat message
 	names = {"L", "C1", "C2", "R"}
 	ovht = {}
-	msg = ""
+	local msg1 = ""
+	local msg2 = ""
 	local n_ovht = 0
 	for i=1,4 do
 		local pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
@@ -38,13 +39,62 @@ function CheckOvht(pump_type) --Returns the second line of the overheat message
 			n_ovht = n_ovht + 1
 		end
 	end
-	msg = table.concat(ovht, ", ")
-	if pump_type == 1 then
-		msg = "PRI " .. msg
-	else
-		msg = "DEM " .. msg
+	if n_ovht > 0 then
+		msg1 = ovht[1]
+		if pump_type == 1 then
+			msg1 = "HYD OVERHEAT PRI " .. msg1
+		else
+			msg1 = "HYD OVERHEAT DEM " .. msg1
+		end
+		drawText(font, 850, cur_y, msg1, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
 	end
-	return msg
+	if n_ovht > 1 then
+		msg2 = table.concat(ovht, ", ", 2) --Make a string from table elemants starting from index 2
+		drawText(font, 850, cur_y, msg2, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07}) --displaying other pump names on a different string
+		cur_y = cur_y - step
+	end
+	return cur_y
+end
+
+function CheckFail(pump_type, cur_y, step)
+	names = {"L", "C1", "C2", "R"}
+	fail = {}
+	msg1 = ""
+	msg2 = ""
+	local n_fail = 0
+	for i=1,4 do
+		local pump_fail = globalPropertyfae("Strato/777/hydraulics/pump/primary/fail", i)
+		local pump_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", i)
+		if pump_type == 2 then --1 = primary, 2 = demand
+			pump_fail = globalPropertyfae("Strato/777/hydraulics/pump/demand/fail", i)
+			pump_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
+		end
+		if get(pump_fail) == 1 and get(pump_state) > 0 then
+			table.insert(fail, n_fail + 1, names[i])
+			n_fail = n_fail + 1
+		end
+	end
+	if n_fail > 0 then
+		if n_fail > 1 then
+			msg1 = table.concat(fail, ", ", 1, 2)
+		elseif n_fail == 1 then
+			msg1 = table.concat(fail, ", ", 1, 1)
+		end
+		if pump_type == 1 then
+			msg1 = "HYD PRESS PRI " .. msg1
+		else            
+			msg1 = "HYD PRESS DEM " .. msg1
+		end
+		drawText(font, 850, cur_y, msg1, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+		cur_y = cur_y - step
+		if n_fail > 2 then
+			msg2 = table.concat(fail, ", ", 3) 
+			drawText(font, 850, cur_y, msg2, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
+			cur_y = cur_y - step
+		end
+	end
+	return cur_y
 end
 
 function Flap_pos2Tape(pos, t_height) --calculates an offset from the top of the flap position bar
@@ -98,20 +148,10 @@ function UpdateEicasAdvisory()
 	local pos_w_l = globalPropertyfae("Strato/777/windows", 1)
 	local pos_w_r = globalPropertyfae("Strato/777/windows", 2)
 	--Draw cautions
-	local primary_ovht = CheckOvht(1)
-	if primary_ovht ~= "PRI " then
-		drawText(font, 850, cur_y, "HYD OVERHEAT", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
-		cur_y = cur_y - step
-		drawText(font, 850, cur_y, primary_ovht, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
-		cur_y = cur_y - step
-	end
-	local demand_ovht = CheckOvht(2)
-	if demand_ovht ~= "DEM " then
-		drawText(font, 850, cur_y, "HYD OVERHEAT", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
-		cur_y = cur_y - step
-		drawText(font, 850, cur_y, demand_ovht, 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
-		cur_y = cur_y - step
-	end
+	cur_y = CheckOvht(1, cur_y, step)
+	cur_y = CheckOvht(2, cur_y, step)
+	cur_y = CheckFail(1, cur_y, step)
+	cur_y = CheckFail(2, cur_y, step)
 	if get(pressure_L) < 2500 and get(pressure_C) < 2500 and get(pressure_R) < 2500 then
 		drawText(font, 850, cur_y, "HYD PRESS SYS L+C+R", 50, false, false, TEXT_ALIGN_LEFT, {1, 0.96, 0.07})
 		cur_y = cur_y - step
