@@ -289,10 +289,10 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 				local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
 				local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
 				local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
-				local decrease = 0 --decrease due to performance degradation when overheating
 				local desired_pressure = 0
 				local increase = 0
 				local load_total = globalPropertyf("Strato/777/hydraulics/load_total")
+				local decrease = 100 * Round(get(load_total), 1) --decrease due to performance degradation when overheating
 				local total_pumps = GetTotalPumpsWorking()
 				if get(primary_temp) >= 75 and get(primary_fail) == 0 or get(demand_temp) >= 75 and get(demand_fail) == 0 then
 					decrease = 400 / pumps_on
