@@ -19,9 +19,35 @@ pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 flap_handle = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 
+recall = createGlobalPropertyi("Strato/777/eicas/rcl", 0)
+recall_past = createGlobalPropertyi("Strato/777/eicas/rcl_past", 0)
+canc = createGlobalPropertyi("Strato/777/eicas/canc", 0)
 windows = createGlobalPropertyfa("Strato/777/windows", {0, 0})
 
 font = loadFont("BoeingFont.ttf")
+
+timer = sasl.createTimer()
+sasl.startTimer(timer)
+
+tmp = Round(sasl.getElapsedSeconds(timer), 1)
+
+function UpdateCanc()
+	if get(recall) ~= get(recall_past) then
+		if get(recall) == 0 and Round(sasl.getElapsedSeconds(timer), 1) == tmp + 1 then
+			if get(canc) == 1 then
+				set(canc, 0)
+			else
+				set(canc, 1)
+			end
+			set(recall_past, get(recall))
+		elseif get(recall) == 1 then
+			set(recall_past, get(recall))
+		end
+	end
+	if Round(sasl.getElapsedSeconds(timer), 1) == tmp + 1 then
+		tmp = tmp + 1
+	end
+end
 
 function CheckOvht(pump_type, cur_y, step) --Returns the second line of the overheat message
 	names = {"L", "C1", "C2", "R"}
@@ -191,8 +217,14 @@ end
 function draw()
 	flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 	if get(battery) == 1 or IsAcConnected() == 1 then
+		UpdateCanc()
 		UpdateFlaps()
-		UpdateEicasAdvisory()
+		if get(canc) == 0 then
+			UpdateEicasAdvisory()
+		end
+		if get(recall_past) == 1 then
+			drawText(font, 850, 680, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+		end
 		if get(flap_load_relief) == 1 then
 			drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 			drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
