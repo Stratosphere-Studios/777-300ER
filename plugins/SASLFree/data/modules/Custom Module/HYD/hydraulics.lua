@@ -24,8 +24,6 @@ engine_2_n2 = globalPropertyfae("sim/flightmodel/engine/ENGN_N2_", 2)
 
 --creating datarefs
 
-
-
 temp_acc = createGlobalPropertyfa("Strato/777/hydraulics/t_acc", {0, 0, 0})
 hyd_qty = createGlobalPropertyfa("Strato/777/hydraulics/qty", {0.98, 0.95, 0.97})
 hyd_pressure = createGlobalPropertyia("Strato/777/hydraulics/press", {50, 50, 50}) --this dataref is shared bc we need it to be readable from xtlua smh
@@ -33,10 +31,14 @@ demand_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/s
 demand_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/past", {0, 0, 0, 0}) --this is needed for accurate schematic update on the hydraulic page of eicas since it happens with a 2/3 second delay irl
 hyd_temps_demand = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/temperatures", {0, 0, 0, 0})
 hyd_fail_demand = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fail", {0, 0, 0, 0})
+demand_fault_sts = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fault_sts", {0, 0, 0, 0}) --status of the light itself
+demand_fault_physical = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/fault_physical", {0, 0, 0, 0})
+demand_fault_tgt = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fault_tgt", {0, 0, 0, 0})
 primary_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/state", {1, 0, 0, 1})
 primary_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/past", {0, 0, 0, 0})
 hyd_temps_primary = createGlobalPropertyfa("Strato/777/hydraulics/pump/primary/temperatures", {0, 0, 0, 0})
 hyd_fail_primary = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/fail", {0, 0, 0, 0})
+primary_fault = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/fault", {0, 0, 0, 0})
 
 timer = sasl.createTimer()
 sasl.startTimer(timer)
@@ -55,6 +57,24 @@ valve_open = loadImage("valve_open.png")
 tmp = Round(sasl.getElapsedSeconds(timer), 1) --For updating hydraulic pressure
 t = tmp --For EICAS
 t1 = tmp --For updating temperatures
+
+function UpdateLights()
+	for i=1,4 do
+		local l_tgt = globalPropertyiae("Strato/777/hydraulics/pump/demand/fault_tgt", i)
+		local l_physical = globalPropertyfae("Strato/777/hydraulics/pump/demand/fault_physical", i)
+		local l_sts = globalPropertyiae("Strato/777/hydraulics/pump/demand/fault_sts", i)
+		if get(l_tgt) ~= get(l_sts) then
+			set(l_sts, get(l_tgt))
+		end
+		if get(l_tgt) ~= get(l_physical) then
+			if math.abs(get(l_tgt) - get(l_physical)) < 0.07 then
+				set(l_physical, get(l_tgt))
+			else
+				set(l_physical, get(l_physical)+(get(l_tgt) - get(l_physical))*0.1)
+			end
+		end
+	end
+end
 
 function GetSysIdx(num) --matches pump index with system index
 	if num == 1 then
@@ -267,12 +287,14 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 			if pumps_on > 0 then
 				local primary_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i) 
 				local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+				local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
+				local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 				local decrease = 0 --decrease due to performance degradation when overheating
 				local desired_pressure = 0
 				local increase = 0
 				local load_total = globalPropertyf("Strato/777/hydraulics/load_total")
 				local total_pumps = GetTotalPumpsWorking()
-				if get(primary_temp) >= 75 or get(demand_temp) >= 75 then
+				if get(primary_temp) >= 75 and get(primary_fail) == 0 or get(demand_temp) >= 75 and get(demand_fail) == 0 then
 					decrease = 400 / pumps_on
 				end
 				if get(pressure) < 2700 then
@@ -404,6 +426,7 @@ function DrawLinesEICAS()
 end
 
 function update()
+	UpdateLights()
 	UpdateTemperatures(0.5)
 	UpdatePressure(0.5)
 end
