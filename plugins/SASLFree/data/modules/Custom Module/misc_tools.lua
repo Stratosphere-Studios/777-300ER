@@ -6,6 +6,10 @@
 *****************************************************************************************
 --]]
 
+function bool2num(value)
+	return value and 1 or 0
+end
+
 function round(number) --rounds everything behind the decimal
 	return math.floor(number+0.5)
 end
