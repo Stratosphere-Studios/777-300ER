@@ -1,17 +1,25 @@
 [STRATO777 INFO]: Initializing...
-[STRATO777 INFO]: Path to module: G:\Steam/steamapps/common/X-Plane 11/Aircraft/Github/777-300ER/plugins/SASLFree/data/modules/main.lua
+[STRATO777 INFO]: Path to module: C:\Users/Apex Gaming/OneDrive/Documents/X-Plane 11/Aircraft/github/777-300ER/plugins/SASLFree/data/modules/main.lua
 [STRATO777 INFO]: Loading module...
 [STRATO777 INFO]: [LUA]: loading	module
 [STRATO777 INFO]: [LUA]: loading	eicascheck
 [STRATO777 INFO]: [LUA]: including	checklist.lua
 [STRATO777 INFO]: [LUA]: loading	Cursor
 [STRATO777 INFO]: [LUA]: loading	hydraulics
-[STRATO777 INFO]: [LUA]: including	misc_tools.lua
-[STRATO777 INFO]: [LUA]: loading	eicas
-[STRATO777 INFO]: [LUA]: including	misc_tools.lua
-[STRATO777 INFO]: [LUA]: loading	fctl
-[STRATO777 INFO]: [LUA]: including	misc_tools.lua
-[STRATO777 INFO]: Module loaded
-[STRATO777 INFO]: [LUA]: loading	interactive
-[STRATO777 INFO]: Disabling...
-[STRATO777 INFO]: SASL plugin stopped...
+[STRATO777 ERROR]: [STACK]:| logError : [LUA]: ...s/SASLFree/data/modules/Custom Module/HYD/hydraulics.lua:1: unexpected symbol near '<'
+[STRATO777 ERROR]: [STACK]:| ...0ER/plugins/SASLFree/data/init/initFilesystemHelpers.lua:54 in function <openFile>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:184 in function <__index>
+[STRATO777 ERROR]: [STACK]:| .../github/777-300ER/plugins/SASLFree/data/modules/main.lua:27 in function <f>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:220 in function <c>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:899 in function <?>
+[STRATO777 ERROR]: [STACK]:| ...
+[STRATO777 ERROR]: [STACK]:| logError : [LUA]: can't load component	hydraulics
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:186 in function <__index>
+[STRATO777 ERROR]: [STACK]:| .../github/777-300ER/plugins/SASLFree/data/modules/main.lua:27 in function <f>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:220 in function <c>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:899 in function <?>
+[STRATO777 ERROR]: [STACK]:| .../github/777-300ER/plugins/SASLFree/data/modules/main.lua:27 in function <f>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:220 in function <c>
+[STRATO777 ERROR]: [STACK]:| ...github/777-300ER/plugins/SASLFree/data/init/initMain.lua:899 in function <?>
+[STRATO777 ERROR]: Error loading module: .../github/777-300ER/plugins/SASLFree/data/modules/main.lua:27: attempt to call global 'hydraulics' (a nil value)
+[STRATO777 ERROR]: Can't load module
