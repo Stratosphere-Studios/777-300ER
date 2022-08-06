@@ -120,7 +120,7 @@ end
 --function before_physics()
 
 function after_physics()
-   if simDR_gpuConnected == 1 and (simDR_groundSpeed > 5 or simDR_onGround ~= 1 or simDR_enginesRunning[0] ~= 0 or simDR_enginesRunning[1] ~= 0) then
+   if simDR_gpuConnected == 1 and (simDR_groundSpeed > 1 or simDR_onGround ~= 1 or simDR_enginesRunning[0] ~= 0 or simDR_enginesRunning[0] ~= 0) then
       simCMD_ovhd_gpu_off:once()
    end
 end

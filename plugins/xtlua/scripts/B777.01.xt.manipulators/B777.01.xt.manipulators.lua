@@ -52,14 +52,13 @@ local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 
-B777DR_pfd_mtrs_capt                      = find_dataref("Strato/777/displays/mtrs_capt")
-
 simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/landing_lights_switch")
 simDR_taxi_light_switch                   = find_dataref("sim/cockpit2/switches/taxi_light_on")
 simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/strobe_lights_on")
 simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
 simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/beacon_on")
 
+B777DR_eicas_mode                     = find_dataref("Strato/777/displays/eicas_mode")
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -90,6 +89,8 @@ B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit
 B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
 
 B777DR_cockpit_door_pos                   = deferred_dataref("Strato/777/cockpit_door_pos", "number")
+
+B777DR_pfd_mtrs_capt                      = deferred_dataref("Strato/777/displays/mtrs_capt", "number")
 
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
@@ -375,8 +376,12 @@ function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
 	if phase == 0 then setEicasPage(4) end
 end
 
-function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
+function B777_efis_lEicas_chkl_switch_CMDhandler(phase, duration)
 	if phase == 0 then setEicasPage(10) end
+end
+
+function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
+	if phase == 0 then setEicasPage(11) end
 end
 
 function B777_efis_wxr_switch_CMDhandler(phase, duration)
@@ -591,6 +596,7 @@ B777CMD_efis_lEicas_door                  = deferred_command("Strato/B777/button
 B777CMD_efis_lEicas_gear                  = deferred_command("Strato/B777/button_switch/efis/lEicas/gear", "Lower Eicas GEAR Page", B777_efis_lEicas_gear_switch_CMDhandler)
 B777CMD_efis_lEicas_fctl                  = deferred_command("Strato/B777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
 B777CMD_efis_lEicas_cam                   = deferred_command("Strato/B777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
+B777CMD_efis_lEicas_chkl                  = deferred_command("Strato/B777/button_switch/efis/lEicas/chkl", "Lower Eicas CHKL Page", B777_efis_lEicas_chkl_switch_CMDhandler)
 
 B777CMD_efis_wxr_button                   = deferred_command("Strato/B777/button_switch/efis/wxr", "ND Weather Radar Button", B777_efis_wxr_switch_CMDhandler)
 B777CMD_efis_sta_button                   = deferred_command("Strato/B777/button_switch/efis/sta", "ND STA Button", B777_efis_sta_switch_CMDhandler)
@@ -674,6 +680,7 @@ function flight_start()
       simCMD_ovhd_bat_1_on:once()
       simCMD_ovhd_bat_2_on:once()
 	end
+   B777CMD_efis_mtrs_capt:once()
 end
 
 --function flight_crash()
