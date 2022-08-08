@@ -188,7 +188,7 @@ function GetAilResponseTime(hyd_sys, pcu_mode) --aileron response time based on 
 			return pressure * 2 / 3340
 		end
 	end
-	return 0.8
+	return 0.4
 end
 
 function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
@@ -387,7 +387,7 @@ function GetFlapResponseTime() --Flap response time that is influenced by hydrau
 	end
 end
 
-function GetElevatorTarget(hyd_sys, yoke_cmd, pcu_mode, position)
+function GetElevatorTarget(hyd_sys, yoke_cmd, pcu_mode)
 	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 5)
 	local elevator_ratio = GetAilRatio(40, hyd_sys, 1000, 1, 0, 0)
 	--Update load
@@ -397,10 +397,10 @@ function GetElevatorTarget(hyd_sys, yoke_cmd, pcu_mode, position)
 		set(h_load, 0)
 	end
 	if pcu_mode == 1 then
-		return position
+		return 0
 	elseif pcu_mode == 0 then
 		if get(tas) < 25.7 then
-			return (-(elevator_ratio * get(tas) / 51.4) + 20 - (elevator_ratio / 2)) + ((elevator_ratio / 2) * yoke_cmd * -1) --elevator drooping
+			return (-(elevator_ratio * get(tas) / 51.4) + 20 - (elevator_ratio / 2) * yoke_cmd) --elevator drooping
 		else
 			return 0
 		end
@@ -511,8 +511,8 @@ function update()
 	local L_elevator_pcu_mode = globalPropertyiae("Strato/777/fctl/elevator/pcu_mode", 1)
 	local R_elevator_pcu_mode = globalPropertyiae("Strato/777/fctl/elevator/pcu_mode", 2)
 	--Obtaining target positions for all of the flight controls
-	local L_elevator_target = GetElevatorTarget({1, 2}, get(yoke_pitch_ratio), get(L_elevator_pcu_mode), get(elevator_L))
-	local R_elevator_target = GetElevatorTarget({1, 3}, get(yoke_pitch_ratio), get(R_elevator_pcu_mode), get(elevator_R))
+	local L_elevator_target = GetElevatorTarget({1, 2}, get(yoke_pitch_ratio), get(L_elevator_pcu_mode))
+	local R_elevator_target = GetElevatorTarget({1, 3}, get(yoke_pitch_ratio), get(R_elevator_pcu_mode))
 	local L_outbd_ail_target = GetAilTarget(-1, get(yoke_roll_ratio), 1, {1, 2}, 1, 1)
 	local L_inbd_ail_target = GetAilTarget(-1, get(yoke_roll_ratio), 2, {1, 3}, get(L_flprn_pcu_mode), 2)
 	local R_outbd_ail_target = GetAilTarget(1, get(yoke_roll_ratio), 1, {1, 2}, 1, 1)
