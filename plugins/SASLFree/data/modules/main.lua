@@ -34,5 +34,6 @@ components = {
 		visible = true,
 		fpsLimit = 50
 	},
-	fctl {}
+	fctl {},
+	gear {}
 }
