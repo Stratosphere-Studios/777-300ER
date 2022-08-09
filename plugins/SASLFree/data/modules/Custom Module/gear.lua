@@ -11,7 +11,6 @@ r_w_strg = globalPropertyfae("sim/flightmodel/parts/tire_steer_cmd", 2) -- 20
 r_wheel_brake = globalPropertyf("sim/cockpit2/controls/right_brake_ratio")
 l_w_strg = globalPropertyfae("sim/flightmodel/parts/tire_steer_cmd", 3)
 l_wheel_brake = globalPropertyf("sim/cockpit2/controls/left_brake_ratio")
-tire_skid_speed
 t_phi = globalPropertyf("sim/flightmodel/position/true_phi") --bank angle
 t_theta = globalPropertyf("sim/flightmodel/position/true_theta") --pitch
 gear_handle = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
