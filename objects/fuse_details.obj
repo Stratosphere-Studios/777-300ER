@@ -3822,26 +3822,26 @@ IDX	3460
 IDX	3461
 
 	ANIM_begin
-	ANIM_trans	-9.1572599	-2.3421099	-8.1149101	-9.1572599	-2.3421099	-8.1149101
+	ANIM_trans	-9.2572699	-2.3421099	-8.1149101	-9.2572699	-2.3421099	-8.1149101
 	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/engines/engine_rotation_angle_deg[0]
 	ANIM_rotate_key	0	-0
-	ANIM_rotate_key	90	-90.000207
-	ANIM_rotate_key	180	-179.99985
-	ANIM_rotate_key	270	-270.00006
-	ANIM_rotate_key	0	-360.00026
+	ANIM_rotate_key	90	90.000207
+	ANIM_rotate_key	180	179.99985
+	ANIM_rotate_key	270	270.00006
+	ANIM_rotate_key	360	360.00026
 	ANIM_rotate_end
 		TRIS	2922 90
 		TRIS	3012 90
 		TRIS	3372 90
 	ANIM_end
 	ANIM_begin
-	ANIM_trans	9.1572599	-2.3421099	-8.1149101	9.1572599	-2.3421099	-8.1149101
+	ANIM_trans	9.2572603	-2.3421099	-8.1149101	9.2572603	-2.3421099	-8.1149101
 	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/engines/engine_rotation_angle_deg[1]
 	ANIM_rotate_key	0	-0
-	ANIM_rotate_key	90	-90.000207
-	ANIM_rotate_key	180	-179.99985
-	ANIM_rotate_key	270	-270.00006
-	ANIM_rotate_key	0	-360.00026
+	ANIM_rotate_key	90	90.000207
+	ANIM_rotate_key	180	179.99985
+	ANIM_rotate_key	270	270.00006
+	ANIM_rotate_key	360	360.00026
 	ANIM_rotate_end
 		TRIS	3102 90
 		TRIS	3192 90
