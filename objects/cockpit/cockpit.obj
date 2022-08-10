@@ -3,7 +3,7 @@ I
 OBJ
 
 GLOBAL_cockpit_lit
-TEXTURE	../../cockpit_3d/-PANELS-/panel.png
+TEXTURE	panel.png
 POINT_COUNTS	7809	0	0	7809
 
 VT	-0.20901637	0.30849525	-33.317318	0	0.92759699	0.37358239	1	1
@@ -1023,18 +1023,6 @@ VT	0.15160447	0.21459605	-32.616047	0	1	-0	0.72930503	0.84529346
 VT	0.19582942	0.21459605	-32.616047	0	1	-0	0.87855363	0.84550655
 VT	0.19582942	0.21459605	-32.58865	0	1	-0	0.87868571	0.75360614
 VT	0.15160447	0.21459605	-32.616047	0	1	-0	0.72930503	0.84529346
-VT	-1.1125449	0.6608808	-33.074329	0.60325199	0.56707358	0.56081587	0.33334503	0.66764605
-VT	-1.2199668	0.63994056	-32.937607	0.60325199	0.56707358	0.56081587	0.00000104	0.66764605
-VT	-1.2882384	0.74908477	-32.974529	0.60325199	0.56707358	0.56081587	0.00000104	0.92255992
-VT	-1.1808165	0.77002501	-33.111256	0.60325199	0.56707358	0.56081587	0.33334881	0.92256385
-VT	-1.1125449	0.6608808	-33.074329	0.60325199	0.56707358	0.56081587	0.33334503	0.66764605
-VT	-1.2882384	0.74908477	-32.974529	0.60325199	0.56707358	0.56081587	0.00000104	0.92255992
-VT	1.1125449	0.6608808	-33.074329	-0.60325211	0.56707364	0.56081575	0.00000473	0.66764605
-VT	1.1808165	0.77002501	-33.111256	-0.60325211	0.56707364	0.56081575	0.00000092	0.92256111
-VT	1.2882384	0.74908477	-32.974529	-0.60325211	0.56707364	0.56081575	0.33334526	0.92255718
-VT	1.2199668	0.63994056	-32.937607	-0.60325211	0.56707364	0.56081575	0.33334526	0.66764605
-VT	1.1125449	0.6608808	-33.074329	-0.60325211	0.56707364	0.56081575	0.00000473	0.66764605
-VT	1.2882384	0.74908477	-32.974529	-0.60325211	0.56707364	0.56081575	0.33334526	0.92255718
 VT	0.77545828	0.59047884	-33.571072	0	0.25850967	0.96600866	0.18036518	0.99999893
 VT	0.74517041	0.59047884	-33.571072	0	0.25850967	0.96600866	0.090184219	0.99999893
 VT	0.74517041	0.6021421	-33.574192	0	0.25850967	0.96600866	0.090184219	0.96129185
@@ -1275,6 +1263,18 @@ VT	0.033767581	0.88417578	-33.365211	0.0001776859	0.27224052	0.96222919	0.999911
 VT	-0.02167657	0.87309933	-33.362068	0.0001776859	0.27224052	0.96222919	0.87927639	0.73021251
 VT	-0.021833688	0.88440442	-33.365265	0.0001776859	0.27224052	0.96222919	0.87893462	0.75954318
 VT	0.033767581	0.88417578	-33.365211	0.0001776859	0.27224052	0.96222919	0.99991161	0.75895733
+VT	-0.93341196	0.48059553	-33.16872	0.41365695	0.80016649	0.43430573	0.33333901	0.66764683
+VT	-1.071595	0.49409321	-33.061977	0.41365695	0.80016649	0.43430573	0.00000866	0.66764349
+VT	-1.13243	0.57375604	-33.150806	0.41365695	0.80016649	0.43430573	0.00000866	0.92255861
+VT	-0.99424589	0.56025612	-33.257549	0.41365695	0.80016649	0.43430573	0.33334103	0.92255861
+VT	-0.93341196	0.48059553	-33.16872	0.41365695	0.80016649	0.43430573	0.33333901	0.66764683
+VT	-1.13243	0.57375604	-33.150806	0.41365695	0.80016649	0.43430573	0.00000866	0.92255861
+VT	0.93341208	0.48059553	-33.16872	-0.41364691	0.80017751	0.43429497	0.0000097	0.66764683
+VT	0.99424601	0.56025612	-33.257549	-0.41364691	0.80017751	0.43429497	0.00000769	0.92255861
+VT	1.13243	0.57375604	-33.150806	-0.41364691	0.80017751	0.43429497	0.33334002	0.92255861
+VT	1.071595	0.49409321	-33.061977	-0.41364691	0.80017751	0.43429497	0.33333996	0.66764349
+VT	0.93341208	0.48059553	-33.16872	-0.41364691	0.80017751	0.43429497	0.0000097	0.66764683
+VT	1.13243	0.57375604	-33.150806	-0.41364691	0.80017751	0.43429497	0.33334002	0.92255861
 VT	-0.18275252	0.22002308	-32.793552	0	1	-0	0.875	0.75
 VT	-0.18275252	0.22002308	-32.800617	0	1	-0	0.875	0.5
 VT	-0.17091843	0.22002308	-32.800617	0	1	-0	0.625	0.5
@@ -8736,7 +8736,7 @@ IDX	7808
 	TRIS	348 6
 	ATTR_manip_command	button	sim/FMS2/key_B	
 	TRIS	354 6
-	ATTR_manip_toggle	button	1	0		Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000		Switch Cover
 	TRIS	360 36
 	ATTR_manip_command	button	sim/radios/com1_standy_flip	
 	TRIS	1269 6
@@ -8750,17 +8750,17 @@ IDX	7808
 	TRIS	1383 36
 	ATTR_manip_command	button	Strato/777/cockpit/fuel/fwd_1	
 	TRIS	1419 36
-	ATTR_manip_toggle	hand	1	0	Strato/777/hydraulics/pump/primary/state[0]	Left Engine Primary Pump
+	ATTR_manip_toggle	hand	1.000	0.000	Strato/777/hydraulics/pump/primary/state[0]	Left Engine Primary Pump
 	TRIS	1491 36
-	ATTR_manip_toggle	hand	1	0	Strato/777/hydraulics/pump/primary/state[1]	C1 Electric Primary Pump 1
+	ATTR_manip_toggle	hand	1.000	0.000	Strato/777/hydraulics/pump/primary/state[1]	C1 Electric Primary Pump 1
 	TRIS	1527 36
-	ATTR_manip_toggle	hand	1	0	Strato/777/hydraulics/pump/primary/state[2]	C2 Electric Primary Pump
+	ATTR_manip_toggle	hand	1.000	0.000	Strato/777/hydraulics/pump/primary/state[2]	C2 Electric Primary Pump
 	TRIS	1563 36
-	ATTR_manip_toggle	hand	1	0	Strato/777/hydraulics/pump/primary/state[3]	Right Engine Primary Pump
+	ATTR_manip_toggle	hand	1.000	0.000	Strato/777/hydraulics/pump/primary/state[3]	Right Engine Primary Pump
 	TRIS	1599 36
 	ATTR_manip_command	button	sim/radios/com2_standy_flip	
 	TRIS	1635 6
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[3]	Right Wing Landing Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/landing_lights_switch[3]	Right Wing Landing Lights
 	TRIS	1641 108
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/MAGtrk	Switch between MAG/TRK
 	TRIS	1749 36
@@ -8771,23 +8771,23 @@ IDX	7808
 	ATTR_manip_command	button	Strato/B777/button_switch/ctr1/toga	TOGA
 	TRIS	1857 36
 	TRIS	1893 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/controls/parking_brake_ratio	Parking Brake
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/controls/parking_brake_ratio	Parking Brake
 	TRIS	1929 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/taxi_light_on	Taxi Lights (Nose)
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/taxi_light_on	Taxi Lights (Nose)
 	TRIS	1965 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[4]	Left Wing Runway Turnoff Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/landing_lights_switch[4]	Left Wing Runway Turnoff Lights
 	TRIS	2001 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[1]	Left Wing Landing Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/landing_lights_switch[1]	Left Wing Landing Lights
 	TRIS	2037 108
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[2]	Nose (Center) Landing Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/landing_lights_switch[2]	Nose (Center) Landing Lights
 	TRIS	2145 108
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/strobe_lights_on	Strobe Lights (Wingtips & Tail)
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/strobe_lights_on	Strobe Lights (Wingtips & Tail)
 	TRIS	2253 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/landing_lights_switch[5]	Right Wing Runway Turnoff Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/landing_lights_switch[5]	Right Wing Runway Turnoff Lights
 	TRIS	2289 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit/electrical/nav_lights_on	Toggle Nav Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit/electrical/nav_lights_on	Toggle Nav Lights
 	TRIS	2325 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit/electrical/beacon_lights_on	Toggle Beacon Lights
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit/electrical/beacon_lights_on	Toggle Beacon Lights
 	TRIS	2361 36
 	ATTR_manip_command	button		APU Generator
 	TRIS	2397 36
@@ -8799,45 +8799,45 @@ IDX	7808
 	TRIS	2505 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ovhd_c/ext_pwr	Ground Power (GPU) Switch
 	TRIS	2541 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit2/switches/ram_air_turbine_on	Ram Air Turbine
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/ram_air_turbine_on	Ram Air Turbine
 	TRIS	2577 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[5]	Right Fuel Jettison Nozzle Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[5]	Right Fuel Jettison Nozzle Switch Cover
 	TRIS	2613 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[2]	Right Generator Drive Disconnect Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[2]	Right Generator Drive Disconnect Switch Cover
 	TRIS	2649 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[1]	Left Generator Drive Disconnect Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[1]	Left Generator Drive Disconnect Switch Cover
 	TRIS	2685 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[4]	Left Fuel Jettison Nozzle Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[4]	Left Fuel Jettison Nozzle Switch Cover
 	TRIS	2721 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[15]	Left Electronic Engine Control Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[15]	Left Electronic Engine Control Switch Cover
 	TRIS	2757 36
-	ATTR_manip_toggle	button	1	0		Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000		Switch Cover
 	TRIS	2793 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[10]	Right Electronic Engine Control Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[10]	Right Electronic Engine Control Switch Cover
 	TRIS	2829 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[9]	DISCH Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[9]	DISCH Switch Cover
 	TRIS	2865 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[11]	Left Stabilizer Trim Cutout Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[11]	Left Stabilizer Trim Cutout Switch Cover
 	TRIS	2901 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[12]	Left Stabilizer Trim Cutout Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[12]	Left Stabilizer Trim Cutout Switch Cover
 	TRIS	2937 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[7]	Emergency Lights Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[7]	Emergency Lights Switch Cover
 	TRIS	2973 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[6]	Primary Flight Computers Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[6]	Primary Flight Computers Switch Cover
 	TRIS	3009 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[8]	Passenger Oxygen Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[8]	Passenger Oxygen Switch Cover
 	TRIS	3045 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[13]	Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[13]	Switch Cover
 	TRIS	3081 36
-	ATTR_manip_toggle	button	1	0	Strato/777/cockpit/button_cover/position[14]	Switch Cover
+	ATTR_manip_toggle	button	1.000	0.000	Strato/777/cockpit/button_cover/position[14]	Switch Cover
 	TRIS	3117 36
-	ATTR_manip_toggle	button	1	0	sim/cockpit/switches/gear_handle_status	Landing Gear Handle
+	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit/switches/gear_handle_status	Landing Gear Handle
 	TRIS	3153 84
-	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_panel_lights[5]	Overhead Panel Brightness
+	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.200	Strato/777/cockpit/cockpit_panel_lights[5]	Overhead Panel Brightness
 	TRIS	3237 84
-	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_panel_lights[3]	Main Panel Brightness
+	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.200	Strato/777/cockpit/cockpit_panel_lights[3]	Main Panel Brightness
 	TRIS	3405 84
-	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_panel_lights[1]	Center Pedestal Panel Brightness
+	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.200	Strato/777/cockpit/cockpit_panel_lights[1]	Center Pedestal Panel Brightness
 	TRIS	3489 66
 	ATTR_manip_command	button	sim/FMS/key_0	
 	TRIS	3639 18
@@ -8907,15 +8907,15 @@ IDX	7808
 	TRIS	4281 18
 	ATTR_manip_command	button	sim/FMS/key_minus	
 	TRIS	4299 18
-	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio[0]	Left Throttle
+	ATTR_manip_drag_axis	hand	0.000	0.200	0.000	0.000	1.000	sim/cockpit2/engine/actuators/throttle_ratio[0]	Left Throttle
 	TRIS	4317 84
 	ATTR_manip_command_knob	rotate_small	sim/radios/stby_com1_fine_up	sim/radios/stby_com1_fine_down	
 	TRIS	4401 84
 	ATTR_manip_command_knob	rotate_medium	sim/radios/stby_com1_coarse_up	sim/radios/stby_com1_coarse_down	
 	TRIS	4485 84
-	ATTR_manip_axis_knob	rotate_small	0	1	0.1	0.2	sim/cockpit2/radios/actuators/audio_volume_com1	
+	ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.100	0.200	sim/cockpit2/radios/actuators/audio_volume_com1	
 	TRIS	4569 84
-	ATTR_manip_axis_knob	rotate_small	0	1	0.1	0.2	sim/cockpit2/radios/actuators/audio_volume_com2	
+	ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.100	0.200	sim/cockpit2/radios/actuators/audio_volume_com2	
 	TRIS	4653 84
 	ATTR_manip_command	button	Strato/B777/button_switch/ctr1/at_disco	Autothrottle Disconnect
 	TRIS	4737 84
@@ -8953,9 +8953,9 @@ IDX	7808
 	TRIS	5685 84
 	ATTR_manip_command	button	sim/FMS/key_period	
 	TRIS	5769 18
-	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio[1]	Right Throttle
+	ATTR_manip_drag_axis	hand	0.000	0.200	0.000	0.000	1.000	sim/cockpit2/engine/actuators/throttle_ratio[1]	Right Throttle
 	TRIS	5787 84
-	ATTR_manip_drag_axis	hand	0	0.2	0	0	1	sim/cockpit2/engine/actuators/throttle_ratio_all	Throttle (Both)
+	ATTR_manip_drag_axis	hand	0.000	0.200	0.000	0.000	1.000	sim/cockpit2/engine/actuators/throttle_ratio_all	Throttle (Both)
 	TRIS	5871 84
 	ATTR_manip_command	button	sim/FMS/key_3	
 	TRIS	5955 18
@@ -8971,9 +8971,9 @@ IDX	7808
 	TRIS	6243 18
 	ATTR_manip_command_knob	rotate_medium	sim/autopilot/bank_limit_up	sim/autopilot/bank_limit_down	Autopilot Bank Limit
 	TRIS	6261 84
-	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_panel_lights[4]	Overhead Panel Brightness
+	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.200	Strato/777/cockpit/cockpit_panel_lights[4]	Overhead Panel Brightness
 	TRIS	6345 84
-	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_dome_light	Overhead Panel Brightness
+	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.200	Strato/777/cockpit/cockpit_dome_light	Overhead Panel Brightness
 	TRIS	6429 84
 	ATTR_manip_command	button	Strato/777/cockpit/cockpit_ovhd_fire_test_cmd	apu fire test
 	TRIS	6513 84
@@ -8983,15 +8983,15 @@ IDX	7808
 	TRIS	6615 18
 	ATTR_manip_command	button	AviTab/Home	EFB Home Button
 	TRIS	6633 18
-	ATTR_manip_axis_knob	rotate_large	0	2	1	1	Strato/777/hydraulics/pump/demand/state[0]	Left Electric Demand Pump
+	ATTR_manip_axis_knob	rotate_large	0.000	2.000	1.000	1.000	Strato/777/hydraulics/pump/demand/state[0]	Left Electric Demand Pump
 	TRIS	6987 84
-	ATTR_manip_axis_knob	rotate_large	0	2	1	1	Strato/777/hydraulics/pump/demand/state[1]	C1 Air Demand Pump
+	ATTR_manip_axis_knob	rotate_large	0.000	2.000	1.000	1.000	Strato/777/hydraulics/pump/demand/state[1]	C1 Air Demand Pump
 	TRIS	7071 84
-	ATTR_manip_axis_knob	rotate_large	0	2	1	1	Strato/777/hydraulics/pump/demand/state[2]	C2 Air Demand Pump
+	ATTR_manip_axis_knob	rotate_large	0.000	2.000	1.000	1.000	Strato/777/hydraulics/pump/demand/state[2]	C2 Air Demand Pump
 	TRIS	7155 84
-	ATTR_manip_axis_knob	rotate_large	0	2	1	1	Strato/777/hydraulics/pump/demand/state[3]	Right Electric Demand Pump
+	ATTR_manip_axis_knob	rotate_large	0.000	2.000	1.000	1.000	Strato/777/hydraulics/pump/demand/state[3]	Right Electric Demand Pump
 	TRIS	7239 84
-	ATTR_manip_push	hand	1	0	Strato/777/eicas/rcl	Eicas Recall
+	ATTR_manip_push	hand	1.000	0.000	Strato/777/eicas/rcl	Eicas Recall
 	TRIS	7323 18
 	ATTR_manip_command	button	sim/FMS/exec	
 	TRIS	7341 6
@@ -9151,7 +9151,7 @@ IDX	7808
 	TRIS	7803 6
 	ATTR_manip_command	button	Strato/B777/button_switch/fltInst/adiru_switch	ADIRU Switch
 	TRIS	1455 36
-	ATTR_manip_axis_knob	rotate_medium	0	1	0.1	0.2	Strato/777/cockpit/cockpit_panel_lights[2]	Main Panel Brightness
+	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.200	Strato/777/cockpit/cockpit_panel_lights[2]	Main Panel Brightness
 	TRIS	6651 84
 	TRIS	3321 84
 	TRIS	6735 84
@@ -9164,4 +9164,4 @@ IDX	7808
 	TRIS	402 6
 	TRIS	408 861
 
-# Build with Blender 3.0.0 (build b'f1cca3055776'). Exported with XPlane2Blender 4.2.0-alpha.1+101.20211103174028
+# Build with Blender 3.0.1 (build b'dc2d18018171'). Exported with XPlane2Blender 4.1.0-beta.2+104.20220106141815
