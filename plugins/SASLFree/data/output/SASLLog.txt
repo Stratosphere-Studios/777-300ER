@@ -15,6 +15,3 @@
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: Module loaded
 [STRATO777 INFO]: [LUA]: loading	interactive
-[STRATO777 INFO]: Disabling...
-[STRATO777 INFO]: [LUA]: Shutting down
-[STRATO777 INFO]: SASL plugin stopped...

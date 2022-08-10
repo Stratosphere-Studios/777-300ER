@@ -11496,7 +11496,7 @@ IDX10	10310	10311	10312	10313	10314	10315	10316	10317	10318	10319
 	ANIM_end
 	ANIM_begin
 	ANIM_trans	5.9611602	1.77636	36.329498	5.9611602	1.77636	36.329498
-	ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/elevator1_deg[0]
+	ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/elevator1_deg[6]
 	ANIM_rotate_key	20	-26.859116
 	ANIM_rotate_key	16	-26.859116
 	ANIM_rotate_key	12	-26.859116
@@ -11509,7 +11509,7 @@ IDX10	10310	10311	10312	10313	10314	10315	10316	10317	10318	10319
 	ANIM_rotate_key	-16	-26.859116
 	ANIM_rotate_key	-20	-26.859116
 	ANIM_rotate_end
-	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/elevator1_deg[0]
+	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/elevator1_deg[6]
 	ANIM_rotate_key	20	-7.610598
 	ANIM_rotate_key	16	-7.610598
 	ANIM_rotate_key	12	-7.610598
@@ -11522,7 +11522,7 @@ IDX10	10310	10311	10312	10313	10314	10315	10316	10317	10318	10319
 	ANIM_rotate_key	-16	-7.610598
 	ANIM_rotate_key	-20	-7.610598
 	ANIM_rotate_end
-	ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/elevator1_deg[0]
+	ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/elevator1_deg[6]
 	ANIM_rotate_key	20	18.004626
 	ANIM_rotate_key	16	16.885066
 	ANIM_rotate_key	12	13.844952
