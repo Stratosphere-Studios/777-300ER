@@ -6,6 +6,27 @@
 *****************************************************************************************
 --]]
 
+ac_heading = globalPropertyf("sim/flightmodel/position/magpsi")
+wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
+
+function GetWindVector()
+	local tmp_heading = (get(ac_heading) + 180) % 360
+	if get(wind_dir) == get(ac_heading) or get(wind_dir) == tmp_heading then
+		return 0
+	else
+		if tmp_heading == get(ac_heading) + 180 then
+			if get(wind_dir) > get(ac_heading) and get(wind_dir) < get(tmp_heading) then
+				return 1
+			end
+		else
+			if get(wind_dir) > get(ac_heading) and get(wind_dir) < 360 or get(wind_dir) >= 0 and get(wind_dir) < tmp_heading then
+				return 1
+			end
+		end
+	end
+	return -1
+end
+
 function tlen(T)
   local count = 0
   for _ in pairs(T) do count = count + 1 end
