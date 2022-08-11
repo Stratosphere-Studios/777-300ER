@@ -227,23 +227,13 @@ function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
 	end
 end
 
-function GetSwingDir() --returns rudder swing vector
-	local diff = math.abs(get(ac_heading) - get(wind_dir))
-	if diff > 180 then
-		return -1
-	elseif diff < 180 then
-		return 1
-	end
-	return 0 
-end
-
 function GetRudderRatio()
 	ratio = GetAilRatio(54, {4}, 2000, 1, 0, 0)
 	if IsAcConnected() == 1 then
 		tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
 		tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
 		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then --If airspeed provided by the sensors is reliable, modify ratio based on the formula
-			if get(tas_pilot) > 135 and get(tas_pilot) >= 269 then
+			if get(tas_pilot) > 135 and get(tas_pilot) <= 269 then
 				return ratio - (get(tas_pilot) - 135) * (36 / 115)
 			elseif get(tas_pilot) > 269 then
 				return 12
@@ -263,7 +253,7 @@ function GetRudderNeutral(ratio)
 	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
 	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength -- pressure required to be able to fully counter act wind
 	if max_press < reqd_press then
-		local swing_dir = GetSwingDir()
+		local swing_dir = GetWindVector() * -1
 		local swing_def = swing_dir * (27.5 - ratio) * ((reqd_press - max_press) / reqd_press)
 		return swing_def
 	end
