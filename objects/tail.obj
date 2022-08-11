@@ -4,6 +4,7 @@ OBJ
 
 GLOBAL_cockpit_lit
 TEXTURE	tail.png
+TEXTURE_LIT	tail_LIT.png
 TEXTURE_NORMAL	tail_NML.png
 NORMAL_METALNESS
 GLOBAL_specular	1
