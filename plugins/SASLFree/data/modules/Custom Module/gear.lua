@@ -19,7 +19,7 @@ sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
 gear_tgt = createGlobalPropertyfa("Strato/777/gear/tgt", {1, 1, 1})
 lock_factor = createGlobalPropertyia("Strato/777/gear/lock_f", {1, 1, 1})
 actuator_press = createGlobalPropertyia("Strato/777/gear/actuator_press", {0, 0, 0})
-doors = createGlobalPropertyfa("Strato/777/gear/doors", {0, 0, 0})
+doors = createGlobalPropertyfa("Strato/777/gear/doors", {0, 0, 0, 0})
 skid_ratio = createGlobalPropertyfa("Strato/777/gear/wheel_skid_ratio", {0, 0, 0})
 
 set(steer_ovrd, 1)
