@@ -64,7 +64,9 @@ B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_b
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 
+-- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
+B777DR_txt_TAS                         = deferred_dataref("Strato/777/displays/txt/TAS", "string")
 B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/txt/---", "string")
 B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")

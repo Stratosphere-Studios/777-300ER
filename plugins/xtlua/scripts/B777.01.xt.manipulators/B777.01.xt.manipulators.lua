@@ -3,11 +3,9 @@
 * Program Script Name: manipulators
 * Author Name: crazytimtimtim
 * Script Description: functions for cockpit switches
-* Notes: 1. Information on default datarefs for some switched provided.
+* Notes: 1. Information on default datarefs for some switches provided.
          2. Can't find probe/window heat switches, might always be on? If so will command them on on aircraft load.
          3. Need to figure out number of buses to do bus cross-ties.
-         4. Need to know a bit more about different types of manipulators in X-Plane2Blender
-         5. Need to figure out how to code knobs and dials
 *****************************************************************************************
 --]]
 
@@ -58,7 +56,14 @@ simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/
 simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
 simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/beacon_on")
 
-B777DR_eicas_mode                     = find_dataref("Strato/777/displays/eicas_mode")
+B777DR_eicas_mode                         = find_dataref("Strato/777/displays/eicas_mode")
+
+B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/pump/primary/state")
+B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
+
+B777DR_hyd_primary_switch_pos             = deferred_dataref("Strato/cockpit/ovhd/hyd/primary_pumps/button_pos", "array[4]")
+B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovhd/hyd/demand_pumps/button_pos", "array[4]")
+
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -711,6 +716,15 @@ function after_physics()
    B777DR_ovhd_fwd_button_positions[7] = B777_animate(simDR_nav_light_switch, B777DR_ovhd_fwd_button_positions[7], 10)
    B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 10)
    B777DR_ovhd_fwd_button_positions[9] = B777_animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 10)
+
+   for i = 0, 3 do
+      B777DR_hyd_primary_switch_pos[i] = B777_animate(B777DR_primary_hyd_pump_sw[i], B777DR_hyd_primary_switch_pos[i], 10)
+   end
+
+   for i = 0, 3 do
+      B777DR_hyd_demand_switch_pos[i] = B777_animate(B777DR_demand_hyd_pump_sw[i], B777DR_hyd_demand_switch_pos[i], 10)
+   end
+
 end
 
 --function after_replay()

@@ -84,7 +84,7 @@ P _cgpt/9/_w_now 0.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -78.101837158
+P _door/0/_ang_now -69.057769775
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -92,7 +92,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 78.101837158
+P _door/1/_ang_now 69.057769775
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -110,7 +110,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 78.101837158
+P _door/2/_ang_now 69.057769775
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -118,7 +118,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 49.838317871
+P _door/3/_ang_now 0.0
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -126,7 +126,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -49.838317871
+P _door/4/_ang_now 0.0
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -134,7 +134,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now -68.607620239
+P _door/5/_ang_now -18.975547791
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -142,7 +142,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 68.607620239
+P _door/6/_ang_now 18.975547791
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -150,7 +150,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -47.215248108
+P _door/7/_ang_now 0.0
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -158,7 +158,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 47.215248108
+P _door/8/_ang_now 0.0
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -166,7 +166,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -78.101837158
+P _door/9/_ang_now -69.057769775
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -213,7 +213,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 104.770751953
+P _gear/0/_lonN 92.638465881
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 303170.593750000
 P _gear/0/_stat_def 0.387207061
@@ -227,7 +227,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -14.286920547
+P _gear/1/_axiN -12.632518768
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -243,14 +243,14 @@ P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.800000191
 P _gear/1/_gear_z 106.400001526
 P _gear/1/_latE 0.0
-P _gear/1/_latN -78.101837158
+P _gear/1/_latN -69.057769775
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 11.800000191
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN 7.191843510
+P _gear/1/_lonN 5.316854000
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 303170.593750000
-P _gear/1/_stat_def 1.087792993
+P _gear/1/_stat_def 1.087793469
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -261,7 +261,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.059999943
 P _gear/1/_tire_swidth 1.0
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 14.286920547
+P _gear/2/_axiN 12.632518768
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -277,14 +277,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.400001526
 P _gear/2/_latE 0.0
-P _gear/2/_latN 78.101837158
+P _gear/2/_latN 69.057769775
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 11.800000191
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN 7.191843510
+P _gear/2/_lonN 5.316854000
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 303170.593750000
-P _gear/2/_stat_def 1.087792993
+P _gear/2/_stat_def 1.087793469
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -41824,10 +41824,11 @@ gen_rotary Layout
   CLICK_DY 0
 
 GROUP Captain ND
+  GROUP_OPEN
   GROUP ADIRU Aligned
     SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
     EFIS_map_s_HM map_s_HM.png
-      POS 2062.000000 1807.000000
+      POS 2062.000000 1804.000000
       DATAREF 
       SIZE 6.600000
       LIGHT_MODE MECHANICAL
@@ -41837,7 +41838,7 @@ GROUP Captain ND
       KEY_FRAME 1.000000 1.000000
 
   END_GROUP
-  gen_text GS
+  gen_text GS Label
     POS 1480.500000 2414.000000
     IMAGE TXT.2.28.white
     DATAREF Strato/777/displays/txt/GS[0]
@@ -41917,10 +41918,10 @@ GROUP Captain ND
     CLICK_DY 0
 
   gen_LED Ground Speed
-    POS 1513.000000 2431.500000
+    POS 1524.000000 2431.500000
     IMAGE LED_2.36R.xxxxx0.white
     DATAREF sim/flightmodel/position/groundspeed[0]
-    SIZE 1.650000
+    SIZE 1.500000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -41931,13 +41932,112 @@ GROUP Captain ND
     PERIOD_WIDTH 15
     LED_ROWS 1
 
+  gen_text TAS Label
+    POS 1650.500000 2416.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/TAS[0]
+    SIZE 1.750000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -50
+    OFFSET_Y -5.000000
+
+  gen_LED Wind Direction
+    POS 1453.000000 2371.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/gauges/indicators/wind_heading_deg_mag[0]
+    SHOW_GREATER 6.000000 sim/cockpit2/gauges/indicators/wind_speed_kts
+    SIZE 1.500000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 3
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_LED Wind Speed
+    POS 1609.000000 2371.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/cockpit2/gauges/indicators/wind_speed_kts[0]
+    SHOW_GREATER 6.000000 sim/cockpit2/gauges/indicators/wind_speed_kts
+    SIZE 1.500000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 3
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_LED TAS
+    POS 1720.285767 2431.500000
+    IMAGE LED_2.36R.xxxxx0.white
+    DATAREF sim/flightmodel/position/true_airspeed[0]
+    SHOW_GREATER 52.000000 sim/flightmodel/position/true_airspeed
+    SIZE 1.500000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 3
+    DECIMALS 0
+    PERIOD_WIDTH 15
+    LED_ROWS 1
+
+  gen_text ---
+    POS 1763.071411 2417.428467
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/---[0]
+    SHOW_LESS 51.000000 sim/flightmodel/position/true_airspeed
+    SIZE 2.100000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -50
+    OFFSET_Y -5.000000
+
+  gen_rotary Degree Slash
+    POS 1508.428589 2373.000000
+    IMAGE ND/degree_slash
+    DATAREF sim/cockpit2/gauges/indicators/wind_speed_kts
+    SIZE 3.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 6.000000 1.000000 1.000000
+    KEY_FRAME 999.000000 1.000000
+    DIGITS 2
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
   GROUP While ADIRU Alignin
     SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
+    HIDE
     gen_text TIME TO ALIGN
       POS 1490.500000 2360.000000
       IMAGE TXT.2.28.white
       DATAREF Strato/777/displays/txt/TIME_TO_ALIGN[0]
       SIZE 2.000000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41951,6 +42051,7 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF Strato/777/fltInst/adiru/time_remaining_min[0]
       SIZE 1.500000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41966,6 +42067,7 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF Strato/777/fltInst/adiru/time_remaining_sec[0]
       SIZE 1.500000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41981,6 +42083,7 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF [0]
       SIZE 1.500000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41996,6 +42099,7 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF [0]
       SIZE 1.500000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42011,6 +42115,7 @@ GROUP Captain ND
       IMAGE TXT.2.28.white
       DATAREF Strato/777/displays/txt/---[0]
       SIZE 2.500000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42018,6 +42123,30 @@ GROUP Captain ND
       KEY_FRAME 1.000000 1.000000
       OFFSET_X -50
       OFFSET_Y -5.000000
+
+  END_GROUP
+  GROUP Wind Correction
+    GROUP_ANIMATE_MODE ROTATE
+    GROUP_WIDTH 20
+    GROUP_HEIGHT 20
+    DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
+    POS 1429.000000 2229.000000
+    KEY_FRAME -10.000000 10.000000 1.000000
+    KEY_FRAME 10.000000 -10.000000
+    ROTATE_OFFSET_X 0.000000
+    ROTATE_OFFSET_Y 0.000000
+    gen_needle Wind Vector
+      POS 1443.000000 2279.000000
+      IMAGE ND/wind_arrow
+      DATAREF sim/cockpit2/gauges/indicators/wind_heading_deg_mag
+      SIZE 2.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 180.000000 1.000000
+      KEY_FRAME 180.000000 360.000000
+      IS_DRAGGABLE 0
+      OFFSET 0.000000
 
   END_GROUP
 END_GROUP
@@ -45427,7 +45556,7 @@ gen_rotary RA Outline
   CLICK_DY 0
 
 gen_LED RA
-  POS 631.428589 1508.642822
+  POS 631.000000 1508.500000
   IMAGE LED_2.36R.xxxxx0.white
   DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
   SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
@@ -45495,31 +45624,13 @@ gen_LED sel_alt_ft
   PERIOD_WIDTH 0
   LED_ROWS 1
 
-GROUP ILS Needles Norm
+GROUP LOC Needle
+  SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_pilot
+  SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_pilot
+  GROUP_OPEN
   gen_rotary scalehoriz
     POS 582.500000 1453.500000
     IMAGE PFD/artificial_horizon/HrznLOCscale
-    DATAREF 
-    SIZE 2.000000
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 0
-    BUS_SRC 1
-    KEY_FRAME 0.000000 0.000000 1.000000
-    KEY_FRAME 1.000000 6.000000
-    DIGITS 1
-    ROTARY_TYPE NO_CLICK
-    CLICK_RADIUS 10.000000
-    CLICK_RADIUS_DY 0.000000
-    OFFSET 0.000000
-    STEP1 1.000000
-    STEP2 1.000000
-    CURSOR DEFAULT
-    CLICK_DX 0
-    CLICK_DY 0
-
-  gen_rotary scalevert
-    POS 941.500000 1803.500000
-    IMAGE PFD/artificial_horizon/HrznGSscale
     DATAREF 
     SIZE 2.000000
     LIGHT_MODE GLASS_AUTO
@@ -45575,46 +45686,11 @@ GROUP ILS Needles Norm
     IS_VERTICAL 0
     OFFSET 0.000000
 
-  gen_pointer gs_pointer_empty
-    POS 942.500000 1803.500000
-    IMAGE PFD/artificial_horizon/HrznGSpointer
-    DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-    SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-    SHOW_GREATER 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-    SIZE 2.000000
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 0
-    BUS_SRC 1
-    KEY_FRAME -5.000000 -125.000000 1.000000
-    KEY_FRAME -2.500000 -125.000000 1.000000
-    KEY_FRAME 2.499990 -125.000000 1.000000
-    KEY_FRAME 2.500000 125.000000 1.000000
-    KEY_FRAME 5.000000 125.000000
-    IS_DRAGGABLE 0
-    IS_VERTICAL 1
-    OFFSET 0.000000
-
-  gen_pointer gs_pointer_full
-    POS 942.500000 1803.500000
-    IMAGE PFD/artificial_horizon/HrznGSpointer2
-    DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-    SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-    SHOW_GREATER -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-    SIZE 2.000000
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 0
-    BUS_SRC 1
-    KEY_FRAME -5.000000 -125.000000 1.000000
-    KEY_FRAME -2.250000 -125.000000 1.000000
-    KEY_FRAME 2.250000 125.000000 1.000000
-    KEY_FRAME 5.000000 125.000000
-    IS_DRAGGABLE 0
-    IS_VERTICAL 1
-    OFFSET 0.000000
-
 END_GROUP
 GROUP LOC Needle Expanded
   SHOW_LESS 10.000000 sim/cockpit/radios/nav1_dme_dist_m
+  SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_pilot
+  SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_pilot
   gen_rotary black
     POS 359.000000 1537.000000
     IMAGE black
@@ -45696,6 +45772,68 @@ GROUP LOC Needle Expanded
     KEY_FRAME 5.000000 68.000000
     IS_DRAGGABLE 0
     IS_VERTICAL 0
+    OFFSET 0.000000
+
+END_GROUP
+GROUP GS Needle
+  SHOW_EQUAL 0.000000 sim/cockpit2/radios/indicators/hsi_flag_glideslope_pilot
+  SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_display_vertical_pilot
+  gen_rotary scalevert
+    POS 941.500000 1803.500000
+    IMAGE PFD/artificial_horizon/HrznGSscale
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_pointer gs_pointer_empty
+    POS 942.500000 1803.500000
+    IMAGE PFD/artificial_horizon/HrznGSpointer
+    DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+    SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+    SHOW_GREATER 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME -5.000000 -125.000000 1.000000
+    KEY_FRAME -2.500000 -125.000000 1.000000
+    KEY_FRAME 2.499990 -125.000000 1.000000
+    KEY_FRAME 2.500000 125.000000 1.000000
+    KEY_FRAME 5.000000 125.000000
+    IS_DRAGGABLE 0
+    IS_VERTICAL 1
+    OFFSET 0.000000
+
+  gen_pointer gs_pointer_full
+    POS 942.500000 1803.500000
+    IMAGE PFD/artificial_horizon/HrznGSpointer2
+    DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+    SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+    SHOW_GREATER -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME -5.000000 -125.000000 1.000000
+    KEY_FRAME -2.250000 -125.000000 1.000000
+    KEY_FRAME 2.250000 125.000000 1.000000
+    KEY_FRAME 5.000000 125.000000
+    IS_DRAGGABLE 0
+    IS_VERTICAL 1
     OFFSET 0.000000
 
 END_GROUP

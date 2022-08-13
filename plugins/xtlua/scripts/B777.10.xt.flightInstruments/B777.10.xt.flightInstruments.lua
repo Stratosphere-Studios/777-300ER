@@ -118,6 +118,7 @@ B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_R
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
+B777DR_txt_TAS                         = deferred_dataref("Strato/777/displays/txt/TAS", "string")
 B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/txt/---", "string")
 B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")
 
@@ -231,6 +232,7 @@ function flight_start()
 	end
 
 	B777DR_txt_GS                  = "GS"
+	B777DR_txt_TAS                 = "TAS"
 	B777DR_txt_TIME_TO_ALIGN       = "TIME TO ALIGN"
 	B777DR_txt_ddd                 = "---"
 	B777DR_txt_INSTANT_ADIRU_ALIGN = "INSTANT ADIRU ALIGN"
