@@ -77,7 +77,7 @@ function UpdateFlprnPCUMode(num, hyd_sys)
 	local press = math.max(unpack(press))
 	if press >= 200 and IsAcConnected() == 1 then
 		local flt_phase = GetFltState()
-		if flt_phase == 1 and get(tas) < 43.72 then --set bypass mode until 85 ktas on takeoff
+		if flt_phase == 1 and get(tas) < 51.4 then --set bypass mode until 100 ktas on takeoff
 			set(mode, 0)
 		else
 			set(mode, 1)
@@ -112,6 +112,8 @@ function GetMaxHydPress() --since some things are driven by all 3 hydraulic syst
 	local pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 	return math.max(get(pressure_L), get(pressure_C), get(pressure_R))
 end
+
+--Ailerons
 
 function GetAilRatio(ratio, hyd_sys, hyd_press, pcu_mode, down_cmd, v_dir) --Aileron ratio gets smaller with hydraulic pressure. This is needed for morer precise simulation when the pressure is low.
 	if pcu_mode == 1 then
@@ -188,7 +190,7 @@ function GetAilResponseTime(hyd_sys, pcu_mode) --aileron response time based on 
 			return pressure * 2 / 3340
 		end
 	end
-	return 0.4
+	return 0.8
 end
 
 function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
@@ -227,49 +229,7 @@ function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
 	end
 end
 
-function GetRudderRatio()
-	ratio = GetAilRatio(54, {4}, 2000, 1, 0, 0)
-	if IsAcConnected() == 1 then
-		tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
-		tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
-		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then --If airspeed provided by the sensors is reliable, modify ratio based on the formula
-			if get(tas_pilot) > 135 and get(tas_pilot) <= 269 then
-				return ratio - (get(tas_pilot) - 135) * (36 / 115)
-			elseif get(tas_pilot) > 269 then
-				return 12
-			end
-		else
-			if get(flaps) <= 1 then --If rudder ratio changer is in the degraded mode, there are only 2 ratios: 1.0 with flaps extended, 0.5 with flaps retracted
-				return ratio * 0.5
-			end
-		end
-	end
-	return ratio
-end
-
-function GetRudderNeutral(ratio)
-	local max_press = GetMaxHydPress()
-	--Wind strength defines how much of an effect wind has on rudder
-	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
-	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength -- pressure required to be able to fully counter act wind
-	if max_press < reqd_press then
-		local swing_dir = GetWindVector() * -1
-		local swing_def = swing_dir * (27.5 - ratio) * ((reqd_press - max_press) / reqd_press)
-		return swing_def
-	end
-	return 0
-end
-
-function GetRudderResponseTime()
-	local max_press = GetMaxHydPress()
-	local wind_mag = get(wind_speed)
-	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
-	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength
-	if max_press < reqd_press then
-		return wind_mag * 0.00194 * ((reqd_press - max_press) / reqd_press) + max_press / 3000
-	end
-	return 1
-end
+--Spoilers
 
 function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 	local actual = 0
@@ -294,13 +254,13 @@ function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 			neutral = actual
 		end
 	end
-	if yoke_cmd * side > 0.4 and max_press >= 570 and true_airspeed < 430 then --when deflecting ailerons is not enough, deflect spoilers
-		local tgt = neutral + ((yoke_cmd * side - 0.4) / 0.6) * (20 - neutral)
+	if yoke_cmd * side * -1 > 0.4 and max_press >= 570 and true_airspeed < 430 then --when deflecting ailerons is not enough, deflect spoilers
+		local tgt = neutral + ((yoke_cmd * side * -1 - 0.4) / 0.6) * (20 - neutral)
 		set(h_load, math.abs(tgt - neutral) * 0.0075)
 		return tgt
 	else
 		if max_press > 100 then
-			set(h_load, math.abs(actual - neutral) * 0.0075)
+			set(h_load, actual * 0.0075)
 		else
 			set(h_load, 0)
 		end
@@ -319,6 +279,8 @@ function GetSpoilerResponseTime() --Spoiler response time that is influenced by 
 		return 1
 	end
 end
+
+--Flaps
 
 function SetFlapTarget()
 	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
@@ -377,6 +339,8 @@ function GetFlapResponseTime() --Flap response time that is influenced by hydrau
 	end
 end
 
+--Elevator
+
 function GetElevatorTarget(hyd_sys, yoke_cmd, pcu_mode)
 	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 5)
 	local elevator_ratio = GetAilRatio(40, hyd_sys, 1000, 1, 0, 0)
@@ -398,6 +362,52 @@ function GetElevatorTarget(hyd_sys, yoke_cmd, pcu_mode)
 	return (elevator_ratio / 2) * yoke_cmd * -1
 end
 
+--Rudder
+
+function GetRudderRatio()
+	ratio = GetAilRatio(54, {4}, 2000, 1, 0, 0)
+	if IsAcConnected() == 1 then
+		tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
+		tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
+		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then --If airspeed provided by the sensors is reliable, modify ratio based on the formula
+			if get(tas_pilot) > 135 and get(tas_pilot) <= 269 then
+				return ratio - (get(tas_pilot) - 135) * (36 / 115)
+			elseif get(tas_pilot) > 269 then
+				return 12
+			end
+		else
+			if get(flaps) <= 1 then --If rudder ratio changer is in the degraded mode, there are only 2 ratios: 1.0 with flaps extended, 0.5 with flaps retracted
+				return ratio * 0.5
+			end
+		end
+	end
+	return ratio
+end
+
+function GetRudderNeutral(ratio)
+	local max_press = GetMaxHydPress()
+	--Wind strength defines how much of an effect wind has on rudder
+	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
+	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength -- pressure required to be able to fully counter act wind
+	if max_press < reqd_press then
+		local swing_dir = GetWindVector() * -1
+		local swing_def = swing_dir * (27.5 - ratio) * ((reqd_press - max_press) / reqd_press)
+		return swing_def
+	end
+	return 0
+end
+
+function GetRudderResponseTime()
+	local max_press = GetMaxHydPress()
+	local wind_mag = get(wind_speed)
+	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
+	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength
+	if max_press < reqd_press then
+		return wind_mag * 0.00194 * ((reqd_press - max_press) / reqd_press) + max_press / 3000
+	end
+	return 1
+end
+
 function GetRudderTarget(yoke_cmd)
 	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 6)
 	local rud_ratio = GetRudderRatio()
@@ -407,7 +417,7 @@ function GetRudderTarget(yoke_cmd)
 	else
 		set(h_load, 0)
 	end
-	return (rud_ratio / 2) * yoke_cmd + rud_neutral
+	return -(rud_ratio / 2) * yoke_cmd + rud_neutral
 end
 
 --these functions set a bunch of datarefs for flight controls to the same value. I guess this is needed because of something in plane maker
@@ -486,7 +496,11 @@ end
 function UpdateFlaps(value)
 	for i=1,10 do
 		local flap = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", i)
-		set(flap, value)
+		if value <= 30 then --avoid overshooting due to floating point operation
+			set(flap, value)
+		else
+			set(flap, 30)
+		end
 	end
 end
 
