@@ -1,4 +1,4 @@
 *.acf~
 *prefs.txt
-SASLLog.txt
+*SASLLog.txt
 *lastpos.dat
