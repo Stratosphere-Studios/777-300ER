@@ -131,7 +131,15 @@ B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit
 
 B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[5]")
 
-B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
+B777DR_ovhd_ctr_cover_positions           = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/position", "array[5]")
+B777DR_ovhd_aft_cover_positions           = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/position", "array[7]")
+B777DR_main_cover_positions               = deferred_dataref("Strato/777/cockpit/main_pnl/button_cover/position", "array[5]")
+B777DR_ctr_cover_positions                = deferred_dataref("Strato/777/cockpit/ctr/button_cover/position", "array[4]")
+
+B777DR_ovhd_ctr_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/target", "array[5]")
+B777DR_ovhd_aft_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/target", "array[7]")
+B777DR_main_cover_target                  = deferred_dataref("Strato/777/cockpit/main_pnl/button_cover/target", "array[5]")
+B777DR_ctr_cover_target                   = deferred_dataref("Strato/777/cockpit/ctr/button_cover/target", "array[4]")
 
 B777DR_cockpit_door_pos                   = deferred_dataref("Strato/777/cockpit_door_pos", "number")
 
@@ -139,3 +147,5 @@ B777DR_pfd_mtrs_capt                      = deferred_dataref("Strato/777/display
 
 B777DR_hyd_primary_switch_pos             = deferred_dataref("Strato/cockpit/ovhd/hyd/primary_pumps/button_pos", "array[4]")
 B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovhd/hyd/demand_pumps/button_pos", "array[4]")
+
+B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")

@@ -47,6 +47,7 @@ local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 --**                               FIND X-PLANE DATAREFS                             **--
 --*************************************************************************************--
 
+simDR_startup_running                     = find_dataref("sim/operation/prefs/startup_running")
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 
@@ -61,9 +62,7 @@ B777DR_eicas_mode                         = find_dataref("Strato/777/displays/ei
 B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/pump/primary/state")
 B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
 
-B777DR_hyd_primary_switch_pos             = deferred_dataref("Strato/cockpit/ovhd/hyd/primary_pumps/button_pos", "array[4]")
-B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovhd/hyd/demand_pumps/button_pos", "array[4]")
-
+B777DR_gear_altn_extnsn_target            = find_dataref("Strato/777/gear/altn_extnsn")
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -91,11 +90,24 @@ B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit
 
 B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[5]")
 
-B777DR_button_cover_positions             = deferred_dataref("Strato/777/cockpit/button_cover/position", "array[16]")
+B777DR_ovhd_ctr_cover_positions           = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/position", "array[5]")
+B777DR_ovhd_aft_cover_positions           = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/position", "array[7]")
+B777DR_main_cover_positions               = deferred_dataref("Strato/777/cockpit/main_pnl/button_cover/position", "array[5]")
+B777DR_ctr_cover_positions                = deferred_dataref("Strato/777/cockpit/ctr/button_cover/position", "array[4]")
+
+B777DR_ovhd_ctr_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/target", "array[5]")
+B777DR_ovhd_aft_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/target", "array[7]")
+B777DR_main_cover_target                  = deferred_dataref("Strato/777/cockpit/main_pnl/button_cover/target", "array[5]")
+B777DR_ctr_cover_target                   = deferred_dataref("Strato/777/cockpit/ctr/button_cover/target", "array[4]")
 
 B777DR_cockpit_door_pos                   = deferred_dataref("Strato/777/cockpit_door_pos", "number")
 
 B777DR_pfd_mtrs_capt                      = deferred_dataref("Strato/777/displays/mtrs_capt", "number")
+
+B777DR_hyd_primary_switch_pos             = deferred_dataref("Strato/cockpit/ovhd/hyd/primary_pumps/button_pos", "array[4]")
+B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovhd/hyd/demand_pumps/button_pos", "array[4]")
+
+B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")
 
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
@@ -107,7 +119,6 @@ B777DR_pfd_mtrs_capt                      = deferred_dataref("Strato/777/display
 --**                               FIND X-PLANE COMMANDS                            **--
 --*************************************************************************************--
 
-simDR_startup_running                    = find_dataref("sim/operation/prefs/startup_running")
 
 ---MCP----------
 simCMD_ap_servos_on                      = find_command("sim/autopilot/servos_on")
@@ -696,11 +707,11 @@ function after_physics()
    B777DR_cockpit_door_pos = B777_animate(B777_cockpit_door_target, B777DR_cockpit_door_pos, 4)
 
    for i = 1, 18 do
-      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 20)
+      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 10)
    end
 
    for i = 1, 5 do
-      B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 20)
+      B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 10)
    end
 
    for i = 1, 7 do
@@ -725,6 +736,20 @@ function after_physics()
       B777DR_hyd_demand_switch_pos[i] = B777_animate(B777DR_demand_hyd_pump_sw[i], B777DR_hyd_demand_switch_pos[i], 10)
    end
 
+   for i = 0, 5 do
+      B777DR_ovhd_ctr_cover_positions[i] = B777_animate(B777DR_ovhd_ctr_cover_target[i], B777DR_ovhd_ctr_cover_positions[i], 10)
+   end
+   for i = 0, 7 do
+      B777DR_ovhd_aft_cover_positions[i] = B777_animate(B777DR_ovhd_aft_cover_target[i], B777DR_ovhd_aft_cover_positions[i], 10)
+   end
+   for i = 0, 5 do
+      B777DR_main_cover_positions[i] = B777_animate(B777DR_main_cover_target[i], B777DR_main_cover_positions[i], 10)
+   end
+   for i = 0, 4 do
+      B777DR_ctr_cover_positions[i] = B777_animate(B777DR_ctr_cover_target[i], B777DR_ctr_cover_positions[i], 10)
+   end
+
+   B777DR_gear_altn_extnsn_pos = B777_animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 10)
 end
 
 --function after_replay()
