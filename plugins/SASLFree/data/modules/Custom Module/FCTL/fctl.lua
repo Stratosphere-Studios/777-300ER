@@ -10,14 +10,24 @@ addSearchPath(moduleDirectory .. "/Custom Module/")
 
 include("misc_tools.lua")
 
---getting all of the xplane datarefs
+--Finding sim datarefs
 
+--Cockpit controls
 speedbrake_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
+yoke_roll_ratio = globalPropertyf("sim/cockpit2/controls/yoke_roll_ratio")
+yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
+yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
+throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
+--Indicators
+altitude_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
+altitude_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_copilot")
+altitude_stdby = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_stby")
+--Weather and position
 ac_heading = globalPropertyf("sim/flightmodel/position/magpsi")
 wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
 wind_speed = globalPropertyf("sim/weather/wind_speed_kt") --this is in meters per second
-fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
-f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
+tas = globalPropertyf("sim/flightmodel/position/true_airspeed") --true airspeed in meters per second. Needed for accurate drooping
+--Flight controls
 outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1)
 inbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 5)
 outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 1)
@@ -28,10 +38,15 @@ flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 elevator_L = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",1)
 elevator_R = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",7)
 rudder = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 1)
-yoke_roll_ratio = globalPropertyf("sim/cockpit2/controls/yoke_roll_ratio")
-yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
-yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
-tas = globalPropertyf("sim/flightmodel/position/true_airspeed") --true airspeed in meters per second. Needed for accurate drooping
+--Reversers
+L_reverser_deployed = globalPropertyiae("sim/cockpit2/annunciators/reverser_on", 1)
+L_reverser_fail = globalPropertyi("sim/operation/failures/rel_revers0")
+R_reverser_deployed = globalPropertyiae("sim/cockpit2/annunciators/reverser_on", 2)
+R_reverser_fail = globalPropertyi("sim/operation/failures/rel_revers1")
+--Operation
+fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
+f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
+on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 --creating our own datarefs
 
@@ -50,8 +65,10 @@ pcu_mode_elevator = createGlobalPropertyia("Strato/777/fctl/elevator/pcu_mode", 
 --6 - rudder
 --7 - flaps
 --8 - gear steering
+--9 - gear deployment/retraction
+--10, 11 - left and right reversers respectively
 
-hyd_load = createGlobalPropertyfa("Strato/777/hydraulics/load", {0, 0, 0, 0, 0, 0, 0, 0})
+hyd_load = createGlobalPropertyfa("Strato/777/hydraulics/load", {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
 flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 
@@ -111,6 +128,17 @@ function GetMaxHydPress() --since some things are driven by all 3 hydraulic syst
 	local pressure_C = globalPropertyiae("Strato/777/hydraulics/press", 2)
 	local pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 	return math.max(get(pressure_L), get(pressure_C), get(pressure_R))
+end
+
+function UpdateReversers()
+	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
+	local h_load_L = globalPropertyfae("Strato/777/hydraulics/load", 10)
+	local pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
+	local h_load_R = globalPropertyfae("Strato/777/hydraulics/load", 11)
+	set(L_reverser_fail, 6 * bool2num(get(pressure_L) < 300 or get(on_ground) == 0))
+	set(h_load_L, 0.2 * bool2num(get(pressure_L) > 300) * get(L_reverser_deployed))
+	set(R_reverser_fail, 6 * bool2num(get(pressure_R) < 300 or get(on_ground) == 0))
+	set(h_load_R, 0.2 * bool2num(get(pressure_R) > 300) * get(R_reverser_deployed))
 end
 
 --Ailerons
@@ -292,7 +320,7 @@ function SetFlapTarget()
 		local flap_pos = get(flaps)
 		local index = indexOf(detents, get(handle_pos), 1)
 		if index ~= nil then
-			if get(tas) > tas_limits[index] and tas_limits[index] ~= -1 then --load relief system only triggers with flaps 15 or below
+			if get(tas) > tas_limits[index] and get(handle_pos) >= 0.5 or (get(handle_pos) > 0 and flap_pos == 0 and get(tas) > 140 and (get(altitude_pilot) >= 20000 or get(altitude_copilot) >= 20000 or get(altitude_stdby) >= 20000)) then --load relief system only triggers with flaps 15 or below
 				if get(flap_load_relief) ~= 1 then
 					set(flap_load_relief, 1)
 				end
@@ -323,19 +351,19 @@ function SetFlapTarget()
 	end
 end
 
-function GetFlapResponseTime() --Flap response time that is influenced by hydraulic pressure
-	flap_settings = {0, 1, 5, 15, 20, 25, 30}
+function GetFlapCurrent()
+	flap_times = {0.4, 1.4, 8, 4.8, 1.9, 3.17}
 	local target = get(flap_tgt)
 	local actual = get(flaps)
-	local sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
-	if target ~= actual then
-		if math.abs(target-actual) < 0.1 then
-			return 30
-		else
-			return 1 * (get(sys_C_press) / 3340) / math.abs(target - actual)
-		end
+	local closest = GetClosestFlapSetting()
+	if closest == 1 then
+		closest = 2
+	end
+	local step = flap_times[closest - 1] * 0.004
+	if math.abs(target - actual) < step then
+		return target
 	else
-		return 1
+		return actual + step * (-bool2num(target < actual) + bool2num(target > actual)) * get(f_time) / 0.0166
 	end
 end
 
@@ -390,7 +418,7 @@ function GetRudderNeutral(ratio)
 	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
 	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength -- pressure required to be able to fully counter act wind
 	if max_press < reqd_press then
-		local swing_dir = GetWindVector() * -1
+		local swing_dir = GetWindVector()
 		local swing_def = swing_dir * (27.5 - ratio) * ((reqd_press - max_press) / reqd_press)
 		return swing_def
 	end
@@ -505,6 +533,7 @@ function UpdateFlaps(value)
 end
 
 function update()
+	UpdateReversers()
 	--Update PCU modes
 	UpdateFlprnPCUMode(1, {1, 3})
 	UpdateFlprnPCUMode(2, {2, 3})
@@ -533,7 +562,6 @@ function update()
 	local R_elevator_response_time = GetAilResponseTime({1, 3}, 1)
 	local spoiler_response_time = GetSpoilerResponseTime()
 	local rud_time = GetRudderResponseTime()
-	local flap_time = GetFlapResponseTime()
 	--Move flight controls in sim
 	UpdateOutbdAileron(get(outbd_ail_L)+(L_outbd_ail_target - get(outbd_ail_L))*get(f_time)*outbd_ail_response_time, -1) --these ginormous formulas are for smooth transitions
 	UpdateInbdAileron(get(inbd_ail_L)+(L_inbd_ail_target - get(inbd_ail_L))*get(f_time)*L_inbd_ail_response_time, -1)
@@ -542,7 +570,7 @@ function update()
 	UpdateRudder(get(rudder)+(rud_target - get(rudder))*get(f_time)*rud_time)
 	UpdateSpoilers(get(spoilers_L)+(L_spoiler_target - get(spoilers_L))*get(f_time)*spoiler_response_time, -1)
 	UpdateSpoilers(get(spoilers_R)+(R_spoiler_target - get(spoilers_R))*get(f_time)*spoiler_response_time, 1)
-	UpdateFlaps(get(flaps)+(get(flap_tgt) - get(flaps)) * get(f_time) * flap_time)
+	UpdateFlaps(GetFlapCurrent())
 	UpdateElevator(get(elevator_L)+(L_elevator_target - get(elevator_L)) * get(f_time) * L_elevator_response_time, -1)
 	UpdateElevator(get(elevator_R)+(R_elevator_target - get(elevator_R)) * get(f_time) * R_elevator_response_time, 1)
 end
