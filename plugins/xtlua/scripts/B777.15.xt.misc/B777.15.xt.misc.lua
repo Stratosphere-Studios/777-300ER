@@ -82,36 +82,36 @@ B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_
 function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
 	if simDR_spoiler_handle < 0 and simDR_onground == 1 and simDR_trottle_pos < 0 then --conditions for deployment in arm mode
 		simDR_spoiler_handle = 1
-	elseif simDR_trottle_pos > 0.5 and simDR_spoiler_handle > 0.5 then --automatic retraction when roo much thrust is applied
+	elseif simDR_trottle_pos > 0.5 and simDR_spoiler_handle > 0.5 then --automatic retraction when too much thrust is applied
 		simDR_spoiler_handle = 0
 	end
 end
 
-function sim_landing_gear_up(phase, duration)         
-   B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
-   B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
-   if not is_timer_scheduled(gearUp) then
-      run_after_time(gearUp, 4)                    -- gear up once eagle claw neutral
-   end
-end
-
-function sim_landing_gear_down(phase, duration)
-   B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
-   simDR_gear_handle = 1                        -- bring gear down
-   if not is_timer_scheduled(eagClawUp) then
-      run_after_time(eagClawUp, 20)                -- put custom eagle claw in the "pointing up" position once gear down
-   end
-end
-
-function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when landing gear toggled
-   if phase == 0 then
-      if simDR_gear_handle == 1 then                 -- if gear down
-         simCMD_ldg_gear_up:once()
-      elseif simDR_gear_handle == 0 then             -- if gear up
-         simCMD_ldg_gear_down:once()
-      end
-   end
-end
+--function sim_landing_gear_up(phase, duration)         
+--   B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
+--   B777_eag_target = 0                          -- bring custom eagle claw to pointing up position
+--   if not is_timer_scheduled(gearUp) then
+--      run_after_time(gearUp, 4)                    -- gear up once eagle claw neutral
+--   end
+--end
+--
+--function sim_landing_gear_down(phase, duration)
+--   B777_eag_claw_sync = 0                       -- desyncronise custom and default eagle claw datarefs
+--   simDR_gear_handle = 1                        -- bring gear down
+--   if not is_timer_scheduled(eagClawUp) then
+--      run_after_time(eagClawUp, 20)                -- put custom eagle claw in the "pointing up" position once gear down
+--   end
+--end
+--
+--function sim_landing_gear_toggle_CMDhandler(phase, duration)   -- runs when landing gear toggled
+--   if phase == 0 then
+--      if simDR_gear_handle == 1 then                 -- if gear down
+--         simCMD_ldg_gear_up:once()
+--      elseif simDR_gear_handle == 0 then             -- if gear up
+--         simCMD_ldg_gear_down:once()
+--      end
+--   end
+--end
 
 function sim_avionics_off() end
 
@@ -119,9 +119,9 @@ function sim_avionics_off() end
 --**                                 X-PLANE COMMANDS                                **--
 --*************************************************************************************--
 
-simCMD_landing_gear_toggle              = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
-simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
-simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
+--simCMD_landing_gear_toggle              = replace_command("sim/flight_controls/landing_gear_toggle", sim_landing_gear_toggle_CMDhandler)
+--simCMD_ldg_gear_up                      = replace_command("sim/flight_controls/landing_gear_up", sim_landing_gear_up)
+--simCMD_ldg_gear_down                    = replace_command("sim/flight_controls/landing_gear_down", sim_landing_gear_down)
 simCMD_avionics_off                     = replace_command("sim/systems/avionics_off", sim_avionics_off)
 
 simCMD_avionics_on                      = find_command("sim/systems/avionics_on")
@@ -206,33 +206,33 @@ end
 
 function after_physics()
    SetSpeedbrkHandle()
-   B777DR_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
+   --B777DR_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
+   --
+   --if B777_eag_claw_sync == 1 then
+   --   B777DR_custom_eagle_claw[1] = simDR_eag_claw_pos[1]
+   --   B777DR_custom_eagle_claw[2] = simDR_eag_claw_pos[2]
+   --end
+   --
+   --if B777DR_avg_gear_pos < 0.9 then
+   --   B777_eag_claw_sync = 0
+   --   B777DR_custom_eagle_claw = 0
+   --end
+   --
+   --if B777_eag_claw_sync == 0 then
+   --   B777DR_custom_eagle_claw[1] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
+   --   B777DR_custom_eagle_claw[2] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
+   --end
+   --
+   --if B777DR_avg_gear_pos == 0 then
+   --   B777DR_ldg_gear_kill = 1
+   --else
+   --   B777DR_ldg_gear_kill = 0
+   --end
 
-   if B777_eag_claw_sync == 1 then
-      B777DR_custom_eagle_claw[1] = simDR_eag_claw_pos[1]
-      B777DR_custom_eagle_claw[2] = simDR_eag_claw_pos[2]
-   end
-
-   if B777DR_avg_gear_pos < 0.9 then
-      B777_eag_claw_sync = 0
-      B777DR_custom_eagle_claw = 0
-   end
-
-   if B777_eag_claw_sync == 0 then
-      B777DR_custom_eagle_claw[1] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
-      B777DR_custom_eagle_claw[2] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
-   end
-
-   if B777DR_avg_gear_pos == 0 then
-      B777DR_ldg_gear_kill = 1
-   else
-      B777DR_ldg_gear_kill = 0
-   end
-
-   if simDR_whichOnGround[1] == 1 and simDR_whichOnGround[2] == 1 then
-      simDR_reverser_0_fail = 6
-      simDR_reverser_1_fail = 6
-   end
+   --if simDR_whichOnGround[1] == 1 and simDR_whichOnGround[2] == 1 then
+   --   simDR_reverser_0_fail = 6
+   --   simDR_reverser_1_fail = 6
+   --end
 
    --print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error.")
 

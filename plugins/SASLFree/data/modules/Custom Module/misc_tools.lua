@@ -118,3 +118,28 @@ function DrawCrossedRect(x, y, width, height, thickness, color) --draws rectangl
 	sasl.gl.drawWideLine(x, y, x + width, y - height, thickness, color)
 	sasl.gl.drawWideLine(x + width, y, x, y - height, thickness, color)
 end
+
+function Stripify(width, height, x, y, n, thickness, color) --draws diagonal stripes across a rectangle
+	local step = (width+height) / n
+	for i=step,width+height,step do
+		local x1 = 0
+        local y1 = 0
+        local x2 = 0
+        local y2 = 0
+		if i <= height then
+			x1 = x
+			y1 = y + height - i
+		else
+			x1 = x + i - height
+			y1 = y
+		end
+		if i <= width then
+			x2 = x + i
+			y2 = y + height
+		else
+			x2 = x + width
+			y2 = y + height - i + width
+		end
+		sasl.gl.drawWideLine(round(x1), round(y1), round(x2), round(y2), thickness, color)
+	end
+end
