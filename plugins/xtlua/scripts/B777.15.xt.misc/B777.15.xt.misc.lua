@@ -234,7 +234,7 @@ end
 
 function after_physics()
    SetSpeedbrkHandle()
-   print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok."")
+   print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok.")
    gear()
 end
 
