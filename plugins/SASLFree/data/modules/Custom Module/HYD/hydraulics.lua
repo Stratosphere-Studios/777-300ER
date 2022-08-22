@@ -72,6 +72,8 @@ primary_ovht = {0, 0, 0, 0}
 --Demand pumps
 demand_ovht = {0, 0, 0, 0}
 demand_time = {0, 0, 0, 0}
+demand_shutdown = {0, 0, 0, 0}
+demand_was_working = {0, 0, 0, 0} --Was the demand pump working at time of shut down?
 
 --Left ACMP low pressure logic
 L_ACMP_time = -16 -- time when pressure reached 2400 psi with both pumps on
@@ -127,7 +129,15 @@ function UpdateLights()
 		--DRefs for demand pumps
 		local light_demand = globalPropertyiae("Strato/777/hydraulics/pump/demand/fault", i)
 		local demand_switch = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
+		local demand_past = globalPropertyiae("Strato/777/hydraulics/pump/demand/past", i)
 		local demand_temperature = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+		--Wait 5 seconds if a working demand pump was shut down
+		if get(demand_past) == 1 and get(demand_switch) == 0 and demand_was_working[i] == 0 then
+			demand_shutdown[i] = get(c_time)
+			demand_was_working[i] = 1
+		elseif get(demand_past) == 0 and get(demand_switch) == 0 and demand_was_working[i] == 0 then
+			demand_shutdown[i] = get(c_time) - 5
+		end
 		--Demand pump overheat logic
 		if get(demand_temperature) >= 75 and demand_ovht[i] == 0 then
 			demand_ovht[i] = 1
@@ -135,7 +145,7 @@ function UpdateLights()
 		elseif get(demand_temperature) < 75 then
 			demand_ovht[i] = 0
 		end
-		if get(demand_switch) == 0 or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) then
+		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch) == 0) or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) then
 			set(light_demand, 1)
 		else
 			set(light_demand, 0)
@@ -208,57 +218,27 @@ function GetDemandPumpState(idx, primary_state)
 			local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
 			local h_load = globalPropertyfae("Strato/777/hydraulics/sys_load", sys_idx)
 			local flt_state = GetFltState()
-			if flt_state == 1 and idx == 2 or flt_state == 1 and idx == 3 then --turn all pumps on if we are taking off
+			if flt_state == 1 and idx == 2 or flt_state == 1 and idx == 3 then --turn ADPs on if we are taking off
 				return 1
 			else
 				if idx == 1 then
-					if primary_state == 1 then
-						if get(ias) > 60 and get(ra_pilot) <= 30 or get(ias) > 60 and get(ra_copilot) <= 30 then --Getting ready for deploying them speedbrakes
-							return 1
-						elseif get(pressure) < 2800 then --Low pressure logic
-							if L_ACMP_engage == false then
-								L_ACMP_engage = true
-							end
-							return 1
-						elseif L_ACMP_engage == true and get(pressure) >= 2800 then
+					if get(ias) > 60 and get(ra_pilot) <= 30 or get(ias) > 60 and get(ra_copilot) <= 30 then --Getting ready for deploying them speedbrakes
+						return 1
+					elseif get(pressure) < 2800 then --Low pressure logic
+						if L_ACMP_engage == false then
+							L_ACMP_engage = true
+						end
+						return 1
+					elseif L_ACMP_engage == true and get(pressure) >= 2800 then
+						if primary_state == 1 then
 							L_ACMP_time = get(c_time)
 							L_ACMP_engage = false
-							return 1
-						elseif L_ACMP_engage == false and get(pressure) >= 2800 and get(c_time) < L_ACMP_time + 15 then
-							return 1
 						end
-					else
+						return 1
+					elseif L_ACMP_engage == false and get(pressure) >= 2800 and get(c_time) < L_ACMP_time + 15 then
 						return 1
 					end
 				elseif idx == 2 or idx == 3 then
-					--Updating touchdown logic for air driven demand pumps
-					if get(ias) > 80 and get(ra_pilot) <= 30 or get(ias) > 80 and get(ra_copilot) <= 30 then
-						ADP_touchdown = true
-					elseif get(ias) <= 80 and ADP_touchdown == true then
-						if get(speedbrake_handle) <= 0 then
-							ADP_touchdown = false
-							ADP_speedbrake_retract = get(c_time)
-						end
-					elseif ADP_touchdown == true and get(ra_pilot) >= 30 or ADP_touchdown == true and get(ra_copilot) >= 30 then --if we've gone around, set touchdown to false
-						ADP_touchdown = false
-					end
-					--Updating ADP low pressure logic
-					if get(pressure) < 2400 then
-						ADP_engage = true
-					elseif ADP_engage == true and get(pressure) >= 2700 then
-						ADP_time = get(c_time)
-						ADP_engage = false
-					end
-					--Takeoff logic
-					if get(on_ground) ~= ADP_onground_past then
-						if get(on_ground) == 0 and ADP_onground_past == 1 then
-							ADP_leave_ground_time = get(c_time) --saving time we left the ground gor correct logic
-						end
-						ADP_onground_past = get(on_ground)
-					end
-					if get(act_press) > 0 then
-						return 1
-					end
 					--Acquiring state of the second primary pump in the system
 					local primary_state_second = 0
 					if idx == 2 then
@@ -273,58 +253,84 @@ function GetDemandPumpState(idx, primary_state)
 					else
 						demand_second = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", 2)
 					end
-					if primary_state == 1 and get(primary_state_second) == 1 then
-						local flap_tgt = globalPropertyf("Strato/777/flaps/tgt")
+					--Updating touchdown logic for air driven demand pumps
+					if get(ias) > 80 and get(ra_pilot) <= 30 or get(ias) > 80 and get(ra_copilot) <= 30 then
+						ADP_touchdown = true
+					elseif get(ias) <= 80 and ADP_touchdown == true then
+						if get(speedbrake_handle) <= 0 then
+							ADP_touchdown = false
+							ADP_speedbrake_retract = get(c_time)
+						end
+					elseif ADP_touchdown == true and get(ra_pilot) >= 30 or ADP_touchdown == true and get(ra_copilot) >= 30 then --if we've gone around, set touchdown to false
+						ADP_touchdown = false
+					end
+					if idx == 2 then
+						--Updating ADP low pressure logic
+						if get(pressure) < 2400 then
+							ADP_engage = true
+						elseif ADP_engage == true and get(pressure) >= 2700 then
+							if primary_state == 1 and get(primary_state_second) == 1 then
+								ADP_time = get(c_time)
+								ADP_engage = false
+							end
+						end
 						--ADP low pressure logic
-						if ADP_engage == false and get(pressure) >= 2700 and get(c_time) < ADP_time + 15 then --Keep pump working until 15 seconds pass from the moment when pressure has reached 2700 psi
+						if ADP_engage == false and get(pressure) >= 2700 and get(c_time) < ADP_time + 15 or ADP_engage == true then --Keep pump working until 15 seconds pass from the moment when pressure has reached 2700 psi
 							return 1
 						end
-						--ADP flap movement logic
-						if get(flap_tgt) == math.abs(Round(get(flaps), 2)) and ADP_flap_past ~= math.abs(Round(get(flaps), 2)) then
-							ADP_flap_past = math.abs(Round(get(flaps), 2))
-							if ADP_flap_pump == 2 then
-								ADP_flap_pump = 3
-							else
-								ADP_flap_pump = 2
-							end
+					end
+					--Takeoff logic
+					if get(on_ground) ~= ADP_onground_past then
+						if get(on_ground) == 0 and ADP_onground_past == 1 then
+							ADP_leave_ground_time = get(c_time) --saving time we left the ground gor correct logic
 						end
-						if get(flap_tgt) ~= math.abs(Round(get(flaps), 2)) then --engage adequate ADP when extending flaps
-							if idx == ADP_flap_pump then
-								return 1
-							end
-							ADP_flap_past = math.abs(Round(get(flaps), 2))
+						ADP_onground_past = get(on_ground)
+					end
+					if get(act_press) > 0 then
+						return 1
+					end
+					local flap_tgt = globalPropertyf("Strato/777/flaps/tgt")
+					--ADP flap movement logic
+					if get(flap_tgt) == math.abs(Round(get(flaps), 2)) and ADP_flap_past ~= math.abs(Round(get(flaps), 2)) then
+						ADP_flap_past = math.abs(Round(get(flaps), 2))
+						if ADP_flap_pump == 2 then
+							ADP_flap_pump = 3
+						else
+							ADP_flap_pump = 2
 						end
-						--After takeoff logic
-						if get(c_time) < ADP_leave_ground_time + 10 then
+					end
+					if get(flap_tgt) ~= math.abs(Round(get(flaps), 2)) then --engage adequate ADP when extending flaps
+						if idx == ADP_flap_pump then
 							return 1
 						end
-						if get(on_ground) == 0 and get(flaps) > 0 and get(demand_second) == 0 then --preparing for some autoslat demand
-							return 1
-						end
-						--ADP after landing logic
-						if ADP_touchdown == true or get(c_time) < ADP_speedbrake_retract + 5 or ADP_engage == true then --Engage during landing and when the pressure is low 
-							return 1
-						end
-					else
+						ADP_flap_past = math.abs(Round(get(flaps), 2))
+					end
+					--After takeoff logic
+					if get(c_time) < ADP_leave_ground_time + 10 then
+						return 1
+					end
+					if get(on_ground) == 0 and get(flaps) > 0 and get(demand_second) == 0 then --preparing for some autoslat demand
+						return 1
+					end
+					--ADP after landing logic
+					if ADP_touchdown == true or get(c_time) < ADP_speedbrake_retract + 5 then --Engage during landing and when the pressure is low 
 						return 1
 					end
 				elseif idx == 4 then
-					if primary_state == 1 then
-						if get(ra_pilot) <= 30 or get(ra_copilot) <= 30 then --preparing for brake demand if rto happens
-							return 1
-						elseif get(pressure) < 2800 then --low pressure logic
-							if R_ACMP_engage == false then
-								R_ACMP_engage = true
-							end
-							return 1
-						elseif R_ACMP_engage == true and get(pressure) >= 2800 then
+					if get(ra_pilot) <= 30 or get(ra_copilot) <= 30 then --preparing for brake demand if rto happens
+						return 1
+					elseif get(pressure) < 2800 then --low pressure logic
+						if R_ACMP_engage == false then
+							R_ACMP_engage = true
+						end
+						return 1
+					elseif R_ACMP_engage == true and get(pressure) >= 2800 then
+						if primary_state == 1 then
 							R_ACMP_time = get(c_time)
 							R_ACMP_engage = false
-							return 1
-						elseif R_ACMP_engage == false and get(pressure) >= 2800 and get(c_time) < R_ACMP_time + 15 then
-							return 1
 						end
-					else
+						return 1
+					elseif R_ACMP_engage == false and get(pressure) >= 2800 and get(c_time) < R_ACMP_time + 15 then
 						return 1
 					end
 				end
