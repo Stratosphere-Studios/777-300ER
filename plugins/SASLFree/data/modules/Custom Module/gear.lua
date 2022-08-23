@@ -72,6 +72,7 @@ gear_load = globalPropertyfae("Strato/777/hydraulics/load", 9)
 altn_gear = globalPropertyi("Strato/777/gear/altn_extnsn")
 normal_gear = globalPropertyi("Strato/777/gear/norm_extnsn")
 act_press = globalPropertyi("Strato/777/gear/actuator_press")
+kill_gear = globalPropertyi("Strato/777/kill_gear")
 
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
 man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
@@ -521,6 +522,7 @@ function UpdateActuatorPress()
 				actuator_press[2] = get(sys_C_press)
 			end
 		elseif mlg_target == 1 then
+			set(kill_gear, 0)
 			--Gear extension
 			ldg_extend = 1
 			if get(sys_C_press) >= 200 and get(altn_gear) == 0 then
@@ -540,6 +542,9 @@ function UpdateActuatorPress()
 			end
 		end
 	else
+		if mlg_target == 0 then
+			set(kill_gear, 1)
+		end
 		--setting up eagle claw for target
 		eag_claw_target[1] = get(sim_eag_R) * mlg_target
 		eag_claw_target[2] = get(sim_eag_L) * mlg_target
@@ -637,6 +642,12 @@ function ParkBrakeHandler(phase)
 	end
 end
 
+function GearDown(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(normal_gear, 1)
+	end
+end
+
 function GearUp(phase)
 	if phase == SASL_COMMAND_BEGIN then
 		if get(on_ground) == 1 then
@@ -666,6 +677,7 @@ end
 sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
 sasl.registerCommandHandler(hold_regular, 1, BrakeHoldHandler)
 sasl.registerCommandHandler(toggle_max, 1, ParkBrakeHandler)
+sasl.registerCommandHandler(gear_down, 0, GearDown)
 sasl.registerCommandHandler(gear_up, 0, GearUp)
 sasl.registerCommandHandler(gear_toggle, 0, ToggleGear)
 
