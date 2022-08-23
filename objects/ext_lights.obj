@@ -5,6 +5,80 @@ OBJ
 GLOBAL_cockpit_lit
 POINT_COUNTS	0	0	0	0
 
+	ANIM_begin
+	ANIM_trans	-8.67346	-0.28106999	-1.88678	-8.67346	-0.28106999	-1.88678
+	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+	ANIM_rotate_key	-6	-0
+	ANIM_rotate_key	2	3.0000069
+	ANIM_rotate_end
+		ANIM_begin
+		ANIM_trans	-8.1132498	0.84539998	5.0679598	-8.1132498	0.84539998	5.0679598
+		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+		ANIM_rotate_key	-6	-0
+		ANIM_rotate_key	2	2.0001957
+		ANIM_rotate_end
+			ANIM_begin
+			ANIM_trans	-6.58639	0.71271002	4.77422	-6.58639	0.71271002	4.77422
+			ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+			ANIM_rotate_key	-6	-0
+			ANIM_rotate_key	2	3.9998185
+			ANIM_rotate_end
+				ANIM_begin
+				ANIM_trans	-3.21521	0.34233999	1.04591	-3.21521	0.34233999	1.04591
+				ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+				ANIM_rotate_key	-6	-0
+				ANIM_rotate_key	2	3.9998185
+				ANIM_rotate_end
+					ANIM_begin
+					ANIM_trans	-3.24862	0.32308999	2.20455	-3.24862	0.32308999	2.20455
+					ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+					ANIM_rotate_key	-6	-0
+					ANIM_rotate_key	2	6.9998255
+					ANIM_rotate_end
+						LIGHT_PARAM	airplane_landing_glow -1.5892277 0.1712395 0.026983261 0 0 0 0 1 
+						LIGHT_PARAM	airplane_landing_glow -2.5159931 0.29183733 2.5434084 0 0 0 0 1 
+					ANIM_end
+				ANIM_end
+			ANIM_end
+		ANIM_end
+	ANIM_end
+	ANIM_begin
+	ANIM_trans	8.67346	-0.28106999	-1.88678	8.67346	-0.28106999	-1.88678
+	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+	ANIM_rotate_key	-6	-0
+	ANIM_rotate_key	2	-3.0000069
+	ANIM_rotate_end
+		ANIM_begin
+		ANIM_trans	8.1132402	0.84539998	5.0679598	8.1132402	0.84539998	5.0679598
+		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+		ANIM_rotate_key	-6	-0
+		ANIM_rotate_key	2	-3.0000069
+		ANIM_rotate_end
+			ANIM_begin
+			ANIM_trans	6.5864	0.71271002	4.77422	6.5864	0.71271002	4.77422
+			ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+			ANIM_rotate_key	-6	-0
+			ANIM_rotate_key	2	-3.9998185
+			ANIM_rotate_end
+				ANIM_begin
+				ANIM_trans	3.2151899	0.34233999	1.04591	3.2151899	0.34233999	1.04591
+				ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+				ANIM_rotate_key	-6	-0
+				ANIM_rotate_key	2	-3.9998185
+				ANIM_rotate_end
+					ANIM_begin
+					ANIM_trans	3.24861	0.32308999	2.20455	3.24861	0.32308999	2.20455
+					ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/wing_tip_deflection_deg[0]
+					ANIM_rotate_key	-6	-0
+					ANIM_rotate_key	2	-6.9998255
+					ANIM_rotate_end
+						LIGHT_PARAM	airplane_landing_glow 1.5893002 0.1712395 0.026983261 0 0 0 0 1 
+						LIGHT_PARAM	airplane_landing_glow 2.5160007 0.29183733 2.5434084 0 0 0 0 1 
+					ANIM_end
+				ANIM_end
+			ANIM_end
+		ANIM_end
+	ANIM_end
 	LIGHT_PARAM	airplane_landing_glow 0.26692972 -2.4066942 -29.580872 0 0 0 0 1 
 	LIGHT_PARAM	airplane_landing_glow -0.25282726 -2.4066942 -29.580872 0 0 0 0 1 
 	LIGHT_PARAM	airplane_landing_sp 0 -2.4066942 -29.580872 0.9 0.9 0.9 0 150 0.5
@@ -16,10 +90,9 @@ POINT_COUNTS	0	0	0	0
 	LIGHT_PARAM	airplane_landing_sp 3.44438 -0.89623976 -7.8978643 0.9 0.9 0.9 0 150 0.5
 	LIGHT_PARAM	airplane_landing_glow 3.44438 -0.87962902 -7.7377439 0 0 0 0 1 
 	LIGHT_PARAM	airplane_landing_glow 0 3.3629179 -22.098515 0 0 0 0 1 
-	LIGHT_PARAM	airplane_landing_glow -31.426151 2.1136968 11.232847 0 0 0 0 1 
-	LIGHT_PARAM	airplane_landing_glow -32.352917 2.2342947 13.749272 0 0 0 0 1 
-	LIGHT_PARAM	airplane_landing_glow 31.426201 2.1136968 11.232847 0 0 0 0 1 
-	LIGHT_PARAM	airplane_landing_glow 32.352901 2.2342947 13.749272 0 0 0 0 1 
 	LIGHT_PARAM	airplane_landing_glow 8.0170603 2.2127488 36.942799 0 0 0 0 1 
+	LIGHT_SPILL_CUSTOM -0.56536996 4.1664476 30.763731 1 1 1 1 4 -0 0.78512907 0.61933219 0.83963958 sim/flightmodel2/lights/landing_lights_brightness_ratio
+	LIGHT_CUSTOM	-1.5111423 1.6786398 -23.253159 0.47949433 0.45918423 1 16 1 0 0 1 1 
+	LIGHT_CUSTOM	1.4201629 1.6786398 -23.253159 0.47949433 0.45918423 1 16 1 0 0 1 1 
 
 # Build with Blender 3.0.1 (build b'dc2d18018171'). Exported with XPlane2Blender 4.1.0-beta.2+104.20220106141815
