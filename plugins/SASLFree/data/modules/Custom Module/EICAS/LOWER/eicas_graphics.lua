@@ -16,6 +16,7 @@ include("misc_tools.lua")
 battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
 
 c_time = globalPropertyf("Strato/777/time/current")
+brake_acc_in_use = globalPropertyi("Strato/777/gear/brake_acc_in_use")
 
 --Creating our own
 
@@ -215,6 +216,12 @@ function DrawBrakes()
 		drawText(font, brake_pos[3] + 89, brake_pos[2] - 196 * (i - 1), draw_temp_L, 38, false, false, TEXT_ALIGN_RIGHT, temp_color_L)
 		drawText(font, brake_pos[4] - 13, brake_pos[2] - 196 * (i - 1), draw_temp_R, 38, false, false, TEXT_ALIGN_RIGHT, temp_color_R)
 		drawText(font, brake_pos[5] + 89, brake_pos[2] - 196 * (i - 1), draw_temp_R, 38, false, false, TEXT_ALIGN_RIGHT, temp_color_R)
+		if i == 3 and get(brake_acc_in_use) == 1 then
+			drawText(font, brake_pos[1] - 13, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+			drawText(font, brake_pos[3] + 124, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+			drawText(font, brake_pos[4] - 13, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+			drawText(font, brake_pos[5] + 124, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+		end
 		if output_L < 5 and get(truck_t_L) ~= get(max_temp_L) or output_L < 3 then
 			DrawRect(brake_pos[1], brake_pos[2] - 196 * (i - 1), 15, 77, 3, white, true)
 			DrawRect(brake_pos[3], brake_pos[2] - 196 * (i - 1), 15, 77, 3, white, true)
