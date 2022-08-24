@@ -16,11 +16,9 @@ include("misc_tools.lua")
 battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
 
 c_time = globalPropertyf("Strato/777/time/current")
+brake_acc_in_use = globalPropertyi("Strato/777/gear/brake_acc_in_use")
 
 --Creating our own
-
-eicas_brake_temp = createGlobalPropertyi("Strato/777/eicas/brake_temp", 0)
-eicas_tire_press = createGlobalPropertyi("Strato/777/eicas/tire_press", 0)
 
 --loading font and images for drawing on eicas
 
@@ -163,7 +161,6 @@ function DrawBrakes()
 		--Modifying output temperature
 		if output_L >= 5 then
 			temp_color_L = amber
-			set(eicas_brake_temp, 1)
 		end
 		if output_L < 0 then
 			output_L = 0
@@ -174,7 +171,6 @@ function DrawBrakes()
 		local output_R = Round(get(truck_t_R) * 0.0101 - 0.5051, 1)
 		if output_R >= 5 then
 			temp_color_R = amber
-			set(eicas_brake_temp, 1)
 		end
 		if output_R < 0 then
 			output_R = 0
@@ -191,19 +187,15 @@ function DrawBrakes()
 		--Configuring psi that we'll draw
 		if get(psi_L) < 100 then
 			psi_color_L = amber
-			set(eicas_tire_press, 1)
 		end
 		if get(psi_LL) < 100 then
 			psi_color_LL = amber
-			set(eicas_tire_press, 1)
 		end
 		if get(psi_R) < 100 then
 			psi_color_R = amber
-			set(eicas_tire_press, 1)
 		end
 		if get(psi_RR) < 100 then
 			psi_color_RR = amber
-			set(eicas_tire_press, 1)
 		end
 		--Draw tire PSI
 		drawText(font, brake_pos[1] + 61, brake_pos[2] + 22 - 196 * (i - 1), round(get(psi_L)), 38, false, false, TEXT_ALIGN_CENTER, psi_color_L)
@@ -215,6 +207,12 @@ function DrawBrakes()
 		drawText(font, brake_pos[3] + 89, brake_pos[2] - 196 * (i - 1), draw_temp_L, 38, false, false, TEXT_ALIGN_RIGHT, temp_color_L)
 		drawText(font, brake_pos[4] - 13, brake_pos[2] - 196 * (i - 1), draw_temp_R, 38, false, false, TEXT_ALIGN_RIGHT, temp_color_R)
 		drawText(font, brake_pos[5] + 89, brake_pos[2] - 196 * (i - 1), draw_temp_R, 38, false, false, TEXT_ALIGN_RIGHT, temp_color_R)
+		if i == 3 and get(brake_acc_in_use) == 1 then
+			drawText(font, brake_pos[1] - 13, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+			drawText(font, brake_pos[3] + 124, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+			drawText(font, brake_pos[4] - 13, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+			drawText(font, brake_pos[5] + 124, brake_pos[2] - 196 * (i - 1) + 46, "ASKID", 38, false, false, TEXT_ALIGN_RIGHT, amber)
+		end
 		if output_L < 5 and get(truck_t_L) ~= get(max_temp_L) or output_L < 3 then
 			DrawRect(brake_pos[1], brake_pos[2] - 196 * (i - 1), 15, 77, 3, white, true)
 			DrawRect(brake_pos[3], brake_pos[2] - 196 * (i - 1), 15, 77, 3, white, true)
