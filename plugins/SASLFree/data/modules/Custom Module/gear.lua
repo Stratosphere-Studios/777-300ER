@@ -465,11 +465,7 @@ function UpdateGearStrg(r_time)
 		set(nw_strg, get(nw_strg) + (nw_tgt - get(nw_strg)) * r_time * get(f_time))
 		l_all = 0.05 * math.abs(get(yoke_heading_ratio))
 		if math.abs(get(nw_strg)) > 13 then
-			local steer_dir = -1 --steering vector for the main wheels
-			if get(nw_strg) < 0 then
-				steer_dir = 1
-			end
-			w_tgt = steer_dir * (steer_dir * Round(get(yoke_heading_ratio), 3) - 0.185) / 0.815 * 14
+			w_tgt = (-1 * Round(get(yoke_heading_ratio), 3) - 0.185) / 0.815 * 14
 		end
 	else --if there's not enough pressure, gear steering is done by natural forces
 		if get(ground_speed) > 0.1 and math.abs(get(nw_strg)) < 50 then
