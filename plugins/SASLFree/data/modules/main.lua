@@ -14,7 +14,6 @@ addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
 altn_gear = createGlobalPropertyi("Strato/777/gear/altn_extnsn", 0)
-normal_gear = createGlobalPropertyi("Strato/777/gear/norm_extnsn", 1)
 act_press = createGlobalPropertyi("Strato/777/gear/actuator_press", 0)
 
 components = {
