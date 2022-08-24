@@ -12,7 +12,10 @@ include("misc_tools.lua")
 --Cockpit controls
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
 yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
-gear_handle = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
+--gear_handle = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
+--Indicators
+ra_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
+ra_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_copilot")
 --Brakes
 Xplane_park_brake = globalPropertyf("sim/flightmodel/controls/parkbrake")
 R_wheel_brake = globalPropertyf("sim/cockpit2/controls/right_brake_ratio")
@@ -67,9 +70,11 @@ sys_R_press = globalPropertyfae("Strato/777/hydraulics/press", 3)
 c_time = globalPropertyf("Strato/777/time/current")
 gear_load = globalPropertyfae("Strato/777/hydraulics/load", 9)
 altn_gear = globalPropertyi("Strato/777/gear/altn_extnsn")
-normal_gear = globalPropertyi("Strato/777/gear/norm_extnsn")
+normal_gear = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 act_press = globalPropertyi("Strato/777/gear/actuator_press")
+kill_gear = globalPropertyi("Strato/777/kill_gear")
 
+handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
 man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
 truck_L_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_L_temp", {0, 0, 0})
@@ -84,11 +89,20 @@ man_keyboard = createGlobalPropertyi("Strato/777/gear/man_keyboard", 0) --1 if u
 brake_acc = createGlobalPropertyf("Strato/777/gear/brake_acc", 3000)
 acc_press_tgt = createGlobalPropertyf("Strato/777/gear/brake_acc_tgt", 3000)
 brake_acc_in_use = createGlobalPropertyi("Strato/777/gear/brake_acc_in_use", 0)
-lock_factor = createGlobalPropertyia("Strato/777/gear/lock_f", {1, 1, 1})
 doors = createGlobalPropertyfa("Strato/777/gear/doors", {0, 0, 0, 0})
 brake_load = createGlobalPropertyfa("Strato/777/gear/brake_load", {0, 0})
 acc_load_current = createGlobalPropertyf("Strato/777/gear/acc_load_current", 0)
 acc_load_past = createGlobalPropertyf("Strato/777/gear/acc_load_past", 0)
+eicas_brake_temp = createGlobalPropertyi("Strato/777/eicas/brake_temp", 0)
+eicas_tire_press = createGlobalPropertyi("Strato/777/eicas/tire_press", 0)
+
+--Finding simulaor commands
+toggle_regular = sasl.findCommand("sim/flight_controls/brakes_toggle_regular")
+hold_regular = sasl.findCommand("sim/flight_controls/brakes_regular")
+toggle_max = sasl.findCommand("sim/flight_controls/brakes_toggle_max")
+gear_down = sasl.findCommand("sim/flight_controls/landing_gear_down")
+gear_up = sasl.findCommand("sim/flight_controls/landing_gear_up")
+gear_toggle = sasl.findCommand("sim/flight_controls/landing_gear_toggle")
 
 mlg_target = 1
 nose_gear_target = 1
@@ -101,6 +115,10 @@ actuator_press = {0, 0}
 eag_claw_sync = 1
 eag_claw_target = {0, 0}
 
+pressures_L = {203, 210, 219, 204, 200, 216}
+L_fuse_plugs_melt = {0, 0, 0}
+pressures_R = {213, 204, 215, 201, 205, 219}
+R_fuse_plugs_melt = {0, 0, 0}
 L_brake_tgt = 0
 R_brake_tgt = 0
 tmp = {0, 0} --time when we just started using brakes
@@ -189,24 +207,42 @@ function UpdateBrakeTemperatures(delay)
 		local R_cooler  = bool2num(1 == GetWindVector())
 		local R_deployed = bool2num(1 == get(mlg_actual_R))
 		--Calculating gain in temperature because of braking here
-		--print(get(L_wheel_brake), get(R_wheel_brake))
-		local L_temp = (0.527 * 10000 * math.sqrt(on_time[1]) * get(ground_speed) * (get(ground_speed) / get(tas)) * get(L_wheel_brake) * 0.25) / math.sqrt(1450 * 2020 * 5.28)
-		local R_temp = (0.527 * 10000 * math.sqrt(on_time[2]) * get(ground_speed) * (get(ground_speed) / get(tas)) * get(R_wheel_brake) * 0.25) / math.sqrt(1450 * 2020 * 5.28)
+		local p1 = 0.527 * 10000 * get(ground_speed) * (get(ground_speed) / get(tas))
+		local p2 = math.sqrt(1450 * 2020 * 5.28)
+		local L_temp_no_askid = 0
+		local R_temp_no_askid = 0
+		if get(brake_acc_in_use) == 1 then
+			L_temp_no_askid = (p1 * math.sqrt(on_time[1]) * get(man_brakes_L) * 0.25) / p2
+			R_temp_no_askid = (p1 * math.sqrt(on_time[2]) * get(man_brakes_R) * 0.25) / p2
+		end
+		local L_temp = (p1 * math.sqrt(on_time[1]) * get(L_wheel_brake) * 0.25) / p2
+		local R_temp = (p1 * math.sqrt(on_time[2]) * get(R_wheel_brake) * 0.25) / p2
 		--Cooling would be slower when parking brake is on
-		local L_cooling_coeff = 0.008 - 0.002 * (get(park_brake) - L_cooler * 2) 
+		local L_cooling_coeff = 0.008 - 0.002 * (get(park_brake) - L_cooler * 2)
 		local R_cooling_coeff = 0.008 - 0.002 * (get(park_brake) - R_cooler * 2)
 		--This is where all the cooling is simulated
-		local L_tgt_temp = L_temp + (get(oat) - get(brake_L_temp)) * (1 - get(L_wheel_brake)) * get(f_time) * L_cooling_coeff * get(tas) * 0.2 * L_deployed 
-		local R_tgt_temp = R_temp + (get(oat) - get(brake_R_temp)) * (1 - get(R_wheel_brake)) * get(f_time) * R_cooling_coeff * get(tas) * 0.2 * R_deployed
+		local cool_L = (get(oat) - brake_L_temp) * (1 - get(L_wheel_brake)) * get(f_time) * L_cooling_coeff * (get(tas) - (get(oat) - brake_L_temp) * 0.002) * 0.2 * L_deployed
+		local cool_R = (get(oat) - brake_R_temp) * (1 - get(R_wheel_brake)) * get(f_time) * R_cooling_coeff * (get(tas) - (get(oat) - brake_R_temp) * 0.002) * 0.2 * R_deployed
+		local L_tgt_temp = L_temp + cool_L 
+		local R_tgt_temp = R_temp + cool_R
 		brake_L_temp = brake_L_temp + L_tgt_temp
 		brake_R_temp = brake_R_temp + R_tgt_temp
+		if brake_L_temp > 545 or brake_R_temp > 545 then
+			set(eicas_brake_temp, 1)
+		else
+			set(eicas_brake_temp, 0)
+		end
 		--Update temperatures for each truck
 		for i=1,3 do 
 			if TBRS_active_L == 4 or i == TBRS_active_L then
 				if truck_brake_temp_L[i] <= 545 and truck_brake_temp_L[i] + L_tgt_temp > 545 then
 					tmp_ovht_L[i] = get(c_time)
 				end
-				truck_brake_temp_L[i] = truck_brake_temp_L[i] + L_tgt_temp --If all of the weels can brake, make all temperatures rise
+				if get(brake_acc_in_use) == 0 or i < 3 then
+					truck_brake_temp_L[i] = truck_brake_temp_L[i] + L_tgt_temp --If all of the weels can brake, make all temperatures rise
+				else
+					truck_brake_temp_L[i] = truck_brake_temp_L[i] + L_temp_no_askid + cool_L
+				end
 			else
 				local L_wheel_temp = (get(oat) - get(truck_brake_temp_L[i])) * get(f_time) * L_cooling_coeff * get(tas) * 0.2 * L_deployed --cool the brakes that aren't working
 				truck_brake_temp_L[i] = truck_brake_temp_L[i] + L_wheel_temp
@@ -215,7 +251,11 @@ function UpdateBrakeTemperatures(delay)
 				if truck_brake_temp_R[i] <= 545 and truck_brake_temp_R[i] + R_tgt_temp > 545 then
 					tmp_ovht_R[i] = get(c_time)
 				end
-				truck_brake_temp_R[i] = truck_brake_temp_R[i] + R_tgt_temp
+				if get(brake_acc_in_use) == 0 or i < 3 then
+					truck_brake_temp_R[i] = truck_brake_temp_R[i] + R_tgt_temp --If all of the weels can brake, make all temperatures rise
+				else
+					truck_brake_temp_R[i] = truck_brake_temp_R[i] + R_temp_no_askid + cool_R
+				end
 			else
 				local R_wheel_temp = (get(oat) - get(truck_brake_temp_R[i])) * get(f_time) * R_cooling_coeff * get(tas) * 0.2 * R_deployed
 				truck_brake_temp_R[i] = truck_brake_temp_R[i] + R_wheel_temp
@@ -226,8 +266,6 @@ function UpdateBrakeTemperatures(delay)
 end
 
 function UpdateTirePsi()
-	local pressures_L = {203, 210, 219, 204, 200, 216}
-	local pressures_R = {213, 204, 215, 201, 205, 219}
 	local n_tires_popped_L = 0 --number of tires that have fuse plugs melted on the left
 	local n_tires_popped_R = 0 --number of tires that have fuse plugs melted on the right
 	for i=1,3 do
@@ -235,14 +273,18 @@ function UpdateTirePsi()
 		local psi_LL = globalPropertyfae("Strato/777/gear/truck_L_psi", i + 3)
 		local psi_R = globalPropertyfae("Strato/777/gear/truck_R_psi", i)
 		local psi_RR = globalPropertyfae("Strato/777/gear/truck_R_psi", i + 3)
-		if truck_brake_temp_L[i] < 545 or get(c_time) < tmp_ovht_L[i] + 120 - ((truck_brake_temp_L[i] * 120) / 1090) then
+		if truck_brake_temp_L[i] < 545 or get(c_time) < tmp_ovht_L[i] + 120 - ((truck_brake_temp_L[i] * 120) / 1090) and L_fuse_plugs_melt[i] == 0 then
 			local press_L = pressures_L[i] + ((truck_brake_temp_L[i] - get(oat)) * 0.18 + 3.2) * 0.02 --Tire pressure under normal circumstances 
 			local press_LL = pressures_L[i + 3] + ((truck_brake_temp_L[i] - get(oat)) * 0.18 + 3.2) * 0.02
 			set(psi_L, press_L)
 			set(psi_LL, press_LL)
 		else --fuse plugs melt at above approximately 545 degC
+			L_fuse_plugs_melt[i] = 1
 			local tgt_L = get(psi_L) - get(psi_L) * 0.02
 			local tgt_LL = get(psi_LL) - get(psi_LL) * 0.02
+			if tgt_L < 100 or tgt_LL < 100 then
+				set(eicas_tire_press, 1)
+			end
 			set(psi_L, tgt_L)
 			set(psi_LL, tgt_LL)
 			pressures_L[i] = tgt_L
@@ -251,14 +293,18 @@ function UpdateTirePsi()
 		if pressures_L[1] < 10 and pressures_L[3] < 10 and pressures_L[6] < 10 then
 			set(L_tire_fail, 6)
 		end
-		if truck_brake_temp_R[i] < 545 or get(c_time) < tmp_ovht_R[i] + 60 - truck_brake_temp_R[i] * 60 / 1090 then
+		if (truck_brake_temp_R[i] < 545 or get(c_time) < tmp_ovht_R[i] + 60 - truck_brake_temp_R[i] * 60 / 1090) and R_fuse_plugs_melt[i] == 0 then
 			local press_R = pressures_R[i] + ((truck_brake_temp_R[i] - get(oat)) * 0.18 + 3.2) * 0.02
 			local press_RR = pressures_R[i + 3] + ((truck_brake_temp_R[i] - get(oat)) * 0.18 + 3.2) * 0.02
 			set(psi_R, press_R)
 			set(psi_RR, press_RR)
 		else --fuse plugs melt at above approximately 545 degC
+			R_fuse_plugs_melt[i] = 1
 			local tgt_R = get(psi_R) - get(psi_R) * 0.02
 			local tgt_RR = get(psi_RR) - get(psi_RR) * 0.02
+			if tgt_R < 100 or tgt_RR < 100 then
+				set(eicas_tire_press, 1)
+			end
 			set(psi_R, tgt_R)
 			set(psi_RR, tgt_RR)
 			pressures_R[i] = tgt_R
@@ -405,11 +451,11 @@ function UpdateGearStrg(r_time)
 	local nw_ratio = 70
 	local w_tgt = 0 --steering target for the main wheels
 	local l_all = 0 --total load created by steering 0.1 max
-	if Round(get(nw_speed), 2) / 6.28 >= 3 then --converting radians to rotations per second
+	if Round(get(nw_speed), 2) / 6.28 >= 5 then --converting radians to rotations per second
 		nw_ratio = 13
 	else
 		local rotations = Round(get(nw_speed), 2) / 6.28
-		nw_ratio = 70 - 57 * (rotations / 3)
+		nw_ratio = 70 - 57 * (rotations / 5)
 	end
 	if get(sys_C_press) > 200 then
 		local nw_tgt = 0
@@ -419,9 +465,9 @@ function UpdateGearStrg(r_time)
 		set(nw_strg, get(nw_strg) + (nw_tgt - get(nw_strg)) * r_time * get(f_time))
 		l_all = 0.05 * math.abs(get(yoke_heading_ratio))
 		if math.abs(get(nw_strg)) > 13 then
-			local steer_dir = 1 --steering vector for the main wheels
+			local steer_dir = -1 --steering vector for the main wheels
 			if get(nw_strg) < 0 then
-				steer_dir = -1
+				steer_dir = 1
 			end
 			w_tgt = steer_dir * (steer_dir * Round(get(yoke_heading_ratio), 3) - 0.185) / 0.815 * 14
 		end
@@ -429,7 +475,7 @@ function UpdateGearStrg(r_time)
 		if get(ground_speed) > 0.1 and math.abs(get(nw_strg)) < 50 then
 			local tgt = 0
 			if get(tas) > 60 then
-				tgt = (get(rudder) / 27.5) * 20
+				tgt = (get(rudder) / 27.5) * -20
 			end
 			set(nw_strg, get(nw_strg) + (tgt - get(nw_strg)) * 0.4 * get(f_time))
 		end
@@ -489,6 +535,7 @@ function UpdateActuatorPress()
 				actuator_press[2] = get(sys_C_press)
 			end
 		elseif mlg_target == 1 then
+			set(kill_gear, 0)
 			--Gear extension
 			ldg_extend = 1
 			if get(sys_C_press) >= 200 and get(altn_gear) == 0 then
@@ -508,6 +555,9 @@ function UpdateActuatorPress()
 			end
 		end
 	else
+		if mlg_target == 0 then
+			set(kill_gear, 1)
+		end
 		--setting up eagle claw for target
 		eag_claw_target[1] = get(sim_eag_R) * mlg_target
 		eag_claw_target[2] = get(sim_eag_L) * mlg_target
@@ -559,7 +609,6 @@ function MoveGear()
 		set(mlg_actual_R, get(mlg_actual_R) + mlg_step * (1 - mlg_locked) * get(f_time) / 0.0166)
 		set(mlg_actual_L, get(mlg_actual_L) + mlg_step * (1 - mlg_locked) * get(f_time) / 0.0166)
 	end
-	
 end
 
 function UpdateDRefs()
@@ -575,31 +624,69 @@ function UpdateDRefs()
 	set(custom_eag_R, eag_claw_target[1] * eag_claw_sync + (get(custom_eag_R) + (eag_claw_target[2] - get(custom_eag_R)) * get(f_time) * 0.9) * (1 - eag_claw_sync))
 end
 
-function KeyHandler(charCode, virtualKeyCode, shiftDown, ctrlDown, altOptDown, event)
-	if virtualKeyCode == 66 and event ~= 2 then
-		set(man_keyboard, 1 - event)
-		set(man_brakes_L, 1 - event)
-		set(man_brakes_R, 1 - event)
+--Command handlers
+
+function BrakeHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(man_brakes_L, 1 - get(man_brakes_L))
+		set(man_brakes_R, 1 - get(man_brakes_R))
 	end
-	if virtualKeyCode == 86 and event == 1 then
+end
+
+function BrakeHoldHandler(phase)
+	if phase == SASL_COMMAND_CONTINUE then
+		set(man_brakes_L, 1)
+		set(man_brakes_R, 1)
+	elseif phase == SASL_COMMAND_END then
+		set(man_brakes_L, 0)
+		set(man_brakes_R, 0)
+	end
+end
+
+function ParkBrakeHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
 		if get(man_brakes_L) == 1 and get(man_brakes_R) == 1 then
-			if get(sys_C_press) > 60 or get(sys_R_press) > 60 or get(brake_acc) > 10 then
-				set(park_brake, 1 - get(park_brake))
+			set(park_brake, 1 - get(park_brake))
+			if get(park_brake) == 0 then
+				set(man_brakes_L, 0)
+				set(man_brakes_R, 0)
 			end
-		end
-	end
-	if virtualKeyCode == 71 and event == 1 then
-		if get(on_ground) == 1 and get(normal_gear) == 1 then
-			if get(lock_ovrd) == 1 then
-				set(normal_gear, 0)
-			end
-		else
-			set(normal_gear, 1 - get(normal_gear))
 		end
 	end
 end
 
-sasl.registerGlobalKeyHandler(KeyHandler)
+function GearUp(phase)
+	if get(on_ground) == 1 then
+		if get(lock_ovrd) == 1 and get(normal_gear) == 1 then
+			return 1
+		else
+			return 0
+		end
+	else
+		return 1
+	end
+end
+
+function ToggleGear(phase)
+	if get(on_ground) == 1 and get(normal_gear) == 1 then
+		if get(lock_ovrd) == 1 then
+			return 1
+		else
+			return 0
+		end
+	else
+		return 1
+	end
+end
+
+--Registering own command handlers
+
+sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
+sasl.registerCommandHandler(hold_regular, 1, BrakeHoldHandler)
+sasl.registerCommandHandler(toggle_max, 1, ParkBrakeHandler)
+--sasl.registerCommandHandler(gear_down, 0, GearDown)
+sasl.registerCommandHandler(gear_up, 1, GearUp)
+sasl.registerCommandHandler(gear_toggle, 1, ToggleGear)
 
 function onAirportLoaded()
 	temp_v = get(c_time)
@@ -609,13 +696,16 @@ function onAirportLoaded()
 		truck_brake_temp_L[i] = get(oat)
 		truck_brake_temp_R[i] = get(oat)
 	end
-	set(park_brake, 1)
+	if get(ra_pilot) < 5 or get(ra_copilot) < 5 then
+		set(park_brake, 1)
+	end
 end
 
 onAirportLoaded() --This is to make sure that everything is set if sasl has been rebooted
 
 function update()
 	set(gear_ovrd, 6)
+	set(handle_pos, get(handle_pos) + (get(normal_gear) - get(handle_pos)) * get(f_time) * 5)
 	UpdateLdgTarget()
 	UpdateBrakeTgt()
 	UpdateActuatorPress()
