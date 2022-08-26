@@ -31,3 +31,5 @@ B777CMD_ovhd_c_ext_pwr_button             = deferred_command("Strato/B777/button
 --**                             CREATE CUSTOM DATAREFS                              **--
 --*************************************************************************************--
 
+simDR_flood_lights                       = deferred_dataref("Strato/777/lights/cockpit/floods", "array[4]")
+simDR_map_lights                       = deferred_dataref("Strato/777/lights/cockpit/maps", "array[2]")
