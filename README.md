@@ -67,21 +67,23 @@ If you want to see more update history, you can check our [old repository.](http
 
 [Matt726](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
+Laminar Research: Default 737 display textures.
+
 [Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model + other aircraft data, manipulators, readme, Github management.
 
 [zeta976](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
-[Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS, SASL integration.
+[Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
 
 [BRUHegg](https://github.com/BRUHegg): Code for various systems
 
-Potatohead123: Landing gear, cockpit, engines.
+Potatohead123: Cockpit help
 
 [mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: XTLua, help, and some borrowed code (within license restrictions)
 
-Phil Paysse: Fuselage and wings.
+Phil Paysse: Fuselage.
 
-[Spherrrical](https://github.com/Spherrrical/): Graphic design, Discord bot.
+[Spherrrical](https://github.com/Spherrrical/): Logo design.
 
 **Liveries:**
 
