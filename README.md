@@ -65,21 +65,21 @@ If you want to see more update history, you can check our [old repository.](http
 ## CREDITS
 [Nathroxer (Head)](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
+[BRUHegg](https://github.com/BRUHegg): SASL code for various systems.
+
+[Crazytimtimtim](https://github.com/crazytimtimtim): XTLua code, flight model + other aircraft data, manipulators, readme, Github management.
+
 [Matt726](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
 Laminar Research: Default 737 display textures.
 
-[Crazytimtimtim](https://github.com/crazytimtimtim): Code, flight model + other aircraft data, manipulators, readme, Github management.
+[Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
 
 [zeta976](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
-[Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
+[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: [XTLua](https://github.com/mSparks43/XTLua), help, and some borrowed code (within license restrictions)
 
-[BRUHegg](https://github.com/BRUHegg): Code for various systems
-
-Potatohead123: Cockpit help
-
-[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: XTLua, help, and some borrowed code (within license restrictions)
+Potatohead123: Cockpit help.
 
 Phil Paysse: Fuselage.
 
