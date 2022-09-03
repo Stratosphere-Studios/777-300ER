@@ -42,7 +42,7 @@ A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft 
 
 A: Please remember this aircraft is still in the works. By downloading from github, you our downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
 
-**Q: Will this aircraft support X-Pane 12?**
+**Q: Will this aircraft support X-Plane 12?**
 
 A: Of course!
 
