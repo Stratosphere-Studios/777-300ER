@@ -52,7 +52,7 @@ ovht_d = {130, 460, 510, 505, 805, 505, 1235, 460}
 
 brake_pos = {216, 805, 460, 890, 1134}
 
-door_s_pos = {568, 920, 903, 205, 230, 205}
+door_s_pos = {568, 920, 230, 205, 903, 205}
 
 function DrawArrowEICAS(idx) --draws arrow for each system on eicas hydraulic page
 	if idx == 1 then
@@ -239,8 +239,8 @@ end
 function DrawDoorStatus()
 	for i=1,6,2 do
 		DrawRect(door_s_pos[i], door_s_pos[i+1], 230, 80, 4, white, true)
-		local door_pos = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", (i + 1) / 2)
-		if get(door_pos) == 0 or get(door_pos) == 1 then
+		local door_pos = globalPropertyfae("Strato/777/gear/doors", 1 + (i + 1) / 2)
+		if get(door_pos) == 0 then
 			drawText(font, door_s_pos[i] + 115, door_s_pos[i+1] + 20, "CLOSED", 60, false, false, TEXT_ALIGN_CENTER, white)
 		else
 			Stripify(230, 80, door_s_pos[i], door_s_pos[i+1], 11, 4, white)
