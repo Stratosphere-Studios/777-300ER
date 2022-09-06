@@ -25,7 +25,7 @@ function deferred_command(name,desc,nilFunc)
 end
 --replace create_dataref
 function deferred_dataref(name,type,notifier)
-	--print("Deffereed dataref: "..name)
+	--print("Deferred dataref: "..name)
 	dref=XLuaCreateDataRef(name, type,"yes",notifier)
 	return wrap_dref_any(dref,type) 
 end
