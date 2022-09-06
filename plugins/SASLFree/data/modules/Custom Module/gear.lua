@@ -89,14 +89,14 @@ man_keyboard = createGlobalPropertyi("Strato/777/gear/man_keyboard", 0) --1 if u
 brake_acc = createGlobalPropertyf("Strato/777/gear/brake_acc", 3000)
 acc_press_tgt = createGlobalPropertyf("Strato/777/gear/brake_acc_tgt", 3000)
 brake_acc_in_use = createGlobalPropertyi("Strato/777/gear/brake_acc_in_use", 0)
-doors = createGlobalPropertyfa("Strato/777/gear/doors", {0, 0, 0, 0})
+doors = createGlobalPropertyfa("Strato/777/gear/doors", {1, 0, 0, 0})
 brake_load = createGlobalPropertyfa("Strato/777/gear/brake_load", {0, 0})
 acc_load_current = createGlobalPropertyf("Strato/777/gear/acc_load_current", 0)
 acc_load_past = createGlobalPropertyf("Strato/777/gear/acc_load_past", 0)
 eicas_brake_temp = createGlobalPropertyi("Strato/777/eicas/brake_temp", 0)
 eicas_tire_press = createGlobalPropertyi("Strato/777/eicas/tire_press", 0)
 
---Finding simulaor commands
+--Finding simulator commands
 toggle_regular = sasl.findCommand("sim/flight_controls/brakes_toggle_regular")
 hold_regular = sasl.findCommand("sim/flight_controls/brakes_regular")
 toggle_max = sasl.findCommand("sim/flight_controls/brakes_toggle_max")
@@ -104,6 +104,10 @@ gear_down = sasl.findCommand("sim/flight_controls/landing_gear_down")
 gear_up = sasl.findCommand("sim/flight_controls/landing_gear_up")
 gear_toggle = sasl.findCommand("sim/flight_controls/landing_gear_toggle")
 
+mlg_door_tgt = 0
+nose_door_tgt = 0
+nose_door_ready = false
+mlg_door_ready = false
 mlg_target = 1
 nose_gear_target = 1
 ldg_extend = 0
@@ -139,6 +143,14 @@ temp_v = 0
 
 set(steer_ovrd, 1)
 set(brk_ovrd, 1)
+
+function EvenAnim(dref, tgt, step)
+	if math.abs(get(dref) - tgt) <= step then
+		set(dref, tgt)
+	else
+		set(dref, get(dref) + (bool2num(get(dref) < tgt) - bool2num(get(dref) > tgt)) * step * get(f_time) / 0.0166)
+	end
+end
 
 function UpdateManualBraking()
 	if get(man_keyboard) == 0 then --if user is not using keyboard shortcuts to brake, update brakes using values from toe brakes
@@ -514,57 +526,134 @@ end
 --	end
 --end
 
+function IsNoseReady()
+	local door = globalPropertyfae("Strato/777/gear/doors", 2)
+	return get(door) == nose_door_tgt
+end
+
+function AreMlgReady()
+	local n = 0
+	for i=3,4 do
+		local door = globalPropertyfae("Strato/777/gear/doors", i)
+		if get(door) == mlg_door_tgt then
+			n = n + 1
+		end
+	end
+	return n == 2
+end
+
+function UpdateGearDoors()
+	local door_step = 0
+	--When there's enough air pressure, doors won't extend
+	if get(tas) < 190 and get(tas) > 150 then
+		door_step = 0.005 - 0.005 * (get(tas) - 150) / 40
+	elseif get(tas) < 150 then
+		door_step = 0.005
+	end
+	for i=1,4 do
+		local door = globalPropertyfae("Strato/777/gear/doors", i)
+		local c_door_tgt = nose_door_tgt
+		if i > 2 then
+			c_door_tgt = mlg_door_tgt
+		end
+		if c_door_tgt == 0 then
+			if i == 1 then
+				--Don't rise the small nose door if nose gear is deployed
+				if get(nw_actual) ~= 0 then
+					c_door_tgt = get(door)
+				end
+			elseif i == 4 then
+				--Rise right mlg door after left one 
+				local door_L = globalPropertyfae("Strato/777/gear/doors", 3)
+				if get(door_L) ~= 0 then
+					c_door_tgt = get(door)
+				end
+			end
+		end
+		if get(door) ~= c_door_tgt then
+			EvenAnim(door, c_door_tgt, door_step)
+		end
+	end
+end
+
 function UpdateActuatorPress()
 	--Retracting gear only if wheels are stationary
-	if get(lmw_speed) / 6.28 < 0.5 and get(rmw_speed) / 6.28 < 0.5 and (get(mlg_actual_R) ~= mlg_target or get(nw_actual) ~= nose_gear_target) then
-		--Unlocking gear to allow movement
-		mlg_locked = 0
-		nose_gear_locked = 0
+	if get(nw_actual) ~= nose_gear_target then
+		if nose_gear_target == 0 and get(sys_C_press) >= 700 then
+			nose_door_tgt = 1
+			if IsNoseReady() == true then
+				nose_gear_locked = 0 --Unlocking gear to allow movement
+				actuator_press[1] = 700 + (get(sys_C_press) - 700) * 0.8
+			end
+		elseif nose_gear_target == 1 then
+			nose_door_tgt = 1
+			UpdateGearDoors()
+			if IsNoseReady() == true then
+				ldg_extend = 1
+				nose_gear_locked = 0
+				if get(sys_C_press) >= 100 and get(altn_gear) == 0 then
+					actuator_press[1] = 100
+				else
+					actuator_press[1] = 0
+				end
+			end
+		end
+	else
+		if get(sys_C_press) > 1000 and get(altn_gear) == 0 then --raise doors if pressure is normal and alternate extension is not used
+			nose_door_tgt = 0
+		end
+		actuator_press[1] = 0
+		nose_gear_locked = 1
+	end
+	if get(lmw_speed) / 6.28 < 0.5 and get(rmw_speed) / 6.28 < 0.5 and get(mlg_actual_R) ~= mlg_target then
 		if mlg_target == 0 and get(sys_C_press) >= 1000 then
 			--Gear retraction
+			eag_claw_sync = 0
 			eag_claw_target[1] = 0
 			eag_claw_target[2] = 0
-			eag_claw_sync = 0
-			if get(mlg_actual_R) > 0.8 and get(custom_eag_L) == 0 and get(custom_eag_R) == 0 then
-				actuator_press[2] = 1000 + (get(sys_C_press) - 1000) * 0.5
-			else
-				actuator_press[2] = get(sys_C_press)
+			mlg_door_tgt = 1
+			if AreMlgReady() == true then
+				mlg_locked = 0 --Unlocking gear to allow movement
+				eag_claw_sync = 0
+				if get(mlg_actual_R) > 0.8 and get(custom_eag_L) == 0 and get(custom_eag_R) == 0 then
+					actuator_press[2] = 1000 + (get(sys_C_press) - 1000) * 0.5
+				else
+					actuator_press[2] = get(sys_C_press)
+				end
 			end
 		elseif mlg_target == 1 then
 			set(kill_gear, 0)
-			--Gear extension
-			ldg_extend = 1
-			if get(sys_C_press) >= 200 and get(altn_gear) == 0 then
-				actuator_press[2] = 200
-			else
-				actuator_press[2] = 0
-			end
-		end
-		if nose_gear_target == 0 and get(sys_C_press) >= 700 then
-			actuator_press[1] = 700 + (get(sys_C_press) - 700) * 0.8
-		elseif nose_gear_target == 1 then
-			ldg_extend = 1
-			if get(sys_C_press) >= 100 and get(altn_gear) == 0 then
-				actuator_press[1] = 100
-			else
-				actuator_press[1] = 0
+			mlg_door_tgt = 1
+			if AreMlgReady() == true then
+				--Gear extension
+				ldg_extend = 1
+				mlg_locked = 0
+				if get(sys_C_press) >= 200 and get(altn_gear) == 0 then
+					actuator_press[2] = 200
+				else
+					actuator_press[2] = 0
+				end
 			end
 		end
 	else
 		if mlg_target == 0 then
 			set(kill_gear, 1)
 		end
-		--setting up eagle claw for target
-		eag_claw_target[1] = get(sim_eag_R) * mlg_target
-		eag_claw_target[2] = get(sim_eag_L) * mlg_target
+		if get(sys_C_press) > 1000 and get(altn_gear) == 0 then --raise doors if pressure is normal and alternate extension is not used
+			mlg_door_tgt = 0
+		end
+		if AreMlgReady() == true then 
+			--setting up eagle claw for target
+			eag_claw_sync = 0
+			eag_claw_target[1] = get(sim_eag_R) * mlg_target
+			eag_claw_target[2] = get(sim_eag_L) * mlg_target
+		end
 		if ldg_extend == 1 and get(custom_eag_L) == eag_claw_target[1] and get(custom_eag_R) == eag_claw_target[2] then
 			eag_claw_sync = 1
 			ldg_extend = 0
 		end
 		--Locking gear
-		actuator_press[1] = 0
 		actuator_press[2] = 0
-		nose_gear_locked = 1
 		mlg_locked = 1
 	end
 	set(gear_load, 0.3 * (actuator_press[2] / 3000))
@@ -581,10 +670,10 @@ function MoveGear()
 		mlg_step = 0.0011 * (1000 - actuator_press[2]) / 1000
 	end
 	--Updating nose landing gear retraction speed
-	if actuator_press[1] >= 500 then
-		nose_gear_step = 0.001 * (actuator_press[2] - 500) / 2100 * -1
+	if actuator_press[1] >= 700 then
+		nose_gear_step = 0.0012 * (actuator_press[2] - 700) / 2100 * -1
 	else
-		nose_gear_step = 0.0012 * (500 - actuator_press[2]) / 500
+		nose_gear_step = 0.0013 * (700 - actuator_press[2]) / 700
 	end
 	--Limiting nose landing gear deployment
 	if get(nw_actual) + nose_gear_step >= 1 then
@@ -617,7 +706,7 @@ function UpdateDRefs()
 		set(truck_t_R, truck_brake_temp_R[i])
 	end
 	set(custom_eag_L, eag_claw_target[1] * eag_claw_sync + (get(custom_eag_L) + (eag_claw_target[1] - get(custom_eag_L)) * get(f_time) * 0.9) * (1 - eag_claw_sync))
-	set(custom_eag_R, eag_claw_target[1] * eag_claw_sync + (get(custom_eag_R) + (eag_claw_target[2] - get(custom_eag_R)) * get(f_time) * 0.9) * (1 - eag_claw_sync))
+	set(custom_eag_R, eag_claw_target[2] * eag_claw_sync + (get(custom_eag_R) + (eag_claw_target[2] - get(custom_eag_R)) * get(f_time) * 0.9) * (1 - eag_claw_sync))
 end
 
 --Command handlers
@@ -676,7 +765,6 @@ function ToggleGear(phase)
 end
 
 --Registering own command handlers
-
 sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
 sasl.registerCommandHandler(hold_regular, 1, BrakeHoldHandler)
 sasl.registerCommandHandler(toggle_max, 1, ParkBrakeHandler)
@@ -700,6 +788,7 @@ end
 onAirportLoaded() --This is to make sure that everything is set if sasl has been rebooted
 
 function update()
+	UpdateGearDoors()
 	set(gear_ovrd, 6)
 	set(handle_pos, get(handle_pos) + (get(normal_gear) - get(handle_pos)) * get(f_time) * 5)
 	UpdateLdgTarget()
