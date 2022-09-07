@@ -17,7 +17,7 @@ function deferred_command(name,desc,nilFunc)
 end
 --replace create_dataref
 function deferred_dataref(name,type,notifier)
-	--print("Deffereed dataref: "..name)
+	--print("Deferred dataref: "..name)
 	dref=XLuaCreateDataRef(name, type,"yes",notifier)
 	return wrap_dref_any(dref,type)
 end
@@ -149,3 +149,5 @@ B777DR_hyd_primary_switch_pos             = deferred_dataref("Strato/cockpit/ovh
 B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovhd/hyd/demand_pumps/button_pos", "array[4]")
 
 B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")
+
+B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lock_ovrd/btn_pos", "number")

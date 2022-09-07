@@ -179,15 +179,15 @@ function B777_rescale(in1, out1, in2, out2, x)
 end
 
 function gear()
-	
+
    B777DR_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
-   
+
    if B777DR_avg_gear_pos == 0 then
-     B777DR_ldg_gear_kill = 1
+      B777DR_ldg_gear_kill = 1
    else
       B777DR_ldg_gear_kill = 0
    end
-	
+
    --[[if B777_eag_claw_sync == 1 then
       B777DR_custom_eagle_claw[1] = simDR_eag_claw_pos[1]
       B777DR_custom_eagle_claw[2] = simDR_eag_claw_pos[2]

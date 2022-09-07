@@ -19,7 +19,7 @@ function deferred_dataref(name,nilType,callFunction)
 	return find_dataref(name)
 end
 
-
+--B777DR_bank_limit_knob_anim            = deferred_dataref("Strato/777/bank_limit_knob_pos", "number")
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--
 --*************************************************************************************--
@@ -40,14 +40,16 @@ local B777_kgs_to_lbs = 2.2046226218
 local B777_ft_to_mtrs = 0.3048
 local B777_adiru_time_remaining_min = 0
 
+local alt_press_counter = 0
+local alt_is_fast = 0
+
+local flashCount = 0
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
+simDR_autopilot_alt                    = find_dataref("sim/cockpit2/autopilot/altitude_dial_ft")
 
 simDR_startup_running                  = find_dataref("sim/operation/prefs/startup_running")
-
-simDR_magHDG                           = find_dataref("sim/cockpit/autopilot/heading_mag")
-simDR_trueHDG                          = find_dataref("sim/cockpit/autopilot/heading")
 
 simDR_com1_stby_khz                    = find_dataref("sim/cockpit2/radios/actuators/com1_standby_frequency_khz")
 simDR_com1_act_khz                     = find_dataref("sim/cockpit2/radios/actuators/com1_frequency_khz")
@@ -76,11 +78,11 @@ B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/a
 simDR_aoa                             = find_dataref("sim/flightmodel2/misc/AoA_angle_degrees")
 simDR_radio_alt_capt                  = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
 simDR_onGround                        = find_dataref("sim/flightmodel/failures/onground_any")
+
+simDR_vertical_speed                   = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
-
-
 
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
@@ -95,7 +97,7 @@ B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/h
 B777DR_alt_mtrs_capt                   = deferred_dataref("Strato/777/displays/alt_mtrs_capt", "number")
 B777DR_autopilot_alt_mtrs_capt         = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 
-B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what pages the lower eicas is on
+B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what page the lower eicas is on
 
 B777DR_displayed_com1_act_khz          = deferred_dataref("Strato/777/displays/com1_act_khz", "number") -- COM1 Radio Active Display
 B777DR_displayed_com1_stby_khz         = deferred_dataref("Strato/777/displays/com1_stby_khz", "number") -- COM1 Radio Standby Display
@@ -115,12 +117,33 @@ B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_b
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 
+B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_knob_target", "number")
+B777DR_alt_step_knob_pos               = deferred_dataref("Strato/777/alt_step_knob_position", "number")
+
+B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "number")
+B777DR_alt_bug_diff                    = deferred_dataref("Strato/777/displays/alt_bug_diff", "number")
+
+B777DR_baro_mode                       = deferred_dataref("Strato/777/baro_mode", "number")
+
+B777DR_minimums_mode                   = deferred_dataref("Strato/777/minimums_mode", "number")
+B777DR_minimums_diff                   = deferred_dataref("Strato/777/minimums_diff", "number")
+B777DR_minimums_visible                = deferred_dataref("Strato/777/minimums_visible", "number")
+B777DR_minimums_mda                    = deferred_dataref("Strato/777/minimums_mda", "number")
+B777DR_minimums_dh                     = deferred_dataref("Strato/777/minimums_dh", "number")
+B777DR_amber_minimums                  = deferred_dataref("Strato/777/amber_minimums", "number")
+
+B777DR_minimums_mode_knob_anim         = deferred_dataref("Strato/777/minimums_mode_knob_pos", "number")
+B777DR_alt_step_knob_anim              = deferred_dataref("Strato/777/alt_step_knob_pos", "number")
+B777DR_baro_mode_knob_anim             = deferred_dataref("Strato/777/baro_mode_knob_pos", "number")
+
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
 B777DR_txt_TAS                         = deferred_dataref("Strato/777/displays/txt/TAS", "string")
 B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/txt/---", "string")
 B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")
+B777DR_txt_H                           = deferred_dataref("Strato/777/displays/txt/H", "string")
+B777DR_txt_REALISTIC_PRK_BRK           = deferred_dataref("Strato/777/displays/txt/REALISTIC_PRK_BRK", "string")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -131,18 +154,14 @@ B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/t
 --*************************************************************************************--
 --**                                 X-PLANE COMMANDS                                **--
 --*************************************************************************************--
-
-
+simCMD_dh_dn_capt                     = find_command("sim/instruments/dh_ref_down")
+simCMD_dh_up_capt                     = find_command("sim/instruments/dh_ref_up")
+simCMD_mda_up_capt                    = find_command("sim/instruments/mda_ref_up")
+simCMD_mda_dn_capt                    = find_command("sim/instruments/mda_ref_down")
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
 --*************************************************************************************--
-
-function B777_mcp_magTRK_CMDhandler(phase, duration)
-	if phase == 0 then B777DR_hdg_mode = 1 - B777DR_hdg_mode end
-end
-
-
 
 function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 	if phase == 0 then
@@ -167,15 +186,77 @@ function B777_fltInst_adiru_align_now_CMDhandler(phase, duration)
 	end
 end
 
+function B777_alt_up_CMDhandler(phase, duration)
+	if phase == 0 then
+		alt_press_counter = alt_press_counter + 1
+		if not is_timer_scheduled then run_after_time(checkAltSpd, 0.3) end
+		if alt_is_fast == 1 or B777DR_alt_is_fast_ovrd == 1 then
+			simDR_autopilot_alt = simDR_autopilot_alt + 1000
+		else
+			simDR_autopilot_alt = simDR_autopilot_alt + 100
+		end
+
+	elseif phase == 2 then
+		simDR_autopilot_alt = simDR_autopilot_alt + 1000
+	end
+end
+
+function B777_alt_dn_CMDhandler(phase, duration)
+	if phase == 0 then
+		alt_press_counter = alt_press_counter + 1
+		if not is_timer_scheduled then run_after_time(checkAltSpd, 0.3) end
+		if alt_is_fast == 1 or B777DR_alt_is_fast_ovrd == 1 then
+			simDR_autopilot_alt = simDR_autopilot_alt - 1000
+		else
+			simDR_autopilot_alt = simDR_autopilot_alt - 100
+		end
+	elseif phase == 2 then
+		simDR_autopilot_alt = simDR_autopilot_alt - 1000
+	end
+end
+
+function B777_minimums_dn_capt_CMDhandler(phase, duration)
+	if phase == 0  then
+		if B777DR_minimums_mode == 0 then
+			if B777DR_minimums_dh > 0 then B777DR_minimums_dh = B777DR_minimums_dh - 1 end
+		else
+			B777DR_minimums_mda = B777DR_minimums_mda - 1
+		end
+		B777DR_minimums_visible = 1
+	end
+end
+
+function B777_minimums_up_capt_CMDhandler(phase, duration)
+	if phase == 0  then
+		if B777DR_minimums_mode == 0 then
+			B777DR_minimums_dh = B777DR_minimums_dh + 1
+		else
+			B777DR_minimums_mda = B777DR_minimums_mda + 1
+		end
+		B777DR_minimums_visible = 1
+	end
+end
+
+function B777_minimums_rst_capt_CMDhandler(phase, duration)
+	if phase == 0 then
+		B777DR_minimums_visible = 0
+		B777DR_amber_minimums = 0
+	end
+end
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
 
-B777CMD_mcp_MAGtrk                   = deferred_command("Strato/B777/button_switch/mcp/MAGtrk", "Switch between true and magnetic heading", B777_mcp_magTRK_CMDhandler)
-
 B777CMD_fltInst_adiru_switch         = deferred_command("Strato/B777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
 
 B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/B777/adiru_align_now", "Align ADIRU Instantly", B777_fltInst_adiru_align_now_CMDhandler)
+
+B777CMD_ap_alt_up                    = deferred_command("Strato/B777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
+B777CMD_ap_alt_dn                    = deferred_command("Strato/B777/autopilot/alt_dn", "Autopilot Altitude Down", B777_alt_dn_CMDhandler)
+
+B777CMD_minimums_up                  = deferred_command("Strato/B777/minimums_up_capt", "Captain Minimums Up", B777_minimums_up_capt_CMDhandler)
+B777CMD_minimums_dn                  = deferred_command("Strato/B777/minimums_dn_capt", "Captain Minimums Down", B777_minimums_dn_capt_CMDhandler)
+B777CMD_minimums_rst                 = deferred_command("Strato/B777/minimums_rst_capt", "Captain Minimums Reset", B777_minimums_rst_capt_CMDhandler)
 
 --*************************************************************************************--
 --**                                      CODE                                       **--
@@ -214,6 +295,84 @@ function disableRAOutline()
 	B777DR_outlined_RA = 0
 end
 
+function checkAltSpd()
+	if alt_press_counter >= 3 then
+		alt_is_fast = 1
+	else
+		alt_is_fast = 0
+	end
+	alt_press_counter = 0
+end
+
+---MINIMUMS----------
+
+function minimums_flash_on()
+	if flashCount < 6 then
+		flashCount = flashCount + 1
+		run_after_time(minimums_flash_off, 0.5)
+	else
+		flashCount = 0
+		B777DR_minimums_visible = 1
+	end
+end
+
+function minimums_flash_off()
+	B777DR_minimums_visible = 0
+	run_after_time(minimums_flash_on, 0.5)
+end
+
+function minimums()
+	if B777DR_minimums_mode == 0 then
+		B777DR_minimums_diff = B777DR_minimums_dh - simDR_radio_alt_capt
+	else
+		B777DR_minimums_diff = B777DR_minimums_mda - B777DR_displayed_alt
+	end
+
+	if simDR_vertical_speed < 0 then
+		if B777DR_minimums_diff < 0 and B777DR_minimums_diff > -2 and B777DR_minimums_visible == 1 then
+			minimums_flash_off()
+			B777DR_amber_minimums = 1
+		end
+	end
+
+	if B777DR_minimums_diff > 0 or simDR_onGround == 1 then
+		B777DR_amber_minimums = 0
+	end
+end
+
+---MISC----------
+
+function setAnimations()
+	B777DR_minimums_mode_knob_anim = B777_animate(B777DR_minimums_mode, B777DR_minimums_mode_knob_anim, 15)
+	B777DR_alt_step_knob_anim = B777_animate(B777DR_alt_is_fast_ovrd, B777DR_alt_step_knob_pos, 15)
+	B777DR_baro_mode_knob_anim = B777_animate(B777DR_baro_mode, B777DR_baro_mode_knob_anim, 15)
+end
+
+function setDispAlt()
+	if simDR_alt_ft_capt <= -1000 then
+		B777DR_displayed_alt = -1000
+	elseif simDR_alt_ft_capt >= 47000 then
+		B777DR_displayed_alt = 47000
+	else
+		B777DR_displayed_alt = simDR_alt_ft_capt
+	end
+end
+
+function setTXT()
+	B777DR_txt_GS                  = "GS"
+	B777DR_txt_TAS                 = "TAS"
+	B777DR_txt_TIME_TO_ALIGN       = "TIME TO ALIGN"
+	B777DR_txt_ddd                 = "---"
+	B777DR_txt_INSTANT_ADIRU_ALIGN = "INSTANT ADIRU ALIGN"
+	B777DR_txt_REALISTIC_PRK_BRK   = "REALISTIC PARK BRAKE"
+end
+----- ANIMATION UTILITY -----------------------------------------------------------------
+function B777_animate(target, variable, speed)
+	if math.abs(target - variable) < 0.1 then return target end
+	variable = variable + ((target - variable) * (speed * SIM_PERIOD))
+	return variable
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
@@ -231,11 +390,7 @@ function flight_start()
 		B777_align_adiru()
 	end
 
-	B777DR_txt_GS                  = "GS"
-	B777DR_txt_TAS                 = "TAS"
-	B777DR_txt_TIME_TO_ALIGN       = "TIME TO ALIGN"
-	B777DR_txt_ddd                 = "---"
-	B777DR_txt_INSTANT_ADIRU_ALIGN = "INSTANT ADIRU ALIGN"
+	setTXT()
 end
 
 --function flight_crash()
@@ -243,12 +398,6 @@ end
 --function before_physics()
 
 function after_physics()
-	if B777DR_hdg_mode == 0 then
-		B777DR_displayed_hdg = simDR_magHDG
-	elseif B777DR_hdg_mode == 1 then
-		B777DR_displayed_hdg = simDR_trueHDG
-	end
-
 	B777DR_displayed_com1_act_khz = simDR_com1_act_khz / 1000
 	B777DR_displayed_com1_stby_khz = simDR_com1_stby_khz / 1000
 
@@ -288,7 +437,6 @@ function after_physics()
 --	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
 	B777DR_airspeed_bug_diff = simDR_ap_airspeed - B777DR_ias_capt_indicator
-	B777DR_alt_mtrs_capt = simDR_alt_ft_capt * B777_ft_to_mtrs
 	B777DR_autopilot_alt_mtrs_capt = simDR_autopilot_alt * B777_ft_to_mtrs
 
 	if simDR_onGround == 1 then
@@ -297,12 +445,16 @@ function after_physics()
 		B777DR_displayed_aoa = simDR_aoa
 	end
 
-	if simDR_onGround == 0 then
-		if simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2490 and simDR_vs_capt < 0 then
-			B777DR_outlined_RA = 1
-			if not is_timer_scheduled(disableRAOutline) then run_after_time(disableRAOutline, 10) end
-		end
+	if simDR_onGround == 0 and simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2490 and simDR_vs_capt < 0 then
+		B777DR_outlined_RA = 1
+		if not is_timer_scheduled(disableRAOutline) then run_after_time(disableRAOutline, 10) end
 	end
+
+	B777DR_alt_bug_diff = simDR_autopilot_alt - B777DR_displayed_alt
+
+	setDispAlt()
+	setAnimations()
+	minimums()
 end
 
 --function after_replay()
