@@ -51,6 +51,9 @@ simDR_startup_running                     = find_dataref("sim/operation/prefs/st
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 
+simDR_ap_heading                          = find_dataref("sim/cockpit/autopilot/heading")
+simDR_trk                                 = find_dataref("sim/cockpit2/gauges/indicators/ground_track_mag_pilot")
+
 simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/landing_lights_switch")
 simDR_taxi_light_switch                   = find_dataref("sim/cockpit2/switches/taxi_light_on")
 simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/strobe_lights_on")
@@ -61,8 +64,10 @@ B777DR_eicas_mode                         = find_dataref("Strato/777/displays/ei
 
 B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/pump/primary/state")
 B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
-
 B777DR_gear_altn_extnsn_target            = find_dataref("Strato/777/gear/altn_extnsn")
+B777DR_gear_lock_ovrd_target              = find_dataref("Strato/777/gear/lock_ovrd")
+B777DR_hdg_mode                           = find_dataref("Strato/777/displays/hdg_mode")
+
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
 --*************************************************************************************--
@@ -109,6 +114,8 @@ B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovh
 
 B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")
 
+B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lock_ovrd/btn_pos", "number")
+
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
 --*************************************************************************************--
@@ -126,7 +133,8 @@ simCMD_ap_servos_on_2                    = find_command("sim/autopilot/servos2_o
 simCMD_ap_approach                       = find_command("sim/autopilot/approach")
 simCMD_ap_hdgHold                        = find_command("sim/autopilot/heading_hold")
 simCMD_ap_hdgSel                         = find_command("sim/autopilot/heading")
-simCMD_ap_altArm                         = find_command("sim/autopilot/altitude_arm")
+simCMD_ap_trackSel                       = find_command("sim/autopilot/track")
+simCMD_ap_altArm                         = find_command("sim/autopilot/altitude_hold")
 simCMD_ap_flch                           = find_command("sim/autopilot/level_change")
 simCMD_ap_vs                             = find_command("sim/autopilot/vertical_speed")
 simCMD_ap_lnav                           = find_command("sim/autopilot/gpss")
@@ -242,7 +250,12 @@ end
 function B777_ap_hdgHold_switch_CMDhandler(phase, duration)    -- A/P HEADING HOLD BUTTON
    if phase == 0 then
       B777DR_mcp_button_target[7] = 1
-      simCMD_ap_hdgHold:once()
+      if B777DR_hdg_mode ==0 then
+         simCMD_ap_hdgHold:once()
+      else
+         simCMD_ap_trackSel:once()
+         simDR_ap_heading = simDR_trk
+      end
    elseif phase == 2 then
       B777DR_mcp_button_target[7] = 0
    end
@@ -251,7 +264,11 @@ end
 function B777_ap_hdgSel_switch_CMDhandler(phase, duration)     -- A/P HEADING SELECT BUTTON
    if phase == 0 then
       B777DR_mcp_button_target[8] = 1
-      simCMD_ap_hdgSel:once()
+      if B777DR_hdg_mode == 0 then
+         simCMD_ap_hdgSel:once()
+      else
+         simCMD_ap_trackSel:once()
+      end
    elseif phase == 2 then
       B777DR_mcp_button_target[8] = 0
    end
@@ -707,7 +724,7 @@ function after_physics()
    B777DR_cockpit_door_pos = B777_animate(B777_cockpit_door_target, B777DR_cockpit_door_pos, 4)
 
    for i = 1, 18 do
-      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 10)
+      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 15)
    end
 
    for i = 1, 5 do
@@ -750,6 +767,8 @@ function after_physics()
    end
 
    B777DR_gear_altn_extnsn_pos = B777_animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 10)
+
+   B777DR_gear_lock_ovrd_pos = B777_animate(B777DR_gear_lock_ovrd_target, B777DR_gear_lock_ovrd_pos, 10)
 end
 
 --function after_replay()
