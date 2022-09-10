@@ -22,6 +22,10 @@ throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_jet_rev_r
 altitude_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 altitude_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_copilot")
 altitude_stdby = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_stby")
+tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
+cas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
+tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
+cas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_copilot")
 --Weather and position
 ac_heading = globalPropertyf("sim/flightmodel/position/magpsi")
 wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
@@ -73,6 +77,7 @@ flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
+fbw_ail_ratio = 0
 
 set(fctl_ovrd, 1)
 
@@ -81,6 +86,59 @@ function GetClosestFlapSetting()
 		if flap_settings[i] >= get(flaps) then
 			return i
 		end
+	end
+end
+
+function UpdateFBWAilRatio()
+	--Speeds and altitudes for aileron lockout
+	lockout_speeds = {280, 240, 240, 166}
+	red_authority_speeds = {270, 230, 230, 152}
+	lockout_alts = {11500, 19500, 26500, 43000}
+	red_authority_alts = {9000, 17500, 25000, 43000}
+	local avg_alt = (get(altitude_pilot) + get(altitude_copilot) + get(altitude_stdby)) / 3
+	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
+	local tmp_idx_1 = 0 --limit after which we start decreasing aileron ratio
+	local tmp_idx_2 = 0 --limit after which we start blocking
+	--find below which altitude we are from the pre defined alts for max and min limits
+	for i=4,1,-1 do
+		if avg_alt < red_authority_alts[i] then
+			tmp_idx_1 = i
+		elseif avg_alt == red_authority_alts[i] then
+			tmp_idx_1 = i
+			break
+		else
+			break
+		end
+	end
+	for i=4,1,-1 do
+		if avg_alt < lockout_alts[i] then
+			tmp_idx_2 = i
+		elseif avg_alt == lockout_alts[i] then
+			tmp_idx_2 = i
+			break
+		else
+			break
+		end
+	end
+	--Calculate the speed limits for given config
+	local speed_lim_min = 0
+	local speed_lim_max = 0
+	if tmp_idx_1 > 1 then
+		speed_lim_min = red_authority_speeds[tmp_idx_1 - 1] + (red_authority_speeds[tmp_idx_1] - red_authority_speeds[tmp_idx_1 - 1]) * (avg_alt - red_authority_alts[tmp_idx_1 - 1]) / (red_authority_alts[tmp_idx_1] - red_authority_alts[tmp_idx_1 - 1])
+	else
+		speed_lim_min = red_authority_speeds[1]
+	end
+	if tmp_idx_2 > 1 then
+		speed_lim_max = lockout_speeds[tmp_idx_2 - 1] + (lockout_speeds[tmp_idx_2] - lockout_speeds[tmp_idx_2 - 1]) * (avg_alt - lockout_alts[tmp_idx_2 - 1]) / (lockout_alts[tmp_idx_2] - lockout_alts[tmp_idx_2 - 1])
+	else
+		speed_lim_max = lockout_speeds[1]
+	end
+	if avg_cas <= speed_lim_min then
+		fbw_ail_ratio = 36
+	elseif avg_cas > speed_lim_min and avg_cas < speed_lim_max then
+		fbw_ail_ratio = 36 * (1 - ((avg_cas - speed_lim_min) / (speed_lim_max - speed_lim_min)))
+	else
+		fbw_ail_ratio = 0
 	end
 end
 
@@ -233,8 +291,8 @@ function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
 	local dn_cmd = GetDownCmd(side, pcu_mode, f_type)
 	if t == 1 then
 		--obtaining aileron characterristics
-		ail_ratio_lower = GetAilRatio(18, hyd_sys, 2500, pcu_mode, dn_cmd, 1)
-		ail_ratio_upper = GetAilRatio(18, hyd_sys, 2500, pcu_mode, dn_cmd, -1)
+		ail_ratio_lower = GetAilRatio(fbw_ail_ratio / 2, hyd_sys, 2500, pcu_mode, dn_cmd, 1)
+		ail_ratio_upper = GetAilRatio(fbw_ail_ratio / 2, hyd_sys, 2500, pcu_mode, dn_cmd, -1)
 		ail_neutral = GetAilNeutral(side, ail_ratio, hyd_sys, pcu_mode, f_type, dn_cmd)
 	else
 		--obtaining flaperon characterristics
@@ -395,8 +453,6 @@ end
 function GetRudderRatio()
 	ratio = GetAilRatio(54, {4}, 2000, 1, 0, 0)
 	if IsAcConnected() == 1 then
-		tas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_pilot")
-		tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
 		if math.abs(get(tas_pilot) - get(tas_copilot)) < 15 then --If airspeed provided by the sensors is reliable, modify ratio based on the formula
 			if get(tas_pilot) > 135 and get(tas_pilot) <= 269 then
 				return ratio - (get(tas_pilot) - 135) * (36 / 115)
@@ -534,6 +590,7 @@ end
 
 function update()
 	UpdateReversers()
+	UpdateFBWAilRatio()
 	--Update PCU modes
 	UpdateFlprnPCUMode(1, {1, 3})
 	UpdateFlprnPCUMode(2, {2, 3})
