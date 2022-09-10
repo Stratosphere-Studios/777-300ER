@@ -272,8 +272,8 @@ function draw()
 				drawText(font, 150 + 527 * (i - 1), 140, tostring(round(get(pressure) * 0.1) * 10), 45, false, false, TEXT_ALIGN_CENTER, color)
 			end
 			for i=1,4 do
-				local primary_pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
-				local demand_pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+				local primary_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
+				local demand_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 				local primary_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/actual", i)
 				local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/actual", i)
 				local sys_idx = GetSysIdx(i)
@@ -287,10 +287,10 @@ function draw()
 				elseif get(demand_state) == -1 then --Draw crossed rectangle if pump is inop
 					DrawCrossedRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)	
 				end
-				if get(demand_pump_temp) >= 75 then
+				if get(demand_pump_ovht) == 1 then
 					drawText(font, ovht_d[1 + 2 * (i - 1)], ovht_d[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
 				end
-				if get(primary_pump_temp) >= 75 then
+				if get(primary_pump_ovht) == 1 then
 					drawText(font, ovht_p[1 + 2 * (i - 1)], ovht_p[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
 				end
 			end
