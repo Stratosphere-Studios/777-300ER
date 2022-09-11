@@ -122,14 +122,14 @@ function DrawLinesEICAS()
 				end
 			end
 		end
-		if get(demand_state) ~= get(demand_past) and get(c_time) >= t + 2 then
+		if get(demand_state) ~= get(demand_past) and get(c_time) >= t + 3 then
 			set(demand_past, get(demand_state))
 		end
-		if get(primary_state) ~= get(primary_past) and get(c_time) >= t + 2 then
+		if get(primary_state) ~= get(primary_past) and get(c_time) >= t + 3 then
 			set(primary_past, get(primary_state))
 		end
 	end
-	if get(c_time) >= t + 2 then
+	if get(c_time) >= t + 3 then
 		t = get(c_time)
 	end
 end
@@ -267,7 +267,14 @@ function draw()
 				else
 					color = white
 				end
-				drawText(font, 113 + 527 * (i - 1), 256, tostring(Round(get(quantity), 2)), 45, false, false, TEXT_ALIGN_LEFT, white)
+				local qty = Round(get(quantity), 2)
+				local qty_displayed = tostring(qty)
+				if qty % 1 == 0 then
+					qty_displayed = qty_displayed .. ".00"
+				elseif qty % 0.1 == 0 then
+					qty_displayed = qty_displayed .. "0"
+				end
+				drawText(font, 113 + 527 * (i - 1), 256, qty_displayed, 45, false, false, TEXT_ALIGN_LEFT, white)
 				--Making pressure output rounded.
 				drawText(font, 150 + 527 * (i - 1), 140, tostring(round(get(pressure) * 0.1) * 10), 45, false, false, TEXT_ALIGN_CENTER, color)
 			end
