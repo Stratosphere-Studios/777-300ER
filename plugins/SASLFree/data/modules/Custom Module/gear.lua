@@ -76,6 +76,7 @@ kill_gear = globalPropertyi("Strato/777/kill_gear")
 
 handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
+realistic_prk_brk = createGlobalPropertyi("Strato/777/gear/park_brake_realistic", 0)
 man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
 truck_L_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_L_temp", {0, 0, 0})
 truck_L_max = createGlobalPropertyf("Strato/777/gear/truck_L_max", 0)
@@ -730,7 +731,7 @@ end
 
 function ParkBrakeHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
-		if get(man_brakes_L) == 1 and get(man_brakes_R) == 1 then
+		if (get(man_brakes_L) == 1 and get(man_brakes_R) == 1) or get(realistic_prk_brk) == 0 then
 			set(park_brake, 1 - get(park_brake))
 			if get(park_brake) == 0 then
 				set(man_brakes_L, 0)

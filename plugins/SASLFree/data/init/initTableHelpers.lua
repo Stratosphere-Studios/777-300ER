@@ -1,85 +1,44 @@
----------------------------------------------------------------------------------------------------------------------------
--- TABLE HELPERS -----------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Table helpers
+-------------------------------------------------------------------------------
 
--- Load stands from cache
-function loadTableFromFile(fileName, name)
-    local chunk = loadfile(fileName)
-    if nil ~= chunk then
-        local t = {}
-        setfenv(chunk, t)
-        chunk()
-        return t[name]
-    else
-        logError('file not exists', fileName)
-        return nil
-    end
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Save table to file
-function saveTableToFile(f, table, name)
-    if name then
-        f:write(name .. ' = ')
-    end
-    f:write('{\n')
-
-    for k, v in pairs(table) do
-        f:write('["' .. k .. '"] = ')
-        if ('number' == type(v)) or ('boolean' == type(v)) then
-            f:write(tostring(v) .. ';\n')
-        elseif ('string' == type(v)) then
-            f:write('"' .. v .. '";\n')
-        elseif ('table' == type(v)) then
-            saveTableToFile(f, v)
+local function transpose(x)
+    local r = {}
+    for i = 1, #x[1] do
+        r[i] = {}
+        for j = 1, #x do
+            r[i][j] = x[j][i]
         end
     end
-
-    f:write('};\n')
+    return r
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Save positions to file
-function savePositionsToFile(f, table, name)
-    if name then
-        f:write(name .. ' = ')
+local function mergeTablesSimple(t1, t2)
+    local t = {}
+    for _, v in ipairs(t1) do
+        table.insert(t, v)
     end
-    f:write('{\n')
-
-    for k, v in pairs(table) do
-        f:write('["' .. k .. '"] = { ')
-        for i = 1, 4 do
-            f:write(v[i])
-            if 4 ~= i then
-                f:write(', ')
-            else
-                f:write(' ')
-            end
-        end
-        f:write('};\n')
+    for _, v in ipairs(t2) do
+        table.insert(t, v)
     end
-
-    f:write('};\n')
+    return t
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Deep copies values from source table to destination table
-function mergeComponentTables(dest, src)
+--- Merges two tables to setup a component.
+--- @param dest table
+--- @param src table
+function private.mergeComponentTables(dest, src)
     for k, v in pairs(src) do
-        if "table" == type(v) then
+        if type(v) == "table" then
             if not dest[k] then
                 dest[k] = v
             elseif isProperty(dest[k]) and isProperty(v) then
                 dest[k] = v
             else
-                mergeComponentTables(dest[k], v)
+                private.mergeComponentTables(dest[k], v)
             end
         else
             dest[k] = v
@@ -87,84 +46,72 @@ function mergeComponentTables(dest, src)
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Simple merge of two tables
-function table.merge(t1, t2)
-    local t = {}
-    for k, v in ipairs(t1) do
-        table.insert(t, v)
-    end
-    for k, v in ipairs(t2) do
-        table.insert(t, v)
-    end
-    return t
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Make deep copy of table
-function cloneTable(table)
-    local t = {}
-    for k, v in pairs(table) do
-        if "table" == type(v) then
-            t[k] = cloneTable(v)
-        else
-            t[k] = v
-        end
-    end
-    return t
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Table floor
-function math.tablefloor(tbl)
-    for i = 1, #tbl do
-        tbl[i] = math.floor(tbl[i])
-    end
-    return tbl
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Transposing function
-local function transpose(x)
-    local r = {}
-
-    for i = 1, #x[1] do
-        r[i] = {}
-        for j = 1, #x do
-            r[i][j] = x[j][i]
-        end
-    end
-
-    return r
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Extracts N-dimensinal table into one table
-function extractArrayData(arr)
-    if type(arr[1]) ~= 'table' then
+--- Extracts data from N-dimensional table to simple array-like table.
+--- @param arr table
+function private.extractArrayData(arr)
+    if type(arr[1]) ~= "table" then
         return arr
     else
-        if type(arr[1][1]) ~= 'table' then
+        if type(arr[1][1]) ~= "table" then
             arr = transpose(arr)
         end
 
-        local res={}
+        local res = {}
         for i = 1, #arr do
-            res = table.merge(res, extractArrayData(arr[i]))
+            res = mergeTablesSimple(res, private.extractArrayData(arr[i]))
         end
         return res
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Writes table to file in valid Lua syntax.
+--- @param fileName string
+--- @param t table
+--- @param tname string
+function private.writeTableToFile(fileName, t, tname)
+    local f = io.open(fileName, "w+")
+    if f ~= nil then
+        local cache = {}
+        local function writeTable(inT, depth)
+            local tStr = tostring(inT)
+            local indent = string.rep(' ', depth * 4)
+            if cache[tStr] then
+            else
+                cache[tStr] = true
+                for k, v in pairs(inT) do
+                    local vt = type(v)
+                    local kStr
+                    if type(k) == "number" then
+                        kStr = tostring(k)
+                    else
+                        kStr = "'"..tostring(k).."'"
+                    end
+                    if vt == "table" then
+                        f:write(indent.."["..kStr.."] = {\n")
+                        writeTable(v, depth + 1)
+                        f:write(indent.."};\n")
+                    elseif vt == "string" then
+                        f:write(indent.."["..kStr.."] = '"..v.."';\n")
+                    elseif vt == "number" or vt == "boolean" then
+                        f:write(indent.."["..kStr.."] = "..tostring(v)..";\n")
+                    end
+                end
+            end
+        end
+        f:write(tname.." = {\n")
+        writeTable(t, 1)
+        f:write("};\n")
+        f:close()
+    else
+        logWarning("Can't write table to '" .. fileName .. "'")
+    end
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

@@ -10094,7 +10094,7 @@ IDX	8720
 	TRIS	1485 6
 	ATTR_manip_command	button	sim/autopilot/knots_mach_toggle	Switch between Knots/Mach
 	TRIS	1563 36
-	ATTR_manip_command	button	Strato/777/cockpit/ovhd/aft/button_cover/target[1]	ADIRU Switch
+	ATTR_manip_command	button	Strato/B777/button_switch/fltInst/adiru_switch	ADIRU Switch
 	TRIS	1635 36
 	ATTR_manip_toggle	button	1.000	0.000	Strato/777/hydraulics/pump/primary/state[0]	Left Engine Primary Pump
 	TRIS	1671 36
@@ -10112,7 +10112,7 @@ IDX	8720
 	TRIS	1965 36
 	ATTR_manip_command_knob	up_down	sim/autopilot/vertical_speed_up	sim/autopilot/vertical_speed_down	V/S Knob
 	TRIS	2001 36
-	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/controls/parking_brake_ratio	Parking Brake
+	ATTR_manip_command	button	sim/flight_controls/brakes_toggle_max	Parking Brake
 	TRIS	2145 36
 	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/taxi_light_on	Taxi Lights (Nose)
 	TRIS	2181 36
