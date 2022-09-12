@@ -1,0 +1,7 @@
+A
+750 version
+x   y  
+0 0	// comment: rose offsets in expanded mode
+0 0	// comment: rose offsets in centered mode
+2.5 2.5	// factor for symbol size
+0 0	// text label offset
