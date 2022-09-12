@@ -102,12 +102,17 @@ function CheckOvht(pump_type, messages) --Returns the second line of the overhea
 	names = {"L", "C1", "C2", "R"}
 	ovht = {}
 	for i=1,4 do
-		local pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
+		local pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
 		if pump_type == 2 then --1 = primary, 2 = demand
-			pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+			pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 		end
-		if get(pump_temp) >= 75 then
-			msg = "HYD OVERHEAT PRI " .. names[i]
+		if get(pump_ovht) == 1 then
+			msg = ""
+			if pump_type == 1 then
+				msg = "HYD OVERHEAT PRI " .. names[i]
+			else
+				msg = "HYD OVERHEAT DEM " .. names[i]
+			end
 			table.insert(messages, tlen(messages) + 1, msg)
 		end
 	end
@@ -123,7 +128,12 @@ function CheckFail(pump_type, messages)
 			pump_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
 		end
 		if get(pump_fail) == 1 and get(pump_state) > 0 then
-			msg = "HYD PRESS PRI " .. names[i]
+			msg = ""
+			if pump_type == 1 then
+				msg = "HYD PRESS PRI " .. names[i]
+			else
+				msg = "HYD PRESS DEM " .. names[i]
+			end
 			table.insert(messages, tlen(messages) + 1, msg)
 		end
 	end

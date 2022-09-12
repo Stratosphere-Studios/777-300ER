@@ -122,14 +122,14 @@ function DrawLinesEICAS()
 				end
 			end
 		end
-		if get(demand_state) ~= get(demand_past) and get(c_time) >= t + 2 then
+		if get(demand_state) ~= get(demand_past) and get(c_time) >= t + 3 then
 			set(demand_past, get(demand_state))
 		end
-		if get(primary_state) ~= get(primary_past) and get(c_time) >= t + 2 then
+		if get(primary_state) ~= get(primary_past) and get(c_time) >= t + 3 then
 			set(primary_past, get(primary_state))
 		end
 	end
-	if get(c_time) >= t + 2 then
+	if get(c_time) >= t + 3 then
 		t = get(c_time)
 	end
 end
@@ -267,13 +267,20 @@ function draw()
 				else
 					color = white
 				end
-				drawText(font, 113 + 527 * (i - 1), 256, tostring(Round(get(quantity), 2)), 45, false, false, TEXT_ALIGN_LEFT, white)
+				local qty = Round(get(quantity), 2)
+				local qty_displayed = tostring(qty)
+				if qty % 1 == 0 then
+					qty_displayed = qty_displayed .. ".00"
+				elseif qty % 0.1 == 0 then
+					qty_displayed = qty_displayed .. "0"
+				end
+				drawText(font, 113 + 527 * (i - 1), 256, qty_displayed, 45, false, false, TEXT_ALIGN_LEFT, white)
 				--Making pressure output rounded.
 				drawText(font, 150 + 527 * (i - 1), 140, tostring(round(get(pressure) * 0.1) * 10), 45, false, false, TEXT_ALIGN_CENTER, color)
 			end
 			for i=1,4 do
-				local primary_pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
-				local demand_pump_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+				local primary_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
+				local demand_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 				local primary_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/actual", i)
 				local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/actual", i)
 				local sys_idx = GetSysIdx(i)
@@ -287,10 +294,10 @@ function draw()
 				elseif get(demand_state) == -1 then --Draw crossed rectangle if pump is inop
 					DrawCrossedRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)	
 				end
-				if get(demand_pump_temp) >= 75 then
+				if get(demand_pump_ovht) == 1 then
 					drawText(font, ovht_d[1 + 2 * (i - 1)], ovht_d[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
 				end
-				if get(primary_pump_temp) >= 75 then
+				if get(primary_pump_ovht) == 1 then
 					drawText(font, ovht_p[1 + 2 * (i - 1)], ovht_p[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
 				end
 			end
