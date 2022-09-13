@@ -1,1 +1,0 @@
-This folder contains linux libc++ libraries.
