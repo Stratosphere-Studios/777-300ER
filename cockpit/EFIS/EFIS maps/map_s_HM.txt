@@ -3,5 +3,5 @@ A
 x   y  
 0 -143	// comment: rose offsets in expanded mode
 0 -5	// comment: rose offsets in centered mode
-5 5	// factor for symbol size
-34 -16	// text label offset
+4 4	// factor for symbol size
+60 -20	// text label offset
