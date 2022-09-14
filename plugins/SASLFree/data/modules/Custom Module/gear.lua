@@ -65,6 +65,9 @@ steer_ovrd = globalPropertyi("sim/operation/override/override_wheel_steer")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 gear_ovrd = globalPropertyi("sim/operation/failures/rel_gear_act")
 --Own datarefs
+brake_sys = globalPropertyi("Strato/777/gear/shuttle_valve") --position of the brake shuttle valve
+brake_qty_L = globalPropertyf("Strato/777/gear/qty_brake_L") --overall fluid quantity in left brakes
+brake_qty_R = globalPropertyf("Strato/777/gear/qty_brake_R") --overall fluid quantity in left brakes
 sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
 sys_R_press = globalPropertyfae("Strato/777/hydraulics/press", 3)
 c_time = globalPropertyf("Strato/777/time/current")
@@ -76,7 +79,7 @@ kill_gear = globalPropertyi("Strato/777/kill_gear")
 
 handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
-realistic_prk_brk = createGlobalPropertyi("Strato/777/gear/park_brake_realistic", 0)
+realistic_prk_brk = createGlobalPropertyi("Strato/777/gear/park_brake_realistic", 1)
 man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
 truck_L_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_L_temp", {0, 0, 0})
 truck_L_max = createGlobalPropertyf("Strato/777/gear/truck_L_max", 0)
@@ -140,6 +143,8 @@ brake_L_temp = 0
 L_brake_past = 0
 brake_R_temp = 0
 R_brake_past = 0
+park_brake_valve = 0
+brake_press = {50, 50}
 temp_v = 0
 
 set(steer_ovrd, 1)
@@ -150,6 +155,20 @@ function EvenAnim(dref, tgt, step)
 		set(dref, tgt)
 	else
 		set(dref, get(dref) + (bool2num(get(dref) < tgt) - bool2num(get(dref) > tgt)) * step * get(f_time) / 0.0166)
+	end
+end
+
+function UpdateShuttleValve()
+	if get(sys_C_press) > 200 or get(sys_R_press) > 200 then
+		if get(sys_C_press) > 200 then
+			if get(sys_R_press) > 200 then
+				set(brake_sys, 3)
+			else
+				set(brake_sys, 2)
+			end
+		else
+			set(brake_sys, 3)
+		end
 	end
 end
 
@@ -231,11 +250,11 @@ function UpdateBrakeTemperatures(delay)
 		local L_temp = (p1 * math.sqrt(on_time[1]) * get(L_wheel_brake) * 0.25) / p2
 		local R_temp = (p1 * math.sqrt(on_time[2]) * get(R_wheel_brake) * 0.25) / p2
 		--Cooling would be slower when parking brake is on
-		local L_cooling_coeff = 0.008 - 0.002 * (get(park_brake) - L_cooler * 2)
-		local R_cooling_coeff = 0.008 - 0.002 * (get(park_brake) - R_cooler * 2)
+		local L_cooling_coeff = 0.008 + 0.002 * L_cooler
+		local R_cooling_coeff = 0.008 + 0.002 * R_cooler
 		--This is where all the cooling is simulated
-		local cool_L = (get(oat) - brake_L_temp) * (1 - get(L_wheel_brake)) * get(f_time) * L_cooling_coeff * (get(tas) - (get(oat) - brake_L_temp) * 0.002) * 0.2 * L_deployed
-		local cool_R = (get(oat) - brake_R_temp) * (1 - get(R_wheel_brake)) * get(f_time) * R_cooling_coeff * (get(tas) - (get(oat) - brake_R_temp) * 0.002) * 0.2 * R_deployed
+		local cool_L = (get(oat) - brake_L_temp) * (1 - get(L_wheel_brake) * 0.4) * get(f_time) * L_cooling_coeff * (get(tas) - (get(oat) - brake_L_temp) * 0.002) * 0.2 * L_deployed
+		local cool_R = (get(oat) - brake_R_temp) * (1 - get(R_wheel_brake) * 0.4) * get(f_time) * R_cooling_coeff * (get(tas) - (get(oat) - brake_R_temp) * 0.002) * 0.2 * R_deployed
 		local L_tgt_temp = L_temp + cool_L 
 		local R_tgt_temp = R_temp + cool_R
 		brake_L_temp = brake_L_temp + L_tgt_temp
@@ -353,8 +372,12 @@ end
 function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 	local effect_L = 1
 	local load_total = 0
-	if get(sys_C_press) < 1500 and get(sys_R_press) < 1500 and get(brake_acc) < 1500 then
-		effect_L = math.max(get(sys_C_press), get(sys_R_press), get(brake_acc)) / 1500
+	local brake_system_press = globalPropertyfae("Strato/777/hydraulics/press", get(brake_sys))
+	if get(brake_acc_in_use) == 1 then
+		brake_system_press = brake_acc
+	end
+	if get(brake_system_press) < 1500 then
+		effect_L = get(brake_system_press) / 1500
 	end
 	local effect_R = effect_L
 	if TBRS_active_L ~= 4 then
@@ -369,13 +392,15 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 		if effect_L * tgt > 0 and get(L_wheel_brake) == 0 then --Update time when we started using the brake
 			tmp[1] = get(c_time)
 		end
-		set(L_wheel_brake, get(L_wheel_brake) + (effect_L * tgt - get(L_wheel_brake)) * 0.1)
+		brake_press[1] = brake_press[1] + (effect_L * tgt * get(brake_system_press) - brake_press[1]) * 0.1
 		if get(brake_acc_in_use) == 0 then --set load to pedal setting when accumulator is in use to get more realistic consumption
 			load_total = tgt
 		end
 	else
-		set(L_wheel_brake, 0)
+		brake_press[1] = brake_press[1] + (park_brake_valve * brake_press[1] - brake_press[1]) * 0.1
 	end
+	set(L_wheel_brake, brake_press[1] / 3100)
+	set(brake_qty_L, get(brake_qty_L) + (0.02 * brake_press[1] / 3100 - get(brake_qty_L)) * math.abs((brake_press[1] - get(brake_system_press)) * 0.1 / 3100))
 	if TBRS_active_R ~= 4 then
 		effect_R = effect_R * 0.3
 	end
@@ -388,13 +413,15 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 		if effect_R * tgt > 0 and get(R_wheel_brake) == 0 then
 			tmp[2] = get(c_time)
 		end
-		set(R_wheel_brake, get(R_wheel_brake) + (effect_R * tgt - get(R_wheel_brake)) * 0.1)
+		brake_press[2] = brake_press[2] + (effect_R * tgt * get(brake_system_press) - brake_press[2]) * 0.1
 		if get(brake_acc_in_use) == 0 then
 			load_total = load_total + tgt
 		end
 	else
-		set(R_wheel_brake, 0)
+		brake_press[2] = brake_press[2] + (park_brake_valve * brake_press[2] - brake_press[2]) * 0.1
 	end
+	set(R_wheel_brake, brake_press[2] / 3100)
+	set(brake_qty_R, get(brake_qty_R) + (0.02 * brake_press[2] / 3100 - get(brake_qty_R)) * math.abs((brake_press[2] - get(brake_system_press)) * 0.1 / 3100))
 	if get(brake_acc_in_use) == 1 then
 		load_total = get(tgt_L) + get(tgt_R)
 	end
@@ -731,12 +758,13 @@ end
 
 function ParkBrakeHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
-		if (get(man_brakes_L) == 1 and get(man_brakes_R) == 1) or get(realistic_prk_brk) == 0 then
-			set(park_brake, 1 - get(park_brake))
-			if get(park_brake) == 0 then
-				set(man_brakes_L, 0)
-				set(man_brakes_R, 0)
-			end
+		park_brake_valve = 1 - park_brake_valve
+		set(park_brake, park_brake_valve)
+		if get(realistic_prk_brk) == 0 then
+			set(brake_qty_L, 0.02 * park_brake_valve)
+			set(brake_qty_R, 0.02 * park_brake_valve)
+			brake_press[1] = 3000 * park_brake_valve
+			brake_press[2] = 3000 * park_brake_valve
 		end
 	end
 end
@@ -783,12 +811,18 @@ function onAirportLoaded()
 	end
 	if get(ra_pilot) < 5 or get(ra_copilot) < 5 then
 		set(park_brake, 1)
+		park_brake_valve = 1
+		brake_press[1] = 3100
+		brake_press[2] = 3100
+		set(brake_qty_L, 0.02)
+		set(brake_qty_R, 0.02)
 	end
 end
 
 onAirportLoaded() --This is to make sure that everything is set if sasl has been rebooted
 
 function update()
+	UpdateShuttleValve()
 	UpdateGearDoors()
 	set(gear_ovrd, 6)
 	set(handle_pos, get(handle_pos) + (get(normal_gear) - get(handle_pos)) * get(f_time) * 5)
@@ -797,7 +831,7 @@ function update()
 	UpdateActuatorPress()
 	MoveGear()
 	UpdateTruckBrakes()
-	set(Xplane_park_brake, get(park_brake))
+	set(Xplane_park_brake, 0)
 	ApplyBrakingWithAntiSkid(L_brake_tgt, R_brake_tgt)
 	UpdateBrakeAcc()
 	UpdateBrakeOnTime()
