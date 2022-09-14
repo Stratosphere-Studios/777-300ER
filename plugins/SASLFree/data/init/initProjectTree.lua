@@ -1,78 +1,80 @@
----------------------------------------------------------------------------------------------------------------------------
--- PROJECT TREE ------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Project tree
+-------------------------------------------------------------------------------
 
--- Initiates current project state tree
+--- Initiates current project state tree.
 function initiateStateTree()
     _G["stateTree"] = {}
-    initStateTree(_G["panel"], _G["stateTree"])
+    private.initStateTree(_G["panel"], _G["stateTree"])
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Initiates current project state tree recursive
-function initStateTree(inTable, inStateTree)
+--- Exports project tree.
+--- @param seekFunctions boolean
+function exportProjectTreePanel(seekFunctions)
+    if _G["panel"] then
+        private.exportProjectTree(_G["panel"], _G["stateTree"], seekFunctions)
+    end
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Initiates current project state tree recursive.
+--- @param inTable table
+--- @param inStateTree table
+function private.initStateTree(inTable, inStateTree)
     local cache = {}
-    local function subInitStateTree(inTable, inStateTree)
-        if (cache[tostring(inTable)]) then
+    local function subInitStateTree(inTableS, inStateTreeS)
+        if (cache[tostring(inTableS)]) then
             -- Do nothing
         else
-            cache[tostring(inTable)] = true
-            if (type(inTable) == "table") then
-                for pos, val in pairs(inTable) do
-                    if (type(val) == "table" and pos ~= "_P" and pos ~= "_C") then
-                        inStateTree["open"] = 0
-                        inStateTree[pos] = {}
-                        subInitStateTree(val, inStateTree[pos])
+            cache[tostring(inTableS)] = true
+            if type(inTableS) == "table" then
+                for pos, val in pairs(inTableS) do
+                    if type(val) == "table" and pos ~= "_P" and pos ~= "_C" then
+                        inStateTreeS["open"] = 0
+                        inStateTreeS[pos] = {}
+                        subInitStateTree(val, inStateTreeS[pos])
                     end
                 end
             end
         end
     end
-    if (type(inTable) == "table") then
-        subInitStateTree(inTable, inStateTree)
-    end
+    subInitStateTree(inTable, inStateTree)
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Exports project tree
-function exportProjectTreePanel(seekFunctions)
-    if (_G["panel"]) then
-        exportProjectTree(_G["panel"], _G["stateTree"], seekFunctions)
-    end
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Exports project tree recursive
-function exportProjectTree(inTable, inStateTree, seekFunctions)
-    local seekF = seekFunctions
+--- Exports project tree recursive.
+--- @param inTable table
+--- @param inStateTree table
+--- @param seekFunctions boolean
+function private.exportProjectTree(inTable, inStateTree, seekFunctions)
     local exportCache = {}
-    local function subExportProjectTree(inTable, inStateTree, seekF)
-        if (exportCache[tostring(inTable)]) then
+    local function subExportProjectTree(inTableS, inStateTreeS)
+        if (exportCache[tostring(inTableS)]) then
             -- Do nothing
         else
-            exportCache[tostring(inTable)] = true
-            if (type(inTable) == "table") then
-                for pos, val in pairs(inTable) do
-                    if (type(val) == "table" and pos ~= "_P" and pos ~= "_C") then
-                        if (type(inStateTree) == "table" and inStateTree["open"] == 1)  then
+            exportCache[tostring(inTableS)] = true
+            if type(inTableS) == "table" then
+                for pos, val in pairs(inTableS) do
+                    if type(val) == "table" and pos ~= "_P" and pos ~= "_C" then
+                        if type(inStateTreeS) == "table" and inStateTreeS["open"] == 1 then
                             local isComponent = rawget(val, "_C") ~= nil
                             sasl.projectTreeBeginCommand("["..tostring(pos).."]", isComponent)
-                            subExportProjectTree(val, inStateTree[pos], seekF)
+                            subExportProjectTree(val, inStateTreeS[pos])
                             sasl.projectTreeEndCommand()
                         else
                             sasl.projectTreeCreateCommand("["..tostring(pos).."]", TYPE_STRING, '', true)
                         end
-                    elseif (type(val) == "string") then
+                    elseif type(val) == "string" then
                         sasl.projectTreeCreateCommand("["..tostring(pos).."]", TYPE_STRING, val, false)
-                    elseif (pos ~= "_P" and pos ~= "_C" and pos ~= "__p") then
-                        if (type(val) ~= "function" or seekFunctions == 1) then
+                    elseif pos ~= "_P" and pos ~= "_C" and pos ~= "__p" then
+                        if type(val) ~= "function" or seekFunctions == 1 then
                             local typeIdentifier
                             local currentType = type(val)
                             if (currentType == "number") then
@@ -91,10 +93,8 @@ function exportProjectTree(inTable, inStateTree, seekFunctions)
             end
         end
     end
-    if (type(inTable) == "table") then
-        subExportProjectTree(inTable, inStateTree)
-    end
+    subExportProjectTree(inTable, inStateTree)
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

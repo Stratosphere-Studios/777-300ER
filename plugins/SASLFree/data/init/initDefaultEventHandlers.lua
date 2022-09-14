@@ -1,11 +1,17 @@
----------------------------------------------------------------------------------------------------------------------------
--- DEFAULT MOUSE HANDLERS ---------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Default events handlers
+-------------------------------------------------------------------------------
 
--- Default mouse click handler
-function defaultOnMouseHold(comp, x, y, button, parentX, parentY)
-    if (button == 1) and get(comp.movable) and (comp.dragging == 1) then
+--- Default mouse click handler for component.
+--- @param comp Component
+--- @param _ number
+--- @param _ number
+--- @param button MouseButton
+--- @param parentX number
+--- @param parentY number
+--- @return boolean
+function private.defaultOnMouseHold(comp, _, _, button, parentX, parentY)
+    if button == 1 and get(comp.movable) and comp.dragging == 1 then
         local position = get(comp.position)
         comp.dragStartX = parentX
         comp.dragStartY = parentY
@@ -17,14 +23,19 @@ function defaultOnMouseHold(comp, x, y, button, parentX, parentY)
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Default mouse down handler
-function defaultOnMouseDown(comp, x, y, button, parentX, parentY)
-    if (button == 1) and get(comp.resizable) and
-                isInRect(comp.resizeRect, x, y)
-    then
+--- Default mouse down handler for component.
+--- @param comp Component
+--- @param x number
+--- @param y number
+--- @param button MouseButton
+--- @param parentX number
+--- @param parentY number
+--- @return boolean
+function private.defaultOnMouseDown(comp, x, y, button, parentX, parentY)
+    if button == 1 and get(comp.resizable) and isInRect(comp.resizeRect, x, y) then
         local pos = get(comp.position)
         comp.resizing = true
         comp.dragStartX = parentX
@@ -36,23 +47,30 @@ function defaultOnMouseDown(comp, x, y, button, parentX, parentY)
         return true
     end
 
-    if (button == 1) and get(comp.movable) then
+    if button == 1 and get(comp.movable) then
         comp.dragging = 1
         return true
     end
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Default mouse up handler
-function defaultOnMouseUp(comp, x, y, button, parentX, parentY)
+--- Default mouse up handler for component.
+--- @param comp Component
+--- @param _ number
+--- @param _ number
+--- @param button MouseButton
+--- @param _ number
+--- @param _ number
+--- @return boolean
+function private.defaultOnMouseUp(comp, _, _, button, _, _)
     if button == 1 and (get(comp.movable) or get(comp.resizable)) then
         if comp.dragging then
             comp.dragging = 0
         end
-         if get(comp.resizable) and comp.resizing then
+        if get(comp.resizable) and comp.resizing then
             comp.resizing = false
         end
         return true
@@ -60,20 +78,27 @@ function defaultOnMouseUp(comp, x, y, button, parentX, parentY)
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Default mouse move handler
-function defaultOnMouseMove(comp, x, y, button, parentX, parentY)
-    if (rawget(comp, "resizing")) then
+--- Default mouse move handler for component.
+--- @param comp Component
+--- @param _ number
+--- @param _ number
+--- @param _ MouseButton
+--- @param parentX number
+--- @param parentY number
+--- @return boolean
+function private.defaultOnMouseMove(comp, _, _, _, parentX, parentY)
+    if rawget(comp, "resizing") then
         local pos = get(comp.position)
         local newSizeX = comp.dragStartSizeX + (parentX - comp.dragStartX)
         local newSizeY = comp.dragStartSizeY - (parentY - comp.dragStartY)
 
-        if 10 > newSizeX then
+        if newSizeX < 10 then
             newSizeX = 10
         end
-        if 10 > newSizeY then
+        if newSizeY < 10 then
             newSizeY = 10
         end
 
@@ -95,7 +120,7 @@ function defaultOnMouseMove(comp, x, y, button, parentX, parentY)
         return true
     end
 
-    if (rawget(comp, "dragging") == 2) and get(comp.movable) then
+    if rawget(comp, "dragging") == 2 and get(comp.movable) then
         local position = get(comp.position)
         position[1] = comp.dragStartPosX + (parentX - comp.dragStartX)
         position[2] = comp.dragStartPosY + (parentY - comp.dragStartY)
@@ -106,31 +131,32 @@ function defaultOnMouseMove(comp, x, y, button, parentX, parentY)
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Default mouse wheel handler
-function defaultOnMouseWheel(comp, x, y, button, parentX, parentY, wheelClicks)
+--- Default mouse wheel handler for component.
+--- @return boolean
+function private.defaultOnMouseWheel()
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- DEFAULT KEY HANDLERS -------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Default key down handler
-function defaultOnKeyDown(comp, char, key, shiftDown, ctrlDown, AltOptDown)
+--- Default key down handler.
+--- @return boolean
+function private.defaultOnKeyDown()
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Default key up handler
-function defaultOnKeyUp(comp, char, key, shiftDown, ctrlDown, AltOptDown)
+--- Default key up handler.
+--- @return boolean
+function private.defaultOnKeyUp()
     return false
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

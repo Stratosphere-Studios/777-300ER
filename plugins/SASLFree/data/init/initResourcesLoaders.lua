@@ -1,17 +1,21 @@
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- MODULES IMAGES LOADER ----------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Resources loaders
+-------------------------------------------------------------------------------
 
--- Load texture image.
--- Loads image and sets texture coords.  It can be called in forms of:
--- loadImage(fileName) -- sets texture coords to entire texture
--- loadImage(fileName, width, height) -- sets texture coords to show
---    center part of image.  width and height sets size of image part
--- loadImage(fileName, x, y, width, height) - loads specified part of image
+--- Loads texture from image.
+--- @param fileName string
+--- @param x number
+--- @param y number
+--- @param width number
+--- @param height number
+--- @overload fun(fileName:string):number
+--- @overload fun(fileName:string, width:number, height:number):number
+--- @return number, number, number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadImage
 function loadImage(fileName, x, y, width, height)
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find texture", fileName)
         return nil
     end
@@ -29,15 +33,25 @@ function loadImage(fileName, x, y, width, height)
     return s, w, h
 end
 
--- Load SVG texture image.
--- Loads image and sets texture coords.  It can be called in forms of:
--- loadImage(fileName) -- sets texture coords to entire texture
--- loadImage(fileName, width, height) -- sets texture coords to show
---    center part of image.  width and height sets size of image part
--- loadImage(fileName, x, y, width, height) - loads specified part of image
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Loads SVG texture from image.
+--- @param fileName string
+--- @param rasterWidth number
+--- @param rasterHeight number
+--- @param x number
+--- @param y number
+--- @param width number
+--- @param height number
+--- @overload fun(fileName:string, rasterWidth:number, rasterHeight:number):number
+--- @overload fun(fileName:string, rasterWidth:number, rasterHeight:number, x:number, y:number):number
+--- @return number, number, number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadVectorImage
 function loadVectorImage(fileName, rasterWidth, rasterHeight, x, y, width, height)
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find vector texture", fileName)
         return nil
     end
@@ -63,58 +77,102 @@ unloadImage = unloadTexture
 sasl.gl.loadImageFromMemory = loadTextureFromMemory
 loadImageFromMemory = loadTextureFromMemory
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- MODULES FONTS LOADERS ----------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Load bitmap font
+--- Loads old-style bitmap font from file.
+--- @param fileName string
+--- @return number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadBitmapFont
 function loadBitmapFont(fileName)
-    return loadFontImpl(fileName, sasl.gl.getGLBitmapFont)
+    local f = findResourceFile(fileName)
+    if f == nil then
+        logError("Can't find bitmap font", fileName)
+        return nil
+    end
+
+    local font = sasl.gl.getGLBitmapFont(f)
+    if not font then
+        logError("Can't load bitmap font", fileName)
+    end
+    return font
 end
 
 sasl.gl.loadBitmapFont = loadBitmapFont
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Load font
-function loadFont(fileName)
-    return loadFontImpl(fileName, sasl.gl.getGLFont)
+--- Loads font from file (TTF, TTC, OTF, etc).
+--- @param fileName string
+--- @param texture number
+--- @param x number
+--- @param y number
+--- @param width number
+--- @param height number
+--- @overload fun(fileName:string):number
+--- @return number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadFont
+function loadFont(fileName, texture, x, y, width, height)
+    return private.loadFont(fileName, FONT_HINTER_AUTO, texture, x, y, width, height)
 end
-
 sasl.gl.loadFont = loadFont
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+--- Loads font from file (TTF, TTC, OTF, etc) using specific hinting preference.
+--- @param fileName string
+--- @param hinter FontHinterPreference
+--- @param texture number
+--- @param x number
+--- @param y number
+--- @param width number
+--- @param height number
+--- @overload fun(fileName:string):number
+--- @return number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadFontHinted
+function loadFontHinted(fileName, hinter, texture, x, y, width, height)
+    return private.loadFont(fileName, hinter, texture, x, y, width, height)
+end
+sasl.gl.loadFontHinted = loadFontHinted
 
--- Load font common implementation
-function loadFontImpl(fileName, loadingFunction)
+function private.loadFont(fileName, hinter, texture, x, y, width, height)
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find font", fileName)
         return nil
     end
 
-    local font = loadingFunction(f)
+    local font
+    if height ~= nil then font = sasl.gl.getGLFont(f, hinter, texture, x, y, width, height)
+    elseif texture ~= nil then font = sasl.gl.getGLFont(f, hinter, texture)
+    else font = sasl.gl.getGLFont(f, hinter) end
+
     if not font then
         logError("Can't load font", fileName)
     end
     return font
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- MODULES SOUNDS LOADERS -------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Load sample from file
+--- Load sound sample from file.
+--- @param fileName string
+--- @param needToCreateTimer boolean
+--- @param needReversed boolean
+--- @overload fun(fileName:string):number
+--- @overload fun(fileName:string, needToCreateTimer:boolean):number
+--- @return number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadSample
 function loadSample(fileName, needToCreateTimer, needReversed)
     if needToCreateTimer == nil then needToCreateTimer = false end
     if needReversed == nil then needReversed = false end
 
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find sound", fileName)
         return nil
     end
@@ -129,15 +187,17 @@ end
 
 sasl.al.loadSample = loadSample
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- MODULES OBJECTS LOADER ---------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Load object from file
+--- Loads XP object from file.
+--- @param fileName string
+--- @return number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadObject
 function loadObject(fileName)
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find object", fileName)
         return nil
     end
@@ -151,10 +211,18 @@ end
 
 sasl.loadObject = loadObject
 
--- Load object from file asynchronously
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Loads XP object from file asynchronously.
+--- @param fileName string
+--- @param callback fun(id:number)
+--- @return number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadObjectAsync
 function loadObjectAsync(fileName, callback)
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find object", fileName)
         return nil
     end
@@ -168,15 +236,18 @@ end
 
 sasl.loadObjectAsync = loadObjectAsync
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- MODULES SHADERS LOADER --------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Load shader source from file
+--- Loads shader source from file.
+--- @param shaderID number
+--- @param fileName string
+--- @param shType ShaderTypeID
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadShader
 function loadShader(shaderID, fileName, shType)
     local f = findResourceFile(fileName)
-    if f == 0 then
+    if f == nil then
         logError("Can't find shader source", fileName)
         return nil
     end
@@ -186,5 +257,5 @@ end
 
 sasl.gl.loadShader = loadShader
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

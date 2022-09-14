@@ -1,4 +1,218 @@
 ----------------------------------------------------------
+SASL 3.14.5 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed incorrect context window header height for some cases
+- Fixed unnecessary events calling for context windows in some variants 
+- Fixed possible case when context window not restore saved position properly due to deferred context window creation
+- Add warning for cases when context window should save its state, but window name is not provided
+- globalProperty wrapper will now use double values in case when both floating point types are provided via dataref accessors
+
+----------------------------------------------------------
+SASL 3.14.4 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed initial state of textures created with 'createRenderTarget' function, now they contain transparent black as earlier (regression from 3.14.0)
+- Fixed missing dependencies for Linux plugin distributions
+
+----------------------------------------------------------
+SASL 3.14.2 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed possible regression crashes which occur in case of extensive usage of fonts or using of 'recreateTexture' function
+
+----------------------------------------------------------
+SASL 3.14.1 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed the order of calling 'onModuleInit' (and some other general callbacks) for subcomponents
+- Fixed distribution packages not working correctly on server (Commercial version)
+
+----------------------------------------------------------
+SASL 3.14.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Replace 'initialize' and 'initializeAll' component functions with 'onModuleInit' function called for every component (analogue to 'onModuleDone')
+- Optimize rendering code in various ways (less queries, more caching, revised OpenGL state processing etc)
+- Fixed possible incorrect clipping 1px off when drawing into render target
+- Fixed a few regression issues with drawing in render targets (including drawing not always working when AA is enabled for target)
+- Fixed incorrect call to OpenGL API when destroying shader objects
+- Fixed correct shutdown of drawing system in case if render targets were not correctly restored in project's Lua code
+- Fixed possible issue with capturing right mouse click when using Auxiliary click system interface
+- Fixed redundant Project Tree processing when this page is not active in Developer Widget
+- Fixed interface for using external texture spaces for fonts atlases
+- Fixed drawing backgrounds for fonts with specified external texture spaces
+- Fixed resetting correct render target in all cases
+- Fixed possible texture memory not properly freed after call to 'destroyRenderTarget'
+- Fixed redundant calls to 'onModuleShutdown' after failed check for correct .key file (Commercial version)
+- Fixed showing SASL error notification after failed check for correct .key file (Commercial version)
+- Fixed various minor issues which might occur during fonts loading/processing
+- Fixed possibly incorrect kerning of fonts when auto-hinting is used
+- Fixed the cases when text outlines may not appear strictly correct in some cases
+- Added ability to specify hinting algorithm for font loading – 'loadFontHinted' function
+- Added ability to disable custom blending support - 'setCustomBlending' function
+- Added ability to optimize drawing in multiple render targets in 'update' callback - 'setUpdateDrawingReady'
+- Removed some processing running in background when related page is not selected in Developer Widget
+- Removed unused check of audio capture device
+- Removed automatic creation of 'ovrdconfiguration.ini' file, fixed possible crash during its processing
+- Make 3D primitives rendering capability disabled by default for projects (since it's not available on Vulkan anyway)
+- Optimize memory usage for vertex data used in renderer
+
+----------------------------------------------------------
+SASL 3.13.1 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed Lua annotations for functions on C/C++ side
+- Fixed possible issue with wrong 3D positional sounds location
+- Fixed errors/warnings logging in cases when errors occured inside nested C++/Lua/C++... function calls
+- Fixed possible incorrect warnings in case of anti-aliasing usage for render targets (textures)
+- Fixed collecting telemetry in SASL Developer Widget when telemetry tab is not active
+- Fixed 'resetBlending' function – initial blending state is correctly reset now
+- Fixed 'getElapsedMicroseconds' function result
+- Added validation for created framebuffers before usage
+- Added ability to not create Depth/Stencil buffer attachment on render target creation (masking won't work in this case)
+- Added ability to specify AA level for render target on render target creation, without need to specify this parameter in 'setRenderTarget' function
+- Added ability to override SASL project configuration with 'ovrdconfiguration.ini' file (only in Free SASL version, may be useful for distributed development in teams) 
+- Added improvements on logging side (fixed formatting and update logged information)
+- Added general 'log' function, parametrized with more flexible output options per log action 
+- Added ability to set decoration for custom decorated context windows with 'setDecoration' method
+- Added special notification window reporting Lua errors when developer console in widget is not enabled/visible
+- Added ability to draw convex geometry with per-vertex color specification
+- Added ability to create separate instances of the same font file and use defined texture region for glyphs creation
+- Added functions to display dynamic information about font and display generated fonts textures ('getFontInfo', 'drawFontTexture')
+- Added 'initialize' callback for Lua components ('initialize' callbacks guaranteed to be called right before first 'update' call)
+- Added logic to prevent possible drawing calls in components before 'initialize' and first 'update' calls are done.
+- Improved text drawing performance a little bit and improved glyphs packaging algorithm
+- Set SASL_STOP_PROCESSING as default Lua errors handling policy ('setLuaErrorsHandling' function can be used to alter behavior)
+
+----------------------------------------------------------
+SASL 3.12.1 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed possible broken XP menu layout after menu item deletion
+- Fixed a few bugs related to nested XP menus creation
+- Fixed artificial limit on how many XP menu items and Hot Keys may be created
+- Fixed "getElapsedMicroseconds" function behavior
+- Fixed a few possible crashes during Search usage in SASL Dev Widget
+- Fixed possible crash after fast reloading of project and 'startProcess' function usage
+- Fixed the crash in case of attempt to destroy currently active Render Target
+- Fixed possible issue with incorrect Context Windows keyboard focusing
+- Added 'hasFocus' method for Context Window object
+- Added cache usage for Lua scripts and modules loaded with 'include' and 'request' function
+- Added ability to force new instance of Lua module creation (for modules loaded with 'request')
+- Added ability to schedule full SASL project reboot as soon as possible (may be used to reload the project in reaction to specific event)
+- Added parameter for 'onAirportLoaded' callback indicating the number new flights started since SASL plugin enabling
+- Added ability to omit file extension when using 'include' or 'request'
+- Update default SASL Context Window decoration (drawing performance and title showing)
+
+----------------------------------------------------------
+SASL 3.11.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed 'readConfig', 'writeConfig' functions (make them correctly save information about values types)
+- Fixed possible CTD in case of calling subprocess creation function on Mac OS
+- Fixed the bug with  broken graphics processing in case of calling SASL project command in 2D draw callback
+- Added function to save textures to files in common formats
+
+----------------------------------------------------------
+SASL 3.10.2 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed failing 'request' function behavior in both Free and Commercial SASL
+- Fixed incorrect saving of telemetry active state between project reboots
+
+----------------------------------------------------------
+SASL 3.10.1 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed drawing components cursors in old-style <subpanel>
+- Fixed possible crash in case of enabled telemetry in Dev Widget
+
+----------------------------------------------------------
+SASL 3.10.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed lookup of multi-typed datarefs (for example, for datarefs provinding both float and double, type request is how handled correctly)
+- Fixed one of the Lua constants representing blending equation identifiers
+- Fixed starting point of vertical text drawing
+- Fixed possible crash in case of OBJ instance creation (with anim datarefs) without controlling datarefs list
+- Fixed a few buttons highlighting in SASL Dev Widget 
+- Fixed leftover input state and trees collapsing in SASL Dev Widget
+- Fixed case where we're not checking valid graphics context before clearing (<clearRenderTarget>)
+- Fixed tracking 3D mouse position in multi-monitor configurations (this time for sure)
+- Fixed a few issues related to 3D sound usage
+- Improved speed of datarefs and commands search in SASL Dev Widget
+- Added full annotations for all SASL functions (api.lua) to simplify development using IDEs, code auto-completion tools and etc.
+- Added special warnings for projects, which don't explicitly configure SASL performance related options
+- Added automatic highlighting and copy-paste support for edit fields in SASL Dev Widget
+- Added ability to execute selected command with keyboard ENTER in SASL Dev Widget 
+- Added function to export OpenGL texture ids from SASL graphics system
+- Added functional to load/save Lua tables serialized in 'ini', 'xml', 'json' formats (<readConfig>, <writeConfig>)
+- Added ability to directly specify parent component for components created outside of hierarchy ('parent' field in function arguments)
+- Added functional to run child processes in sync in async manner (<startProcessSync>, <startProcessAsync>)
+- Added correct OpenGL state restoring in case if scripts will left it wrong
+- Added ability to get raw DataRef pointers from Global Properties.
+- Added 'request' function for scripts, similar to standard 'require', but working only with SASL project hierarchy
+- Added simpler and faster additional interface for interpolation (<createLinearInterpolator>, etc)
+- Added ability to use newlines (\n) for messageWindow text
+- Updated telemetry functional  
+- Updated dependencies (C++ libraries) and toolsets
+
+----------------------------------------------------------
+SASL 3.9.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed tracking of 3D panel mouse position in multi-monitor configurations and with rotational offsets applied for monitors
+- Fixed bug with mouse cursor associated with 3D panel component being active after leaving 3D panel
+- Fixed configuring 3D positional sounds for Aircraft plugins
+- Fixed context windows states saving and restoring, also visibily is now saved as well
+- Added Lua functions to track 3D panel mouse position - <getCSMouseIsOnPanel>, <getCSPanelMousePos>
+- Added Lua routines to save and restore OGL internal line primitives settings
+- Added option to draw text vertically 
+- Added async variants of functions to perform data transfers from URL (Net interface)
+- Updated SASL Dev Widget UI (scrollbars, drefs & commands search, dynamic text size, bugfixes)
+- Updated SASL default cursors texture 
+
+----------------------------------------------------------
+SASL 3.8.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed cathing middle mouse button events for legacy pop-ups and 3d panel
+- Fixed bug with attempt to render into texture, which is already freed
+- Fixed SASL_CW_RESIZE_RIGHT_BOTTOM resizing mode for non-propotional context windows
+- Improved cursor showing behavior for component, more logical and convenient
+- Improved windows layering (legacy pop-ups window now live in separate layer)
+- Added ability to save context window state (position, active context) between project loadings
+- Added functional to work with stereographic projections
+- Added ability to completely destroy context window, freeing all handled resources (<destroy> method)
+- Added function to reset timer
+- Added function to create hi-res system timer (can be used to measure time within same callback)
+- Added annotations for Lua SASL interface (used for auto-completion)
+- Restructured internal code related to events system, etc
+
+----------------------------------------------------------
+SASL 3.7.2 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed usage of nested render targets in non-graphics callbacks (<update>, etc)
+
+----------------------------------------------------------
+SASL 3.7.1 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed some unnecessary re-activation triggers on Windows OS (Commercial Version)
+- Fixed irrelevant entry in the Log about error before activation (Commercial Version)
+
+----------------------------------------------------------
+SASL 3.7.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed possible CTD during automatic context window positioning
+- Used other method to catch click event for additional Click System Layer in VR
+- Added function to disable and enable Unicode support for the font instance
+- Added new Lua callback for components on shutdown - <onModuleShutdown>
+
+----------------------------------------------------------
 SASL 3.6.5 (XP11.25+ support)
 ----------------------------------------------------------
 

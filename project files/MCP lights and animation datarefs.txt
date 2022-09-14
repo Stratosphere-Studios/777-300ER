@@ -18,3 +18,15 @@ FLCH - [11], sim/cockpit2/autopilot/speed_status = 2
 Disengage Bar - [12], no light
 A/T (speed) - [16], sim/cockpit2/autopilot/autothrottle_enabled = 1
 CLB CON - [17], sim/cockpit2/autopilot/autothrottle_enabled = 2
+
+  EFIS_camera CAM
+    POS 3414.000000 416.000000
+    DATAREF 
+    SHOW_EQUAL 10.000000 Strato/777/displays/eicas_mode
+    SIZE 10.000000
+    LOCKED
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 5
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000

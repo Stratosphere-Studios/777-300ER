@@ -1,82 +1,60 @@
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- UPDATE AND DRAW PROCESSORS -------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Draw
+-------------------------------------------------------------------------------
 
--- Draw all modules panel components
-function drawPanelStage()
-    drawComponent(panel)
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Draw all modules popups components
-function drawPopupsStage()
-    drawComponent(popups)
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Draw all 3D stuff
-function draw3DStage()
-    drawComponent3D(panel)
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Draw all objects
-function drawObjectsStage()
-    drawObjects(panel)
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Update all modules components
-function update()
-    updateComponent(panel)
-    updateComponent(popups)
-    updateComponent(contextWindows)
-end
-
--- Update component
-function updateComponent(v)
-    if v and v.update then
-        v:update()
+--- Draws (2D) all components.
+--- @param components Component[]
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#drawAll
+function drawAll(components)
+    for _, v in ipairs(components) do
+        private.drawComponent(v)
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Update all components from table
-function updateAll(table)
-    for _, v in ipairs(table) do
-        updateComponent(v)
+--- Draws 3D from components.
+--- @param components Component[]
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#drawAll3D
+function drawAll3D(components)
+    for _, v in ipairs(components) do
+        v:draw3D()
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Draw to components render target
-function renderToTarget(v)
+--- Draws objects from components.
+--- @param components Component[]
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#drawAllObjects
+function drawAllObjects(components)
+    for _, v in ipairs(components) do
+        v:drawObjects()
+    end
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Simulator framerate dataref
+local simFRP = globalPropertyf("sim/operation/misc/frame_rate_period")
+
+--- Draws component to its 2D render target.
+--- @param v Component
+function private.drawComponentToTarget(v)
     setRenderTarget(v.renderTarget, true)
     v:draw()
     restoreRenderTarget()
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Simulator framerate
-local simFRP = globalPropertyf("sim/operation/misc/frame_rate_period")
-
--- Draw component
-function drawComponent(v)
+--- Draws component in 2D.
+--- @param v Component
+function private.drawComponent(v)
     if v and toboolean(get(v.visible)) then
         sasl.gl.saveGraphicsContext()
         local renderTargetExist = toboolean(get(v.fbo))
@@ -86,11 +64,11 @@ function drawComponent(v)
                 local currentFPS = 1.0 / get(simFRP)
                 local limit = get(v.fpsLimit)
                 if limit == -1 or limit >= currentFPS then
-                    renderToTarget(v)
+                    private.drawComponentToTarget(v)
                     v.frames = 0
                 else
                     if v.frames > currentFPS / limit then
-                        renderToTarget(v)
+                        private.drawComponentToTarget(v)
                         v.frames = 0
                     else
                         v.frames = v.frames + 1
@@ -105,7 +83,7 @@ function drawComponent(v)
             local pos = get(v.position)
             sasl.gl.setComponentTransform(pos[1], pos[2], pos[3], pos[4], v.size[1], v.size[2])
             local clip = toboolean(get(v.clip))
-            local cs = get(v.clipSize) and get(v.clipSize) or {pos[1], pos[2], pos[3], pos[4]}
+            local cs = get(v.clipSize) and get(v.clipSize) or { pos[1], pos[2], pos[3], pos[4] }
             local clipSize = cs[3] > 0 and cs[4] > 0
             if clip then
                 if clipSize then
@@ -123,51 +101,184 @@ function drawComponent(v)
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Update
+-------------------------------------------------------------------------------
 
--- Draw component 3D stuff
-function drawComponent3D(v)
-    v:draw3D()
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Draw component 3D stuff
-function drawObjects(v)
-    v:drawObjects()
-end
-
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Draw all components from table
-function drawAll(table)
-    for _, v in ipairs(table) do
-        drawComponent(v)
+--- Updates all components.
+--- @param components Component[]
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#updateAll
+function updateAll(components)
+    for _, v in ipairs(components) do
+        v:update()
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Utilities
+-------------------------------------------------------------------------------
 
--- Draw all 3D stuff from components
-function drawAll3D(table)
-    for _, v in ipairs(table) do
-        drawComponent3D(v)
+--- Calls callback function for component recursively.
+--- @param name string
+--- @param component Component
+--- @param isForward boolean
+--- @param arg any
+function private.callCallback(name, component, isForward, arg)
+    local handler = rawget(component, name)
+    if handler then
+        handler(arg)
+    end
+    local first, last, step
+    if isForward then
+        first = 1
+        last = #component.components
+        step = 1
+    else
+        first = #component.components
+        last = 1
+        step = -1
+    end
+    for i = first, last, step do
+        private.callCallback(name, component.components[i], isForward, arg)
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
-
--- Draw all 3D stuff from components
-function drawAllObjects(table)
-    for _, v in ipairs(table) do
-        drawObjects(v)
-    end
+--- Calls callback for all components layers.
+--- @param name string
+--- @param isForward boolean
+--- @param arg any
+function private.callCallbackForAllLayers(name, isForward, arg)
+    private.callCallback(name, popups, isForward, arg)
+    private.callCallback(name, panel, isForward, arg)
+    private.callCallback(name, contextWindows, isForward, arg)
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Other
+-------------------------------------------------------------------------------
+
+--- Draws 3D panel components.
+function drawPanelStage()
+    private.drawComponent(panel)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Draws old-style popups components.
+function drawPopupsStage()
+    private.drawComponent(popups)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Draws 3D.
+function draw3DStage()
+    panel:draw3D()
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Draws objects.
+function drawObjectsStage()
+    panel:drawObjects()
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Updates components.
+function update()
+    panel:update()
+    popups:update()
+    contextWindows:update()
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called whenever the user's plane is positioned at a new airport (or new flight start).
+--- @param flightIndex number
+function onAirportLoaded(flightIndex)
+    private.callCallbackForAllLayers("onAirportLoaded", true, flightIndex)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called whenever new scenery is loaded.
+function onSceneryLoaded()
+    private.callCallbackForAllLayers("onSceneryLoaded", true)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called whenever the user adjusts the number of X-Plane aircraft models.
+function onAirplaneCountChanged()
+    private.callCallbackForAllLayers("onAirplaneCountChanged", true)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called when user aircraft is loaded.
+function onPlaneLoaded()
+    private.callCallbackForAllLayers("onPlaneLoaded", true)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called when user aircraft is unloaded.
+function onPlaneUnloaded()
+    private.callCallbackForAllLayers("onPlaneUnloaded", false)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called whenever user plane is crashed.
+function onPlaneCrash()
+    local planeCrashHandler = rawget(panel, 'onPlaneCrash')
+    needReload = 1
+    if planeCrashHandler then
+        needReload = planeCrashHandler()
+    end
+    if needReload == 0 then
+        for i = #panel.components, 1, -1 do
+            private.callCallback('onPlaneCrash', panel.components[i], false)
+        end
+        private.callCallback('onPlaneCrash', popups, false)
+        private.callCallback('onPlaneCrash', contextWindows, false)
+    end
+    return needReload
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called on module shutdown.
+function shutdownModules()
+    private.callCallbackForAllLayers("onModuleShutdown", false)
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Called right before first 'update' call.
+function initModules()
+    private.callCallbackForAllLayers("onModuleInit", true)
+end
+
+--- Called when module is unloading.
+function doneModules()
+    private.callCallbackForAllLayers("onModuleDone", false)
+    private.saveState()
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------

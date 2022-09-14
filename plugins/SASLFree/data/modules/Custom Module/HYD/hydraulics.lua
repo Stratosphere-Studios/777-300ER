@@ -47,7 +47,7 @@ hyd_pressure = createGlobalPropertyia("Strato/777/hydraulics/press", {50, 50, 50
 demand_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/state", {0, 0, 0, 0})
 demand_pumps_actual = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/actual", {0, 0, 0, 0})
 demand_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/past", {0, 0, 0, 0}) --this is needed for accurate schematic update on the hydraulic page of eicas since it happens with a 2/3 second delay irl
-hyd_temps_demand = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/temperatures", {0, 0, 0, 0})
+hyd_ovht_demand = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/ovht", {0, 0, 0, 0})
 hyd_fail_demand = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fail", {0, 0, 0, 0})
 demand_fault = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fault", {0, 0, 0, 0}) --status of the light itself
 demand_fault_physical = createGlobalPropertyfa("Strato/777/hydraulics/pump/demand/fault_physical", {0, 0, 0, 0})
@@ -55,7 +55,7 @@ demand_fault_tgt = createGlobalPropertyia("Strato/777/hydraulics/pump/demand/fau
 primary_pumps_state = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/state", {1, 0, 0, 1})
 primary_pumps_actual = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/actual", {0, 0, 0, 0})
 primary_pumps_past = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/past", {0, 0, 0, 0})
-hyd_temps_primary = createGlobalPropertyfa("Strato/777/hydraulics/pump/primary/temperatures", {0, 0, 0, 0})
+hyd_ovht_primary = createGlobalPropertyfa("Strato/777/hydraulics/pump/primary/ovht", {0, 0, 0, 0})
 hyd_fail_primary = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/fail", {0, 0, 0, 0})
 primary_fault = createGlobalPropertyia("Strato/777/hydraulics/pump/primary/fault", {0, 0, 0, 0})
 
@@ -63,15 +63,20 @@ tmp = 0 --For updating hydraulic pressure
 t = tmp --For EICAS
 t1 = tmp --For updating temperatures
 
+hyd_temp = {0, 0, 0}
+fuel_temp = {0, 0, 0}
+
 --Fault light logic
 --Primary pumps
 primary_past  = {0, 0, 0, 0}
 primary_shutdown = {0, 0, 0, 0}
 primary_ovht = {0, 0, 0, 0}
+primary_start_time = {0, 0, 0, 0}
 
 --Demand pumps
 demand_ovht = {0, 0, 0, 0}
 demand_time = {0, 0, 0, 0}
+demand_start_time = {0, 0, 0, 0}
 demand_shutdown = {0, 0, 0, 0}
 demand_was_working = {0, 0, 0, 0} --Was the demand pump working at time of shut down?
 
@@ -104,7 +109,8 @@ function UpdateLights()
 		--DRefs for primary pumps
 		local light_primary = globalPropertyiae("Strato/777/hydraulics/pump/primary/fault", i)
 		local primary_switch = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", i)
-		local primary_temperature = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
+		local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
+		local primary_temperature = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
 		--Low pressure logic
 		if get(primary_switch) ~= primary_past[i] then
 			if get(primary_switch) == 0 then
@@ -113,15 +119,15 @@ function UpdateLights()
 			primary_past[i] = get(primary_switch)
 		end
 		--Overheat logic
-		if get(primary_temperature) >= 75 and primary_ovht[i] == 0 then
+		if get(primary_temperature) == 1 and primary_ovht[i] == 0 then
 			primary_shutdown[i] = get(c_time)
 			primary_ovht[i] = 1
-		elseif get(primary_temperature) < 75 then
+		elseif get(primary_temperature) == 0 then
 			primary_ovht[i] = 0
 		end
-		if get(primary_switch) == 0 and get(c_time) >= primary_shutdown[i] + 5 then
+		if get(primary_switch) == 0 and get(c_time) >= primary_shutdown[i] + 5 or get(primary_fail) == 1 then
 			set(light_primary, 1)
-		elseif get(c_time) >= primary_shutdown[i] + 5 and get(primary_temperature) >= 75 then
+		elseif get(c_time) >= primary_shutdown[i] + 5 and get(primary_temperature) == 1 then
 			set(light_primary, 1)
 		else
 			set(light_primary, 0)
@@ -129,8 +135,9 @@ function UpdateLights()
 		--DRefs for demand pumps
 		local light_demand = globalPropertyiae("Strato/777/hydraulics/pump/demand/fault", i)
 		local demand_switch = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
+		local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 		local demand_past = globalPropertyiae("Strato/777/hydraulics/pump/demand/past", i)
-		local demand_temperature = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+		local demand_temperature = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 		--Wait 5 seconds if a working demand pump was shut down
 		if get(demand_past) == 1 and get(demand_switch) == 0 and demand_was_working[i] == 0 then
 			demand_shutdown[i] = get(c_time)
@@ -139,13 +146,13 @@ function UpdateLights()
 			demand_shutdown[i] = get(c_time) - 5
 		end
 		--Demand pump overheat logic
-		if get(demand_temperature) >= 75 and demand_ovht[i] == 0 then
+		if get(demand_temperature) == 1 and demand_ovht[i] == 0 then
 			demand_ovht[i] = 1
 			demand_time[i] = get(c_time)
-		elseif get(demand_temperature) < 75 then
+		elseif get(demand_temperature) == 0 then
 			demand_ovht[i] = 0
 		end
-		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch) == 0) or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) then
+		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch) == 0) or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) or get(demand_fail) == 1 then
 			set(light_demand, 1)
 		else
 			set(light_demand, 0)
@@ -426,59 +433,53 @@ function UpdateTemperatures(delay)
 	if t1 + delay >= get(c_time) then
 		local fuel_reqd = 50 --fuel required for sufficient cooling
 		if get(oat) > 0 then
-			fuel_reqd = 500 * (get(oat) / 15)
+			fuel_reqd = 2267 * (get(oat) / 15)
 		end
 		local pumps_on_total = GetTotalPumpsWorking()
+		cooling_tanks = {1, 3, 3, 3}
 		for i=1,4 do
 			local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
 			local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 			--pump temperatures, states
-			local primary_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i) 
-			local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+			local primary_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i) 
+			local demand_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 			local primary_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/actual", i)
+			local primary_past = globalPropertyiae("Strato/777/hydraulics/pump/primary/past", i)
 			local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/actual", i)
+			local demand_past = globalPropertyiae("Strato/777/hydraulics/pump/demand/past", i)
 			--hydarulic system related things
 			local sys_idx = GetSysIdx(i)
-			local tk_weight = globalPropertyfae("sim/flightmodel/weight/m_fuel", sys_idx) --weight of the fuel tank used to cool the system
-			local h_load = globalPropertyfae("Strato/777/hydraulics/sys_load", sys_idx)
+			local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
+			local tk_weight = globalPropertyfae("sim/flightmodel/weight/m_fuel", cooling_tanks[i]) --weight of the fuel tank used to cool the system
 			local pumps_on = GetNWorkingHydPumps(sys_idx)
-			local t_acc = temp_acc[sys_idx]
-			if t_acc > 10 and pumps_on == 0 then
-				t_acc = t_acc - 0.4
+			if get(demand_state) == 1 and get(demand_past) == 0 then
+				demand_start_time[i] = get(c_time)
+			end
+			if get(primary_state) == 1 and get(primary_past) == 0 then
+				primary_start_time[i] = get(c_time)
 			end
 			if get(tk_weight) < fuel_reqd then
-				local pump_load = 0
-				if pumps_on_total > 0 then
-					pump_load = get(h_load) / pumps_on_total
-				end
-				if get(oat) > 5 then
-					if t_acc < 12.5 * pumps_on then --Updating accumulated temperature
-						t_acc = t_acc + 2 * pump_load * pumps_on
-					elseif get(t_acc) > 12.5 * pumps_on then
-						t_acc = t_acc - 0.4
-					end
-				else
-					if t_acc > 5 * pumps_on then
-						t_acc = t_acc - 0.4 --if oat is too small, decrease accumulated temperature
-					end
-				end
-				if get(primary_fail) == 0 then
-					local tgt_temp_p = get(oat) + t_acc + 100 * pump_load * get(primary_state)
-					set(primary_temp, get(primary_temp) + (tgt_temp_p - get(primary_temp)) * 0.4)
-					if get(primary_temp) > 110 then
-						set(primary_fail, 1)
-					end
-				end
-				if get(demand_fail) == 0 then
-					local tgt_temp_d = get(oat) + get(t_acc) + 100 * pump_load * get(demand_state)
-					set(demand_temp, get(demand_temp) + (tgt_temp_d - get(demand_temp)) * 0.4)
-					if get(demand_temp) > 110 then
-						set(demand_fail, 1)
-					end
-				end
+				hyd_temp[sys_idx] = hyd_temp[sys_idx] + (fuel_reqd * 15 / get(oat) - get(tk_weight)) * (pumps_on * 0.01 - (hyd_temp[sys_idx] - get(oat)) * 0.0001 * get(tas) * 0.2) / 2267
 			else
-				set(primary_temp, get(primary_temp) + (get(oat) * 0.9 - get(primary_temp)) * 0.4)
-				set(demand_temp, get(demand_temp) + (get(oat) * 0.9 - get(demand_temp)) * 0.4)
+				hyd_temp[sys_idx] = hyd_temp[sys_idx] + (get(oat) - hyd_temp[sys_idx]) * 0.01
+			end
+			if hyd_temp[sys_idx] > 80 then
+				if get(c_time) > primary_start_time[i] + 10 and get(primary_state) == 1 then
+					set(primary_fail, 1)
+				end
+				if get(c_time) > demand_start_time[i] + 10 and get(demand_state) == 1 then
+					set(demand_fail, 1)
+				end
+			elseif hyd_temp[sys_idx] > 70 then
+				if get(primary_state) == 1 and get(c_time) > primary_start_time[i] + 2 then
+					set(primary_ovht, 1)
+				end
+				if get(demand_state) == 1 and get(c_time) > demand_start_time[i] + 2 then
+					set(demand_ovht, 1)
+				end
+			elseif hyd_temp[sys_idx] <= 70 then
+				set(primary_ovht, 0)
+				set(demand_ovht, 0)
 			end
 		end
 		t1 = get(c_time)
@@ -494,8 +495,8 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 			local quantity = globalPropertyfae("Strato/777/hydraulics/qty", sys_idx)
 			local pumps_on = GetNWorkingHydPumps(sys_idx)
 			if pumps_on > 0 and round(get(t_phi) / 180) % 2 == 0 then
-				local primary_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i) 
-				local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
+				local primary_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i) 
+				local demand_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 				local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
 				local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 				local desired_pressure = 0
@@ -559,16 +560,13 @@ end
 
 function UpdateQuantity()
 	for i=1,4 do
-		local p_temp = globalPropertyfae("Strato/777/hydraulics/pump/primary/temperatures", i)
-		local d_temp = globalPropertyfae("Strato/777/hydraulics/pump/demand/temperatures", i)
 		local sys_idx = GetSysIdx(i)
+		local h_temp = hyd_temp[sys_idx]
 		local qty = globalPropertyfae("Strato/777/hydraulics/qty", sys_idx)
 		local qty_initial = hyd_qty_initial[sys_idx]
 		local increase = 0
-		if math.abs(get(p_temp) - get(oat)) >= 20 then --the higher the temperature, the higher the oil density => qty will increase with temperature
-			increase = math.floor((get(p_temp) - get(oat)) / 20) * 0.01
-		elseif math.abs(get(d_temp) - get(oat)) >= 20 then
-			increase = math.floor((get(d_temp) - get(oat)) / 20) * 0.01
+		if math.abs(h_temp - get(oat)) >= 20 then --the higher the temperature, the higher the oil density => qty will increase with temperature
+			increase = math.floor((h_temp - get(oat)) / 20) * 0.01
 		end
 		if get(qty) ~= qty_initial + increase then
 			set(qty, qty_initial + increase)

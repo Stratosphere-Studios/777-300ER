@@ -1,15 +1,37 @@
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
--- SUBPANEL CREATOR -----------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-- Subpanel
+-------------------------------------------------------------------------------
 
--- Create movable resizable subpanel hidden by default
+--- @class SubpanelParams
+--- @field name string
+--- @field position number[]
+--- @field savePosition boolean
+--- @field visible boolean
+--- @field noBackground boolean
+--- @field noClose boolean
+--- @field noResize boolean
+--- @field noMove boolean
+--- @field vrAuto boolean
+--- @field fbo boolean
+--- @field clip boolean
+--- @field clipSize number[]
+--- @field command string
+--- @field description string
+--- @field pinnedToXWindow boolean[]
+--- @field propotionalToXWindow boolean[]
+--- @field components Component[]
+
+--- [DEPRECATED] Creates simple 2D floating panel (popup) with attached components hierarchy.
+--- @param tbl SubpanelParams
+--- @return Component
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#subpanel
 function subpanel(tbl)
     local name = tbl.name
     if name == nil then
-        name = 'subpanel'
+        name = "subpanel"
     end
-    local c = createComponent(name, popups)
+    local c = private.createComponent(name, popups)
     c.position = createProperty { 0, 0, 0, 0 }
     set(c.position, tbl.position)
     set(c.clip, tbl.clip)
@@ -17,19 +39,19 @@ function subpanel(tbl)
     set(c.fbo, tbl.fbo)
     c.size = { tbl.position[3], tbl.position[4] }
     c.onMouseHold = function(comp, x, y, button, parentX, parentY)
-        defaultOnMouseHold(comp, x, y, button, parentX, parentY)
+        private.defaultOnMouseHold(comp, x, y, button, parentX, parentY)
         return true
     end
     c.onMouseDown = function(comp, x, y, button, parentX, parentY)
-        defaultOnMouseDown(comp, x, y, button, parentX, parentY)
+        private.defaultOnMouseDown(comp, x, y, button, parentX, parentY)
         return true
     end
     c.onMouseMove = function(comp, x, y, button, parentX, parentY)
-        defaultOnMouseMove(comp, x, y, button, parentX, parentY)
+        private.defaultOnMouseMove(comp, x, y, button, parentX, parentY)
         return true
     end
     c.onMouseWheel = function(comp, x, y, button, parentX, parentY, wheelClicks)
-        defaultOnMouseWheel(comp, x, y, button, parentX, parentY, wheelClicks)
+        private.defaultOnMouseWheel(comp, x, y, button, parentX, parentY, wheelClicks)
         return true
     end
 
@@ -44,7 +66,7 @@ function subpanel(tbl)
         set(c.movable, false)
     end
 
-	c.savePosition = createProperty(false)
+    c.savePosition = createProperty(false)
     if get(tbl.savePosition) then
         set(c.savePosition, true)
     end
@@ -58,10 +80,10 @@ function subpanel(tbl)
     set(c.proportionalToXWindow, tbl.proportionalToXWindow)
     c.components = tbl.components
 
-    startComponentsCreation(tbl)
+    private.startComponentsCreation(tbl)
     if not get(tbl.noBackground) then
         if not rectangle then
-            rectangle = loadComponent('rectangle')
+            rectangle = loadComponent("rectangle")
         end
 
         table.insert(c.components, 1,
@@ -74,7 +96,7 @@ function subpanel(tbl)
         local btnHeight = c.size[2] / pos[4] * 16
 
         if not popupCloseButton then
-            popupCloseButton = loadComponent('popupCloseButton')
+            popupCloseButton = loadComponent("popupCloseButton")
         end
 
         local closeButton = popupCloseButton {
@@ -83,7 +105,7 @@ function subpanel(tbl)
             panel = c
         }
         closeButton.size = { btnWidth, btnHeight }
-        c.component('closeButton', closeButton)
+        c.component(closeButton)
     end
 
     if not get(tbl.noResize) and not get(c.proportionalToXWindow) then
@@ -93,10 +115,10 @@ function subpanel(tbl)
         c.resizeHeight = c.size[2] / pos[4] * 10
 
         if not rectangle then
-            rectangle = loadComponent('rectangle')
+            rectangle = loadComponent("rectangle")
         end
        if not popupResizeButton then
-            popupResizeButton = loadComponent('popupResizeButton')
+            popupResizeButton = loadComponent("popupResizeButton")
         end
 
         c.resizeRect = { c.size[1] - c.resizeWidth, 0,
@@ -106,69 +128,81 @@ function subpanel(tbl)
             position = c.resizeRect
         }
         resizeButton.size = { c.resizeWidth, c.resizeHeight }
-        c.component('resizeButton', resizeButton)
+        c.component(resizeButton)
     end
-    finishComponentsCreation()
+    private.finishComponentsCreation()
 
     if get(tbl.command) then
-        -- Register panel popup command
         local command = sasl.createCommand(get(tbl.command), get(tbl.description))
 
-        -- Show or hide panel on command received
         function commandHandler(phase)
             if phase == SASL_COMMAND_BEGIN then
                 set(c.visible, not toboolean(get(c.visible)))
                 if toboolean(get(c.visible)) then
-                    movePanelToTop(c)
+                    private.movePopupToTop(c)
                 end
             end
             return 0
         end
 
-        -- Register created command handler
         sasl.registerCommandHandler(command, 0, commandHandler)
     end
 
-    if popupsPositions and get(c.savePosition) and (name ~= 'subpanel') then
-        local pos = popupsPositions[name]
+    if get(c.savePosition) and name ~= "subpanel" then
+        local pos = private.savedState.legacyPopups[name]
         if pos then
             set(c.position, pos)
         end
     end
 
-    popup(c)
+    popups.component(c)
     return c
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
--- Save positions of popup components
-function savePopupsPositions()
-    local positions = { }
-    for _, c in ipairs(popups.components) do
-        if get(c.savePosition) and (get(c.name) ~= 'subpanel') then
-            positions[get(c.name)] = get(c.position)
+--- Moves 2D floating panel to the top of hierarchy
+--- @param p Component
+function private.movePopupToTop(p)
+    for i, v in ipairs(popups.components) do
+        if v == p then
+            table.remove(popups.components, i)
+            table.insert(popups.components, p)
+            return
         end
-    end
-
-    if not #positions then
-        return
-    end
-
-    local fileName = moduleDirectory .. '/popupsPositions.txt'
-    local f = io.open(fileName, 'w+')
-    if f ~= nil then
-        savePositionsToFile(f, positions, 'positions')
-        f:close()
-    else
-        logWarning("Can't open file '" .. fileName .. "' for writing")
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
+--- Saves current positions of 2D floating panels in global state holder.
+function private.savePopupsState()
+    local positions = private.savedState.legacyPopups
+    for _, c in ipairs(popups.components) do
+        local needStore = get(c.savePosition)
+        local popupName = get(c.name)
+        if needStore then
+            if popupName ~= "subpanel" then
+                positions[popupName] = get(c.position)
+            else
+                logWarning("Legacy subpanel requsted saving its state, but 'name' wasn't provided at subpanel creation")
+            end
+        else
+            positions[popupName] = nil
+        end
+    end
+end
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Adapts positions and dimensions of 2D floating panel on 2D context resize.
+--- @param diffX number
+--- @param diffY number
+--- @param ratioX number
+--- @param ratioY number
 function adaptPopupsPositions(diffX, diffY, ratioX, ratioY)
     for i = 1, #popups.components do
         local pinOption = get(popups.components[i].pinnedToXWindow)
@@ -202,5 +236,5 @@ function adaptPopupsPositions(diffX, diffY, ratioX, ratioY)
     end
 end
 
----------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
