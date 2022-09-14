@@ -15,6 +15,9 @@ addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
 altn_gear = createGlobalPropertyi("Strato/777/gear/altn_extnsn", 0)
 act_press = createGlobalPropertyi("Strato/777/gear/actuator_press", 0)
+brake_sys = createGlobalPropertyi("Strato/777/gear/shuttle_valve", 3)
+brake_qty_L = createGlobalPropertyf("Strato/777/gear/qty_brake_L")
+brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R")
 
 components = {
 
