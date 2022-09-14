@@ -38,6 +38,9 @@ on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 c_time = globalPropertyf("Strato/777/time/current")
 act_press = globalPropertyi("Strato/777/gear/actuator_press")
+brake_sys = globalPropertyi("Strato/777/gear/shuttle_valve") --position of the brake shuttle valve
+brake_qty_L = globalPropertyf("Strato/777/gear/qty_brake_L") --overall fluid quantity in left brakes
+brake_qty_R = globalPropertyf("Strato/777/gear/qty_brake_R") --overall fluid quantity in left brakes
 
 --Creating datarefs
 
@@ -64,7 +67,9 @@ t = tmp --For EICAS
 t1 = tmp --For updating temperatures
 
 hyd_temp = {0, 0, 0}
-fuel_temp = {0, 0, 0}
+fuel_temp = {0, 0, 0} --Will be implemented later
+
+brake_qty_past = {0, 0}
 
 --Fault light logic
 --Primary pumps
@@ -106,6 +111,7 @@ hyd_qty_initial = {0.98, 0.95, 0.97}
 
 function UpdateLights()
 	for i=1,4 do
+		local pressure = globalPropertyiae("Strato/777/hydraulics/press", GetSysIdx(i))
 		--DRefs for primary pumps
 		local light_primary = globalPropertyiae("Strato/777/hydraulics/pump/primary/fault", i)
 		local primary_switch = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", i)
@@ -125,7 +131,7 @@ function UpdateLights()
 		elseif get(primary_temperature) == 0 then
 			primary_ovht[i] = 0
 		end
-		if get(primary_switch) == 0 and get(c_time) >= primary_shutdown[i] + 5 or get(primary_fail) == 1 then
+		if get(primary_switch) == 0 and get(c_time) >= primary_shutdown[i] + 5 or get(primary_fail) == 1 or get(pressure) < 1200 then
 			set(light_primary, 1)
 		elseif get(c_time) >= primary_shutdown[i] + 5 and get(primary_temperature) == 1 then
 			set(light_primary, 1)
@@ -152,7 +158,7 @@ function UpdateLights()
 		elseif get(demand_temperature) == 0 then
 			demand_ovht[i] = 0
 		end
-		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch) == 0) or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) or get(demand_fail) == 1 then
+		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch) == 0) or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) or get(demand_fail) == 1 or get(pressure) < 1200 then
 			set(light_demand, 1)
 		else
 			set(light_demand, 0)
@@ -392,6 +398,7 @@ end
 function UpdateSysLoad()
 	local sys_operative = {} --All indexes of systems that have at least 1 pump working go here
 	local n_sys_operative = 0
+	--Counting operative hydraulic systems
 	for i=1,3 do
 		if GetNWorkingHydPumps(i) >= 1 then
 			table.insert(sys_operative, n_sys_operative + 1, i)
@@ -400,6 +407,7 @@ function UpdateSysLoad()
 	end
 	if n_sys_operative > 0 then
 		local load_all = 0
+		--Summing load on all systems
 		for i=1,6 do
 			local h_load = globalPropertyfae("Strato/777/hydraulics/load", i)
 			load_all = load_all + get(h_load)
@@ -432,16 +440,15 @@ end
 function UpdateTemperatures(delay)
 	if t1 + delay >= get(c_time) then
 		local fuel_reqd = 50 --fuel required for sufficient cooling
-		if get(oat) > 0 then
-			fuel_reqd = 2267 * (get(oat) / 15)
-		end
 		local pumps_on_total = GetTotalPumpsWorking()
 		cooling_tanks = {1, 3, 3, 3}
+		fuel_reqd_max = {2268, 3311, 2268}
 		for i=1,4 do
 			local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
 			local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 			--pump temperatures, states
-			local primary_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i) 
+			--overheat datarefs for eicas
+			local primary_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
 			local demand_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
 			local primary_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/actual", i)
 			local primary_past = globalPropertyiae("Strato/777/hydraulics/pump/primary/past", i)
@@ -452,12 +459,18 @@ function UpdateTemperatures(delay)
 			local pressure = globalPropertyiae("Strato/777/hydraulics/press", sys_idx)
 			local tk_weight = globalPropertyfae("sim/flightmodel/weight/m_fuel", cooling_tanks[i]) --weight of the fuel tank used to cool the system
 			local pumps_on = GetNWorkingHydPumps(sys_idx)
+			--Calculating fuel required for cooling a hydraulic system
+			if get(oat) > 0 then
+				fuel_reqd = fuel_reqd_max[sys_idx] * (get(oat) / 15)
+			end
+			--Timer from the start of the pump to be able to fail it properly when turning on with overheating fluid
 			if get(demand_state) == 1 and get(demand_past) == 0 then
 				demand_start_time[i] = get(c_time)
 			end
 			if get(primary_state) == 1 and get(primary_past) == 0 then
 				primary_start_time[i] = get(c_time)
 			end
+			--Calculating temperatures
 			if get(tk_weight) < fuel_reqd then
 				hyd_temp[sys_idx] = hyd_temp[sys_idx] + (fuel_reqd * 15 / get(oat) - get(tk_weight)) * (pumps_on * 0.01 - (hyd_temp[sys_idx] - get(oat)) * 0.0001 * get(tas) * 0.2) / 2267
 			else
@@ -502,7 +515,7 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 				local desired_pressure = 0
 				local increase = 0
 				local load_total = globalPropertyfae("Strato/777/hydraulics/sys_load", sys_idx)
-				local decrease = 400 * get(load_total) + bool2num(i ~= 2) * round(math.random(-1, 1)) * 10 --decrease due to performance degradation when overheating and due to change in load
+				local decrease = 300 * get(load_total) + bool2num(i ~= 2) * round(math.random(-1, 1)) * 10 --decrease due to performance degradation when overheating and due to change in load
 				if i ~= 2 then
 					l_past = get(load_total)
 				end
@@ -559,17 +572,29 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 end
 
 function UpdateQuantity()
-	for i=1,4 do
-		local sys_idx = GetSysIdx(i)
-		local h_temp = hyd_temp[sys_idx]
-		local qty = globalPropertyfae("Strato/777/hydraulics/qty", sys_idx)
-		local qty_initial = hyd_qty_initial[sys_idx]
+	press_max = {3050, 3290, 3050}
+	for i=1,3 do
+		local h_temp = hyd_temp[i]
+		local qty = globalPropertyfae("Strato/777/hydraulics/qty", i)
+		local press = globalPropertyiae("Strato/777/hydraulics/press", i)
+		local load_total = globalPropertyfae("Strato/777/hydraulics/sys_load", i)
+		local qty_initial = hyd_qty_initial[i]
 		local increase = 0
+		if i == get(brake_sys) then
+			local brake_load = globalPropertyfae("Strato/777/gear/brake_load", get(brake_sys) - 1)
+			increase = brake_qty_past[1] - get(brake_qty_L) + brake_qty_past[2] - get(brake_qty_R)
+			brake_qty_past[1] = get(brake_qty_L)
+			brake_qty_past[2] = get(brake_qty_R)
+			hyd_qty_initial[i] = hyd_qty_initial[i] + increase
+			increase = increase - 0.03 * ((get(press) - 50) / press_max[i] + 3 * (get(load_total) - get(brake_load) * 0.3))
+		else
+			increase = - 0.03 * ((get(press) - 50) / press_max[i] + 4 * get(load_total))
+		end
 		if math.abs(h_temp - get(oat)) >= 20 then --the higher the temperature, the higher the oil density => qty will increase with temperature
-			increase = math.floor((h_temp - get(oat)) / 20) * 0.01
+			increase = increase + math.floor((h_temp - get(oat)) / 20) * 0.03
 		end
 		if get(qty) ~= qty_initial + increase then
-			set(qty, qty_initial + increase)
+			set(qty, get(qty) + (qty_initial + increase - get(qty)) * 0.01) --It takes time for the quantity to change
 		end
 	end
 end
