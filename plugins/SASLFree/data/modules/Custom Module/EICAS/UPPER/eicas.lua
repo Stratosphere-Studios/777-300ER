@@ -20,12 +20,18 @@ pressure_C = globalPropertyiae("Strato/777/hydraulics/press", 2)
 pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 flap_handle = globalPropertyf("sim/cockpit2/controls/flap_ratio")
+--Gear positions
+nw_actual = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 1)
+mlg_actual_R = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 2)
+mlg_actual_L = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 3)
 
 --Finding own datarefs
 
 c_time = globalPropertyf("Strato/777/time/current")
 eicas_brake_temp = globalPropertyi("Strato/777/eicas/brake_temp")
 eicas_tire_press = globalPropertyi("Strato/777/eicas/tire_press")
+altn_gear = globalPropertyi("Strato/777/gear/altn_extnsn")
+handle_pos = globalPropertyf("Strato/777/gear/norm_extnsn", 0)
 
 --Creating datarefs
 
@@ -43,6 +49,8 @@ tmp1 = 0
 flaps_past = 0
 flap_retract_time = -11
 advisories_past = {}
+handle_past = 1
+gear_display_time = -11
 
 function UpdateWindows()
 	for i=1,2 do
@@ -151,6 +159,60 @@ function UpdateWindowAdvisory(messages)
 	end
 end
 
+function UpdateGearPos()
+	gear_status_pos = {990, 640, 900, 574, 1080, 574} --Coordinates of the bottom left corner of gear status signs for alternate extension
+	--If gear has been retracted, weit 10 seconds before we hide the status
+	local gear_in_pos = Round(get(nw_actual), 2) ~= 0 or Round(get(mlg_actual_L), 2) ~= 0 or Round(get(mlg_actual_R), 2) ~= 0
+	if gear_in_pos == false and handle_past == 1 and Round(get(handle_pos), 2) == 0 then
+		gear_display_time = get(c_time)
+		handle_past = Round(get(handle_pos), 2)
+	end
+	if handle_past == 0 and Round(get(handle_pos), 2) == 1 then
+		handle_past = 1
+	end
+	if gear_in_pos == true or Round(get(handle_pos), 2) ~= 0 or get(c_time) < gear_display_time + 10 or get(altn_gear) == 1 then
+		if get(altn_gear) == 0 then
+			--Display simplified gear status if alternate extension isn't used
+			local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L) + get(mlg_actual_R)) / 3
+			local color = {1, 1, 1}
+			local text = ""
+			if avg_gear_pos == 0 then
+				text = "UP"
+			elseif avg_gear_pos == 1 then
+				text = "DOWN"
+				local color = {0, 1, 0}
+			end
+			DrawRect(970, 628, 110, 60, 5, color)
+			drawText(font, 1025, 580, "GEAR", 45, false, false, TEXT_ALIGN_CENTER, {0.17, 0.71, 0.83})
+			if text ~= "" then
+				drawText(font, 1025, 640, text, 50, false, false, TEXT_ALIGN_CENTER, color)
+			else
+				Stripify(970, 628, 110, 60, 6, 5, color)
+			end
+		else
+			--Advanced status displaying
+			for i=1,3 do
+				local color = {1, 1, 1}
+				local text = ""
+				local gear_pos = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", i)
+				if get(gear_pos) == 0 then
+					text = "UP"
+				elseif get(gear_pos) == 1 then
+					color = {0, 1, 0}
+					text = "DN"
+				end
+				DrawRect(gear_status_pos[i*2-1], gear_status_pos[i*2], 70, 50, 5, color)
+				if text ~= "" then
+					drawText(font, gear_status_pos[i*2-1] + 34, gear_status_pos[i*2] + 7, text, 45, false, false, TEXT_ALIGN_CENTER, color)
+				else
+					Stripify(gear_status_pos[i*2-1], gear_status_pos[i*2], 70, 50, 4, 5, color)
+				end
+			end
+			drawText(font, 1025, 580, "GEAR", 45, false, false, TEXT_ALIGN_CENTER, {0.17, 0.71, 0.83})
+		end
+	end
+end
+
 function Flap_pos2Tape(pos, t_height) --calculates an offset from the top of the flap position bar
 	flap_settings = {0, 1, 5, 15, 20, 25, 30}
 	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
@@ -235,6 +297,7 @@ function DisplayMessages(messages)
 end
 
 function draw()
+	UpdateGearPos()
 	flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 	UpdateWindows()
 	if get(battery) == 1 or IsAcConnected() == 1 then
