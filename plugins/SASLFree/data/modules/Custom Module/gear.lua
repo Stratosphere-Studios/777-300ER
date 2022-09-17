@@ -88,7 +88,7 @@ man_brakes_R = createGlobalPropertyf("Strato/777/gear/manual_braking_R", 0)
 truck_R_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_R_temp", {0, 0, 0})
 truck_R_max = createGlobalPropertyf("Strato/777/gear/truck_R_max", 0)
 truck_R_psi = createGlobalPropertyfa("Strato/777/gear/truck_R_psi", {0, 0, 0, 0, 0, 0}) --psi for each pair of tires
-park_brake = createGlobalPropertyi("Strato/777/gear/park_brake", 0)
+park_brake_valve = createGlobalPropertyi("Strato/777/gear/park_brake_valve", 0)
 man_keyboard = createGlobalPropertyi("Strato/777/gear/man_keyboard", 0) --1 if user is braking using keyboard
 brake_acc = createGlobalPropertyf("Strato/777/gear/brake_acc", 3000)
 acc_press_tgt = createGlobalPropertyf("Strato/777/gear/brake_acc_tgt", 3000)
@@ -143,7 +143,6 @@ brake_L_temp = 0
 L_brake_past = 0
 brake_R_temp = 0
 R_brake_past = 0
-park_brake_valve = 0
 brake_press = {50, 50}
 temp_v = 0
 
@@ -397,7 +396,7 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 			load_total = tgt
 		end
 	else
-		brake_press[1] = brake_press[1] + (park_brake_valve * brake_press[1] - brake_press[1]) * 0.1
+		brake_press[1] = brake_press[1] + (get(park_brake_valve) * brake_press[1] - brake_press[1]) * 0.1
 	end
 	set(L_wheel_brake, brake_press[1] / 3100)
 	set(brake_qty_L, get(brake_qty_L) + (0.02 * brake_press[1] / 3100 - get(brake_qty_L)) * math.abs((brake_press[1] - get(brake_system_press)) * 0.1 / 3100))
@@ -418,7 +417,7 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 			load_total = load_total + tgt
 		end
 	else
-		brake_press[2] = brake_press[2] + (park_brake_valve * brake_press[2] - brake_press[2]) * 0.1
+		brake_press[2] = brake_press[2] + (get(park_brake_valve) * brake_press[2] - brake_press[2]) * 0.1
 	end
 	set(R_wheel_brake, brake_press[2] / 3100)
 	set(brake_qty_R, get(brake_qty_R) + (0.02 * brake_press[2] / 3100 - get(brake_qty_R)) * math.abs((brake_press[2] - get(brake_system_press)) * 0.1 / 3100))
@@ -574,9 +573,9 @@ function UpdateGearDoors()
 	local door_step = 0
 	--When there's enough air pressure, doors won't extend
 	if get(tas) < 190 and get(tas) > 150 then
-		door_step = 0.005 - 0.005 * (get(tas) - 150) / 40
+		door_step = 0.012 - 0.012 * (get(tas) - 150) / 40
 	elseif get(tas) < 150 then
-		door_step = 0.005
+		door_step = 0.012
 	end
 	for i=1,4 do
 		local door = globalPropertyfae("Strato/777/gear/doors", i)
@@ -588,7 +587,7 @@ function UpdateGearDoors()
 			if i == 1 then
 				--Don't rise the small nose door if nose gear is deployed
 				if get(nw_actual) ~= 0 then
-					c_door_tgt = get(door)
+					c_door_tgt = get(door) 
 				end
 			elseif i == 4 then
 				--Rise right mlg door after left one 
@@ -758,13 +757,12 @@ end
 
 function ParkBrakeHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
-		park_brake_valve = 1 - park_brake_valve
-		set(park_brake, park_brake_valve)
+		set(park_brake_valve, 1 - get(park_brake_valve))
 		if get(realistic_prk_brk) == 0 then
-			set(brake_qty_L, 0.02 * park_brake_valve)
-			set(brake_qty_R, 0.02 * park_brake_valve)
-			brake_press[1] = 3000 * park_brake_valve
-			brake_press[2] = 3000 * park_brake_valve
+			set(brake_qty_L, 0.02 * get(park_brake_valve))
+			set(brake_qty_R, 0.02 * get(park_brake_valve))
+			brake_press[1] = 3000 * get(park_brake_valve)
+			brake_press[2] = 3000 * get(park_brake_valve)
 		end
 	end
 end
@@ -810,8 +808,7 @@ function onAirportLoaded()
 		truck_brake_temp_R[i] = get(oat)
 	end
 	if get(ra_pilot) < 5 or get(ra_copilot) < 5 then
-		set(park_brake, 1)
-		park_brake_valve = 1
+		set(park_brake_valve, 1)
 		brake_press[1] = 3100
 		brake_press[2] = 3100
 		set(brake_qty_L, 0.02)
