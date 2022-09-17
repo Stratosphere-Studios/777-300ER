@@ -180,7 +180,7 @@ function UpdateGearPos()
 				text = "UP"
 			elseif avg_gear_pos == 1 then
 				text = "DOWN"
-				local color = {0, 1, 0}
+				color = {0, 1, 0}
 			end
 			DrawRect(970, 628, 110, 60, 5, color)
 			drawText(font, 1025, 580, "GEAR", 45, false, false, TEXT_ALIGN_CENTER, {0.17, 0.71, 0.83})
