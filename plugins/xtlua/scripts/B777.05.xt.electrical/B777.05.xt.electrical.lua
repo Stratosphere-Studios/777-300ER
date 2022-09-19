@@ -60,7 +60,7 @@ B777DR_ovhd_ctr_button_target             = find_dataref("Strato/777/cockpit/ovh
 --*************************************************************************************--
 
 simDR_flood_lights                       = deferred_dataref("Strato/777/lights/cockpit/floods", "array[4]")
-simDR_map_lights                       = deferred_dataref("Strato/777/lights/cockpit/maps", "array[2]")
+simDR_map_lights                         = deferred_dataref("Strato/777/lights/cockpit/maps", "array[2]")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--

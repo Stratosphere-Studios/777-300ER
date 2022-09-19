@@ -51,7 +51,7 @@ simDR_startup_running                     = find_dataref("sim/operation/prefs/st
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 
-simDR_ap_heading                          = find_dataref("sim/cockpit/autopilot/heading")
+simDR_ap_heading                          = find_dataref("sim/cockpit/autopilot/heading_mag")
 simDR_trk                                 = find_dataref("sim/cockpit2/gauges/indicators/ground_track_mag_pilot")
 
 simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/landing_lights_switch")
@@ -67,6 +67,12 @@ B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/
 B777DR_gear_altn_extnsn_target            = find_dataref("Strato/777/gear/altn_extnsn")
 B777DR_gear_lock_ovrd_target              = find_dataref("Strato/777/gear/lock_ovrd")
 B777DR_hdg_mode                           = find_dataref("Strato/777/displays/hdg_mode")
+
+simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch")
+
+simDR_bus_volts                           = find_dataref("sim/cockpit2/electrical/bus_volts")
+
+B777DR_prk_brk_target                     = find_dataref("Strato/777/gear/park_brake")
 
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
@@ -116,10 +122,12 @@ B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_al
 
 B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lock_ovrd/btn_pos", "number")
 
+B777DR_cockpit_panel_lights_brightness    = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
+B777DR_cockpit_panel_lights_knob_pos      = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights_knob_pos", "array[6]")
+
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
 --*************************************************************************************--
-
 
 
 --*************************************************************************************--
@@ -181,7 +189,7 @@ simCMD_ovhd_gen_2_off                   = find_command("sim/electrical/generator
 ---MISC----------
 
 ---CENTER PED----------
-simCMD_toga                             = find_command("sim/engines/TOGA_power")
+simCMD_toga                             = find_command("sim/autopilot/take_off_go_around")
 
 --*************************************************************************************--
 --**                                CUSTOM COMMAND HANDLERS                          **--
@@ -745,6 +753,9 @@ function after_physics()
    B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 10)
    B777DR_ovhd_fwd_button_positions[9] = B777_animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 10)
 
+   B777DR_ovhd_fwd_button_positions[10] = B777_animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[10], 10)
+   B777DR_ovhd_fwd_button_positions[11] = B777_animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[11], 10)
+
    for i = 0, 3 do
       B777DR_hyd_primary_switch_pos[i] = B777_animate(B777DR_primary_hyd_pump_sw[i], B777DR_hyd_primary_switch_pos[i], 10)
    end
@@ -768,7 +779,15 @@ function after_physics()
 
    B777DR_gear_altn_extnsn_pos = B777_animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 10)
 
-   B777DR_gear_lock_ovrd_pos = B777_animate(B777DR_gear_lock_ovrd_target, B777DR_gear_lock_ovrd_pos, 10)
+   B777DR_gear_lock_ovrd_pos = B777_animate(B777DR_gear_lock_ovrd_target, B777DR_gear_lock_ovrd_pos, 15)    
+
+   for i = 0, 5 do
+      if simDR_bus_volts[0] >=5 or simDR_bus_volts[1] >=5 or simDR_bus_volts[2] >=5 then
+         B777DR_cockpit_panel_lights_brightness[i] = B777DR_cockpit_panel_lights_knob_pos[i]
+      else
+         B777DR_cockpit_panel_lights_brightness[i] = 0
+      end
+   end
 end
 
 --function after_replay()

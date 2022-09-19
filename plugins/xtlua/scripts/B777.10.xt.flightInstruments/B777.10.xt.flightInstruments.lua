@@ -3,6 +3,12 @@
 * Script Name: flightInstruments
 * Author Name: Crazytimtimtim
 * Script Description: Code for cockpit instruments
+Plan:
+dataref for pilot and copilot inboard knob
+knob sets display anim
+combine with buttons up top
+adjust brightness accordingly
+
 *****************************************************************************************
 --]]
 
@@ -18,8 +24,94 @@ function deferred_dataref(name,nilType,callFunction)
 	end
 	return find_dataref(name)
 end
+--[[
+B777DR_inboard_disp_sel_target_capt    = deferred_dataref("Strato/777/inboard_disp_sel_target_capt", "number")
+B777DR_inboard_disp_sel_target_fo      = deferred_dataref("Strato/777/inboard_disp_sel_target_fo", "number")
+B777DR_inboard_disp_sel_pos_capt       = deferred_dataref("Strato/777/inboard_disp_sel_pos_capt", "number")
+B777DR_inboard_disp_sel_pos_fo         = deferred_dataref("Strato/777/inboard_disp_sel_pos_fo", "number")
+B777DR_display_pos                     = deferred_dataref("Strato/777/display_pos", "array[5]")
+B777DR_mfd_pos                         = deferred_dataref("Strato/777/mfd_pos", "array[3]")
+B77CMD_mfd_ctr                         = deferred_command("Strato/777/mfd_ctr", "Set Lower DU to MFD", mfd_ctr_cmdHandler)
+B777CMD_mfd_l                          = deferred_command("Strato/777/mfd_l", "Set Left Inboard DU to MFD", mfd_l_cmdHandler)
+B777CMD_mfd_r                          = deferred_command("Strato/777/mfd_r", "Set Right Inboard DU to MFD", mfd_r_cmdHandler)]]
+
+--[[if simDR_window_heat1 == 0 then
+		window_heat1_target = 0
+	elseif simDR_window_heat1 == 1 then
+		if simDR_window_heat1_fail ~= 6 then
+			if simDR_bus1_volts > 10 or simDR_bus2_volts > 10 then
+				if simDR_gear_on_ground == 1 then
+					window_heat1_target = 8
+				elseif simDR_gear_on_ground == 0 then
+					window_heat1_target = 13
+				end
+			elseif simDR_bus1_volts < 10 and simDR_bus2_volts < 10 then
+				window_heat1_target = 0
+			end
+		elseif simDR_window_heat1_fail == 6 then
+			window_heat1_target = 0
+		end
+	end
+
+-- f/o window
+
+	if simDR_window_heat2 == 0 then
+		window_heat2_target = 0
+	elseif simDR_window_heat2 == 1 then
+		if simDR_window_heat2_fail ~= 6 then
+			if simDR_bus1_volts > 10 or simDR_bus2_volts > 10 then
+				if simDR_gear_on_ground == 1 then
+					window_heat2_target = 8
+				elseif simDR_gear_on_ground == 0 then
+					window_heat2_target = 13
+				end
+			elseif simDR_bus1_volts < 10 and simDR_bus2_volts < 10 then
+				window_heat2_target = 0
+			end
+		elseif simDR_window_heat2_fail == 6 then
+			window_heat2_target = 0
+		end
+	end
+
+-- left side windows
+
+	if simDR_window_heat3 == 0 then
+		window_heat3_target = 0
+	elseif simDR_window_heat3 == 1 then
+		if simDR_window_heat3_fail ~= 6 then
+			if simDR_bus1_volts > 10 or simDR_bus2_volts > 10 then
+				window_heat3_target = 8
+			elseif simDR_bus1_volts < 10 and simDR_bus2_volts < 10 then
+				window_heat3_target = 0
+			end
+		elseif simDR_window_heat3_fail == 6 then
+			window_heat3_target = 0
+		end
+	end
+
+-- right side windows
+
+	if simDR_window_heat4 == 0 then
+		window_heat4_target = 0
+	elseif simDR_window_heat4 == 1 then
+		if simDR_window_heat4_fail ~= 6 then
+			if simDR_bus1_volts > 10 or simDR_bus2_volts > 10 then
+				window_heat4_target = 8
+			elseif simDR_bus1_volts < 10 and simDR_bus2_volts < 10 then
+				window_heat4_target = 0
+			end
+		elseif simDR_window_heat4_fail == 6 then
+			window_heat4_target = 0
+		end
+	end
+
+	A333_window1_temp = A333_set_animation_position(A333_window1_temp, window_heat1_target, 0, 13, 0.04)
+	A333_window2_temp = A333_set_animation_position(A333_window2_temp, window_heat2_target, 0, 13, 0.04)
+	A333_window3_temp = A333_set_animation_position(A333_window3_temp, window_heat3_target, 0, 8, 0.06)
+	A333_window4_temp = A333_set_animation_position(A333_window4_temp, window_heat4_target, 0, 8, 0.06)]]
 
 --B777DR_bank_limit_knob_anim            = deferred_dataref("Strato/777/bank_limit_knob_pos", "number")
+--window heat 110f
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--
 --*************************************************************************************--
@@ -58,8 +150,7 @@ simDR_com2_stby_khz                    = find_dataref("sim/cockpit2/radios/actua
 simDR_com2_act_khz                     = find_dataref("sim/cockpit2/radios/actuators/com2_frequency_khz")
 
 simDR_total_fuel_kgs                   = find_dataref("sim/flightmodel/weight/m_fuel_total")
-simDR_r_fuel_kgs                       = find_dataref("sim/cockpit2/fuel/fuel_level_indicated_right")
-simDR_l_fuel_kgs                       = find_dataref("sim/cockpit2/fuel/fuel_level_indicated_left")
+simDR_fuel_kgs                         = find_dataref("sim/cockpit2/fuel/fuel_quantity")
 
 simDR_vs_capt                          = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
 simDR_ias_capt                         = find_dataref("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
@@ -75,11 +166,17 @@ simDR_autopilot_alt                    = find_dataref("sim/cockpit/autopilot/alt
 
 B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
 
-simDR_aoa                             = find_dataref("sim/flightmodel2/misc/AoA_angle_degrees")
-simDR_radio_alt_capt                  = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
-simDR_onGround                        = find_dataref("sim/flightmodel/failures/onground_any")
+simDR_aoa                              = find_dataref("sim/flightmodel2/misc/AoA_angle_degrees")
+simDR_radio_alt_capt                   = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
+simDR_onGround                         = find_dataref("sim/flightmodel/failures/onground_any")
 
 simDR_vertical_speed                   = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
+
+simDR_hdg_bug                          = find_dataref("sim/cockpit/autopilot/heading_mag")
+simDR_hdg                              = find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
+
+simDR_map_mode                         = find_dataref("sim/cockpit/switches/EFIS_map_submode")
+
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -88,12 +185,10 @@ simDR_vertical_speed                   = find_dataref("sim/cockpit2/gauges/indic
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
 
-B777DR_total_fuel_lbs                  = deferred_dataref("Strato/777/displays/total_fuel_lbs", "number")
-B777DR_r_fuel_lbs                      = deferred_dataref("Strato/777/displays/r_fuel_lbs", "number")
-B777DR_l_fuel_lbs                      = deferred_dataref("Strato/777/displays/l_fuel_lbs", "number")
+B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "number")
+B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
+B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_total", "number")
 
-B777DR_displayed_hdg                   = deferred_dataref("Strato/777/displays/hdg", "number") -- what the MCP heading display actually shows
-B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number")
 B777DR_alt_mtrs_capt                   = deferred_dataref("Strato/777/displays/alt_mtrs_capt", "number")
 B777DR_autopilot_alt_mtrs_capt         = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 
@@ -118,7 +213,6 @@ B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 
 B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_knob_target", "number")
-B777DR_alt_step_knob_pos               = deferred_dataref("Strato/777/alt_step_knob_position", "number")
 
 B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "number")
 B777DR_alt_bug_diff                    = deferred_dataref("Strato/777/displays/alt_bug_diff", "number")
@@ -133,9 +227,9 @@ B777DR_minimums_dh                     = deferred_dataref("Strato/777/minimums_d
 B777DR_amber_minimums                  = deferred_dataref("Strato/777/amber_minimums", "number")
 
 B777DR_minimums_mode_knob_anim         = deferred_dataref("Strato/777/minimums_mode_knob_pos", "number")
-B777DR_alt_step_knob_anim              = deferred_dataref("Strato/777/alt_step_knob_pos", "number")
 B777DR_baro_mode_knob_anim             = deferred_dataref("Strato/777/baro_mode_knob_pos", "number")
 
+B777DR_heading_bug_diff                = deferred_dataref("Strato/777/heading_bug_diff", "number")
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
@@ -220,7 +314,7 @@ function B777_minimums_dn_capt_CMDhandler(phase, duration)
 		if B777DR_minimums_mode == 0 then
 			if B777DR_minimums_dh > 0 then B777DR_minimums_dh = B777DR_minimums_dh - 1 end
 		else
-			B777DR_minimums_mda = B777DR_minimums_mda - 1
+			if B777DR_minimums_mda > -1000 then B777DR_minimums_mda = B777DR_minimums_mda - 1 end
 		end
 		B777DR_minimums_visible = 1
 	end
@@ -229,9 +323,9 @@ end
 function B777_minimums_up_capt_CMDhandler(phase, duration)
 	if phase == 0  then
 		if B777DR_minimums_mode == 0 then
-			B777DR_minimums_dh = B777DR_minimums_dh + 1
+			if B777DR_minimums_dh < 999  then B777DR_minimums_dh = B777DR_minimums_dh + 1 end
 		else
-			B777DR_minimums_mda = B777DR_minimums_mda + 1
+			if B777DR_minimums_dh < 15000 then B777DR_minimums_mda = B777DR_minimums_mda + 1 end
 		end
 		B777DR_minimums_visible = 1
 	end
@@ -344,7 +438,6 @@ end
 
 function setAnimations()
 	B777DR_minimums_mode_knob_anim = B777_animate(B777DR_minimums_mode, B777DR_minimums_mode_knob_anim, 15)
-	B777DR_alt_step_knob_anim = B777_animate(B777DR_alt_is_fast_ovrd, B777DR_alt_step_knob_pos, 15)
 	B777DR_baro_mode_knob_anim = B777_animate(B777DR_baro_mode, B777DR_baro_mode_knob_anim, 15)
 end
 
@@ -404,9 +497,11 @@ function after_physics()
 	B777DR_displayed_com2_act_khz = simDR_com2_act_khz / 1000
 	B777DR_displayed_com2_stby_khz = simDR_com2_stby_khz / 1000
 
-	B777DR_total_fuel_lbs = simDR_total_fuel_kgs * B777_kgs_to_lbs
-	B777DR_r_fuel_lbs = simDR_r_fuel_kgs * B777_kgs_to_lbs
-	B777DR_l_fuel_lbs = simDR_l_fuel_kgs * B777_kgs_to_lbs
+	for i = 0, 2 do
+		B777DR_fuel_lbs[i] = simDR_fuel_kgs[i] * B777_kgs_to_lbs
+	end
+
+	B777DR_fuel_lbs_total = (simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]) * B777_kgs_to_lbs
 
 	if simDR_vs_capt > 6000 then
 		B777DR_vs_capt_indicator = 6000
@@ -451,6 +546,14 @@ function after_physics()
 	end
 
 	B777DR_alt_bug_diff = simDR_autopilot_alt - B777DR_displayed_alt
+
+	B777DR_heading_bug_diff = simDR_hdg_bug - simDR_hdg
+
+	if B777DR_nd_mode_selector < 3 then
+		simDR_map_mode = B777DR_nd_mode_selector
+	else
+		simDR_map_mode = 4
+	end
 
 	setDispAlt()
 	setAnimations()
