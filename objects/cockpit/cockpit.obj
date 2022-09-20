@@ -10698,7 +10698,7 @@ IDX	9194
 	TRIS	3609 84
 	ATTR_manip_axis_knob	rotate_medium	0.000	1.000	0.100	0.100	Strato/777/cockpit/cockpit_panel_lights_knob_pos[3]	Right Main Panel Brightness
 	TRIS	3693 84
-	ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.100	0.100	Strato/777/cockpit/cockpit_panel_lights_knob_pos[0]	Overhead Panel Brightness
+	ATTR_manip_axis_knob	rotate_small	0.000	1.000	0.100	0.100	Strato/777/cockpit/cockpit_panel_lights_knob_pos[0]	CIrcuit Breaker Panel Brightness
 	TRIS	3945 84
 	ATTR_manip_axis_knob	rotate_large	0.000	1.000	0.100	0.100	Strato/777/cockpit/cockpit_panel_lights_knob_pos[1]	Center Pedestal Panel Brightness
 	TRIS	4029 66

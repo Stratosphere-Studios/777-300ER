@@ -1,6 +1,6 @@
 state = {
-    ['legacyPopups'] = {
-    };
     ['contextWindows'] = {
+    };
+    ['legacyPopups'] = {
     };
 };
