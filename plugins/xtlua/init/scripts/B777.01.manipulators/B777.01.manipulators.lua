@@ -151,3 +151,6 @@ B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovh
 B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")
 
 B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lock_ovrd/btn_pos", "number")
+
+B777DR_cockpit_panel_lights_brightness    = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
+B777DR_cockpit_panel_lights_knob_pos      = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights_knob_pos", "array[6]")

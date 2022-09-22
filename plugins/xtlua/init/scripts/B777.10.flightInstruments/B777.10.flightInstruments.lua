@@ -40,11 +40,10 @@ B777CMD_minimums_rst                 = deferred_command("Strato/B777/minimums_rs
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
 
-B777DR_total_fuel_lbs                  = deferred_dataref("Strato/777/displays/total_fuel_lbs", "number")
-B777DR_r_fuel_lbs                      = deferred_dataref("Strato/777/displays/r_fuel_lbs", "number")
-B777DR_l_fuel_lbs                      = deferred_dataref("Strato/777/displays/l_fuel_lbs", "number")
+B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "number")
+B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
+B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_total", "number")
 
-B777DR_hdg_mode                        = deferred_dataref("Strato/777/displays/hdg_mode", "number")
 B777DR_alt_mtrs_capt                   = deferred_dataref("Strato/777/displays/alt_mtrs_capt", "number")
 B777DR_autopilot_alt_mtrs_capt         = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 
@@ -86,6 +85,8 @@ B777DR_amber_minimums                  = deferred_dataref("Strato/777/amber_mini
 B777DR_minimums_mode_knob_anim         = deferred_dataref("Strato/777/minimums_mode_knob_pos", "number")
 B777DR_alt_step_knob_anim              = deferred_dataref("Strato/777/alt_step_knob_pos", "number")
 B777DR_baro_mode_knob_anim             = deferred_dataref("Strato/777/baro_mode_knob_pos", "number")
+
+B777DR_heading_bug_diff                = deferred_dataref("Strato/777/heading_bug_diff", "number")
 
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")

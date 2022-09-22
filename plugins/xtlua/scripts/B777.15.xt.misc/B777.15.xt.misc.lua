@@ -54,7 +54,11 @@ simDR_trottle_pos                         = find_dataref("sim/cockpit2/engine/ac
 simDR_onground                            = find_dataref("sim/flightmodel/failures/onground_any")
 
 simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
-simDR_shadow			          = find_dataref("sim/private/controls/shadow/total_fade_ratio")
+
+simDR_N1                                  = find_dataref("sim/flightmodel2/engines/N1_percent")
+simDR_oil_pressure_psi                    = find_dataref("sim/flightmodel/engine/ENGN_oil_press_psi")
+simDR_oil_press_fail_0                    = find_dataref("sim/operation/failures/rel_oilp_ind_0")
+simDR_oil_press_fail_1                    = find_dataref("sim/operation/failures/rel_oilp_ind_1")
 
 --[[simDR_reverser_0_fail                     = find_dataref("sim/operation/failures/rel_revers0")
 simDR_reverser_1_fail                     = find_dataref("sim/operation/failures/rel_revers1")]]
@@ -70,10 +74,10 @@ simDR_reverser_1_fail                     = find_dataref("sim/operation/failures
 --*************************************************************************************--
 
 B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
-B777DR_cockpit_panel_lights             = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
 B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
 B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
 B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_gear_pos", "number")
+B777DR_oil_press_psi                    = deferred_dataref("Strato/777/oil_press_psi", "array[2]")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -221,7 +225,6 @@ end
 --function aircraft_unload()
 
 function flight_start()
-   simDR_shadow = 0.8
    simDR_camera_fov = 40
    simCMD_avionics_on:once()
 end
@@ -236,6 +239,18 @@ function after_physics()
    SetSpeedbrkHandle()
    print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok.")
    gear()
+
+   if simDR_oil_press_fail_0 ~= 6 then
+      B777DR_oil_press_psi[0] = -0.0027*(simDR_N1[0]*simDR_N1[0]) + 0.6464*simDR_N1[0] + 30
+   else
+      B777DR_oil_press_psi[0] = B777_animate(0, B777DR_oil_press_psi[0], 1)
+   end
+
+   if simDR_oil_press_fail_1 ~= 6 then
+      B777DR_oil_press_psi[1] = -0.0027*(simDR_N1[1]*simDR_N1[1]) + 0.6464*simDR_N1[1] + 30
+   else
+      B777DR_oil_press_psi[1] = B777_animate(0, B777DR_oil_press_psi[1], 1)
+   end
 end
 
 --function after_replay()
