@@ -6,7 +6,7 @@ GLOBAL_cockpit_lit
 TEXTURE	glass.png
 TEXTURE_NORMAL	glass_NML.png
 NORMAL_METALNESS
-RAIN_SCALE	0.8
+RAIN_SCALE	0.3
 #THERMAL_texture	glass_heat.png
 WIPER_texture	glass_WPR.png
 #THERMAL_source	laminar/A333/anti_ice/window_temp1    sim/cockpit2/ice/ice_window_heat_on_window[0]

@@ -2,7 +2,11 @@
 Flaperon (inbd aileron) - Aileron 1 (sim/flightmodel2/wing/aileron1_deg)
 Inboard flap            - Flap 1 (sim/flightmodel2/wing/flap1_deg)
 Inboard slats           - Slat 1 (sim/flightmodel2/controls/slat1_deploy_ratio)
-Roll spoilers/spdbrakes - sb2, sb2, sb1, sb1, rs2, rs2, rs2, rs1, rs1, rs1
+Roll spoilers/spdbrakes - sb2, sb1 ... rs2, rs1, rs2, rs1, rs2, rs1
+	rs1 - sim/flightmodel2/wing/spoiler1_deg
+	rs2 - sim/flightmodel2/wing/spoiler1_deg
+	sb1 - sim/flightmodel2/wing/speedbrake1_deg
+	sb2 - sim/flightmodel2/wing/speedbrake2_deg
 Outboard flap           - Flap 2 (sim/flightmodel2/wing/flap2_deg)
 Outboard slat           - Slat 2 (sim/flightmodel2/controls/slat2_deploy_ratio)
 Normal (outbrd) aileron - Aileron 2 (sim/flightmodel2/wing/aileron2_deg)
