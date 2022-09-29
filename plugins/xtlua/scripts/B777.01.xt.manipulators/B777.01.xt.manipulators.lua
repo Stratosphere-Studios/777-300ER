@@ -47,32 +47,27 @@ local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 --**                               FIND X-PLANE DATAREFS                             **--
 --*************************************************************************************--
 
+simDR_sim_version                         = find_dataref("sim/version/xplane_internal_version")
 simDR_startup_running                     = find_dataref("sim/operation/prefs/startup_running")
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
-
 simDR_ap_heading                          = find_dataref("sim/cockpit/autopilot/heading_mag")
 simDR_trk                                 = find_dataref("sim/cockpit2/gauges/indicators/ground_track_mag_pilot")
-
 simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/landing_lights_switch")
 simDR_taxi_light_switch                   = find_dataref("sim/cockpit2/switches/taxi_light_on")
 simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/strobe_lights_on")
 simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
 simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/beacon_on")
-
+simDR_bus_volts                           = find_dataref("sim/cockpit2/electrical/bus_volts")
 B777DR_eicas_mode                         = find_dataref("Strato/777/displays/eicas_mode")
-
 B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/pump/primary/state")
 B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
 B777DR_gear_altn_extnsn_target            = find_dataref("Strato/777/gear/altn_extnsn")
 B777DR_gear_lock_ovrd_target              = find_dataref("Strato/777/gear/lock_ovrd")
 B777DR_hdg_mode                           = find_dataref("Strato/777/displays/hdg_mode")
-
-simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch")
-
-simDR_bus_volts                           = find_dataref("sim/cockpit2/electrical/bus_volts")
-
 B777DR_prk_brk_target                     = find_dataref("Strato/777/gear/park_brake")
+B777DR_grd_pwr_primary                    = find_dataref("Strato/B777/ext_pwr")
+--simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch") -- only works in xp12
 
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
@@ -172,10 +167,6 @@ simCMD_efis_apt                          = find_command("sim/instruments/EFIS_ap
 
 --Center-----
 
-simCMD_ovhd_bat_1_on                    = find_command("sim/electrical/battery_1_on")
-simCMD_ovhd_bat_1_off                   = find_command("sim/electrical/battery_1_off")
-simCMD_ovhd_bat_2_on                    = find_command("sim/electrical/battery_2_on")
-simCMD_ovhd_bat_2_off                   = find_command("sim/electrical/battery_2_off")
 simCMD_ovhd_apu_gen_on                  = find_command("sim/electrical/APU_generator_on")
 simCMD_ovhd_apu_gen_off                 = find_command("sim/electrical/APU_generator_off")
 simCMD_ovhd_gen_1_on                    = find_command("sim/electrical/generator_1_on")
@@ -457,7 +448,7 @@ end
 function B777_efis_tfc_switch_CMDhandler(phase, duration)
    if phase == 0 then
       B777DR_efis_button_positions[4] = 1
-      simCMD_EFIS_tcas:once()
+      simCMD_efis_tfc:once()
    elseif phase == 2 then
       B777DR_efis_button_positions[4] = 0
    end
@@ -489,80 +480,9 @@ end
 
 --Center-----
 
-function B777_ovhd_c_batt_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_target[1] == 1 then
-         B777DR_ovhd_ctr_button_target[1] = 0
-         simCMD_ovhd_bat_1_off:once()
-         simCMD_ovhd_bat_2_off:once()
-      elseif B777DR_ovhd_ctr_button_target[1] == 0 then
-         B777DR_ovhd_ctr_button_target[1] = 1
-         simCMD_ovhd_bat_1_on:once()
-         simCMD_ovhd_bat_2_on:once()
-      end
-   end
-end
-
-function B777_ovhd_c_apu_gen_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_target[2] == 0 then
-         simCMD_ovhd_apu_gen_on:once()
-         B777DR_ovhd_ctr_button_target[2] = 1
-      elseif B777DR_ovhd_ctr_button_target[2] == 1 then
-         simCMD_ovhd_apu_gen_off:once()
-         B777DR_ovhd_ctr_button_target[2] = 0
-      end
-   end
-end
-
---TODO: FIX BUS TIES
--- a = 1 - a trick not used because switch could be inverted
-
-function B777_ovhd_c_bus_tie_l_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_target[3] == 0 then
-         B777DR_ovhd_ctr_button_target[3] = 1
-      elseif B777DR_ovhd_ctr_button_target[3] == 1 then
-         B777DR_ovhd_ctr_button_target[3] = 0
-      end
-   end
-end
-
-function B777_ovhd_c_bus_tie_r_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_target[4] == 0 then
-         B777DR_ovhd_ctr_button_target[4] = 1
-      elseif B777DR_ovhd_ctr_button_target[4] == 1 then
-         B777DR_ovhd_ctr_button_target[4] = 0
-      end
-   end
-end
-
-function B777_ovhd_c_eng_gen_l_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_target[5] == 0 then
-         simCMD_ovhd_gen_1_on:once()
-         B777DR_ovhd_ctr_button_target[5] = 1
-      elseif B777DR_ovhd_ctr_button_target[5] == 1 then
-         simCMD_ovhd_gen_1_off:once()
-         B777DR_ovhd_ctr_button_target[5] = 0
-      end
-   end
-end
-
-function B777_ovhd_c_eng_gen_r_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_ovhd_ctr_button_target[6] == 0 then
-         simCMD_ovhd_gen_2_on:once()
-         B777DR_ovhd_ctr_button_target[6] = 1
-      elseif B777DR_ovhd_ctr_button_target[6] == 1 then
-         simCMD_ovhd_gen_2_off:once()
-         B777DR_ovhd_ctr_button_target[6] = 0
-      end
-   end
-end
 
 --Aft-----
+
 
 ---OTHER---------------
 
@@ -654,16 +574,6 @@ B777CMD_efis_mtrs_capt                    = deferred_command("Strato/B777/button
 
 --CENTER-----
 
-B777CMD_ovhd_c_batt_button                = deferred_command("Strato/B777/button_switch/ovhd_c/batt", "Battery Switch", B777_ovhd_c_batt_switch_CMDhandler)
-B777CMD_ovhd_c_apu_gen_button             = deferred_command("Strato/B777/button_switch/ovhd_c/apu_gen", "APU Generator Switch", B777_ovhd_c_apu_gen_switch_CMDhandler)
-
-B777CMD_ovhd_c_eng_gen_l_button           = deferred_command("Strato/B777/button_switch/ovhd_c/eng_gen1", "L Engine Generator Switch", B777_ovhd_c_eng_gen_l_switch_CMDhandler)
-B777CMD_ovhd_c_eng_gen_r_button           = deferred_command("Strato/B777/button_switch/ovhd_c/eng_gen2", "R Engine Generator Switch", B777_ovhd_c_eng_gen_r_switch_CMDhandler)
---B777CMD_ovhd_c_bus_tie_l_button           = deferred_command("Strato/B777/button_switch/ovhd_c/apu_gen", "L Bus Tie Switch", B777_ovhd_c_bus_tie_l_switch_CMDhandler)
---B777CMD_ovhd_c_bus_tie_r_button           = deferred_command("Strato/B777/button_switch/ovhd_c/apu_gen", "R Bus Tie Switch", B777_ovhd_c_bus_tie_r_switch_CMDhandler)
---B777CMD_ovhd_c_ext_pwr_button             = deferred_command("Strato/B777/button_switch/ovhd_c/apu_gen", "External Power Switch", B777_ovhd_c_ext_pwr_switch_CMDhandler)
---EXTERNAL POWER IS IN ELECTRICAL MODULE
-
 -- RAM AIR TURBINE USES DEFAULT DATAREF: sim/cockpit2/switches/ram_air_turbine_on
 
 --AFT-----
@@ -685,6 +595,8 @@ B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_s
 --*************************************************************************************--
 --**                                       CODE                                      **--
 --*************************************************************************************--
+
+if simDR_sim_version >= 120000 then print("urmom") end
 
 ----- ANIMATION UTILITY -----------------------------------------------------------------
 function B777_animate(target, variable, speed)
@@ -718,8 +630,6 @@ function flight_start()
 		B777DR_ovhd_ctr_button_target[1] = 1
       B777DR_ovhd_aft_button_target[1] = 1
 
-      simCMD_ovhd_bat_1_on:once()
-      simCMD_ovhd_bat_2_on:once()
 	end
    B777CMD_efis_mtrs_capt:once()
 end
@@ -739,10 +649,6 @@ function after_physics()
       B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 10)
    end
 
-   for i = 1, 7 do
-      B777DR_ovhd_ctr_button_positions[i] = B777_animate(B777DR_ovhd_ctr_button_target[i], B777DR_ovhd_ctr_button_positions[i], 10)
-   end
-
    B777DR_ovhd_aft_button_positions[1] = B777_animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 10)
 
    for i = 1, 5 do
@@ -753,8 +659,8 @@ function after_physics()
    B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 10)
    B777DR_ovhd_fwd_button_positions[9] = B777_animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 10)
 
-   B777DR_ovhd_fwd_button_positions[10] = B777_animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[10], 10)
-   B777DR_ovhd_fwd_button_positions[11] = B777_animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[11], 10)
+   --B777DR_ovhd_fwd_button_positions[10] = B777_animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[10], 10)  -- only works in xp12
+   --B777DR_ovhd_fwd_button_positions[11] = B777_animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[11], 10)
 
    for i = 0, 3 do
       B777DR_hyd_primary_switch_pos[i] = B777_animate(B777DR_primary_hyd_pump_sw[i], B777DR_hyd_primary_switch_pos[i], 10)
@@ -779,7 +685,7 @@ function after_physics()
 
    B777DR_gear_altn_extnsn_pos = B777_animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 10)
 
-   B777DR_gear_lock_ovrd_pos = B777_animate(B777DR_gear_lock_ovrd_target, B777DR_gear_lock_ovrd_pos, 15)    
+   B777DR_gear_lock_ovrd_pos = B777_animate(B777DR_gear_lock_ovrd_target, B777DR_gear_lock_ovrd_pos, 15)
 
    for i = 0, 5 do
       if simDR_bus_volts[0] >=5 or simDR_bus_volts[1] >=5 or simDR_bus_volts[2] >=5 then
@@ -788,6 +694,9 @@ function after_physics()
          B777DR_cockpit_panel_lights_brightness[i] = 0
       end
    end
+
+   B777DR_ovhd_ctr_button_positions[0] = B777_animate(B777DR_grd_pwr_primary, B777DR_ctr_cover_positions[0], 10)
+
 end
 
 --function after_replay()

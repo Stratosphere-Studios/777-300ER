@@ -19,6 +19,8 @@ brake_sys = createGlobalPropertyi("Strato/777/gear/shuttle_valve", 3)
 brake_qty_L = createGlobalPropertyf("Strato/777/gear/qty_brake_L")
 brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R")
 
+testNum = globalPropertyf("testNum")
+
 components = {
 
 	timers {},
