@@ -140,42 +140,30 @@ local flashCount = 0
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
 simDR_autopilot_alt                    = find_dataref("sim/cockpit2/autopilot/altitude_dial_ft")
-
 simDR_startup_running                  = find_dataref("sim/operation/prefs/startup_running")
-
 simDR_com1_stby_khz                    = find_dataref("sim/cockpit2/radios/actuators/com1_standby_frequency_khz")
 simDR_com1_act_khz                     = find_dataref("sim/cockpit2/radios/actuators/com1_frequency_khz")
-
 simDR_com2_stby_khz                    = find_dataref("sim/cockpit2/radios/actuators/com2_standby_frequency_khz")
 simDR_com2_act_khz                     = find_dataref("sim/cockpit2/radios/actuators/com2_frequency_khz")
-
 simDR_total_fuel_kgs                   = find_dataref("sim/flightmodel/weight/m_fuel_total")
 simDR_fuel_kgs                         = find_dataref("sim/cockpit2/fuel/fuel_quantity")
-
 simDR_vs_capt                          = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
 simDR_ias_capt                         = find_dataref("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 simDR_latitude                         = find_dataref("sim/flightmodel/position/latitude")
 simDR_groundSpeed                      = find_dataref("sim/flightmodel/position/groundspeed")
-
 simDR_bus_voltage                      = find_dataref("sim/cockpit2/electrical/bus_volts")
-
 simDR_ap_airspeed                      = find_dataref("sim/cockpit/autopilot/airspeed")
-
 simDR_alt_ft_capt                      = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 simDR_autopilot_alt                    = find_dataref("sim/cockpit/autopilot/altitude")
-
-B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
-
 simDR_aoa                              = find_dataref("sim/flightmodel2/misc/AoA_angle_degrees")
 simDR_radio_alt_capt                   = find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
 simDR_onGround                         = find_dataref("sim/flightmodel/failures/onground_any")
-
 simDR_vertical_speed                   = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
-
 simDR_hdg_bug                          = find_dataref("sim/cockpit/autopilot/heading_mag")
 simDR_hdg                              = find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
-
 simDR_map_mode                         = find_dataref("sim/cockpit/switches/EFIS_map_submode")
+B777DR_hyd_press                       = find_dataref("Strato/777/hydraulics/press")
+B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -188,15 +176,12 @@ simDR_map_mode                         = find_dataref("sim/cockpit/switches/EFIS
 B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "number")
 B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
 B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_total", "number")
-
 B777DR_alt_mtrs_capt                   = deferred_dataref("Strato/777/displays/alt_mtrs_capt", "number")
 B777DR_autopilot_alt_mtrs_capt         = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
-
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what page the lower eicas is on
 
 B777DR_displayed_com1_act_khz          = deferred_dataref("Strato/777/displays/com1_act_khz", "number") -- COM1 Radio Active Display
 B777DR_displayed_com1_stby_khz         = deferred_dataref("Strato/777/displays/com1_stby_khz", "number") -- COM1 Radio Standby Display
-
 B777DR_displayed_com2_act_khz          = deferred_dataref("Strato/777/displays/com2_act_khz", "number") -- COM2 Radio Active Display
 B777DR_displayed_com2_stby_khz         = deferred_dataref("Strato/777/displays/com2_stby_khz", "number") -- COM2 Radio Standby Display
 
@@ -211,25 +196,21 @@ B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltIn
 B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
-
 B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_knob_target", "number")
-
 B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "number")
 B777DR_alt_bug_diff                    = deferred_dataref("Strato/777/displays/alt_bug_diff", "number")
-
 B777DR_baro_mode                       = deferred_dataref("Strato/777/baro_mode", "number")
-
 B777DR_minimums_mode                   = deferred_dataref("Strato/777/minimums_mode", "number")
 B777DR_minimums_diff                   = deferred_dataref("Strato/777/minimums_diff", "number")
 B777DR_minimums_visible                = deferred_dataref("Strato/777/minimums_visible", "number")
 B777DR_minimums_mda                    = deferred_dataref("Strato/777/minimums_mda", "number")
 B777DR_minimums_dh                     = deferred_dataref("Strato/777/minimums_dh", "number")
 B777DR_amber_minimums                  = deferred_dataref("Strato/777/amber_minimums", "number")
-
 B777DR_minimums_mode_knob_anim         = deferred_dataref("Strato/777/minimums_mode_knob_pos", "number")
 B777DR_baro_mode_knob_anim             = deferred_dataref("Strato/777/baro_mode_knob_pos", "number")
-
 B777DR_heading_bug_diff                = deferred_dataref("Strato/777/heading_bug_diff", "number")
+B777DR_hyd_press_low_any               = deferred_dataref("Strato/777/displays/hyd_press_low_any", "number")
+
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
 B777DR_txt_GS                          = deferred_dataref("Strato/777/displays/txt/GS", "string")
@@ -558,6 +539,13 @@ function after_physics()
 	setDispAlt()
 	setAnimations()
 	minimums()
+
+	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
+		B777DR_hyd_press_low_any = 1
+	else
+		B777DR_hyd_press_low_any = 0
+	end
+
 end
 
 --function after_replay()

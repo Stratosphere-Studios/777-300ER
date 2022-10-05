@@ -136,7 +136,7 @@ B777DR_main_cover_positions               = deferred_dataref("Strato/777/cockpit
 B777DR_ctr_cover_positions                = deferred_dataref("Strato/777/cockpit/ctr/button_cover/position", "array[4]")
 
 B777DR_ovhd_ctr_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/target", "array[5]")
-B777DR_ovhd_aft_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/target", "array[7]")
+B777DR_ovhd_aft_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/target", "array[6]")
 B777DR_main_cover_target                  = deferred_dataref("Strato/777/cockpit/main_pnl/button_cover/target", "array[5]")
 B777DR_ctr_cover_target                   = deferred_dataref("Strato/777/cockpit/ctr/button_cover/target", "array[4]")
 

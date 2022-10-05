@@ -82,6 +82,8 @@ B777DR_minimums_mda                    = deferred_dataref("Strato/777/minimums_m
 B777DR_minimums_dh                     = deferred_dataref("Strato/777/minimums_dh", "number")
 B777DR_amber_minimums                  = deferred_dataref("Strato/777/amber_minimums", "number")
 
+B777DR_hyd_press_low_any               = deferred_dataref("Strato/777/displays/hyd_press_low_any", "number")
+
 B777DR_minimums_mode_knob_anim         = deferred_dataref("Strato/777/minimums_mode_knob_pos", "number")
 B777DR_alt_step_knob_anim              = deferred_dataref("Strato/777/alt_step_knob_pos", "number")
 B777DR_baro_mode_knob_anim             = deferred_dataref("Strato/777/baro_mode_knob_pos", "number")

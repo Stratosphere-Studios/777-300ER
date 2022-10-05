@@ -64,7 +64,7 @@ B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/
 B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
 B777DR_gear_altn_extnsn_target            = find_dataref("Strato/777/gear/altn_extnsn")
 B777DR_gear_lock_ovrd_target              = find_dataref("Strato/777/gear/lock_ovrd")
-B777DR_hdg_mode                           = find_dataref("Strato/777/displays/hdg_mode")
+--B777DR_hdg_mode                           = find_dataref("Strato/777/displays/hdg_mode")
 B777DR_prk_brk_target                     = find_dataref("Strato/777/gear/park_brake")
 B777DR_grd_pwr_primary                    = find_dataref("Strato/B777/ext_pwr")
 --simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch") -- only works in xp12
@@ -102,7 +102,7 @@ B777DR_main_cover_positions               = deferred_dataref("Strato/777/cockpit
 B777DR_ctr_cover_positions                = deferred_dataref("Strato/777/cockpit/ctr/button_cover/position", "array[4]")
 
 B777DR_ovhd_ctr_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/target", "array[5]")
-B777DR_ovhd_aft_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/target", "array[7]")
+B777DR_ovhd_aft_cover_target              = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/target", "array[6]")
 B777DR_main_cover_target                  = deferred_dataref("Strato/777/cockpit/main_pnl/button_cover/target", "array[5]")
 B777DR_ctr_cover_target                   = deferred_dataref("Strato/777/cockpit/ctr/button_cover/target", "array[4]")
 
@@ -251,9 +251,9 @@ function B777_ap_hdgHold_switch_CMDhandler(phase, duration)    -- A/P HEADING HO
       B777DR_mcp_button_target[7] = 1
       if B777DR_hdg_mode ==0 then
          simCMD_ap_hdgHold:once()
-      else
+--[[      else
          simCMD_ap_trackSel:once()
-         simDR_ap_heading = simDR_trk
+         simDR_ap_heading = simDR_trk]]
       end
    elseif phase == 2 then
       B777DR_mcp_button_target[7] = 0
@@ -673,7 +673,7 @@ function after_physics()
    for i = 0, 5 do
       B777DR_ovhd_ctr_cover_positions[i] = B777_animate(B777DR_ovhd_ctr_cover_target[i], B777DR_ovhd_ctr_cover_positions[i], 10)
    end
-   for i = 0, 7 do
+   for i = 0, 6 do
       B777DR_ovhd_aft_cover_positions[i] = B777_animate(B777DR_ovhd_aft_cover_target[i], B777DR_ovhd_aft_cover_positions[i], 10)
    end
    for i = 0, 5 do
