@@ -94,7 +94,7 @@ P _cgpt/9/_w_now 1.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -81.599220276
+P _door/0/_ang_now -55.625419617
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -102,7 +102,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 81.599220276
+P _door/1/_ang_now 55.625419617
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -120,7 +120,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 81.599220276
+P _door/2/_ang_now 55.625419617
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -128,7 +128,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 90.356796265
+P _door/3/_ang_now 0.0
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -136,7 +136,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -90.356796265
+P _door/4/_ang_now 0.0
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -144,7 +144,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now -87.800590515
+P _door/5/_ang_now 0.0
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -152,7 +152,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 87.800590515
+P _door/6/_ang_now 0.0
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -160,7 +160,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -85.601173401
+P _door/7/_ang_now 0.0
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -168,7 +168,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 85.601173401
+P _door/8/_ang_now 0.0
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -176,7 +176,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -81.599220276
+P _door/9/_ang_now -55.625419617
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -223,7 +223,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 109.462364197
+P _gear/0/_lonN 74.619468689
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
 P _gear/0/_stat_def 0.579100728
@@ -237,7 +237,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -14.926686287
+P _gear/1/_axiN -10.175381660
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -253,14 +253,14 @@ P _gear/1/_gear_x 16.600000381
 P _gear/1/_gear_y -4.599999905
 P _gear/1/_gear_z 106.360000610
 P _gear/1/_latE 0.0
-P _gear/1/_latN -81.599220276
+P _gear/1/_latN -55.625419617
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 12.500000000
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN 7.916911125
+P _gear/1/_lonN 2.532099724
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.170852542
+P _gear/1/_stat_def 1.170852184
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -271,7 +271,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.899999976
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 14.926686287
+P _gear/2/_axiN 10.175381660
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -287,14 +287,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.360000610
 P _gear/2/_latE 0.0
-P _gear/2/_latN 81.599220276
+P _gear/2/_latN 55.625419617
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 12.500000000
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN 7.916911125
+P _gear/2/_lonN 2.532099724
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.370846629
+P _gear/2/_stat_def 1.370846510
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -47254,6 +47254,7 @@ GROUP Captain ND
 END_GROUP
 GROUP Lower Eicas
   CHAINED
+  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     CHAINED
@@ -48063,7 +48064,7 @@ GROUP Lower Eicas
   END_GROUP
   GROUP FCTL
     SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
-    GROUP_OPEN
+    CHAINED
     gen_pointer R FLPRN
       POS 3704.000000 495.500000
       IMAGE EICAS lower/ENG/pointer_left
