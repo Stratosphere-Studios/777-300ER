@@ -98,3 +98,8 @@ B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/t
 B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")
 B777DR_txt_H                           = deferred_dataref("Strato/777/displays/txt/H", "string")
 B777DR_txt_REALISTIC_PRK_BRK           = deferred_dataref("Strato/777/displays/txt/REALISTIC_PRK_BRK", "string")
+B777DR_txt_PASSENGER_FREIGHTER         = deferred_dataref("Strato/777/displays/txt/PASSENGER_FREIGHTER", "string")
+B777DR_txt_PAX_FREIGHT                 = deferred_dataref("Strato/777/displays/txt/PAX_FREIGHT", "string")
+
+B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
+B777DR_acf_is_pax                      = deferred_dataref("Strato/777/acf_is_pax", "number")

@@ -219,6 +219,11 @@ B777DR_txt_ddd                         = deferred_dataref("Strato/777/displays/t
 B777DR_txt_INSTANT_ADIRU_ALIGN         = deferred_dataref("Strato/777/displays/txt/INSTANT_ADIRU_ALIGN", "string")
 B777DR_txt_H                           = deferred_dataref("Strato/777/displays/txt/H", "string")
 B777DR_txt_REALISTIC_PRK_BRK           = deferred_dataref("Strato/777/displays/txt/REALISTIC_PRK_BRK", "string")
+B777DR_txt_PASSENGER_FREIGHTER         = deferred_dataref("Strato/777/displays/txt/PASSENGER_FREIGHTER", "string")
+B777DR_txt_PAX_FREIGHT                 = deferred_dataref("Strato/777/displays/txt/PAX_FREIGHT", "string")
+
+B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
+B777DR_acf_is_pax                      = deferred_dataref("Strato/777/acf_is_pax", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -439,6 +444,7 @@ function setTXT()
 	B777DR_txt_ddd                 = "---"
 	B777DR_txt_INSTANT_ADIRU_ALIGN = "INSTANT ADIRU ALIGN"
 	B777DR_txt_REALISTIC_PRK_BRK   = "REALISTIC PARK BRAKE"
+	B777DR_txt_PASSENGER_FREIGHTER = "PASSENGER/FREIGHTER"
 end
 ----- ANIMATION UTILITY -----------------------------------------------------------------
 function B777_animate(target, variable, speed)
@@ -546,6 +552,13 @@ function after_physics()
 		B777DR_hyd_press_low_any = 0
 	end
 
+	if B777DR_acf_is_freighter == 0 then
+		B777DR_acf_is_pax = 1
+		B777DR_txt_PAX_FREIGHT = "PAX"
+	else
+		B777DR_acf_is_pax = 0
+		B777DR_txt_PAX_FREIGHT = "FREIGHT"
+	end
 end
 
 --function after_replay()
