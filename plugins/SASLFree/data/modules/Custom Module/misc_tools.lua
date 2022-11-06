@@ -11,7 +11,16 @@ wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
 
 --Generic utilities
 
-function tlen(T)
+function lim(val, upper, lower)
+	if val > upper then
+		return upper
+	elseif val < lower then
+		return lower
+	end
+	return val
+end
+
+function tlen(T) --Returns length of a table
   local count = 0
   for _ in pairs(T) do count = count + 1 end
   return count
@@ -42,7 +51,46 @@ function indexOf(array, value, round_) --returns index of a value in an array.
     return nil
 end
 
+function PID_Compute(kp, ki, kd, target, current, errtotal, errlast, lim1, lim2)
+	local current_error = target - current
+	local et = errtotal + current_error --total error
+	--Limiting total error
+	if et > lim1 then
+		et = lim1
+	elseif et < -lim1 then
+		et = -lim1
+	end
+	local delta_error = current_error - errlast
+	local compute = 0
+	if get(f_time) ~= 0 then --only perform calculations when sim is not paused
+		compute = kp * current_error + ki * get(f_time) * et + (kd / get(f_time)) * delta_error
+	end
+	--Limiting output
+	if compute > lim2 then
+		compute = lim2
+	elseif compute < -lim2 then
+		compute = -lim2
+	end
+	return {compute, et, current_error}
+end	
+
+function EvenChange(val, tgt, step)
+	if math.abs(val - tgt) <= step then
+		return val
+	else
+		return val + (bool2num(val < tgt) - bool2num(val > tgt)) * step * get(f_time) / 0.0166
+	end
+end
+
 --Sim only utilities
+
+function EvenAnim(dref, tgt, step)
+	if math.abs(get(dref) - tgt) <= step then
+		set(dref, tgt)
+	else
+		set(dref, get(dref) + (bool2num(get(dref) < tgt) - bool2num(get(dref) > tgt)) * step * get(f_time) / 0.0166)
+	end
+end
 
 function IsAcConnected() --1 if ac is connected
 	for i=1,3 do
@@ -96,6 +144,8 @@ function GetSysIdx(num) --matches pump index with system index
 	end
 end
 
+--Drawing utilities
+
 function DrawRect(x, y, width, height, thickness, color, bottom) --draws rectangle with definable line thickness
 	if bottom == false then
 		sasl.gl.drawWideLine(x, y, x + width, y, thickness, color)
@@ -119,7 +169,7 @@ function DrawCrossedRect(x, y, width, height, thickness, color) --draws rectangl
 	sasl.gl.drawWideLine(x + width, y, x, y - height, thickness, color)
 end
 
-function Stripify(width, height, x, y, n, thickness, color) --draws diagonal stripes across a rectangle
+function Stripify(x, y, width, height, n, thickness, color) --draws diagonal stripes across a rectangle
 	local step = (width+height) / n
 	for i=step,width+height,step do
 		local x1 = 0
