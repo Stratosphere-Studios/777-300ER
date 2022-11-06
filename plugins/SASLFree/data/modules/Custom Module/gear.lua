@@ -80,11 +80,14 @@ kill_gear = globalPropertyi("Strato/777/kill_gear")
 handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
 realistic_prk_brk = createGlobalPropertyi("Strato/777/gear/park_brake_realistic", 1)
+main_s_locked = createGlobalPropertyi("Strato/777/gear/main_s_locked", 1)
 man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
+brake_press_L = createGlobalPropertyi("Strato/777/gear/brake_press_L", 0)
 truck_L_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_L_temp", {0, 0, 0})
 truck_L_max = createGlobalPropertyf("Strato/777/gear/truck_L_max", 0)
 truck_L_psi = createGlobalPropertyfa("Strato/777/gear/truck_L_psi", {0, 0, 0, 0, 0, 0}) --psi for each pair of tires
 man_brakes_R = createGlobalPropertyf("Strato/777/gear/manual_braking_R", 0)
+brake_press_R = createGlobalPropertyi("Strato/777/gear/brake_press_R", 0)
 truck_R_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_R_temp", {0, 0, 0})
 truck_R_max = createGlobalPropertyf("Strato/777/gear/truck_R_max", 0)
 truck_R_psi = createGlobalPropertyfa("Strato/777/gear/truck_R_psi", {0, 0, 0, 0, 0, 0}) --psi for each pair of tires
@@ -99,14 +102,6 @@ acc_load_current = createGlobalPropertyf("Strato/777/gear/acc_load_current", 0)
 acc_load_past = createGlobalPropertyf("Strato/777/gear/acc_load_past", 0)
 eicas_brake_temp = createGlobalPropertyi("Strato/777/eicas/brake_temp", 0)
 eicas_tire_press = createGlobalPropertyi("Strato/777/eicas/tire_press", 0)
-
---Finding simulator commands
-toggle_regular = sasl.findCommand("sim/flight_controls/brakes_toggle_regular")
-hold_regular = sasl.findCommand("sim/flight_controls/brakes_regular")
-toggle_max = sasl.findCommand("sim/flight_controls/brakes_toggle_max")
-gear_down = sasl.findCommand("sim/flight_controls/landing_gear_down")
-gear_up = sasl.findCommand("sim/flight_controls/landing_gear_up")
-gear_toggle = sasl.findCommand("sim/flight_controls/landing_gear_toggle")
 
 mlg_door_tgt = 0
 nose_door_tgt = 0
@@ -143,19 +138,10 @@ brake_L_temp = 0
 L_brake_past = 0
 brake_R_temp = 0
 R_brake_past = 0
-brake_press = {50, 50}
 temp_v = 0
 
 set(steer_ovrd, 1)
 set(brk_ovrd, 1)
-
-function EvenAnim(dref, tgt, step)
-	if math.abs(get(dref) - tgt) <= step then
-		set(dref, tgt)
-	else
-		set(dref, get(dref) + (bool2num(get(dref) < tgt) - bool2num(get(dref) > tgt)) * step * get(f_time) / 0.0166)
-	end
-end
 
 function UpdateShuttleValve()
 	if get(sys_C_press) > 200 or get(sys_R_press) > 200 then
@@ -238,7 +224,7 @@ function UpdateBrakeTemperatures(delay)
 		local R_cooler  = bool2num(1 == GetWindVector())
 		local R_deployed = bool2num(1 == get(mlg_actual_R))
 		--Calculating gain in temperature because of braking here
-		local p1 = 0.527 * 10000 * get(ground_speed) * (get(ground_speed) / get(tas))
+		local p1 = 0.527 * 10000 * get(ground_speed) * (get(ground_speed) / get(tas)) * get(on_ground)
 		local p2 = math.sqrt(1450 * 2020 * 5.28)
 		local L_temp_no_askid = 0
 		local R_temp_no_askid = 0
@@ -391,15 +377,15 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 		if effect_L * tgt > 0 and get(L_wheel_brake) == 0 then --Update time when we started using the brake
 			tmp[1] = get(c_time)
 		end
-		brake_press[1] = brake_press[1] + (effect_L * tgt * get(brake_system_press) - brake_press[1]) * 0.1
+		set(brake_press_L, get(brake_press_L) + (effect_L * tgt * get(brake_system_press) - get(brake_press_L)) * 0.1)
 		if get(brake_acc_in_use) == 0 then --set load to pedal setting when accumulator is in use to get more realistic consumption
 			load_total = tgt
 		end
 	else
-		brake_press[1] = brake_press[1] + (get(park_brake_valve) * brake_press[1] - brake_press[1]) * 0.1
+		set(brake_press_L, get(brake_press_L) + (get(park_brake_valve) * get(brake_press_L) - get(brake_press_L)) * 0.1)
 	end
-	set(L_wheel_brake, brake_press[1] / 3100)
-	set(brake_qty_L, get(brake_qty_L) + (0.02 * brake_press[1] / 3100 - get(brake_qty_L)) * math.abs((brake_press[1] - get(brake_system_press)) * 0.1 / 3100))
+	set(L_wheel_brake, get(brake_press_L) / 3100)
+	set(brake_qty_L, get(brake_qty_L) + (0.02 * get(brake_press_L) / 3100 - get(brake_qty_L)) * math.abs((get(brake_press_L) - get(brake_system_press)) * 0.1 / 3100))
 	if TBRS_active_R ~= 4 then
 		effect_R = effect_R * 0.3
 	end
@@ -412,15 +398,15 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 		if effect_R * tgt > 0 and get(R_wheel_brake) == 0 then
 			tmp[2] = get(c_time)
 		end
-		brake_press[2] = brake_press[2] + (effect_R * tgt * get(brake_system_press) - brake_press[2]) * 0.1
+		set(brake_press_R, get(brake_press_R) + (effect_R * tgt * get(brake_system_press) - get(brake_press_R)) * 0.1)
 		if get(brake_acc_in_use) == 0 then
 			load_total = load_total + tgt
 		end
 	else
-		brake_press[2] = brake_press[2] + (get(park_brake_valve) * brake_press[2] - brake_press[2]) * 0.1
+		set(brake_press_R, get(brake_press_R) + (get(park_brake_valve) * get(brake_press_R) - get(brake_press_R)) * 0.1)
 	end
-	set(R_wheel_brake, brake_press[2] / 3100)
-	set(brake_qty_R, get(brake_qty_R) + (0.02 * brake_press[2] / 3100 - get(brake_qty_R)) * math.abs((brake_press[2] - get(brake_system_press)) * 0.1 / 3100))
+	set(R_wheel_brake, get(brake_press_R) / 3100)
+	set(brake_qty_R, get(brake_qty_R) + (0.02 * get(brake_press_R) / 3100 - get(brake_qty_R)) * math.abs((get(brake_press_R) - get(brake_system_press)) * 0.1 / 3100))
 	if get(brake_acc_in_use) == 1 then
 		load_total = get(tgt_L) + get(tgt_R)
 	end
@@ -496,15 +482,20 @@ function UpdateGearStrg(r_time)
 		local rotations = Round(get(nw_speed), 2) / 6.28
 		nw_ratio = 70 - 57 * (rotations / 5)
 	end
-	if get(sys_C_press) > 200 then
+	if get(sys_C_press) > 450 then
 		local nw_tgt = 0
 		if get(nw_onground) == 1 then --steering happens only on ground to prevent tire skidding
 			nw_tgt = nw_ratio * get(yoke_heading_ratio)
 		end
 		set(nw_strg, get(nw_strg) + (nw_tgt - get(nw_strg)) * r_time * get(f_time))
 		l_all = 0.05 * math.abs(get(yoke_heading_ratio))
-		if math.abs(get(nw_strg)) > 13 then
+		if math.abs(get(nw_strg)) > 13 and get(throttle_pos) < 0.5 then
+			set(main_s_locked, 0)
 			w_tgt = (-1 * Round(get(yoke_heading_ratio), 3) - 0.185) / 0.815 * 14
+		else
+			if math.abs(get(r_w_strg)) < 0.1 and math.abs(get(r_w_strg)) < 0.1 then
+				set(main_s_locked, 1)
+			end
 		end
 	else --if there's not enough pressure, gear steering is done by natural forces
 		if get(ground_speed) > 0.1 and math.abs(get(nw_strg)) < 50 then
@@ -664,16 +655,19 @@ function UpdateActuatorPress()
 		end
 	else
 		if mlg_target == 0 then
-			set(kill_gear, 1)
+			local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L)) / 2
+			if avg_gear_pos == 0 then
+				set(kill_gear, 1)
+			end
 		end
 		if get(sys_C_press) > 1000 and get(altn_gear) == 0 then --raise doors if pressure is normal and alternate extension is not used
 			mlg_door_tgt = 0
 		end
 		if AreMlgReady() == true then 
 			--setting up eagle claw for target
-			eag_claw_sync = 0
 			eag_claw_target[1] = get(sim_eag_R) * mlg_target
 			eag_claw_target[2] = get(sim_eag_L) * mlg_target
+			eag_claw_sync = mlg_target
 		end
 		if ldg_extend == 1 and get(custom_eag_L) == eag_claw_target[1] and get(custom_eag_R) == eag_claw_target[2] then
 			eag_claw_sync = 1
@@ -681,6 +675,7 @@ function UpdateActuatorPress()
 		end
 		--Locking gear
 		actuator_press[2] = 0
+		nose_gear_locked = 1
 		mlg_locked = 1
 	end
 	set(gear_load, 0.3 * (actuator_press[2] / 3000))
@@ -736,69 +731,6 @@ function UpdateDRefs()
 	set(custom_eag_R, eag_claw_target[2] * eag_claw_sync + (get(custom_eag_R) + (eag_claw_target[2] - get(custom_eag_R)) * get(f_time) * 0.9) * (1 - eag_claw_sync))
 end
 
---Command handlers
-
-function BrakeHandler(phase)
-	if phase == SASL_COMMAND_BEGIN then
-		set(man_brakes_L, 1 - get(man_brakes_L))
-		set(man_brakes_R, 1 - get(man_brakes_R))
-	end
-end
-
-function BrakeHoldHandler(phase)
-	if phase == SASL_COMMAND_CONTINUE then
-		set(man_brakes_L, 1)
-		set(man_brakes_R, 1)
-	elseif phase == SASL_COMMAND_END then
-		set(man_brakes_L, 0)
-		set(man_brakes_R, 0)
-	end
-end
-
-function ParkBrakeHandler(phase)
-	if phase == SASL_COMMAND_BEGIN then
-		set(park_brake_valve, 1 - get(park_brake_valve))
-		if get(realistic_prk_brk) == 0 then
-			set(brake_qty_L, 0.02 * get(park_brake_valve))
-			set(brake_qty_R, 0.02 * get(park_brake_valve))
-			brake_press[1] = 3000 * get(park_brake_valve)
-			brake_press[2] = 3000 * get(park_brake_valve)
-		end
-	end
-end
-
-function GearUp(phase)
-	if get(on_ground) == 1 then
-		if get(lock_ovrd) == 1 and get(normal_gear) == 1 then
-			return 1
-		else
-			return 0
-		end
-	else
-		return 1
-	end
-end
-
-function ToggleGear(phase)
-	if get(on_ground) == 1 and get(normal_gear) == 1 then
-		if get(lock_ovrd) == 1 then
-			return 1
-		else
-			return 0
-		end
-	else
-		return 1
-	end
-end
-
---Registering own command handlers
-sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
-sasl.registerCommandHandler(hold_regular, 1, BrakeHoldHandler)
-sasl.registerCommandHandler(toggle_max, 1, ParkBrakeHandler)
---sasl.registerCommandHandler(gear_down, 0, GearDown)
-sasl.registerCommandHandler(gear_up, 1, GearUp)
-sasl.registerCommandHandler(gear_toggle, 1, ToggleGear)
-
 function onAirportLoaded()
 	temp_v = get(c_time)
 	brake_L_temp = get(oat)
@@ -809,14 +741,13 @@ function onAirportLoaded()
 	end
 	if get(ra_pilot) < 5 or get(ra_copilot) < 5 then
 		set(park_brake_valve, 1)
-		brake_press[1] = 3100
-		brake_press[2] = 3100
+		set(brake_press_L, 3100)
+		set(brake_press_R, 3100)
 		set(brake_qty_L, 0.02)
 		set(brake_qty_R, 0.02)
+		set(kill_gear, 0)
 	end
 end
-
-onAirportLoaded() --This is to make sure that everything is set if sasl has been rebooted
 
 function update()
 	UpdateShuttleValve()
@@ -837,3 +768,5 @@ function update()
 	UpdateDRefs()
 	UpdateGearStrg(0.8)
 end
+
+onAirportLoaded() --This is to make sure that everything is set if sasl has been rebooted
