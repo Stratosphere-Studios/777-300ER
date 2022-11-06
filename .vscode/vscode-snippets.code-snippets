@@ -10,7 +10,7 @@
 		"scope": "lua",
 		"prefix": "ddref",
 		"body": [
-			"deferred_dataref(\"${1:Strato/777/}\", \"${2|number,string|}\")",
+			"deferred_dataref(\"${1:Strato/777/}\", \"${2|number,string,array[]|}\")",
 		],
 		"description": "Defer a dataref"
 	},
