@@ -19,6 +19,8 @@ yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
 yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
 --Indicators
+ra_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
+ra_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_copilot")
 altitude_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 altitude_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_copilot")
 altitude_stdby = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_stby")
@@ -32,13 +34,21 @@ wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
 wind_speed = globalPropertyf("sim/weather/wind_speed_kt") --this is in meters per second
 tas = globalPropertyf("sim/flightmodel/position/true_airspeed") --true airspeed in meters per second. Needed for accurate drooping
 --Flight controls
-outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1)
-inbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 5)
-outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 1)
-inbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 5)
-spoilers_L = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 1)
-spoilers_R = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 1)
-flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
+outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 5)
+inbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1)
+outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 6)
+inbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 2)
+spoiler_L1 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 3)
+spoiler_L2 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 3)
+spoiler_R1 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 4)
+spoiler_R2 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 4)
+flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 3)
+inbd_flap_L = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
+inbd_flap_R = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 2)
+outbd_flap_L = globalPropertyfae("sim/flightmodel2/wing/flap2_deg", 3)
+outbd_flap_R = globalPropertyfae("sim/flightmodel2/wing/flap2_deg", 4)
+slat_1 = globalPropertyf("sim/flightmodel2/controls/slat1_deploy_ratio")
+slat_2 = globalPropertyf("sim/flightmodel2/controls/slat2_deploy_ratio")
 elevator_L = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",1)
 elevator_R = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",7)
 rudder = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 1)
@@ -51,6 +61,13 @@ R_reverser_fail = globalPropertyi("sim/operation/failures/rel_revers1")
 fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
+
+pfc_roll_command = globalPropertyf("Strato/777/fctl/pfc/roll")
+pfc_elevator_command = globalPropertyf("Strato/777/fctl/pfc/elevator")
+pfc_rudder_command = globalPropertyf("Strato/777/fctl/pfc/rudder")
+fbw_ail_ratio = globalPropertyf("Strato/777/fctl/ail_ratio")
+fbw_flprn_ratio_l = globalPropertyf("Strato/777/fctl/flprn_ratio_l")
+fbw_flprn_ratio_u = globalPropertyf("Strato/777/fctl/flprn_ratio_u")
 
 --creating our own datarefs
 
@@ -73,11 +90,11 @@ pcu_mode_elevator = createGlobalPropertyia("Strato/777/fctl/elevator/pcu_mode", 
 --10, 11 - left and right reversers respectively
 
 hyd_load = createGlobalPropertyfa("Strato/777/hydraulics/load", {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0})
-flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
+flap_tgt = globalPropertyf("Strato/777/flaps/tgt")
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
-fbw_ail_ratio = 0
+ace_smooth = false
 
 set(fctl_ovrd, 1)
 
@@ -86,59 +103,6 @@ function GetClosestFlapSetting()
 		if flap_settings[i] >= get(flaps) then
 			return i
 		end
-	end
-end
-
-function UpdateFBWAilRatio()
-	--Speeds and altitudes for aileron lockout
-	lockout_speeds = {280, 240, 240, 166}
-	red_authority_speeds = {270, 230, 230, 152}
-	lockout_alts = {11500, 19500, 26500, 43000}
-	red_authority_alts = {9000, 17500, 25000, 43000}
-	local avg_alt = (get(altitude_pilot) + get(altitude_copilot) + get(altitude_stdby)) / 3
-	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
-	local tmp_idx_1 = 0 --limit after which we start decreasing aileron ratio
-	local tmp_idx_2 = 0 --limit after which we start blocking
-	--find below which altitude we are from the pre defined alts for max and min limits
-	for i=4,1,-1 do
-		if avg_alt < red_authority_alts[i] then
-			tmp_idx_1 = i
-		elseif avg_alt == red_authority_alts[i] then
-			tmp_idx_1 = i
-			break
-		else
-			break
-		end
-	end
-	for i=4,1,-1 do
-		if avg_alt < lockout_alts[i] then
-			tmp_idx_2 = i
-		elseif avg_alt == lockout_alts[i] then
-			tmp_idx_2 = i
-			break
-		else
-			break
-		end
-	end
-	--Calculate the speed limits for given config
-	local speed_lim_min = 0
-	local speed_lim_max = 0
-	if tmp_idx_1 > 1 then
-		speed_lim_min = red_authority_speeds[tmp_idx_1 - 1] + (red_authority_speeds[tmp_idx_1] - red_authority_speeds[tmp_idx_1 - 1]) * (avg_alt - red_authority_alts[tmp_idx_1 - 1]) / (red_authority_alts[tmp_idx_1] - red_authority_alts[tmp_idx_1 - 1])
-	else
-		speed_lim_min = red_authority_speeds[1]
-	end
-	if tmp_idx_2 > 1 then
-		speed_lim_max = lockout_speeds[tmp_idx_2 - 1] + (lockout_speeds[tmp_idx_2] - lockout_speeds[tmp_idx_2 - 1]) * (avg_alt - lockout_alts[tmp_idx_2 - 1]) / (lockout_alts[tmp_idx_2] - lockout_alts[tmp_idx_2 - 1])
-	else
-		speed_lim_max = lockout_speeds[1]
-	end
-	if avg_cas <= speed_lim_min then
-		fbw_ail_ratio = 36
-	elseif avg_cas > speed_lim_min and avg_cas < speed_lim_max then
-		fbw_ail_ratio = 36 * (1 - ((avg_cas - speed_lim_min) / (speed_lim_max - speed_lim_min)))
-	else
-		fbw_ail_ratio = 0
 	end
 end
 
@@ -224,7 +188,7 @@ function GetAilRatio(ratio, hyd_sys, hyd_press, pcu_mode, down_cmd, v_dir) --Ail
 	return 0
 end
 
-function GetDownCmd(side, pcu_mode, f_type) --Change of neutral by flybywire
+function GetDownCmd(pcu_mode, f_type) --Change of neutral by flybywire
 	ail_neutral = {0, 0, -5, -5, -5, 0, 0}
 	flprn_neutral = {0, 0, -5, -14, -16, -29, -29}
 	if get(speedbrake_handle) <= 0 and pcu_mode == 1 and get(flaps) > 0 then
@@ -232,9 +196,9 @@ function GetDownCmd(side, pcu_mode, f_type) --Change of neutral by flybywire
 		local closest_2 = closest - 1
 		local val_nml = (get(flaps) - flap_settings[closest_2]) / (flap_settings[closest] - flap_settings[closest_2])
 		if f_type == 1 then
-			return -1 * side * (ail_neutral[closest_2] + (ail_neutral[closest] - ail_neutral[closest_2]) * val_nml)
+			return -1 * (ail_neutral[closest_2] + (ail_neutral[closest] - ail_neutral[closest_2]) * val_nml)
 		else
-			return -1 * side * (flprn_neutral[closest_2] + (flprn_neutral[closest] - flprn_neutral[closest_2]) * val_nml)
+			return -1 * (flprn_neutral[closest_2] + (flprn_neutral[closest] - flprn_neutral[closest_2]) * val_nml)
 		end
 	end
 	return 0
@@ -252,7 +216,7 @@ function GetAilNeutral(side, ratio, hyd_sys, pcu_mode, f_type, down_cmd)
 	end
 	if get(tas) < 25.7 and math.max(unpack(press)) * pcu_mode < 2500 then
 		if f_type == 2 then
-			return side * (-(ratio * get(tas) / 51.4) + 40 - ratio) --drooping for flaperons
+			return (-(ratio * get(tas) / 51.4) + 40 - ratio) --drooping for flaperons
 		end
 	else
 		return down_cmd
@@ -288,16 +252,16 @@ function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
 	if side == 1 then
 		s_idx = 4
 	end
-	local dn_cmd = GetDownCmd(side, pcu_mode, f_type)
+	local dn_cmd = GetDownCmd(pcu_mode, f_type)
 	if t == 1 then
 		--obtaining aileron characterristics
-		ail_ratio_lower = GetAilRatio(fbw_ail_ratio / 2, hyd_sys, 2500, pcu_mode, dn_cmd, 1)
-		ail_ratio_upper = GetAilRatio(fbw_ail_ratio / 2, hyd_sys, 2500, pcu_mode, dn_cmd, -1)
+		ail_ratio_lower = GetAilRatio(get(fbw_ail_ratio) / 2, hyd_sys, 2500, pcu_mode, dn_cmd, -1)
+		ail_ratio_upper = GetAilRatio(get(fbw_ail_ratio) / 2, hyd_sys, 2500, pcu_mode, dn_cmd, 1)
 		ail_neutral = GetAilNeutral(side, ail_ratio, hyd_sys, pcu_mode, f_type, dn_cmd)
 	else
 		--obtaining flaperon characterristics
-		ail_ratio_upper = GetAilRatio(18, hyd_sys, 2500, pcu_mode, dn_cmd, -1)
-		ail_ratio_lower = GetAilRatio(40, hyd_sys, 2500, pcu_mode, dn_cmd, 1)
+		ail_ratio_upper = GetAilRatio(get(fbw_flprn_ratio_u), hyd_sys, 2500, pcu_mode, dn_cmd, 1)
+		ail_ratio_lower = GetAilRatio(get(fbw_flprn_ratio_l), hyd_sys, 2500, pcu_mode, dn_cmd, -1)
 		ail_neutral = GetAilNeutral(side, ail_ratio_lower, hyd_sys, pcu_mode, f_type, dn_cmd)
 	end
 	--Updating load
@@ -307,11 +271,11 @@ function GetAilTarget(side, yoke_cmd, t, hyd_sys, pcu_mode, f_type)
 	else
 		set(h_load, 0)
 	end
-	--Outputing target
+	--Outputting target
 	if yoke_cmd * side < 0 then
-		return ail_neutral + ail_ratio_upper * yoke_cmd
+		return ail_neutral + ail_ratio_upper * yoke_cmd * side
 	else
-		return ail_neutral + ail_ratio_lower * yoke_cmd
+		return ail_neutral + ail_ratio_lower * yoke_cmd * side
 	end
 end
 
@@ -321,9 +285,9 @@ function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 	local actual = 0
 	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 1)
 	if side == -1 then
-		actual = get(spoilers_L)
+		actual = get(spoiler_L1)
 	else
-		actual = get(spoilers_R)
+		actual = get(spoiler_R1)
 		h_load = globalPropertyfae("Strato/777/hydraulics/load", 2)
 	end
 	local true_airspeed = get(tas)
@@ -340,9 +304,9 @@ function GetSpoilerTarget(side, yoke_cmd) --behavior for spoilers
 			neutral = actual
 		end
 	end
-	if yoke_cmd * side * -1 > 0.4 and max_press >= 570 and true_airspeed < 430 then --when deflecting ailerons is not enough, deflect spoilers
-		local tgt = neutral + ((yoke_cmd * side * -1 - 0.4) / 0.6) * (20 - neutral)
-		set(h_load, math.abs(tgt - neutral) * 0.0075)
+	if yoke_cmd * side > 0.4 and max_press >= 570 and true_airspeed < 430 then --when deflecting ailerons is not enough, deflect spoilers
+		local tgt = neutral + ((yoke_cmd * side - 0.4) / 0.6) * (20 - neutral)
+		set(h_load, tgt * 0.0075)
 		return tgt
 	else
 		if max_press > 100 then
@@ -418,7 +382,7 @@ function GetFlapCurrent()
 		closest = 2
 	end
 	local step = flap_times[closest - 1] * 0.004
-	if math.abs(target - actual) < step then
+	if math.abs(target - actual) <= step then
 		return target
 	else
 		return actual + step * (-bool2num(target < actual) + bool2num(target > actual)) * get(f_time) / 0.0166
@@ -564,33 +528,46 @@ function UpdateRudder(value)
 end
 
 function UpdateSpoilers(value, side)
-	for i=1,10 do
-		if i % 2 == 1 then
-			if side == -1 then
-				local spoiler = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", i)
-				set(spoiler, value)
-			else
-				local spoiler = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", i)
-				set(spoiler, value)
-			end
-		end
+	if side == -1 then
+		set(spoiler_L1, value)
+		set(spoiler_L2, value)
+	else
+		set(spoiler_R1, value)
+		set(spoiler_R2, value)
+	end
+end
+
+function UpdateSlats()
+	local flap_target = get(flap_tgt)
+	local flap_actual = get(flaps)
+	if flap_actual < 1 then
+		set(slat_1, flap_actual / 2)
+		set(slat_2, flap_actual / 2)
+	elseif flap_actual >= 1 and flap_actual <= 20 then
+		set(slat_1, 0.5)
+		set(slat_2, 0.5)
+	elseif flap_actual > 20 and flap_actual < 25 then
+		set(slat_1, 0.5 + (flap_actual - 20) * 0.1)
+		set(slat_2, 0.5 + (flap_actual - 20) * 0.1)
+	elseif flap_actual >= 25 then
+		set(slat_1, 1)
+		set(slat_2, 1)
+	else
+		set(slat_1, 0)
+		set(slat_2, 0)
 	end
 end
 
 function UpdateFlaps(value)
-	for i=1,10 do
-		local flap = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", i)
-		if value <= 30 then --avoid overshooting due to floating point operation
-			set(flap, value)
-		else
-			set(flap, 30)
-		end
-	end
+	set(flaps, value)
+	set(inbd_flap_L, value)
+	set(outbd_flap_L, value)
+	set(inbd_flap_R, value)
+	set(outbd_flap_R, value)
 end
 
 function update()
 	UpdateReversers()
-	UpdateFBWAilRatio()
 	--Update PCU modes
 	UpdateFlprnPCUMode(1, {1, 3})
 	UpdateFlprnPCUMode(2, {2, 3})
@@ -601,15 +578,15 @@ function update()
 	local L_elevator_pcu_mode = globalPropertyiae("Strato/777/fctl/elevator/pcu_mode", 1)
 	local R_elevator_pcu_mode = globalPropertyiae("Strato/777/fctl/elevator/pcu_mode", 2)
 	--Obtaining target positions for all of the flight controls
-	local L_elevator_target = GetElevatorTarget({1, 2}, get(yoke_pitch_ratio), get(L_elevator_pcu_mode))
-	local R_elevator_target = GetElevatorTarget({1, 3}, get(yoke_pitch_ratio), get(R_elevator_pcu_mode))
-	local L_outbd_ail_target = GetAilTarget(-1, get(yoke_roll_ratio), 1, {1, 2}, 1, 1)
-	local L_inbd_ail_target = GetAilTarget(-1, get(yoke_roll_ratio), 2, {1, 3}, get(L_flprn_pcu_mode), 2)
-	local R_outbd_ail_target = GetAilTarget(1, get(yoke_roll_ratio), 1, {1, 2}, 1, 1)
-	local R_inbd_ail_target = GetAilTarget(1, get(yoke_roll_ratio), 2, {2, 3}, get(R_flprn_pcu_mode), 2)
+	local L_elevator_target = GetElevatorTarget({1, 2}, get(pfc_elevator_command) / 20, get(L_elevator_pcu_mode))
+	local R_elevator_target = GetElevatorTarget({1, 3}, get(pfc_elevator_command) / 20, get(R_elevator_pcu_mode))
+	local L_outbd_ail_target = GetAilTarget(1, get(pfc_roll_command) / 18, 1, {1, 2}, 1, 1)
+	local L_inbd_ail_target = GetAilTarget(1, get(pfc_roll_command) / 18, 2, {1, 3}, get(L_flprn_pcu_mode), 2)
+	local R_outbd_ail_target = GetAilTarget(-1, get(pfc_roll_command) / 18, 1, {1, 2}, 1, 1)
+	local R_inbd_ail_target = GetAilTarget(-1, get(pfc_roll_command) / 18, 2, {2, 3}, get(R_flprn_pcu_mode), 2)
 	local L_spoiler_target = GetSpoilerTarget(-1, get(yoke_roll_ratio))
 	local R_spoiler_target = GetSpoilerTarget(1, get(yoke_roll_ratio))
-	local rud_target = GetRudderTarget(get(yoke_heading_ratio))
+	local rud_target = GetRudderTarget(get(pfc_rudder_command) / 27)
 	SetFlapTarget()
 	--Obtaining response times for all of the flight controls
 	local outbd_ail_response_time = GetAilResponseTime({1, 2}, 1)
@@ -620,14 +597,25 @@ function update()
 	local spoiler_response_time = GetSpoilerResponseTime()
 	local rud_time = GetRudderResponseTime()
 	--Move flight controls in sim
-	UpdateOutbdAileron(get(outbd_ail_L)+(L_outbd_ail_target - get(outbd_ail_L))*get(f_time)*outbd_ail_response_time, -1) --these ginormous formulas are for smooth transitions
-	UpdateInbdAileron(get(inbd_ail_L)+(L_inbd_ail_target - get(inbd_ail_L))*get(f_time)*L_inbd_ail_response_time, -1)
-	UpdateOutbdAileron(get(outbd_ail_R)+(R_outbd_ail_target - get(outbd_ail_R))*get(f_time)*outbd_ail_response_time, 1)
-	UpdateInbdAileron(get(inbd_ail_R)+(R_inbd_ail_target - get(inbd_ail_R))*get(f_time)*R_inbd_ail_response_time, 1)
+	EvenAnim(outbd_ail_L, L_outbd_ail_target, 0.3)
+	EvenAnim(inbd_ail_L, L_inbd_ail_target, 0.3)
+	EvenAnim(outbd_ail_R, R_outbd_ail_target, 0.3)
+	EvenAnim(inbd_ail_R, R_inbd_ail_target, 0.3)
 	UpdateRudder(get(rudder)+(rud_target - get(rudder))*get(f_time)*rud_time)
-	UpdateSpoilers(get(spoilers_L)+(L_spoiler_target - get(spoilers_L))*get(f_time)*spoiler_response_time, -1)
-	UpdateSpoilers(get(spoilers_R)+(R_spoiler_target - get(spoilers_R))*get(f_time)*spoiler_response_time, 1)
+	UpdateSpoilers(get(spoiler_L1)+(L_spoiler_target - get(spoiler_L1))*get(f_time)*spoiler_response_time, -1)
+	UpdateSpoilers(get(spoiler_R1)+(R_spoiler_target - get(spoiler_R1))*get(f_time)*spoiler_response_time, 1)
 	UpdateFlaps(GetFlapCurrent())
+	UpdateSlats()
 	UpdateElevator(get(elevator_L)+(L_elevator_target - get(elevator_L)) * get(f_time) * L_elevator_response_time, -1)
 	UpdateElevator(get(elevator_R)+(R_elevator_target - get(elevator_R)) * get(f_time) * R_elevator_response_time, 1)
 end
+
+function onAirportLoaded()
+	if get(ra_pilot) > 5 or get(ra_copilot) > 5 then
+		UpdateFlaps(5)
+		set(flap_tgt, 5)
+		UpdateSlats()
+	end
+end
+
+onAirportLoaded()
