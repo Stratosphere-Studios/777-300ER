@@ -13,18 +13,24 @@ addSearchPath(moduleDirectory.."/Custom Module/FCTL")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
+max_allowable = createGlobalPropertyi("Strato/777/fctl/vmax", 0)
+stall_speed = createGlobalPropertyi("Strato/777/fctl/vstall", 0)
+manuever_speed = createGlobalPropertyi("Strato/777/fctl/vmanuever", 0)
+flap_tgt = createGlobalPropertyf("Strato/777/flaps/tgt", 0)
 altn_gear = createGlobalPropertyi("Strato/777/gear/altn_extnsn", 0)
 act_press = createGlobalPropertyi("Strato/777/gear/actuator_press", 0)
 brake_sys = createGlobalPropertyi("Strato/777/gear/shuttle_valve", 3)
-brake_qty_L = createGlobalPropertyf("Strato/777/gear/qty_brake_L")
-brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R")
-
-testNum = globalPropertyf("testNum")
+brake_qty_L = createGlobalPropertyf("Strato/777/gear/qty_brake_L", 0)
+brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R", 0)
+stab_cutout_C = createGlobalPropertyi("Strato/777/fctl/stab_cutout_C", 0)
+stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
 
 components = {
 
 	timers {},
+	speed_calc {},
 	hydraulics {},
+	fbw_pid {},
 	fctl {},
 	gear {},
 	eicascheck {
@@ -46,5 +52,6 @@ components = {
 		position = {2730 , 1400, 1365, 1365},
 		visible = true,
 		fpsLimit = 50
-	}
+	},
+	custom_commands {}
 }
