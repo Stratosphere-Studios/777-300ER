@@ -85,7 +85,7 @@ err_reset = createGlobalPropertyi("Strato/777/test/err_reset", 0)
 -- 2.6, 2.9, 0.1
 pid_d_maintain = {5.6, 4.6, 1.1}
 pid_pitch_maintain = {0.4, 1.45, 0.1}
-pid_trs_maintain = {-0.16, -0.09, -0.01}
+pid_trs_maintain = {-0.08, -0.09, -0.01}
 pid_gust_supr = {0.3, 0.23, 0.13}
 pid_coefficients_rudder = {0.43, 0.24, 0}
 --Fly by wire pitch gains
@@ -114,7 +114,6 @@ roll_input_last = 0
 heading_input_last = 0
 fbw_roll_past = 0
 fbw_elevator_past = 0 --This is for stab trim
-fbw_pitch_auto = 0
 fbw_pitch = 0
 stab_trim_engage = 0
 d_error_last = 0
@@ -245,41 +244,23 @@ function UpdatePFCElevatorCommand()
 			trs_error_last = tmp_pitch[3]
 		end
 		set(fbw_pitch_dref, fbw_pitch)
-		if fbw_pitch_auto == 0 and math.abs(p_delta) <= 0.07 and math.abs(get(yoke_pitch_ratio)) < 0.1 then
-			pitch_release_time = get(c_time)
-		end
-		if math.abs(get(yoke_pitch_ratio)) < 0.1 and avg_ra > 100 and math.abs(p_delta) <= 0.07 then
-			fbw_pitch_auto = 1
-			--Limiting pitch because we don't want to subject the plane to extreme G-loads
-			fbw_pitch = lim(fbw_pitch, 25, -10)
-			--Calculating elevator output to maintain pitch
-			local t_kp = pid_pitch_maintain[1]
-			local t_ki = pid_pitch_maintain[2]
-			local t_kd = pid_pitch_maintain[3]
-			local tmp = PID_Compute(t_kp, t_ki, t_kd, fbw_pitch, avg_pitch, e_error_total, e_error_last, 100, 20)
-			set(pfc_elevator_command, tmp[1])
-			e_error_total = tmp[2]
-			e_error_last = tmp[3]
-		else
-			fbw_pitch_auto = 0
-			if get(f_time) ~= 0 then
-				local dep_coeff = 0.2
-				--Stall protection
-				if avg_cas < get(manuever_speed) then
-					dep_coeff = 0.2 + (get(manuever_speed) - avg_cas) * 0.3 / (get(manuever_speed) - get(stall_speed))
-				end
-				--Maintain a certain pitch rate
-				local fbw_delta = (fbw_pitch - avg_pitch) * dep_coeff
-				local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
-				local tmp = PID_Compute(pid_d_maintain[1], pid_d_maintain[2], pid_d_maintain[3], fbw_delta + get(yoke_pitch_ratio) * 3.3, curr_delta, d_error_total, d_error_last, 100, 20)
-				set(pitch_delta, curr_delta)
-				set(pfc_elevator_command, tmp[1])
-				d_error_total = tmp[2]
-				d_error_last = tmp[3]
-				pitch_last = avg_pitch
+		if get(f_time) ~= 0 then
+			local dep_coeff = 0.2
+			--Stall protection
+			if avg_cas < get(manuever_speed) then
+				dep_coeff = 0.2 + (get(manuever_speed) - avg_cas) * 0.23 / (get(manuever_speed) - get(stall_speed))
 			end
+			--Maintain a certain pitch rate
+			local fbw_delta = (fbw_pitch - avg_pitch) * dep_coeff
+			local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
+			local tmp = PID_Compute(pid_d_maintain[1], pid_d_maintain[2], pid_d_maintain[3], fbw_delta + get(yoke_pitch_ratio) * 3.3, curr_delta, d_error_total, d_error_last, 100, 20)
+			--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_delta + get(yoke_pitch_ratio) * 3.3, curr_delta, d_error_total, d_error_last, 100, 20)
+			set(pitch_delta, curr_delta)
+			set(pfc_elevator_command, tmp[1])
+			d_error_total = tmp[2]
+			d_error_last = tmp[3]
+			pitch_last = avg_pitch
 		end
-		set(fbw_p_e, fbw_pitch_auto)
 		fbw_elevator_past = get(pfc_elevator_command)
 		p_delta_last = p_delta
 	else
@@ -354,11 +335,7 @@ end
 function UpdateStabTrim()
 	if get(fbw_mode) == 1 then
 		local delta_limit = 0.33
-		local pitch_limit = 3.8
-		if fbw_pitch_auto == 1 then
-			delta_limit = 0.33
-			pitch_limit = 0.3
-		end
+		local pitch_limit = 0.3
 		if (get(sys_C_press) * (1 - get(stab_cutout_C)) > 900 or get(sys_R_press) * (1 - get(stab_cutout_R)) > 900) and get(on_ground) == 0 then
 			if math.abs(fbw_elevator_past - get(pfc_elevator_command)) < delta_limit and math.abs(get(pfc_elevator_command)) > pitch_limit then
 				if stab_trim_engage == 0 then
