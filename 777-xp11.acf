@@ -94,7 +94,7 @@ P _cgpt/9/_w_now 1.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -55.625419617
+P _door/0/_ang_now -81.565948486
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -102,7 +102,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 55.625419617
+P _door/1/_ang_now 81.565948486
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -120,7 +120,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 55.625419617
+P _door/2/_ang_now 81.565948486
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -128,7 +128,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 0.0
+P _door/3/_ang_now 89.971397400
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -136,7 +136,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now 0.0
+P _door/4/_ang_now -89.971397400
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -144,7 +144,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now 0.0
+P _door/5/_ang_now -87.618034363
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -152,7 +152,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 0.0
+P _door/6/_ang_now 87.618034363
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -160,7 +160,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now 0.0
+P _door/7/_ang_now -85.236061096
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -168,7 +168,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 0.0
+P _door/8/_ang_now 85.236061096
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -176,7 +176,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -55.625419617
+P _door/9/_ang_now -81.565948486
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -223,10 +223,10 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 74.619468689
+P _gear/0/_lonN 109.417739868
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
-P _gear/0/_stat_def 0.579100728
+P _gear/0/_stat_def 0.579100668
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -237,7 +237,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -10.175381660
+P _gear/1/_axiN -14.920600891
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -253,14 +253,14 @@ P _gear/1/_gear_x 16.600000381
 P _gear/1/_gear_y -4.599999905
 P _gear/1/_gear_z 106.360000610
 P _gear/1/_latE 0.0
-P _gear/1/_latN -55.625419617
+P _gear/1/_latN -81.565948486
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 12.500000000
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN 2.532099724
+P _gear/1/_lonN 7.910014629
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.170852184
+P _gear/1/_stat_def 1.170852423
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -271,7 +271,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.899999976
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 10.175381660
+P _gear/2/_axiN 14.920600891
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -287,11 +287,11 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.360000610
 P _gear/2/_latE 0.0
-P _gear/2/_latN 55.625419617
+P _gear/2/_latN 81.565948486
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 12.500000000
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN 2.532099724
+P _gear/2/_lonN 7.910014629
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
 P _gear/2/_stat_def 1.370846510
@@ -648,6 +648,7 @@ P _obja/11/_v10_att_z_acf_prt_ref 100.0
 P _obja/11/_v10_is_internal 442238
 P _obja/11/_v10_steers_with_gear 0
 P _obja/12/_obj_flags 9
+P _obja/12/_obj_hide_dataref Strato/777/acf_is_freighter
 P _obja/12/_v10_att_file_stl economy.obj
 P _obja/12/_v10_att_part -1
 P _obja/12/_v10_att_phi_ref 0.0
@@ -670,6 +671,7 @@ P _obja/13/_v10_att_z_acf_prt_ref 100.0
 P _obja/13/_v10_is_internal 886860
 P _obja/13/_v10_steers_with_gear 0
 P _obja/14/_obj_flags 9
+P _obja/14/_obj_hide_dataref Strato/777/acf_is_freighter
 P _obja/14/_v10_att_file_stl first_class.obj
 P _obja/14/_v10_att_part -1
 P _obja/14/_v10_att_phi_ref 0.0
@@ -681,6 +683,7 @@ P _obja/14/_v10_att_z_acf_prt_ref 100.0
 P _obja/14/_v10_is_internal 141358
 P _obja/14/_v10_steers_with_gear 0
 P _obja/15/_obj_flags 24
+P _obja/15/_obj_hide_dataref Strato/777/acf_is_freighter
 P _obja/15/_v10_att_file_stl fuse_2.obj
 P _obja/15/_v10_att_part -1
 P _obja/15/_v10_att_phi_ref 0.0
@@ -692,6 +695,7 @@ P _obja/15/_v10_att_z_acf_prt_ref 100.0
 P _obja/15/_v10_is_internal 568614
 P _obja/15/_v10_steers_with_gear 0
 P _obja/16/_obj_flags 24
+P _obja/16/_obj_hide_dataref Strato/777/acf_is_freighter
 P _obja/16/_v10_att_file_stl fuse_1.obj
 P _obja/16/_v10_att_part -1
 P _obja/16/_v10_att_phi_ref 0.0
@@ -703,6 +707,7 @@ P _obja/16/_v10_att_z_acf_prt_ref 100.0
 P _obja/16/_v10_is_internal 939942
 P _obja/16/_v10_steers_with_gear 0
 P _obja/17/_obj_flags 24
+P _obja/17/_obj_hide_dataref Strato/777/acf_is_freighter
 P _obja/17/_v10_att_file_stl fuse_3.obj
 P _obja/17/_v10_att_part -1
 P _obja/17/_v10_att_phi_ref 0.0
@@ -823,6 +828,42 @@ P _obja/26/_v10_att_y_acf_prt_ref 0.0
 P _obja/26/_v10_att_z_acf_prt_ref 100.0
 P _obja/26/_v10_is_internal -1650485712
 P _obja/26/_v10_steers_with_gear 0
+P _obja/27/_obj_flags 1
+P _obja/27/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/27/_v10_att_file_stl ch.obj
+P _obja/27/_v10_att_part -1
+P _obja/27/_v10_att_phi_ref 0.0
+P _obja/27/_v10_att_psi_ref 0.0
+P _obja/27/_v10_att_the_ref 0.0
+P _obja/27/_v10_att_x_acf_prt_ref 0.0
+P _obja/27/_v10_att_y_acf_prt_ref 0.0
+P _obja/27/_v10_att_z_acf_prt_ref 100.0
+P _obja/27/_v10_is_internal 1294046768
+P _obja/27/_v10_steers_with_gear 0
+P _obja/28/_obj_flags 1
+P _obja/28/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/28/_v10_att_file_stl interior.obj
+P _obja/28/_v10_att_part -1
+P _obja/28/_v10_att_phi_ref 0.0
+P _obja/28/_v10_att_psi_ref 0.0
+P _obja/28/_v10_att_the_ref 0.0
+P _obja/28/_v10_att_x_acf_prt_ref 0.0
+P _obja/28/_v10_att_y_acf_prt_ref 0.0
+P _obja/28/_v10_att_z_acf_prt_ref 100.0
+P _obja/28/_v10_is_internal 1294046768
+P _obja/28/_v10_steers_with_gear 0
+P _obja/29/_obj_flags 9
+P _obja/29/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/29/_v10_att_file_stl 300ERF/cargo_hold.obj
+P _obja/29/_v10_att_part -1
+P _obja/29/_v10_att_phi_ref 0.0
+P _obja/29/_v10_att_psi_ref 0.0
+P _obja/29/_v10_att_the_ref 0.0
+P _obja/29/_v10_att_x_acf_prt_ref 0.0
+P _obja/29/_v10_att_y_acf_prt_ref 0.0
+P _obja/29/_v10_att_z_acf_prt_ref 100.0
+P _obja/29/_v10_is_internal 1294046768
+P _obja/29/_v10_steers_with_gear 0
 P _obja/3/_obj_flags 9
 P _obja/3/_v10_att_file_stl cockpit/cockpit_main.obj
 P _obja/3/_v10_att_part -1
@@ -834,6 +875,54 @@ P _obja/3/_v10_att_y_acf_prt_ref 0.0
 P _obja/3/_v10_att_z_acf_prt_ref 100.0
 P _obja/3/_v10_is_internal 107836
 P _obja/3/_v10_steers_with_gear 0
+P _obja/30/_obj_flags 16
+P _obja/30/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/30/_v10_att_file_stl 300ERF/fuse_1.obj
+P _obja/30/_v10_att_part -1
+P _obja/30/_v10_att_phi_ref 0.0
+P _obja/30/_v10_att_psi_ref 0.0
+P _obja/30/_v10_att_the_ref 0.0
+P _obja/30/_v10_att_x_acf_prt_ref 0.0
+P _obja/30/_v10_att_y_acf_prt_ref 0.0
+P _obja/30/_v10_att_z_acf_prt_ref 100.0
+P _obja/30/_v10_is_internal 1294046768
+P _obja/30/_v10_steers_with_gear 0
+P _obja/31/_obj_flags 16
+P _obja/31/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/31/_v10_att_file_stl 300ERF/fuse_2.obj
+P _obja/31/_v10_att_part -1
+P _obja/31/_v10_att_phi_ref 0.0
+P _obja/31/_v10_att_psi_ref 0.0
+P _obja/31/_v10_att_the_ref 0.0
+P _obja/31/_v10_att_x_acf_prt_ref 0.0
+P _obja/31/_v10_att_y_acf_prt_ref 0.0
+P _obja/31/_v10_att_z_acf_prt_ref 100.0
+P _obja/31/_v10_is_internal 1294046768
+P _obja/31/_v10_steers_with_gear 0
+P _obja/32/_obj_flags 16
+P _obja/32/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/32/_v10_att_file_stl 300ERF/fuse_3.obj
+P _obja/32/_v10_att_part -1
+P _obja/32/_v10_att_phi_ref 0.0
+P _obja/32/_v10_att_psi_ref 0.0
+P _obja/32/_v10_att_the_ref 0.0
+P _obja/32/_v10_att_x_acf_prt_ref 0.0
+P _obja/32/_v10_att_y_acf_prt_ref 0.0
+P _obja/32/_v10_att_z_acf_prt_ref 100.0
+P _obja/32/_v10_is_internal 1294046768
+P _obja/32/_v10_steers_with_gear 0
+P _obja/33/_obj_flags 9
+P _obja/33/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/33/_v10_att_file_stl 300ERF/interior.obj
+P _obja/33/_v10_att_part -1
+P _obja/33/_v10_att_phi_ref 0.0
+P _obja/33/_v10_att_psi_ref 0.0
+P _obja/33/_v10_att_the_ref 0.0
+P _obja/33/_v10_att_x_acf_prt_ref 0.0
+P _obja/33/_v10_att_y_acf_prt_ref 0.0
+P _obja/33/_v10_att_z_acf_prt_ref 100.0
+P _obja/33/_v10_is_internal 1294046768
+P _obja/33/_v10_steers_with_gear 0
 P _obja/4/_obj_flags 9
 P _obja/4/_v10_att_file_stl cockpit/no_efb.obj
 P _obja/4/_v10_att_part -1
@@ -857,7 +946,7 @@ P _obja/5/_v10_att_z_acf_prt_ref 100.0
 P _obja/5/_v10_is_internal 892160
 P _obja/5/_v10_steers_with_gear 0
 P _obja/6/_obj_flags 13
-P _obja/6/_v10_att_file_stl cockpit/mcp.obj
+P _obja/6/_v10_att_file_stl cockpit/main_pnl.obj
 P _obja/6/_v10_att_part -1
 P _obja/6/_v10_att_phi_ref 0.0
 P _obja/6/_v10_att_psi_ref 0.0
@@ -865,10 +954,10 @@ P _obja/6/_v10_att_the_ref 0.0
 P _obja/6/_v10_att_x_acf_prt_ref 0.0
 P _obja/6/_v10_att_y_acf_prt_ref 0.0
 P _obja/6/_v10_att_z_acf_prt_ref 100.0
-P _obja/6/_v10_is_internal 789640
+P _obja/6/_v10_is_internal 474048
 P _obja/6/_v10_steers_with_gear 0
 P _obja/7/_obj_flags 13
-P _obja/7/_v10_att_file_stl cockpit/main_pnl.obj
+P _obja/7/_v10_att_file_stl cockpit/mcp.obj
 P _obja/7/_v10_att_part -1
 P _obja/7/_v10_att_phi_ref 0.0
 P _obja/7/_v10_att_psi_ref 0.0
@@ -876,7 +965,7 @@ P _obja/7/_v10_att_the_ref 0.0
 P _obja/7/_v10_att_x_acf_prt_ref 0.0
 P _obja/7/_v10_att_y_acf_prt_ref 0.0
 P _obja/7/_v10_att_z_acf_prt_ref 100.0
-P _obja/7/_v10_is_internal 474048
+P _obja/7/_v10_is_internal 789640
 P _obja/7/_v10_steers_with_gear 0
 P _obja/8/_obj_flags 13
 P _obja/8/_v10_att_file_stl cockpit/ovhd_1.obj
@@ -900,7 +989,7 @@ P _obja/9/_v10_att_y_acf_prt_ref 0.0
 P _obja/9/_v10_att_z_acf_prt_ref 100.0
 P _obja/9/_v10_is_internal 289402
 P _obja/9/_v10_steers_with_gear 0
-P _obja/count 27
+P _obja/count 34
 P _panel_inst_3d 0
 P _part/0/_bot_s1 0.0
 P _part/0/_bot_s2 0.015625000
@@ -39734,7 +39823,7 @@ P acf/_bus_gen_is_on/7 1
 P acf/_bus_gen_is_on/count 8
 P acf/_buses_always_tied 0
 P acf/_bypass_ratio 9.0
-P acf/_callsign Stratosphere 777
+P acf/_callsign Stratosphere 777W
 P acf/_camera_fov_zoom 60.0
 P acf/_camera_offset_phi 0.0
 P acf/_camera_offset_psi 0.0
@@ -40525,7 +40614,7 @@ P acf/_cyclic_up_trim_rat 0.0
 P acf/_deg_psi_per_deg_def 12.0
 P acf/_deg_the_per_deg_def 6.0
 P acf/_delta3 0.0
-P acf/_descrip X-Plane 11 Version
+P acf/_descrip Stratosphere Studios WIP Boeing 777-300ER and ERF for X-Plane 11
 P acf/_diff_coll_with_hdng 0.0
 P acf/_diff_coll_with_ptch 0.0
 P acf/_diff_coll_with_roll 0.0
@@ -41300,7 +41389,7 @@ P acf/_mixt_x_ctr 0.0
 P acf/_n1_power_curve1 2.0
 P acf/_n1_power_curve2 3.0
 P acf/_n2_power_curve 3.500000000
-P acf/_name 777-300ER (XP 11)
+P acf/_name 777-300ER/ERF XP11
 P acf/_new_plot_XP3D_cock/0 0
 P acf/_new_plot_XP3D_cock/1 1
 P acf/_new_plot_XP3D_cock/2 0
@@ -41324,7 +41413,7 @@ P acf/_nom_bat_volt 28.0
 P acf/_nom_fuelP 30.0
 P acf/_nom_gen_volt 115.0
 P acf/_nom_oilP 80.0
-P acf/_notes WIP, This version is for XP11.
+P acf/_notes Stratosphere Studios WIP Boeing 777-300ER and ERF for X-Plane 11
 P acf/_num_batteries 3
 P acf/_num_braking_wheels 0.0
 P acf/_num_buses 3
@@ -41875,7 +41964,7 @@ P acf/_vect_power_for 1.0
 P acf/_vect_rate 15.0
 P acf/_vectarmY 0.0
 P acf/_vectarmZ 0.0
-P acf/_version 0.2.0 WIP (XP 11)
+P acf/_version WIP XP11
 P acf/_vvi_but_adjusts_pitch 0
 P acf/_warn_airliner 1
 P acf/_warn_alt_app_100 0
@@ -47254,7 +47343,6 @@ GROUP Captain ND
 END_GROUP
 GROUP Lower Eicas
   CHAINED
-  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     CHAINED
@@ -50569,14 +50657,11 @@ GROUP Trim
 
 END_GROUP
 GROUP EFB
-  LOCKED
-  CHAINED
   gen_rotary InstAlign Backg
     POS 134.000000 3469.500000
     IMAGE EFB/InstAlign
     DATAREF 
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -50599,7 +50684,6 @@ GROUP EFB
     IMAGE EFB/InstAlign
     DATAREF 
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -50620,8 +50704,53 @@ GROUP EFB
   gen_text REALISTIC PARK BRAK
     POS 442.500000 3469.000000
     IMAGE TXT.2.28.white
-    DATAREF Strato/777/displays/txt/REALISTIC_PRK_BRK[0]
-    LOCKED
+    DATAREF Strato/777/displays/txt/REALISTIC_PRK_BRK
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
+  gen_rotary Passenger/erf
+    POS 821.000000 3469.500000
+    IMAGE EFB/InstAlign
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 0.000000  62.857170 0.000000  62.857170 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_text PASSENGER/FREIGHTER
+    POS 828.500000 3469.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/PASSENGER_FREIGHTER
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
+  gen_text PAX_FREIGHT
+    POS 1087.500000 3459.500000
+    IMAGE FMS/big_green
+    DATAREF Strato/777/displays/txt/PAX_FREIGHT
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -50636,7 +50765,6 @@ GROUP EFB
     DATAREF 
     SHOW_EQUAL 1.000000 Strato/777/gear/park_brake_realistic
     SIZE 0.200000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -50656,8 +50784,7 @@ GROUP EFB
   gen_text INSTANT ADIRU ALIGN
     POS 140.500000 3469.000000
     IMAGE TXT.2.28.white
-    DATAREF Strato/777/displays/txt/INSTANT_ADIRU_ALIGN[0]
-    LOCKED
+    DATAREF Strato/777/displays/txt/INSTANT_ADIRU_ALIGN
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1

@@ -1,0 +1,41 @@
+{
+	// Place your 777-300ER workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"Defer Dataref": {
+		"scope": "lua",
+		"prefix": "ddref",
+		"body": [
+			"deferred_dataref(\"${1:Strato/777/}\", \"${2|number,string,array[]|}\")",
+		],
+		"description": "Defer a dataref"
+	},
+	"Defer Command": {
+		"scope": "lua",
+		"prefix": "dcmd",
+		"body": [
+			"deferred_command(\"${1:Strato/777/}\", \"${2:Description}\", ${3:_cmdHandler})",
+		],
+		"description": "Defer a command"
+	},
+	"Find": {
+		"scope": "lua",
+		"prefix": "find",
+		"body": [
+			"find_${2|dataref,command|}(\"${1}\")",
+		],
+		"description": "Find a dataref or command"
+	},
+	"XTLua Timers": {
+		"scope": "lua",
+		"prefix": "time",
+		"body": [
+			"${1|run_after_time,is_timer_scheduled,stop_timer|}(\"${2:func}\")",
+		],
+		"description": "XTLua Timer Functions"
+	}
+}
