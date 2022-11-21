@@ -94,7 +94,7 @@ P _cgpt/9/_w_now 1.0
 P _cgpt/9/_w_test 0.0
 P _cgpt/9/_z_ref 0.0
 P _cgpt/count 20
-P _door/0/_ang_now -81.565948486
+P _door/0/_ang_now -76.182250977
 P _door/0/_ext_ang 0.0
 P _door/0/_ret_ang -82.0
 P _door/0/_type 2
@@ -102,7 +102,7 @@ P _door/0/_xyz/0 19.0
 P _door/0/_xyz/1 -5.699999332
 P _door/0/_xyz/2 102.0
 P _door/0/_xyz/count 3
-P _door/1/_ang_now 81.565948486
+P _door/1/_ang_now 76.182250977
 P _door/1/_ext_ang 0.0
 P _door/1/_ret_ang 82.0
 P _door/1/_type 2
@@ -120,7 +120,7 @@ P _door/16/_type 0
 P _door/17/_type 0
 P _door/18/_type 0
 P _door/19/_type 0
-P _door/2/_ang_now 81.565948486
+P _door/2/_ang_now 76.182250977
 P _door/2/_ext_ang 0.0
 P _door/2/_ret_ang 82.0
 P _door/2/_type 2
@@ -128,7 +128,7 @@ P _door/2/_xyz/0 -19.0
 P _door/2/_xyz/1 -5.699999332
 P _door/2/_xyz/2 102.0
 P _door/2/_xyz/count 3
-P _door/3/_ang_now 89.971397400
+P _door/3/_ang_now 27.599227905
 P _door/3/_ext_ang 0.0
 P _door/3/_ret_ang 95.0
 P _door/3/_type 3
@@ -136,7 +136,7 @@ P _door/3/_xyz/0 0.799999952
 P _door/3/_xyz/1 -10.0
 P _door/3/_xyz/2 103.399993896
 P _door/3/_xyz/count 3
-P _door/4/_ang_now -89.971397400
+P _door/4/_ang_now -27.599227905
 P _door/4/_ext_ang 0.0
 P _door/4/_ret_ang -95.0
 P _door/4/_type 3
@@ -144,7 +144,7 @@ P _door/4/_xyz/0 -0.800000191
 P _door/4/_xyz/1 -10.0
 P _door/4/_xyz/2 103.399993896
 P _door/4/_xyz/count 3
-P _door/5/_ang_now -87.618034363
+P _door/5/_ang_now -58.073318481
 P _door/5/_ext_ang 0.0
 P _door/5/_ret_ang -90.0
 P _door/5/_type 1
@@ -152,7 +152,7 @@ P _door/5/_xyz/0 2.200000763
 P _door/5/_xyz/1 -7.899999619
 P _door/5/_xyz/2 16.400001526
 P _door/5/_xyz/count 3
-P _door/6/_ang_now 87.618034363
+P _door/6/_ang_now 58.073318481
 P _door/6/_ext_ang 0.0
 P _door/6/_ret_ang 90.0
 P _door/6/_type 1
@@ -160,7 +160,7 @@ P _door/6/_xyz/0 -2.200000048
 P _door/6/_xyz/1 -7.899999142
 P _door/6/_xyz/2 16.400001526
 P _door/6/_xyz/count 3
-P _door/7/_ang_now -85.236061096
+P _door/7/_ang_now -26.146633148
 P _door/7/_ext_ang 0.0
 P _door/7/_ret_ang -90.0
 P _door/7/_type 3
@@ -168,7 +168,7 @@ P _door/7/_xyz/0 2.200001478
 P _door/7/_xyz/1 -6.600000381
 P _door/7/_xyz/2 12.100000381
 P _door/7/_xyz/count 3
-P _door/8/_ang_now 85.236061096
+P _door/8/_ang_now 26.146633148
 P _door/8/_ext_ang 0.0
 P _door/8/_ret_ang 90.0
 P _door/8/_type 3
@@ -176,7 +176,7 @@ P _door/8/_xyz/0 -2.199999809
 P _door/8/_xyz/1 -6.600000381
 P _door/8/_xyz/2 12.100004196
 P _door/8/_xyz/count 3
-P _door/9/_ang_now -81.565948486
+P _door/9/_ang_now -76.182250977
 P _door/9/_ext_ang 0.0
 P _door/9/_ret_ang -82.0
 P _door/9/_type 2
@@ -223,7 +223,7 @@ P _gear/0/_latN 0.0
 P _gear/0/_latR 0.0
 P _gear/0/_leg_len 9.0
 P _gear/0/_lonE 0.0
-P _gear/0/_lonN 109.417739868
+P _gear/0/_lonN 102.195701599
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
 P _gear/0/_stat_def 0.579100668
@@ -237,7 +237,7 @@ P _gear/0/_strut_t2 0.252929688
 P _gear/0/_tire_radius 1.740000010
 P _gear/0/_tire_swidth 0.610000014
 P _gear/1/_axiE 0.0
-P _gear/1/_axiN -14.920600891
+P _gear/1/_axiN -13.935777664
 P _gear/1/_axiR -15.0
 P _gear/1/_cyc_time 20.0
 P _gear/1/_damp 25900.0
@@ -253,14 +253,14 @@ P _gear/1/_gear_x 16.600000381
 P _gear/1/_gear_y -4.599999905
 P _gear/1/_gear_z 106.360000610
 P _gear/1/_latE 0.0
-P _gear/1/_latN -81.565948486
+P _gear/1/_latN -76.182250977
 P _gear/1/_latR -82.0
 P _gear/1/_leg_len 12.500000000
 P _gear/1/_lonE -9.0
-P _gear/1/_lonN 7.910014629
+P _gear/1/_lonN 6.793880939
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.170852423
+P _gear/1/_stat_def 1.170852184
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -271,7 +271,7 @@ P _gear/1/_strut_t2 0.252929688
 P _gear/1/_tire_radius 2.200000048
 P _gear/1/_tire_swidth 0.899999976
 P _gear/2/_axiE 0.0
-P _gear/2/_axiN 14.920600891
+P _gear/2/_axiN 13.935777664
 P _gear/2/_axiR 15.0
 P _gear/2/_cyc_time 20.0
 P _gear/2/_damp 25900.0
@@ -287,14 +287,14 @@ P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.800000191
 P _gear/2/_gear_z 106.360000610
 P _gear/2/_latE 0.0
-P _gear/2/_latN 81.565948486
+P _gear/2/_latN 76.182250977
 P _gear/2/_latR 82.0
 P _gear/2/_leg_len 12.500000000
 P _gear/2/_lonE -9.0
-P _gear/2/_lonN 7.910014629
+P _gear/2/_lonN 6.793880939
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.370846510
+P _gear/2/_stat_def 1.370846391
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -42122,15 +42122,13 @@ gen_rotary Layout
   CLICK_DY 0
 
 GROUP Captain PFD
-  LOCKED
-  CHAINED
+  GROUP_OPEN
   gen_rotary template
     POS 668.500000 1784.000000
     IMAGE PFD/_Diagram
     DATAREF 
     SHOW_EQUAL 1.000000 testNum
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -42153,7 +42151,6 @@ GROUP Captain PFD
     DATAREF 
     SHOW_EQUAL 1.000000 testNum
     SIZE 1.550000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -42171,54 +42168,35 @@ GROUP Captain PFD
     CLICK_DY 0
 
   GROUP Artificial Horizon
-    LOCKED
     CHAINED
     GROUP_OPEN
     GROUP Not while ADIRU ali
       SHOW_EQUAL 0.000000 Strato/777/temp/fltInst/adiru/aligning
-      LOCKED
-      CHAINED
-      gen_needle AH
-        POS 605.000000 1743.000000
-        IMAGE PFD/artificial_horizon/horizon_colors
+      GROUP_OPEN
+      gen_needle Horizon
+        POS 604.000000 1795.000000
+        IMAGE PFD/artificial_horizon/horizon
         DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
-        SIZE 1.380000
-        LOCKED
+        SIZE 1.920000
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
-        BUS_SRC 1
+        BUS_SRC 3
         KEY_FRAME 0.000000 90.000000 1.000000
-        KEY_FRAME 45.000000 45.000000
+        KEY_FRAME -45.000000 135.000000
+        COMMENT 468
         IS_DRAGGABLE 0
         OFFSET 0.000000
         DEFLECT_SRC PITCH_AHRS
-        DEFLECT_PIX 920.000000
-
-      gen_needle AH_Markings
-        POS 605.000000 1743.000000
-        IMAGE PFD/artificial_horizon/horizon_label
-        DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
-        SIZE 1.380000
-        LOCKED
-        CLIP
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 90.000000 1.000000
-        KEY_FRAME 45.000000 45.000000
-        IS_DRAGGABLE 0
-        OFFSET 0.000000
-        DEFLECT_SRC PITCH_AHRS
-        DEFLECT_PIX 920.000000
+        DEFLECT_PIX 468.000000
+        NEEDLE_OFFSET_Y -3.000000
 
       gen_pointer AH_fd_roll
         POS 605.000000 1789.500000
         IMAGE PFD/artificial_horizon/fd_roll
         DATAREF sim/cockpit/autopilot/flight_director_roll
-        SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/flight_director[13]
+        SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_command_bars_pilot[13]
         SIZE 1.350000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -42233,9 +42211,8 @@ GROUP Captain PFD
         POS 604.500000 1789.000000
         IMAGE PFD/artificial_horizon/fd_pitch
         DATAREF sim/cockpit/autopilot/flight_director_pitch
-        SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/flight_director[13]
+        SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_command_bars_pilot[13]
         SIZE 1.350000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -42253,7 +42230,6 @@ GROUP Captain PFD
         IMAGE PFD/artificial_horizon/blue_mask
         DATAREF 
         SIZE 1.420000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -42275,8 +42251,8 @@ GROUP Captain PFD
       POS 687.000000 1774.000000
       IMAGE PFD/artificial_horizon/horizon_mask
       DATAREF 
+      SHOW_EQUAL 0.000000 Strato/777/fctl/pfc/overbank
       SIZE 1.400000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42299,7 +42275,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/fctl/pfc/overbank
       SIZE 1.400000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42317,7 +42292,6 @@ GROUP Captain PFD
       CLICK_DY 0
 
     GROUP Bank Slip
-      LOCKED
       CHAINED
       GROUP_ANIMATE_MODE ROTATE
       GROUP_WIDTH 242
@@ -42334,7 +42308,6 @@ GROUP Captain PFD
         IMAGE PFD/artificial_horizon/bank_diamond
         DATAREF 
         SIZE 2.500000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -42348,7 +42321,6 @@ GROUP Captain PFD
         IMAGE PFD/artificial_horizon/slip_rectangle
         DATAREF sim/cockpit2/gauges/indicators/slip_deg
         SIZE 2.500000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -42363,7 +42335,6 @@ GROUP Captain PFD
       IMAGE PFD/artificial_horizon/dual_cue
       DATAREF 
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42385,7 +42356,6 @@ GROUP Captain PFD
       IMAGE PFD/artificial_horizon/Inner_Marker
       DATAREF sim/cockpit2/radios/indicators/inner_marker_lit
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42407,7 +42377,6 @@ GROUP Captain PFD
       IMAGE PFD/artificial_horizon/Outer_Marker
       DATAREF sim/cockpit2/radios/indicators/outer_marker_lit
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42429,7 +42398,6 @@ GROUP Captain PFD
       IMAGE PFD/artificial_horizon/Middle_Marker
       DATAREF sim/cockpit2/radios/indicators/middle_marker_lit
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42448,7 +42416,6 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP VSI
-    LOCKED
     CHAINED
     gen_LED VS_negative
       POS 1360.000000 1435.000000
@@ -42456,7 +42423,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       SHOW_LESS -400.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42473,7 +42439,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       SHOW_GREATER 400.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42489,7 +42454,6 @@ GROUP Captain PFD
       IMAGE PFD/vertical_speed_indicator/vsi_background
       DATAREF 
       SIZE 1.250000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42511,7 +42475,6 @@ GROUP Captain PFD
       IMAGE PFD/vertical_speed_indicator/VSIscale
       DATAREF 
       SIZE 1.960000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42533,12 +42496,12 @@ GROUP Captain PFD
       IMAGE PFD/vertical_speed_indicator/VSIspdPtr
       DATAREF Strato/777/displays/vvi_capt
       SIZE 2.250000
-      LOCKED
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
       KEY_FRAME 6000.000000 63.099998 1.000000
+      KEY_FRAME 4000.000000 60.924999 1.000000
       KEY_FRAME 2000.000000 58.750000 1.000000
       KEY_FRAME 1000.000000 47.000000 1.000000
       KEY_FRAME 500.000000 27.500000 1.000000
@@ -42557,7 +42520,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
       SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/vvi_status
       SIZE 1.960000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 2
       BUS_SRC 1
@@ -42576,14 +42538,60 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP ASI
-    LOCKED
     CHAINED
+    gen_pointer vman min
+      POS 207.500000 1790.000000
+      IMAGE PFD/airspeed_indicator/amber_tape_min
+      DATAREF Strato/777/vmlo_tape_diff
+      SHOW_EQUAL 0.000000 sim/flightmodel/failures/onground_any
+      SIZE 0.990000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME -60.000000 -840.000000 1.000000
+      KEY_FRAME 0.000000 -345.000000 1.000000
+      KEY_FRAME 60.000000 150.000000
+      IS_DRAGGABLE 0
+      IS_VERTICAL 1
+      OFFSET 0.000000
+
+    gen_pointer stall band
+      POS 207.500000 1790.000000
+      IMAGE PFD/airspeed_indicator/red_tape
+      DATAREF Strato/777/stall_tape_diff
+      SHOW_EQUAL 0.000000 sim/flightmodel/failures/onground_any
+      SIZE 0.990000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME -60.000000 -840.000000 1.000000
+      KEY_FRAME 0.000000 -345.000000 1.000000
+      KEY_FRAME 60.000000 150.000000
+      IS_DRAGGABLE 0
+      IS_VERTICAL 1
+      OFFSET 0.000000
+
+    gen_pointer ovspd band
+      POS 207.500000 1790.000000
+      IMAGE PFD/airspeed_indicator/red_tape
+      DATAREF Strato/777/ovspd_tape_diff
+      SHOW_EQUAL 0.000000 sim/flightmodel/failures/onground_any
+      SIZE 0.990000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME -60.000000 -140.000000 1.000000
+      KEY_FRAME 0.000000 360.000000 1.000000
+      KEY_FRAME 60.000000 850.000000
+      IS_DRAGGABLE 0
+      IS_VERTICAL 1
+      OFFSET 0.000000
+
     gen_rotary ASI_background
       POS 107.500000 1775.500000
       IMAGE PFD/alt_spd_background
       DATAREF 
       SIZE 1.410000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42606,7 +42614,6 @@ GROUP Captain PFD
       IMAGE PFD/airspeed_indicator/ASItape
       DATAREF Strato/777/displays/ias_capt
       SIZE 2.060000
-      LOCKED
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -42624,7 +42631,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
       SHOW_GREATER 0.400000 sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
       SIZE 3.000000
-      LOCKED
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -42642,7 +42648,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
       SHOW_LESS -0.400000 sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
       SIZE 3.000000
-      LOCKED
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -42659,31 +42664,27 @@ GROUP Captain PFD
       IMAGE PFD/airspeed_indicator/IAS_bug
       DATAREF Strato/777/airspeed_bug_diff
       SIZE 2.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME 60.000000 211.000000 1.000000
-      KEY_FRAME 60.000000 211.000000 1.000000
-      KEY_FRAME 20.000000 68.000000 1.000000
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME -20.000000 -68.000000 1.000000
       KEY_FRAME -60.000000 -210.000000 1.000000
-      KEY_FRAME -60.000000 -210.000000
+      KEY_FRAME -60.000000 -210.000000 1.000000
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 60.000000 210.000000 1.000000
+      KEY_FRAME 60.000000 210.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
 
     gen_rotary black
-      POS 160.000000 2374.000000
+      POS 159.000000 2374.000000
       IMAGE black
       DATAREF 
       SIZE 0.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      CORNERS 0.000000 0.000000  0.000000 -28.571432  -10.000001 -28.571432  -10.000001 0.000000
+      CORNERS 0.000000 0.000000  0.000000 34.285717  -10.000001 34.285717  -10.000001 0.000000
       KEY_FRAME 0.000000 0.000000 1.000000
       KEY_FRAME 1.000000 6.000000
       DIGITS 1
@@ -42702,11 +42703,10 @@ GROUP Captain PFD
       IMAGE black
       DATAREF 
       SIZE 0.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      CORNERS 0.000000 0.000000  0.000000 -12.857144  -10.000001 -12.857144  -10.000001 0.000000
+      CORNERS 2.857143 -34.285717  0.000000 -12.857144  -10.000001 -12.857144  -7.142858 -34.285717
       KEY_FRAME 0.000000 0.000000 1.000000
       KEY_FRAME 1.000000 6.000000
       DIGITS 1
@@ -42720,28 +42720,28 @@ GROUP Captain PFD
       CLICK_DX 0
       CLICK_DY 0
 
-    gen_LED Mach
-      POS 114.000000 1237.500000
-      IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/flightmodel/misc/machno
-      SIZE 1.500000
-      LOCKED
+    gen_pointer trs pointer
+      POS 227.500000 1790.000000
+      IMAGE PFD/airspeed_indicator/TRS
+      DATAREF Strato/777/trimref_ovspd_diff
+      SHOW_EQUAL 1.000000 Strato/777/displays/trs_bug_enabled
+      SIZE 2.000000
+      CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
+      KEY_FRAME -60.000000 -247.000000 1.000000
       KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 360.000000 360.000000
-      DIGITS 3
-      DECIMALS 3
-      PERIOD_WIDTH 16
-      LED_ROWS 1
+      KEY_FRAME 60.000000 246.000000
+      IS_DRAGGABLE 0
+      IS_VERTICAL 1
+      OFFSET 0.000000
 
     gen_LED sel_mach
       POS 186.000000 2349.000000
       IMAGE PFD/magenta_type_meters
       DATAREF sim/flightmodel/misc/machno
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42756,14 +42756,36 @@ GROUP Captain PFD
       POS 93.500000 1789.500000
       IMAGE PFD/spd_window
       DATAREF 
+      SHOW_EQUAL 0.000000 Strato/777/displays/ias_amber
       SIZE 1.360000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
       KEY_FRAME 0.000000 0.000000 1.000000
       KEY_FRAME 1.000000 6.000000
       DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary spd window amber fl
+      POS 94.500000 1789.500000
+      IMAGE PFD/airspeed_indicator/spd_box_amber_flash
+      DATAREF Strato/777/displays/ias_flash
+      SHOW_EQUAL 1.000000 Strato/777/displays/ias_amber
+      SIZE 1.370000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 1.000000
+      DIGITS 2
       ROTARY_TYPE NO_CLICK
       CLICK_RADIUS 10.000000
       CLICK_RADIUS_DY 0.000000
@@ -42780,7 +42802,6 @@ GROUP Captain PFD
       DATAREF Strato/777/displays/ias_capt
       SHOW_GREATER 100.000000 Strato/777/displays/ias_capt
       SIZE 1.950000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42794,7 +42815,6 @@ GROUP Captain PFD
       IMAGE PFD/airspeed_indicator/ASIcrntTens
       DATAREF Strato/777/displays/ias_capt
       SIZE 1.950000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42809,7 +42829,6 @@ GROUP Captain PFD
       IMAGE PFD/airspeed_indicator/ASIcrntOnes
       DATAREF Strato/777/displays/ias_capt
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42818,9 +42837,122 @@ GROUP Captain PFD
       KEY_FRAME 999.999023 430.000000
       DIGITS 3
 
+    GROUP PFD GS
+      SHOW_LESS 0.399000 sim/flightmodel/misc/machno
+      CHAINED
+      gen_LED Ground Speed 3 digi
+        POS 176.000000 1242.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF sim/flightmodel/position/groundspeed[0]
+        SHOW_GREATER 100.000000 sim/flightmodel/position/groundspeed
+        SIZE 2.200000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 1
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 3
+        DECIMALS 0
+        PERIOD_WIDTH 15
+        LED_ROWS 0
+
+      gen_LED Ground Speed 2 digi
+        POS 146.000000 1243.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF sim/flightmodel/position/groundspeed[0]
+        SHOW_LESS 99.000000 sim/flightmodel/position/groundspeed
+        SHOW_GREATER 10.000000 sim/flightmodel/position/groundspeed
+        SIZE 2.200000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 1
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 15
+        LED_ROWS 0
+
+      gen_LED Ground Speed 1 digi
+        POS 116.000000 1242.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF sim/flightmodel/position/groundspeed[0]
+        SHOW_LESS 9.000000 sim/flightmodel/position/groundspeed
+        SHOW_GREATER -9.000000 sim/flightmodel/position/groundspeed
+        SIZE 2.200000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 1
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 1
+        DECIMALS 0
+        PERIOD_WIDTH 15
+        LED_ROWS 0
+
+      gen_rotary GS
+        POS 66.000000 1238.000000
+        IMAGE ND/GS
+        DATAREF 
+        SIZE 2.200000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 2
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+    END_GROUP
+    gen_rotary GS/MACH Outline
+      POS 113.000000 1240.500000
+      IMAGE PFD/artificial_horizon/RA_highlight2
+      DATAREF 
+      SHOW_EQUAL 1.000000 Strato/777/displays/ias_outline
+      SIZE 0.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      CORNERS 4.000000 0.000000  4.000000 0.000000  -13.000000 0.000000  -13.000000 0.000000
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED Mach
+      POS 120.000000 1241.500000
+      IMAGE LED_2.36R.xxxxx0.white
+      DATAREF sim/flightmodel/misc/machno
+      SHOW_GREATER 0.400000 sim/flightmodel/misc/machno
+      SIZE 1.500000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 3
+      PERIOD_WIDTH 16
+      LED_ROWS 1
+
   END_GROUP
   GROUP ALT
-    LOCKED
     CHAINED
     gen_LED sel_alt_mtrs
       POS 1187.000000 2396.000000
@@ -42828,7 +42960,6 @@ GROUP Captain PFD
       DATAREF Strato/777/displays/autopilot_alt_mtrs
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs_capt
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42844,7 +42975,6 @@ GROUP Captain PFD
       IMAGE PFD/magenta_type_large
       DATAREF sim/cockpit/autopilot/altitude
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42860,7 +42990,6 @@ GROUP Captain PFD
       IMAGE PFD/magenta_type
       DATAREF sim/cockpit/autopilot/altitude
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42876,7 +43005,6 @@ GROUP Captain PFD
       IMAGE PFD/alt_spd_background
       DATAREF 
       SIZE 1.410000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -42895,16 +43023,13 @@ GROUP Captain PFD
       CLICK_DY 0
 
     GROUP Tapes
-      LOCKED
       CHAINED
-      GROUP_OPEN
       gen_pointer Tape -1000-2000
         POS 1110.500000 1789.000000
         IMAGE PFD/ALTtapes/ALTtape01
         DATAREF Strato/777/displays/displayed_alt
         SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -42924,7 +43049,6 @@ GROUP Captain PFD
         SHOW_LESS 5500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 1600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -42942,7 +43066,6 @@ GROUP Captain PFD
         SHOW_LESS 8500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 4600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -42960,7 +43083,6 @@ GROUP Captain PFD
         SHOW_LESS 11500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 7600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -42978,7 +43100,6 @@ GROUP Captain PFD
         SHOW_LESS 14500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 10600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -42996,7 +43117,6 @@ GROUP Captain PFD
         SHOW_LESS 17500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 13600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43014,7 +43134,6 @@ GROUP Captain PFD
         SHOW_LESS 20500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 16600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43032,7 +43151,6 @@ GROUP Captain PFD
         SHOW_LESS 23500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 19600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43050,7 +43168,6 @@ GROUP Captain PFD
         SHOW_LESS 26500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 22600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43068,7 +43185,6 @@ GROUP Captain PFD
         SHOW_LESS 29500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 25600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43086,7 +43202,6 @@ GROUP Captain PFD
         SHOW_LESS 32500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 28600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43104,7 +43219,6 @@ GROUP Captain PFD
         SHOW_LESS 35500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 31600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43122,7 +43236,6 @@ GROUP Captain PFD
         SHOW_LESS 38500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 34600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43140,7 +43253,6 @@ GROUP Captain PFD
         SHOW_LESS 41500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 37600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43158,7 +43270,6 @@ GROUP Captain PFD
         SHOW_LESS 99999.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 43600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43177,7 +43288,6 @@ GROUP Captain PFD
         SHOW_LESS 44500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SHOW_GREATER 40600.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
         SIZE 2.070000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -43194,20 +43304,15 @@ GROUP Captain PFD
       IMAGE PFD/altimeter/SelAltPtr
       DATAREF Strato/777/displays/alt_bug_diff
       SIZE 1.980000
-      LOCKED
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME 400.000000 250.000000 1.000000
-      KEY_FRAME 400.000000 250.000000 1.000000
-      KEY_FRAME 200.000000 126.000000 1.000000
-      KEY_FRAME 100.000000 63.000000 1.000000
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME -100.000000 -63.000000 1.000000
-      KEY_FRAME -200.000000 -125.000000 1.000000
       KEY_FRAME -400.000000 -250.000000 1.000000
-      KEY_FRAME -400.000000 -250.000000
+      KEY_FRAME -400.000000 -250.000000 1.000000
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 400.000000 250.000000 1.000000
+      KEY_FRAME 400.000000 250.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -43217,7 +43322,6 @@ GROUP Captain PFD
       IMAGE PFD/altimeter/ground_level
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.750000
-      LOCKED
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -43238,7 +43342,6 @@ GROUP Captain PFD
       IMAGE PFD/alt_window
       DATAREF 
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43261,7 +43364,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_LESS -1.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43283,7 +43385,6 @@ GROUP Captain PFD
       IMAGE PFD/altimeter/5_columnALT
       DATAREF Strato/777/displays/displayed_alt
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43297,7 +43398,6 @@ GROUP Captain PFD
       DATAREF Strato/777/displays/displayed_alt
       SHOW_GREATER 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       SIZE 2.750000
-      LOCKED
       KF_WRAP_BOTTOM
       KF_WRAP_TOP
       CLIP
@@ -43317,7 +43417,6 @@ GROUP Captain PFD
       SHOW_LESS 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       SHOW_GREATER -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       SIZE 2.750000
-      LOCKED
       KF_WRAP_BOTTOM
       KF_WRAP_TOP
       CLIP
@@ -43336,7 +43435,6 @@ GROUP Captain PFD
       DATAREF Strato/777/displays/displayed_alt
       SHOW_LESS -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       SIZE 2.750000
-      LOCKED
       KF_WRAP_BOTTOM
       KF_WRAP_TOP
       CLIP
@@ -43355,7 +43453,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs_capt
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43378,7 +43475,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs_capt
       SIZE 1.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43402,7 +43498,6 @@ GROUP Captain PFD
       DATAREF Strato/777/displays/alt_mtrs_capt[1]
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs_capt
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43420,7 +43515,6 @@ GROUP Captain PFD
       SHOW_LESS 0.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs_capt
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43438,7 +43532,6 @@ GROUP Captain PFD
     DATAREF 
     SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/windshear_warning
     SIZE 2.100000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -43458,7 +43551,6 @@ GROUP Captain PFD
   GROUP ILS1 CAPT
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav1_flag_from_to_pilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/nav1_display_vertical
-    LOCKED
     CHAINED
     gen_text LOC/VNAV
       POS 337.000000 2184.000000
@@ -43466,7 +43558,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 2.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43477,13 +43568,11 @@ GROUP Captain PFD
 
     GROUP ACTIVE NAV1
       SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
-      LOCKED
       gen_text ILS1
         POS 310.000000 2285.000000
         IMAGE PFD/ILS Data/nav_text
         DATAREF sim/cockpit2/radios/indicators/nav1_nav_id
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43497,7 +43586,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/slash_degree
         DATAREF 
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43519,7 +43607,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/nav_numbers_deg
         DATAREF sim/cockpit2/radios/actuators/nav1_obs_deg_mag_pilot
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43535,7 +43622,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/dme
         DATAREF sim/cockpit/radios/nav1_has_dme
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43558,7 +43644,6 @@ GROUP Captain PFD
         DATAREF sim/cockpit/radios/nav1_dme_dist_m
         SHOW_EQUAL 1.000000 sim/cockpit/radios/nav1_has_dme
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43574,7 +43659,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/ils_marker
         DATAREF 
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43596,7 +43680,6 @@ GROUP Captain PFD
   GROUP ILS2 CAPT
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav2_flag_from_to_pilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/nav2_display_vertical
-    LOCKED
     CHAINED
     gen_text LOC/VNAV
       POS 337.000000 2184.000000
@@ -43604,7 +43687,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 2.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43615,14 +43697,12 @@ GROUP Captain PFD
 
     GROUP ACTIVE NAV2
       SHOW_EQUAL 1.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
-      LOCKED
       GROUP_OPEN
       gen_text ILS2
         POS 310.000000 2285.000000
         IMAGE PFD/ILS Data/nav_text
         DATAREF sim/cockpit2/radios/indicators/nav2_nav_id
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43636,7 +43716,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/slash_degree
         DATAREF 
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43658,7 +43737,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/nav_numbers_deg
         DATAREF sim/cockpit2/radios/actuators/nav2_obs_deg_mag_pilot
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43674,7 +43752,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/dme
         DATAREF sim/cockpit/radios/nav2_has_dme
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43697,7 +43774,6 @@ GROUP Captain PFD
         DATAREF sim/cockpit/radios/nav2_dme_dist_m
         SHOW_EQUAL 1.000000 sim/cockpit/radios/nav1_has_dme
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43713,7 +43789,6 @@ GROUP Captain PFD
         IMAGE PFD/ILS Data/ils_marker
         DATAREF 
         SIZE 2.000000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43738,7 +43813,6 @@ GROUP Captain PFD
     DATAREF 
     SHOW_EQUAL 1.000000 sim/cockpit/warnings/annunciators/GPWS
     SIZE 2.100000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -43758,7 +43832,6 @@ GROUP Captain PFD
   GROUP Radio Minimums
     SHOW_LESS 0.000000 Strato/777/minimums_mode
     SHOW_EQUAL 1.000000 Strato/777/minimums_visible
-    LOCKED
     CHAINED
     gen_pointer Radio Bug
       POS 1097.000000 1791.000000
@@ -43766,7 +43839,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_diff
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums
       SIZE 2.900000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43787,7 +43859,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_diff
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums
       SIZE 2.900000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43809,7 +43880,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43832,7 +43902,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43855,7 +43924,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_dh
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43872,7 +43940,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_dh
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43887,7 +43954,6 @@ GROUP Captain PFD
   GROUP Baro Minimums
     SHOW_EQUAL 1.000000 Strato/777/minimums_visible
     SHOW_GREATER 1.000000 Strato/777/minimums_mode
-    LOCKED
     CHAINED
     gen_pointer Baro Bug
       POS 1097.000000 1791.000000
@@ -43895,7 +43961,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_diff
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums
       SIZE 2.900000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43916,7 +43981,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_diff
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums
       SIZE 2.900000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43937,7 +44001,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43960,7 +44023,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums
       SIZE 3.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -43983,7 +44045,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_mda
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44000,7 +44061,6 @@ GROUP Captain PFD
       DATAREF Strato/777/minimums_mda
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44017,7 +44077,6 @@ GROUP Captain PFD
     IMAGE black
     DATAREF 
     SIZE 0.350000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -44040,7 +44099,6 @@ GROUP Captain PFD
     IMAGE black
     DATAREF 
     SIZE 0.350000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -44058,10 +44116,31 @@ GROUP Captain PFD
     CLICK_DX 0
     CLICK_DY 0
 
+  gen_rotary FMA_background
+    POS 605.500000 2402.500000
+    IMAGE PFD/AFDS_mode/afds_background
+    DATAREF 
+    SIZE 1.380000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 0.000000  20.000000 0.000000  20.000000 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
   GROUP Baro
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav2_flag_from_to_pilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/nav2_display_vertical
-    LOCKED
     CHAINED
     gen_LED BARO IN
       POS 1201.000000 1230.000000
@@ -44069,7 +44148,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
       SHOW_EQUAL 0.000000 Strato/777/baro_mode
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44086,7 +44164,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
       SHOW_EQUAL 1.000000 Strato/777/baro_mode
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44102,7 +44179,6 @@ GROUP Captain PFD
       IMAGE PFD/IN_HPA
       DATAREF Strato/777/baro_mode
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44125,7 +44201,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 29.920000 sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44144,34 +44219,10 @@ GROUP Captain PFD
 
   END_GROUP
   GROUP FMA
-    LOCKED
+    SHOW_EQUAL 1.000000 testNum
     CHAINED
-    gen_rotary FMA_background
-      POS 605.500000 2402.500000
-      IMAGE PFD/AFDS_mode/afds_background
-      DATAREF 
-      SIZE 1.380000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      CORNERS 0.000000 0.000000  0.000000 0.000000  20.000000 0.000000  20.000000 0.000000
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
     GROUP Pitch Modes
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/altv_captured
-      LOCKED
       CHAINED
       gen_rotary PItch Modes
         POS 875.000000 2420.000000
@@ -44179,7 +44230,6 @@ GROUP Captain PFD
         DATAREF sim/cockpit2/autopilot/altitude_mode
         SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/alts_captured
         SIZE 2.750000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1073741827
@@ -44204,10 +44254,10 @@ GROUP Captain PFD
     gen_rotary VNAV PTH 2
       POS 875.000000 2420.000000
       IMAGE PFD/AFDS_mode/default 737/vnav_pth
-      DATAREF sim/cockpit2/autopilot/altv_captured
+      DATAREF 
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
+      SHOW_GREATER 1.000000 sim/cockpit2/autopilot/altv_captured
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1073741827
@@ -44227,10 +44277,10 @@ GROUP Captain PFD
     gen_rotary VNAV ALT 2
       POS 875.000000 2420.000000
       IMAGE PFD/AFDS_mode/default 737/vnav_alt
-      DATAREF sim/cockpit2/autopilot/alts_captured
+      DATAREF 
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
+      SHOW_GREATER 1.000000 sim/cockpit2/autopilot/alts_captured
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1073741827
@@ -44253,7 +44303,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/autopilot/heading_mode
       SHOW_LESS 1.500000 sim/cockpit2/autopilot/rollout_status
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44278,7 +44327,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/rollout
       DATAREF sim/cockpit2/autopilot/rollout_status
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44301,7 +44349,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/autopilot/autothrottle_enabled
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/fms_vnav
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44326,7 +44373,6 @@ GROUP Captain PFD
       DATAREF sim/cockpit2/autopilot/autothrottle_enabled
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44349,9 +44395,8 @@ GROUP Captain PFD
       POS 356.000000 2380.000000
       IMAGE PFD/AFDS_mode/default 737/autothrottle_arm
       DATAREF sim/cockpit2/autopilot/autothrottle_arm
-      SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/autothrottle_enabled
+      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_arm
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44373,7 +44418,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/gs_armed
       DATAREF sim/cockpit2/autopilot/glideslope_armed
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44395,7 +44439,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/flare_armed
       DATAREF sim/cockpit2/autopilot/flare_status
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44419,7 +44462,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/vs_armed
       DATAREF sim/cockpit2/autopilot/vvi_status
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44443,7 +44485,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/vorloc_arm
       DATAREF sim/cockpit2/autopilot/hnav_armed
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44465,7 +44506,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/lnav_arm
       DATAREF sim/cockpit2/autopilot/gpss_status
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44489,7 +44529,6 @@ GROUP Captain PFD
       IMAGE PFD/AFDS_mode/default 737/rollout_arm
       DATAREF sim/cockpit2/autopilot/rollout_status
       SIZE 2.750000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1073741827
@@ -44514,7 +44553,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autopilot_on
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44537,7 +44575,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44559,9 +44596,8 @@ GROUP Captain PFD
       IMAGE PFD/AFDS/flt_dir
       DATAREF 
       SHOW_LESS 0.000000 sim/cockpit2/autopilot/autopilot_on
-      SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/flight_director
+      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/flight_director_mode
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44585,7 +44621,6 @@ GROUP Captain PFD
       SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/trk_fpa
       SHOW_GREATER 2.000000 sim/cockpit2/autopilot/fpa_status
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44609,7 +44644,6 @@ GROUP Captain PFD
       SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_status
       SHOW_GREATER 1.000000 Strato/777/displays/hdg_mode
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44633,7 +44667,6 @@ GROUP Captain PFD
       SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_hold_status
       SHOW_GREATER 1.000000 Strato/777/displays/hdg_mode
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44653,19 +44686,17 @@ GROUP Captain PFD
   END_GROUP
   GROUP RA
     SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
-    LOCKED
     CHAINED
-    GROUP_OPEN
-    gen_rotary black
-      POS 613.000000 1586.000000
-      IMAGE black
+    gen_rotary RA Box
+      POS 605.000000 1497.500000
+      IMAGE PFD/artificial_horizon/RA_box
       DATAREF 
+      SHOW_EQUAL 0.000000 Strato/777/outlined_RA
       SIZE 0.540000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      CORNERS 38.000000 -0.000000  38.000000 -188.000000  -60.000000 -188.000000  -60.000000 0.000000
+      CORNERS -6.000000 0.000000  -6.000000 0.000000  4.000000 0.000000  4.000000 0.000000
       KEY_FRAME 0.000000 0.000000 1.000000
       KEY_FRAME 1.000000 6.000000
       DIGITS 1
@@ -44685,7 +44716,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/outlined_RA
       SIZE 0.540000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44704,12 +44734,11 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_LED RA 4 Digits
-      POS 703.666687 1497.333374
+      POS 703.000000 1497.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_GREATER 1000.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44721,13 +44750,12 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED RA 3 Digits
-      POS 679.000000 1497.333374
+      POS 679.000000 1497.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_LESS 999.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_GREATER 100.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44739,13 +44767,12 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED RA 2 Digits
-      POS 653.666687 1497.000000
+      POS 653.000000 1497.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_LESS 99.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_GREATER 10.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44761,10 +44788,8 @@ GROUP Captain PFD
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_LESS 9.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
-      SHOW_EQUAL 0.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
-      SHOW_GREATER 0.000000 -9
+      SHOW_GREATER -9.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44779,14 +44804,12 @@ GROUP Captain PFD
   GROUP LOC Needle
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_pilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_pilot
-    LOCKED
     CHAINED
     gen_rotary scalehoriz
       POS 604.500000 1440.500000
       IMAGE PFD/artificial_horizon/HrznLOCscale
       DATAREF 
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44810,13 +44833,11 @@ GROUP Captain PFD
       SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SHOW_GREATER 2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
       KEY_FRAME -2.500000 -125.000000 1.000000
       KEY_FRAME -2.500000 -125.000000 1.000000
-      KEY_FRAME 2.499990 -125.000000 1.000000
       KEY_FRAME 2.500000 125.000000 1.000000
       KEY_FRAME 2.500000 125.000000
       IS_DRAGGABLE 0
@@ -44830,14 +44851,13 @@ GROUP Captain PFD
       SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SHOW_GREATER -2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
       KEY_FRAME -2.500000 -125.000000 1.000000
-      KEY_FRAME -2.250000 -125.000000 1.000000
-      KEY_FRAME 2.000000 125.000000 1.000000
-      KEY_FRAME 2.000000 125.000000
+      KEY_FRAME -2.500000 -125.000000 1.000000
+      KEY_FRAME 2.500000 125.000000 1.000000
+      KEY_FRAME 2.500000 125.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 0
       OFFSET 0.000000
@@ -44847,14 +44867,12 @@ GROUP Captain PFD
     SHOW_LESS 10.000000 sim/cockpit/radios/nav1_dme_dist_m
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_pilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_pilot
-    LOCKED
     CHAINED
     gen_rotary black
       POS 382.000000 1523.000000
       IMAGE black
       DATAREF 
       SIZE 0.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44877,7 +44895,6 @@ GROUP Captain PFD
       IMAGE PFD/artificial_horizon/HrznLOCscaleEx
       DATAREF 
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44898,17 +44915,14 @@ GROUP Captain PFD
       POS 604.500000 1440.500000
       IMAGE PFD/artificial_horizon/HrznLOCpointer
       DATAREF sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
-      SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
-      SHOW_GREATER 2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
+      SHOW_LESS -0.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
+      SHOW_GREATER 0.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SIZE 2.000000
-      LOCKED
-      CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
       KEY_FRAME -0.500000 -68.000000 1.000000
       KEY_FRAME -0.500000 -68.000000 1.000000
-      KEY_FRAME 0.499990 -68.000000 1.000000
       KEY_FRAME 0.500000 68.000000 1.000000
       KEY_FRAME 0.500000 68.000000
       IS_DRAGGABLE 0
@@ -44919,11 +44933,10 @@ GROUP Captain PFD
       POS 604.500000 1440.500000
       IMAGE PFD/artificial_horizon/HrznLOCpointer2
       DATAREF sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
-      SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
-      SHOW_GREATER -2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
+      SHOW_LESS 0.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
+      SHOW_GREATER -0.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SIZE 2.000000
-      LOCKED
-      CLIP
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44939,14 +44952,12 @@ GROUP Captain PFD
   GROUP GS Needle
     SHOW_EQUAL 0.000000 sim/cockpit2/radios/indicators/hsi_flag_glideslope_pilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_display_vertical_pilot
-    LOCKED
     CHAINED
     gen_rotary scalevert
       POS 956.500000 1789.500000
       IMAGE PFD/artificial_horizon/HrznGSscale
       DATAREF 
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44970,13 +44981,11 @@ GROUP Captain PFD
       SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
       SHOW_GREATER 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
       KEY_FRAME -2.500000 -125.000000 1.000000
       KEY_FRAME -2.500000 -125.000000 1.000000
-      KEY_FRAME 2.499990 -125.000000 1.000000
       KEY_FRAME 2.500000 125.000000 1.000000
       KEY_FRAME 2.500000 125.000000
       IS_DRAGGABLE 0
@@ -44990,21 +44999,19 @@ GROUP Captain PFD
       SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
       SHOW_GREATER -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME -2.250000 -125.000000 1.000000
-      KEY_FRAME -2.250000 -125.000000 1.000000
-      KEY_FRAME 2.250000 125.000000 1.000000
-      KEY_FRAME 2.250000 125.000000
+      KEY_FRAME -2.500000 -125.000000 1.000000
+      KEY_FRAME -2.500000 -125.000000 1.000000
+      KEY_FRAME 2.500000 125.000000 1.000000
+      KEY_FRAME 2.500000 125.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
 
   END_GROUP
   GROUP Compass
-    LOCKED
     CHAINED
     gen_rotary Compass Background
       POS 604.000000 1174.000000
@@ -45012,7 +45019,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_GREATER 1.000000 Strato/777/fltInst/adiru/status
       SIZE 2.060000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -45035,7 +45041,6 @@ GROUP Captain PFD
       DATAREF 
       SHOW_GREATER 1.000000 Strato/777/fltInst/adiru/status
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -45054,28 +45059,24 @@ GROUP Captain PFD
 
     GROUP While ADIRU Alignin
       SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
-      LOCKED
       CHAINED
     END_GROUP
     GROUP ADIRU Aligned
       SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
-      LOCKED
       CHAINED
-      GROUP_OPEN
       gen_needle HDG Bug
         POS 604.000000 821.000000
         IMAGE PFD/Heading Track/heading_bug
         DATAREF Strato/777/heading_bug_diff
         SIZE 2.750000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
-        KEY_FRAME -179.999985 -51.000000 1.000000
-        KEY_FRAME -50.000000 -51.000000 1.000000
+        KEY_FRAME 179.999985 -51.000000 1.000000
+        KEY_FRAME 50.000000 -51.000000 1.000000
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 50.000000 51.000000 1.000000
-        KEY_FRAME 179.999985 51.000000
+        KEY_FRAME -50.000000 51.000000 1.000000
+        KEY_FRAME -179.999985 51.000000
         IS_DRAGGABLE 0
         OFFSET 166.000000
 
@@ -45084,7 +45085,6 @@ GROUP Captain PFD
         IMAGE PFD/Heading Track/HdgTrackRose
         DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SIZE 2.060000
-        LOCKED
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -45100,7 +45100,6 @@ GROUP Captain PFD
         IMAGE PFD/Heading Track/HdgTrackMagLabel
         DATAREF 
         SIZE 2.750000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45123,7 +45122,6 @@ GROUP Captain PFD
         DATAREF sim/cockpit/autopilot/heading_mag
         SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
         SIZE 2.750000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45140,7 +45138,6 @@ GROUP Captain PFD
         DATAREF Strato/777/displays/txt/H[0]
         SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
         SIZE 1.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45152,14 +45149,14 @@ GROUP Captain PFD
     END_GROUP
     GROUP ADIRU Not Aligned
       SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
-      LOCKED
       CHAINED
+      GROUP_OPEN
       gen_rotary hdg_fail
         POS 604.000000 1134.500000
         IMAGE PFD/failure_flags/hdg_fail
         DATAREF 
         SIZE 1.350000
-        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45179,14 +45176,13 @@ GROUP Captain PFD
     END_GROUP
   END_GROUP
   GROUP CAPT AOA
-    LOCKED
+    SHOW_EQUAL 1.000000 Strato/777/displays/pfd_aoa_enabled
     CHAINED
     gen_rotary AOA gauge
       POS 872.000000 2246.000000
       IMAGE PFD/aoa_gauge
       DATAREF 
       SIZE 2.300000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -45205,13 +45201,11 @@ GROUP Captain PFD
 
     GROUP AOA anim
       SHOW_GREATER 80.000000 sim/cockpit2/gauges/indicators/airspeed_kts_pilot
-      LOCKED
       gen_needle AOA needle
         POS 868.000000 2246.000000
         IMAGE PFD/aoa_needle
         DATAREF Strato/777/displayed_aoa
         SIZE 2.300000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45228,7 +45222,6 @@ GROUP Captain PFD
         DATAREF Strato/777/displayed_aoa
         SHOW_LESS 0.000000 Strato/777/displayed_aoa
         SIZE 2.300000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45247,7 +45240,6 @@ GROUP Captain PFD
         DATAREF Strato/777/displayed_aoa
         SHOW_GREATER 0.000000 Strato/777/displayed_aoa
         SIZE 2.300000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45263,13 +45255,11 @@ GROUP Captain PFD
     END_GROUP
     GROUP AOA static
       SHOW_LESS 80.000000 sim/cockpit2/gauges/indicators/airspeed_kts_pilot
-      LOCKED
       gen_needle AOA needle 2
         POS 868.000000 2246.000000
         IMAGE PFD/aoa_needle
         DATAREF sim/flightmodel2/misc/AoA_angle_degrees
         SIZE 2.300000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45283,7 +45273,6 @@ GROUP Captain PFD
         IMAGE PFD/angle_of_attack_type
         DATAREF Strato/777/displayed_aoa
         SIZE 2.300000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45593,18 +45582,15 @@ GROUP LCD Backgrounds
 
 END_GROUP
 GROUP Captain ND
-  LOCKED
-  CHAINED
+  GROUP_OPEN
   GROUP ADIRU Not Aligned
     SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
-    LOCKED
     CHAINED
     gen_rotary hdg_fail
       POS 2057.000000 2437.500000
       IMAGE PFD/failure_flags/hdg_fail
       DATAREF 
       SIZE 1.350000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45624,14 +45610,12 @@ GROUP Captain ND
   END_GROUP
   GROUP While ADIRU Alignin
     SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
-    LOCKED
     CHAINED
     gen_text TIME TO ALIGN
       POS 1497.500000 2358.000000
       IMAGE TXT.2.28.white
       DATAREF Strato/777/displays/txt/TIME_TO_ALIGN[0]
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45645,7 +45629,6 @@ GROUP Captain ND
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/fltInst/adiru/time_remaining_min[0]
       SIZE 2.200000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45661,7 +45644,6 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF Strato/777/fltInst/adiru/time_remaining_sec[0]
       SIZE 1.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45677,7 +45659,6 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF [0]
       SIZE 1.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45693,7 +45674,6 @@ GROUP Captain ND
       IMAGE LED_2.36R.xxxxx0.white
       DATAREF [0]
       SIZE 1.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45709,7 +45689,6 @@ GROUP Captain ND
       IMAGE TXT.2.28.white
       DATAREF Strato/777/displays/txt/---[0]
       SIZE 2.500000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45722,14 +45701,217 @@ GROUP Captain ND
   GROUP ADIRU Aligned
     SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
     LOCKED
-    HIDE
-    CHAINED
+    GROUP_OPEN
+    GROUP Extra ND INFO
+      LOCKED
+      CHAINED
+      GROUP VERTICAL DEV CAPT
+        SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/hsi_flag_glideslope_pilot
+        SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_display_vertical_pilot
+        LOCKED
+        GROUP Vertical Dev Center
+          SHOW_EQUAL 0.000000 sim/cockpit/switches/EFIS_map_submode
+          SHOW_GREATER 1.000000 sim/cockpit2/EFIS/map_mode_is_HSI
+          LOCKED
+          gen_rotary VERT DEVIATION DOTS
+            POS 2683.000000 1500.000000
+            IMAGE ND/vertical_deviation_dots
+            DATAREF 
+            SIZE 2.150000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_pointer V Dev Diamond
+            POS 2683.000000 1500.000000
+            IMAGE ND/vertical_deviation_diamond
+            DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+            SIZE 2.150000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 2.000000 -70.000000 1.000000
+            KEY_FRAME -2.000000 70.000000
+            IS_DRAGGABLE 0
+            IS_VERTICAL 1
+            OFFSET 0.000000
+
+          gen_rotary VERT DEVIATION 0
+            POS 2683.000000 1500.000000
+            IMAGE ND/vertical_deviation_0
+            DATAREF 
+            SIZE 2.150000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+        GROUP Vertical Dev Expand
+          SHOW_LESS 0.000000 sim/cockpit2/EFIS/map_mode_is_HSI
+          SHOW_EQUAL 0.000000 sim/cockpit/switches/EFIS_map_submode
+          LOCKED
+          gen_rotary VERT DEVIATION DOTS
+            POS 2683.000000 1500.000000
+            IMAGE ND/vertical_deviation_dots
+            DATAREF 
+            SIZE 2.150000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_pointer V Dev Diamond 2
+            POS 2683.000000 1500.000000
+            IMAGE ND/vertical_deviation_diamond
+            DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
+            SIZE 2.150000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 2.000000 -70.000000 1.000000
+            KEY_FRAME -2.000000 70.000000
+            IS_DRAGGABLE 0
+            IS_VERTICAL 1
+            OFFSET 0.000000
+
+          gen_rotary VERT DEVIATION 0 2
+            POS 2683.000000 1500.000000
+            IMAGE ND/vertical_deviation_0
+            DATAREF 
+            SIZE 2.150000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+        END_GROUP
+      END_GROUP
+      GROUP VNAV Path DEV CAPT 
+        SHOW_GREATER 0.010000 sim/cockpit2/radios/indicators/fms_fpta_pilot
+        LOCKED
+        GROUP VNav Dev Expand
+          SHOW_EQUAL 2.000000 sim/cockpit/switches/EFIS_map_submode
+          LOCKED
+          gen_rotary VERT DEVIATION DOTS
+            POS 2683.000000 1500.000000
+            IMAGE ND/VNAVpath_scale
+            DATAREF 
+            SIZE 3.000000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME 0.000000 0.000000 1.000000
+            KEY_FRAME 1.000000 6.000000
+            DIGITS 1
+            ROTARY_TYPE NO_CLICK
+            CLICK_RADIUS 10.000000
+            CLICK_RADIUS_DY 0.000000
+            OFFSET 0.000000
+            STEP1 1.000000
+            STEP2 1.000000
+            CURSOR DEFAULT
+            CLICK_DX 0
+            CLICK_DY 0
+
+          gen_pointer V Dev Diamond 2 2
+            POS 2683.000000 1500.000000
+            IMAGE ND/VNAVpath_pointer
+            DATAREF sim/cockpit2/radios/indicators/fms_vtk_pilot
+            SIZE 3.000000
+            LOCKED
+            LIGHT_MODE GLASS_AUTO
+            LIGHT_RHEOSTAT 2
+            BUS_SRC 1
+            KEY_FRAME -500.000000 -49.000000 1.000000
+            KEY_FRAME -400.000000 -49.000000 1.000000
+            KEY_FRAME 400.000000 49.000000 1.000000
+            KEY_FRAME 500.000000 49.000000
+            IS_DRAGGABLE 0
+            IS_VERTICAL 1
+            OFFSET 0.000000
+
+        END_GROUP
+      END_GROUP
+    END_GROUP
+    GROUP Captain Map Mode
+      SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode
+      LOCKED
+      CHAINED
+      gen_LED CAPT TRK
+        POS 2106.000000 2428.000000
+        IMAGE ND/Course_type
+        DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 2
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        DIGITS 3
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+
+    END_GROUP
     EFIS_map_s_HM ND
       POS 2057.000000 1801.000000
       DATAREF 
       SIZE 2.750000
       LOCKED
-      HIDE
       LIGHT_MODE MECHANICAL
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45738,11 +45920,9 @@ GROUP Captain ND
 
     GROUP Wind Data
       LOCKED
-      HIDE
+      CHAINED
       GROUP Wind Correction
         LOCKED
-        HIDE
-        CHAINED
         GROUP_ANIMATE_MODE ROTATE
         GROUP_WIDTH 20
         GROUP_HEIGHT 20
@@ -45759,7 +45939,6 @@ GROUP Captain ND
           SHOW_GREATER 5.000000 sim/cockpit2/gauges/indicators/wind_speed_kts
           SIZE 2.500000
           LOCKED
-          HIDE
           CHAINED
           GROUP_OPEN
           LIGHT_MODE GLASS_AUTO
@@ -45777,7 +45956,6 @@ GROUP Captain ND
         DATAREF sim/cockpit2/gauges/indicators/wind_heading_deg_mag[0]
         SIZE 1.500000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 1
@@ -45794,7 +45972,6 @@ GROUP Captain ND
         DATAREF sim/cockpit2/gauges/indicators/wind_speed_kts[0]
         SIZE 2.200000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 1
@@ -45805,13 +45982,35 @@ GROUP Captain ND
         PERIOD_WIDTH 15
         LED_ROWS 0
 
+      gen_rotary TAS_LAB
+        POS 1620.000000 2423.000000
+        IMAGE ND/TAS
+        DATAREF sim/flightmodel/position/true_airspeed
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 2
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 100.000000 1.000000
+        DIGITS 2
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_LED TAS
-        POS 1739.000000 2432.000000
+        POS 1704.000000 2428.000000
         IMAGE White_size23_stretched_vert_no_lead0
         DATAREF sim/flightmodel/position/true_airspeed[0]
+        SHOW_GREATER 100.000000 sim/flightmodel/position/true_airspeed
         SIZE 2.200000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
         BUS_SRC 1
@@ -45828,7 +46027,6 @@ GROUP Captain ND
         DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SIZE 3.000000
         LOCKED
-        HIDE
         CHAINED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 1
@@ -45851,13 +46049,12 @@ GROUP Captain ND
 
     END_GROUP
     gen_LED Ground Speed 3 digi
-      POS 1552.285767 2430.285645
+      POS 1552.000000 2428.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/position/groundspeed[0]
       SHOW_GREATER 100.000000 sim/flightmodel/position/groundspeed
       SIZE 2.200000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45869,14 +46066,13 @@ GROUP Captain ND
       LED_ROWS 0
 
     gen_LED Ground Speed 2 digi
-      POS 1522.000000 2430.285645
+      POS 1522.000000 2429.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/position/groundspeed[0]
       SHOW_LESS 99.000000 sim/flightmodel/position/groundspeed
       SHOW_GREATER 10.000000 sim/flightmodel/position/groundspeed
       SIZE 2.200000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45888,14 +46084,13 @@ GROUP Captain ND
       LED_ROWS 0
 
     gen_LED Ground Speed 1 digi
-      POS 1492.285767 2428.285645
+      POS 1492.000000 2428.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/position/groundspeed[0]
       SHOW_LESS 9.000000 sim/flightmodel/position/groundspeed
       SHOW_GREATER -9.000000 sim/flightmodel/position/groundspeed
       SIZE 2.200000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45912,7 +46107,6 @@ GROUP Captain ND
       DATAREF 
       SIZE 2.200000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 2
       BUS_SRC 1
@@ -45931,14 +46125,14 @@ GROUP Captain ND
 
     GROUP MFD CAPT
       LOCKED
-      HIDE
+      CHAINED
+      GROUP_OPEN
       gen_LED CAPT HDG
-        POS 2109.428467 2436.000000
+        POS 2109.000000 2436.000000
         IMAGE ND/Course_type
         DATAREF sim/cockpit/autopilot/heading_mag
         SIZE 2.150000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 2
         BUS_SRC 1
@@ -45951,20 +46145,18 @@ GROUP Captain ND
 
       GROUP EFIS mode
         LOCKED
-        HIDE
         CHAINED
         GROUP Capt
           SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/map_mode_is_HSI
           LOCKED
-          HIDE
           CHAINED
+          GROUP_OPEN
           gen_rotary ARPT
             POS 1446.000000 1569.000000
             IMAGE ND/EFIS_mode/ARPT
             DATAREF sim/cockpit2/EFIS/EFIS_airport_on
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -45987,7 +46179,6 @@ GROUP Captain ND
             DATAREF sim/cockpit2/EFIS/EFIS_fix_on
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46010,7 +46201,6 @@ GROUP Captain ND
             DATAREF sim/cockpit2/EFIS/EFIS_vor_on
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46034,7 +46224,6 @@ GROUP Captain ND
             SHOW_LESS 2.000000 sim/cockpit2/EFIS/map_mode
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46058,7 +46247,6 @@ GROUP Captain ND
             SHOW_LESS 2.000000 sim/cockpit2/EFIS/map_mode
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46079,13 +46267,11 @@ GROUP Captain ND
       END_GROUP
       GROUP DO NOT SHOW in PLAN
         LOCKED
-        HIDE
-        CHAINED
+        GROUP_OPEN
         GROUP Capt
           SHOW_LESS 1.000000 sim/cockpit2/EFIS/map_mode
           LOCKED
           HIDE
-          CHAINED
           gen_rotary VOR1 Null CA
             POS 1477.000000 1182.000000
             IMAGE ND/VOR1_null
@@ -46153,15 +46339,13 @@ GROUP Captain ND
           SHOW_EQUAL 4.000000 sim/cockpit2/radios/indicators/nav1_type
           SHOW_GREATER 2.000000 sim/cockpit2/EFIS/EFIS_1_selection_pilot
           LOCKED
-          HIDE
-          CHAINED
+          GROUP_OPEN
           gen_rotary VOR1 Indicator
             POS 1466.000000 1185.000000
             IMAGE ND/Radio Information/VOR1
             DATAREF 
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46185,7 +46369,6 @@ GROUP Captain ND
             SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/nav1_display_horizontal
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46208,7 +46391,6 @@ GROUP Captain ND
             DATAREF sim/cockpit2/radios/indicators/nav1_nav_id
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46223,7 +46405,6 @@ GROUP Captain ND
             DATAREF sim/cockpit2/radios/indicators/nav1_has_dme
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46247,7 +46428,6 @@ GROUP Captain ND
             SHOW_EQUAL 1.000000 sim/cockpit/radios/nav1_has_dme
             SIZE 2.150000
             LOCKED
-            HIDE
             LIGHT_MODE GLASS_AUTO
             LIGHT_RHEOSTAT 2
             BUS_SRC 1
@@ -46264,7 +46444,6 @@ GROUP Captain ND
           SHOW_GREATER 2.000000 sim/cockpit2/EFIS/EFIS_1_selection_pilot
           LOCKED
           HIDE
-          CHAINED
           gen_rotary VOR1 Indicator 2
             POS 1466.000000 1185.000000
             IMAGE ND/Radio Information/VOR1
@@ -46600,6 +46779,7 @@ GROUP Captain ND
           LOCKED
           HIDE
           CHAINED
+          GROUP_OPEN
           gen_text GPS ID
             POS 2613.000000 2431.000000
             IMAGE ND/type_magenta
@@ -46739,11 +46919,13 @@ GROUP Captain ND
           LOCKED
           HIDE
           CHAINED
+          GROUP_OPEN
           GROUP VOR1
             SHOW_EQUAL 4.000000 sim/cockpit2/radios/indicators/nav1_type
             LOCKED
             HIDE
             CHAINED
+            GROUP_OPEN
             gen_rotary VOR1
               POS 2485.000000 2430.000000
               IMAGE ND/Radio Information/RefNAV_VOR1
@@ -47300,7 +47482,6 @@ GROUP Captain ND
     DATAREF 
     SHOW_LESS 1.000000 Strato/777/fltInst/adiru/status
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 1
     BUS_SRC 1
@@ -47323,7 +47504,6 @@ GROUP Captain ND
     DATAREF 
     SHOW_LESS 1.000000 Strato/777/fltInst/adiru/status
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 1
     BUS_SRC 1
@@ -47342,15 +47522,21 @@ GROUP Captain ND
 
 END_GROUP
 GROUP Lower Eicas
+  LOCKED
+  HIDE
   CHAINED
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
       POS 3412.000000 413.000000
       IMAGE EICAS lower/AIR/air_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47370,12 +47556,16 @@ GROUP Lower Eicas
   END_GROUP
   GROUP DOOR
     SHOW_EQUAL 2.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
       POS 3412.000000 413.000000
       IMAGE EICAS lower/ELEC/elec_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47395,12 +47585,16 @@ GROUP Lower Eicas
   END_GROUP
   GROUP ELEC
     SHOW_EQUAL 3.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
       POS 3410.000000 413.000000
       IMAGE EICAS lower/ELEC/elec_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47422,6 +47616,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/battery_voltage_actual_volts[0]
       SIZE 1.750000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47437,6 +47633,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/battery_amps[0]
       SIZE 1.750000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47452,6 +47650,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47467,6 +47667,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47480,12 +47682,14 @@ GROUP Lower Eicas
   END_GROUP
   GROUP ENG
     SHOW_EQUAL 4.000000 Strato/777/displays/eicas_mode
+    LOCKED
     CHAINED
     gen_pie N2 pie #1
       POS 2947.500000 858.500000
       IMAGE EICAS upper/EICAS_pie
       DATAREF sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.980000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47504,6 +47708,7 @@ GROUP Lower Eicas
       IMAGE EICAS upper/EICAS_pie
       DATAREF sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 2.980000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47522,6 +47727,7 @@ GROUP Lower Eicas
       IMAGE EICAS upper/EICAS_needle
       DATAREF sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.900000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47536,6 +47742,7 @@ GROUP Lower Eicas
       IMAGE EICAS upper/EICAS_needle
       DATAREF sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 2.900000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47551,6 +47758,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/N2_percent[0]
       SHOW_GREATER 114.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.400000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 2
       BUS_SRC 1
@@ -47568,6 +47776,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 108.000000 [1]
       SHOW_GREATER 114.000000 sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 2.400000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 2
       BUS_SRC 1
@@ -47583,6 +47792,7 @@ GROUP Lower Eicas
       IMAGE EICAS lower/ENG/eng_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47604,6 +47814,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.400000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47619,6 +47830,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 2.400000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47629,11 +47841,58 @@ GROUP Lower Eicas
       PERIOD_WIDTH 15
       LED_ROWS 0
 
+    gen_rotary red box
+      POS 3026.000000 901.500000
+      IMAGE EICAS upper/red_box
+      DATAREF 
+      SHOW_GREATER 114.000000 sim/cockpit2/engine/indicators/N2_percent[0]
+      SIZE 3.100000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      CORNERS -6.333334 0.000000  -6.333334 0.000000  -1.833337 0.000000  -1.833337 0.000000
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary red box
+      POS 3370.000000 901.500000
+      IMAGE EICAS upper/red_box
+      DATAREF 
+      SHOW_GREATER 114.000000 sim/cockpit2/engine/indicators/N2_percent[1]
+      SIZE 3.100000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      CORNERS -6.333334 0.000000  -6.333334 0.500000  -1.833337 0.500000  -1.833337 0.000000
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
     gen_LED ff_L
       POS 2987.000000 666.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/engine/indicators/fuel_flow_kg_sec[0]
       SIZE 2.400000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47649,6 +47908,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/engine/indicators/fuel_flow_kg_sec[1]
       SIZE 2.400000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47665,6 +47925,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.850000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47689,6 +47950,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
       SHOW_GREATER 65.000000 [1]
       SIZE 2.850000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47713,6 +47975,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
       SHOW_GREATER 0.150000 sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47729,6 +47992,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
       SHOW_GREATER 0.150000 sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47745,6 +48009,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
       SHOW_LESS 0.140000 sim/cockpit2/engine/indicators/oil_quantity_ratio[0]
       SIZE 2.500000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47761,6 +48026,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
       SHOW_LESS 0.140000 sim/cockpit2/engine/indicators/oil_quantity_ratio[1]
       SIZE 2.500000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47778,6 +48044,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 testNum
       SHOW_GREATER 65.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.850000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47803,6 +48070,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 testNum
       SHOW_GREATER 65.000000 sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 2.850000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47826,6 +48094,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/oil_press_psi[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47841,6 +48110,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/oil_press_psi[1]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47859,6 +48129,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 testNum
       SHOW_GREATER 13.000000 sim/cockpit2/engine/indicators/oil_pressure_psi[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47877,6 +48148,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 testNum
       SHOW_GREATER 65.000000 [0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47895,6 +48167,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 testNum
       SHOW_GREATER 13.000000 sim/cockpit2/engine/indicators/oil_pressure_psi[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47913,6 +48186,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 testNum
       SHOW_GREATER 65.000000 [0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47929,6 +48203,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SHOW_LESS 115.000000 sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47946,6 +48221,7 @@ GROUP Lower Eicas
       SHOW_LESS 129.990005 sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SHOW_GREATER 116.000000 sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47963,6 +48239,7 @@ GROUP Lower Eicas
       SHOW_LESS 13.000000 [0]
       SHOW_GREATER 130.000000 sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47979,6 +48256,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SHOW_LESS 115.000000 sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47996,6 +48274,7 @@ GROUP Lower Eicas
       SHOW_LESS 129.990005 sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SHOW_GREATER 116.000000 sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48013,6 +48292,7 @@ GROUP Lower Eicas
       SHOW_LESS 0.000000 [0]
       SHOW_GREATER 130.000000 sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SIZE 2.200000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48029,6 +48309,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SHOW_GREATER 65.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.700000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48046,6 +48327,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SHOW_GREATER 65.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 2.700000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48063,6 +48345,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[0]
       SHOW_GREATER 0.000000 [0]
       SIZE 2.850000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48087,6 +48370,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/engine/indicators/oil_temperature_deg_C[1]
       SHOW_GREATER 0.000000 [0]
       SIZE 2.850000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48110,6 +48394,7 @@ GROUP Lower Eicas
       IMAGE EICAS upper/red
       DATAREF 
       SIZE 0.250000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48132,6 +48417,7 @@ GROUP Lower Eicas
       IMAGE EICAS upper/red
       DATAREF 
       SIZE 0.250000
+      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48152,6 +48438,8 @@ GROUP Lower Eicas
   END_GROUP
   GROUP FCTL
     SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_pointer R FLPRN
       POS 3704.000000 495.500000
@@ -48159,12 +48447,14 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/aileron1_deg[1]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -40.000000 0.000000 1.000000
+      KEY_FRAME 40.000000 0.000000 1.000000
       KEY_FRAME 0.000000 49.000000 1.000000
-      KEY_FRAME 11.000000 65.000000
+      KEY_FRAME -18.000000 65.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -48175,12 +48465,14 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/aileron1_deg[0]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -40.000000 0.000000 1.000000
+      KEY_FRAME -18.000000 65.000000 1.000000
       KEY_FRAME 0.000000 49.000000 1.000000
-      KEY_FRAME 11.000000 65.000000
+      KEY_FRAME 40.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -48191,6 +48483,8 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/aileron2_deg[4]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48207,6 +48501,8 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/aileron2_deg[5]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48223,6 +48519,8 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/rudder1_deg[0]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48239,6 +48537,8 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/elevator1_deg[0]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48255,6 +48555,8 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/elevator1_deg[0]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48270,12 +48572,13 @@ GROUP Lower Eicas
       IMAGE white_size23_stretched_vert
       DATAREF sim/cockpit2/controls/elevator_trim[0]
       SIZE 2.100000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -1.000000 -11.000000 1.000000
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 4.000000
+      KEY_FRAME -1.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 15.000000
       DIGITS 4
       DECIMALS 2
       PERIOD_WIDTH 20
@@ -48286,12 +48589,13 @@ GROUP Lower Eicas
       IMAGE white_size23_stretched_vert
       DATAREF sim/cockpit2/controls/rudder_trim[0]
       SIZE 2.100000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -1.000000 -6.800000 1.000000
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.800000
+      KEY_FRAME -1.000000 -15.000000 1.000000
+      KEY_FRAME 1.000000 15.000000
       DIGITS 4
       DECIMALS 2
       PERIOD_WIDTH 20
@@ -48302,6 +48606,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/speedbrake2_deg
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48318,6 +48624,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/speedbrake1_deg
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48334,6 +48642,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48350,6 +48660,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler1_deg[2]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48366,6 +48678,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48382,6 +48696,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler1_deg[2]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48398,6 +48714,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48414,6 +48732,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/speedbrake2_deg
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48430,6 +48750,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/speedbrake1_deg
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48446,6 +48768,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48462,6 +48786,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler1_deg[3]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48478,6 +48804,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48494,6 +48822,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler1_deg[3]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48510,6 +48840,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
+      LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -48523,12 +48855,16 @@ GROUP Lower Eicas
 
     GROUP Hydraulic Press Low
       SHOW_EQUAL 1.000000 Strato/777/displays/hyd_press_low_any
+      LOCKED
+      HIDE
       CHAINED
       gen_rotary HYDRAULICS
         POS 2935.000000 -150.000000
         IMAGE EICAS lower/FCTL/HYDRAULICS
         DATAREF 
         SIZE 1.400000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48551,6 +48887,8 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_GREATER 1200.000000 Strato/777/hydraulics/press[0]
         SIZE 1.300000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48573,6 +48911,8 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_GREATER 1200.000000 Strato/777/hydraulics/press[1]
         SIZE 1.300000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48595,6 +48935,8 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_GREATER 1200.000000 Strato/777/hydraulics/press[2]
         SIZE 1.300000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48617,6 +48959,8 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_LESS 1199.989990 Strato/777/hydraulics/press[0]
         SIZE 1.300000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48639,6 +48983,8 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_LESS 1199.989990 Strato/777/hydraulics/press[1]
         SIZE 1.300000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48661,6 +49007,8 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_LESS 1199.989990 Strato/777/hydraulics/press[2]
         SIZE 1.300000
+        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48682,30 +49030,10 @@ GROUP Lower Eicas
       POS 3412.500000 -209.500000
       IMAGE EICAS lower/FCTL/NORMAL
       DATAREF 
-      SHOW_EQUAL 0.000000 testNum
+      SHOW_EQUAL 1.000000 Strato/777/fctl/pfc/mode
       SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary DIRECT
-      POS 3412.000000 -210.000000
-      IMAGE EICAS lower/FCTL/DIRECT
-      DATAREF 
-      SHOW_EQUAL 1.000000 testNum
-      SIZE 1.370000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -48726,8 +49054,34 @@ GROUP Lower Eicas
       POS 3412.000000 -210.000000
       IMAGE EICAS lower/FCTL/SECONDARY
       DATAREF 
-      SHOW_EQUAL 1.000000 testNum
+      SHOW_EQUAL 2.000000 Strato/777/fctl/pfc/mode
       SIZE 1.370000
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary DIRECT
+      POS 3412.000000 -210.000000
+      IMAGE EICAS lower/FCTL/DIRECT
+      DATAREF 
+      SHOW_EQUAL 3.000000 Strato/777/fctl/pfc/mode
+      SIZE 1.370000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -48749,6 +49103,8 @@ GROUP Lower Eicas
       IMAGE EICAS lower/FCTL/fctl_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48768,12 +49124,16 @@ GROUP Lower Eicas
   END_GROUP
   GROUP FUEL
     SHOW_EQUAL 6.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
-      POS 3412.000000 413.000000
+      POS 3411.000000 413.000000
       IMAGE EICAS lower/FUEL/fuel_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48790,11 +49150,37 @@ GROUP Lower Eicas
       CLICK_DX 0
       CLICK_DY 0
 
+    gen_rotary KGS
+      POS 3340.500000 931.500000
+      IMAGE EICAS upper/KGS
+      DATAREF 
+      SHOW_EQUAL 0.000000 Strato/777/lbs_kgs
+      SIZE 1.360000
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 2
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
     gen_LED fuel_total
-      POS 3529.000000 1019.000000
+      POS 3528.000000 1019.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs_total
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48806,10 +49192,12 @@ GROUP Lower Eicas
       LED_ROWS 0
 
     gen_LED fuel_L
-      POS 3001.000000 579.000000
+      POS 3000.000000 579.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs[0]
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48821,10 +49209,12 @@ GROUP Lower Eicas
       LED_ROWS 0
 
     gen_LED fuel_C
-      POS 3455.000000 338.000000
+      POS 3454.000000 338.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs[1]
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48836,10 +49226,12 @@ GROUP Lower Eicas
       LED_ROWS 0
 
     gen_LED fuel_R
-      POS 3907.000000 580.000000
+      POS 3906.000000 580.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs[2]
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48853,12 +49245,16 @@ GROUP Lower Eicas
   END_GROUP
   GROUP GEAR
     SHOW_EQUAL 7.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
       POS 3412.000000 413.000000
       IMAGE EICAS lower/GEAR/gear_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48878,12 +49274,16 @@ GROUP Lower Eicas
   END_GROUP
   GROUP HYD
     SHOW_EQUAL 8.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
       POS 3412.000000 413.000000
       IMAGE EICAS lower/HYD/HYD_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48903,12 +49303,16 @@ GROUP Lower Eicas
   END_GROUP
   GROUP STAT
     SHOW_EQUAL 9.000000 Strato/777/displays/eicas_mode
+    LOCKED
+    HIDE
     CHAINED
     gen_rotary Background
       POS 3412.000000 413.000000
       IMAGE EICAS lower/STAT/stat_background
       DATAREF 
       SIZE 1.350000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48930,6 +49334,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 1.750000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48945,6 +49351,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/APU_EGT_c
       SIZE 1.750000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48960,6 +49368,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit/misc/hydraulic_quantity2
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48975,6 +49385,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit/misc/hydraulic_quantity
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48990,6 +49402,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -49005,6 +49419,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -49020,6 +49436,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -49035,6 +49453,8 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/flightmodel/misc/machno
       SIZE 2.000000
+      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -49054,6 +49474,29 @@ GROUP Upper Eicas
     POS 3414.000000 1800.000000
     IMAGE EICAS upper/eng_background
     DATAREF 
+    SIZE 1.360000
+    LOCKED
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 2
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary KGS
+    POS 4011.500000 1224.500000
+    IMAGE EICAS upper/KGS
+    DATAREF 
+    SHOW_EQUAL 0.000000 Strato/777/lbs_kgs
     SIZE 1.360000
     LOCKED
     LIGHT_MODE GLASS_AUTO
@@ -49409,8 +49852,10 @@ GROUP Upper Eicas
     POS 3071.000000 1967.000000
     IMAGE White_size23_stretched_vert_no_lead0
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
+    SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.400000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49425,8 +49870,10 @@ GROUP Upper Eicas
     POS 3440.000000 1967.000000
     IMAGE White_size23_stretched_vert_no_lead0
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
+    SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.400000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49438,10 +49885,10 @@ GROUP Upper Eicas
     LED_ROWS 0
 
   gen_LED EGT_1_r
-    POS 3055.000000 1968.000000
+    POS 3057.000000 1968.000000
     IMAGE EICAS lower/ENG/red_size22_oil_press
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
-    SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/N2_percent[0]
+    SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.400000
     LOCKED
     LIGHT_MODE GLASS_AUTO
@@ -49455,11 +49902,11 @@ GROUP Upper Eicas
     LED_ROWS 0
 
   gen_LED EGT_2_r
-    POS 3425.000000 1968.000000
+    POS 3427.000000 1968.000000
     IMAGE EICAS lower/ENG/red_size22_oil_press
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SHOW_EQUAL 108.000000 [1]
-    SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/N2_percent[1]
+    SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.400000
     LOCKED
     LIGHT_MODE GLASS_AUTO
@@ -49682,6 +50129,98 @@ GROUP Upper Eicas
     CLICK_DX 0
     CLICK_DY 0
 
+  gen_rotary red box
+    POS 2983.000000 2297.500000
+    IMAGE EICAS upper/red_box
+    DATAREF 
+    SHOW_GREATER 108.000000 sim/cockpit2/engine/indicators/N1_percent[0]
+    SIZE 3.100000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    CORNERS -6.333334 0.000000  -6.333334 0.000000  -1.333337 0.000000  -1.333337 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary red box
+    POS 3351.000000 2297.500000
+    IMAGE EICAS upper/red_box
+    DATAREF 
+    SHOW_GREATER 108.000000 sim/cockpit2/engine/indicators/N1_percent[1]
+    SIZE 3.100000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    CORNERS -6.333334 0.000000  -6.333334 0.000000  -0.833337 0.000000  -0.833337 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary red box
+    POS 2983.000000 1965.500000
+    IMAGE EICAS upper/red_box
+    DATAREF 
+    SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[0]
+    SIZE 3.100000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    CORNERS -6.333334 0.000000  -6.333334 1.000000  -1.333337 1.000000  -1.333337 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary red box
+    POS 3351.000000 1965.500000
+    IMAGE EICAS upper/red_box
+    DATAREF 
+    SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[1]
+    SIZE 3.100000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    CORNERS -6.333334 0.000000  -6.333334 1.500000  -0.833337 1.500000  -0.833337 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
   gen_LED fuel
     POS 3987.000000 1212.000000
     IMAGE White_size23_stretched_vert_no_lead0
@@ -49708,17 +50247,14 @@ GROUP First Officer ND
   CHAINED
 END_GROUP
 GROUP Radios
-  LOCKED
-  CHAINED
+  GROUP_OPEN
   GROUP COM1
-    LOCKED
-    CHAINED
+    GROUP_OPEN
     gen_LED COM1 Stby Khz
-      POS 2861.000000 3220.000000
+      POS 2859.000000 3220.000000
       IMAGE Digital_Large
       DATAREF Strato/777/displays/com1_stby_khz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49734,7 +50270,6 @@ GROUP Radios
       IMAGE Digital_Large
       DATAREF sim/cockpit2/radios/actuators/com1_standby_frequency_Mhz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49746,11 +50281,10 @@ GROUP Radios
       LED_ROWS 0
 
     gen_LED COM1 Act Khz
-      POS 2333.000000 3220.000000
+      POS 2334.142822 3220.000000
       IMAGE Digital_Large
       DATAREF Strato/777/displays/com1_act_khz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49766,7 +50300,6 @@ GROUP Radios
       IMAGE Digital_Large
       DATAREF sim/cockpit2/radios/actuators/com1_frequency_Mhz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49779,14 +50312,12 @@ GROUP Radios
 
   END_GROUP
   GROUP COM2
-    LOCKED
-    CHAINED
+    GROUP_OPEN
     gen_LED COM2 Act Mhz
       POS 2163.000000 3065.000000
       IMAGE Digital_Large
       DATAREF sim/cockpit2/radios/actuators/com2_frequency_Mhz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49798,11 +50329,10 @@ GROUP Radios
       LED_ROWS 0
 
     gen_LED COM2 Act Khz
-      POS 2333.000000 3065.000000
+      POS 2334.142822 3064.571533
       IMAGE Digital_Large
       DATAREF Strato/777/displays/com2_act_khz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49814,11 +50344,10 @@ GROUP Radios
       LED_ROWS 0
 
     gen_LED COM2 Stby Khz
-      POS 2861.000000 3065.000000
+      POS 2859.000000 3065.000000
       IMAGE Digital_Large
       DATAREF Strato/777/displays/com2_stby_khz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49834,7 +50363,6 @@ GROUP Radios
       IMAGE Digital_Large
       DATAREF sim/cockpit2/radios/actuators/com2_standby_frequency_Mhz
       SIZE 2.000000
-      LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 10
       BUS_SRC 1
@@ -49851,7 +50379,6 @@ GROUP Radios
     IMAGE Digital_Large
     DATAREF sim/cockpit2/radios/actuators/transponder_code
     SIZE 3.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -50657,8 +51184,65 @@ GROUP Trim
 
 END_GROUP
 GROUP EFB
+  GROUP_OPEN
+  gen_rotary aoa checkmark
+    POS 1032.000000 2506.000000
+    IMAGE EFB/checkmark
+    DATAREF 
+    SHOW_EQUAL 1.000000 Strato/777/displays/pfd_aoa_enabled
+    SIZE 0.200000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary AOA Indicator
+    POS 840.000000 2507.500000
+    IMAGE EFB/InstAlign
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 0.000000  62.857170 0.000000  62.857170 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_text PFD AOA INDICATOR
+    POS 863.500000 2505.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/PFD_AOA_INDICATOR
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
   gen_rotary InstAlign Backg
-    POS 134.000000 3469.500000
+    POS 107.000000 3499.214355
     IMAGE EFB/InstAlign
     DATAREF 
     SIZE 2.000000
@@ -50680,7 +51264,7 @@ GROUP EFB
     CLICK_DY 0
 
   gen_rotary prk brk Backg
-    POS 440.000000 3470.500000
+    POS 413.000000 3500.214355
     IMAGE EFB/InstAlign
     DATAREF 
     SIZE 2.000000
@@ -50702,7 +51286,7 @@ GROUP EFB
     CLICK_DY 0
 
   gen_text REALISTIC PARK BRAK
-    POS 442.500000 3469.000000
+    POS 415.500000 3498.714355
     IMAGE TXT.2.28.white
     DATAREF Strato/777/displays/txt/REALISTIC_PRK_BRK
     LIGHT_MODE GLASS_AUTO
@@ -50713,8 +51297,54 @@ GROUP EFB
     OFFSET_X -100
     OFFSET_Y -12.000000
 
+  gen_rotary lbskgs Backg
+    POS 107.000000 2506.500000
+    IMAGE EFB/InstAlign
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 0.000000  62.857170 0.000000  62.857170 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_text POUNDS/KILOGRAMS
+    POS 135.500000 2507.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/LBS_KGS
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
+  gen_text LBS_KGS
+    POS 373.500000 2498.500000
+    IMAGE FMS/big_green
+    DATAREF Strato/777/displays/txt/lbs_kgs_status
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
   gen_rotary Passenger/erf
-    POS 821.000000 3469.500000
+    POS 765.571411 3499.214355
     IMAGE EFB/InstAlign
     DATAREF 
     SIZE 2.000000
@@ -50736,7 +51366,7 @@ GROUP EFB
     CLICK_DY 0
 
   gen_text PASSENGER/FREIGHTER
-    POS 828.500000 3469.000000
+    POS 773.071411 3498.714355
     IMAGE TXT.2.28.white
     DATAREF Strato/777/displays/txt/PASSENGER_FREIGHTER
     LIGHT_MODE GLASS_AUTO
@@ -50748,7 +51378,7 @@ GROUP EFB
     OFFSET_Y -12.000000
 
   gen_text PAX_FREIGHT
-    POS 1087.500000 3459.500000
+    POS 1032.071411 3489.214355
     IMAGE FMS/big_green
     DATAREF Strato/777/displays/txt/PAX_FREIGHT
     LIGHT_MODE GLASS_AUTO
@@ -50759,8 +51389,120 @@ GROUP EFB
     OFFSET_X -100
     OFFSET_Y -12.000000
 
+  gen_rotary trs background
+    POS 483.000000 2505.500000
+    IMAGE EFB/InstAlign
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 0.000000  62.857170 0.000000  62.857170 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary smart knobs backgro
+    POS 107.999985 2563.500000
+    IMAGE EFB/InstAlign
+    DATAREF 
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 0.000000  62.857170 0.000000  62.857170 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary smart knob checkmar
+    POS 298.714325 2563.000000
+    IMAGE EFB/checkmark
+    DATAREF 
+    SHOW_EQUAL 1.000000 Strato/777/smart_knobs
+    SIZE 0.200000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_text SMART MCP KNOBS
+    POS 135.499985 2564.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/SMART_MCP_KNOBS
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
+  gen_text SHOW TRS BUG ON PFD
+    POS 489.500000 2506.000000
+    IMAGE TXT.2.28.white
+    DATAREF Strato/777/displays/txt/SHOW_TRS_BUG_ON_PFD
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 1.000000
+    OFFSET_X -100
+    OFFSET_Y -12.000000
+
+  gen_rotary trs checkmark
+    POS 674.000000 2506.000000
+    IMAGE EFB/checkmark
+    DATAREF 
+    SHOW_EQUAL 1.000000 Strato/777/displays/trs_bug_enabled
+    SIZE 0.200000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
   gen_rotary prk brk checkmark
-    POS 631.000000 3470.000000
+    POS 604.000000 3499.714355
     IMAGE EFB/checkmark
     DATAREF 
     SHOW_EQUAL 1.000000 Strato/777/gear/park_brake_realistic
@@ -50782,7 +51524,7 @@ GROUP EFB
     CLICK_DY 0
 
   gen_text INSTANT ADIRU ALIGN
-    POS 140.500000 3469.000000
+    POS 113.500000 3498.714355
     IMAGE TXT.2.28.white
     DATAREF Strato/777/displays/txt/INSTANT_ADIRU_ALIGN
     LIGHT_MODE GLASS_AUTO
@@ -50895,222 +51637,6 @@ GROUP Centered Mode CAPT
     DEFLECT_SRC SEL
     DEFLECT_PIX 90.000000
 
-END_GROUP
-GROUP Extra ND INFO
-  SHOW_GREATER 1.000000 testNum
-  HIDE
-  CHAINED
-  GROUP VERTICAL DEV CAPT
-    SHOW_LESS 0.000000 sim/cockpit2/radios/indicators/hsi_flag_glideslope_pilot
-    SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_display_vertical_pilot
-    HIDE
-    GROUP_OPEN
-    GROUP Vertical Dev Center
-      SHOW_EQUAL 0.000000 sim/cockpit/switches/EFIS_map_submode
-      SHOW_GREATER 1.000000 sim/cockpit2/EFIS/map_mode_is_HSI
-      HIDE
-      GROUP_OPEN
-      gen_rotary VERT DEVIATION DOTS
-        POS 2653.000000 1621.000000
-        IMAGE ND/vertical_deviation_dots
-        DATAREF 
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_pointer V Dev Diamond
-        POS 2653.000000 1621.000000
-        IMAGE ND/vertical_deviation_diamond
-        DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 2.000000 -70.000000 1.000000
-        KEY_FRAME -2.000000 70.000000
-        IS_DRAGGABLE 0
-        IS_VERTICAL 1
-        OFFSET 0.000000
-
-      gen_rotary VERT DEVIATION 0
-        POS 2653.000000 1621.000000
-        IMAGE ND/vertical_deviation_0
-        DATAREF 
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    GROUP Vertical Dev Expand
-      SHOW_LESS 0.000000 sim/cockpit2/EFIS/map_mode_is_HSI
-      SHOW_EQUAL 0.000000 sim/cockpit/switches/EFIS_map_submode
-      HIDE
-      GROUP_OPEN
-      gen_rotary VERT DEVIATION DOTS
-        POS 2653.000000 2085.000000
-        IMAGE ND/vertical_deviation_dots
-        DATAREF 
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_pointer V Dev Diamond 2
-        POS 2653.000000 2085.000000
-        IMAGE ND/vertical_deviation_diamond
-        DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 2.000000 -70.000000 1.000000
-        KEY_FRAME -2.000000 70.000000
-        IS_DRAGGABLE 0
-        IS_VERTICAL 1
-        OFFSET 0.000000
-
-      gen_rotary VERT DEVIATION 0 2
-        POS 2653.000000 2085.000000
-        IMAGE ND/vertical_deviation_0
-        DATAREF 
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-  END_GROUP
-  GROUP VNAV Path DEV CAPT 
-    SHOW_GREATER 0.010000 sim/cockpit2/radios/indicators/fms_fpta_pilot
-    HIDE
-    GROUP_OPEN
-    GROUP VNav Dev Expand
-      SHOW_EQUAL 2.000000 sim/cockpit/switches/EFIS_map_submode
-      HIDE
-      GROUP_OPEN
-      gen_rotary VERT DEVIATION DOTS
-        POS 2545.000000 1625.000000
-        IMAGE ND/VNAVpath_scale
-        DATAREF 
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_pointer V Dev Diamond 2 2
-        POS 2566.000000 1625.000000
-        IMAGE ND/VNAVpath_pointer
-        DATAREF sim/cockpit2/radios/indicators/fms_vtk_pilot
-        SIZE 2.150000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 2
-        BUS_SRC 1
-        KEY_FRAME -500.000000 -49.000000 1.000000
-        KEY_FRAME -400.000000 -49.000000 1.000000
-        KEY_FRAME 400.000000 49.000000 1.000000
-        KEY_FRAME 500.000000 49.000000
-        IS_DRAGGABLE 0
-        IS_VERTICAL 1
-        OFFSET 0.000000
-
-    END_GROUP
-  END_GROUP
-  GROUP GS / TAS Capt
-    HIDE
-    gen_rotary TAS
-      POS 1620.000000 2423.000000
-      IMAGE ND/TAS
-      DATAREF sim/flightmodel/position/true_airspeed
-      SIZE 2.150000
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 2
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 52.000000 1.000000 1.000000
-      KEY_FRAME 514.000000 1.000000
-      DIGITS 2
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-  END_GROUP
 END_GROUP
 GROUP PLAN Range
   SHOW_EQUAL 1.000000 testNum
@@ -51361,7 +51887,7 @@ GROUP APP VOR Range
 END_GROUP
 GROUP Heading Adjust Trac
   SHOW_GREATER 1.000000 testNum
-  CHAINED
+  GROUP_OPEN
   GROUP_ANIMATE_MODE ROTATE
   GROUP_WIDTH 320
   GROUP_HEIGHT 90
@@ -51372,22 +51898,11 @@ GROUP Heading Adjust Trac
   KEY_FRAME -10.000000 10.000000
   ROTATE_OFFSET_X 0.000000
   ROTATE_OFFSET_Y -137.000000
-  gen_needle HDG Bug
-    POS 606.000000 1084.000000
-    IMAGE PFD/Heading Track/HdgTrackBug
-    DATAREF sim/cockpit2/autopilot/heading_dial_deg_mag_pilot
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 0
-    BUS_SRC 1
-    KEY_FRAME -30.000000 -30.000000 1.000000
-    KEY_FRAME 30.000000 30.000000
-    IS_DRAGGABLE 0
-    OFFSET 166.000000
-
   gen_needle Track Needle
-    POS 606.000000 1084.000000
+    POS 604.000000 893.000000
     IMAGE PFD/Heading Track/track_needle
     DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
+    SIZE 2.300000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -51395,29 +51910,6 @@ GROUP Heading Adjust Trac
     KEY_FRAME -10.000000 -10.000000
     IS_DRAGGABLE 0
     OFFSET 125.000000
-
-END_GROUP
-GROUP Captain Map Mode
-  SHOW_EQUAL 2.000000 sim/cockpit2/EFIS/map_mode
-  SHOW_GREATER 1.000000 testNum
-  HIDE
-  CHAINED
-  GROUP_OPEN
-  gen_LED CAPT TRK
-    POS 2106.000000 2428.000000
-    IMAGE ND/Course_type
-    DATAREF sim/cockpit2/gauges/indicators/ground_track_mag_pilot
-    SIZE 2.150000
-    HIDE
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 2
-    BUS_SRC 1
-    KEY_FRAME 0.000000 0.000000 1.000000
-    KEY_FRAME 1.000000 1.000000
-    DIGITS 3
-    DECIMALS 0
-    PERIOD_WIDTH 0
-    LED_ROWS 0
 
 END_GROUP
 PANEL_3D_END

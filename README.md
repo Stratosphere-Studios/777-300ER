@@ -14,7 +14,11 @@ A: As we are very early in development, and have no release date at this time.
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries from various authors that aren't included with the 777 from from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft. If you are a livery painter and want us to add your livery to the repository, please let us know on the X-Plane forums, Discord, or in a Github issue on the livery repository and we'll add it.
+A: You can download liveries from various authors that aren't included with the 777 from from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft.
+
+**Livery Painters**
+
+If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. Note that while the modeling is mostly complete, it's still subject to some changes.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 

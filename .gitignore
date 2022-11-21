@@ -1,4 +1,5 @@
 *.acf~
 *prefs.txt
-*SASLLog.txt
 *lastpos.dat
+plugins/SASLFree/data/output/SASLLog.txt
+plugins/SASLFree/data/modules/state.txt

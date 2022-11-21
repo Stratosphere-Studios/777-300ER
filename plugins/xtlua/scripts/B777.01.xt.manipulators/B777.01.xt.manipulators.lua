@@ -52,13 +52,16 @@ simDR_startup_running                     = find_dataref("sim/operation/prefs/st
 simDR_yoke_pitch                          = find_dataref("sim/cockpit2/controls/total_pitch_ratio")
 simDR_yoke_roll                           = find_dataref("sim/cockpit2/controls/total_roll_ratio")
 simDR_ap_heading                          = find_dataref("sim/cockpit/autopilot/heading_mag")
-simDR_trk                                 = find_dataref("sim/cockpit2/gauges/indicators/ground_track_mag_pilot")
 simDR_landing_light_switches              = find_dataref("sim/cockpit2/switches/landing_lights_switch")
 simDR_taxi_light_switch                   = find_dataref("sim/cockpit2/switches/taxi_light_on")
 simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/strobe_lights_on")
 simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
 simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/beacon_on")
 simDR_bus_volts                           = find_dataref("sim/cockpit2/electrical/bus_volts")
+
+--*************************************************************************************--
+--**                              FIND CUSTOM DATAREFS                               **--
+--*************************************************************************************--
 B777DR_eicas_mode                         = find_dataref("Strato/777/displays/eicas_mode")
 B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/pump/primary/state")
 B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
@@ -70,6 +73,8 @@ B777DR_grd_pwr_primary                    = find_dataref("Strato/B777/ext_pwr")
 --simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch") -- only works in xp12
 B777DR_stab_cutout_C                      = find_dataref("Strato/777/fctl/stab_cutout_C")
 B777DR_stab_cutout_R                      = find_dataref("Strato/777/fctl/stab_cutout_R")
+simDR_at_armed                            = find_dataref("sim/cockpit2/autopilot/autothrottle_arm")
+simDR_fd_enabled                          = find_dataref("sim/cockpit2/autopilot/flight_director_mode")
 
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
@@ -138,7 +143,6 @@ simCMD_ap_servos_on_2                    = find_command("sim/autopilot/servos2_o
 simCMD_ap_approach                       = find_command("sim/autopilot/approach")
 simCMD_ap_hdgHold                        = find_command("sim/autopilot/heading_hold")
 simCMD_ap_hdgSel                         = find_command("sim/autopilot/heading")
-simCMD_ap_trackSel                       = find_command("sim/autopilot/track")
 simCMD_ap_altArm                         = find_command("sim/autopilot/altitude_hold")
 simCMD_ap_flch                           = find_command("sim/autopilot/level_change")
 simCMD_ap_vs                             = find_command("sim/autopilot/vertical_speed")
@@ -149,10 +153,6 @@ simCMD_ap_loc                            = find_command("sim/autopilot/NAV")
 simCMD_at_spd                            = find_command("sim/autopilot/autothrottle")
 simCMD_at_clbcon                         = find_command("sim/autopilot/autothrottle_n1epr")
 simCMD_at_off                            = find_command("sim/autopilot/autothrottle_off")
-simCMD_fd_capt_on                        = find_command("sim/autopilot/fdir_on")
-simCMD_fd_capt_off                       = find_command("sim/autopilot/servos_fdir_off")
-simCMD_fd_fo_on                          = find_command("sim/autopilot/fdir2_on")
-simCMD_fd_fo_off                         = find_command("sim/autopilot/servos_fdir2_off")
 
 ---EFIS----------
 simCMD_efis_wxr                          = find_command("sim/instruments/EFIS_wxr")
@@ -251,11 +251,8 @@ end
 function B777_ap_hdgHold_switch_CMDhandler(phase, duration)    -- A/P HEADING HOLD BUTTON
    if phase == 0 then
       B777DR_mcp_button_target[7] = 1
-      if B777DR_hdg_mode ==0 then
+      if B777DR_hdg_mode == 0 then
          simCMD_ap_hdgHold:once()
---[[      else
-         simCMD_ap_trackSel:once()
-         simDR_ap_heading = simDR_trk]]
       end
    elseif phase == 2 then
       B777DR_mcp_button_target[7] = 0
@@ -265,11 +262,7 @@ end
 function B777_ap_hdgSel_switch_CMDhandler(phase, duration)     -- A/P HEADING SELECT BUTTON
    if phase == 0 then
       B777DR_mcp_button_target[8] = 1
-      if B777DR_hdg_mode == 0 then
-         simCMD_ap_hdgSel:once()
-      else
-         simCMD_ap_trackSel:once()
-      end
+      simCMD_ap_hdgSel:once()
    elseif phase == 2 then
       B777DR_mcp_button_target[8] = 0
    end
@@ -311,46 +304,9 @@ function B777_ap_disengage_switch_CMDhandler(phase, duration)  -- A/P DISENGAGE 
    end
 end
 
-function B777_fd_capt_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
-   if phase == 0 then
-      if B777DR_mcp_button_target[13] == 1 then
-         B777DR_mcp_button_target[13] = 0
-         simCMD_fd_capt_off:once()
-      elseif B777DR_mcp_button_target[13] == 0 then
-         B777DR_mcp_button_target[13] = 1
-         simCMD_fd_capt_on:once()
-      end
-   end
-end
-
-function B777_fd_fo_CMDhandler(phase, duration)              -- CAPTAIN F/D SWITCH
-   if phase == 0 then
-      if B777DR_mcp_button_target[14] == 1 then
-         B777DR_mcp_button_target[14] = 0
-         simCMD_fd_fo_off:once()
-      elseif B777DR_mcp_button_target[14] == 0 then
-         B777DR_mcp_button_target[14] = 1
-         simCMD_fd_fo_on:once()
-      end
-   end
-end
-
-function B777_autothrottle_switch_CMDhandler(phase, duration)
-   if phase == 0 then
-      if B777DR_mcp_button_target[15] == 1 then
-         simCMD_at_off:once()
-         B777DR_mcp_button_target[15] = 0
-      else
-         B777DR_mcp_button_target[15] = 1
-      end
-   end
-end
-
 function B777_autothrottle_spd_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_mcp_button_target[15] == 1 then
-         simCMD_at_spd:once()
-      end
+      simCMD_at_spd:once()
       B777DR_mcp_button_target[16] = 1
    elseif phase == 2 then
       B777DR_mcp_button_target[16] = 0
@@ -359,9 +315,7 @@ end
 
 function B777_autothrottle_clbcon_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      if B777DR_mcp_button_target[15] == 1 then
-         simCMD_at_clbcon:once()
-      end
+      simCMD_at_clbcon:once()
       B777DR_mcp_button_target[17] = 1
    elseif phase == 2 then
       B777DR_mcp_button_target[17] = 0
@@ -526,15 +480,8 @@ B777CMD_mcp_ap_engage_1                   = deferred_command("Strato/B777/button
 B777CMD_mcp_ap_engage_2                   = deferred_command("Strato/B777/button_switch/mcp/ap/engage_2", "Engage A/P 2", B777_ap_engage_switch_2_CMDhandler)
 B777CMD_mcp_ap_disengage_switch           = deferred_command("Strato/B777/button_switch/mcp/ap/disengage", "Disengage A/P", B777_ap_disengage_switch_CMDhandler)
 
-B777CMD_mcp_flightdirector_capt           = deferred_command("Strato/B777/button_switch/mcp/fd/capt", "Captain Flight Director Switch", B777_fd_capt_CMDhandler)
---B777CMD_mcp_flightdirector_capt_off       = deferred_command("Strato/B777/button_switch/mcp/fd/capt/off", "Captain Flight Director Switch Off", B777_fd_capt_dn_CMDhandler)
-
-B777CMD_mcp_flightdirector_fo             = deferred_command("Strato/B777/button_switch/mcp/fd/fo", "F/O Flight Director Switch", B777_fd_fo_CMDhandler)
---B777CMD_mcp_flightdirector_fo_off         = deferred_command("Strato/B777/button_switch/mcp/fd/fo/off", "F/O Flight Director Switch Off", B777_fd_fo_dn_CMDhandler)
-
-B777CMD_mcp_autothrottle_switch           = deferred_command("Strato/B777/button_switch/mcp/autothrottle/switch_1", "Autothrottle Switch 1", B777_autothrottle_switch_CMDhandler)
 B777CMD_mcp_autothrottle_spd_mode         = deferred_command("Strato/B777/button_switch/mcp/autothrottle/spd", "Autothrottle Speed Mode", B777_autothrottle_spd_switch_CMDhandler)
-B777CMD_mcp_autothrottle_spd_mode         = deferred_command("Strato/B777/button_switch/mcp/autothrottle/clbcon", "CLB/CON Mode", B777_autothrottle_clbcon_switch_CMDhandler)
+B777CMD_mcp_autothrottle_clbcon_mode      = deferred_command("Strato/B777/button_switch/mcp/autothrottle/clbcon", "CLB/CON Mode", B777_autothrottle_clbcon_switch_CMDhandler)
 --B777CMD_mcp_autothrottle_switch_2         = deferred_command("Strato/B777/button_switch/mcp/autothrottle/switch_2", "Autothrottle Switch 2", B777_autothrottle_switch_2_CMDhandler)
 
 B777CMD_mcp_ap_loc                        = deferred_command("Strato/B777/button_switch/mcp/ap/loc", "Localizer A/P Mode", B777_ap_loc_switch_CMDhandler)
@@ -566,7 +513,7 @@ B777CMD_efis_sta_button                   = deferred_command("Strato/B777/button
 B777CMD_efis_wpt_button                   = deferred_command("Strato/B777/button_switch/efis/wpt", "ND Waypoint Button", B777_efis_wpt_switch_CMDhandler)
 B777CMD_efis_tfc_button                   = deferred_command("Strato/B777/button_switch/efis/tfc", "ND Traffic Button", B777_efis_tfc_switch_CMDhandler)
 B777CMD_efis_apt_button                   = deferred_command("Strato/B777/button_switch/efis/apt", "ND Airport Button", B777_efis_apt_switch_CMDhandler)
-B777CMD_efis_mtrs_capt                    = deferred_command("Strato/B777/button_switch/efis/mtrs_capt", "Toggle Meters on PFD (Captain)", B777_efis_mtrs_capt_CMDhandler)
+B777CMD_efis_mtrs_capt                    = deferred_command("Strato/B777/button_switch/efis/mtrs_capt", "Toggle Meters on P   (Captain)", B777_efis_mtrs_capt_CMDhandler)
 
 ---OVERHEAD----------
 
@@ -634,6 +581,7 @@ function flight_start()
 
 	end
    B777CMD_efis_mtrs_capt:once()
+   simDR_at_armed = 0
 end
 
 --function flight_crash()
@@ -644,8 +592,12 @@ function after_physics()
    B777DR_cockpit_door_pos = B777_animate(B777_cockpit_door_target, B777DR_cockpit_door_pos, 4)
 
    for i = 1, 18 do
-      B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 15)
+      if i ~= 15 or i ~= 13 then
+         B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 15)
+      end
    end
+   B777DR_mcp_button_pos[15] = B777_animate(simDR_at_armed, B777DR_mcp_button_pos[15], 15)
+   B777DR_mcp_button_pos[13] = B777_animate(simDR_fd_enabled, B777DR_mcp_button_pos[13], 15)
 
    for i = 1, 5 do
       B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 15)
@@ -678,7 +630,7 @@ function after_physics()
       B777DR_ovhd_ctr_cover_positions[i] = B777_animate(B777DR_ovhd_ctr_cover_target[i], B777DR_ovhd_ctr_cover_positions[i], 15)
    end
    for i = 0, 6 do
-      B777DR_ovhd_aft_cover_positions[i] = B777_animate(B777DR_ovhd_aft_cover_target[i], B777DR_ovhd_aft_cover_positions[i], 15)
+         B777DR_ovhd_aft_cover_positions[i] = B777_animate(B777DR_ovhd_aft_cover_target[i], B777DR_ovhd_aft_cover_positions[i], 15)
    end
    for i = 0, 5 do
       B777DR_main_cover_positions[i] = B777_animate(B777DR_main_cover_target[i], B777DR_main_cover_positions[i], 15)
