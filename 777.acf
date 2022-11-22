@@ -40019,7 +40019,6 @@ GROUP Captain PFD
   GROUP FMA
     SHOW_EQUAL 1.000000 testNum
     CHAINED
-    GROUP_OPEN
     GROUP Pitch Modes
       SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/altv_captured
       CHAINED
@@ -47257,7 +47256,7 @@ GROUP EFB
   gen_text SMART MCP KNOBS
     POS 135.499985 2564.000000
     IMAGE TXT.2.28.white
-    DATAREF Strato/777/displays/txt/INSTANT_ADIRU_ALIGN
+    DATAREF Strato/777/displays/txt/SMART_MCP_KNOBS
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
