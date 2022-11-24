@@ -277,7 +277,7 @@ function GetDemandPumpState(idx, primary_state)
 					elseif ADP_touchdown == true and get(ra_pilot) >= 30 or ADP_touchdown == true and get(ra_copilot) >= 30 then --if we've gone around, set touchdown to false
 						ADP_touchdown = false
 					end
-					if idx == 2 then
+					if (idx == 2 and get(demand_state) > 0) or (idx == 3 and get(demand_second) == 0) then
 						--Updating ADP low pressure logic
 						if get(pressure) < 2400 then
 							ADP_engage = true
@@ -295,7 +295,7 @@ function GetDemandPumpState(idx, primary_state)
 					--Takeoff logic
 					if get(on_ground) ~= ADP_onground_past then
 						if get(on_ground) == 0 and ADP_onground_past == 1 then
-							ADP_leave_ground_time = get(c_time) --saving time we left the ground gor correct logic
+							ADP_leave_ground_time = get(c_time) --saving time we left the ground for correct logic
 						end
 						ADP_onground_past = get(on_ground)
 					end
@@ -549,16 +549,20 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 			else
 				local desired_pressure = 50 * round(get(quantity)) --default pressure is 50 psi unless more than half of the fluid leaks out
 				if get(pressure) > desired_pressure then
+					local decrement = 95
+					if get(pressure) < 300 then
+						decrement = 15
+					end
 					if i == 1 or i == 4 then
-						if get(pressure)-95 >= desired_pressure then
-							set(pressure, get(pressure)-95)
+						if get(pressure)-decrement >= desired_pressure then
+							set(pressure, get(pressure)-decrement)
 						else
 							set(pressure, desired_pressure)
 						end
 					else
 						if pumps_on == 0 or round(get(t_phi) / 180) % 2 == 1 then
-							if get(pressure)-95 >= desired_pressure then
-								set(pressure, get(pressure)-95)
+							if get(pressure)-decrement >= desired_pressure then
+								set(pressure, get(pressure)-decrement)
 							else
 								set(pressure, desired_pressure)
 							end
@@ -625,7 +629,3 @@ function onAirportLoaded() --set all the pressures and pumps to normal if engine
 end
 
 onAirportLoaded()
-
-function onModuleDone()
-	sasl.print("Shutting down")
-end

@@ -60,8 +60,6 @@ t_theta = globalPropertyf("sim/flightmodel/position/true_theta") --pitch
 --Flight controls
 rudder = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 1)
 --Operation
-brk_ovrd = globalProperty("sim/operation/override/override_gearbrake")
-steer_ovrd = globalPropertyi("sim/operation/override/override_wheel_steer")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 gear_ovrd = globalPropertyi("sim/operation/failures/rel_gear_act")
 --Own datarefs
@@ -139,9 +137,6 @@ L_brake_past = 0
 brake_R_temp = 0
 R_brake_past = 0
 temp_v = 0
-
-set(steer_ovrd, 1)
-set(brk_ovrd, 1)
 
 function UpdateShuttleValve()
 	if get(sys_C_press) > 200 or get(sys_R_press) > 200 then
@@ -750,9 +745,9 @@ function onAirportLoaded()
 end
 
 function update()
+	set(gear_ovrd, 6)
 	UpdateShuttleValve()
 	UpdateGearDoors()
-	set(gear_ovrd, 6)
 	set(handle_pos, get(handle_pos) + (get(normal_gear) - get(handle_pos)) * get(f_time) * 5)
 	UpdateLdgTarget()
 	UpdateBrakeTgt()
@@ -767,6 +762,10 @@ function update()
 	UpdateTirePsi()
 	UpdateDRefs()
 	UpdateGearStrg(0.8)
+end
+
+function onModuleDone()
+	set(gear_ovrd, 0)
 end
 
 onAirportLoaded() --This is to make sure that everything is set if sasl has been rebooted
