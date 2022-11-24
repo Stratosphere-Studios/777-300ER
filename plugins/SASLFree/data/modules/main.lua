@@ -25,6 +25,16 @@ brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R", 0)
 stab_cutout_C = createGlobalPropertyi("Strato/777/fctl/stab_cutout_C", 0)
 stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
 
+--Overrides
+
+fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
+brk_ovrd = globalPropertyi("sim/operation/override/override_gearbrake")
+steer_ovrd = globalPropertyi("sim/operation/override/override_wheel_steer")
+
+set(fctl_ovrd, 1)
+set(steer_ovrd, 1)
+set(brk_ovrd, 1)
+
 components = {
 
 	timers {},
@@ -55,3 +65,10 @@ components = {
 	},
 	custom_commands {}
 }
+
+function onModuleDone()
+	sasl.print("Shutting down")
+	set(fctl_ovrd, 0)
+	set(steer_ovrd, 0)
+	set(brk_ovrd, 0)
+end
