@@ -217,11 +217,12 @@ function UpdateGearPos()
 	gear_status_pos = {990, 640, 900, 574, 1080, 574} --Coordinates of the bottom left corner of gear status signs for alternate extension
 	--If gear has been retracted, weit 10 seconds before we hide the status
 	local gear_in_pos = Round(get(nw_actual), 2) ~= 0 or Round(get(mlg_actual_L), 2) ~= 0 or Round(get(mlg_actual_R), 2) ~= 0
+	set(tr_time, gear_display_time)
 	if gear_in_pos == false and handle_past == 1 and Round(get(handle_pos), 2) == 0 then
 		gear_display_time = get(c_time)
-		handle_past = Round(get(handle_pos), 2)
+		handle_past = 0
 	end
-	if handle_past == 0 and get(handle_pos) ~= 0 then
+	if handle_past == 0 and Round(get(handle_pos), 2) ~= 0 then
 		handle_past = 1
 		if get(altn_gear) == 0 then
 			gear_transit_time = get(c_time)
