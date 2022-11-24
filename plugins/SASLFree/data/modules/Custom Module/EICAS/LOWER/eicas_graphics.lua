@@ -42,6 +42,11 @@ green = {0, 1, 0}
 
 --Hydraulics
 
+pri_time = {-3, -3, -3, -3}
+pri_set = {1, 1, 1, 1}
+dem_time = {-3, -3, -3, -3}
+dem_set = {1, 1, 1, 1}
+
 --coordinates of the upper left corner of the rectangle for each pump
 primary_coords = {40, 846, 418, 900, 821, 900, 1251, 846}
 demand_coords = {200, 562, 564, 603, 667, 603, 1090, 562}
@@ -122,15 +127,20 @@ function DrawLinesEICAS()
 				end
 			end
 		end
-		if get(demand_state) ~= get(demand_past) and get(c_time) >= t + 3 then
-			set(demand_past, get(demand_state))
+		if get(demand_state) ~= get(demand_past) then
+			if dem_set[i] == 0 then
+				dem_time[i] = get(c_time)
+				dem_set[i] = 1
+			end
+			if get(c_time) >= dem_time[i] + 3 then
+				set(demand_past, get(demand_state))
+				dem_set[i] = 0
+			end
 		end
-		if get(primary_state) ~= get(primary_past) and get(c_time) >= t + 3 then
+		if get(primary_state) ~= get(primary_past) then
+			pri_time[i] = get(c_time)
 			set(primary_past, get(primary_state))
 		end
-	end
-	if get(c_time) >= t + 3 then
-		t = get(c_time)
 	end
 end
 
@@ -243,7 +253,7 @@ function DrawDoorStatus()
 		if get(door_pos) == 0 then
 			drawText(font, door_s_pos[i] + 115, door_s_pos[i+1] + 20, "CLOSED", 60, false, false, TEXT_ALIGN_CENTER, white)
 		else
-			Stripify(230, 80, door_s_pos[i], door_s_pos[i+1], 11, 4, white)
+			Stripify(door_s_pos[i], door_s_pos[i+1], 230, 80, 11, 4, white)
 		end
 	end
 end
