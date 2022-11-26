@@ -1,10 +1,14 @@
 [STRATO777 INFO]: Initializing...
-[STRATO777 INFO]: [DISPLAY] Monitor 0: 0, 0, 1920, 1200
-[STRATO777 INFO]: Path to module: G:\X-Plane 12/Aircraft/777-300ER/plugins/SASLFree/data/modules/main.lua
+[STRATO777 INFO]: [DISPLAY] Monitor 0: 0, 0, 2560, 1440
+[STRATO777 INFO]: Path to module: C:\Users/Apex Gaming/Documents/X-Plane 12/Aircraft/777-300ER/plugins/SASLFree/data/modules/main.lua
 [STRATO777 INFO]: Loading module...
 [STRATO777 INFO]: [LUA]: loading	module
 [STRATO777 INFO]: [LUA]: loading	timers
+[STRATO777 INFO]: [LUA]: loading	speed_calc
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: [LUA]: loading	hydraulics
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	fbw_pid
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: [LUA]: loading	fctl
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
@@ -17,8 +21,6 @@
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: [LUA]: loading	eicas
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	custom_commands
 [STRATO777 INFO]: Module loaded
 [STRATO777 INFO]: [LUA]: loading	interactive
-[STRATO777 INFO]: Disabling...
-[STRATO777 INFO]: [LUA]: Shutting down
-[STRATO777 INFO]: SASL plugin stopped...
