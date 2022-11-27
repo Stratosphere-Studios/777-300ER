@@ -35281,6 +35281,7 @@ P acf/_auto_rpm_with_tvec 0
 P acf/_auto_sync_EQ 1
 P acf/_auto_trim_EQ 0
 P acf/_autopilot_logic 0
+P acf/_average_mac_acf 25.815263748
 P acf/_bagg_1/0 -8.000000000
 P acf/_bagg_1/1 -1.000000000
 P acf/_bagg_1/2 40.000000000
@@ -35595,7 +35596,7 @@ P acf/_crew_2/0 30.000000000
 P acf/_crew_2/1 0.000000000
 P acf/_crew_2/2 -20.000000000
 P acf/_crew_2/count 3
-P acf/_crit_alt_mtr 0.000000000
+P acf/_crit_alt_mtr 4.906558514
 P acf/_cus_dig_dec/0 0
 P acf/_cus_dig_dec/1 0
 P acf/_cus_dig_dec/10 0
@@ -36710,7 +36711,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 120045
+P acf/_file_writer_version 120046
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -36765,8 +36766,8 @@ P acf/_fixed_role/6 0
 P acf/_fixed_role/7 0
 P acf/_fixed_role/8 0
 P acf/_fixed_role/count 9
-P acf/_flap1_cd 0.079999998
-P acf/_flap1_cl 2.559999943
+P acf/_flap1_cd 0.050000001
+P acf/_flap1_cl 1.200000048
 P acf/_flap1_cm -0.259000003
 P acf/_flap1_cratR 0.209999993
 P acf/_flap1_cratT 0.209999993
@@ -36789,8 +36790,8 @@ P acf/_flap1_ptch_above_50 0
 P acf/_flap1_roll 0.000000000
 P acf/_flap1_roll_above_50 0
 P acf/_flap1_type 3
-P acf/_flap2_cd 0.079999998
-P acf/_flap2_cl 2.559999943
+P acf/_flap2_cd 0.025000000
+P acf/_flap2_cl 1.110000014
 P acf/_flap2_cm -0.282000005
 P acf/_flap2_cratR 0.200000003
 P acf/_flap2_cratT 0.300000012
@@ -37084,7 +37085,7 @@ P acf/_hyd_slats 7
 P acf/_hyd_thrust_rev_L 0
 P acf/_hyd_thrust_rev_R 0
 P acf/_idle_rat/0 0.419999987
-P acf/_idle_rat/1 1.870000005
+P acf/_idle_rat/1 1.299999952
 P acf/_idle_rat/count 2
 P acf/_incidence_with_flaps 0
 P acf/_inlet_compression_efficiency 0.850000024
@@ -37700,8 +37701,8 @@ P acf/_tank_xyz_full/j_count 3
 P acf/_the_eqlbm -0.579269171
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
-P acf/_throt_max_fwd_emr 1.139999986
-P acf/_throt_max_fwd_nrm 1.139999986
+P acf/_throt_max_fwd_emr 1.000000000
+P acf/_throt_max_fwd_nrm 1.000000000
 P acf/_throt_max_rev 0.800000012
 P acf/_throt_time_jet 5.000000000
 P acf/_throt_time_prop 1.000000000
