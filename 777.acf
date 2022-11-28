@@ -38216,10 +38216,11 @@ GROUP Captain PFD
   END_GROUP
   GROUP VSI
     CHAINED
+    GROUP_OPEN
     gen_LED VS_negative
       POS 1360.000000 1435.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
+      DATAREF Strato/777/displays/pfd/vspeed
       SHOW_LESS -400.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       SIZE 2.200000
       LIGHT_MODE GLASS_AUTO
@@ -38235,7 +38236,7 @@ GROUP Captain PFD
     gen_LED VS_positive
       POS 1360.000000 2144.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit2/gauges/indicators/vvi_fpm_pilot
+      DATAREF Strato/777/displays/pfd/vspeed
       SHOW_GREATER 400.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
       SIZE 2.200000
       LIGHT_MODE GLASS_AUTO
