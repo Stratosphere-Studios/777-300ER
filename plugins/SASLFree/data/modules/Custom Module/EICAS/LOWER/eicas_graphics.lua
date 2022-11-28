@@ -138,8 +138,14 @@ function DrawLinesEICAS()
 			end
 		end
 		if get(primary_state) ~= get(primary_past) then
-			pri_time[i] = get(c_time)
-			set(primary_past, get(primary_state))
+			if pri_set[i] == 0 then
+				pri_time[i] = get(c_time)
+				pri_set[i] = 1
+			end
+			if get(c_time) >= pri_time[i] + 3 then
+				set(primary_past, get(primary_state))
+				pri_set[i] = 0
+			end
 		end
 	end
 end
