@@ -10,11 +10,11 @@ Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studi
 
 **Q: When is the release date?**
 
-A: As we are very early in development, and have no release date at this time.
+A: As we are early in development, and have no release date at this time.
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries from various authors that aren't included with the 777 from from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft.
+A: You can download liveries from various authors from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft.
 
 **Livery Painters**
 
@@ -26,42 +26,38 @@ A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwM
 
 **Q: What is the black console window that appears when I start the aircraft?**
 
-A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. **This can be disabled by deleting the xtlua_debugging.txt file from the aircraft's "plugins/xtlua/64/" folder.**
+A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. **This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's "plugins/xtlua/64/" folder.
 
 **Q: How do I start the aircraft?**
 
-A: As of now, you can't start the plane from cold and dark because systems have not been implemented yet. For now, enable "Start with engines running" in the aircraft menu. When systems are implemented, you should follow the checklists and manuals found [here.](https://github.com/Stratosphere-Studios/777/tree/main/Documentation)
+A: As of now, you can't start the plane from cold and dark because not all of the systems have been implemented yet. For now, enable "Start with engines running" in the aircraft menu. When systems are implemented, you should follow the checklists and manuals found [here.](https://github.com/Stratosphere-Studios/777/tree/main/Documentation)
+
+**Q: Is there a cargo version available?**
+
+A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERF. Note that not all cockpit changes are modeled yet.
 
 **Q: How can I contribute to this aircraft?**
 
-A: Please use the [Github issue page](https://github.com/Stratosphere-Studios/777/issues) to report any problems you find. This will greatly help us fix issues.
+A: Please use the [GitHub issue page](https://github.com/Stratosphere-Studios/777/issues) to report any problems you find. This will greatly help us fix issues.
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Why is my aircraft broken and/or I get error messages?**
+**Q: Why is my aircraft broken/gving me error messages?**
 
-A: You have selected the wrong aircraft. The 777 download inlcudes two aircraft which show up in the X-Plane menu. One of them is an experimental one we are using to test our new flightmodel, but it is otherwise fairly broken. 
+A: You have selected the wrong aircraft. The 777 download includes two aircraft which show up in the X-Plane menu - one for X-Plane 11 and one for x-Plane 12. Make sure you select the correct version!
 
-**Q: Even after following the above instructions my aircraft is still broken?**
+**Q: Even after following the above instructions, why my aircraft is still broken?**
 
-A: Please remember this aircraft is still in the works. By downloading from github, you our downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
-
-**Q: Will this aircraft support X-Plane 12?**
-
-A: Of course!
-
-**Q: Why are the physics broken/the plane won't take off/I can barely control the aircraft?**
-
-A: We know the physics are very broken currently. We're actively working on it.
+A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
 
 
 ## INSTALLATION
-Go to our [Github repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
+Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
 
-I suggest you use Github Desktop to keep the aircraft updated without needing to redownload it every time.
+We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
 
 ## OLD REPOSITORY
 If you want to see more update history, you can check our [old repository.](https://github.com/StratosphereStudios/777)
