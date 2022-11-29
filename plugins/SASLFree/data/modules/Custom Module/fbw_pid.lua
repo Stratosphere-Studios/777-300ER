@@ -43,6 +43,8 @@ mlg_actual_L = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 3)
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 curr_g = globalPropertyf("sim/flightmodel/forces/g_nrml")
+cg = globalPropertyf("sim/flightmodel/misc/cgz_ref_to_default")
+total_weight = globalPropertyf("sim/flightmodel/weight/m_total")
 
 --Own datarefs
 c_time = globalPropertyf("Strato/777/time/current")
@@ -63,7 +65,7 @@ pfc_overbank = createGlobalPropertyi("Strato/777/fctl/pfc/overbank", 0)
 pfc_roll_command = createGlobalPropertyf("Strato/777/fctl/pfc/roll", 0)
 pfc_elevator_command = createGlobalPropertyf("Strato/777/fctl/pfc/elevator", 0)
 pfc_rudder_command = createGlobalPropertyf("Strato/777/fctl/pfc/rudder", 0)
-fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 210)
+fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 230)
 fbw_pitch_dref = createGlobalPropertyf("Strato/777/fctl/pitch", 0)
 fbw_roll_dref = createGlobalPropertyf("Strato/777/fctl/roll", 0)
 fbw_ail_ratio = createGlobalPropertyf("Strato/777/fctl/ail_ratio", 0)
@@ -72,25 +74,38 @@ fbw_flprn_ratio_u = createGlobalPropertyf("Strato/777/fctl/flprn_ratio_u", 0)
 t_fac = createGlobalPropertyf("Strato/777/fctl/t_factor", 0)
 p_last = createGlobalPropertyf("Strato/777/fctl/p_last", 0)
 
-pt = createGlobalPropertyf("Strato/777/test/kp", 5.6)
-it = createGlobalPropertyf("Strato/777/test/ip", 4.6)
-dt = createGlobalPropertyf("Strato/777/test/dp", 1.1)
+pt = createGlobalPropertyf("Strato/777/test/kp", -0.19)
+it = createGlobalPropertyf("Strato/777/test/ip", -0.023)
+dt = createGlobalPropertyf("Strato/777/test/dp", 0)
+pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0)
+errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
+iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.0632)
+thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 15.5)
 pitch_delta = createGlobalPropertyf("Strato/777/test/p_delta", 0)
-correction = createGlobalPropertyf("Strato/777/test/correction", -1.2)
+delta_maintain = createGlobalPropertyf("Strato/777/test/p_deltam", 0)
+correction = createGlobalPropertyf("Strato/777/test/correction", 0)
 flap_c = createGlobalPropertyf("Strato/777/test/flap_correction", 0)
+mass_coeff = createGlobalPropertyf("Strato/777/test/mass_c", -1.7)
 err_reset = createGlobalPropertyi("Strato/777/test/err_reset", 0)
+calc_sp = createGlobalPropertyf("Strato/777/test/calc_sp", 0)
 
--- -1.7, 3.4, -3
--- -1.1 -0.5
--- 2.6, 2.9, 0.1
-pid_d_maintain = {5.6, 4.6, 1.1}
-pid_pitch_maintain = {0.4, 1.45, 0.1}
-pid_trs_maintain = {-0.08, -0.09, -0.01}
+pid_d_maintain = {4.1, 4.6, 0.01}
+pid_trs_maintain = {-0.19, -0.023, 0}
 pid_gust_supr = {0.3, 0.23, 0.13}
 pid_coefficients_rudder = {0.43, 0.24, 0}
 --Fly by wire pitch gains
-flap_corrections = {-1.2, -1.4, -4.55, -11.95, -15.8, -15.8, -16.1}
-flap_settings = {0, 1, 5, 15, 20, 25, 30}
+no_pitch_speeds = 
+{
+	{21, 247},
+	{22, 252},
+	{24, 261},
+	{26, 266},
+	{28, 281},
+	{30, 287},
+	{32, 293},
+	{34, 300},
+	{35, 305}
+}
 
 --Pfc self test globals
 sys_avail_last = {false, false, false}
@@ -127,14 +142,29 @@ e_error_total = 0
 trs_error_total = 0
 r_error_total = 0
 
---t_ratio = 0.779, 5.56 kias
-
 function GetGearStatus()
 	local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L) + get(mlg_actual_R)) / 3
 	if avg_gear_pos <= 0.3 then
 		return 0
 	end
 	return 1
+end
+
+function FindNoPitchSpeed(mass)
+	local tmp_mass = mass / 10000
+	local idx = 0
+	for i=1,tlen(no_pitch_speeds) do
+		if no_pitch_speeds[i][1] >= tmp_mass then
+			idx = i
+			break
+		end
+	end
+	if idx == 1 then
+		return no_pitch_speeds[1][2]
+	else
+		local r1 = (no_pitch_speeds[idx][2] - no_pitch_speeds[idx-1][2]) / (no_pitch_speeds[idx][1] - no_pitch_speeds[idx-1][1])
+		return (tmp_mass - no_pitch_speeds[idx-1][1]) * r1 + no_pitch_speeds[idx-1][2]
+	end
 end
 
 function UpdateFBWAilRatio()
@@ -218,43 +248,39 @@ function UpdatePFCElevatorCommand()
 		--there will be some constant error left out that they won't be able to reduce, thus we 
 		--need to calculate how much we need to adjust the pitch that we use in calculations
 		--to eliminate this error
-		local flap_correction = 0
-		for i=1,7 do
-			if flap_settings[i] >= get(flaps) then
-				flap_correction = flap_corrections[i]
-				break
-			end
-		end
-		local thrust_fac_L = (get(thrust_engn_L) - 24000) / 426000
-		local thrust_fac_R = (get(thrust_engn_R) - 24000) / 426000
+		local thrust_fac_L = (get(thrust_engn_L) - 16000) / 334000
+		local thrust_fac_R = (get(thrust_engn_R) - 16000) / 334000
 		local thrust_fac_total = (thrust_fac_L + thrust_fac_R) / 2
-		local ias_correction_linear = 0.0718 * (280 - get(fbw_trim_speed))
-		local thrust_coeff = 17.17
-		if flap_correction == flap_corrections[-1] then
-			thrust_coeff = 16.74
-		end
-		local thrust_correction = thrust_coeff * thrust_fac_total
+		set(t_fac, thrust_fac_total)
+		local tmp_speed = FindNoPitchSpeed(get(total_weight))
+		local ias_correction_linear = 0.0632 * (tmp_speed - get(fbw_trim_speed))
+		set(calc_sp, tmp_speed)
+		local thrust_correction = 15.85 * thrust_fac_total
 		local gear_correction = -1.2 * GetGearStatus()
-		fbw_pitch = ias_correction_linear + thrust_correction + gear_correction + flap_correction
+		fbw_pitch = ias_correction_linear + thrust_correction
 		if avg_ra > 100 then
 			--Calculating the pitch angle
 			local tmp_pitch = PID_Compute(pid_trs_maintain[1], pid_trs_maintain[2], pid_trs_maintain[3], round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
-			fbw_pitch = fbw_pitch + tmp_pitch[1]
+			--local tmp_pitch = PID_Compute(get(pt), get(it), get(dt), round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
+			set(errtotal, tmp_pitch[2])
+			if get(pitch_ovrd) == 0 then
+				fbw_pitch = fbw_pitch + tmp_pitch[1]
+			else
+				fbw_pitch = 0
+			end
 			trs_error_total = tmp_pitch[2]
 			trs_error_last = tmp_pitch[3]
+		else
+			fbw_pitch = 0
 		end
 		set(fbw_pitch_dref, fbw_pitch)
 		if get(f_time) ~= 0 then
-			local dep_coeff = 0.2
-			--Stall protection
-			if avg_cas < get(manuever_speed) then
-				dep_coeff = 0.2 + (get(manuever_speed) - avg_cas) * 0.23 / (get(manuever_speed) - get(stall_speed))
-			end
+			local dep_coeff = 0.3
 			--Maintain a certain pitch rate
 			local fbw_delta = (fbw_pitch - avg_pitch) * dep_coeff
 			local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
 			local tmp = PID_Compute(pid_d_maintain[1], pid_d_maintain[2], pid_d_maintain[3], fbw_delta + get(yoke_pitch_ratio) * 3.3, curr_delta, d_error_total, d_error_last, 100, 20)
-			--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_delta + get(yoke_pitch_ratio) * 3.3, curr_delta, d_error_total, d_error_last, 100, 20)
+			--local tmp = PID_Compute(get(pt), get(it), get(dt), get(yoke_pitch_ratio) * 3.3, curr_delta, d_error_total, d_error_last, 100, 20)
 			set(pitch_delta, curr_delta)
 			set(pfc_elevator_command, tmp[1])
 			d_error_total = tmp[2]
