@@ -14,6 +14,8 @@ include("misc_tools.lua")
 tas = globalPropertyf("sim/flightmodel/position/true_airspeed")
 cas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
+--Indicators
+vspeed = globalPropertyf("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
 --Physics
 curr_pressure = globalPropertyf("sim/physics/earth_pressure_p")
 --Weights
@@ -31,6 +33,10 @@ max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
 
+--Creating own datarefs
+
+vs_indicated = createGlobalPropertyi("Strato/777/displays/pfd/vspeed", 0)
+
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
 cas_limits = {330, 265, 245, 230, 225, 200, 180}
 flap_drag_coeff = {1.18, 1.75, 2, 2.1, 2.23, 2.44, 2.56}
@@ -41,6 +47,8 @@ function toCAS(speed)
 end
 
 function update()
+    local tmp = get(vspeed) % 50
+    set(vs_indicated, get(vspeed) - tmp + 50 * round(tmp / 50))
     if get(on_ground) == 0 then
         cas_p_ms = get(cas_pilot) / 1.944
         cas_tmp = toCAS(get(tas))
