@@ -65,7 +65,7 @@ If you want to see more update history, you can check our [old repository.](http
 ## CREDITS
 [Nathroxer (Head)](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[BRUHegg](https://github.com/BRUHegg): SASL code for various systems.
+[BRUHegg](https://github.com/BRUHegg): SASL code for various systems, flight model.
 
 [Crazytimtimtim](https://github.com/crazytimtimtim): XTLua code, flight model + other aircraft data, manipulators, readme, Github management.
 
