@@ -50,7 +50,7 @@ total_weight = globalPropertyf("sim/flightmodel/weight/m_total")
 c_time = globalPropertyf("Strato/777/time/current")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
-manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
+maneuver_speed = globalPropertyi("Strato/777/fctl/vmanuever")
 sys_L_press = globalPropertyfae("Strato/777/hydraulics/press", 1)
 sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
 sys_R_press = globalPropertyfae("Strato/777/hydraulics/press", 3)
@@ -95,7 +95,7 @@ pid_gust_supr = {0.3, 0.23, 0.13}
 pid_coefficients_rudder = {0.43, 0.24, 0}
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
 --Fly by wire pitch gains
-
+--TODO: refine thrust corrections
 linear_corrections = {0.0632, 0.075, 0.095, 0.135}
 --Zero pitch speeds per total mass in kg / 10000
 no_pitch_speeds = 
@@ -250,9 +250,6 @@ end
 function UpdatePFCElevatorCommand()
 	local avg_ra = (get(ra_pilot) + get(ra_copilot)) / 2
 	if avg_ra > 5 and get(fbw_mode) == 1 then
-		--Limit trs
-		local tmp = lim(get(fbw_trim_speed), get(max_allowable), get(manuever_speed))
-		set(fbw_trim_speed, tmp)
 		local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
 		local avg_pitch = (get(pitch_pilot) + get(pitch_copilot)) / 2
 		local avg_alt_baro = (get(altitude_pilot) + get(altitude_stdby) + get(altitude_copilot)) / 3
@@ -272,6 +269,13 @@ function UpdatePFCElevatorCommand()
 		local gear_correction = -1.2 * GetGearStatus()
 		fbw_pitch = GetPitchCorrection(tmp_mass, m_i, thrust_fac_total, get(fbw_trim_speed))
 		if avg_ra > 100 then
+			--Limit trs
+			if get(fbw_trim_speed) == 0 then
+				set(fbw_trim_speed, avg_cas)
+			else
+				local tmp = lim(get(fbw_trim_speed), get(max_allowable), get(maneuver_speed))
+				set(fbw_trim_speed, tmp)
+			end
 			--Calculating the pitch angle
 			local tmp_pitch = PID_Compute(pid_trs_maintain[1], pid_trs_maintain[2], pid_trs_maintain[3], round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
 			--local tmp_pitch = PID_Compute(get(pt), get(it), get(dt), round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
@@ -283,8 +287,6 @@ function UpdatePFCElevatorCommand()
 			end
 			trs_error_total = tmp_pitch[2]
 			trs_error_last = tmp_pitch[3]
-		else
-			fbw_pitch = 0
 		end
 		set(fbw_pitch_dref, fbw_pitch)
 		if get(f_time) ~= 0 then
@@ -308,6 +310,7 @@ function UpdatePFCElevatorCommand()
 		fbw_elevator_past = get(pfc_elevator_command)
 		p_delta_last = p_delta
 	else
+		set(fbw_trim_speed, 0)
 		set(pfc_elevator_command, 20 * get(yoke_pitch_ratio))
 	end
 end
