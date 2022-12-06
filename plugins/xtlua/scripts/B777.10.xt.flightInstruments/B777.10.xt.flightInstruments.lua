@@ -505,7 +505,7 @@ function setTXT()
 	B777DR_txt_LBS_KGS             = "POUNDS/KILOGRAMS"
 	B777DR_txt_SHOW_TRS_BUG_ON_PFD = "SHOW TRS BUG ON PFD"
 	B777DR_txt_PFD_AOA_INDICATOR   = "PFD AOA INDICATOR"
-	B777DR_txt_SMART_MCP_KNOBS      = "SMART MCP KNOBS"
+	B777DR_txt_SMART_MCP_KNOBS     = "SMART MCP KNOBS"
 end
 
 function getHeadingDifference(desireddirection,current_heading)
