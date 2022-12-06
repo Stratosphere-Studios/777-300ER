@@ -65,7 +65,7 @@ pfc_overbank = createGlobalPropertyi("Strato/777/fctl/pfc/overbank", 0)
 pfc_roll_command = createGlobalPropertyf("Strato/777/fctl/pfc/roll", 0)
 pfc_elevator_command = createGlobalPropertyf("Strato/777/fctl/pfc/elevator", 0)
 pfc_rudder_command = createGlobalPropertyf("Strato/777/fctl/pfc/rudder", 0)
-fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 176)
+fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 0)
 fbw_pitch_dref = createGlobalPropertyf("Strato/777/fctl/pitch", 0)
 fbw_roll_dref = createGlobalPropertyf("Strato/777/fctl/roll", 0)
 fbw_ail_ratio = createGlobalPropertyf("Strato/777/fctl/ail_ratio", 0)
@@ -80,7 +80,7 @@ dt = createGlobalPropertyf("Strato/777/test/dp", 0.01)
 pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0)
 errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
 iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.0742)
-thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 15.85)
+thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 17)
 pitch_delta = createGlobalPropertyf("Strato/777/test/p_delta", 0)
 delta_maintain = createGlobalPropertyf("Strato/777/test/p_deltam", 0)
 correction = createGlobalPropertyf("Strato/777/test/correction", 0)
@@ -109,6 +109,19 @@ no_pitch_speeds =
 	{32, 293, 284, 248, 197},
 	{34, 300, 290, 255, 203},
 	{35, 305, 294, 262, 205}
+}
+
+thrust_corrections = 
+{
+	{21, 18.3},
+	{22, 17.6},
+	{24, 16.1},
+	{26, 14.7},
+	{28, 13.6},
+	{30, 12.8},
+	{32, 12.8},
+	{34, 12.8},
+	{35, 12.8}
 }
 
 --Pfc self test globals
@@ -171,10 +184,10 @@ end
 function GetPitchCorrection(mass, m_idx, thrust, trim_speed)
 	local flap_idx = lim(getGreaterThan(flap_settings, get(flaps)), 4, 1)
 	local r1 = (no_pitch_speeds[m_idx][2 + flap_idx - 1] - no_pitch_speeds[m_idx-1][2 + flap_idx - 1]) / (no_pitch_speeds[m_idx][1] - no_pitch_speeds[m_idx-1][1])
-	local r2 = 0.5
+	local r2 = (thrust_corrections[m_idx][2] - thrust_corrections[m_idx-1][2]) / (thrust_corrections[m_idx][1] - thrust_corrections[m_idx-1][1])
 	local speed = (mass - no_pitch_speeds[m_idx-1][1]) * r1 + no_pitch_speeds[m_idx-1][2 + flap_idx - 1]
-	set(calc_sp, speed)
-	local thrust_coeff = 17 - (mass - 22) * r2
+	local thrust_coeff = (mass - thrust_corrections[m_idx-1][1]) * r2 + thrust_corrections[m_idx-1][2]
+	set(calc_sp, thrust_coeff)
 	local ias_correction_linear = linear_corrections[flap_idx] * (speed - trim_speed)
 	--local ias_correction_linear = get(iasln) * (speed - trim_speed)
 	local thrust_correction = thrust_coeff * thrust
