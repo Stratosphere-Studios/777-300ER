@@ -153,14 +153,6 @@ end]]
 --**                                      CODE                                       **--
 --*************************************************************************************--
 
-function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
-	if simDR_spoiler_handle < 0 and simDR_onground == 1 and simDR_trottle_pos < 0 then --conditions for deployment in arm mode
-		simDR_spoiler_handle = 1
-	elseif simDR_trottle_pos > 0.5 and simDR_spoiler_handle > 0.5 then --automatic retraction when too much thrust is applied
-		simDR_spoiler_handle = 0
-	end
-end
-
 ----- ANIMATION UTILITY -----------------------------------------------------------------
 function B777_animate(target, variable, speed)
    if math.abs(target - variable) < 0.1 then return target end
@@ -191,27 +183,6 @@ function gear()
    else
       B777DR_ldg_gear_kill = 0
    end
-
-   --[[if B777_eag_claw_sync == 1 then
-      B777DR_custom_eagle_claw[1] = simDR_eag_claw_pos[1]
-      B777DR_custom_eagle_claw[2] = simDR_eag_claw_pos[2]
-   end
-   
-   if B777DR_avg_gear_pos < 0.9 then
-      B777_eag_claw_sync = 0
-      B777DR_custom_eagle_claw = 0
-   d
-   
-   if B777_eag_claw_sync == 0 then
-      B777DR_custom_eagle_claw[1] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
-      B777DR_custom_eagle_claw[2] = B777_animate(B777_eag_target, B777DR_custom_eagle_claw[1], 0.9)
-   end
-   
-   if simDR_whichOnGround[1] == 1 and simDR_whichOnGround[2] == 1 then
-      simDR_reverser_0_fail = 6
-      simDR_reverser_1_fail = 6
-   end]]
-
 end
 
 --*************************************************************************************--
@@ -236,7 +207,6 @@ end
 --function before_physics()
 
 function after_physics()
-   SetSpeedbrkHandle()
    --print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok. IF YOU HAVE ANY ISSUES, PLEASE CHECK THE README BEFORE ASKING THE DEVELOPERS!!!")
    gear()
 
