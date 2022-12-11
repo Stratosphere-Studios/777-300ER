@@ -15,6 +15,7 @@ include("misc_tools.lua")
 --Cockpit controls
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
+spoiler_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
 --Electrical
 battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
 gen_1 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 1)
@@ -40,7 +41,9 @@ on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 --Finding own datarefs
 
-fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode", 1)
+park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
+fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
+fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
@@ -74,11 +77,14 @@ stab_c_past = 0
 flaps_past = 0
 flap_retract_time = -11
 advisories_past = {}
+n_dsp = 0
+advisories_start = 1
 handle_past = 1
 altn_gear_past = 0
 gear_display_time = -11
 gear_transit_time = -26
 gear_dn = true
+eicas_nest = 0
 
 function UpdateAdvisorySide(messages, text_L, text_R, text_both, dref_l, dref_r)
 	if round(get(dref_l)) == 1 and round(get(dref_r)) == 0 then
@@ -104,13 +110,19 @@ function UpdateWindows()
 	end
 end
 
-function UpdateCanc() --Updating cancell/recall
+function UpdateCanc(n_adv, n_warn) --Updating cancel/recall
 	if get(recall) ~= get(recall_past) then
 		if get(recall) == 0 and get(c_time) >= tmp + 1 then
 			if get(canc) == 1 then
 				set(canc, 0)
 			else
-				set(canc, 1)
+				local adv_disp = 11 - n_warn
+				if n_adv + n_warn > 11 and n_adv - advisories_start >= adv_disp then
+					advisories_start = advisories_start + adv_disp
+				else
+					set(canc, 1)
+					advisories_start = 1
+				end
 			end
 			set(recall_past, get(recall))
 		elseif get(recall) == 1 then
@@ -123,18 +135,23 @@ function UpdateCanc() --Updating cancell/recall
 end
 
 function UpdatePress(messages) --Update pressure advisories
+	eicas_nest = 0
 	if get(pressure_L) < 1200 and get(pressure_C) < 1200 and get(pressure_R) < 1200 then
 		table.insert(messages, tlen(messages) + 1, "HYD PRESS SYS L+C+R")
 		table.insert(messages, tlen(messages) + 1, "FLIGHT CONTROLS")
+		eicas_nest = 1
 	elseif get(pressure_L) >= 1200 and get(pressure_C) < 1200 and get(pressure_R) < 1200 then
 		table.insert(messages, tlen(messages) + 1, "HYD PRESS SYS R+C")
 		table.insert(messages, tlen(messages) + 1, "FLIGHT CONTROLS")
+		eicas_nest = 1
 	elseif get(pressure_L) < 1200 and get(pressure_C) >= 1200 and get(pressure_R) < 1200 then
 		table.insert(messages, tlen(messages) + 1, "HYD PRESS SYS L+R")
 		table.insert(messages, tlen(messages) + 1, "FLIGHT CONTROLS")
+		eicas_nest = 1
 	elseif get(pressure_L) < 1200 and get(pressure_C) < 1200 and get(pressure_R) >= 1200 then
 		table.insert(messages, tlen(messages) + 1, "HYD PRESS SYS L+C")
 		table.insert(messages, tlen(messages) + 1, "FLIGHT CONTROLS")
+		eicas_nest = 1
 	elseif get(pressure_L) < 1200 and get(pressure_C) >= 1200 and get(pressure_R) >= 1200 then
 		table.insert(messages, tlen(messages) + 1, "HYD PRESS SYS L")
 	elseif get(pressure_L) >= 1200 and get(pressure_C) < 1200 and get(pressure_R) >= 1200 then
@@ -214,6 +231,7 @@ function UpdateStabCutoutAdvisory(messages)
 end
 
 function UpdateGearPos()
+	local height = 615
 	gear_status_pos = {990, 640, 900, 574, 1080, 574} --Coordinates of the bottom left corner of gear status signs for alternate extension
 	--If gear has been retracted, weit 10 seconds before we hide the status
 	local gear_in_pos = Round(get(nw_actual), 2) ~= 0 or Round(get(mlg_actual_L), 2) ~= 0 or Round(get(mlg_actual_R), 2) ~= 0
@@ -254,12 +272,11 @@ function UpdateGearPos()
 			else
 				gear_dn = false
 			end
-			DrawRect(970, 628, 110, 60, 5, color)
-			drawText(font, 1025, 580, "GEAR", 45, false, false, TEXT_ALIGN_CENTER, {0.17, 0.71, 0.83})
+			DrawRect(970, height, 110, 60, 5, color)
 			if text ~= "" then
-				drawText(font, 1025, 640, text, 50, false, false, TEXT_ALIGN_CENTER, color)
+				drawText(font, 1025, height + 12, text, 50, false, false, TEXT_ALIGN_CENTER, color)
 			else
-				Stripify(970, 628, 110, 60, 6, 5, color)
+				Stripify(970, height, 110, 60, 6, 5, color)
 			end
 		else
 			--Advanced status displaying
@@ -282,13 +299,13 @@ function UpdateGearPos()
 					Stripify(gear_status_pos[i*2-1], gear_status_pos[i*2], 70, 50, 4, 5, color)
 				end
 			end
-			drawText(font, 1025, 580, "GEAR", 45, false, false, TEXT_ALIGN_CENTER, {0.17, 0.71, 0.83})
 			if n_gear_dn == 3 then
 				gear_dn = true
 			else
 				gear_dn = false
 			end
 		end
+		drawText(font, 1025, height - 48, "GEAR", 45, false, false, TEXT_ALIGN_CENTER, {0.17, 0.71, 0.83})
 	end
 end
 
@@ -377,13 +394,14 @@ function UpdateEicasWarnings(messages)
 	if avg_ra < 800 and get(throttle_pos) < 0.05 and gear_dn == false then
 		table.insert(messages, tlen(messages) + 1, "CONFIG GEAR")
 	end
-	if get(sys_C_press) < 900 and get(sys_R_press) < 900 then
+	if get(sys_C_press) < 900 and get(sys_R_press) < 900 and get(stab_cutout_C) * get(stab_cutout_R) == 0 then
 		table.insert(messages, tlen(messages) + 1, "STABILIZER")
 	end
 end
 
 function UpdateEicasAdvisory(messages)
 	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
+	local nest_strg = ""
 	--Draw cautions
 	if get(fbw_mode) == 2 then
 		table.insert(messages, tlen(messages) + 1, "FLIGHT CONTROL MODE")
@@ -402,6 +420,12 @@ function UpdateEicasAdvisory(messages)
 	if get(acc) == 1 then
 		table.insert(messages, tlen(messages) + 1, "BRAKE SOURCE")
 	end
+	if get(pressure_L) < 1200 or get(pressure_C) < 1200 or get(pressure_R) < 1200 then
+		table.insert(messages, tlen(messages) + 1, "SPOILERS")
+	end
+	if get(pressure_C) < 1200 or (get(fbw_mode) > 1 and get(fbw_self_test) == 0) then
+		table.insert(messages, tlen(messages) + 1, "AUTO SPEEDBRAKE")
+	end
 	if get(eicas_tire_press) == 1 then
 		table.insert(messages, tlen(messages) + 1, "TIRE PRESS")
 	end
@@ -416,11 +440,44 @@ function UpdateEicasAdvisory(messages)
 	UpdateWindowAdvisory(messages)
 end
 
-function DisplayMessages(messages, offset, color)
-	local n_advisories = tlen(messages)
-	if n_advisories > 0 then
-		for i=1,n_advisories do
-			drawText(font, 850, offset - 50 * (i - 1), messages[i], 50, false, false, TEXT_ALIGN_LEFT, color)
+function UpdateMemo(messages, msg_avail)
+	local c_avail = msg_avail
+	if get(park_brake_valve) == 1 and c_avail >= 1 then
+		table.insert(messages, 1, "PARKING BRAKE SET")
+		c_avail = c_avail - 1
+	end
+	if get(spoiler_handle) < 0 and c_avail >= 1 then
+		table.insert(messages, 1, "SPEEDBRAKE ARMED")
+		c_avail = c_avail - 1
+	end
+	if get(on_ground) == 1 and get(throttle_pos) < 0.5 and c_avail >= 1 then
+		table.insert(messages, 1, "DOORS AUTO")
+	end
+end
+
+function DisplayMessages(messages, offset, color, step, start_p, end_p)
+	if end_p >= start_p then
+		local hyd_idx = nil
+		local hyd_press_idx1 = indexOf(messages, "HYD PRESS SYS L")
+		local hyd_press_idx2 = indexOf(messages, "HYD PRESS SYS C")
+		local hyd_press_idx3 = indexOf(messages, "HYD PRESS SYS R")
+		if hyd_press_idx1 ~= nil then
+			hyd_idx = hyd_press_idx1
+		elseif hyd_press_idx2 ~= nil then
+			hyd_idx = hyd_press_idx2
+		elseif hyd_press_idx3 ~= nil then
+			hyd_idx = hyd_press_idx3
+		end
+		local fctl_idx = indexOf(messages, "FLIGHT CONTROLS")
+		for i=1,end_p - start_p + 1 do
+			local curr_idx = start_p + i - 1
+			local curr_msg = messages[curr_idx]
+			if fctl_idx ~= nil and curr_idx > fctl_idx then
+				curr_msg = " "..curr_msg
+			elseif fctl_idx == nil and hyd_idx ~= nil and curr_idx > hyd_idx then
+				curr_msg = " "..curr_msg
+			end
+			drawText(font, 830, offset - step * (i - 1), curr_msg, 50, false, false, TEXT_ALIGN_LEFT, color)
 		end
 	end
 end
@@ -430,23 +487,42 @@ function draw()
 	flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 	UpdateWindows()
 	if get(battery) == 1 or IsAcConnected() == 1 then
-		local offset = 1245
+		local offset = 1275
+		local n_dsp = 0
+		local curr_end = 0
+		local n_warnings = 0
+		local n_advisories = 0
 		local warnings = {}
-		UpdateCanc()
+		local advisories = {}
+		local memo = {}
 		UpdateFlaps()
 		UpdateEicasWarnings(warnings)
-		DisplayMessages(warnings, offset, {1, 0, 0})
-		offset = offset - 50 * tlen(warnings)
-		if get(canc) == 0 or get(recall_past) == 1 then
-			local advisories = {}
-			if get(c_time) >= tmp1 + 1 then
-				UpdateEicasAdvisory(advisories)
-				advisories_past = advisories
-			end
-			DisplayMessages(advisories_past, offset, {1, 0.96, 0.07})
+		if get(c_time) >= tmp1 + 1 then
+			UpdateEicasAdvisory(advisories)
+			advisories_past = advisories
 		end
+		n_warnings = tlen(warnings)
+		n_advisories = tlen(advisories_past)
+		n_dsp = n_advisories + n_warnings
+		UpdateMemo(memo, 11 - n_dsp)
+		UpdateCanc(n_advisories, n_warnings)
+		DisplayMessages(warnings, offset, {1, 0, 0}, 50, 1, n_warnings)
+		offset = offset - 50 * n_warnings
+		if get(canc) == 0 or get(recall_past) == 1 then
+			if n_dsp > 11 then
+				local curr_pg = math.floor(advisories_start / (11 - n_warnings)) + 1
+				drawText(font, 1280, 740, "PG "..tostring(curr_pg), 30, false, false, TEXT_ALIGN_CENTER, {1, 1, 1})
+			end
+			if n_dsp - advisories_start < 10 then
+				curr_end = n_dsp - n_warnings
+			else
+				curr_end = advisories_start + 10 - n_warnings
+			end
+			DisplayMessages(advisories_past, offset, {1, 0.96, 0.07}, 50, advisories_start, curr_end)
+		end
+		DisplayMessages(memo, 775, {1, 1, 1}, -50, 1, tlen(memo))
 		if get(recall_past) == 1 and get(canc) == 1 then
-			drawText(font, 850, 680, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+			drawText(font, 830, 740, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 		end
 		if get(flap_load_relief) == 1 then
 			drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
