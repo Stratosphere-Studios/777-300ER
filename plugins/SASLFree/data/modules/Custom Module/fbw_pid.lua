@@ -15,6 +15,7 @@ yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
 yoke_roll_ratio = globalPropertyf("sim/cockpit2/controls/yoke_roll_ratio")
 yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
 stab_trim = globalPropertyf("sim/cockpit2/controls/elevator_trim")
+spoiler_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
 ths_degrees = globalPropertyf("sim/flightmodel2/controls/stabilizer_deflection_degrees")
 --Control surfaces
@@ -65,6 +66,7 @@ pfc_overbank = createGlobalPropertyi("Strato/777/fctl/pfc/overbank", 0)
 pfc_roll_command = createGlobalPropertyf("Strato/777/fctl/pfc/roll", 0)
 pfc_elevator_command = createGlobalPropertyf("Strato/777/fctl/pfc/elevator", 0)
 pfc_rudder_command = createGlobalPropertyf("Strato/777/fctl/pfc/rudder", 0)
+fbw_self_test = createGlobalPropertyi("Strato/777/fctl/pfc/selftest", 0)
 fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 0)
 fbw_pitch_dref = createGlobalPropertyf("Strato/777/fctl/pitch", 0)
 fbw_roll_dref = createGlobalPropertyf("Strato/777/fctl/roll", 0)
@@ -77,7 +79,7 @@ p_last = createGlobalPropertyf("Strato/777/fctl/p_last", 0)
 pt = createGlobalPropertyf("Strato/777/test/kp", 4.1)
 it = createGlobalPropertyf("Strato/777/test/ip", 4.6)
 dt = createGlobalPropertyf("Strato/777/test/dp", 0.01)
-pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0)
+pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 1)
 errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
 iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.0742)
 thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 17)
@@ -97,6 +99,7 @@ flap_settings = {0, 1, 5, 15, 20, 25, 30}
 --Fly by wire pitch gains
 --TODO: refine thrust corrections
 linear_corrections = {0.0632, 0.075, 0.095, 0.135}
+fuel = {37000}
 --Zero pitch speeds per total mass in kg / 10000
 no_pitch_speeds = 
 {
@@ -113,12 +116,12 @@ no_pitch_speeds =
 
 thrust_corrections = 
 {
-	{21, 17.4},
-	{22, 16.6},
-	{24, 15.2},
-	{26, 13.8},
-	{28, 12.7},
-	{30, 11.9},
+	{21, 17.2},
+	{22, 16.4},
+	{24, 15},
+	{26, 13.6},
+	{28, 12.4},
+	{30, 11.6},
 	{32, 12.8},
 	{34, 12.8},
 	{35, 12.8}
@@ -159,6 +162,15 @@ e_error_total = 0
 trs_error_total = 0
 r_error_total = 0
 
+function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
+	if get(on_ground) == 1 and get(throttle_pos) < 0 and get(sys_C_press) > 1200 and get(fbw_mode) == 1 then --conditions for deployment
+		set(spoiler_handle, 1)
+	elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 then --automatic retraction when too much thrust is applied
+		set(spoiler_handle, 0)
+	end
+end
+
+
 function GetGearStatus()
 	local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L) + get(mlg_actual_R)) / 3
 	if avg_gear_pos <= 0.3 then
@@ -187,7 +199,7 @@ function GetPitchCorrection(mass, m_idx, thrust, trim_speed)
 	local r2 = (thrust_corrections[m_idx][2] - thrust_corrections[m_idx-1][2]) / (thrust_corrections[m_idx][1] - thrust_corrections[m_idx-1][1])
 	local speed = (mass - no_pitch_speeds[m_idx-1][1]) * r1 + no_pitch_speeds[m_idx-1][2 + flap_idx - 1]
 	local thrust_coeff = (mass - thrust_corrections[m_idx-1][1]) * r2 + thrust_corrections[m_idx-1][2]
-	set(calc_sp, thrust_coeff)
+	set(calc_sp, speed)
 	local ias_correction_linear = linear_corrections[flap_idx] * (speed - trim_speed)
 	--local ias_correction_linear = get(iasln) * (speed - trim_speed)
 	local thrust_correction = thrust_coeff * thrust
@@ -444,6 +456,7 @@ end
 
 function DoSelfTest()
 	if self_test_init == true and self_test_done == false then
+		set(fbw_self_test, 1)
 		if sec_tested == false and sec_init == false then
 			set(fbw_mode, 2)
 			sec_time = get(c_time)
@@ -465,10 +478,13 @@ function DoSelfTest()
 				set(fbw_mode, 1)
 			end
 		end
+	else
+		set(fbw_self_test, 0)
 	end
 end
 
 function update()
+	SetSpeedbrkHandle()
 	UpdateSelfTest()
 	DoSelfTest()
 	UpdateFBWAilRatio()
