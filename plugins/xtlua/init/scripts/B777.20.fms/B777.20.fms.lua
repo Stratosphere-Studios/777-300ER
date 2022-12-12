@@ -1,8 +1,8 @@
 --[[
 *****************************************************************************************
-* Script Name: misc
-* Author Name: Crazytimtimtim
-* Script Description: (Init) misc system code for systems that don't have enough for their own module.
+* Script Name: FMS
+* Author Name: crazytimtimtim
+* Script Description: (Init) Flight Management System code
 *****************************************************************************************
 --]]
 
