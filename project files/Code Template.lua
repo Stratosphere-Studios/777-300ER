@@ -1,8 +1,8 @@
 --[[
 *****************************************************************************************
-* Script Name: Flight Instruments
-* Author Name: crazyitmtimtimtim
-* Script Description: Cockpit instrument code
+* Script Name: 
+* Author Name: crazytimtimtim
+* Script Description:
 *****************************************************************************************
 --]]
 
