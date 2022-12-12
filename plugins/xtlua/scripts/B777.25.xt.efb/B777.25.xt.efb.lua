@@ -42,7 +42,7 @@ local pagemode = 0
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
 
-
+avitabEnabled = find_dataref("avitab/panel_enabled") -- or 'avitab/panel_powered'
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -55,6 +55,7 @@ local pagemode = 0
 --*************************************************************************************--
 
 B777DR_efb_page = deferred_dataref("Strato/777/displays/efb_page", "number")
+B777DR_efb_page_type = deferred_dataref("Strato/777/displays/efb_page_type", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -178,12 +179,24 @@ B777CMD_efb_back = deferred_command("Strato/777/efb_back", "EFB Back Button", ef
 
 --function aircraft_unload()
 
---function flight_start()
+function flight_start()
+   avitabEnabled = 0
+   B777DR_efb_page = 1
+   run_after_time(efb_boot, 3)
+end
 
 --function flight_crash()
 
 --function before_physics()
 
---function after_physics()
+function after_physics()
+   if B777DR_efb_page < 2 or B777DR_efb_page == 1000 then -- off, startup, or avitab
+      B777DR_efb_page_type = 0
+   elseif B777DR_efb_page >= 2 and B777DR_efb_page <= 999 then -- normal big buttons
+      B777DR_efb_page_type = 1
+   elseif B777DR_efb_page > 999 then -- settings pages
+      B777DR_efb_page_type = 3
+   end
+end
 
 --function after_replay()

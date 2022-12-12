@@ -43,3 +43,4 @@ B777CMD_efb_back = deferred_command("Strato/777/efb_back", "EFB Back Button", ef
 --*************************************************************************************--
 
 B777DR_efb_page = deferred_dataref("Strato/777/displays/efb_page", "number")
+B777DR_efb_page_type = deferred_dataref("Strato/777/displays/efb_page_type", "number")
