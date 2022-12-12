@@ -100,7 +100,7 @@ end
 
 function StabTrimUp(phase)
 	if get(on_ground) == 1 or get(fbw_mode) == 3 then
-		if get(sys_C_press) > 900 * (1 - get(stab_cutout_C)) or get(sys_R_press) * (1 - get(stab_cutout_R)) > 900 then
+		if get(sys_C_press) * (1 - get(stab_cutout_C)) > 900 or get(sys_R_press) * (1 - get(stab_cutout_R)) > 900 then
 			return 1
 		end
 	else
