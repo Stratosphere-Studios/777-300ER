@@ -81,9 +81,9 @@ p_last = createGlobalPropertyf("Strato/777/fctl/p_last", 0)
 pt = createGlobalPropertyf("Strato/777/test/kp", 4.1)
 it = createGlobalPropertyf("Strato/777/test/ip", 4.6)
 dt = createGlobalPropertyf("Strato/777/test/dp", 0.01)
-pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0)
+pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0) --NEVER LEAVE THIS AT 1
 errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
-iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.0742)
+iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.15)
 thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 17)
 pitch_delta = createGlobalPropertyf("Strato/777/test/p_delta", 0)
 delta_maintain = createGlobalPropertyf("Strato/777/test/p_deltam", 0)
@@ -99,19 +99,19 @@ pid_gust_supr = {0.3, 0.23, 0.13}
 pid_coefficients_rudder = {0.43, 0.24, 0}
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
 --Fly by wire pitch gains
-linear_corrections = {0.0632, 0.075, 0.095, 0.135}
+linear_corrections = {0.0632, 0.075, 0.095, 0.135, 0.19, 0.21, 0.225}
 --Zero pitch speeds per total mass in kg / 10000
 no_pitch_speeds = 
 {
-	{21, 252, 240, 208, 162},
-	{22, 257, 244, 212, 166},
-	{24, 264, 253, 219, 173},
-	{26, 273, 261, 227, 179},
-	{28, 281, 269, 234, 186},
-	{30, 287, 276, 241, 192},
-	{32, 293, 284, 248, 197},
-	{34, 300, 290, 255, 203},
-	{35, 305, 294, 262, 205}
+	{21, 252, 240, 208, 162, 140, 135.5, 133},
+	{22, 257, 244, 212, 166, 142, 138.5, 136},
+	{24, 264, 253, 219, 173, 148, 144, 141},
+	{26, 273, 261, 227, 179, 154, 150, 147},
+	{28, 281, 269, 234, 186, 160, 155, 152},
+	{30, 287, 276, 241, 192, 165, 160, 157},
+	{32, 293, 284, 248, 197, 170, 165, 162},
+	{34, 300, 290, 255, 203, 175, 170, 167},
+	{35, 305, 294, 262, 205, 177, 172, 169}
 }
 
 thrust_corrections = 
@@ -194,7 +194,7 @@ function GetMassIndex(T, mass)
 end
 
 function GetPitchCorrection(mass, m_idx, thrust, trim_speed)
-	local flap_idx = lim(getGreaterThan(flap_settings, get(flaps)), 4, 1)
+	local flap_idx = lim(getGreaterThan(flap_settings, get(flaps)), 8, 1)
 	local r1 = (no_pitch_speeds[m_idx][2 + flap_idx - 1] - no_pitch_speeds[m_idx-1][2 + flap_idx - 1]) / (no_pitch_speeds[m_idx][1] - no_pitch_speeds[m_idx-1][1])
 	local r2 = (thrust_corrections[m_idx][2] - thrust_corrections[m_idx-1][2]) / (thrust_corrections[m_idx][1] - thrust_corrections[m_idx-1][1])
 	local speed = (mass - no_pitch_speeds[m_idx-1][1]) * r1 + no_pitch_speeds[m_idx-1][2 + flap_idx - 1]
@@ -290,8 +290,6 @@ function UpdatePFCElevatorCommand()
 		local thrust_fac_R = (get(thrust_engn_R) - 16000) / 334000
 		local thrust_fac_total = (thrust_fac_L + thrust_fac_R) / 2
 		set(t_fac, thrust_fac_total)
-		local thrust_correction = get(thrust_c) * thrust_fac_total
-		local gear_correction = -1.2 * GetGearStatus()
 		fbw_pitch = GetPitchCorrection(tmp_mass, m_i, thrust_fac_total, get(fbw_trim_speed))
 		if avg_ra > 100 then
 			--Limit trs
@@ -394,7 +392,7 @@ function UpdateRudderCommand()
 			if get(on_ground) == 0 and avg_cas <= 210 then
 				ail_component = get(yoke_roll_ratio) --Tie rudder to ailerons below 210 kias 
 			end
-			local tgt = (get(yoke_heading_ratio) - ail_component) * 27
+			local tgt = get(yoke_heading_ratio) * 27 - ail_component * 8
 			tgt = lim(tgt, 27, -27)
 			set(pfc_rudder_command, tgt)
 		end
