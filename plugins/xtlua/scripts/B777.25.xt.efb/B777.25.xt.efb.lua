@@ -180,6 +180,7 @@ B777CMD_efb_back = deferred_command("Strato/777/efb_back", "EFB Back Button", ef
 --function aircraft_unload()
 
 function flight_start()
+   print("EFB loaded")
    avitabEnabled = 0
    B777DR_efb_page = 1
    run_after_time(efb_boot, 3)
@@ -197,6 +198,7 @@ function after_physics()
    elseif B777DR_efb_page > 999 then -- settings pages
       B777DR_efb_page_type = 3
    end
+   print("EFB WORKING")
 end
 
 --function after_replay()
