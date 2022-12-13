@@ -15,9 +15,6 @@
 *****************************************************************************************
 --]]
 
---*************************************************************************************--
---** 					         EARLY FUNCTION DEFITIONS                            **--
---*************************************************************************************--
 --replace create_command
 function deferred_command(name,desc,nilFunc)
 	c = XLuaCreateCommand(name,desc)
@@ -32,22 +29,17 @@ function deferred_dataref(name,type,notifier)
 	return wrap_dref_any(dref,type) 
 end
 
-
 --*************************************************************************************--
---** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
+--**                               CREATE DATAREFS                                   **--
 --*************************************************************************************--
 -- Holds all SimConfig options
-B747DR_simconfig_data					= deferred_dataref("laminar/B747/simconfig", "string")
-B747DR_newsimconfig_data				= deferred_dataref("laminar/B747/newsimconfig", "number")
-B747DR_pfd_style						= deferred_dataref("laminar/B747/pfd/style", "number")
-B747DR_nd_style							= deferred_dataref("laminar/B747/nd/style", "number")
-B747DR_thrust_ref						= deferred_dataref("laminar/B747/engines/thrust_ref", "number")
-B747DR_engineType						= deferred_dataref("laminar/B747/engines/type", "number") -- crazytimtimtim engine type DR
-B747DR_hideGE						= deferred_dataref("laminar/B747/engines/hideGE", "number") 
-B747DR_hideRR						= deferred_dataref("laminar/B747/engines/hideRR", "number") 
+B777DR_simconfig_data       = deferred_dataref("Strato/777/simconfig", "string")
+B777DR_newsimconfig_data    = deferred_dataref("Strato/777/newsimconfig", "number")
 
-B747DR_hideCabin						= deferred_dataref("laminar/B747/objects/hideCabin", "number")
-B747DR_hideGear						= deferred_dataref("laminar/B747/objects/hideGear", "number") 
-B747DR_hideHStab						= deferred_dataref("laminar/B747/objects/hideHStab", "number")   
-B747DR_hideFuse						= deferred_dataref("laminar/B747/objects/hideFuse", "number")   
-B747DR_modernAlarms						= deferred_dataref("laminar/B747/fmod/options/modernAlarms", "number")
+B777DR_SNDoptions           = deferred_dataref("Strato/777/fmod/options", "array[7]")
+B777DR_SNDoptions_volume    = deferred_dataref("Strato/777/fmod/options/volume", "array[8]") --TODO
+B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "array[16]")
+
+--*************************************************************************************--
+--**                              CREATE COMMANDS                                    **--
+--*************************************************************************************--
