@@ -553,7 +553,7 @@ function defaultFMSData()
 	acarsAddress="*******",
 	atc="****",
 	grwt="***.*   ",
-	crzalt=string.rep("*", 5),
+	crzalt = string.rep("*", 5),
 	clbspd="250",
 	transpd="272",
 	spdtransalt="10000",
@@ -629,104 +629,110 @@ function defaultFMSData()
 }
 end
 
-
 fmsModules["data"]=defaultFMSData()
 B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
+
 fmsModules["setData"]=function(self,id,value)
     --always retain the same length
-    if value=="" then 
-      local initData=defaultFMSData()
-      if initData[id]~=nil then
-	print("default for " .. id .. " is " .. initData[id])
-	value=initData[id]
-      else
-	print("default for " .. id .. " is nil")
-	self["data"][id]=nil
-	return
-      end
+    if value == "" then
+		local initData=defaultFMSData()
+		if initData[id]~=nil then
+			print("default for " .. id .. " is " .. initData[id])
+			value=initData[id]
+		else
+			print("default for " .. id .. " is nil")
+			self["data"][id] = nil
+			return
+		end
     end
     len=string.len(self["data"][id])
     if len < string.len(value) then 
-      value=string.sub(value,1,len)
+		value=string.sub(value,1,len)
     end
     --newVal=string.sub(value,1,len)
     self["data"][id]=string.format("%s%"..(len-string.len(value)).."s",value,"")
 	B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
 end
+
 function setFMSData(id,value)
-	
     print("setting " .. id )
 	print(" to "..value)
 	print(" curently "..fmsModules["data"][id])
-   fmsModules:setData(id,value)
-end  
+	fmsModules:setData(id,value)
+end
+
 function getFMSData(id)
-  if hasChild(fmsModules["data"],id) then
-    return fmsModules["data"][id]
-  end
-  print("getting getFMSData" )
-  print("getting " .. id )
-  print(" curently "..fmsModules["data"][id])
-  return fmsModules["data"][id]
-end 
+	if hasChild(fmsModules["data"],id) then
+		return fmsModules["data"][id]
+	end
+	print("getting getFMSData" )
+	print("getting " .. id )
+	print(" curently "..fmsModules["data"][id])
+	return fmsModules["data"][id]
+end
+
 fmsModules["lastcmd"]=" "
 fmsModules["cmds"]={}
 fmsModules["cmdstrings"]={}
+
 function registerFMCCommand(commandID,dataString)
-  fmsModules["cmds"][commandID]=find_command(commandID)
-  fmsModules["cmdstrings"][commandID]=dataString
+	fmsModules["cmds"][commandID]=find_command(commandID)
+	fmsModules["cmdstrings"][commandID]=dataString
 end
 
 function switchCustomMode()
-  fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
-  fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
-  fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
-  fmsModules["fmsL"]["currentPage"]=fmsModules["fmsL"]["targetPage"]
-  fmsModules["fmsC"]["currentPage"]=fmsModules["fmsC"]["targetPage"]
-  fmsModules["fmsR"]["currentPage"]=fmsModules["fmsR"]["targetPage"]
-  fmsModules["fmsL"]["pgNo"]=fmsModules["fmsL"]["targetpgNo"]
-  fmsModules["fmsC"]["pgNo"]=fmsModules["fmsC"]["targetpgNo"]
-  fmsModules["fmsR"]["pgNo"]=fmsModules["fmsR"]["targetpgNo"]
-  --print("left cdu blanking")
+	fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
+	fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
+	fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
+	fmsModules["fmsL"]["currentPage"]=fmsModules["fmsL"]["targetPage"]
+	fmsModules["fmsC"]["currentPage"]=fmsModules["fmsC"]["targetPage"]
+	fmsModules["fmsR"]["currentPage"]=fmsModules["fmsR"]["targetPage"]
+	fmsModules["fmsL"]["pgNo"]=fmsModules["fmsL"]["targetpgNo"]
+	fmsModules["fmsC"]["pgNo"]=fmsModules["fmsC"]["targetpgNo"]
+	fmsModules["fmsR"]["pgNo"]=fmsModules["fmsR"]["targetpgNo"]
+	--print("left cdu blanking")
 end
+
 function createPage(page)
-  retVal={}
-  retVal.name=page
-  retVal.template={
-  "    " .. page,
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        "
-  }  
-  retVal.templateSmall={
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        ",
-  "                        "
-  }
-  retVal.getPage=function(self,pgNo) return self.template end
-  retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
-  retVal.getNumPages=function(self) return 1 end
-  fmsFunctionsDefs[page]={}
-  return retVal
+	retVal={}
+	retVal.name=page
+	retVal.template={
+		"    " .. page,
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        "
+	}
+
+	retVal.templateSmall={
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        "
+	}
+
+	retVal.getPage=function(self,pgNo) return self.template end
+	retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
+	retVal.getNumPages=function(self) return 1 end
+	fmsFunctionsDefs[page]={}
+	return retVal
 end
 
 dofile("B744.notifications.lua")
@@ -767,31 +773,30 @@ fmsModules.fmsL=fmsL;
 fmsModules.fmsC=fmsC;
 fmsModules.fmsR=fmsR;
 
-
 B777DR_CAS_memo_status          = find_dataref("laminar/B777/CAS/memo_status")
 
 --Marauder28
 function getCurrentWayPoint(fms,usenext)
 
 	for i=1,table.getn(fms),1 do
-     --print("FMS j="..fmsJSON)
+		--print("FMS j="..fmsJSON)
 
 		if fms[i][10] == true then
-				--print("Found TRUE = "..fms[i][1].." "..fms[i][2].." "..fms[i][8])
-				if usenext==false then
+			--print("Found TRUE = "..fms[i][1].." "..fms[i][2].." "..fms[i][8])
+			if usenext == false then
 				if fms[i][8] == "latlon" then
 					return simDR_navID, fms[i][5], fms[i][6]
 				else
 					return fms[i][8], fms[i][5], fms[i][6]
 				end
-				elseif i+1<table.getn(fms) then
-				  if fms[i+1][8] == "latlon" then
+			elseif i+1 < table.getn(fms) then
+				if fms[i+1][8] == "latlon" then
 					return "-----", fms[i+1][5], fms[i+1][6]
 				else
 					return fms[i+1][8], fms[i+1][5], fms[i+1][6]
 				end
-				end
-		end		
+			end
+		end
 	end
 	return ""  --NOT FOUND
 end
@@ -804,7 +809,7 @@ function get_ETA_for_Distance(distance,additionalTime)
 	local default_speed = 275 * meters_per_second_to_kts
 	local actual_speed = simDR_groundspeed * meters_per_second_to_kts
 	time_to_waypoint = additionalTime + (distance / math.max(default_speed, actual_speed)) * 3600
-	
+
 	hours = math.floor((time_to_waypoint % 86400) / 3600)
 	mins = math.floor((time_to_waypoint % 3600) / 60)
 	secs = (time_to_waypoint % 60) / 60
@@ -812,16 +817,16 @@ function get_ETA_for_Distance(distance,additionalTime)
 	hours = hours + hh
 	mins = mins + mm
 	secs = secs + (ss / 60)
-	
+
 	if hours >= 24 then
 		hours = hours - 24
 	end
-		
+
 	if mins >= 60 then
 		mins = mins - 60
 		hours = hours + 1
 	end
-	
+
 	if secs >= 1 then
 		secs = secs - 1
 		mins = mins + 1
@@ -829,24 +834,22 @@ function get_ETA_for_Distance(distance,additionalTime)
 
 	return time_to_waypoint,hours,mins,secs
 end
-function get_waypoint_estimate(latitude,longitude,fms_waypoint, fms_latitude, fms_longitude,additionalTime)
-  
-  local hours = 0
-  local mins = 0
-  local secs = 0
-  
-  local time_to_waypoint = 0
-  local fms_distance_to_waypoint = 0
-  if fms_waypoint ~= "" and fms_waypoint ~= "VECTOR" and not string.match(fms_waypoint, "%(") then
-	--print("Checking distance for waypoint = "..fms_current_waypoint)
-	fms_distance_to_waypoint = getDistance(latitude, longitude, fms_latitude, fms_longitude)
-	time_to_waypoint,hours,mins,secs = get_ETA_for_Distance(fms_distance_to_waypoint,additionalTime)
-	
-  end
-  
-  return fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs
-end
 
+function get_waypoint_estimate(latitude,longitude,fms_waypoint, fms_latitude, fms_longitude,additionalTime)
+	local hours = 0
+	local mins = 0
+	local secs = 0
+	local time_to_waypoint = 0
+	local fms_distance_to_waypoint = 0
+
+	if fms_waypoint ~= "" and fms_waypoint ~= "VECTOR" and not string.match(fms_waypoint, "%(") then
+		--print("Checking distance for waypoint = "..fms_current_waypoint)
+		ms_distance_to_waypoint = getDistance(latitude, longitude, fms_latitude, fms_longitude)
+		ime_to_waypoint,hours,mins,secs = get_ETA_for_Distance(fms_distance_to_waypoint,additionalTime)
+	end
+
+	return fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs
+end
 
 function waypoint_eta_display()
 	local hours = 0
@@ -867,49 +870,50 @@ function waypoint_eta_display()
 	local fms_distance_to_next_waypoint = 0
 	if string.len(fmsJSON) > 2 then
 		fms = json.decode(fmsJSON)
-		if fms[table.getn(fms)][8]~="LATLON" then
-        	B777DR_destination = string.format("%4s",fms[table.getn(fms)][8])
+
+		if fms[table.getn(fms)][8] ~= "LATLON" then
+			B777DR_destination = string.format("%4s",fms[table.getn(fms)][8])
 		else
 			B777DR_destination="----"
 		end
+
 		if simDR_onGround ~= 1 then
-		--print(fmsJSON)
-			
-		fms_current_waypoint, fms_latitude, fms_longitude = getCurrentWayPoint(fms,false)
-		--print(string.match(fms_current_waypoint, "%("))
-		fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs = get_waypoint_estimate(simDR_latitude, simDR_longitude,fms_current_waypoint, fms_latitude, fms_longitude,0)
-		
-		fms_next_waypoint, fms_next_latitude, fms_next_longitude = getCurrentWayPoint(fms,true)
-		--print(string.match(fms_current_waypoint, "%("))
-		fms_distance_to_next_waypoint,time_to_waypoint,nhours,nmins,nsecs = get_waypoint_estimate(fms_latitude, fms_longitude,fms_next_waypoint, fms_next_latitude, fms_next_longitude,time_to_waypoint)
+			--print(fmsJSON)
+			fms_current_waypoint, fms_latitude, fms_longitude = getCurrentWayPoint(fms,false)
+			--print(string.match(fms_current_waypoint, "%("))
+			fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs = get_waypoint_estimate(simDR_latitude, simDR_longitude,fms_current_waypoint, fms_latitude, fms_longitude,0)
+			fms_next_waypoint, fms_next_latitude, fms_next_longitude = getCurrentWayPoint(fms,true)
+			--print(string.match(fms_current_waypoint, "%("))
+			fms_distance_to_next_waypoint,time_to_waypoint,nhours,nmins,nsecs = get_waypoint_estimate(fms_latitude, fms_longitude,fms_next_waypoint, fms_next_latitude, fms_next_longitude,time_to_waypoint)
 		end
 	else
-		B777DR_destination="----"	
+		B777DR_destination="----"
 	end
-	
+
 	if fms_current_waypoint == "" or string.match(fms_current_waypoint, "%(") then
 		B777DR_ND_current_waypoint = "-----"
 		B777DR_ND_waypoint_distance = "------NM"
 		B777DR_ND_waypoint_eta = "------Z"
-			
 	elseif fms_current_waypoint == "VECTOR" then
 		B777DR_ND_current_waypoint = fms_current_waypoint
 		B777DR_ND_waypoint_distance = "------NM"
 		B777DR_ND_waypoint_eta = "------Z"
 	else
-	    if B777DR_ND_current_waypoint ~= fms_current_waypoint then
-		  B777DR_waypoint_ata = B777DR_ND_waypoint_eta
-		  B777DR_last_waypoint = B777DR_ND_current_waypoint
-		  B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
+		if B777DR_ND_current_waypoint ~= fms_current_waypoint then
+			B777DR_waypoint_ata = B777DR_ND_waypoint_eta
+			B777DR_last_waypoint = B777DR_ND_current_waypoint
+			B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
 		end
 		B777DR_ND_current_waypoint = fms_current_waypoint
 		B777DR_ND_waypoint_distance = string.format("%5.1f".."nm", fms_distance_to_waypoint)
 		B777DR_ND_waypoint_eta = string.format("%02d%02d.%d".."z", hours, mins, secs * 10)			
 	end
+
 	if B777DR_last_waypoint=="" then
-	  B777DR_last_waypoint="-----"
-	  B777DR_waypoint_ata="------Z"
+		B777DR_last_waypoint="-----"
+		B777DR_waypoint_ata="------Z"
 	end
+
 	if fms_next_waypoint == "" or string.match(fms_next_waypoint, "%(") then
 		B777DR_next_waypoint = "-----"
 		B777DR_next_waypoint_eta = "------Z"
@@ -927,12 +931,9 @@ end
 
 function nd_range_display ()
 	local range = {5, 10, 20, 40, 80, 160, 320}
-			
 	B777DR_ND_range_display_capt	= range[simDR_range_dial_capt + 1]
 	B777DR_ND_range_display_fo		= range[simDR_range_dial_fo + 1]
 end
-
-
 
 function nd_speed_wind_display()
 	local meters_per_second_to_kts = 1.94384449  --Convert meters per second to KTS
@@ -944,18 +945,18 @@ function nd_speed_wind_display()
 	local Tt = K0 + simDR_total_air_temp  --Total air temperature in Kelvin
 	local T_pilot = Tt / (1 + (0.2 * math.pow(M_pilot, 2)))  --Static air temperature in Kelvin	
 	local T_copilot = Tt / (1 + (0.2 * math.pow(M_copilot, 2)))  --Static air temperature in Kelvin	
-	
+
 	local TAS_pilot = round(a0 * M_pilot * math.sqrt(T_pilot/T0))
 	B777DR_TAS_pilot=TAS_pilot
 	local TAS_copilot = round(a0 * M_copilot * math.sqrt(T_copilot/T0))
-	
+
 	local groundspeed = simDR_groundspeed * meters_per_second_to_kts
 	local wind_hdg = round(simDR_wind_degrees)
 	local wind_hdg_deviation = 360 - wind_hdg + simDR_aircraft_hdg
 	local wind_bearing = 360 - wind_hdg_deviation
 	local wind_spd = tostring(round(simDR_wind_speed))
 	local wind_line_tmp = string.format("%03.0f`/%s", wind_hdg, wind_spd)
-	
+
 	if simDR_ias_pilot < 100 then
 		B777DR_ND_GS_TAS_Line = "GS"
 		B777DR_ND_GS_TAS_Line_Pilot = string.format("%d", groundspeed)
@@ -999,67 +1000,66 @@ end
 
 function flight_start()
 	B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
-  if simDR_startup_running == 0 then
-    irsSystem["irsL"]["aligned"]=false
-    irsSystem["irsC"]["aligned"]=false
-    irsSystem["irsR"]["aligned"]=false
-    -- ENGINES RUNNING ------------------------------------------------------------------
-    elseif simDR_startup_running == 1 then
-      irsSystem["setPos"]=true
-      irsSystem.align("irsL",true)
-  
-      irsSystem.align("irsC",true)
-  
-      irsSystem.align("irsR",true)
-      
+	if simDR_startup_running == 0 then
+		irsSystem["irsL"]["aligned"]=false
+		irsSystem["irsC"]["aligned"]=false
+		irsSystem["irsR"]["aligned"]=false
+	elseif simDR_startup_running == 1 then -- ENGINES RUNNING
+		irsSystem["setPos"]=true
+		irsSystem.align("irsL",true)
+		irsSystem.align("irsC",true)
+		irsSystem.align("irsR",true)
     end
 
 	simDR_cg_adjust = 0  --reset CG slider to begin current flight
-	
+
 	--Ensure that CG location gets updated periodically so that the CG slider repositions automatically as fuel is burned during flight
-	run_at_interval(inflight_update_CG, 60)	
+	run_at_interval(inflight_update_CG, 60)
 end
 
 debug_fms     = deferred_dataref("laminar/B777/debug/fms", "number")
 fms_style = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_style_line2")
-lastNotify=0
+lastNotify = 0
+
 function setNotifications()
-  local diff=simDRTime-lastNotify
-  if diff<10 then return end
-  --print("FMS notify")
-  local hasNotify=false
-  lastNotify=simDRTime
-  for i =1,53,1 do
-    --print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
-    if B777DR_fmc_notifications[i]>0 then
-      fmsModules["fmsL"]["notify"]=B777_FMCAlertMsg[i].name
-      fmsModules["fmsC"]["notify"]=B777_FMCAlertMsg[i].name
-      fmsModules["fmsR"]["notify"]=B777_FMCAlertMsg[i].name
-      --print("do FMS notify "..B777_FMCAlertMsg[i].name)
-	  hasNotify=true
-      break
-    else
-      if fmsModules["fmsL"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsL"]["notify"]="" end
-      if fmsModules["fmsC"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsC"]["notify"]="" end
-      if fmsModules["fmsR"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsR"]["notify"]="" end
-    end
-  end
-  if hasNotify==true then 
-	B777DR_CAS_advisory_status[145] = 1 
-  else
-	B777DR_CAS_advisory_status[145] = 0
-  end
+	local diff=simDRTime-lastNotify
+	if diff<10 then return end
+	--print("FMS notify")
+	local hasNotify=false
+	lastNotify=simDRTime
+	for i =1,53,1 do
+		--print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
+		if B777DR_fmc_notifications[i]>0 then
+			fmsModules["fmsL"]["notify"]=B777_FMCAlertMsg[i].name
+			fmsModules["fmsC"]["notify"]=B777_FMCAlertMsg[i].name
+			fmsModules["fmsR"]["notify"]=B777_FMCAlertMsg[i].name
+			--print("do FMS notify "..B777_FMCAlertMsg[i].name)
+			hasNotify=true
+			break
+		else
+			if fmsModules["fmsL"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsL"]["notify"]="" end
+			if fmsModules["fmsC"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsC"]["notify"]="" end
+			if fmsModules["fmsR"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsR"]["notify"]="" end
+		end
+	end
+
+	if hasNotify==true then 
+		B777DR_CAS_advisory_status[145] = 1
+	else
+		B777DR_CAS_advisory_status[145] = 0
+	end
 end
+
 function after_physics()
-  if debug_fms>0 then return end
-  if hasSimConfig()==false then return end
+	if debug_fms>0 then return end
+	if hasSimConfig()==false then return end
 --     for i =1,24,1 do
 --       print(string.byte(fms_style,i))
 --     end
 	--refresh time
-	local cM=hh
-	cM=mm
-	cM=ss
+	local cM = hh
+	cM = mm
+	cM = ss
     setNotifications()
     B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
     --print(B777DR_FMSdata)
@@ -1070,6 +1070,7 @@ function after_physics()
 		irsSystem.update()
 		B777_setNAVRAD()
     end
+
     if acarsSystem.provider.online() then
 		B777DR_CAS_memo_status[40]=0 --for CAS
 		acars = 1 --for radio
@@ -1080,15 +1081,14 @@ function after_physics()
 				hasNew = 1
 			end
 		end
-		B777DR_CAS_memo_status[0]=hasNew
+		B777DR_CAS_memo_status[0] = hasNew
     else
-
-		if B777DR_rtp_C_off==0 then
-		B777DR_CAS_memo_status[40]=1 --for CAS
-      else
-		B777DR_CAS_memo_status[40]=0
-      end
-      acars=0 --for radio
+		if B777DR_rtp_C_off == 0 then
+			B777DR_CAS_memo_status[40] = 1 --for CAS
+		else
+			B777DR_CAS_memo_status[40] = 0
+		end
+		acars = 0 --for radio
     end
 
 	--Display Waypoint ETA on ND
