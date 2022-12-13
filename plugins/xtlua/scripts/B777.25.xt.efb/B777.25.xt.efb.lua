@@ -35,8 +35,11 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --**                                CREATE VARIABLES                                 **--
 --*************************************************************************************--
 
-local lastpage = 0
-local pagemode = 0
+local parentPage = {
+   1, -- parent page of 1 (loading screen) is itself
+   2, -- parent page of 2 (home screen) is itself
+   2  -- parent page of 3 is home screen
+}
 
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
@@ -129,14 +132,13 @@ end
 
 function efb_back_CMDhandler(phase, duration)
    if phase == 0 then
-      B777DR_efb_page = lastpage
+      B777DR_efb_page = parentPage[B777DR_efb_page]
    end
 end
 
 function efb_pwr_CMDhandler(phase, duration)
    if phase == 0 then
       if B777DR_efb_page > 0 then
-         lastpage = B777DR_efb_page
          B777DR_efb_page = 0
       else
          B777DR_efb_page = 1
@@ -180,10 +182,10 @@ B777CMD_efb_back = deferred_command("Strato/777/efb_back", "EFB Back Button", ef
 --function aircraft_unload()
 
 function flight_start()
-   print("EFB loaded")
    avitabEnabled = 0
    B777DR_efb_page = 1
    run_after_time(efb_boot, 3)
+   print("EFB loaded")
 end
 
 --function flight_crash()
