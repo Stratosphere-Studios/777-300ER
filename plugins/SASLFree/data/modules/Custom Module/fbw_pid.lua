@@ -21,7 +21,9 @@ ths_degrees = globalPropertyf("sim/flightmodel2/controls/stabilizer_deflection_d
 --Control surfaces
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 --Engine datarefs
+L_reverser_deployed = globalPropertyiae("sim/cockpit2/annunciators/reverser_on", 1)
 thrust_engn_L = globalPropertyfae("sim/flightmodel/engine/POINT_thrust", 1)
+R_reverser_deployed = globalPropertyiae("sim/cockpit2/annunciators/reverser_on", 2)
 thrust_engn_R = globalPropertyfae("sim/flightmodel/engine/POINT_thrust", 2)
 --Indicators
 vspeed = globalPropertyf("sim/flightmodel/position/vh_ind_fpm")
@@ -79,7 +81,7 @@ p_last = createGlobalPropertyf("Strato/777/fctl/p_last", 0)
 pt = createGlobalPropertyf("Strato/777/test/kp", 4.1)
 it = createGlobalPropertyf("Strato/777/test/ip", 4.6)
 dt = createGlobalPropertyf("Strato/777/test/dp", 0.01)
-pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 1)
+pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0)
 errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
 iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.0742)
 thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 17)
@@ -97,9 +99,7 @@ pid_gust_supr = {0.3, 0.23, 0.13}
 pid_coefficients_rudder = {0.43, 0.24, 0}
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
 --Fly by wire pitch gains
---TODO: refine thrust corrections
 linear_corrections = {0.0632, 0.075, 0.095, 0.135}
-fuel = {37000}
 --Zero pitch speeds per total mass in kg / 10000
 no_pitch_speeds = 
 {
@@ -122,9 +122,9 @@ thrust_corrections =
 	{26, 13.6},
 	{28, 12.4},
 	{30, 11.6},
-	{32, 12.8},
-	{34, 12.8},
-	{35, 12.8}
+	{32, 10.7},
+	{34, 10.2},
+	{35, 9.8}
 }
 
 --Pfc self test globals
@@ -163,9 +163,9 @@ trs_error_total = 0
 r_error_total = 0
 
 function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
-	if get(on_ground) == 1 and get(throttle_pos) < 0 and get(sys_C_press) > 1200 and get(fbw_mode) == 1 then --conditions for deployment
+	if get(on_ground) == 1 and (get(L_reverser_deployed) or get(R_reverser_deployed)) == 1 and get(sys_C_press) > 1200 and get(fbw_mode) == 1 then --conditions for deployment
 		set(spoiler_handle, 1)
-	elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 then --automatic retraction when too much thrust is applied
+	elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 and get(on_ground) == 1 then --automatic retraction when too much thrust is applied
 		set(spoiler_handle, 0)
 	end
 end
