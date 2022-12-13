@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4
-*   Converted from Sparky744 to Stratosphere 777 by crazytimtim
+*     Converted from Sparky744 to Stratosphere 777 by crazytimtim
 *****************************************************************************************
 ]]
 simDRTime=find_dataref("sim/time/total_running_time_sec")
