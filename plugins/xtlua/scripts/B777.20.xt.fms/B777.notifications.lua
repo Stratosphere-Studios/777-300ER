@@ -1,5 +1,5 @@
-B747_FMCAlertMsg={}
-B747_FMCAlertMsg   = {
+B777_FMCAlertMsg = {}
+B777_FMCAlertMsg = {
     {DRindex = 0, name = "ATC COMM ESTABLISHED",data="", status = 0},        --
     {DRindex = 1, name = "ATC MSG NOT ACKNOWLEDGED",data="", status = 0},
     {DRindex = 2, name = "ATC REPORT LIST FULL",data="", status = 0},
@@ -55,9 +55,9 @@ B747_FMCAlertMsg   = {
     {DRindex = 52, name = "WIND DATA UPLINK READY",data="", status = 0}
 }
 function getAdvisoryMessages()
-  B747_FMCAdvisoryMsg={}
+  B747_FMCAdvisoryMsg = {}
   B747_FMCAdvisoryMsg   = {
-        {DRindex = 0, name = "ARR N/A FOR RUNWAY", status = 0},        --
+    {DRindex = 0, name = "ARR N/A FOR RUNWAY", status = 0},        --
     {DRindex = 1, name = "CRS REVERSAL AT FA FIX", status = 0},
     {DRindex = 2, name = "DELETE", status = 0},
     {DRindex = 3, name = "INVALID DELETE", status = 0},
