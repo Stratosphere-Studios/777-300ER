@@ -136,7 +136,6 @@ function baro_sync()
 end
 
 function setSoundOption(key,value)
-
 	if key == "alarmsOption" then B777DR_SNDoptions[0] = value end
 	if key == "seatBeltOption" then B777DR_SNDoptions[1] = value end
 	if key == "paOption" then B777DR_SNDoptions[2] = value end
@@ -158,22 +157,18 @@ function setSoundOption(key,value)
 	if key == "GPWS20" then B777DR_SNDoptions_gpws[13] = value end
 	if key == "GPWS10" then B777DR_SNDoptions_gpws[14] = value end
 	if key == "GPWS5" then B777DR_SNDoptions_gpws[15] = value end
-
 end
 
 function set_loaded_configs()
-
 	for key, value in pairs(simConfigData["data"].SOUND) do
 		setSoundOption(key,value)
 	end
 	B777DR_acf_is_pax = simConfigData["data"].PLANE.aircraft_type
 	--print("B777DR_is_passenger="..B777DR_acf_is_pax)
 	B777DR_newsimconfig_data = 0
-
 end
 
 function aircraft_simConfig()
-
 	local file_location = simDR_livery_path.."B777-300ER_simconfig.dat"
 	print("File = "..file_location)
 	local file = io.open(file_location, "r")

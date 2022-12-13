@@ -4,9 +4,21 @@
 *     Converted from Sparky744 to Stratosphere 777 by crazytimtim
 *****************************************************************************************
 ]]
+
+function deferred_command(name,desc,realFunc)
+	return replace_command(name,realFunc)
+end
+
+--replace deferred_dataref
+function deferred_dataref(name,nilType,callFunction)
+	if callFunction~=nil then
+		print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
+    end
+    return find_dataref(name)
+end
+
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
-
 
 B777DR_acfType               = find_dataref("laminar/B777/acfType")
 B777DR_payload_weight               = find_dataref("sim/flightmodel/weight/m_fixed")
@@ -41,21 +53,19 @@ simDR_autopilot_airspeed_kts   		= find_dataref("sim/cockpit2/autopilot/airspeed
 B777DR_elec_ext_pwr1_available      = find_dataref("laminar/B777/electrical/ext_pwr1_avail")
 --Workaround for stack overflow in init.lua namespace_read
 
-
 function replace_char(pos, str, r)
     return str:sub(1, pos-1) .. r .. str:sub(pos+1)
 end
+
 function hasChild(parent,childKey)
-  if(parent==nil) then
-    return false
-  end
-  local keyFuncs=rawget(parent,'values')
-  if keyFuncs==nil then return false end
-  local keyFunc=rawget(keyFuncs,childKey)
-  if keyFunc==nil then return false end
- 
-  return true
+	if parent == nil then return false end
+	local keyFuncs = rawget(parent,'values')
+	if keyFuncs == nil then return false end
+	local keyFunc = rawget(keyFuncs,childKey)
+	if keyFunc == nil then return false end
+	return true
 end
+
 function split(s, delimiter)
     result = {};
     for match in (s..delimiter):gmatch("(.-)"..delimiter) do
@@ -63,20 +73,24 @@ function split(s, delimiter)
     end
     return result;
 end
+
 function round(x)
 	return x>=0 and math.floor(x+0.5) or math.ceil(x-0.5)
-  end
+end
+
 function cleanFMSLine(line)
     local retval=line:gsub("☐","*")
     retval=retval:gsub("°","`")
     return retval
-end 
+end
+
 function getHeadingDifference(desireddirection,current_heading)
 	error = current_heading - desireddirection
 	if (error >  180) then error =error- 360 end
 	if (error < -180) then error =error+ 360 end
 	return error
 end
+
 function getHeadingDifferenceM(desireddirection,current_heading)
 	error = current_heading - desireddirection
 	if (error >  180) then error =error- 360 end
@@ -84,53 +98,44 @@ function getHeadingDifferenceM(desireddirection,current_heading)
 	if error<0 then error = error *-1 end
 	return error
 end
+
 function getDistance(lat1,lon1,lat2,lon2)
-  alat=math.rad(lat1)
-  alon=math.rad(lon1)
-  blat=math.rad(lat2)
-  blon=math.rad(lon2)
-  av=math.sin(alat)*math.sin(blat) + math.cos(alat)*math.cos(blat)*math.cos(blon-alon)
-  if av > 1 then av=1 end
-  retVal=math.acos(av) * 3440
-  --print(lat1.." "..lon1.." "..lat2.." "..lon2)
-  --print("Distance = "..retVal) 
-  return retVal
+	alat = math.rad(lat1)
+	alon = math.rad(lon1)
+	blat = math.rad(lat2)
+	blon = math.rad(lon2)
+	av = math.sin(alat)*math.sin(blat) + math.cos(alat)*math.cos(blat)*math.cos(blon-alon)
+	if av > 1 then av = 1 end
+	retVal = math.acos(av) * 3440
+	--print(lat1.." "..lon1.." "..lat2.." "..lon2)
+	--print("Distance = "..retVal) 
+	return retVal
 end
 
 function toDMS(value,isLat)
-  degrees=value
-  if value<0 then
-    degrees=degrees*-1
-   end
-  minutes=(value-math.floor(value))*60
-  seconds=minutes-math.floor(minutes)
-  local p="E"
-  if isLat==true and value<0 then 
-    p="S"
-  elseif isLat==true then  
-    p="N"
-  elseif value<0 then
-    p="W"
-  end
-  retVal=string.format(p .. "%03d`%02d.%1d",degrees,minutes,seconds*10)
-  return retVal
+	degrees = value
+	if value <0 then
+    	degrees = degrees * -1
+	end
+	minutes=(value-math.floor(value))*60
+	seconds=minutes-math.floor(minutes)
+	local p="E"
+	if isLat==true and value<0 then 
+		p = "S"
+	elseif isLat==true then  
+		p = "N"
+	elseif value<0 then
+		p = "W"
+	end
+	retVal=string.format(p .. "%03d`%02d.%1d", degrees, minutes, seconds*10)
+	return retVal
 end
 
-function deferred_command(name,desc,realFunc)
-	return replace_command(name,realFunc)
-end
---replace deferred_dataref
-function deferred_dataref(name,nilType,callFunction)
-  if callFunction~=nil then
-    print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-    end
-    return find_dataref(name)
-end
 dofile("json/json.lua")
 hh=find_dataref("sim/cockpit2/clock_timer/zulu_time_hours")
 mm=find_dataref("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss=find_dataref("sim/cockpit2/clock_timer/zulu_time_seconds")
-simDR_bus_volts               = find_dataref("sim/cockpit2/electrical/bus_volts")
+simDR_bus_volts                     = find_dataref("sim/cockpit2/electrical/bus_volts")
 simDR_startup_running               = find_dataref("sim/operation/prefs/startup_running")
 
 simDR_instrument_brightness_switch  = find_dataref("sim/cockpit2/switches/instrument_brightness_ratio")
@@ -142,11 +147,11 @@ simDR_radio_nav_freq_hz             = find_dataref("sim/cockpit2/radios/actuator
 
 simDR_radio_nav_course_deg          = find_dataref("sim/cockpit2/radios/actuators/nav_course_deg_mag_pilot")
 simDR_radio_nav_obs_deg             = find_dataref("sim/cockpit2/radios/actuators/nav_obs_deg_mag_pilot")
-simDR_radio_nav1_obs_deg             = find_dataref("sim/cockpit/radios/nav1_obs_degt")
-simDR_radio_nav2_obs_deg             = find_dataref("sim/cockpit/radios/nav2_obs_degt")
+simDR_radio_nav1_obs_deg            = find_dataref("sim/cockpit/radios/nav1_obs_degt")
+simDR_radio_nav2_obs_deg            = find_dataref("sim/cockpit/radios/nav2_obs_degt")
 simDR_radio_nav_horizontal          = find_dataref("sim/cockpit2/radios/indicators/nav_display_horizontal")
 simDR_radio_nav_hasDME              = find_dataref("sim/cockpit2/radios/indicators/nav_has_dme")
-simDR_radio_nav_radial		    = find_dataref("sim/cockpit2/radios/indicators/nav_bearing_deg_mag")
+simDR_radio_nav_radial		        = find_dataref("sim/cockpit2/radios/indicators/nav_bearing_deg_mag")
 simDR_radio_nav01_ID                = find_dataref("sim/cockpit2/radios/indicators/nav1_nav_id")
 simDR_radio_nav02_ID                = find_dataref("sim/cockpit2/radios/indicators/nav2_nav_id")
 simDR_radio_nav03_ID                = find_dataref("sim/cockpit2/radios/indicators/nav3_nav_id")
@@ -157,28 +162,28 @@ simDR_radio_adf2_freq_hz            = find_dataref("sim/cockpit2/radios/actuator
 
 simDR_fueL_tank_weight_total_kg     = find_dataref("sim/flightmodel/weight/m_fuel_total")
 
-navAidsJSON   = find_dataref("xtlua/navaids")
-fmsJSON = find_dataref("xtlua/fms")
+navAidsJSON                         = find_dataref("xtlua/navaids")
+fmsJSON                              = find_dataref("xtlua/fms")
 
 B777DR_fms1_display_mode            = find_dataref("laminar/B777/fms1/display_mode")
 
 B777DR_init_fmsL_CD                 = find_dataref("laminar/B777/fmsL/init_CD")
-ilsData=deferred_dataref("laminar/B777/radio/ilsData", "string")
-acars=deferred_dataref("laminar/B777/comm/acars","number")  
-toderate=deferred_dataref("laminar/B777/engine/derate/TO","number") 
-clbderate=deferred_dataref("laminar/B777/engine/derate/CLB","number")
-B777DR_radioModes=deferred_dataref("laminar/B777/radio/tuningmodes", "string")
-B777DR_FMSdata=deferred_dataref("laminar/B777/fms/data", "string")
+ilsData                             = deferred_dataref("laminar/B777/radio/ilsData", "string")
+acars                               = deferred_dataref("laminar/B777/comm/acars","number")  
+toderate                            = deferred_dataref("laminar/B777/engine/derate/TO","number") 
+clbderate                           = deferred_dataref("laminar/B777/engine/derate/CLB","number")
+B777DR_radioModes                   = deferred_dataref("laminar/B777/radio/tuningmodes", "string")
+B777DR_FMSdata                      = deferred_dataref("laminar/B777/fms/data", "string")
 B777DR_ap_vnav_state                = find_dataref("laminar/B777/autopilot/vnav_state")
-simDR_autopilot_vs_status          = find_dataref("sim/cockpit2/autopilot/vvi_status")
-B777BR_totalDistance 			= find_dataref("laminar/B777/autopilot/dist/remaining_distance")
-B777BR_nextDistanceInFeet 		= find_dataref("laminar/B777/autopilot/dist/next_distance_feet")
-B777BR_cruiseAlt 			= find_dataref("laminar/B777/autopilot/dist/cruise_alt")
-B777BR_tod				= find_dataref("laminar/B777/autopilot/dist/top_of_descent")
-B777DR__gear_chocked           = find_dataref("laminar/B777/gear/chocked")
-B777DR_fuel_preselect		= find_dataref("laminar/B777/fuel/preselect")
-B777DR_refuel				= find_dataref("laminar/B777/fuel/refuel")
-B777DR_fuel_add				= find_dataref("laminar/B777/fuel/add_fuel")
+simDR_autopilot_vs_status           = find_dataref("sim/cockpit2/autopilot/vvi_status")
+B777BR_totalDistance                = find_dataref("laminar/B777/autopilot/dist/remaining_distance")
+B777BR_nextDistanceInFeet           = find_dataref("laminar/B777/autopilot/dist/next_distance_feet")
+B777BR_cruiseAlt                    = find_dataref("laminar/B777/autopilot/dist/cruise_alt")
+B777BR_tod                          = find_dataref("laminar/B777/autopilot/dist/top_of_descent")
+B777DR__gear_chocked                = find_dataref("laminar/B777/gear/chocked")
+B777DR_fuel_preselect               = find_dataref("laminar/B777/fuel/preselect")
+B777DR_refuel		                = find_dataref("laminar/B777/fuel/refuel")
+B777DR_fuel_add		                = find_dataref("laminar/B777/fuel/add_fuel" )
 
 B777DR_efis_min_ref_alt_capt_sel_dial_pos       = find_dataref("laminar/B777/efis/min_ref_alt/capt/sel_dial_pos")
 B777DR_efis_ref_alt_capt_set_dial_pos           = find_dataref("laminar/B777/efis/ref_alt/capt/set_dial_pos")
@@ -262,13 +267,10 @@ simDR_fuel_totalizer_kg		= find_dataref("sim/cockpit2/fuel/fuel_totalizer_init_k
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
 
--- CRT BRIGHTNESS DIAL ------------------------------------------------------------------
-B777DR_fms1_display_brightness      = deferred_dataref("laminar/B777/fms1/display_brightness", "number", B777_fms1_display_brightness_DRhandler)
-
 --Marauder28
 -- Holds all SimConfig options
-B777DR_simconfig_data					= deferred_dataref("laminar/B777/simconfig", "string")
-B777DR_newsimconfig_data				= deferred_dataref("laminar/B777/newsimconfig", "number")
+B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
+B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
 -- Temp location for fuel preselect for displaying in correct units
 B777DR_fuel_preselect_temp				= deferred_dataref("laminar/B777/fuel/fuel_preselect_temp", "number")
 
@@ -305,9 +307,9 @@ B777DR_ND_Wind_Bearing					= deferred_dataref("laminar/B777/nd/wind_bearing", "n
 B777DR_elevator_trim				    = deferred_dataref("laminar/B777/fmc/elevator_trim", "number")
 
 --Sound Options (crazytimtimtim + Matt726)
-B777DR_SNDoptions			        	= deferred_dataref("laminar/B777/fmod/options", "array[7]")
---B777DR_SNDoptions_volume				= deferred_dataref("laminar/B777/fmod/options/volume", "array[8]")
-B777DR_SNDoptions_gpws					= deferred_dataref("laminar/B777/fmod/options/gpws", "array[16]")
+B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
+B777DR_SNDoptions_volume    = find_dataref("Strato/777/fmod/options/volume") --TODO
+B777DR_SNDoptions_gpws      = find_dataref("Strato/777/fmod/options/gpws")
 
 --Simulator Config Options
 simConfigData = {}
@@ -334,74 +336,72 @@ function hasSimConfig()
 end
 
 --Marauder28
-
+--[[ @BRUHegg you might want to take a look at this and see if any of it is of any use. I think X-Plane 12 has most of this built in though so it's not necessary.
 --Marauder28
 --Weight & Balance data
 wb = {
-		--Weights
-		OEW_weight				= 0,
-		fuel_CTR_0_weight		= 0,
-		fuel_L_main1_weight		= 0,
-		fuel_L_main2_weight		= 0,
-		fuel_R_main3_weight		= 0,
-		fuel_R_main4_weight		= 0,
-		fuel_L_rsv5_weight		= 0,
-		fuel_R_rsv6_weight		= 0,
-		fuel_stab7_weight		= 0,
+	--Weights
+	OEW_weight				= 0,
+	fuel_CTR_0_weight		= 0,
+	fuel_L_main1_weight		= 0,
+	fuel_L_main2_weight		= 0,
+	fuel_R_main3_weight		= 0,
+	fuel_R_main4_weight		= 0,
+	fuel_L_rsv5_weight		= 0,
+	fuel_R_rsv6_weight		= 0,
+	fuel_stab7_weight		= 0,
+	-- Passenger Zones are defined A - E, A=First, B=Business, C-D-E=Economy split in 3 zones
+	passenger_zoneA_weight	= 0,  --defined via FMC passenger loading function
+	passenger_zoneB_weight	= 0,  --defined via FMC passenger loading function
+	passenger_zoneC_weight	= 0,  --defined via FMC passenger loading function
+	passenger_zoneD_weight	= 0,  --defined via FMC passenger loading function
+	passenger_zoneE_weight	= 0,  --defined via FMC passenger loading function
 
-		-- Passenger Zones are defined A - E, A=First, B=Business, C-D-E=Economy split in 3 zones
-		passenger_zoneA_weight	= 0,  --defined via FMC passenger loading function
-		passenger_zoneB_weight	= 0,  --defined via FMC passenger loading function
-		passenger_zoneC_weight	= 0,  --defined via FMC passenger loading function
-		passenger_zoneD_weight	= 0,  --defined via FMC passenger loading function
-		passenger_zoneE_weight	= 0,  --defined via FMC passenger loading function
-		
-		--Payload/Cargo Zones
-		fwd_lower_cargo_weight	= 0,  --defined via FMC cargo loading function
-		aft_lower_cargo_weight	= 0,  --defined via FMC cargo loading function
-		bulk_lower_cargo_weight	= 0,  --defined via FMC cargo loading function
-		freight_zoneA_weight	= 0,  --defined via FMC cargo loading function
-		freight_zoneB_weight	= 0,  --defined via FMC cargo loading function
-		freight_zoneC_weight	= 0,  --defined via FMC cargo loading function
-		freight_zoneD_weight	= 0,  --defined via FMC cargo loading function
-		freight_zoneE_weight	= 0,  --defined via FMC cargo loading function
-		
-		--Moment Arm Distances (inches from reference point [aircraft nose] stored in feet in aircraft .acf file)
-		OEW_distance				= 1243.32, --103.61 feet
-		fuel_CTR_0_distance			= 1008.00, --84.00 feet
-		fuel_L_main1_distance		= 1383.60, --115.30 feet
-		fuel_L_main2_distance		= 1140.00, --95.00 feet
-		fuel_R_main3_distance		= 1140.00, --95.00 feet
-		fuel_R_main4_distance		= 1383.60, --115.30 feet
-		fuel_L_rsv5_distance		= 1596.00, --133.00 feet
-		fuel_R_rsv6_distance		= 1596.00, --133.00 feet
-		fuel_stab7_distance			= 2412.00, --201.00 feet
-		-- Passenger Zone moment arm distances are an approximation using the middle of the Zone as a reference
-		passenger_zoneA_distance	= 285.00, --23.75 feet (23 First Class seats in the nose)
-		passenger_zoneB_distance	= 735.00, --61.25 feet (80 Business Class seats behind First Class, including the Upper Deck Business Class seats)
-		passenger_zoneC_distance	= 1060.00, --88.33 feet (77 Economy Class seats)
-		passenger_zoneD_distance	= 1405.00, --117.08 feet (104 Economy Class seats)
-		passenger_zoneE_distance	= 1950.00, --162.5 feet (132 Economy Class seats)
-		
-		--Payload/Cargo Zone moment arm distances are an approximation using the middle of the Zone as a reference
-		fwd_lower_cargo_distance	= 650.00,  --54.16 feet (5 pallets [5035 KGS] or 16 LD1/LD3 [1588 KGS] containers or combination totalling 26,490 KGS).
-		aft_lower_cargo_distance	= 1675.00,  --139.58 feet (4 pallets or 14 LD1/LD3 containers or combination totalling 22,938 KGS).
-		bulk_lower_cargo_distance	= 1935.00,  --161.25 feet (6,749 KGS).  In the tail of the aircraft beneath the rear galley.
-		freight_zoneA_distance		= 290.00,  --24.16 feet (3 pallets [3763 KGS] or equivalent totalling 11,289 KGS).
-		freight_zoneB_distance		= 690.00,  --57.50 feet (8 pallets [3763 KGS] or equivalent totalling 30,104 KGS).
-		freight_zoneC_distance		= 1135.00,  --94.58 feet (6 pallets [3763 KGS] or equivalent totalling 22,578 KGS).
-		freight_zoneD_distance		= 1750.00,  --145.83 feet (12 pallets [3763 KGS] or equivalent totalling 45,156 KGS).
-		freight_zoneE_distance		= 2220.00,  --185.00 feet (1 pallet [3763 KGS] or equivalent totalling 3763 KGS).
+	--Payload/Cargo Zones
+	fwd_lower_cargo_weight	= 0,  --defined via FMC cargo loading function
+	aft_lower_cargo_weight	= 0,  --defined via FMC cargo loading function
+	bulk_lower_cargo_weight	= 0,  --defined via FMC cargo loading function
+	freight_zoneA_weight	= 0,  --defined via FMC cargo loading function
+	freight_zoneB_weight	= 0,  --defined via FMC cargo loading function
+	freight_zoneC_weight	= 0,  --defined via FMC cargo loading function
+	freight_zoneD_weight	= 0,  --defined via FMC cargo loading function
+	freight_zoneE_weight	= 0,  --defined via FMC cargo loading function
 
-		--Calculated Results
-		stab_trim = 0,
-		cg_mac = 0,
+	--Moment Arm Distances (inches from reference point [aircraft nose] stored in feet in aircraft .acf file)
+	OEW_distance				= 1243.32, --103.61 feet
+	fuel_CTR_0_distance			= 1008.00, --84.00 feet
+	fuel_L_main1_distance		= 1383.60, --115.30 feet
+	fuel_L_main2_distance		= 1140.00, --95.00 feet
+	fuel_R_main3_distance		= 1140.00, --95.00 feet
+	fuel_R_main4_distance		= 1383.60, --115.30 feet
+	fuel_L_rsv5_distance		= 1596.00, --133.00 feet
+	fuel_R_rsv6_distance		= 1596.00, --133.00 feet
+	fuel_stab7_distance			= 2412.00, --201.00 feet
+	-- Passenger Zone moment arm distances are an approximation using the middle of the Zone as a reference
+	passenger_zoneA_distance	= 285.00, --23.75 feet (23 First Class seats in the nose)
+	passenger_zoneB_distance	= 735.00, --61.25 feet (80 Business Class seats behind First Class, including the Upper Deck Business Class seats)
+	passenger_zoneC_distance	= 1060.00, --88.33 feet (77 Economy Class seats)
+	passenger_zoneD_distance	= 1405.00, --117.08 feet (104 Economy Class seats)
+	passenger_zoneE_distance	= 1950.00, --162.5 feet (132 Economy Class seats)
+
+	--Payload/Cargo Zone moment arm distances are an approximation using the middle of the Zone as a reference
+	fwd_lower_cargo_distance	= 650.00,  --54.16 feet (5 pallets [5035 KGS] or 16 LD1/LD3 [1588 KGS] containers or combination totalling 26,490 KGS).
+	aft_lower_cargo_distance	= 1675.00,  --139.58 feet (4 pallets or 14 LD1/LD3 containers or combination totalling 22,938 KGS).
+	bulk_lower_cargo_distance	= 1935.00,  --161.25 feet (6,749 KGS).  In the tail of the aircraft beneath the rear galley.
+	freight_zoneA_distance		= 290.00,  --24.16 feet (3 pallets [3763 KGS] or equivalent totalling 11,289 KGS).
+	freight_zoneB_distance		= 690.00,  --57.50 feet (8 pallets [3763 KGS] or equivalent totalling 30,104 KGS).
+	freight_zoneC_distance		= 1135.00,  --94.58 feet (6 pallets [3763 KGS] or equivalent totalling 22,578 KGS).
+	freight_zoneD_distance		= 1750.00,  --145.83 feet (12 pallets [3763 KGS] or equivalent totalling 45,156 KGS).
+	freight_zoneE_distance		= 2220.00,  --185.00 feet (1 pallet [3763 KGS] or equivalent totalling 3763 KGS).
+	--Calculated Results
+	stab_trim = 0,
+	cg_mac = 0
 }
 
 --Calculate CG %MAC & Trim
 function calc_stab_trim(GW, CG_MAC)
 	local stab_trim = 0
-	
+
 	GW = GW * simConfigData["data"].SIM.kgs_to_lbs  --Formula uses LBS to calculate Stab TRIM.  GW passed in should always be in KGS.
 	--print("GWin = "..GW.." MACin = "..CG_MAC)
 
@@ -410,12 +410,12 @@ function calc_stab_trim(GW, CG_MAC)
 	end
 
 	stab_trim = (0.000000717 * GW^2 - 0.001217 * GW + 0.24) * CG_MAC + (-0.0000309 * GW^2 + 0.05558 * GW - 12.24)  --GW must be in 1000s of LBS
-	
+
 	--Stab Trim can never be less than zero
 	if stab_trim < 0 then
 		stab_trim = 0
 	end
-	
+
 	wb.stab_trim	= stab_trim
 	fmsModules["data"].stab_trim 	= string.format("%4.1f", wb.stab_trim)
 	B777DR_elevator_trim = fmsModules["data"].stab_trim  --Set STAB TRIM for green band calculation
@@ -426,7 +426,7 @@ end
 function calc_CGMAC()
 
 	local inch_to_meters	= 39.3700787
-	
+
 	--Setup initial weights
 	wb.OEW_weight				= simDR_empty_weight
 	wb.fuel_CTR_0_weight		= simDR_fuel_qty[0]
@@ -530,6 +530,9 @@ function inflight_update_CG()
 	--print("CG Shift = "..cg_shift)
 end
 --Marauder28
+--744 WB end
+]]
+
 
 fmsPages={}
 --fmsPagesmall={}
@@ -537,92 +540,92 @@ fmsFunctionsDefs={}
 fmsModules={} --set later
 
 function defaultFMSData()
-  return {
-  acarsInitString="{}",
-  fltno=string.rep("-", 8),
-  fltdate="********",
-  fltdep="****",
-  fltdst="****",
-  flttimehh="**",
-  flttimemm="**",
-  rpttimehh="**",
-  rpttimemm="**",
-  acarsAddress="*******",
-  atc="****",
-  grwt="***.*   ",
-  crzalt=string.rep("*", 5),
-  clbspd="250",
-  transpd="272",
-  spdtransalt="10000",
-  transalt="18000",
-  clbrestspd="250",
-  maxkts="420",
-  clbrestalt="5000 ",
-  stepalt="FL360",
-  crzspd="810",
-  desspdmach="805",
-  desspd="270",
-  destranspd="240",
-  desspdtransalt="10000",
-  desrestspd="180",
-  desrestalt="5000 ",
-  fpa="*.*",
-  vb="*.*",
-  vs="****",
-  fuel="***.*",
-  zfw="***.*   ",
-  reserves="***.*",
-  costindex="****",
-  crzcg="20.0",
-  thrustsel=string.rep(" ", 2), --"26",  --Initally "blank" per FCOM FMC Preflight 2B - Thrust Limit Page
-  thrustn1="**.*",
-  toflap="**",
-  v1="***",
-  vr="***",
-  v2="***",
-  runway=string.rep("-", 5),
-  coroute=string.rep("-", 10),
-  grosswt="***.*",
-  vref1="***",
-  vref2="***",
-  irsLat=string.rep(" ", 9),
-  irsLon=string.rep(" ", 9),
-  initIRSLat="****`**.*",
-  initIRSLon="****`**.*",
-  flapspeed="**/***",
-  airportpos=string.rep("-", 4),
-  airportgate=string.rep(" ", 5),
-  preselectLeft=string.rep("-", 6),
-  preselectRight=string.rep("-", 6),
-  codata = string.rep("-", 6),
-  lastpos = string.rep(" ", 18),
-  sethdg = string.rep(" ", 4),
-  stepsize = "ICAO",
-  cg_mac = string.rep("-", 2),
-  stab_trim = string.rep(" ", 4),
-  paxFirstClassA = string.rep("0", 2),
-  paxBusClassB = string.rep("0", 2),
-  paxEconClassC = string.rep("0", 2),
-  paxEconClassD = string.rep("0", 3),
-  paxEconClassE = string.rep("0", 3),
-  paxTotal = string.rep("0", 3),
-  paxWeightA = string.rep("0", 4),
-  paxWeightB = string.rep("0", 5),
-  paxWeightC = string.rep("0", 5),
-  paxWeightD = string.rep("0", 5),
-  paxWeightE = string.rep("0", 5),
-  paxWeightTotal = string.rep("0", 6),
-  cargoFwd = string.rep("0", 6),
-  cargoAft = string.rep("0", 6),
-  cargoBulk = string.rep("0", 5),
-  cargoTotal = string.rep("0", 6),
-  freightZoneA = string.rep("0", 6),
-  freightZoneB = string.rep("0", 6),
-  freightZoneC = string.rep("0", 6),
-  freightZoneD = string.rep("0", 6),
-  freightZoneE = string.rep("0", 6),
-  freightTotal = string.rep("0", 7),
-  --irsAlignTime = string.rep("0", 3),
+	return {
+	acarsInitString="{}",
+	fltno=string.rep("-", 8),
+	fltdate="********",
+	fltdep="****",
+	fltdst="****",
+	flttimehh="**",
+	flttimemm="**",
+	rpttimehh="**",
+	rpttimemm="**",
+	acarsAddress="*******",
+	atc="****",
+	grwt="***.*   ",
+	crzalt=string.rep("*", 5),
+	clbspd="250",
+	transpd="272",
+	spdtransalt="10000",
+	transalt="18000",
+	clbrestspd="250",
+	maxkts="420",
+	clbrestalt="5000 ",
+	stepalt="FL360",
+	crzspd="810",
+	desspdmach="805",
+	desspd="270",
+	destranspd="240",
+	desspdtransalt="10000",
+	desrestspd="180",
+	desrestalt="5000 ",
+	fpa="*.*",
+	vb="*.*",
+	vs="****",
+	fuel="***.*",
+	zfw="***.*   ",
+	reserves="***.*",
+	costindex="****",
+	crzcg="20.0",
+	thrustsel=string.rep(" ", 2), --"26",  --Initally "blank" per FCOM FMC Preflight 2B - Thrust Limit Page
+	thrustn1="**.*",
+	toflap="**",
+	v1="***",
+	vr="***",
+	v2="***",
+	runway=string.rep("-", 5),
+	coroute=string.rep("-", 10),
+	grosswt="***.*",
+	vref1="***",
+	vref2="***",
+	irsLat=string.rep(" ", 9),
+	irsLon=string.rep(" ", 9),
+	initIRSLat="****`**.*",
+	initIRSLon="****`**.*",
+	flapspeed="**/***",
+	airportpos=string.rep("-", 4),
+	airportgate=string.rep(" ", 5),
+	preselectLeft=string.rep("-", 6),
+	preselectRight=string.rep("-", 6),
+	codata = string.rep("-", 6),
+	lastpos = string.rep(" ", 18),
+	sethdg = string.rep(" ", 4),
+	stepsize = "ICAO",
+	cg_mac = string.rep("-", 2),
+	stab_trim = string.rep(" ", 4),
+	paxFirstClassA = string.rep("0", 2),
+	paxBusClassB = string.rep("0", 2),
+	paxEconClassC = string.rep("0", 2),
+	paxEconClassD = string.rep("0", 3),
+	paxEconClassE = string.rep("0", 3),
+	paxTotal = string.rep("0", 3),
+	paxWeightA = string.rep("0", 4),
+	paxWeightB = string.rep("0", 5),
+	paxWeightC = string.rep("0", 5),
+	paxWeightD = string.rep("0", 5),
+	paxWeightE = string.rep("0", 5),
+	paxWeightTotal = string.rep("0", 6),
+	cargoFwd = string.rep("0", 6),
+	cargoAft = string.rep("0", 6),
+	cargoBulk = string.rep("0", 5),
+	cargoTotal = string.rep("0", 6),
+	freightZoneA = string.rep("0", 6),
+	freightZoneB = string.rep("0", 6),
+	freightZoneC = string.rep("0", 6),
+	freightZoneD = string.rep("0", 6),
+	freightZoneE = string.rep("0", 6),
+	freightTotal = string.rep("0", 7),
+	--irsAlignTime = string.rep("0", 3),
 }
 end
 
@@ -725,6 +728,7 @@ function createPage(page)
   fmsFunctionsDefs[page]={}
   return retVal
 end
+
 dofile("B744.notifications.lua")
 dofile("irs/irs_system.lua")
 dofile("B744.fms.pages.lua")
@@ -1063,23 +1067,23 @@ function after_physics()
     fmsC:B777_fms_display()
     fmsR:B777_fms_display()
     if simDR_bus_volts[0]>24 then
-      irsSystem.update()
-      B777_setNAVRAD()
+		irsSystem.update()
+		B777_setNAVRAD()
     end
     if acarsSystem.provider.online() then
-      B777DR_CAS_memo_status[40]=0 --for CAS
-      acars=1 --for radio
-      acarsSystem.provider.receive()
-      local hasNew=0
-      for i = table.getn(acarsSystem.messages.values), 1, -1 do
-		if not acarsSystem.messages[i]["read"] then 
-			hasNew=1
-		end 
-      end 
-      B777DR_CAS_memo_status[0]=hasNew
+		B777DR_CAS_memo_status[40]=0 --for CAS
+		acars = 1 --for radio
+		acarsSystem.provider.receive()
+		local hasNew = 0
+		for i = table.getn(acarsSystem.messages.values), 1, -1 do
+			if not acarsSystem.messages[i]["read"] then
+				hasNew = 1
+			end
+		end
+		B777DR_CAS_memo_status[0]=hasNew
     else
-      
-      if B777DR_rtp_C_off==0 then
+
+		if B777DR_rtp_C_off==0 then
 		B777DR_CAS_memo_status[40]=1 --for CAS
       else
 		B777DR_CAS_memo_status[40]=0
@@ -1092,19 +1096,17 @@ function after_physics()
 
 	--Display range NM on ND
 	nd_range_display ()
-	
+
 	--Display speed and wind info on ND
 	nd_speed_wind_display()
 
-	--Ensure simConfig data is fresh
-	
+	--Ensure simConfig data is fresh	
 
-		
 	--Ensure DR's are updated in time for use in calc_CGMAC()
 	local payload_weight = B777DR_payload_weight
 	local fuel_qty = simDR_fuel_qty
 	local simconfig = B777DR_simconfig_data
-	
+
 	print("FMS WORKING")
 end
 
