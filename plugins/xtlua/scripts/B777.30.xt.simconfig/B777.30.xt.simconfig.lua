@@ -105,7 +105,7 @@ function simconfig_values()
 			GPWS5 = 1,
 		},
 		PLANE = {
-			aircraft_type = 1, -- 1 = pax, 0 = Freighter
+			aircraft_type = 0, -- 0 = pax, 1 = Freighter
 			airline = "",
 		},
 		FMC = {
@@ -163,7 +163,7 @@ function set_loaded_configs()
 	for key, value in pairs(simConfigData["data"].SOUND) do
 		setSoundOption(key,value)
 	end
-	B777DR_acf_is_pax = simConfigData["data"].PLANE.aircraft_type
+	B777DR_acf_is_freighter = simConfigData["data"].PLANE.aircraft_type
 	--print("B777DR_is_passenger="..B777DR_acf_is_pax)
 	B777DR_newsimconfig_data = 0
 end

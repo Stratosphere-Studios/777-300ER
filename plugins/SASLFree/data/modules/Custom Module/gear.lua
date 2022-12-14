@@ -657,6 +657,8 @@ function UpdateActuatorPress()
 		end
 		if get(sys_C_press) > 1000 and get(altn_gear) == 0 then --raise doors if pressure is normal and alternate extension is not used
 			mlg_door_tgt = 0
+		elseif get(altn_gear) == 1 then
+			mlg_door_tgt = 1
 		end
 		if AreMlgReady() == true then 
 			--setting up eagle claw for target
