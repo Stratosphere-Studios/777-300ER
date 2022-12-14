@@ -14,7 +14,7 @@ include("misc_tools.lua")
 
 --Cockpit controls
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
-throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
+throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
 spoiler_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
 --Electrical
 battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
@@ -72,6 +72,9 @@ font = loadFont("BoeingFont.ttf")
 
 tmp = 0
 tmp1 = 0
+
+flap_settings = {0, 1, 5, 15, 20, 25, 30}
+detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 
 stab_c_past = 0
 flaps_past = 0
@@ -200,13 +203,18 @@ end
 function CheckFail(pump_type, messages)
 	names = {"L", "C1", "C2", "R"}
 	for i=1,4 do
+		local s = i
+		if i > 2 then
+			s = i - 1
+		end
 		local pump_fail = globalPropertyfae("Strato/777/hydraulics/pump/primary/fail", i)
 		local pump_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", i)
+		local hyd_press = globalPropertyiae("Strato/777/hydraulics/press", s)
 		if pump_type == 2 then --1 = primary, 2 = demand
 			pump_fail = globalPropertyfae("Strato/777/hydraulics/pump/demand/fail", i)
 			pump_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
 		end
-		if get(pump_fail) == 1 and get(pump_state) > 0 then
+		if (get(pump_fail) == 1 and get(pump_state) > 0) or (get(hyd_press) > 1200 and get(hyd_press) < 1800) then
 			msg = ""
 			if pump_type == 1 then
 				msg = "HYD PRESS PRI " .. names[i]
@@ -225,6 +233,12 @@ function UpdateWindowAdvisory(messages)
 end
 
 function UpdateStabCutoutAdvisory(messages)
+	if get(stab_cutout_C) == 1 then
+		table.insert(messages, tlen(messages) + 1, "STABILIZER C")
+	end
+	if get(stab_cutout_R) == 1 then
+		table.insert(messages, tlen(messages) + 1, "STABILIZER R")
+	end
 	if get(stab_cutout_C) * get(stab_cutout_R) == 1  then
 		table.insert(messages, tlen(messages) + 1, "STABILIZER CUTOUT")
 	end
@@ -310,8 +324,6 @@ function UpdateGearPos()
 end
 
 function Flap_pos2Tape(pos, t_height) --calculates an offset from the top of the flap position bar
-	flap_settings = {0, 1, 5, 15, 20, 25, 30}
-	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 	for i=1,7 do
 		if flap_settings[i] > pos then
 			local delta = round((detents[i] - detents[i - 1]) * t_height)
@@ -380,14 +392,17 @@ function UpdateEicasWarnings(messages)
 		--Config warnings
 		if get(throttle_pos) > 0.5 then
 			local idx = indexOf(to_flaps, get(flaps), 1)
-			if idx == nil then
-				table.insert(messages, tlen(messages) + 1, "CONFIG FLAPS")
+			if get(spoiler_handle) < 0 then
+				table.insert(messages, tlen(messages) + 1, "CONFIG SPOILERS")
 			end
 			if get(park_brake_valve) == 1 then
 				table.insert(messages, tlen(messages) + 1, "CONFIG PARKING BRAKE")
 			end
 			if get(main_s_locked) == 0 then
 				table.insert(messages, tlen(messages) + 1, "CONFIG GEAR STEERING")
+			end
+			if idx == nil then
+				table.insert(messages, tlen(messages) + 1, "CONFIG FLAPS")
 			end
 		end
 	end
@@ -401,6 +416,7 @@ end
 
 function UpdateEicasAdvisory(messages)
 	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
+	local avg_ra = (get(ra_pilot) + get(ra_copilot)) / 2
 	local nest_strg = ""
 	--Draw cautions
 	if get(fbw_mode) == 2 then
@@ -412,6 +428,11 @@ function UpdateEicasAdvisory(messages)
 		table.insert(messages, tlen(messages) + 1, "AIRSPEED LOW")
 	end
 	UpdatePress(messages)
+	if get(spoiler_handle) > 0 then
+		if avg_ra > 15 and (avg_ra < 800 or get(flap_handle) >= 0.5 or get(throttle_pos) > 0.1) then
+			table.insert(messages, tlen(messages) + 1, "SPEEDBRAKE EXTENDED")
+		end
+	end
 	UpdateStabCutoutAdvisory(messages)
 	local door_stat = checkGearDoors()
 	if door_stat == 1 then
