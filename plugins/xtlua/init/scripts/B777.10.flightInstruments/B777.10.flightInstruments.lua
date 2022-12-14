@@ -107,3 +107,8 @@ B777DR_spd_flash                       = deferred_dataref("Strato/777/displays/i
 B777DR_spd_amber                       = deferred_dataref("Strato/777/displays/ias_amber", "number")
 B777DR_spd_outline                     = deferred_dataref("Strato/777/displays/ias_outline", "number")
 B777DR_smart_knobs                     = deferred_dataref("Strato/777/smart_knobs", "number")
+
+B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
+B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
+B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
+B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")

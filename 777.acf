@@ -10008,7 +10008,7 @@ P _obja/11/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/11/_v10_is_internal 442238
 P _obja/11/_v10_steers_with_gear 0
 P _obja/12/_obj_flags 9
-P _obja/12/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/12/_obj_hide_dataref Strato/777/misc/kill_pax_interior
 P _obja/12/_v10_att_body -1
 P _obja/12/_v10_att_file_stl economy.obj
 P _obja/12/_v10_att_gear -1
@@ -10035,7 +10035,7 @@ P _obja/13/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/13/_v10_is_internal 886860
 P _obja/13/_v10_steers_with_gear 0
 P _obja/14/_obj_flags 9
-P _obja/14/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/14/_obj_hide_dataref Strato/777/misc/kill_pax_interior
 P _obja/14/_v10_att_body -1
 P _obja/14/_v10_att_file_stl first_class.obj
 P _obja/14/_v10_att_gear -1
@@ -10049,7 +10049,7 @@ P _obja/14/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/14/_v10_is_internal 141358
 P _obja/14/_v10_steers_with_gear 0
 P _obja/15/_obj_flags 24
-P _obja/15/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/15/_obj_hide_dataref Strato/777/misc/kill_pax
 P _obja/15/_v10_att_body -1
 P _obja/15/_v10_att_file_stl fuse_1.obj
 P _obja/15/_v10_att_gear -1
@@ -10063,7 +10063,7 @@ P _obja/15/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/15/_v10_is_internal 568614
 P _obja/15/_v10_steers_with_gear 0
 P _obja/16/_obj_flags 24
-P _obja/16/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/16/_obj_hide_dataref Strato/777/misc/kill_pax
 P _obja/16/_v10_att_body -1
 P _obja/16/_v10_att_file_stl fuse_2.obj
 P _obja/16/_v10_att_gear -1
@@ -10077,7 +10077,7 @@ P _obja/16/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/16/_v10_is_internal 939942
 P _obja/16/_v10_steers_with_gear 0
 P _obja/17/_obj_flags 24
-P _obja/17/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/17/_obj_hide_dataref Strato/777/misc/kill_pax
 P _obja/17/_v10_att_body -1
 P _obja/17/_v10_att_file_stl fuse_3.obj
 P _obja/17/_v10_att_gear -1
@@ -10091,7 +10091,7 @@ P _obja/17/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/17/_v10_is_internal 333646
 P _obja/17/_v10_steers_with_gear 0
 P _obja/18/_obj_flags 9
-P _obja/18/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/18/_obj_hide_dataref Strato/777/misc/kill_pax_interior
 P _obja/18/_v10_att_body -1
 P _obja/18/_v10_att_file_stl interior.obj
 P _obja/18/_v10_att_gear -1
@@ -10278,7 +10278,7 @@ P _obja/3/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/3/_v10_is_internal 107836
 P _obja/3/_v10_steers_with_gear 0
 P _obja/30/_obj_flags 9
-P _obja/30/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/30/_obj_hide_dataref Strato/777/misc/kill_pax_interior
 P _obja/30/_v10_att_body -1
 P _obja/30/_v10_att_file_stl economy_2.obj
 P _obja/30/_v10_att_gear -1
@@ -10305,7 +10305,7 @@ P _obja/31/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/31/_v10_is_internal -669387456
 P _obja/31/_v10_steers_with_gear 0
 P _obja/32/_obj_flags 9
-P _obja/32/_obj_hide_dataref Strato/777/acf_is_freighter
+P _obja/32/_obj_hide_dataref Strato/777/misc/kill_pax_interior
 P _obja/32/_v10_att_body -1
 P _obja/32/_v10_att_file_stl ch.obj
 P _obja/32/_v10_att_gear -1
@@ -10319,7 +10319,7 @@ P _obja/32/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/32/_v10_is_internal 1030683040
 P _obja/32/_v10_steers_with_gear 0
 P _obja/33/_obj_flags 9
-P _obja/33/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/33/_obj_hide_dataref Strato/777/misc/kill_cargo_interior
 P _obja/33/_v10_att_body -1
 P _obja/33/_v10_att_file_stl 300ERF/cargo_hold.obj
 P _obja/33/_v10_att_gear -1
@@ -10333,7 +10333,7 @@ P _obja/33/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/33/_v10_is_internal 0
 P _obja/33/_v10_steers_with_gear 0
 P _obja/34/_obj_flags 16
-P _obja/34/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/34/_obj_hide_dataref Strato/777/misc/kill_cargo
 P _obja/34/_v10_att_body -1
 P _obja/34/_v10_att_file_stl 300ERF/fuse_1.obj
 P _obja/34/_v10_att_gear -1
@@ -10347,7 +10347,7 @@ P _obja/34/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/34/_v10_is_internal 0
 P _obja/34/_v10_steers_with_gear 0
 P _obja/35/_obj_flags 16
-P _obja/35/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/35/_obj_hide_dataref Strato/777/misc/kill_cargo
 P _obja/35/_v10_att_body -1
 P _obja/35/_v10_att_file_stl 300ERF/fuse_2.obj
 P _obja/35/_v10_att_gear -1
@@ -10361,7 +10361,7 @@ P _obja/35/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/35/_v10_is_internal 0
 P _obja/35/_v10_steers_with_gear 0
 P _obja/36/_obj_flags 16
-P _obja/36/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/36/_obj_hide_dataref Strato/777/misc/kill_cargo
 P _obja/36/_v10_att_body -1
 P _obja/36/_v10_att_file_stl 300ERF/fuse_3.obj
 P _obja/36/_v10_att_gear -1
@@ -10375,7 +10375,7 @@ P _obja/36/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/36/_v10_is_internal 0
 P _obja/36/_v10_steers_with_gear 0
 P _obja/37/_obj_flags 9
-P _obja/37/_obj_hide_dataref Strato/777/acf_is_pax
+P _obja/37/_obj_hide_dataref Strato/777/misc/kill_cargo_interior
 P _obja/37/_v10_att_body -1
 P _obja/37/_v10_att_file_stl 300ERF/interior.obj
 P _obja/37/_v10_att_gear -1
