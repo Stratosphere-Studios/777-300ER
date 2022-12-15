@@ -10,6 +10,7 @@ addSearchPath(moduleDirectory.."/Custom Module/EICASCHECK")
 addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
 addSearchPath(moduleDirectory.."/Custom Module/FCTL")
+addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
@@ -38,9 +39,10 @@ set(brk_ovrd, 1)
 components = {
 
 	timers {},
+	eec {},
 	speed_calc {},
 	hydraulics {},
-	fbw_pid {},
+	fbw_main {},
 	fctl {},
 	gear {},
 	eicascheck {
