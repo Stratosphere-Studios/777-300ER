@@ -335,21 +335,22 @@ end
 
 function SetFlapTarget()
 	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
-	tas_limits = {-1, 136, 126, 118, 115, 102, 93} --limits in meters per second for load relief system
+	cas_limits = {-1, 136, 126, 118, 115, 102, 93} --limits in meters per second for load relief system
 	local sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
 	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 7)
 	if get(sys_C_press) >= 1000 then
 		local handle_pos = globalPropertyf("sim/cockpit2/controls/flap_ratio")
 		local flap_pos = get(flaps)
 		local index = indexOf(detents, get(handle_pos), 1)
+		local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
 		if index ~= nil then
-			if get(tas) > tas_limits[index] and get(handle_pos) >= 0.5 or (get(handle_pos) > 0 and flap_pos == 0 and get(tas) > 140 and (get(altitude_pilot) >= 20000 or get(altitude_copilot) >= 20000 or get(altitude_stdby) >= 20000)) then --load relief system only triggers with flaps 15 or below
+			if avg_cas > cas_limits[index] and get(handle_pos) >= 0.5 or (get(handle_pos) > 0 and flap_pos == 0 and avg_cas > 140 and (get(altitude_pilot) >= 20000 or get(altitude_copilot) >= 20000 or get(altitude_stdby) >= 20000)) then --load relief system only triggers with flaps 15 or below
 				if get(flap_load_relief) ~= 1 then
 					set(flap_load_relief, 1)
 				end
 				if get(flap_pos) > 5 then
 					for i = index,3,-1 do
-						if tas_limits[i] > get(tas) or i == 3 then --load relief retraction is limited to flap 5 idk why but the fcom says it
+						if cas_limits[i] > avg_cas or i == 3 then --load relief retraction is limited to flap 5 idk why but the fcom says it
 							set(flap_tgt, flap_settings[i])
 							break
 						end
