@@ -43,6 +43,7 @@ on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
+tac_engage = globalPropertyi("Strato/777/fctl/pfc/tac_eng", 1)
 fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
@@ -246,7 +247,7 @@ end
 
 function UpdateGearPos()
 	local height = 615
-	gear_status_pos = {990, 640, 900, 574, 1080, 574} --Coordinates of the bottom left corner of gear status signs for alternate extension
+	gear_status_pos = {990, 620, 900, 554, 1080, 554} --Coordinates of the bottom left corner of gear status signs for alternate extension
 	--If gear has been retracted, weit 10 seconds before we hide the status
 	local gear_in_pos = Round(get(nw_actual), 2) ~= 0 or Round(get(mlg_actual_L), 2) ~= 0 or Round(get(mlg_actual_R), 2) ~= 0
 	set(tr_time, gear_display_time)
@@ -446,6 +447,9 @@ function UpdateEicasAdvisory(messages)
 	end
 	if get(pressure_C) < 1200 or (get(fbw_mode) > 1 and get(fbw_self_test) == 0) then
 		table.insert(messages, tlen(messages) + 1, "AUTO SPEEDBRAKE")
+	end
+	if (get(fbw_mode) > 1 and get(fbw_self_test) == 0) or get(tac_engage) == 0 then
+		table.insert(messages, tlen(messages) + 1, "THRUST ASYM COMP")
 	end
 	if get(eicas_tire_press) == 1 then
 		table.insert(messages, tlen(messages) + 1, "TIRE PRESS")

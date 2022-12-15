@@ -1,12 +1,14 @@
 --[[
 *****************************************************************************************
-* Script Name: eicas
+* Script Name: fbw_main
 * Author Name: @bruh
-* Script Description: Code for flybywire pid
+* Script Description: Main code for flybywire
 *****************************************************************************************
 --]]
 
 include("misc_tools.lua")
+include("fbw_bite.lua")
+include("thrust_asym_comp.lua")
 
 --Getting handles to sim datarefs
 
@@ -42,9 +44,13 @@ roll_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/roll_AHARS_deg_co
 nw_actual = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 1)
 mlg_actual_R = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 2)
 mlg_actual_L = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 3)
+--Ground collision
+nw_onground = globalPropertyiae("sim/flightmodel2/gear/on_ground", 1)
+rmw_onground = globalPropertyiae("sim/flightmodel2/gear/on_ground", 2)
+lmw_onground = globalPropertyiae("sim/flightmodel2/gear/on_ground", 3)
+on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 --Operation
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
-on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 curr_g = globalPropertyf("sim/flightmodel/forces/g_nrml")
 cg = globalPropertyf("sim/flightmodel/misc/cgz_ref_to_default")
 total_weight = globalPropertyf("sim/flightmodel/weight/m_total")
@@ -64,10 +70,12 @@ flap_tgt = globalPropertyf("Strato/777/flaps/tgt")
 
 --Creating our own
 fbw_mode = createGlobalPropertyi("Strato/777/fctl/pfc/mode", 1)
+tac_engage = createGlobalPropertyi("Strato/777/fctl/pfc/tac_eng", 1)
 pfc_overbank = createGlobalPropertyi("Strato/777/fctl/pfc/overbank", 0)
 pfc_roll_command = createGlobalPropertyf("Strato/777/fctl/pfc/roll", 0)
 pfc_elevator_command = createGlobalPropertyf("Strato/777/fctl/pfc/elevator", 0)
 pfc_rudder_command = createGlobalPropertyf("Strato/777/fctl/pfc/rudder", 0)
+rud_trim = createGlobalPropertyf("Strato/777/fctl/pfc/rud_trim", 0)
 fbw_self_test = createGlobalPropertyi("Strato/777/fctl/pfc/selftest", 0)
 fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 0)
 fbw_pitch_dref = createGlobalPropertyf("Strato/777/fctl/pitch", 0)
@@ -75,22 +83,7 @@ fbw_roll_dref = createGlobalPropertyf("Strato/777/fctl/roll", 0)
 fbw_ail_ratio = createGlobalPropertyf("Strato/777/fctl/ail_ratio", 0)
 fbw_flprn_ratio_l = createGlobalPropertyf("Strato/777/fctl/flprn_ratio_l", 0)
 fbw_flprn_ratio_u = createGlobalPropertyf("Strato/777/fctl/flprn_ratio_u", 0)
-t_fac = createGlobalPropertyf("Strato/777/fctl/t_factor", 0)
 p_last = createGlobalPropertyf("Strato/777/fctl/p_last", 0)
-
-pt = createGlobalPropertyf("Strato/777/test/kp", 4.1)
-it = createGlobalPropertyf("Strato/777/test/ip", 4.6)
-dt = createGlobalPropertyf("Strato/777/test/dp", 0.01)
-pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0) --NEVER LEAVE THIS AT 1
-errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
-iasln = createGlobalPropertyf("Strato/777/test/iasln", 0.15)
-thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 17)
-pitch_delta = createGlobalPropertyf("Strato/777/test/p_delta", 0)
-delta_maintain = createGlobalPropertyf("Strato/777/test/p_deltam", 0)
-correction = createGlobalPropertyf("Strato/777/test/correction", 0)
-flap_c = createGlobalPropertyf("Strato/777/test/flap_correction", 0)
-err_reset = createGlobalPropertyi("Strato/777/test/err_reset", 0)
-calc_sp = createGlobalPropertyf("Strato/777/test/calc_sp", 0)
 
 pid_d_maintain = {4.1, 0.01}
 d_int = {2.8, 2.9, 2.9, 3.1, 3.1, 3.9, 3.5, 3.3, 3.3}
@@ -127,16 +120,6 @@ thrust_corrections =
 	{35, 9.8}
 }
 
---Pfc self test globals
-sys_avail_last = {false, false, false}
-self_test_time = 0
-self_test_init = false
-self_test_done = false
-sec_tested = false
-sec_init = false
-sec_time = 0
-dir_init = false
-dir_time = 0
 --Other globals
 flprn_ratio_degrade = 0 --This is to increase stiffness of the yoke
 man_pitch = 0
@@ -151,6 +134,8 @@ fbw_roll_past = 0
 fbw_elevator_past = 0 --This is for stab trim
 fbw_pitch = 0
 stab_trim_engage = 0
+tac_input_last = 0
+--Pid globals
 d_error_last = 0
 ail_error_last = 0
 e_error_last = 0
@@ -163,11 +148,19 @@ trs_error_total = 0
 r_error_total = 0
 
 function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
-	if get(on_ground) == 1 and (get(L_reverser_deployed) or get(R_reverser_deployed)) == 1 and get(sys_C_press) > 1200 and get(fbw_mode) == 1 then --conditions for deployment
-		set(spoiler_handle, 1)
-	elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 and get(on_ground) == 1 then --automatic retraction when too much thrust is applied
-		set(spoiler_handle, 0)
-	end
+    local all_onground = get(nw_onground) == 1 and get(lmw_onground) == 1 and get(rmw_onground) == 1
+    local rev_deployed = (get(L_reverser_deployed) or get(R_reverser_deployed)) == 1
+    if all_onground then
+	    if rev_deployed and get(sys_C_press) > 1200 and get(fbw_mode) == 1 then --conditions for deployment
+	    	set(spoiler_handle, 1)
+	    elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 then --automatic retraction when too much thrust is applied
+	    	set(spoiler_handle, 0)
+	    end
+    elseif get(lmw_onground) == 1 and get(rmw_onground) == 1 and get(nw_onground) == 0 then
+        if rev_deployed and get(sys_C_press) > 1200 and get(fbw_mode) == 1 and get(spoiler_handle) < 0 then
+            set(spoiler_handle, 1)
+        end
+    end
 end
 
 
@@ -199,7 +192,6 @@ function GetPitchCorrection(mass, m_idx, thrust, trim_speed)
 	local r2 = (thrust_corrections[m_idx][2] - thrust_corrections[m_idx-1][2]) / (thrust_corrections[m_idx][1] - thrust_corrections[m_idx-1][1])
 	local speed = (mass - no_pitch_speeds[m_idx-1][1]) * r1 + no_pitch_speeds[m_idx-1][2 + flap_idx - 1]
 	local thrust_coeff = (mass - thrust_corrections[m_idx-1][1]) * r2 + thrust_corrections[m_idx-1][2]
-	set(calc_sp, speed)
 	local ias_correction_linear = linear_corrections[flap_idx] * (speed - trim_speed)
 	--local ias_correction_linear = get(iasln) * (speed - trim_speed)
 	local thrust_correction = thrust_coeff * thrust
@@ -289,7 +281,6 @@ function UpdatePFCElevatorCommand()
 		local thrust_fac_L = (get(thrust_engn_L) - 16000) / 334000
 		local thrust_fac_R = (get(thrust_engn_R) - 16000) / 334000
 		local thrust_fac_total = (thrust_fac_L + thrust_fac_R) / 2
-		set(t_fac, thrust_fac_total)
 		fbw_pitch = GetPitchCorrection(tmp_mass, m_i, thrust_fac_total, get(fbw_trim_speed))
 		if avg_ra > 100 then
 			--Limit trs
@@ -302,12 +293,13 @@ function UpdatePFCElevatorCommand()
 			--Calculating the pitch angle
 			local tmp_pitch = PID_Compute(pid_trs_maintain[1], pid_trs_maintain[2], pid_trs_maintain[3], round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
 			--local tmp_pitch = PID_Compute(get(pt), get(it), get(dt), round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
-			set(errtotal, tmp_pitch[2])
-			if get(pitch_ovrd) == 0 then
-				fbw_pitch = fbw_pitch + tmp_pitch[1]
-			else
-				fbw_pitch = 0
-			end
+			--set(errtotal, tmp_pitch[2])
+            fbw_pitch = fbw_pitch + tmp_pitch[1]
+			--if get(pitch_ovrd) == 0 then
+			--	fbw_pitch = fbw_pitch + tmp_pitch[1]
+			--else
+			--	fbw_pitch = 0
+			--end
 			trs_error_total = tmp_pitch[2]
 			trs_error_last = tmp_pitch[3]
 		end
@@ -315,7 +307,6 @@ function UpdatePFCElevatorCommand()
 		if get(f_time) ~= 0 then
 			local commanded_pitch = 0
 			local tmp_int = d_int[m_i] + ((d_int[m_i] - d_int[m_i-1]) * (tmp_mass - no_pitch_speeds[m_i-1][1])) / (no_pitch_speeds[m_i][1] - no_pitch_speeds[m_i-1][1])
-			set(it, tmp_int)
 			if math.abs(get(yoke_pitch_ratio)) > 0.08 then
 				commanded_pitch = get(yoke_pitch_ratio) * 3.3
 			end
@@ -324,7 +315,7 @@ function UpdatePFCElevatorCommand()
 			local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
 			local tmp = PID_Compute(pid_d_maintain[1], tmp_int, pid_d_maintain[2], fbw_delta + commanded_pitch, curr_delta, d_error_total, d_error_last, 100, 20)
 			--local tmp = PID_Compute(get(pt), get(it), get(dt), get(delta_maintain), curr_delta, d_error_total, d_error_last, 100, 20)
-			set(pitch_delta, curr_delta)
+			--set(pitch_delta, curr_delta)
 			set(pfc_elevator_command, tmp[1])
 			d_error_total = tmp[2]
 			d_error_last = tmp[3]
@@ -339,15 +330,24 @@ function UpdatePFCElevatorCommand()
 end
 
 function UpdateRudderCommand()
+    local avg_roll = (get(roll_pilot) + get(roll_copilot)) / 2
+	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
+	local r_delta = get(yoke_roll_ratio) - roll_input_last
+	local h_delta = get(yoke_heading_ratio) - heading_input_last
+	roll_input_last = get(yoke_roll_ratio)
+	heading_input_last = get(yoke_heading_ratio)
+	local bank_correction_rudder = false
+	local bank_correction_ail = false
 	if get(fbw_mode) == 1 then
-		local avg_roll = (get(roll_pilot) + get(roll_copilot)) / 2
-		local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
-		local r_delta = get(yoke_roll_ratio) - roll_input_last
-		local h_delta = get(yoke_heading_ratio) - heading_input_last
-		roll_input_last = get(yoke_roll_ratio)
-		heading_input_last = get(yoke_heading_ratio)
-		local bank_correction_rudder = false
-		local bank_correction_ail = false
+        --Run TAC
+        local rev_deployed = (get(L_reverser_deployed) or get(R_reverser_deployed)) == 1
+        local thrust_fac_L = (get(thrust_engn_L) - 16000) / 334000
+		local thrust_fac_R = (get(thrust_engn_R) - 16000) / 334000
+        local tac_input = GetRudderTrim(thrust_fac_L, thrust_fac_R, rev_deployed, avg_cas)
+        if math.abs(tac_input - tac_input_last) > 0.06 and get(tac_engage) == 1 then
+            set(rud_trim, tac_input)
+            tac_input_last = tac_input
+        end
 		if r_delta ~= 0 then
 			fbw_roll_past = avg_roll
 		end
@@ -371,34 +371,42 @@ function UpdateRudderCommand()
 			flprn_ratio_degrade = 0
 		end
 		set(fbw_roll_dref, fbw_roll_past)
-		--Aileron logic
-		if r_delta <= 0.1 and math.abs(get(yoke_roll_ratio)) < 0.2 and get(on_ground) == 0 or bank_correction_ail == true then
-			local tmp = PID_Compute(pid_gust_supr[1], pid_gust_supr[2], pid_gust_supr[3], fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 200, 18)
-			--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 200, 18)
-			set(pfc_roll_command, tmp[1])
-			ail_error_total = tmp[2]
-			ail_error_last = tmp[3]
-		else
-			set(pfc_roll_command, get(yoke_roll_ratio) * 18)
-		end
-		--Rudder logic
-		if math.abs(get(yoke_heading_ratio)) <= 0.14 and get(on_ground) == 0 and h_delta <= 0.07 or bank_correction_rudder == true then
-			local tmp = PID_Compute(pid_coefficients_rudder[1], pid_coefficients_rudder[2], pid_coefficients_rudder[3], fbw_roll_past, avg_roll, r_error_total, r_error_last, 200, 27)
-			set(pfc_rudder_command, tmp[1])
-			r_error_total = tmp[2]
-			r_error_last = tmp[3]
-		else
-			local ail_component = 0
-			if get(on_ground) == 0 and avg_cas <= 210 then
-				ail_component = get(yoke_roll_ratio) --Tie rudder to ailerons below 210 kias 
-			end
-			local tgt = get(yoke_heading_ratio) * 27 - ail_component * 8
-			tgt = lim(tgt, 27, -27)
-			set(pfc_rudder_command, tgt)
-		end
+    end
+	--Aileron logic
+    local ail_engage_nml = r_delta <= 0.1 and math.abs(get(yoke_roll_ratio)) < 0.2 and get(on_ground) == 0
+	if get(fbw_mode) == 1 and (ail_engage_nml or bank_correction_ail == true) then
+		local tmp = PID_Compute(pid_gust_supr[1], pid_gust_supr[2], pid_gust_supr[3], fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 200, 18)
+		--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 200, 18)
+		set(pfc_roll_command, tmp[1])
+		ail_error_total = tmp[2]
+		ail_error_last = tmp[3]
 	else
 		set(pfc_roll_command, get(yoke_roll_ratio) * 18)
-		set(pfc_rudder_command, get(yoke_heading_ratio) * 27)
+	end
+	--Rudder logic
+    local rud_neutral = get(rud_trim) * 27 / -15
+    local rud_engage_nml = math.abs(get(yoke_heading_ratio)) <= 0.14 and get(on_ground) == 0 and h_delta <= 0.07
+	if get(fbw_mode) == 1 and (rud_engage_nml or bank_correction_rudder == true) then
+		local tmp = PID_Compute(pid_coefficients_rudder[1], pid_coefficients_rudder[2], pid_coefficients_rudder[3], fbw_roll_past, avg_roll, r_error_total, r_error_last, 200, 27)
+		set(pfc_rudder_command, tmp[1] + rud_neutral)
+		r_error_total = tmp[2]
+		r_error_last = tmp[3]
+	else
+		local ail_component = 0
+		if get(on_ground) == 0 and avg_cas <= 210 and get(fbw_mode) == 1 then
+			ail_component = get(yoke_roll_ratio) --Tie rudder to ailerons below 210 kias 
+        end
+        local l_ratio = 27 - rud_neutral
+        local r_ratio = 54 - l_ratio
+        local tgt = rud_neutral
+        if get(yoke_heading_ratio) > 0 then
+            tgt = tgt + get(yoke_heading_ratio) * l_ratio
+        else
+            tgt = tgt + get(yoke_heading_ratio) * r_ratio
+        end
+		tgt = tgt - ail_component * 8
+		tgt = lim(tgt, 27, -27)
+		set(pfc_rudder_command, tgt)
 	end
 end
 
@@ -432,55 +440,6 @@ function UpdateStabTrim()
 	set(ths_degrees, get(stab_trim) * -11)
 end
 
-function UpdateSelfTest()
-	local l_avail = get(sys_L_press) >= 400
-	local c_avail = get(sys_C_press) >= 400
-	local r_avail = get(sys_R_press) >= 400
-	past_avail = sys_avail_last[1] or sys_avail_last[2] or sys_avail_last[3]
-	curr_avail = l_avail or c_avail or r_avail
-	if past_avail == true and c_avail == false then
-		self_test_time = get(c_time)
-		self_test_done = false
-	end
-	if get(c_time) > self_test_time + 120 and self_test_done == false and c_avail == false then
-		self_test_init = true
-	elseif self_test_done == true then
-		self_test_init = false
-	end
-	sys_avail_last[1] = l_avail
-	sys_avail_last[2] = c_avail
-	sys_avail_last[3] = r_avail
-end
-
-function DoSelfTest()
-	if self_test_init == true and self_test_done == false then
-		set(fbw_self_test, 1)
-		if sec_tested == false and sec_init == false then
-			set(fbw_mode, 2)
-			sec_time = get(c_time)
-			sec_init = true
-		elseif sec_tested == false and sec_init == true then
-			if get(c_time) >= sec_time + 5 then
-				sec_tested = true
-				sec_init = false
-				set(fbw_mode, 3)
-				dir_time = get(c_time)
-				dir_init = true
-			end
-		end
-		if dir_init == true then
-			if get(c_time) >= dir_time + 5 then
-				self_test_done = true
-				sec_tested = false
-				dir_init = false
-				set(fbw_mode, 1)
-			end
-		end
-	else
-		set(fbw_self_test, 0)
-	end
-end
-
 function update()
 	SetSpeedbrkHandle()
 	UpdateSelfTest()
@@ -493,6 +452,7 @@ function update()
 end
 
 function onAirportLoaded()
+    --Disable pfc self test
 	self_test_init = false
 end
 
