@@ -515,7 +515,7 @@ function fms:B777_fms_display()
       B777DR_fms_s[thisID][14] = "                        "
     end
   else
-    if self.pgNo > fmsPages[page]:getNumPages() then print("IMPORTANT FUNC") self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end --TODO: SS777 PROBLEM!
+    if self.pgNo > fmsPages[page]:getNumPages() then print("IMPORTANT FUNC") self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end --Breaks FMS
     print("STUPID THING WORKS")
     if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
     local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
