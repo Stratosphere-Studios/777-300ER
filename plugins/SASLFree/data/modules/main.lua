@@ -39,7 +39,6 @@ set(brk_ovrd, 1)
 components = {
 
 	timers {},
-	eec {},
 	speed_calc {},
 	hydraulics {},
 	fbw_main {},
