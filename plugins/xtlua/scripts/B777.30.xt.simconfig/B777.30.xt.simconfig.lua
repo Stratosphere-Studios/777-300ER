@@ -226,4 +226,5 @@ function after_physics()
 
 	--See if Baro's should be sync'd
 	baro_sync()
+	--print("simconfig working")
 end

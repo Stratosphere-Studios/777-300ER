@@ -199,7 +199,7 @@ fmsFunctionsDefs["RTE1"]["R6"]={"setpage","PERFINIT"}
 fmsFunctionsDefs["RTE1"]["next"]={"custom2fmc","next"}
 fmsFunctionsDefs["RTE1"]["prev"]={"custom2fmc","prev"}
 fmsFunctionsDefs["RTE1"]["exec"]={"custom2fmc","exec"}
-dofile("activepages/B744.fms.pages.posinit.lua")
+--[[dofile("activepages/B744.fms.pages.posinit.lua")
 dofile("activepages/B744.fms.pages.perfinit.lua")
 dofile("activepages/B744.fms.pages.thrustlim.lua")
 dofile("activepages/B744.fms.pages.takeoff.lua")
@@ -232,7 +232,7 @@ dofile("activepages/B744.fms.pages.eicasctl.lua")
 dofile("activepages/B744.fms.pages.doors.lua")
 dofile("activepages/B744.fms.pages.soundconfig.lua")
 
---[[
+--
 dofile("B744.fms.pages.actclb.lua")
 dofile("B744.fms.pages.actcrz.lua")
 dofile("B744.fms.pages.actdes.lua")

@@ -20,37 +20,37 @@ end
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
 
-B777DR_acfType                      = find_dataref("laminar/B777/acfType")
+B777DR_acfType                      = find_dataref("Strato/B777/acfType")
 B777DR_payload_weight               = find_dataref("sim/flightmodel/weight/m_fixed")
 simDR_acf_m_jettison  	            = find_dataref("sim/aircraft/weight/acf_m_jettison")
 simDR_m_jettison  		            = find_dataref("sim/flightmodel/weight/m_jettison")
-B777DR_CAS_advisory_status          = find_dataref("laminar/B777/CAS/advisory_status") -- no 
-B777DR_ap_vnav_system               = find_dataref("laminar/B777/autopilot/vnav_system")
-B777DR_ap_vnav_pause                = find_dataref("laminar/B777/autopilot/vnav_pause")
+B777DR_CAS_advisory_status          = find_dataref("Strato/B777/CAS/advisory_status") -- no 
+B777DR_ap_vnav_system               = find_dataref("Strato/B777/autopilot/vnav_system")
+B777DR_ap_vnav_pause                = find_dataref("Strato/B777/autopilot/vnav_pause")
 simDR_nav1Freq                      = find_dataref("sim/cockpit/radios/nav1_freq_hz")
 simDR_nav2Freq                      = find_dataref("sim/cockpit/radios/nav2_freq_hz")
-B777DR_iru_status                   = find_dataref("laminar/B777/flt_mgmt/iru/status")
-B777DR_iru_mode_sel_pos             = find_dataref("laminar/B777/flt_mgmt/iru/mode_sel_dial_pos")
+B777DR_iru_status                   = find_dataref("Strato/B777/flt_mgmt/iru/status")
+B777DR_iru_mode_sel_pos             = find_dataref("Strato/B777/flt_mgmt/iru/mode_sel_dial_pos")
 
-B777DR_rtp_C_off                    = find_dataref("laminar/B777/comm/rtp_C/off_status") -- no 
-B777DR_pfd_mode_capt                = find_dataref("laminar/B777/pfd/capt/irs")
-B777DR_pfd_mode_fo                  = find_dataref("laminar/B777/pfd/fo/irs")
-B777DR_irs_src_fo	                = find_dataref("laminar/B777/flt_inst/irs_src/fo/sel_dial_pos")
-B777DR_irs_src_capt	                = find_dataref("laminar/B777/flt_inst/irs_src/capt/sel_dial_pos")
-B777DR_ap_fpa                       = find_dataref("laminar/B777/autopilot/navadata/fpa")
-B777DR_ap_vb                        = find_dataref("laminar/B777/autopilot/navadata/vb")
+B777DR_rtp_C_off                    = find_dataref("Strato/B777/comm/rtp_C/off_status") -- no 
+B777DR_pfd_mode_capt                = find_dataref("Strato/B777/pfd/capt/irs")
+B777DR_pfd_mode_fo                  = find_dataref("Strato/B777/pfd/fo/irs")
+B777DR_irs_src_fo	                = find_dataref("Strato/B777/flt_inst/irs_src/fo/sel_dial_pos")
+B777DR_irs_src_capt	                = find_dataref("Strato/B777/flt_inst/irs_src/capt/sel_dial_pos")
+B777DR_ap_fpa                       = find_dataref("Strato/B777/autopilot/navadata/fpa")
+B777DR_ap_vb                        = find_dataref("Strato/B777/autopilot/navadata/vb")
 simDR_autopilot_vs_fpm              = find_dataref("sim/cockpit2/autopilot/vvi_dial_fpm")
 B747DR_fmc_notifications            = deferred_dataref("laminar/B747/fms/notification","array[53]")
-B777DR_airspeed_Vref                = find_dataref("laminar/B777/airspeed/Vref")
-B777DR_airspeed_VrefFlap            = find_dataref("laminar/B777/airspeed/VrefFlap")
-B777DR_altimter_ft_adjusted         = find_dataref("laminar/B777/altimeter/ft_adjusted")
-B777BR_eod_index                    = find_dataref("laminar/B777/autopilot/dist/eod_index")
-B777DR_TAS_pilot                    = find_dataref("laminar/B777/nd/TAS_pilot") -- no
-B777DR_engine_used_fuel             = find_dataref("laminar/B777/fuel/totaliser")
+B777DR_airspeed_Vref                = find_dataref("Strato/B777/airspeed/Vref")
+B777DR_airspeed_VrefFlap            = find_dataref("Strato/B777/airspeed/VrefFlap")
+B777DR_altimter_ft_adjusted         = find_dataref("Strato/B777/altimeter/ft_adjusted")
+B777BR_eod_index                    = find_dataref("Strato/B777/autopilot/dist/eod_index")
+B777DR_TAS_pilot                    = find_dataref("Strato/B777/nd/TAS_pilot") -- no*
+B777DR_engine_used_fuel             = find_dataref("Strato/B777/fuel/totaliser")
 simDR_autopilot_airspeed_is_mac     = find_dataref("sim/cockpit2/autopilot/airspeed_is_mach")
 simDR_autopilot_airspeed_kts_mach   = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts_mach")
 simDR_autopilot_airspeed_kts   	    = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts")
-B777DR_elec_ext_pwr1_available      = find_dataref("laminar/B777/electrical/ext_pwr1_avail")
+B777DR_elec_ext_pwr1_available      = find_dataref("Strato/B777/electrical/ext_pwr1_avail")
 --Workaround for stack overflow in init.lua namespace_read
 
 function replace_char(pos, str, r)
@@ -165,61 +165,61 @@ simDR_fueL_tank_weight_total_kg     = find_dataref("sim/flightmodel/weight/m_fue
 navAidsJSON                         = find_dataref("xtlua/navaids")
 fmsJSON                             = find_dataref("xtlua/fms")
 
-B777DR_fms1_display_mode            = find_dataref("laminar/B777/fms1/display_mode")
+B777DR_fms1_display_mode            = find_dataref("Strato/B777/fms1/display_mode")
 
-B777DR_init_fmsL_CD                 = find_dataref("laminar/B777/fmsL/init_CD")
-ilsData                             = deferred_dataref("laminar/B777/radio/ilsData", "string")
-acars                               = deferred_dataref("laminar/B777/comm/acars","number")  
-toderate                            = deferred_dataref("laminar/B777/engine/derate/TO","number") 
-clbderate                           = deferred_dataref("laminar/B777/engine/derate/CLB","number")
-B777DR_radioModes                   = deferred_dataref("laminar/B777/radio/tuningmodes", "string")
-B777DR_FMSdata                      = deferred_dataref("laminar/B777/fms/data", "string")
-B777DR_ap_vnav_state                = find_dataref("laminar/B777/autopilot/vnav_state")
+B777DR_init_fmsL_CD                 = find_dataref("Strato/B777/fmsL/init_CD")
+ilsData                             = deferred_dataref("Strato/B777/radio/ilsData", "string")
+acars                               = deferred_dataref("Strato/B777/comm/acars","number")  
+toderate                            = deferred_dataref("Strato/B777/engine/derate/TO","number") 
+clbderate                           = deferred_dataref("Strato/B777/engine/derate/CLB","number")
+B777DR_radioModes                   = deferred_dataref("Strato/B777/radio/tuningmodes", "string")
+B777DR_FMSdata                      = deferred_dataref("Strato/B777/fms/data", "string")
+B777DR_ap_vnav_state                = find_dataref("Strato/B777/autopilot/vnav_state")
 simDR_autopilot_vs_status           = find_dataref("sim/cockpit2/autopilot/vvi_status")
-B777BR_totalDistance                = find_dataref("laminar/B777/autopilot/dist/remaining_distance")
-B777BR_nextDistanceInFeet           = find_dataref("laminar/B777/autopilot/dist/next_distance_feet")
-B777BR_cruiseAlt                    = find_dataref("laminar/B777/autopilot/dist/cruise_alt")
-B777BR_tod                          = find_dataref("laminar/B777/autopilot/dist/top_of_descent")
-B777DR__gear_chocked                = find_dataref("laminar/B777/gear/chocked")
-B777DR_fuel_preselect               = find_dataref("laminar/B777/fuel/preselect")
-B777DR_refuel		                = find_dataref("laminar/B777/fuel/refuel")
-B777DR_fuel_add		                = find_dataref("laminar/B777/fuel/add_fuel" )
+B777BR_totalDistance                = find_dataref("Strato/B777/autopilot/dist/remaining_distance")
+B777BR_nextDistanceInFeet           = find_dataref("Strato/B777/autopilot/dist/next_distance_feet")
+B777BR_cruiseAlt                    = find_dataref("Strato/B777/autopilot/dist/cruise_alt")
+B777BR_tod                          = find_dataref("Strato/B777/autopilot/dist/top_of_descent")
+B777DR__gear_chocked                = find_dataref("Strato/B777/gear/chocked")
+B777DR_fuel_preselect               = find_dataref("Strato/B777/fuel/preselect")
+B777DR_refuel		                = find_dataref("Strato/B777/fuel/refuel")
+B777DR_fuel_add		                = find_dataref("Strato/B777/fuel/add_fuel" )
 
-B777DR_efis_min_ref_alt_capt_sel_dial_pos       = find_dataref("laminar/B777/efis/min_ref_alt/capt/sel_dial_pos")
-B777DR_efis_ref_alt_capt_set_dial_pos           = find_dataref("laminar/B777/efis/ref_alt/capt/set_dial_pos")
-B777DR_efis_dh_reset_capt_switch_pos            = find_dataref("laminar/B777/efis/dh_reset/capt/switch_pos")
-B777DR_efis_baro_ref_capt_sel_dial_pos          = find_dataref("laminar/B777/efis/baro_ref/capt/sel_dial_pos")
-B777DR_efis_baro_std_capt_switch_pos            = find_dataref("laminar/B777/efis/baro_std/capt/switch_pos")
-B777DR_efis_baro_capt_set_dial_pos              = find_dataref("laminar/B777/efis/baro/capt/set_dial_pos")
-B777DR_efis_baro_capt_preselect                 = find_dataref("laminar/B777/efis/baro/capt/preselect")
-B777DR_efis_baro_alt_ref_capt                   = find_dataref("laminar/B777/efis/baro_ref/capt")
+B777DR_efis_min_ref_alt_capt_sel_dial_pos       = find_dataref("Strato/B777/efis/min_ref_alt/capt/sel_dial_pos")
+B777DR_efis_ref_alt_capt_set_dial_pos           = find_dataref("Strato/B777/efis/ref_alt/capt/set_dial_pos")
+B777DR_efis_dh_reset_capt_switch_pos            = find_dataref("Strato/B777/efis/dh_reset/capt/switch_pos")
+B777DR_efis_baro_ref_capt_sel_dial_pos          = find_dataref("Strato/B777/efis/baro_ref/capt/sel_dial_pos")
+B777DR_efis_baro_std_capt_switch_pos            = find_dataref("Strato/B777/efis/baro_std/capt/switch_pos")
+B777DR_efis_baro_capt_set_dial_pos              = find_dataref("Strato/B777/efis/baro/capt/set_dial_pos")
+B777DR_efis_baro_capt_preselect                 = find_dataref("Strato/B777/efis/baro/capt/preselect")
+B777DR_efis_baro_alt_ref_capt                   = find_dataref("Strato/B777/efis/baro_ref/capt")
 
-B777DR_efis_min_ref_alt_fo_sel_dial_pos         = find_dataref("laminar/B777/efis/min_ref_alt/fo/sel_dial_pos")
-B777DR_efis_ref_alt_fo_set_dial_pos             = find_dataref("laminar/B777/efis/ref_alt/fo/set_dial_pos")
-B777DR_efis_dh_reset_fo_switch_pos              = find_dataref("laminar/B777/efis/dh_reset/fo/switch_pos")
-B777DR_efis_baro_ref_fo_sel_dial_pos            = find_dataref("laminar/B777/efis/baro_ref/fo/sel_dial_pos")
-B777DR_efis_baro_std_fo_switch_pos              = find_dataref("laminar/B777/efis/baro_std/fo/switch_pos")
-B777DR_efis_baro_fo_set_dial_pos                = find_dataref("laminar/B777/efis/baro/fo/set_dial_pos")
-B777DR_efis_baro_fo_preselect                   = find_dataref("laminar/B777/efis/baro/fo/preselect")
-B777DR_efis_baro_alt_ref_fo                     = find_dataref("laminar/B777/efis/baro_ref/fo")
+B777DR_efis_min_ref_alt_fo_sel_dial_pos         = find_dataref("Strato/B777/efis/min_ref_alt/fo/sel_dial_pos")
+B777DR_efis_ref_alt_fo_set_dial_pos             = find_dataref("Strato/B777/efis/ref_alt/fo/set_dial_pos")
+B777DR_efis_dh_reset_fo_switch_pos              = find_dataref("Strato/B777/efis/dh_reset/fo/switch_pos")
+B777DR_efis_baro_ref_fo_sel_dial_pos            = find_dataref("Strato/B777/efis/baro_ref/fo/sel_dial_pos")
+B777DR_efis_baro_std_fo_switch_pos              = find_dataref("Strato/B777/efis/baro_std/fo/switch_pos")
+B777DR_efis_baro_fo_set_dial_pos                = find_dataref("Strato/B777/efis/baro/fo/set_dial_pos")
+B777DR_efis_baro_fo_preselect                   = find_dataref("Strato/B777/efis/baro/fo/preselect")
+B777DR_efis_baro_alt_ref_fo                     = find_dataref("Strato/B777/efis/baro_ref/fo")
 
 
 simDR_EFIS_1_sel_pilot              = find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_pilot")
 simDR_EFIS_1_sel_fo                 = find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_copilot")
 simDR_EFIS_2_sel_pilot              = find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_pilot")
 simDR_EFIS_2_sel_fo                 = find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_copilot")
-B777DR_nd_capt_terr                 = deferred_dataref("laminar/B777/nd/data/capt/terr", "number")
-B777DR_nd_fo_terr                   = deferred_dataref("laminar/B777/nd/data/fo/terr", "number")
-B777DR_nd_capt_vor_ndb              = find_dataref("laminar/B777/nd/data/capt/vor_ndb")
-B777DR_nd_capt_wpt                  = find_dataref("laminar/B777/nd/data/capt/wpt")
-B777DR_nd_fo_vor_ndb                = find_dataref("laminar/B777/nd/data/fo/vor_ndb")
-B777DR_nd_fo_wpt                    = find_dataref("laminar/B777/nd/data/fo/wpt")
-B777DR_nd_capt_apt	                = find_dataref("laminar/B777/nd/data/capt/apt")
-B777DR_nd_fo_apt	                = find_dataref("laminar/B777/nd/data/fo/apt")
-B777DR_nd_fo_ftc	                = find_dataref("laminar/B777/nd/fo/tfc")
-B777DR_nd_capt_ftc	                = find_dataref("laminar/B777/nd/capt/tfc")
-B777DR_nd_capt_traffic_Selected     = find_dataref("laminar/B777/nd/traffic/capt/selected")
-B777DR_nd_fo_traffic_Selected       = find_dataref("laminar/B777/nd/traffic/fo/selected")
+B777DR_nd_capt_terr                 = deferred_dataref("Strato/B777/nd/data/capt/terr", "number")
+B777DR_nd_fo_terr                   = deferred_dataref("Strato/B777/nd/data/fo/terr", "number")
+B777DR_nd_capt_vor_ndb              = find_dataref("Strato/B777/nd/data/capt/vor_ndb")
+B777DR_nd_capt_wpt                  = find_dataref("Strato/B777/nd/data/capt/wpt")
+B777DR_nd_fo_vor_ndb                = find_dataref("Strato/B777/nd/data/fo/vor_ndb")
+B777DR_nd_fo_wpt                    = find_dataref("Strato/B777/nd/data/fo/wpt")
+B777DR_nd_capt_apt	                = find_dataref("Strato/B777/nd/data/capt/apt")
+B777DR_nd_fo_apt	                = find_dataref("Strato/B777/nd/data/fo/apt")
+B777DR_nd_fo_ftc	                = find_dataref("Strato/B777/nd/fo/tfc")
+B777DR_nd_capt_ftc	                = find_dataref("Strato/B777/nd/capt/tfc")
+B777DR_nd_capt_traffic_Selected     = find_dataref("Strato/B777/nd/traffic/capt/selected")
+B777DR_nd_fo_traffic_Selected       = find_dataref("Strato/B777/nd/traffic/fo/selected")
 B777DR_nd_wxr	                    = find_dataref("sim/cockpit2/EFIS/EFIS_weather_on")
 simDR_radio_alt_DH_capt             = find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot")
 simDR_radio_alt_DH_fo               = find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot")
@@ -232,12 +232,12 @@ simDR_altimeter_baro_inHg_fo        = find_dataref("sim/cockpit2/gauges/actuator
 simDR_latitude				= find_dataref("sim/flightmodel/position/latitude")
 simDR_longitude				= find_dataref("sim/flightmodel/position/longitude")
 simDR_navID					= find_dataref("sim/cockpit2/radios/indicators/gps_nav_id")
-simDR_range_dial_capt		= find_dataref("laminar/B777/nd/range/capt/sel_dial_pos") -- no*
-simDR_range_dial_fo			= find_dataref("laminar/B777/nd/range/fo/sel_dial_pos") -- no*
-simDR_nd_mode_dial_capt		= find_dataref("laminar/B777/nd/mode/capt/sel_dial_pos")
-simDR_nd_mode_dial_fo       = find_dataref("laminar/B777/nd/mode/fo/sel_dial_pos")
-simDR_nd_center_dial_capt   = find_dataref("laminar/B777/nd/map_center/capt")
-simDR_nd_center_dial_fo	    = find_dataref("laminar/B777/nd/map_center/fo")
+simDR_range_dial_capt		= find_dataref("Strato/B777/nd/range/capt/sel_dial_pos") -- no*
+simDR_range_dial_fo			= find_dataref("Strato/B777/nd/range/fo/sel_dial_pos") -- no*
+simDR_nd_mode_dial_capt		= find_dataref("Strato/B777/nd/mode/capt/sel_dial_pos")
+simDR_nd_mode_dial_fo       = find_dataref("Strato/B777/nd/mode/fo/sel_dial_pos")
+simDR_nd_center_dial_capt   = find_dataref("Strato/B777/nd/map_center/capt")
+simDR_nd_center_dial_fo	    = find_dataref("Strato/B777/nd/map_center/fo")
 simDR_EFIS_map_mode         = find_dataref("sim/cockpit2/EFIS/map_mode")
 simDR_EFIS_map_range        = find_dataref("sim/cockpit2/EFIS/map_range")
 
@@ -251,7 +251,7 @@ simDR_total_air_temp		= find_dataref("sim/cockpit2/temperature/outside_air_LE_te
 simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
 simDR_aircraft_hdg		 	= find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
 
---WB CG Info
+--[[WB CG Info
 simDR_cgZ_ref_point			= find_dataref("sim/aircraft/weight/acf_cgZ_original")
 simDR_cgz_ref_to_default	= find_dataref("sim/flightmodel/misc/cgz_ref_to_default")
 simDR_empty_weight			= find_dataref("sim/aircraft/weight/acf_m_empty")
@@ -262,49 +262,50 @@ simDR_onground				= find_dataref("sim/flightmodel/failures/onground_any")
 simDR_payload_weight		= find_dataref("sim/flightmodel/weight/m_fixed")
 simDR_fuel_totalizer_kg		= find_dataref("sim/cockpit2/fuel/fuel_totalizer_init_kg")
 --Marauder28
+ss777 comment]]
 
 --*************************************************************************************--
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
-
+B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
 --Marauder28
 -- Holds all SimConfig options
 B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
 B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
 -- Temp location for fuel preselect for displaying in correct units
-B777DR_fuel_preselect_temp				= deferred_dataref("laminar/B777/fuel/fuel_preselect_temp", "number")
+B777DR_fuel_preselect_temp				= deferred_dataref("Strato/B777/fuel/fuel_preselect_temp", "number")
 
 --pos data
-B777DR_waypoint_ata					= deferred_dataref("laminar/B777/nd/waypoint_ata", "string")
-B777DR_last_waypoint				= deferred_dataref("laminar/B777/nd/last_waypoint", "string")
+B777DR_waypoint_ata					= deferred_dataref("Strato/B777/nd/waypoint_ata", "string")
+B777DR_last_waypoint				= deferred_dataref("Strato/B777/nd/last_waypoint", "string")
 B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
-B777DR_destination					= deferred_dataref("laminar/B777/nd/dest", "string")
-B777DR_next_waypoint_eta					= deferred_dataref("laminar/B777/nd/next_waypoint_eta", "string")
-B777DR_next_waypoint_dist					= deferred_dataref("laminar/B777/nd/next_waypoint_dist", "number")
-B777DR_next_waypoint				= deferred_dataref("laminar/B777/nd/next_waypoint", "string")
+B777DR_destination					= deferred_dataref("Strato/B777/nd/dest", "string")
+B777DR_next_waypoint_eta					= deferred_dataref("Strato/B777/nd/next_waypoint_eta", "string")
+B777DR_next_waypoint_dist					= deferred_dataref("Strato/B777/nd/next_waypoint_dist", "number")
+B777DR_next_waypoint				= deferred_dataref("Strato/B777/nd/next_waypoint", "string")
 
 --Waypoint info for ND DISPLAY
-B777DR_ND_waypoint_eta					= deferred_dataref("laminar/B777/nd/waypoint_eta", "string")
-B777DR_ND_current_waypoint				= deferred_dataref("laminar/B777/nd/current_waypoint", "string")
-B777DR_ND_waypoint_distance				= deferred_dataref("laminar/B777/nd/waypoint_distance", "string")
+B777DR_ND_waypoint_eta					= deferred_dataref("Strato/B777/nd/waypoint_eta", "string")
+B777DR_ND_current_waypoint				= deferred_dataref("Strato/B777/nd/current_waypoint", "string")
+B777DR_ND_waypoint_distance				= deferred_dataref("Strato/B777/nd/waypoint_distance", "string")
 
 --ND Range DISPLAY
-B777DR_ND_range_display_capt			= deferred_dataref("laminar/B777/nd/range_display_capt", "number")
-B777DR_ND_range_display_fo				= deferred_dataref("laminar/B777/nd/range_display_fo", "number")
+B777DR_ND_range_display_capt			= deferred_dataref("Strato/B777/nd/range_display_capt", "number")
+B777DR_ND_range_display_fo				= deferred_dataref("Strato/B777/nd/range_display_fo", "number")
 
 --IRS ND DISPLAY
-B777DR_ND_GPS_Line						= deferred_dataref("laminar/B777/irs/gps_display_line", "string")
-B777DR_ND_IRS_Line						= deferred_dataref("laminar/B777/irs/irs_display_line", "string")
+B777DR_ND_GPS_Line						= deferred_dataref("Strato/B777/irs/gps_display_line", "string")
+B777DR_ND_IRS_Line						= deferred_dataref("Strato/B777/irs/irs_display_line", "string")
 
 --SPEED ND DISPLAY
-B777DR_ND_GS_TAS_Line					= deferred_dataref("laminar/B777/nd/gs_tas_line", "string")
-B777DR_ND_GS_TAS_Line_Pilot				= deferred_dataref("laminar/B777/nd/gs_tas_line_pilot", "string")
-B777DR_ND_GS_TAS_Line_CoPilot			= deferred_dataref("laminar/B777/nd/gs_tas_line_copilot", "string")
-B777DR_ND_Wind_Line						= deferred_dataref("laminar/B777/nd/wind_line", "string")
-B777DR_ND_Wind_Bearing					= deferred_dataref("laminar/B777/nd/wind_bearing", "number")
+B777DR_ND_GS_TAS_Line					= deferred_dataref("Strato/B777/nd/gs_tas_line", "string")
+B777DR_ND_GS_TAS_Line_Pilot				= deferred_dataref("Strato/B777/nd/gs_tas_line_pilot", "string")
+B777DR_ND_GS_TAS_Line_CoPilot			= deferred_dataref("Strato/B777/nd/gs_tas_line_copilot", "string")
+B777DR_ND_Wind_Line						= deferred_dataref("Strato/B777/nd/wind_line", "string")
+B777DR_ND_Wind_Bearing					= deferred_dataref("Strato/B777/nd/wind_bearing", "number")
 
 --STAB TRIM setting
-B777DR_elevator_trim				    = deferred_dataref("laminar/B777/fmc/elevator_trim", "number")
+B777DR_elevator_trim				    = deferred_dataref("Strato/B777/fmc/elevator_trim", "number")
 
 --Sound Options (crazytimtimtim + Matt726)
 B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
@@ -540,9 +541,9 @@ end
 
 dofile("B777.notifications.lua")
 --dofile("irs/irs_system.lua")
---dofile("B777.fms.pages.lua")
+--dofile("stuff/B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
---dofile("B777.createfms.lua")
+dofile("B777.createfms.lua")
 
 fmsC = {}
 setmetatable(fmsC, {__index = fms})
@@ -575,7 +576,7 @@ fmsModules.fmsL=fmsL;
 fmsModules.fmsC=fmsC;
 fmsModules.fmsR=fmsR;
 
-B777DR_CAS_memo_status          = find_dataref("laminar/B777/CAS/memo_status")
+B777DR_CAS_memo_status          = find_dataref("Strato/B777/CAS/memo_status") -- no
 
 --Marauder28
 function getCurrentWayPoint(fms,usenext)
@@ -778,7 +779,7 @@ function nd_speed_wind_display()
 end
 
 function aircraft_last_pos(phase)
-	file_location = simDR_livery_path.."B777-400_lastpos.dat"
+	file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
 	--print("File = "..file_location)
 
 	if phase == "LOAD" then
@@ -793,16 +794,16 @@ function aircraft_last_pos(phase)
 		local file = io.open(file_location, "w+")
 		if file ~= nil then
 			io.output(file)
-			io.write(irsSystem.getLat("gpsL") .." " .. irsSystem.getLon("gpsL"))
+			-- io.write(irsSystem.getLat("gpsL") .." " .. irsSystem.getLon("gpsL")) comment for ss777
 			io.close(file)
 		end
 	end
 end
 --Marauder28
-
+debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 function flight_start()
 	B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
-	if simDR_startup_running == 0 then
+	--[[if simDR_startup_running == 0 then commented out for ss777
 		irsSystem["irsL"]["aligned"]=false
 		irsSystem["irsC"]["aligned"]=false
 		irsSystem["irsR"]["aligned"]=false
@@ -816,10 +817,9 @@ function flight_start()
 	simDR_cg_adjust = 0  --reset CG slider to begin current flight
 
 	--Ensure that CG location gets updated periodically so that the CG slider repositions automatically as fuel is burned during flight
-	run_at_interval(inflight_update_CG, 60)
+	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
 end
 
-debug_fms     = deferred_dataref("laminar/B777/debug/fms", "number")
 fms_style = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_style_line2")
 lastNotify = 0
 
@@ -845,16 +845,16 @@ function setNotifications()
 		end
 	end
 
-	if hasNotify==true then 
+	--[[if hasNotify==true then ss777 comment
 		B777DR_CAS_advisory_status[145] = 1
 	else
 		B777DR_CAS_advisory_status[145] = 0
-	end
+	end]]
 end
 
 function after_physics()
-	if debug_fms>0 then return end
-	if hasSimConfig()==false then return end
+	if debug_fms > 0 then return end
+	if hasSimConfig() == false then return end
 --     for i =1,24,1 do
 --       print(string.byte(fms_style,i))
 --     end
@@ -868,13 +868,14 @@ function after_physics()
     fmsL:B777_fms_display()
     fmsC:B777_fms_display()
     fmsR:B777_fms_display()
-    if simDR_bus_volts[0]>24 then
+	print("FMS WORKING")
+	--[[if simDR_bus_volts[0]>24 then ss777 comment
 		irsSystem.update()
 		B777_setNAVRAD()
-    end
+    end]]
 
-    if acarsSystem.provider.online() then
-		B777DR_CAS_memo_status[40]=0 --for CAS
+--[[    if acarsSystem.provider.online() then
+		-- B777DR_CAS_memo_status[40]=0
 		acars = 1 --for radio
 		acarsSystem.provider.receive()
 		local hasNew = 0
@@ -885,19 +886,19 @@ function after_physics()
 		end
 		B777DR_CAS_memo_status[0] = hasNew
     else
-		if B777DR_rtp_C_off == 0 then
+		if B777DR_rtp_C_off == 0 then ss777 comment
 			B777DR_CAS_memo_status[40] = 1 --for CAS
 		else
 			B777DR_CAS_memo_status[40] = 0
 		end
 		acars = 0 --for radio
     end
-
+]]
 	--Display Waypoint ETA on ND
 	waypoint_eta_display()
 
 	--Display range NM on ND
-	nd_range_display ()
+	nd_range_display()
 
 	--Display speed and wind info on ND
 	nd_speed_wind_display()
@@ -905,18 +906,16 @@ function after_physics()
 	--Ensure simConfig data is fresh	
 
 	--Ensure DR's are updated in time for use in calc_CGMAC()
-	local payload_weight = B777DR_payload_weight
-	local fuel_qty = simDR_fuel_qty
+	--[[local payload_weight = B777DR_payload_weight s777 comment
+	local fuel_qty = simDR_fuel_qty]]
 	local simconfig = B777DR_simconfig_data
-
-	print("FMS WORKING")
 end
 
 function aircraft_load()
-	simDR_cg_adjust = 0 --reset CG slider to begin current flight
+	-- simDR_cg_adjust = 0 --reset CG slider to begin current flight, ss777 comment
 end
 
 function aircraft_unload()
 	aircraft_last_pos("UNLOAD")
-	simDR_cg_adjust = 0 --reset CG slider to neutral for future flights
+	-- simDR_cg_adjust = 0 --reset CG slider to neutral for future flights s777 comment
 end

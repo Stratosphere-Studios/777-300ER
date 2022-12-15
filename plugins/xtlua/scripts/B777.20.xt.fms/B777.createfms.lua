@@ -31,6 +31,8 @@ function fmsClearNotify(notification)
   end
 end
 
+fmsKeyFunc={}
+
 function keyDown(fmsModule,key)
   run_after_time(switchCustomMode, 0.5)
   print(fmsModule.. " do " .. key)
@@ -180,8 +182,6 @@ function keyDown(fmsModule,key)
   end
 end
 
-fmsKeyFunc={}
-
 function create_keypad(fms)
   fmsKeyFunc[fms]={};
 
@@ -271,36 +271,36 @@ B777DR_srcfms={}
 
 function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
   B777DR_fms[fmsO.id]={}
-  B777DR_fms[fmsO.id][1]                = find_dataref("laminar/B777/"..fmsid.."/Line01_L", "string")
-  B777DR_fms[fmsO.id][2]                = find_dataref("laminar/B777/"..fmsid.."/Line02_L", "string")
-  B777DR_fms[fmsO.id][3]                = find_dataref("laminar/B777/"..fmsid.."/Line03_L", "string")
-  B777DR_fms[fmsO.id][4]                = find_dataref("laminar/B777/"..fmsid.."/Line04_L", "string")
-  B777DR_fms[fmsO.id][5]                = find_dataref("laminar/B777/"..fmsid.."/Line05_L", "string")
-  B777DR_fms[fmsO.id][6]                = find_dataref("laminar/B777/"..fmsid.."/Line06_L", "string")
-  B777DR_fms[fmsO.id][7]                = find_dataref("laminar/B777/"..fmsid.."/Line07_L", "string")
-  B777DR_fms[fmsO.id][8]                = find_dataref("laminar/B777/"..fmsid.."/Line08_L", "string")
-  B777DR_fms[fmsO.id][9]                = find_dataref("laminar/B777/"..fmsid.."/Line09_L", "string")
-  B777DR_fms[fmsO.id][10]               = find_dataref("laminar/B777/"..fmsid.."/Line10_L", "string")
-  B777DR_fms[fmsO.id][11]               = find_dataref("laminar/B777/"..fmsid.."/Line11_L", "string")
-  B777DR_fms[fmsO.id][12]               = find_dataref("laminar/B777/"..fmsid.."/Line12_L", "string")
-  B777DR_fms[fmsO.id][13]               = find_dataref("laminar/B777/"..fmsid.."/Line13_L", "string")
-  B777DR_fms[fmsO.id][14]               = find_dataref("laminar/B777/"..fmsid.."/Line14_L", "string")
+  B777DR_fms[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L", "string")
+  B777DR_fms[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L", "string")
+  B777DR_fms[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L", "string")
+  B777DR_fms[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L", "string")
+  B777DR_fms[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L", "string")
+  B777DR_fms[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L", "string")
+  B777DR_fms[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L", "string")
+  B777DR_fms[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L", "string")
+  B777DR_fms[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L", "string")
+  B777DR_fms[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L", "string")
+  B777DR_fms[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L", "string")
+  B777DR_fms[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L", "string")
+  B777DR_fms[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L", "string")
+  B777DR_fms[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L", "string")
 
   B777DR_fms_s[fmsO.id]={}
-  B777DR_fms_s[fmsO.id][1]                = find_dataref("laminar/B777/"..fmsid.."/Line01_S", "string")
-  B777DR_fms_s[fmsO.id][2]                = find_dataref("laminar/B777/"..fmsid.."/Line02_S", "string")
-  B777DR_fms_s[fmsO.id][3]                = find_dataref("laminar/B777/"..fmsid.."/Line03_S", "string")
-  B777DR_fms_s[fmsO.id][4]                = find_dataref("laminar/B777/"..fmsid.."/Line04_S", "string")
-  B777DR_fms_s[fmsO.id][5]                = find_dataref("laminar/B777/"..fmsid.."/Line05_S", "string")
-  B777DR_fms_s[fmsO.id][6]                = find_dataref("laminar/B777/"..fmsid.."/Line06_S", "string")
-  B777DR_fms_s[fmsO.id][7]                = find_dataref("laminar/B777/"..fmsid.."/Line07_S", "string")
-  B777DR_fms_s[fmsO.id][8]                = find_dataref("laminar/B777/"..fmsid.."/Line08_S", "string")
-  B777DR_fms_s[fmsO.id][9]                = find_dataref("laminar/B777/"..fmsid.."/Line09_S", "string")
-  B777DR_fms_s[fmsO.id][10]               = find_dataref("laminar/B777/"..fmsid.."/Line10_S", "string")
-  B777DR_fms_s[fmsO.id][11]               = find_dataref("laminar/B777/"..fmsid.."/Line11_S", "string")
-  B777DR_fms_s[fmsO.id][12]               = find_dataref("laminar/B777/"..fmsid.."/Line12_S", "string")
-  B777DR_fms_s[fmsO.id][13]               = find_dataref("laminar/B777/"..fmsid.."/Line13_S", "string")
-  B777DR_fms_s[fmsO.id][14]               = find_dataref("laminar/B777/"..fmsid.."/Line14_S", "string")
+  B777DR_fms_s[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_S", "string")
+  B777DR_fms_s[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_S", "string")
+  B777DR_fms_s[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_S", "string")
+  B777DR_fms_s[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_S", "string")
+  B777DR_fms_s[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_S", "string")
+  B777DR_fms_s[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_S", "string")
+  B777DR_fms_s[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_S", "string")
+  B777DR_fms_s[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_S", "string")
+  B777DR_fms_s[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_S", "string")
+  B777DR_fms_s[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_S", "string")
+  B777DR_fms_s[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_S", "string")
+  B777DR_fms_s[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_S", "string")
+  B777DR_fms_s[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_S", "string")
+  B777DR_fms_s[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_S", "string")
 
   B777DR_srcfms[fmsO.id]={}
   B777DR_srcfms[fmsO.id][1]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line0")
@@ -407,100 +407,100 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
   end
 
   create_keypad(fmsO.id)
-  B777CMD_fms1_ls_key_L1              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/L1", "FMS1 Line Select Key 1-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L1_CMDhandler"])
-  B777CMD_fms1_ls_key_L2              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/L2", "FMS1 Line Select Key 2-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L2_CMDhandler"])
-  B777CMD_fms1_ls_key_L3              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/L3", "FMS1 Line Select Key 3-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L3_CMDhandler"])
-  B777CMD_fms1_ls_key_L4              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/L4", "FMS1 Line Select Key 4-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L4_CMDhandler"])
-  B777CMD_fms1_ls_key_L5              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/L5", "FMS1 Line Select Key 5-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L5_CMDhandler"])
-  B777CMD_fms1_ls_key_L6              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/L6", "FMS1 Line Select Key 6-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L6_CMDhandler"])
+  B777CMD_fms1_ls_key_L1              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L1", "FMS1 Line Select Key 1-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L1_CMDhandler"])
+  B777CMD_fms1_ls_key_L2              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L2", "FMS1 Line Select Key 2-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L2_CMDhandler"])
+  B777CMD_fms1_ls_key_L3              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L3", "FMS1 Line Select Key 3-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L3_CMDhandler"])
+  B777CMD_fms1_ls_key_L4              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L4", "FMS1 Line Select Key 4-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L4_CMDhandler"])
+  B777CMD_fms1_ls_key_L5              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L5", "FMS1 Line Select Key 5-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L5_CMDhandler"])
+  B777CMD_fms1_ls_key_L6              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L6", "FMS1 Line Select Key 6-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L6_CMDhandler"])
 
-  B777CMD_fms1_ls_key_R1              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/R1", "FMS1 Line Select Key 1-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R1_CMDhandler"])
-  B777CMD_fms1_ls_key_R2              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/R2", "FMS1 Line Select Key 2-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R2_CMDhandler"])
-  B777CMD_fms1_ls_key_R3              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/R3", "FMS1 Line Select Key 3-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R3_CMDhandler"])
-  B777CMD_fms1_ls_key_R4              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/R4", "FMS1 Line Select Key 4-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R4_CMDhandler"])
-  B777CMD_fms1_ls_key_R5              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/R5", "FMS1 Line Select Key 5-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R5_CMDhandler"])
-  B777CMD_fms1_ls_key_R6              = deferred_command("laminar/B777/".. fmskeyid .. "/ls_key/R6", "FMS1 Line Select Key 6-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R6_CMDhandler"])
+  B777CMD_fms1_ls_key_R1              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/R1", "FMS1 Line Select Key 1-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R1_CMDhandler"])
+  B777CMD_fms1_ls_key_R2              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/R2", "FMS1 Line Select Key 2-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R2_CMDhandler"])
+  B777CMD_fms1_ls_key_R3              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/R3", "FMS1 Line Select Key 3-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R3_CMDhandler"])
+  B777CMD_fms1_ls_key_R4              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/R4", "FMS1 Line Select Key 4-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R4_CMDhandler"])
+  B777CMD_fms1_ls_key_R5              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/R5", "FMS1 Line Select Key 5-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R5_CMDhandler"])
+  B777CMD_fms1_ls_key_R6              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/R6", "FMS1 Line Select Key 6-Right", fmsKeyFunc[fmsO.id]["funcs"]["key_R6_CMDhandler"])
 
   -- FUNCTION KEYS ------------------------------------------------------------------------
-  B777CMD_fms1_func_key_index         = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/index", "FMS1 Function Key INDEX",fmsKeyFunc[fmsO.id]["funcs"]["key_index_CMDhandler"])
-  B777CMD_fms1_func_key_fpln          = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/fpln", "FMS1 Function Key FPLN", fmsKeyFunc[fmsO.id]["funcs"]["key_fpln_CMDhandler"])
-  B777CMD_fms1_func_key_navrad        = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/navrad", "FMS1 Function Key FPLN", fmsKeyFunc[fmsO.id]["funcs"]["key_navrad_CMDhandler"])
-  B777CMD_fms1_func_key_clb           = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/clb", "FMS1 Function Key CLB", fmsKeyFunc[fmsO.id]["funcs"]["key_clb_CMDhandler"])
-  B777CMD_fms1_func_key_crz           = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/crz", "FMS1 Function Key CRZ", fmsKeyFunc[fmsO.id]["funcs"]["key_crz_CMDhandler"])
-  B777CMD_fms1_func_key_des           = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/des", "FMS1 Function Key DES", fmsKeyFunc[fmsO.id]["funcs"]["key_des_CMDhandler"])
-  B777CMD_fms1_func_key_dir_intc      = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/dir_intc", "FMS1 Function Key DIR/INTC",fmsKeyFunc[fmsO.id]["funcs"]["key_dir_intc_CMDhandler"])
-  B777CMD_fms1_func_key_legs          = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/legs", "FMS1 Function Key LEGS", fmsKeyFunc[fmsO.id]["funcs"]["key_legs_CMDhandler"])
-  B777CMD_fms1_func_key_dep_arr       = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/dep_arr", "FMS1 Function Key DEP/ARR", fmsKeyFunc[fmsO.id]["funcs"]["key_dep_arr_CMDhandler"])
-  B777CMD_fms1_func_key_hold          = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/hold", "FMS1 Function Key HOLD", fmsKeyFunc[fmsO.id]["funcs"]["key_hold_CMDhandler"])
-  B777CMD_fms1_func_key_prog          = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/prog", "FMS1 Function Key PROG", fmsKeyFunc[fmsO.id]["funcs"]["key_prog_CMDhandler"])
-  B777CMD_fms1_key_execute            = deferred_command("laminar/B777/".. fmskeyid .. "/key/execute", "FMS1 KEY EXEC", fmsKeyFunc[fmsO.id]["funcs"]["key_execute_CMDhandler"])
-  B777CMD_fms1_func_key_fix           = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/fix", "FMS1 Function Key FIX", fmsKeyFunc[fmsO.id]["funcs"]["key_fix_CMDhandler"])
-  B777CMD_fms1_func_key_prev_pg       = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/prev_pg", "FMS1 Function Key PREV PAGE", fmsKeyFunc[fmsO.id]["funcs"]["key_prev_pg_CMDhandler"])
-  B777CMD_fms1_func_key_next_pg       = deferred_command("laminar/B777/".. fmskeyid .. "/func_key/next_pg", "FMS1 Function Key NEXT PAGE", fmsKeyFunc[fmsO.id]["funcs"]["key_next_pg_CMDhandler"])
+  B777CMD_fms1_func_key_index         = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/index", "FMS1 Function Key INDEX",fmsKeyFunc[fmsO.id]["funcs"]["key_index_CMDhandler"])
+  B777CMD_fms1_func_key_fpln          = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/fpln", "FMS1 Function Key FPLN", fmsKeyFunc[fmsO.id]["funcs"]["key_fpln_CMDhandler"])
+  B777CMD_fms1_func_key_navrad        = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/navrad", "FMS1 Function Key FPLN", fmsKeyFunc[fmsO.id]["funcs"]["key_navrad_CMDhandler"])
+  B777CMD_fms1_func_key_clb           = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/clb", "FMS1 Function Key CLB", fmsKeyFunc[fmsO.id]["funcs"]["key_clb_CMDhandler"])
+  B777CMD_fms1_func_key_crz           = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/crz", "FMS1 Function Key CRZ", fmsKeyFunc[fmsO.id]["funcs"]["key_crz_CMDhandler"])
+  B777CMD_fms1_func_key_des           = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/des", "FMS1 Function Key DES", fmsKeyFunc[fmsO.id]["funcs"]["key_des_CMDhandler"])
+  B777CMD_fms1_func_key_dir_intc      = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/dir_intc", "FMS1 Function Key DIR/INTC",fmsKeyFunc[fmsO.id]["funcs"]["key_dir_intc_CMDhandler"])
+  B777CMD_fms1_func_key_legs          = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/legs", "FMS1 Function Key LEGS", fmsKeyFunc[fmsO.id]["funcs"]["key_legs_CMDhandler"])
+  B777CMD_fms1_func_key_dep_arr       = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/dep_arr", "FMS1 Function Key DEP/ARR", fmsKeyFunc[fmsO.id]["funcs"]["key_dep_arr_CMDhandler"])
+  B777CMD_fms1_func_key_hold          = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/hold", "FMS1 Function Key HOLD", fmsKeyFunc[fmsO.id]["funcs"]["key_hold_CMDhandler"])
+  B777CMD_fms1_func_key_prog          = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/prog", "FMS1 Function Key PROG", fmsKeyFunc[fmsO.id]["funcs"]["key_prog_CMDhandler"])
+  B777CMD_fms1_key_execute            = deferred_command("Strato/B777/".. fmskeyid .. "/key/execute", "FMS1 KEY EXEC", fmsKeyFunc[fmsO.id]["funcs"]["key_execute_CMDhandler"])
+  B777CMD_fms1_func_key_fix           = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/fix", "FMS1 Function Key FIX", fmsKeyFunc[fmsO.id]["funcs"]["key_fix_CMDhandler"])
+  B777CMD_fms1_func_key_prev_pg       = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/prev_pg", "FMS1 Function Key PREV PAGE", fmsKeyFunc[fmsO.id]["funcs"]["key_prev_pg_CMDhandler"])
+  B777CMD_fms1_func_key_next_pg       = deferred_command("Strato/B777/".. fmskeyid .. "/func_key/next_pg", "FMS1 Function Key NEXT PAGE", fmsKeyFunc[fmsO.id]["funcs"]["key_next_pg_CMDhandler"])
 
   -- ALPHA-NUMERIC KEYS -------------------------------------------------------------------
-  B777CMD_fms1_alphanum_key_0         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/0", "FMS1 Alpha/Numeric Key 0", fmsKeyFunc[fmsO.id]["funcs"]["key_0_CMDhandler"])
-  B777CMD_fms1_alphanum_key_1         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/1", "FMS1 Alpha/Numeric Key 1", fmsKeyFunc[fmsO.id]["funcs"]["key_1_CMDhandler"])
-  B777CMD_fms1_alphanum_key_2         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/2", "FMS1 Alpha/Numeric Key 2", fmsKeyFunc[fmsO.id]["funcs"]["key_2_CMDhandler"])
-  B777CMD_fms1_alphanum_key_3         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/3", "FMS1 Alpha/Numeric Key 3", fmsKeyFunc[fmsO.id]["funcs"]["key_3_CMDhandler"])
-  B777CMD_fms1_alphanum_key_4         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/4", "FMS1 Alpha/Numeric Key 4", fmsKeyFunc[fmsO.id]["funcs"]["key_4_CMDhandler"])
-  B777CMD_fms1_alphanum_key_5         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/5", "FMS1 Alpha/Numeric Key 5", fmsKeyFunc[fmsO.id]["funcs"]["key_5_CMDhandler"])
-  B777CMD_fms1_alphanum_key_6         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/6", "FMS1 Alpha/Numeric Key 6", fmsKeyFunc[fmsO.id]["funcs"]["key_6_CMDhandler"])
-  B777CMD_fms1_alphanum_key_7         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/7", "FMS1 Alpha/Numeric Key 7", fmsKeyFunc[fmsO.id]["funcs"]["key_7_CMDhandler"])
-  B777CMD_fms1_alphanum_key_8         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/8", "FMS1 Alpha/Numeric Key 8", fmsKeyFunc[fmsO.id]["funcs"]["key_8_CMDhandler"])
-  B777CMD_fms1_alphanum_key_9         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/9", "FMS1 Alpha/Numeric Key 9", fmsKeyFunc[fmsO.id]["funcs"]["key_9_CMDhandler"])
+  B777CMD_fms1_alphanum_key_0         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/0", "FMS1 Alpha/Numeric Key 0", fmsKeyFunc[fmsO.id]["funcs"]["key_0_CMDhandler"])
+  B777CMD_fms1_alphanum_key_1         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/1", "FMS1 Alpha/Numeric Key 1", fmsKeyFunc[fmsO.id]["funcs"]["key_1_CMDhandler"])
+  B777CMD_fms1_alphanum_key_2         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/2", "FMS1 Alpha/Numeric Key 2", fmsKeyFunc[fmsO.id]["funcs"]["key_2_CMDhandler"])
+  B777CMD_fms1_alphanum_key_3         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/3", "FMS1 Alpha/Numeric Key 3", fmsKeyFunc[fmsO.id]["funcs"]["key_3_CMDhandler"])
+  B777CMD_fms1_alphanum_key_4         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/4", "FMS1 Alpha/Numeric Key 4", fmsKeyFunc[fmsO.id]["funcs"]["key_4_CMDhandler"])
+  B777CMD_fms1_alphanum_key_5         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/5", "FMS1 Alpha/Numeric Key 5", fmsKeyFunc[fmsO.id]["funcs"]["key_5_CMDhandler"])
+  B777CMD_fms1_alphanum_key_6         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/6", "FMS1 Alpha/Numeric Key 6", fmsKeyFunc[fmsO.id]["funcs"]["key_6_CMDhandler"])
+  B777CMD_fms1_alphanum_key_7         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/7", "FMS1 Alpha/Numeric Key 7", fmsKeyFunc[fmsO.id]["funcs"]["key_7_CMDhandler"])
+  B777CMD_fms1_alphanum_key_8         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/8", "FMS1 Alpha/Numeric Key 8", fmsKeyFunc[fmsO.id]["funcs"]["key_8_CMDhandler"])
+  B777CMD_fms1_alphanum_key_9         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/9", "FMS1 Alpha/Numeric Key 9", fmsKeyFunc[fmsO.id]["funcs"]["key_9_CMDhandler"])
 
-  B777CMD_fms1_key_period             = deferred_command("laminar/B777/".. fmskeyid .. "/key/period", "FMS1 Key '.'", fmsKeyFunc[fmsO.id]["funcs"]["key_period_CMDhandler"])
-  B777CMD_fms1_key_minus              = deferred_command("laminar/B777/".. fmskeyid .. "/key/minus", "FMS1 Key '+/-'", fmsKeyFunc[fmsO.id]["funcs"]["key_minus_CMDhandler"])
+  B777CMD_fms1_key_period             = deferred_command("Strato/B777/".. fmskeyid .. "/key/period", "FMS1 Key '.'", fmsKeyFunc[fmsO.id]["funcs"]["key_period_CMDhandler"])
+  B777CMD_fms1_key_minus              = deferred_command("Strato/B777/".. fmskeyid .. "/key/minus", "FMS1 Key '+/-'", fmsKeyFunc[fmsO.id]["funcs"]["key_minus_CMDhandler"])
 
-  B777CMD_fms1_alphanum_key_A         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/A", "FMS1 Alpha/Numeric Key A", fmsKeyFunc[fmsO.id]["funcs"]["key_A_CMDhandler"])
-  B777CMD_fms1_alphanum_key_B         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/B", "FMS1 Alpha/Numeric Key B", fmsKeyFunc[fmsO.id]["funcs"]["key_B_CMDhandler"])
-  B777CMD_fms1_alphanum_key_C         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/C", "FMS1 Alpha/Numeric Key C", fmsKeyFunc[fmsO.id]["funcs"]["key_C_CMDhandler"])
-  B777CMD_fms1_alphanum_key_D         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/D", "FMS1 Alpha/Numeric Key D", fmsKeyFunc[fmsO.id]["funcs"]["key_D_CMDhandler"])
-  B777CMD_fms1_alphanum_key_E         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/E", "FMS1 Alpha/Numeric Key E", fmsKeyFunc[fmsO.id]["funcs"]["key_E_CMDhandler"])
-  B777CMD_fms1_alphanum_key_F         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/F", "FMS1 Alpha/Numeric Key F", fmsKeyFunc[fmsO.id]["funcs"]["key_F_CMDhandler"])
-  B777CMD_fms1_alphanum_key_G         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/G", "FMS1 Alpha/Numeric Key G", fmsKeyFunc[fmsO.id]["funcs"]["key_G_CMDhandler"])
-  B777CMD_fms1_alphanum_key_H         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/H", "FMS1 Alpha/Numeric Key H", fmsKeyFunc[fmsO.id]["funcs"]["key_H_CMDhandler"])
-  B777CMD_fms1_alphanum_key_I         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/I", "FMS1 Alpha/Numeric Key I", fmsKeyFunc[fmsO.id]["funcs"]["key_I_CMDhandler"])
-  B777CMD_fms1_alphanum_key_J         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/J", "FMS1 Alpha/Numeric Key J", fmsKeyFunc[fmsO.id]["funcs"]["key_J_CMDhandler"])
-  B777CMD_fms1_alphanum_key_K         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/K", "FMS1 Alpha/Numeric Key K", fmsKeyFunc[fmsO.id]["funcs"]["key_K_CMDhandler"])
-  B777CMD_fms1_alphanum_key_L         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/L", "FMS1 Alpha/Numeric Key L", fmsKeyFunc[fmsO.id]["funcs"]["key_L_CMDhandler"])
-  B777CMD_fms1_alphanum_key_M         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/M", "FMS1 Alpha/Numeric Key M", fmsKeyFunc[fmsO.id]["funcs"]["key_M_CMDhandler"])
-  B777CMD_fms1_alphanum_key_N         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/N", "FMS1 Alpha/Numeric Key N", fmsKeyFunc[fmsO.id]["funcs"]["key_N_CMDhandler"])
-  B777CMD_fms1_alphanum_key_O         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/O", "FMS1 Alpha/Numeric Key O", fmsKeyFunc[fmsO.id]["funcs"]["key_O_CMDhandler"])
-  B777CMD_fms1_alphanum_key_P         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/P", "FMS1 Alpha/Numeric Key P", fmsKeyFunc[fmsO.id]["funcs"]["key_P_CMDhandler"])
-  B777CMD_fms1_alphanum_key_Q         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/Q", "FMS1 Alpha/Numeric Key Q", fmsKeyFunc[fmsO.id]["funcs"]["key_Q_CMDhandler"])
-  B777CMD_fms1_alphanum_key_R         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/R", "FMS1 Alpha/Numeric Key R", fmsKeyFunc[fmsO.id]["funcs"]["key_R_CMDhandler"])
-  B777CMD_fms1_alphanum_key_S         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/S", "FMS1 Alpha/Numeric Key S", fmsKeyFunc[fmsO.id]["funcs"]["key_S_CMDhandler"])
-  B777CMD_fms1_alphanum_key_T         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/T", "FMS1 Alpha/Numeric Key T", fmsKeyFunc[fmsO.id]["funcs"]["key_T_CMDhandler"])
-  B777CMD_fms1_alphanum_key_U         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/U", "FMS1 Alpha/Numeric Key U", fmsKeyFunc[fmsO.id]["funcs"]["key_U_CMDhandler"])
-  B777CMD_fms1_alphanum_key_V         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/V", "FMS1 Alpha/Numeric Key V", fmsKeyFunc[fmsO.id]["funcs"]["key_V_CMDhandler"])
-  B777CMD_fms1_alphanum_key_W         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/W", "FMS1 Alpha/Numeric Key W", fmsKeyFunc[fmsO.id]["funcs"]["key_W_CMDhandler"])
-  B777CMD_fms1_alphanum_key_X         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/X", "FMS1 Alpha/Numeric Key X", fmsKeyFunc[fmsO.id]["funcs"]["key_X_CMDhandler"])
-  B777CMD_fms1_alphanum_key_Y         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/Y", "FMS1 Alpha/Numeric Key Y", fmsKeyFunc[fmsO.id]["funcs"]["key_Y_CMDhandler"])
-  B777CMD_fms1_alphanum_key_Z         = deferred_command("laminar/B777/".. fmskeyid .. "/alphanum_key/Z", "FMS1 Alpha/Numeric Key Z", fmsKeyFunc[fmsO.id]["funcs"]["key_Z_CMDhandler"])
+  B777CMD_fms1_alphanum_key_A         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/A", "FMS1 Alpha/Numeric Key A", fmsKeyFunc[fmsO.id]["funcs"]["key_A_CMDhandler"])
+  B777CMD_fms1_alphanum_key_B         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/B", "FMS1 Alpha/Numeric Key B", fmsKeyFunc[fmsO.id]["funcs"]["key_B_CMDhandler"])
+  B777CMD_fms1_alphanum_key_C         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/C", "FMS1 Alpha/Numeric Key C", fmsKeyFunc[fmsO.id]["funcs"]["key_C_CMDhandler"])
+  B777CMD_fms1_alphanum_key_D         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/D", "FMS1 Alpha/Numeric Key D", fmsKeyFunc[fmsO.id]["funcs"]["key_D_CMDhandler"])
+  B777CMD_fms1_alphanum_key_E         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/E", "FMS1 Alpha/Numeric Key E", fmsKeyFunc[fmsO.id]["funcs"]["key_E_CMDhandler"])
+  B777CMD_fms1_alphanum_key_F         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/F", "FMS1 Alpha/Numeric Key F", fmsKeyFunc[fmsO.id]["funcs"]["key_F_CMDhandler"])
+  B777CMD_fms1_alphanum_key_G         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/G", "FMS1 Alpha/Numeric Key G", fmsKeyFunc[fmsO.id]["funcs"]["key_G_CMDhandler"])
+  B777CMD_fms1_alphanum_key_H         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/H", "FMS1 Alpha/Numeric Key H", fmsKeyFunc[fmsO.id]["funcs"]["key_H_CMDhandler"])
+  B777CMD_fms1_alphanum_key_I         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/I", "FMS1 Alpha/Numeric Key I", fmsKeyFunc[fmsO.id]["funcs"]["key_I_CMDhandler"])
+  B777CMD_fms1_alphanum_key_J         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/J", "FMS1 Alpha/Numeric Key J", fmsKeyFunc[fmsO.id]["funcs"]["key_J_CMDhandler"])
+  B777CMD_fms1_alphanum_key_K         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/K", "FMS1 Alpha/Numeric Key K", fmsKeyFunc[fmsO.id]["funcs"]["key_K_CMDhandler"])
+  B777CMD_fms1_alphanum_key_L         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/L", "FMS1 Alpha/Numeric Key L", fmsKeyFunc[fmsO.id]["funcs"]["key_L_CMDhandler"])
+  B777CMD_fms1_alphanum_key_M         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/M", "FMS1 Alpha/Numeric Key M", fmsKeyFunc[fmsO.id]["funcs"]["key_M_CMDhandler"])
+  B777CMD_fms1_alphanum_key_N         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/N", "FMS1 Alpha/Numeric Key N", fmsKeyFunc[fmsO.id]["funcs"]["key_N_CMDhandler"])
+  B777CMD_fms1_alphanum_key_O         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/O", "FMS1 Alpha/Numeric Key O", fmsKeyFunc[fmsO.id]["funcs"]["key_O_CMDhandler"])
+  B777CMD_fms1_alphanum_key_P         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/P", "FMS1 Alpha/Numeric Key P", fmsKeyFunc[fmsO.id]["funcs"]["key_P_CMDhandler"])
+  B777CMD_fms1_alphanum_key_Q         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/Q", "FMS1 Alpha/Numeric Key Q", fmsKeyFunc[fmsO.id]["funcs"]["key_Q_CMDhandler"])
+  B777CMD_fms1_alphanum_key_R         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/R", "FMS1 Alpha/Numeric Key R", fmsKeyFunc[fmsO.id]["funcs"]["key_R_CMDhandler"])
+  B777CMD_fms1_alphanum_key_S         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/S", "FMS1 Alpha/Numeric Key S", fmsKeyFunc[fmsO.id]["funcs"]["key_S_CMDhandler"])
+  B777CMD_fms1_alphanum_key_T         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/T", "FMS1 Alpha/Numeric Key T", fmsKeyFunc[fmsO.id]["funcs"]["key_T_CMDhandler"])
+  B777CMD_fms1_alphanum_key_U         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/U", "FMS1 Alpha/Numeric Key U", fmsKeyFunc[fmsO.id]["funcs"]["key_U_CMDhandler"])
+  B777CMD_fms1_alphanum_key_V         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/V", "FMS1 Alpha/Numeric Key V", fmsKeyFunc[fmsO.id]["funcs"]["key_V_CMDhandler"])
+  B777CMD_fms1_alphanum_key_W         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/W", "FMS1 Alpha/Numeric Key W", fmsKeyFunc[fmsO.id]["funcs"]["key_W_CMDhandler"])
+  B777CMD_fms1_alphanum_key_X         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/X", "FMS1 Alpha/Numeric Key X", fmsKeyFunc[fmsO.id]["funcs"]["key_X_CMDhandler"])
+  B777CMD_fms1_alphanum_key_Y         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/Y", "FMS1 Alpha/Numeric Key Y", fmsKeyFunc[fmsO.id]["funcs"]["key_Y_CMDhandler"])
+  B777CMD_fms1_alphanum_key_Z         = deferred_command("Strato/B777/".. fmskeyid .. "/alphanum_key/Z", "FMS1 Alpha/Numeric Key Z", fmsKeyFunc[fmsO.id]["funcs"]["key_Z_CMDhandler"])
 
-  B777CMD_fms1_key_space              = deferred_command("laminar/B777/".. fmskeyid .. "/key/space", "FMS1 KEY SP",fmsKeyFunc[fmsO.id]["funcs"]["key_space_CMDhandler"])
-  B777CMD_fms1_key_del                = deferred_command("laminar/B777/".. fmskeyid .. "/key/del", "FMS1 KEY DEL", fmsKeyFunc[fmsO.id]["funcs"]["key_del_CMDhandler"])
-  B777CMD_fms1_key_slash              = deferred_command("laminar/B777/".. fmskeyid .. "/key/slash", "FMS1 Key '/'", fmsKeyFunc[fmsO.id]["funcs"]["key_slash_CMDhandler"])
-  B777CMD_fms1_key_clear              = deferred_command("laminar/B777/".. fmskeyid .. "/key/clear", "FMS1 KEY CLR", fmsKeyFunc[fmsO.id]["funcs"]["key_clear_CMDhandler"])
+  B777CMD_fms1_key_space              = deferred_command("Strato/B777/".. fmskeyid .. "/key/space", "FMS1 KEY SP",fmsKeyFunc[fmsO.id]["funcs"]["key_space_CMDhandler"])
+  B777CMD_fms1_key_del                = deferred_command("Strato/B777/".. fmskeyid .. "/key/del", "FMS1 KEY DEL", fmsKeyFunc[fmsO.id]["funcs"]["key_del_CMDhandler"])
+  B777CMD_fms1_key_slash              = deferred_command("Strato/B777/".. fmskeyid .. "/key/slash", "FMS1 Key '/'", fmsKeyFunc[fmsO.id]["funcs"]["key_slash_CMDhandler"])
+  B777CMD_fms1_key_clear              = deferred_command("Strato/B777/".. fmskeyid .. "/key/clear", "FMS1 KEY CLR", fmsKeyFunc[fmsO.id]["funcs"]["key_clear_CMDhandler"])
 end
 
 function fms:B777_fms_display()
+  print("RUNNING")
   local thisID = self.id
   if self.inCustomFMC ~= self.targetCustomFMC or self.currentPage ~= self.targetPage or self.pgNo ~= self.targetpgNo then
     for i=1, 14, 1 do
+      print("func 2")
       B777DR_fms[thisID][i] = "                        "
       B777DR_fms_s[thisID][i] = "                        "
     end
     return
   end
-
   --self.swipeOut=1
 
   local inCustomFMC=self.inCustomFMC
   local page=self.currentPage
-  if B777DR_srcfms[thisID][14] == "[NAV DATA OUT OF DATE  ]" then simCMD_FMS_key[thisID]["clear"]:once() return end
   if not inCustomFMC then
     for i=1,13,1 do
       B777DR_fms[thisID][i]=cleanFMSLine(B777DR_srcfms[thisID][i])
@@ -515,12 +515,12 @@ function fms:B777_fms_display()
       B777DR_fms_s[thisID][14] = "                        "
     end
   else
-    if self.pgNo>fmsPages[page]:getNumPages() then self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end
+    if self.pgNo > fmsPages[page]:getNumPages() then print("IMPORTANT FUNC") self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end --TODO: SS777 PROBLEM!
+    print("STUPID THING WORKS")
     if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
     local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
     local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
     local tmpSRC
-
     for i=1,13,1 do
       tmpSRC=B777DR_srcfms[thisID][i] -- make sure src is always fresh
       B777DR_fms[thisID][i]=fmsPage[i]

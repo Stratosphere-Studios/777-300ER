@@ -169,7 +169,7 @@ B777CMD_efb_back                       = deferred_command("Strato/777/efb_back",
 --*************************************************************************************--
 
 function efb_boot()
-   B777DR_efb_page = lastpage
+   B777DR_efb_page = 2
 end
 
 --*************************************************************************************--
@@ -197,7 +197,7 @@ function after_physics()
    else
       B777DR_efb_page_type = pages[B777DR_efb_page].type
    end
-   print("EFB WORKING")
+   --print("EFB WORKING")
 end
 
 --function after_replay()
