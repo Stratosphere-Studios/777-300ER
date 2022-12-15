@@ -51,14 +51,14 @@ slat_1 = globalPropertyf("sim/flightmodel2/controls/slat1_deploy_ratio")
 slat_2 = globalPropertyf("sim/flightmodel2/controls/slat2_deploy_ratio")
 elevator_L = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",1)
 elevator_R = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",7)
-rudder = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 1)
+upper_rudder = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 12)
+bottom_rudder = globalPropertyfae("sim/flightmodel2/wing/rudder2_deg", 12)
 --Reversers
 L_reverser_deployed = globalPropertyiae("sim/cockpit2/annunciators/reverser_on", 1)
 L_reverser_fail = globalPropertyi("sim/operation/failures/rel_revers0")
 R_reverser_deployed = globalPropertyiae("sim/cockpit2/annunciators/reverser_on", 2)
 R_reverser_fail = globalPropertyi("sim/operation/failures/rel_revers1")
 --Operation
-fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
@@ -96,14 +96,15 @@ flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --se
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
 ace_smooth = false
 
-set(fctl_ovrd, 1)
-
 function GetClosestFlapSetting()
+	local tmp = 1
 	for i=1,7 do
+		tmp = tmp + 1
 		if flap_settings[i] >= get(flaps) then
 			return i
 		end
 	end
+	return tmp
 end
 
 function UpdateFlprnPCUMode(num, hyd_sys)
@@ -192,8 +193,8 @@ function GetDownCmd(pcu_mode, f_type) --Change of neutral by flybywire
 	ail_neutral = {0, 0, -5, -5, -5, 0, 0}
 	flprn_neutral = {0, 0, -5, -14, -16, -29, -29}
 	if get(speedbrake_handle) <= 0 and pcu_mode == 1 and get(flaps) > 0 then
-		local closest = GetClosestFlapSetting()
-		local closest_2 = closest - 1
+		local closest = lim(GetClosestFlapSetting(), 1, 7)
+		local closest_2 = lim(closest - 1, 1, 7)
 		local val_nml = (get(flaps) - flap_settings[closest_2]) / (flap_settings[closest] - flap_settings[closest_2])
 		if f_type == 1 then
 			return -1 * (ail_neutral[closest_2] + (ail_neutral[closest] - ail_neutral[closest_2]) * val_nml)
@@ -377,10 +378,7 @@ function GetFlapCurrent()
 	flap_times = {0.4, 1.4, 8, 4.8, 1.9, 3.17}
 	local target = get(flap_tgt)
 	local actual = get(flaps)
-	local closest = GetClosestFlapSetting()
-	if closest == 1 then
-		closest = 2
-	end
+	local closest = lim(GetClosestFlapSetting(), 7, 2)
 	local step = flap_times[closest - 1] * 0.004
 	if math.abs(target - actual) <= step then
 		return target
@@ -517,14 +515,8 @@ function UpdateInbdAileron(value, side)
 end
 
 function UpdateRudder(value)
-	for i=1,12 do
-		local rud = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", i)
-		if i % 2 ~= 0 then
-			set(rud, value)
-		else
-			set(rud, -value)
-		end
-	end
+	set(upper_rudder, value)
+	set(bottom_rudder, value)
 end
 
 function UpdateSpoilers(value, side)
@@ -601,7 +593,7 @@ function update()
 	EvenAnim(inbd_ail_L, L_inbd_ail_target, 0.3)
 	EvenAnim(outbd_ail_R, R_outbd_ail_target, 0.3)
 	EvenAnim(inbd_ail_R, R_inbd_ail_target, 0.3)
-	UpdateRudder(get(rudder)+(rud_target - get(rudder))*get(f_time)*rud_time)
+	UpdateRudder(get(upper_rudder)+(rud_target - get(upper_rudder))*get(f_time)*rud_time)
 	UpdateSpoilers(get(spoiler_L1)+(L_spoiler_target - get(spoiler_L1))*get(f_time)*spoiler_response_time, -1)
 	UpdateSpoilers(get(spoiler_R1)+(R_spoiler_target - get(spoiler_R1))*get(f_time)*spoiler_response_time, 1)
 	UpdateFlaps(GetFlapCurrent())
@@ -611,9 +603,9 @@ function update()
 end
 
 function onAirportLoaded()
-	if get(ra_pilot) > 5 or get(ra_copilot) > 5 then
-		UpdateFlaps(5)
-		set(flap_tgt, 5)
+	if get(ra_pilot) > 100 or get(ra_copilot) > 100 then
+		UpdateFlaps(15)
+		set(flap_tgt, 15)
 		UpdateSlats()
 	end
 end
