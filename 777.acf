@@ -12734,7 +12734,7 @@ P _wing/0/_locked/j_count 18
 P _wing/0/_part_phi 0.000000000
 P _wing/0/_part_psi 0.000000000
 P _wing/0/_part_specs_eq 1
-P _wing/0/_part_specs_invis 1
+P _wing/0/_part_specs_invis 0
 P _wing/0/_part_specs_rmod 1
 P _wing/0/_part_tex 0
 P _wing/0/_part_the 0.000000000
@@ -14537,7 +14537,7 @@ P _wing/1/_locked/j_count 18
 P _wing/1/_part_phi 0.000000000
 P _wing/1/_part_psi 0.000000000
 P _wing/1/_part_specs_eq 1
-P _wing/1/_part_specs_invis 1
+P _wing/1/_part_specs_invis 0
 P _wing/1/_part_specs_rmod 1
 P _wing/1/_part_tex 0
 P _wing/1/_part_the 0.000000000
@@ -16340,7 +16340,7 @@ P _wing/11/_locked/j_count 18
 P _wing/11/_part_phi 0.000000000
 P _wing/11/_part_psi 0.000000000
 P _wing/11/_part_specs_eq 1
-P _wing/11/_part_specs_invis 1
+P _wing/11/_part_specs_invis 0
 P _wing/11/_part_specs_rmod 1
 P _wing/11/_part_tex 0
 P _wing/11/_part_the 0.000000000
@@ -18143,7 +18143,7 @@ P _wing/2/_locked/j_count 18
 P _wing/2/_part_phi 0.000000000
 P _wing/2/_part_psi 0.000000000
 P _wing/2/_part_specs_eq 1
-P _wing/2/_part_specs_invis 1
+P _wing/2/_part_specs_invis 0
 P _wing/2/_part_specs_rmod 1
 P _wing/2/_part_tex 0
 P _wing/2/_part_the 0.000000000
@@ -19946,7 +19946,7 @@ P _wing/3/_locked/j_count 18
 P _wing/3/_part_phi 0.000000000
 P _wing/3/_part_psi 0.000000000
 P _wing/3/_part_specs_eq 1
-P _wing/3/_part_specs_invis 1
+P _wing/3/_part_specs_invis 0
 P _wing/3/_part_specs_rmod 1
 P _wing/3/_part_tex 0
 P _wing/3/_part_the 0.000000000
@@ -21749,7 +21749,7 @@ P _wing/32/_locked/j_count 18
 P _wing/32/_part_phi 0.000000000
 P _wing/32/_part_psi 0.000000000
 P _wing/32/_part_specs_eq 1
-P _wing/32/_part_specs_invis 1
+P _wing/32/_part_specs_invis 0
 P _wing/32/_part_specs_rmod 1
 P _wing/32/_part_tex 0
 P _wing/32/_part_the 0.000000000
@@ -23552,7 +23552,7 @@ P _wing/33/_locked/j_count 18
 P _wing/33/_part_phi 0.000000000
 P _wing/33/_part_psi 0.000000000
 P _wing/33/_part_specs_eq 1
-P _wing/33/_part_specs_invis 1
+P _wing/33/_part_specs_invis 0
 P _wing/33/_part_specs_rmod 1
 P _wing/33/_part_tex 0
 P _wing/33/_part_the 0.000000000
@@ -25355,7 +25355,7 @@ P _wing/4/_locked/j_count 18
 P _wing/4/_part_phi 0.000000000
 P _wing/4/_part_psi 0.000000000
 P _wing/4/_part_specs_eq 1
-P _wing/4/_part_specs_invis 1
+P _wing/4/_part_specs_invis 0
 P _wing/4/_part_specs_rmod 1
 P _wing/4/_part_tex 0
 P _wing/4/_part_the 0.000000000
@@ -27158,7 +27158,7 @@ P _wing/5/_locked/j_count 18
 P _wing/5/_part_phi 0.000000000
 P _wing/5/_part_psi 0.000000000
 P _wing/5/_part_specs_eq 1
-P _wing/5/_part_specs_invis 1
+P _wing/5/_part_specs_invis 0
 P _wing/5/_part_specs_rmod 1
 P _wing/5/_part_tex 0
 P _wing/5/_part_the 0.000000000
@@ -28961,7 +28961,7 @@ P _wing/6/_locked/j_count 18
 P _wing/6/_part_phi 0.000000000
 P _wing/6/_part_psi 0.000000000
 P _wing/6/_part_specs_eq 1
-P _wing/6/_part_specs_invis 1
+P _wing/6/_part_specs_invis 0
 P _wing/6/_part_specs_rmod 1
 P _wing/6/_part_tex 0
 P _wing/6/_part_the 0.000000000
@@ -30764,7 +30764,7 @@ P _wing/7/_locked/j_count 18
 P _wing/7/_part_phi 0.000000000
 P _wing/7/_part_psi 0.000000000
 P _wing/7/_part_specs_eq 1
-P _wing/7/_part_specs_invis 1
+P _wing/7/_part_specs_invis 0
 P _wing/7/_part_specs_rmod 1
 P _wing/7/_part_tex 0
 P _wing/7/_part_the 0.000000000
@@ -32567,7 +32567,7 @@ P _wing/8/_locked/j_count 18
 P _wing/8/_part_phi 0.000000000
 P _wing/8/_part_psi 0.000000000
 P _wing/8/_part_specs_eq 1
-P _wing/8/_part_specs_invis 1
+P _wing/8/_part_specs_invis 0
 P _wing/8/_part_specs_rmod 1
 P _wing/8/_part_tex 0
 P _wing/8/_part_the 0.000000000
@@ -34370,7 +34370,7 @@ P _wing/9/_locked/j_count 18
 P _wing/9/_part_phi 0.000000000
 P _wing/9/_part_psi 0.000000000
 P _wing/9/_part_specs_eq 1
-P _wing/9/_part_specs_invis 1
+P _wing/9/_part_specs_invis 0
 P _wing/9/_part_specs_rmod 1
 P _wing/9/_part_tex 0
 P _wing/9/_part_the 0.000000000
@@ -35526,7 +35526,7 @@ P acf/_bus_gen_is_on/6 1
 P acf/_bus_gen_is_on/7 1
 P acf/_bus_gen_is_on/count 8
 P acf/_buses_always_tied 0
-P acf/_bypass_ratio 9.000000000
+P acf/_bypass_ratio 9.100000381
 P acf/_callsign Stratosphere 777W
 P acf/_camera_fov_zoom 60.000000000
 P acf/_camera_offset_phi 0.000000000
@@ -36830,7 +36830,7 @@ P acf/_flaps_with_stall_rat_1 0.000000000
 P acf/_flaps_with_vec_EQ 0
 P acf/_flaps_with_vector 0
 P acf/_flare_max 0
-P acf/_flight_idle_EQ 0
+P acf/_flight_idle_EQ 1
 P acf/_fly_like_a_helo 0
 P acf/_folding_prop_EQ 0
 P acf/_food_1/0 10.000000000
@@ -37084,11 +37084,11 @@ P acf/_hyd_rat_pump_0123 1
 P acf/_hyd_slats 7
 P acf/_hyd_thrust_rev_L 0
 P acf/_hyd_thrust_rev_R 0
-P acf/_idle_rat/0 0.419999987
-P acf/_idle_rat/1 1.299999952
+P acf/_idle_rat/0 0.509999990
+P acf/_idle_rat/1 0.529999971
 P acf/_idle_rat/count 2
 P acf/_incidence_with_flaps 0
-P acf/_inlet_compression_efficiency 0.850000024
+P acf/_inlet_compression_efficiency 0.970000029
 P acf/_integrated_approach_navigation 0
 P acf/_inverted_fuel_oil_EQ 0
 P acf/_inverter_for_elec_gyros 1
@@ -37180,7 +37180,7 @@ P acf/_max_gen_amp_per_gen/8 0.000000000
 P acf/_max_gen_amp_per_gen/9 0.000000000
 P acf/_max_gen_amp_per_gen/count 16
 P acf/_max_inverter 150.000000000
-P acf/_max_mach_eff 0.879999995
+P acf/_max_mach_eff 0.910000026
 P acf/_max_oilT 200.000000000
 P acf/_max_press_diff 9.100000381
 P acf/_max_stator 100.000000000
@@ -37193,9 +37193,9 @@ P acf/_min_n2_ITT 30.000000000
 P acf/_min_rwy_len 3000.000000000
 P acf/_min_vec_on_ground 0.000000000
 P acf/_mixt_x_ctr 0.000000000
-P acf/_n1_power_curve1 2.299999952
+P acf/_n1_power_curve1 1.370000005
 P acf/_n1_power_curve2 3.500000000
-P acf/_n2_power_curve 3.500000000
+P acf/_n2_power_curve 4.320000172
 P acf/_name 777-300ER/ERF XP12
 P acf/_new_plot_XP3D_cock/0 1
 P acf/_new_plot_outer_acf/0 0
@@ -43325,6 +43325,7 @@ GROUP Lower Eicas
   LOCKED
   HIDE
   CHAINED
+  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     LOCKED
@@ -44241,6 +44242,7 @@ GROUP Lower Eicas
     LOCKED
     HIDE
     CHAINED
+    GROUP_OPEN
     gen_pointer R FLPRN
       POS 3704.000000 495.500000
       IMAGE EICAS lower/ENG/pointer_left
@@ -44288,9 +44290,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -19.000000 65.000000 1.000000
+      KEY_FRAME -18.000000 65.000000 1.000000
       KEY_FRAME 0.000000 29.000000 1.000000
-      KEY_FRAME 33.000000 0.000000
+      KEY_FRAME 18.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44306,9 +44308,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -19.000000 65.000000 1.000000
+      KEY_FRAME -18.000000 65.000000 1.000000
       KEY_FRAME 0.000000 29.000000 1.000000
-      KEY_FRAME 33.000000 0.000000
+      KEY_FRAME 18.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44316,7 +44318,7 @@ GROUP Lower Eicas
     gen_pointer RUDDER
       POS 3247.000000 -5.500000
       IMAGE EICAS lower/FCTL/pointer_up
-      DATAREF sim/flightmodel2/wing/rudder1_deg[0]
+      DATAREF sim/flightmodel2/wing/rudder1_deg[11]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
@@ -44324,9 +44326,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -25.000000 0.000000 1.000000
+      KEY_FRAME -27.000000 0.000000 1.000000
       KEY_FRAME 0.000000 61.500000 1.000000
-      KEY_FRAME 25.000000 122.500000
+      KEY_FRAME 27.000000 122.500000
       IS_DRAGGABLE 0
       IS_VERTICAL 0
       OFFSET 0.000000
@@ -44334,7 +44336,7 @@ GROUP Lower Eicas
     gen_pointer R ELEV
       POS 3677.000000 -4.500000
       IMAGE EICAS lower/ENG/pointer_left
-      DATAREF sim/flightmodel2/wing/elevator1_deg[0]
+      DATAREF sim/flightmodel2/wing/elevator1_deg[6]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
@@ -44342,9 +44344,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -27.000000 65.000000 1.000000
+      KEY_FRAME -20.000000 65.000000 1.000000
       KEY_FRAME 0.000000 33.000000 1.000000
-      KEY_FRAME 33.000000 0.000000
+      KEY_FRAME 20.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44360,9 +44362,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -27.000000 65.000000 1.000000
+      KEY_FRAME -20.000000 65.000000 1.000000
       KEY_FRAME 0.000000 33.000000 1.000000
-      KEY_FRAME 33.000000 0.000000
+      KEY_FRAME 20.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
