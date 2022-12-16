@@ -323,7 +323,7 @@ function B777_alt_up_CMDhandler(phase, duration)
 		if B777DR_alt_is_fast_ovrd == 0 then
 			simDR_autopilot_alt = smartKnobUp(100, 1000, 50000, simDR_autopilot_alt)
 		else
-			simDR_autopilot_alt = smartKnobUp(1000, 1000, 50000, simDR_autopilot_alt)
+			simDR_autopilot_alt = simDR_autopilot_alt + 1000
 		end
 	end
 end
@@ -333,7 +333,7 @@ function B777_alt_dn_CMDhandler(phase, duration)
 		if B777DR_alt_is_fast_ovrd == 0 then
 			simDR_autopilot_alt = smartKnobDn(100, 1000, 0, simDR_autopilot_alt)
 		else
-			simDR_autopilot_alt = smartKnobDn(1000, 1000, 0, simDR_autopilot_alt)
+			simDR_autopilot_alt = simDR_autopilot_alt - 1000
 		end
 	end
 end
@@ -551,7 +551,7 @@ function smartKnobDn(slow, fast, min, dataref)
 end
 
 function checkKnobSpd()
-	if press_counter >= 3 then
+	if press_counter >= 2 then
 		knob_is_fast = 1
 		print("knob is fast")
 	else
