@@ -9538,9 +9538,9 @@ IDX	7703
 	TRIS	5163 84
 	ATTR_manip_command	button	Strato/B777/minimums_rst_capt	Captain Reset Minimums
 	TRIS	5247 18
-	ATTR_manip_axis_knob	rotate_large	0.000	3.000	1.000	1.000	sim/cockpit2/switches/wiper_speed_switch[0]	Captain WIpers
+	ATTR_manip_axis_knob	rotate_large	0.000	3.000	1.000	1.000	sim/cockpit2/switches/wiper_speed_switch[1]	Captain WIpers
 	TRIS	5265 84
-	ATTR_manip_axis_knob	rotate_large	3.000	0.000	1.000	1.000	sim/cockpit2/switches/wiper_speed_switch[1]	F/O Wipers
+	ATTR_manip_axis_knob	rotate_large	3.000	0.000	1.000	1.000	sim/cockpit2/switches/wiper_speed_switch[0]	F/O Wipers
 	TRIS	5349 84
 	ATTR_manip_axis_knob	rotate_medium	1.000	7.000	1.000	1.000	sim/cockpit/switches/EFIS_map_range_selector	ND Zoom
 	TRIS	5433 84
