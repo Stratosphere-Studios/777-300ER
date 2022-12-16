@@ -37897,6 +37897,7 @@ PROPERTIES_END
 PANEL_2D_BEGIN
 PANEL_2D_END
 PANEL_3D_BEGIN
+PANEL_3D_BEGIN
 gen_rotary Layout
   POS 2049.500000 1800.000000
   IMAGE layout
@@ -45251,8 +45252,7 @@ GROUP Lower Eicas
   END_GROUP
 END_GROUP
 GROUP Upper Eicas
-  LOCKED
-  CHAINED
+  GROUP_OPEN
   gen_rotary Background
     POS 3414.000000 1800.000000
     IMAGE EICAS upper/eng_background
@@ -45617,7 +45617,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.400000
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -45634,7 +45633,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.400000
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -45646,7 +45644,7 @@ GROUP Upper Eicas
     LED_ROWS 0
 
   gen_LED EGT_1_r
-    POS 3057.000000 1968.000000
+    POS 3070.000000 1967.000000
     IMAGE EICAS lower/ENG/red_size22_oil_press
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[0]
@@ -45657,12 +45655,12 @@ GROUP Upper Eicas
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 360.000000 360.000000
     DIGITS 4
-    DECIMALS 1
+    DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
 
   gen_LED EGT_2_r
-    POS 3427.000000 1968.000000
+    POS 3439.000000 1968.000000
     IMAGE EICAS lower/ENG/red_size22_oil_press
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SHOW_EQUAL 108.000000 [1]
@@ -45674,7 +45672,7 @@ GROUP Upper Eicas
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 360.000000 360.000000
     DIGITS 4
-    DECIMALS 1
+    DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
 

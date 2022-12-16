@@ -226,7 +226,7 @@ P _gear/0/_lonE 0.0
 P _gear/0/_lonN 0.0
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
-P _gear/0/_stat_def 0.579100728
+P _gear/0/_stat_def 0.579100847
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -294,7 +294,7 @@ P _gear/2/_lonE -9.0
 P _gear/2/_lonN -9.0
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.370846748
+P _gear/2/_stat_def 1.370846272
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -31850,7 +31850,7 @@ P _part/87/_part_specs_invis 1
 P _part/87/_part_tex 0
 P _part/87/_part_the 0.0
 P _part/87/_part_x -16.500000000
-P _part/87/_part_y -15.775258064
+P _part/87/_part_y -15.775259018
 P _part/87/_part_z 108.315429688
 P _part/87/_patt_con 0
 P _part/87/_patt_prt 0
@@ -49817,7 +49817,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.400000
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49834,7 +49833,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.400000
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49846,7 +49844,7 @@ GROUP Upper Eicas
     LED_ROWS 0
 
   gen_LED EGT_1_r
-    POS 3057.000000 1968.000000
+    POS 3070.000000 1967.000000
     IMAGE EICAS lower/ENG/red_size22_oil_press
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[0]
@@ -49857,12 +49855,12 @@ GROUP Upper Eicas
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 360.000000 360.000000
     DIGITS 4
-    DECIMALS 1
+    DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
 
   gen_LED EGT_2_r
-    POS 3427.000000 1968.000000
+    POS 3439.000000 1968.000000
     IMAGE EICAS lower/ENG/red_size22_oil_press
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SHOW_EQUAL 108.000000 [1]
@@ -49874,7 +49872,7 @@ GROUP Upper Eicas
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 360.000000 360.000000
     DIGITS 4
-    DECIMALS 1
+    DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
 
