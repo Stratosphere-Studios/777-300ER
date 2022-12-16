@@ -181,7 +181,7 @@ end
 --function aircraft_unload()
 
 function flight_start()
-   avitabEnabled = 0
+   avitabEnabled = 1 -- change to 0 once ui made
    B777DR_efb_page = 1
    run_after_time(efb_boot, 3)
    print("EFB loaded")
