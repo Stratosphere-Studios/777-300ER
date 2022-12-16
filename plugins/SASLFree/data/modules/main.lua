@@ -10,6 +10,7 @@ addSearchPath(moduleDirectory.."/Custom Module/EICASCHECK")
 addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
 addSearchPath(moduleDirectory.."/Custom Module/FCTL")
+addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
@@ -30,18 +31,21 @@ stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
 fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
 brk_ovrd = globalPropertyi("sim/operation/override/override_gearbrake")
 steer_ovrd = globalPropertyi("sim/operation/override/override_wheel_steer")
+throttle_ovrd = globalProperty("sim/operation/override/override_throttles")
 
 set(fctl_ovrd, 1)
 set(steer_ovrd, 1)
 set(brk_ovrd, 1)
+set(throttle_ovrd, 1)
 
 components = {
 
 	timers {},
 	speed_calc {},
 	hydraulics {},
-	fbw_pid {},
+	fbw_main {},
 	fctl {},
+	eec {},
 	gear {},
 	eicascheck {
 		position = {2730 , 0, 1365, 1365},
@@ -71,4 +75,5 @@ function onModuleDone()
 	set(fctl_ovrd, 0)
 	set(steer_ovrd, 0)
 	set(brk_ovrd, 0)
+	set(throttle_ovrd, 0)
 end

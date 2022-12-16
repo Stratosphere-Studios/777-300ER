@@ -171,7 +171,6 @@ simDR_map_mode                         = find_dataref("sim/cockpit/switches/EFIS
 simDR_ias_trend                        = find_dataref("sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot")
 simDR_airspeed_mach                    = find_dataref("sim/flightmodel/misc/machno")
 
-
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
@@ -181,6 +180,7 @@ B777DR_vstall                          = find_dataref("Strato/777/fctl/vstall")
 B777DR_vmax                            = find_dataref("Strato/777/fctl/vmax")
 B777DR_trimref                         = find_dataref("Strato/777/fctl/trs")
 B777DR_vman_min                        = find_dataref("Strato/777/fctl/vmanuever")
+B777DR_cockpit_door_target             = find_dataref("Strato/cockpit/door_target")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -249,7 +249,6 @@ B777DR_txt_PFD_AOA_INDICATOR           = deferred_dataref("Strato/777/displays/t
 B777DR_txt_SMART_MCP_KNOBS             = deferred_dataref("Strato/777/displays/txt/SMART_MCP_KNOBS", "string")
 
 B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
-B777DR_acf_is_pax                      = deferred_dataref("Strato/777/acf_is_pax", "number")
 B777DR_lbs_kgs                         = deferred_dataref("Strato/777/lbs_kgs", "number")
 B777DR_trs_bug_enabled                 = deferred_dataref("Strato/777/displays/trs_bug_enabled", "number")
 B777DR_aoa_enabled                     = deferred_dataref("Strato/777/displays/pfd_aoa_enabled", "number")
@@ -257,6 +256,11 @@ B777DR_spd_flash                       = deferred_dataref("Strato/777/displays/i
 B777DR_spd_amber                       = deferred_dataref("Strato/777/displays/ias_amber", "number")
 B777DR_spd_outline                     = deferred_dataref("Strato/777/displays/ias_outline", "number")
 B777DR_smart_knobs                     = deferred_dataref("Strato/777/smart_knobs", "number")
+
+B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
+B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
+B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
+B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -505,7 +509,7 @@ function setTXT()
 	B777DR_txt_LBS_KGS             = "POUNDS/KILOGRAMS"
 	B777DR_txt_SHOW_TRS_BUG_ON_PFD = "SHOW TRS BUG ON PFD"
 	B777DR_txt_PFD_AOA_INDICATOR   = "PFD AOA INDICATOR"
-	B777DR_txt_SMART_MCP_KNOBS      = "SMART MCP KNOBS"
+	B777DR_txt_SMART_MCP_KNOBS     = "SMART MCP KNOBS"
 end
 
 function getHeadingDifference(desireddirection,current_heading)
@@ -723,10 +727,8 @@ function after_physics()
 	end
 
 	if B777DR_acf_is_freighter == 0 then
-		B777DR_acf_is_pax = 1
 		B777DR_txt_PAX_FREIGHT = "PAX"
 	else
-		B777DR_acf_is_pax = 0
 		B777DR_txt_PAX_FREIGHT = "FREIGHT"
 	end
 
@@ -734,8 +736,25 @@ function after_physics()
 		alt_is_fast = 10
 	end
 
+	if B777DR_acf_is_freighter == 1 then
+		B777DR_kill_pax = 1
+		B777DR_kill_pax_interior = 1
+		B777DR_kill_cargo = 0
+		if B777DR_cockpit_door_target == 1 then
+			B777DR_kill_cargo_interior = 0
+		else
+			B777DR_kill_cargo_interior = 1
+		end
+	else
+		B777DR_kill_cargo = 1
+		B777DR_kill_cargo_interior = 1
+		B777DR_kill_pax = 0
+		if B777DR_cockpit_door_target == 1 then
+			B777DR_kill_pax_interior = 0
+		else
+			B777DR_kill_pax_interior = 1
+		end
+	end
 end
-
-
 
 --function after_replay()

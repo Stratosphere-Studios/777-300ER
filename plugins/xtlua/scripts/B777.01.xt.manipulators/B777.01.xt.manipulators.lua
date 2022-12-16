@@ -40,7 +40,6 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --**                                 CREATE VARIABLES                                **--
 --*************************************************************************************--
 
-local B777_cockpit_door_target = 0
 local B777_ctr1_button_target = {0, 0, 0, 0, 0}
 
 --*************************************************************************************--
@@ -58,6 +57,8 @@ simDR_strobe_light_switch                 = find_dataref("sim/cockpit2/switches/
 simDR_nav_light_switch                    = find_dataref("sim/cockpit2/switches/navigation_lights_on")
 simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/beacon_on")
 simDR_bus_volts                           = find_dataref("sim/cockpit2/electrical/bus_volts")
+simDR_at_armed                            = find_dataref("sim/cockpit2/autopilot/autothrottle_arm")
+simDR_fd_enabled                          = find_dataref("sim/cockpit2/autopilot/flight_director_mode")
 
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
@@ -73,8 +74,6 @@ B777DR_grd_pwr_primary                    = find_dataref("Strato/B777/ext_pwr")
 --simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch") -- only works in xp12
 B777DR_stab_cutout_C                      = find_dataref("Strato/777/fctl/stab_cutout_C")
 B777DR_stab_cutout_R                      = find_dataref("Strato/777/fctl/stab_cutout_R")
-simDR_at_armed                            = find_dataref("sim/cockpit2/autopilot/autothrottle_arm")
-simDR_fd_enabled                          = find_dataref("sim/cockpit2/autopilot/flight_director_mode")
 
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
@@ -126,6 +125,8 @@ B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lo
 
 B777DR_cockpit_panel_lights_brightness    = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
 B777DR_cockpit_panel_lights_knob_pos      = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights_knob_pos", "array[6]")
+
+B777DR_cockpit_door_target = deferred_dataref("Strato/cockpit/door_target", "number")
 
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
@@ -444,7 +445,7 @@ end
 
 function B777_cockpit_door_CMDhandler(phase, duration)
    if phase == 0 then
-      B777_cockpit_door_target = 1 - B777_cockpit_door_target
+      B777DR_cockpit_door_target = 1 - B777DR_cockpit_door_target
    end
 end
 
@@ -589,7 +590,8 @@ end
 --function before_physics()
 
 function after_physics()
-   B777DR_cockpit_door_pos = B777_animate(B777_cockpit_door_target, B777DR_cockpit_door_pos, 4)
+   B777DR_kill_cabin = 1 - B777DR_cockpit_door_target
+   B777DR_cockpit_door_pos = B777_animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 4)
 
    for i = 1, 18 do
       if i ~= 15 or i ~= 13 then

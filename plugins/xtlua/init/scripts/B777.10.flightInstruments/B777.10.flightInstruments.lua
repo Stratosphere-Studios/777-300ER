@@ -96,6 +96,7 @@ B777DR_txt_LBS_KGS                     = deferred_dataref("Strato/777/displays/t
 B777DR_lbs_kgs_status                  = deferred_dataref("Strato/777/displays/txt/lbs_kgs_status", "string")
 B777DR_txt_SHOW_TRS_BUG_ON_PFD         = deferred_dataref("Strato/777/displays/txt/SHOW_TRS_BUG_ON_PFD", "string")
 B777DR_txt_PFD_AOA_INDICATOR           = deferred_dataref("Strato/777/displays/txt/PFD_AOA_INDICATOR", "string")
+B777DR_txt_SMART_MCP_KNOBS             = deferred_dataref("Strato/777/displays/txt/SMART_MCP_KNOBS", "string")
 
 B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
 B777DR_acf_is_pax                      = deferred_dataref("Strato/777/acf_is_pax", "number")
@@ -105,3 +106,9 @@ B777DR_aoa_enabled                     = deferred_dataref("Strato/777/displays/p
 B777DR_spd_flash                       = deferred_dataref("Strato/777/displays/ias_flash", "number")
 B777DR_spd_amber                       = deferred_dataref("Strato/777/displays/ias_amber", "number")
 B777DR_spd_outline                     = deferred_dataref("Strato/777/displays/ias_outline", "number")
+B777DR_smart_knobs                     = deferred_dataref("Strato/777/smart_knobs", "number")
+
+B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
+B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
+B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
+B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
