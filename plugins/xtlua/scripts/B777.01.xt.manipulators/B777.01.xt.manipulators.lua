@@ -5,7 +5,6 @@
 * Script Description: functions for cockpit switches
 * Notes: 1. Information on default datarefs for some switches provided.
          2. Can't find probe/window heat switches, might always be on? If so will command them on on aircraft load.
-         3. Need to figure out number of buses to do bus cross-ties.
 *****************************************************************************************
 --]]
 
