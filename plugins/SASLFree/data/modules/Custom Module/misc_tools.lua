@@ -21,9 +21,20 @@ function lim(val, upper, lower)
 end
 
 function tlen(T) --Returns length of a table
-  local count = 0
-  for _ in pairs(T) do count = count + 1 end
-  return count
+  local idx = 0
+  for i in pairs(T) do idx = idx + 1 end
+  return idx
+end
+
+function getGreaterThan(T, val)
+	local idx = 0
+	for i in pairs(T) do
+		idx = idx + 1
+		if T[idx] >= val then
+			break
+		end
+	end
+	return idx
 end
 
 function bool2num(value)
@@ -34,7 +45,7 @@ function round(number) --rounds everything behind the decimal
 	return math.floor(number+0.5)
 end
 
-function Round(num, dp) --rounds evcerything until a certain point
+function Round(num, dp) --rounds everything until a certain point
     local mult = 10^(dp or 0)
     return math.floor(num * mult + 0.5)/mult
 end

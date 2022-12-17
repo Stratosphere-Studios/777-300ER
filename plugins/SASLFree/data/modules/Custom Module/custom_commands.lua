@@ -11,6 +11,7 @@ normal_gear = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 lock_ovrd = globalPropertyi("Strato/777/gear/lock_ovrd")
 --Brakes
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
+park_brake_handle = createGlobalPropertyf("Strato/777/gear/park_brake", 1)
 realistic_prk_brk = globalPropertyi("Strato/777/gear/park_brake_realistic")
 man_brakes_L = globalPropertyf("Strato/777/gear/manual_braking_L")
 brake_qty_L = globalPropertyf("Strato/777/gear/qty_brake_L") --overall fluid quantity in left brakes
@@ -28,7 +29,7 @@ stab_cutout_C = globalPropertyi("Strato/777/fctl/stab_cutout_C")
 stab_cutout_R = globalPropertyi("Strato/777/fctl/stab_cutout_R")
 --Operation
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
-
+f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 --Finding own datarefs
 
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
@@ -45,15 +46,26 @@ gear_toggle = sasl.findCommand("sim/flight_controls/landing_gear_toggle")
 trim_up = sasl.findCommand("sim/flight_controls/pitch_trim_up")
 trim_down = sasl.findCommand("sim/flight_controls/pitch_trim_down")
 
+park_brake_past = 0
+
 function BrakeHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
 		set(man_brakes_L, 1 - get(man_brakes_L))
 		set(man_brakes_R, 1 - get(man_brakes_R))
+		if 1 - get(man_brakes_L) == 0 and get(park_brake_valve) == 1 then
+			set(park_brake_valve, 0)
+			park_brake_past = 0
+		end
 	end
 end
 
 function BrakeHoldHandler(phase)
-	if phase == SASL_COMMAND_CONTINUE then
+	if phase == SASL_COMMAND_BEGIN then
+		if park_brake_past == 1 and get(park_brake_valve) == 1 then
+			set(park_brake_valve, 0)
+			park_brake_past = 0
+		end
+	elseif phase == SASL_COMMAND_CONTINUE then
 		set(man_brakes_L, 1)
 		set(man_brakes_R, 1)
 	elseif phase == SASL_COMMAND_END then
@@ -71,6 +83,8 @@ function ParkBrakeHandler(phase)
 			set(brake_press_L, 3000 * get(park_brake_valve))
 			set(brake_press_R, 3000 * get(park_brake_valve))
 		end
+	elseif phase == SASL_COMMAND_END then
+		park_brake_past = 1 - park_brake_past
 	end
 end
 
@@ -133,3 +147,12 @@ sasl.registerCommandHandler(gear_toggle, 1, ToggleGear)
 sasl.registerCommandHandler(trim_up, 1, StabTrimUp)
 sasl.registerCommandHandler(trim_down, 1, StabTrimDown)
 
+function update()
+	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
+end
+
+function onAirportLoaded()
+	park_brake_past = get(park_brake_valve)
+end
+
+onAirportLoaded()

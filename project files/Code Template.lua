@@ -1,8 +1,8 @@
 --[[
 *****************************************************************************************
-* Script Name: Flight Instruments
+* Script Name:
 * Author Name: crazytimtimtim
-* Script Description: Cockpit instrument code
+* Script Description:
 *****************************************************************************************
 --]]
 
@@ -39,7 +39,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 
 
 --*************************************************************************************--
---**                              FIND X-PLANE DATAREFS                              **--
+--**                                  FIND DATAREFS                                  **--
 --*************************************************************************************--
 
 
@@ -63,7 +63,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 
 
 --*************************************************************************************--
---**                                 X-PLANE COMMANDS                                **--
+--**                             REPLACE X-PLANE COMMANDS                            **--
 --*************************************************************************************--
 
 
