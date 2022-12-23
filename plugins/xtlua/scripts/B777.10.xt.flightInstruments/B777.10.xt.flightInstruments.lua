@@ -133,6 +133,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 local ft_to_mtrs = 0.3048
+local kts_to_mach = 0.001512
 local adiru_time_remaining_min = 0
 
 local press_counter = 0
@@ -156,7 +157,7 @@ simDR_fuel_kgs                         = find_dataref("sim/cockpit2/fuel/fuel_qu
 simDR_vs_capt                          = find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot")
 simDR_ias_capt                         = find_dataref("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 simDR_latitude                         = find_dataref("sim/flightmodel/position/latitude")
-simDR_groundSpeed                      = find_dataref("sim/flightmodel/position/groundspeed")
+simDR_groundSpeed                      = find_dataref("sim/cockpit2/gauges/indicators/ground_speed_kt")
 simDR_bus_voltage                      = find_dataref("sim/cockpit2/electrical/bus_volts")
 simDR_ap_airspeed                      = find_dataref("sim/cockpit/autopilot/airspeed")
 simDR_alt_ft_capt                      = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
@@ -211,6 +212,7 @@ B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/ad
 B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltInst/adiru/aligning", "number")
 
 B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
+B777DR_displayed_gs_mach               = deferred_dataref("Strato/777/displayed_gs_mach", "number")
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
 B777DR_displayed_ra                    = deferred_dataref("Strato/777/displayed_ra", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
@@ -630,7 +632,7 @@ function checkForSpdOutline()
 end
 
 function checkForRaOutline()
-	if simDR_onGround == 0 and simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2490 and simDR_vs_capt < 0 then
+	if simDR_onGround == 0 and simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2495 and simDR_vs_capt < 0 then
 		if not is_timer_scheduled(disableRAOutline) then
 			B777DR_outlined_RA = 1
 			run_after_time(disableRAOutline, 10)
@@ -780,6 +782,9 @@ function after_physics()
 			B777DR_kill_pax_interior = 1
 		end
 	end
+
+	B777DR_displayed_gs_mach = simDR_groundSpeed * kts_to_mach
+
 end
 
 --function after_replay()

@@ -226,7 +226,7 @@ P _gear/0/_lonE 0.0
 P _gear/0/_lonN 0.0
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
-P _gear/0/_stat_def 0.579100788
+P _gear/0/_stat_def 0.579100728
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -260,7 +260,7 @@ P _gear/1/_lonE -9.0
 P _gear/1/_lonN -9.0
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.170852423
+P _gear/1/_stat_def 1.170852304
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -294,7 +294,7 @@ P _gear/2/_lonE -9.0
 P _gear/2/_lonN -9.0
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.370846391
+P _gear/2/_stat_def 1.370846629
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -42923,8 +42923,8 @@ GROUP Captain PFD
     gen_LED Mach
       POS 120.000000 1241.500000
       IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/flightmodel/misc/machno
-      SHOW_GREATER 0.400000 sim/flightmodel/misc/machno
+      DATAREF Strato/777/displayed_gs_mach
+      SHOW_GREATER 0.400000 Strato/777/displayed_gs_mach
       SIZE 1.500000
       LOCKED
       LIGHT_MODE GLASS_AUTO
@@ -42941,6 +42941,7 @@ GROUP Captain PFD
       POS 176.000000 1242.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/gauges/indicators/ground_speed_kt[0]
+      SHOW_LESS 0.400000 Strato/777/displayed_gs_mach
       SIZE 2.200000
       LOCKED
       LIGHT_MODE GLASS_AUTO
@@ -42957,6 +42958,7 @@ GROUP Captain PFD
       POS 66.000000 1235.000000
       IMAGE ND/GS
       DATAREF 
+      SHOW_LESS 0.400000 Strato/777/displayed_gs_mach
       SIZE 2.200000
       LOCKED
       LIGHT_MODE GLASS_AUTO
@@ -44810,7 +44812,6 @@ GROUP Captain PFD
     SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
     LOCKED
     CHAINED
-    GROUP_OPEN
     gen_rotary RA Box
       POS 605.000000 1494.000000
       IMAGE PFD/artificial_horizon/RA_box
@@ -45355,7 +45356,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_needle AOA needle
-      POS 911.000000 2255.000000
+      POS 901.500000 2255.000000
       IMAGE PFD/aoa_needle
       DATAREF sim/flightmodel2/misc/AoA_angle_degrees
       SHOW_GREATER 80.000000 Strato/777/displays/ias_capt
@@ -45364,15 +45365,19 @@ GROUP Captain PFD
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME 50.000000 -45.000000 1.000000
       KEY_FRAME 20.000000 -45.000000 1.000000
+      KEY_FRAME 20.000000 -45.000000 1.000000
+      KEY_FRAME 15.000000 0.000000 1.000000
+      KEY_FRAME 10.000000 45.000000 1.000000
+      KEY_FRAME 5.000000 90.000000 1.000000
+      KEY_FRAME 0.000000 135.000000 1.000000
       KEY_FRAME -5.000000 180.000000 1.000000
-      KEY_FRAME -50.000000 180.000000
+      KEY_FRAME -5.000000 180.000000
       IS_DRAGGABLE 0
       OFFSET 14.000000
 
     gen_needle AOA needle_static
-      POS 911.000000 2255.000000
+      POS 901.500000 2255.000000
       IMAGE PFD/aoa_needle
       DATAREF 
       SHOW_LESS 79.989998 Strato/777/displays/ias_capt
@@ -45381,13 +45386,13 @@ GROUP Captain PFD
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME 0.000000 143.000000 1.000000
-      KEY_FRAME -6.000000 143.000000
+      KEY_FRAME 0.000000 135.000000 1.000000
+      KEY_FRAME 0.000000 135.000000
       IS_DRAGGABLE 0
       OFFSET 14.000000
 
     gen_LED AOA numeration neg
-      POS 894.000000 2226.000000
+      POS 889.000000 2226.000000
       IMAGE PFD/angle_of_attack_type
       DATAREF Strato/777/displayed_aoa
       SHOW_LESS 0.000000 Strato/777/displayed_aoa
@@ -45406,7 +45411,7 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED AOA numeration pos
-      POS 898.000000 2226.000000
+      POS 894.000000 2226.000000
       IMAGE PFD/angle_of_attack_type
       DATAREF Strato/777/displayed_aoa
       SHOW_GREATER 0.000000 Strato/777/displayed_aoa
@@ -45852,7 +45857,6 @@ GROUP Captain ND
     SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
     LOCKED
     CHAINED
-    GROUP_OPEN
     GROUP Extra ND INFO
       LOCKED
       CHAINED

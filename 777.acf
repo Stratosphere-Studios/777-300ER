@@ -9536,7 +9536,7 @@ P _gear/0/_eagle_claw_deg 0.000000000
 P _gear/0/_gear_brakes 0
 P _gear/0/_gear_can_retract 1
 P _gear/0/_gear_castors 0
-P _gear/0/_gear_renders_geo 0
+P _gear/0/_gear_renders_geo 1
 P _gear/0/_gear_type 3
 P _gear/0/_gear_x 0.000000000
 P _gear/0/_gear_y -7.000000000
@@ -9568,14 +9568,14 @@ P _gear/1/_eagle_claw_deg 19.000000000
 P _gear/1/_gear_brakes 1
 P _gear/1/_gear_can_retract 1
 P _gear/1/_gear_castors 0
-P _gear/1/_gear_renders_geo 0
+P _gear/1/_gear_renders_geo 1
 P _gear/1/_gear_type 6
 P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.599999905
 P _gear/1/_gear_z 106.300003052
 P _gear/1/_latE 0.000000000
 P _gear/1/_latR -82.000000000
-P _gear/1/_leg_len 11.899999619
+P _gear/1/_leg_len 12.500000000
 P _gear/1/_lonE -9.000000000
 P _gear/1/_lonR 8.000000000
 P _gear/1/_steerdeg_hispeed 6.500000000
@@ -9600,14 +9600,14 @@ P _gear/2/_eagle_claw_deg 19.000000000
 P _gear/2/_gear_brakes 1
 P _gear/2/_gear_can_retract 1
 P _gear/2/_gear_castors 0
-P _gear/2/_gear_renders_geo 0
+P _gear/2/_gear_renders_geo 1
 P _gear/2/_gear_type 6
 P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.599999905
 P _gear/2/_gear_z 106.300003052
 P _gear/2/_latE 0.000000000
 P _gear/2/_latR 82.000000000
-P _gear/2/_leg_len 11.899999619
+P _gear/2/_leg_len 12.500000000
 P _gear/2/_lonE -9.000000000
 P _gear/2/_lonR 8.000000000
 P _gear/2/_steerdeg_hispeed 6.500000000
@@ -36711,7 +36711,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 120046
+P acf/_file_writer_version 120057
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -36966,7 +36966,7 @@ P acf/_ground_pwr/2 160.000000000
 P acf/_ground_pwr/count 3
 P acf/_gyro_spooldown_time 60.000000000
 P acf/_gyro_spoolup_time 5.000000000
-P acf/_h_eqlbm 15.695349693
+P acf/_h_eqlbm 16.236799240
 P acf/_has_ADG 0
 P acf/_has_APU_bleed_air 1
 P acf/_has_APU_generator 1
@@ -37698,7 +37698,7 @@ P acf/_tank_xyz_full/8,1 0.000000000
 P acf/_tank_xyz_full/8,2 0.000000000
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm -0.579269171
+P acf/_the_eqlbm -0.912936270
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
 P acf/_throt_max_fwd_emr 1.000000000
@@ -37782,6 +37782,7 @@ P acf/_wheel_t2 0.002000000
 P acf/_windshield_eff_factor 1.000000000
 P acf/_windshield_scratchy 0
 P acf/_wing_damp_rat 0.800000012
+P acf/_wing_frac_fuel 0.500000000
 P acf/_wing_frac_mass 0.300000012
 P acf/_wing_mid_dihed_per_g 1.750000000
 P acf/_wing_tilt_ptch 0.000000000
@@ -38702,7 +38703,6 @@ GROUP Captain PFD
       SHOW_EQUAL 1.000000 Strato/777/displays/ias_outline
       SIZE 0.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -38723,11 +38723,10 @@ GROUP Captain PFD
     gen_LED Mach
       POS 120.000000 1241.500000
       IMAGE LED_2.36R.xxxxx0.white
-      DATAREF sim/flightmodel/misc/machno
-      SHOW_GREATER 0.400000 sim/flightmodel/misc/machno
+      DATAREF Strato/777/displayed_gs_mach
+      SHOW_GREATER 0.400000 Strato/777/displayed_gs_mach
       SIZE 1.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -38742,6 +38741,7 @@ GROUP Captain PFD
       POS 176.000000 1242.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/gauges/indicators/ground_speed_kt[0]
+      SHOW_LESS 0.400000 Strato/777/displayed_gs_mach
       SIZE 2.200000
       LOCKED
       LIGHT_MODE GLASS_AUTO
@@ -38758,6 +38758,7 @@ GROUP Captain PFD
       POS 66.000000 1235.000000
       IMAGE ND/GS
       DATAREF 
+      SHOW_LESS 0.400000 Strato/777/displayed_gs_mach
       SIZE 2.200000
       LOCKED
       LIGHT_MODE GLASS_AUTO
@@ -40611,7 +40612,6 @@ GROUP Captain PFD
     SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
     LOCKED
     CHAINED
-    GROUP_OPEN
     gen_rotary RA Box
       POS 605.000000 1494.000000
       IMAGE PFD/artificial_horizon/RA_box
@@ -41156,25 +41156,28 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_needle AOA needle
-      POS 911.000000 2255.000000
+      POS 901.500000 2255.000000
       IMAGE PFD/aoa_needle
       DATAREF sim/flightmodel2/misc/AoA_angle_degrees
       SHOW_GREATER 80.000000 Strato/777/displays/ias_capt
       SIZE 2.350000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME 50.000000 -45.000000 1.000000
       KEY_FRAME 20.000000 -45.000000 1.000000
+      KEY_FRAME 20.000000 -45.000000 1.000000
+      KEY_FRAME 15.000000 0.000000 1.000000
+      KEY_FRAME 10.000000 45.000000 1.000000
+      KEY_FRAME 5.000000 90.000000 1.000000
+      KEY_FRAME 0.000000 135.000000 1.000000
       KEY_FRAME -5.000000 180.000000 1.000000
-      KEY_FRAME -50.000000 180.000000
+      KEY_FRAME -5.000000 180.000000
       IS_DRAGGABLE 0
       OFFSET 14.000000
 
     gen_needle AOA needle_static
-      POS 911.000000 2255.000000
+      POS 901.500000 2255.000000
       IMAGE PFD/aoa_needle
       DATAREF 
       SHOW_LESS 79.989998 Strato/777/displays/ias_capt
@@ -41183,13 +41186,13 @@ GROUP Captain PFD
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
-      KEY_FRAME 0.000000 143.000000 1.000000
-      KEY_FRAME -6.000000 143.000000
+      KEY_FRAME 0.000000 135.000000 1.000000
+      KEY_FRAME 0.000000 135.000000
       IS_DRAGGABLE 0
       OFFSET 14.000000
 
     gen_LED AOA numeration neg
-      POS 894.000000 2226.000000
+      POS 889.000000 2226.000000
       IMAGE PFD/angle_of_attack_type
       DATAREF Strato/777/displayed_aoa
       SHOW_LESS 0.000000 Strato/777/displayed_aoa
@@ -41208,13 +41211,12 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED AOA numeration pos
-      POS 898.000000 2226.000000
+      POS 894.000000 2226.000000
       IMAGE PFD/angle_of_attack_type
       DATAREF Strato/777/displayed_aoa
       SHOW_GREATER 0.000000 Strato/777/displayed_aoa
       SIZE 2.350000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41655,7 +41657,6 @@ GROUP Captain ND
     SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
     LOCKED
     CHAINED
-    GROUP_OPEN
     GROUP Extra ND INFO
       LOCKED
       CHAINED

@@ -63,6 +63,7 @@ B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltIn
 B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
 B777DR_displayed_ra                    = deferred_dataref("Strato/777/displayed_ra", "number")
+B777DR_displayed_gs_mach               = deferred_dataref("Strato/777/displayed_gs_mach", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_knob_target", "number")
 B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "number")
