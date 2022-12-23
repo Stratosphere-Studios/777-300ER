@@ -37975,7 +37975,6 @@ GROUP Captain PFD
     GROUP Not while ADIRU ali
       SHOW_EQUAL 0.000000 Strato/777/temp/fltInst/adiru/aligning
       LOCKED
-      GROUP_OPEN
       gen_needle Horizon
         POS 604.000000 1795.000000
         IMAGE PFD/artificial_horizon/horizon
@@ -40612,8 +40611,9 @@ GROUP Captain PFD
     SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
     LOCKED
     CHAINED
+    GROUP_OPEN
     gen_rotary RA Box
-      POS 605.000000 1497.500000
+      POS 605.000000 1494.000000
       IMAGE PFD/artificial_horizon/RA_box
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/outlined_RA
@@ -40637,7 +40637,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary RA Outline
-      POS 605.000000 1497.500000
+      POS 605.000000 1494.000000
       IMAGE PFD/artificial_horizon/RA_highlight2
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/outlined_RA
@@ -40661,9 +40661,9 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_LED RA 4 Digits
-      POS 703.000000 1497.000000
+      POS 702.000000 1494.000000
       IMAGE white_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
+      DATAREF Strato/777/displayed_ra
       SHOW_GREATER 1000.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
       LOCKED
@@ -40678,9 +40678,9 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED RA 3 Digits
-      POS 679.000000 1497.000000
+      POS 678.000000 1494.000000
       IMAGE white_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
+      DATAREF Strato/777/displayed_ra
       SHOW_LESS 999.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_GREATER 100.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
@@ -40696,9 +40696,9 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED RA 2 Digits
-      POS 653.000000 1497.000000
+      POS 652.000000 1494.000000
       IMAGE white_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
+      DATAREF Strato/777/displayed_ra
       SHOW_LESS 99.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_GREATER 10.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
@@ -40714,9 +40714,9 @@ GROUP Captain PFD
       LED_ROWS 0
 
     gen_LED RA 1 Digit
-      POS 630.000000 1497.000000
+      POS 631.000000 1494.000000
       IMAGE white_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
+      DATAREF Strato/777/displayed_ra
       SHOW_LESS 9.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SHOW_GREATER -9.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.500000
@@ -41134,10 +41134,10 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary AOA gauge
-      POS 872.000000 2246.000000
+      POS 911.000000 2255.000000
       IMAGE PFD/aoa_gauge
       DATAREF 
-      SIZE 2.300000
+      SIZE 2.350000
       LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -41155,104 +41155,83 @@ GROUP Captain PFD
       CLICK_DX 0
       CLICK_DY 0
 
-    GROUP AOA anim
-      SHOW_GREATER 80.000000 sim/cockpit2/gauges/indicators/airspeed_kts_pilot
+    gen_needle AOA needle
+      POS 911.000000 2255.000000
+      IMAGE PFD/aoa_needle
+      DATAREF sim/flightmodel2/misc/AoA_angle_degrees
+      SHOW_GREATER 80.000000 Strato/777/displays/ias_capt
+      SIZE 2.350000
       LOCKED
-      gen_needle AOA needle
-        POS 868.000000 2246.000000
-        IMAGE PFD/aoa_needle
-        DATAREF Strato/777/displayed_aoa
-        SIZE 2.300000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 50.000000 -45.000000 1.000000
-        KEY_FRAME 20.000000 -45.000000 1.000000
-        KEY_FRAME -5.000000 180.000000 1.000000
-        KEY_FRAME -50.000000 180.000000
-        IS_DRAGGABLE 0
-        OFFSET 14.000000
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 50.000000 -45.000000 1.000000
+      KEY_FRAME 20.000000 -45.000000 1.000000
+      KEY_FRAME -5.000000 180.000000 1.000000
+      KEY_FRAME -50.000000 180.000000
+      IS_DRAGGABLE 0
+      OFFSET 14.000000
 
-      gen_LED AOA numeration neg
-        POS 849.000000 2235.000000
-        IMAGE PFD/angle_of_attack_type
-        DATAREF Strato/777/displayed_aoa
-        SHOW_LESS 0.000000 Strato/777/displayed_aoa
-        SIZE 2.300000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME -50.000000 -6.000000 1.000000
-        KEY_FRAME -6.000000 -6.000000 1.000000
-        KEY_FRAME 22.000000 22.000000 1.000000
-        KEY_FRAME 50.000000 22.000000
-        DIGITS 2
-        DECIMALS 1
-        PERIOD_WIDTH 4
-        LED_ROWS 0
-
-      gen_LED AOA numeration pos
-        POS 850.000000 2235.000000
-        IMAGE PFD/angle_of_attack_type
-        DATAREF Strato/777/displayed_aoa
-        SHOW_GREATER 0.000000 Strato/777/displayed_aoa
-        SIZE 2.300000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME -7.000000 -6.000000 1.000000
-        KEY_FRAME -6.000000 -6.000000 1.000000
-        KEY_FRAME 22.000000 22.000000 1.000000
-        KEY_FRAME 23.000000 22.000000
-        DIGITS 3
-        DECIMALS 1
-        PERIOD_WIDTH 4
-        LED_ROWS 0
-
-    END_GROUP
-    GROUP AOA static
-      SHOW_LESS 80.000000 sim/cockpit2/gauges/indicators/airspeed_kts_pilot
+    gen_needle AOA needle_static
+      POS 911.000000 2255.000000
+      IMAGE PFD/aoa_needle
+      DATAREF 
+      SHOW_LESS 79.989998 Strato/777/displays/ias_capt
+      SIZE 2.350000
       LOCKED
-      gen_needle AOA needle 2
-        POS 868.000000 2246.000000
-        IMAGE PFD/aoa_needle
-        DATAREF sim/flightmodel2/misc/AoA_angle_degrees
-        SIZE 2.300000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME -90.000000 135.000000 1.000000
-        KEY_FRAME 90.000000 135.000000
-        IS_DRAGGABLE 0
-        OFFSET 14.000000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME 0.000000 143.000000 1.000000
+      KEY_FRAME -6.000000 143.000000
+      IS_DRAGGABLE 0
+      OFFSET 14.000000
 
-      gen_LED AOA numeration pos
-        POS 850.000000 2235.000000
-        IMAGE PFD/angle_of_attack_type
-        DATAREF Strato/777/displayed_aoa
-        SIZE 2.300000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME -90.000000 0.000000 1.000000
-        KEY_FRAME 90.000000 0.000000
-        DIGITS 2
-        DECIMALS 1
-        PERIOD_WIDTH 4
-        LED_ROWS 0
+    gen_LED AOA numeration neg
+      POS 894.000000 2226.000000
+      IMAGE PFD/angle_of_attack_type
+      DATAREF Strato/777/displayed_aoa
+      SHOW_LESS 0.000000 Strato/777/displayed_aoa
+      SIZE 2.350000
+      LOCKED
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME -50.000000 -6.000000 1.000000
+      KEY_FRAME -6.000000 -6.000000 1.000000
+      KEY_FRAME 22.000000 22.000000 1.000000
+      KEY_FRAME 50.000000 22.000000
+      DIGITS 2
+      DECIMALS 1
+      PERIOD_WIDTH 9
+      LED_ROWS 0
 
-    END_GROUP
+    gen_LED AOA numeration pos
+      POS 898.000000 2226.000000
+      IMAGE PFD/angle_of_attack_type
+      DATAREF Strato/777/displayed_aoa
+      SHOW_GREATER 0.000000 Strato/777/displayed_aoa
+      SIZE 2.350000
+      LOCKED
+      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME -7.000000 -6.000000 1.000000
+      KEY_FRAME -6.000000 -6.000000 1.000000
+      KEY_FRAME 22.000000 22.000000 1.000000
+      KEY_FRAME 23.000000 22.000000
+      DIGITS 3
+      DECIMALS 1
+      PERIOD_WIDTH 9
+      LED_ROWS 0
+
   END_GROUP
 END_GROUP
 GROUP LCD Backgrounds
   LOCKED
   CHAINED
-  GROUP_OPEN
   gen_rotary LCD Background
     POS 712.500000 3157.000000
     IMAGE LCD_Background
@@ -41675,6 +41654,7 @@ GROUP Captain ND
   GROUP ADIRU Aligned
     SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
     LOCKED
+    CHAINED
     GROUP_OPEN
     GROUP Extra ND INFO
       LOCKED
@@ -41895,7 +41875,6 @@ GROUP Captain ND
     GROUP Wind Data
       LOCKED
       CHAINED
-      GROUP_OPEN
       gen_LED Ground Speed 3 digi
         POS 1552.000000 2428.000000
         IMAGE White_size23_stretched_vert_no_lead0
@@ -44323,7 +44302,7 @@ GROUP Lower Eicas
       OFFSET 0.000000
 
     gen_pointer L FLPRN
-      POS 3121.285889 495.214294
+      POS 3121.000000 495.500000
       IMAGE EICAS lower/ENG/pointer_right
       DATAREF sim/flightmodel2/wing/aileron1_deg[0]
       SHOW_GREATER 65.000000 [0]
@@ -46647,7 +46626,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2359.357178 3783.285645
+        POS 2359.500000 3783.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line02_S
         LIGHT_MODE GLASS_AUTO

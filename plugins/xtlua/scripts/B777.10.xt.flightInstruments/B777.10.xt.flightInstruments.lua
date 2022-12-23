@@ -132,8 +132,8 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --**                                CREATE VARIABLES                                 **--
 --*************************************************************************************--
 
-local B777_ft_to_mtrs = 0.3048
-local B777_adiru_time_remaining_min = 0
+local ft_to_mtrs = 0.3048
+local adiru_time_remaining_min = 0
 
 local press_counter = 0
 local knob_is_fast = 0
@@ -212,6 +212,7 @@ B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltIn
 
 B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
+B777DR_displayed_ra                    = deferred_dataref("Strato/777/displayed_ra", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
 B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_knob_target", "number")
 B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "number")
@@ -292,7 +293,7 @@ function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 		elseif B777DR_ovhd_aft_button_target[1] == 0 then
 			B777DR_ovhd_aft_button_target[1] = 1												-- move button to on
 			if simDR_groundSpeed < 1 then
-				B777_adiru_time_remaining_min = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
+				adiru_time_remaining_min = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
 				B777DR_adiru_status = 1
 				countdown()
 			end
@@ -417,8 +418,8 @@ end
 --- ADIRU ----------
 function countdown()
 	if B777DR_adiru_status == 1  then
-		if B777_adiru_time_remaining_min > 1 then
-			B777_adiru_time_remaining_min = B777_adiru_time_remaining_min - 1
+		if adiru_time_remaining_min > 1 then
+			adiru_time_remaining_min = adiru_time_remaining_min - 1
 			run_after_time(countdown2, 1)
 		else
 			B777_align_adiru()
@@ -427,18 +428,18 @@ function countdown()
 end
 
 function countdown2()
-	B777_adiru_time_remaining_min = B777_adiru_time_remaining_min - 1
+	adiru_time_remaining_min = adiru_time_remaining_min - 1
 	run_after_time(countdown, 1)
 end
 
 function B777_adiru_off()
 	B777DR_adiru_status = 0
-	B777_adiru_time_remaining_min = 0
+	adiru_time_remaining_min = 0
 end
 
 function B777_align_adiru()
 	B777DR_adiru_status = 2
-	B777_adiru_time_remaining_min = 0
+	adiru_time_remaining_min = 0
 end
 
 function disableRAOutline()
@@ -628,6 +629,40 @@ function checkForSpdOutline()
 	end
 end
 
+function checkForRaOutline()
+	if simDR_onGround == 0 and simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2490 and simDR_vs_capt < 0 then
+		if not is_timer_scheduled(disableRAOutline) then
+			B777DR_outlined_RA = 1
+			run_after_time(disableRAOutline, 10)
+		end
+	end
+end
+
+function roundNearest(x)
+	return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
+end
+
+function dispIncrmt(input, increment)
+	local inptMod = input % increment
+	return input - (inptMod) + increment * roundNearest(inptMod / increment)
+end
+
+function setDispRA()
+	if simDR_radio_alt_capt > 100 then
+		B777DR_displayed_ra = dispIncrmt(simDR_radio_alt_capt, 20)
+	else
+		B777DR_displayed_ra = dispIncrmt(simDR_radio_alt_capt, 2)
+	end
+end
+
+function setDispAOA()
+	if B777DR_ias_capt_indicator < 80 then
+		B777DR_displayed_aoa = 0
+	else
+		B777DR_displayed_aoa = dispIncrmt(simDR_aoa, 0.2)
+	end
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--1
@@ -684,27 +719,14 @@ function after_physics()
 		B777_adiru_off()
 	end
 
-	B777DR_adiru_time_remaining_min = string.format("%2.0f", math.floor(B777_adiru_time_remaining_min / 60)) -- %0.2f
-	B777DR_adiru_time_remaining_sec = math.floor(B777_adiru_time_remaining_min / 60 % 1 * 60)
+	B777DR_adiru_time_remaining_min = string.format("%2.0f", math.floor(adiru_time_remaining_min / 60)) -- %0.2f
+	B777DR_adiru_time_remaining_sec = math.floor(adiru_time_remaining_min / 60 % 1 * 60)
 
 	if B777DR_adiru_status == 1 then B777DR_temp_adiru_is_aligning = 1 else B777DR_temp_adiru_is_aligning = 0 end
 
 --	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
-	B777DR_autopilot_alt_mtrs_capt = simDR_autopilot_alt * B777_ft_to_mtrs
-
-	if simDR_onGround == 1 then
-		B777DR_displayed_aoa = 0
-	else
-		B777DR_displayed_aoa = simDR_aoa
-	end
-
-	if simDR_onGround == 0 and simDR_radio_alt_capt <= 2500 and simDR_radio_alt_capt >= 2490 and simDR_vs_capt < 0 then
-		if not is_timer_scheduled(disableRAOutline) then
-			B777DR_outlined_RA = 1
-			run_after_time(disableRAOutline, 10)
-		end
-	end
+	B777DR_autopilot_alt_mtrs_capt = simDR_autopilot_alt * ft_to_mtrs
 
 	if B777DR_nd_mode_selector < 3 then
 		simDR_map_mode = B777DR_nd_mode_selector
@@ -719,6 +741,9 @@ function after_physics()
 	vManeuverMin()
 	weightConv()
 	checkForSpdOutline()
+	setDispRA()
+	setDispAOA()
+	checkForRaOutline()
 
 	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
 		B777DR_hyd_press_low_any = 1
