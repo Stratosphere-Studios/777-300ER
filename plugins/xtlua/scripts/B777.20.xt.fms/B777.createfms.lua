@@ -487,7 +487,6 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
 end
 
 function fms:B777_fms_display()
-  print("RUNNING")
   local thisID = self.id
   if self.inCustomFMC ~= self.targetCustomFMC or self.currentPage ~= self.targetPage or self.pgNo ~= self.targetpgNo then
     for i=1, 14, 1 do
@@ -515,8 +514,8 @@ function fms:B777_fms_display()
       B777DR_fms_s[thisID][14] = "                        "
     end
   else
-    if self.pgNo > fmsPages[page]:getNumPages() then print("IMPORTANT FUNC") self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end --Breaks FMS
-    print("STUPID THING WORKS")
+    --if self.pgNo > fmsPages[page]:getNumPages() then print("IMPORTANT FUNC") self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end --Breaks FMS
+    --print("STUPID THING WORKS")
     if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
     local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
     local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
@@ -533,7 +532,7 @@ function fms:B777_fms_display()
     if string.len(string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]",""))>0 then
       B777DR_fms[thisID][14]=B777DR_srcfms[thisID][14]
       self.notify=B777DR_srcfms[thisID][14]--string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]","")
-      --print("notify["..self.notify.."]")
+      --print("notify["..self.notify.."]") ss777 note
     elseif string.len(self.notify)>0 then
       B777DR_fms[thisID][14] = self.notify
     else

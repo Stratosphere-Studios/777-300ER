@@ -494,7 +494,7 @@ function switchCustomMode()
 	fmsModules["fmsL"]["pgNo"]=fmsModules["fmsL"]["targetpgNo"]
 	fmsModules["fmsC"]["pgNo"]=fmsModules["fmsC"]["targetpgNo"]
 	fmsModules["fmsR"]["pgNo"]=fmsModules["fmsR"]["targetpgNo"]
-	--print("left cdu blanking")
+	print("cdu blanking")
 end
 
 function createPage(page)
@@ -528,20 +528,22 @@ function createPage(page)
 		"                        ",
 		"                        ",
 		"                        ",
-		"                        ",
+		"                        ", 
 		"                        "
 	}
 
 	retVal.getPage=function(self,pgNo) return self.template end
 	retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
-	retVal.getNumPages=function(self) return 1 end
+	print("createPage")
+	retVal.getNumPages=function(self) print("thing") return 1 end
 	fmsFunctionsDefs[page]={}
+	print("createDone")
 	return retVal
 end
 
 dofile("B777.notifications.lua")
 --dofile("irs/irs_system.lua")
---dofile("stuff/B777.fms.pages.lua")
+dofile("B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
 dofile("B777.createfms.lua")
 
@@ -868,7 +870,7 @@ function after_physics()
     fmsL:B777_fms_display()
     fmsC:B777_fms_display()
     fmsR:B777_fms_display()
-	print("FMS WORKING")
+	--print("FMS WORKING")
 	--[[if simDR_bus_volts[0]>24 then ss777 comment
 		irsSystem.update()
 		B777_setNAVRAD()
