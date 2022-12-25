@@ -170,7 +170,7 @@ simDR_hdg_bug                          = find_dataref("sim/cockpit/autopilot/hea
 simDR_hdg                              = find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
 simDR_map_mode                         = find_dataref("sim/cockpit/switches/EFIS_map_submode")
 simDR_ias_trend                        = find_dataref("sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot")
-simDR_airspeed_mach                    = find_dataref("sim/flightmodel/misc/machno")
+simDR_airspeed_mach                    = find_dataref("sim/cockpit2/gauges/indicators/mach_pilot")
 
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
@@ -182,6 +182,7 @@ B777DR_vmax                            = find_dataref("Strato/777/fctl/vmax")
 B777DR_trimref                         = find_dataref("Strato/777/fctl/trs")
 B777DR_vman_min                        = find_dataref("Strato/777/fctl/vmanuever")
 B777DR_cockpit_door_target             = find_dataref("Strato/cockpit/door_target")
+B777DR_ace_fail                        = find_dataref("Strato/777/failures/fctl/ace")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -212,7 +213,6 @@ B777DR_adiru_time_remaining_sec        = deferred_dataref("Strato/777/fltInst/ad
 B777DR_temp_adiru_is_aligning          = deferred_dataref("Strato/777/temp/fltInst/adiru/aligning", "number")
 
 B777DR_airspeed_bug_diff               = deferred_dataref("Strato/777/airspeed_bug_diff", "number")
-B777DR_displayed_gs_mach               = deferred_dataref("Strato/777/displayed_gs_mach", "number")
 B777DR_displayed_aoa                   = deferred_dataref("Strato/777/displayed_aoa", "number")
 B777DR_displayed_ra                    = deferred_dataref("Strato/777/displayed_ra", "number")
 B777DR_outlined_RA                     = deferred_dataref("Strato/777/outlined_RA", "number")
@@ -230,6 +230,7 @@ B777DR_minimums_mode_knob_anim         = deferred_dataref("Strato/777/minimums_m
 B777DR_baro_mode_knob_anim             = deferred_dataref("Strato/777/baro_mode_knob_pos", "number")
 B777DR_heading_bug_diff                = deferred_dataref("Strato/777/heading_bug_diff", "number")
 B777DR_hyd_press_low_any               = deferred_dataref("Strato/777/displays/hyd_press_low_any", "number")
+B777DR_hyd_ace_fail_any                = deferred_dataref("Strato/777/displays/ace_fail_any", "number")
 B777DR_stall_tape_diff                 = deferred_dataref("Strato/777/stall_tape_diff", "number")
 B777DR_ovspd_tape_diff                 = deferred_dataref("Strato/777/ovspd_tape_diff", "number")
 B777DR_trimref_tape_diff               = deferred_dataref("Strato/777/trimref_ovspd_diff", "number")
@@ -250,6 +251,7 @@ B777DR_lbs_kgs_status                  = deferred_dataref("Strato/777/displays/t
 B777DR_txt_SHOW_TRS_BUG_ON_PFD         = deferred_dataref("Strato/777/displays/txt/SHOW_TRS_BUG_ON_PFD", "string")
 B777DR_txt_PFD_AOA_INDICATOR           = deferred_dataref("Strato/777/displays/txt/PFD_AOA_INDICATOR", "string")
 B777DR_txt_SMART_MCP_KNOBS             = deferred_dataref("Strato/777/displays/txt/SMART_MCP_KNOBS", "string")
+B777DR_txt_MACH_GS_PFD                 = deferred_dataref("Strato/777/displays/txt/MACH_GS_PFD", "string")
 
 B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
 B777DR_lbs_kgs                         = deferred_dataref("Strato/777/lbs_kgs", "number")
@@ -259,6 +261,7 @@ B777DR_spd_flash                       = deferred_dataref("Strato/777/displays/i
 B777DR_spd_amber                       = deferred_dataref("Strato/777/displays/ias_amber", "number")
 B777DR_spd_outline                     = deferred_dataref("Strato/777/displays/ias_outline", "number")
 B777DR_smart_knobs                     = deferred_dataref("Strato/777/smart_knobs", "number")
+B777DR_pfd_mach_gs                     = deferred_dataref("Strato/777/pfd_mach_gs", "number")
 
 B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
@@ -513,6 +516,7 @@ function setTXT()
 	B777DR_txt_SHOW_TRS_BUG_ON_PFD = "SHOW TRS BUG ON PFD"
 	B777DR_txt_PFD_AOA_INDICATOR   = "PFD AOA INDICATOR"
 	B777DR_txt_SMART_MCP_KNOBS     = "SMART MCP KNOBS"
+	B777DR_txt_MACH_GS_PFD         = "MACH AND GS ON PFD"
 end
 
 function getHeadingDifference(desireddirection,current_heading)
@@ -687,6 +691,7 @@ function flight_start()
 	B777DR_aoa_enabled = 1
 	B777DR_trs_bug_enabled = 1
 	B777DR_smart_knobs = 1
+	B777DR_pfd_mach_gs = 1
 end
 
 --function flight_crash()
@@ -783,8 +788,11 @@ function after_physics()
 		end
 	end
 
-	B777DR_displayed_gs_mach = simDR_groundSpeed * kts_to_mach
-
+	--[[if B777DR_ace_fail[0] == 1 or B777DR_ace_fail[1] == 1 or B777DR_ace_fail[2] == 1 or B777DR_ace_fail[3] == 1 then
+		B777DR_hyd_ace_fail_any = 1
+	else
+		B777DR_hyd_ace_fail_any = 0
+	end]]
 end
 
 --function after_replay()

@@ -101,7 +101,7 @@ B777DR_ovhd_fwd_button_target             = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_ctr_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target", "array[46]")
 B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/target", "array[24]")
 
-B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[7]")
+B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[8]")
 
 B777DR_ovhd_ctr_cover_positions           = deferred_dataref("Strato/777/cockpit/ovhd/ctr/button_cover/position", "array[5]")
 B777DR_ovhd_aft_cover_positions           = deferred_dataref("Strato/777/cockpit/ovhd/aft/button_cover/position", "array[7]")
@@ -565,6 +565,20 @@ function setEicasPage(id)
 	end
 end
 
+function coverPhysics() -- moves switches under switc covers when switch covers are closed
+   if B777DR_main_cover_positions[4] < 0.1 then -- manual gear extension
+      B777DR_gear_altn_extnsn_target = 0
+   end
+
+   if B777DR_ctr_cover_positions[0] < 0.1 then
+      B777DR_stab_cutout_C = 0
+   end
+
+   if B777DR_ctr_cover_positions[1] < 0.1 then
+      B777DR_stab_cutout_R = 0
+   end
+end
+
 --*************************************************************************************--
 --**                                    EVENT CALLBACKS                              **--
 --*************************************************************************************--
@@ -657,6 +671,8 @@ function after_physics()
    end
 
    B777DR_ovhd_ctr_button_positions[0] = B777_animate(B777DR_grd_pwr_primary, B777DR_ctr_cover_positions[0], 10)
+
+	coverPhysics()
 
 end
 
