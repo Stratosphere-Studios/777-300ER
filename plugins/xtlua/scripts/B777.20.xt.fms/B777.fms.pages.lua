@@ -34,19 +34,19 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	end
 return {
 
-"          MENU          ",
-"                        ",
-"<FMC    <ACT>    SELECT>",
-"                        ",
-acarsS.."    SELECT>",
-"                        ",
-"<SAT                    ",
-"                        ",
+"            MENU            ",
+"                            ",
+"<FMC    <ACT>        SELECT>",
+"                           ",
+acarsS.."        SELECT>",
+"                            ",
+"<SAT                        ",
+"                            ",
 gs1,
-"                        ",
-"<ACMS                   ", 
-"                        ",
-"<CMC             SELECT>"
+"                            ",
+"<ACMS                       ",
+"                            ",
+"<CMC                 SELECT>"
 }
 end
 fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
@@ -57,19 +57,19 @@ fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
     gs2="         GROUND HANDLING"
   end
   return {
-      "                        ",
-      "                 EFIS CP",
-      "                        ",
-      "                EICAS CP",
-      "                        ",
-      "                 CTL PNL",
-      "                        ",
+      "                           ",
+      "                     EFIS CP",
+      "                            ",
+	  "                    EICAS CP",
+      "                            ",
+      "                     CTL PNL",
+      "                            ",
       gs2,
-      "                        ",
-      "                        ",
-      "                        ",
-      "         AIRCRAFT CONFIG",
-      "                        ",
+      "                            ",
+      "                            ",
+      "                            ",
+      "             AIRCRAFT CONFIG",
+      "                            ",
       }
 end
 fmsFunctionsDefs["INDEX"]={}

@@ -260,7 +260,7 @@ P _gear/1/_lonE -9.0
 P _gear/1/_lonN -9.0
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.170852184
+P _gear/1/_stat_def 1.170852304
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -49450,6 +49450,75 @@ GROUP Lower Eicas
         CLICK_DX 0
         CLICK_DY 0
 
+      gen_rotary RUDDER INOP
+        POS 3411.000000 23.500000
+        IMAGE EICAS lower/FCTL/rudder_inop
+        DATAREF 
+        SHOW_EQUAL 1.000000 testNum
+        SIZE 1.350000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary L ELEV INOP
+        POS 3168.000000 78.000000
+        IMAGE EICAS lower/FCTL/inopBig
+        DATAREF 
+        SHOW_EQUAL 1.000000 testNum
+        SIZE 1.350000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary R ELEV INOP
+        POS 3657.000000 78.000000
+        IMAGE EICAS lower/FCTL/inopBig
+        DATAREF 
+        SHOW_EQUAL 1.000000 testNum
+        SIZE 1.350000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
       gen_rotary spoiler bar l1 inop
         POS 3284.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
@@ -51282,12 +51351,13 @@ GROUP MCP
 
 END_GROUP
 GROUP FMSs
+  GROUP_OPEN
   GROUP Center
     GROUP_OPEN
     GROUP Big White
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2298.500000 3821.500000
+        POS 2252.500000 3821.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line01_L
         LIGHT_MODE GLASS_AUTO
@@ -51299,7 +51369,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2298.500000 3781.500000
+        POS 2252.500000 3781.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line02_L
         LIGHT_MODE GLASS_AUTO
@@ -51311,7 +51381,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2298.500000 3741.500000
+        POS 2252.500000 3741.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line03_L
         LIGHT_MODE GLASS_AUTO
@@ -51323,7 +51393,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2297.500000 3703.500000
+        POS 2251.500000 3703.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line04_L
         LIGHT_MODE GLASS_AUTO
@@ -51335,7 +51405,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2298.500000 3662.500000
+        POS 2252.500000 3662.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line05_L
         LIGHT_MODE GLASS_AUTO
@@ -51347,7 +51417,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2298.500000 3623.500000
+        POS 2252.500000 3623.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line06_L
         LIGHT_MODE GLASS_AUTO
@@ -51359,7 +51429,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2297.500000 3585.500000
+        POS 2251.500000 3585.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line07_L
         LIGHT_MODE GLASS_AUTO
@@ -51371,7 +51441,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2297.500000 3545.500000
+        POS 2251.500000 3545.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line08_L
         LIGHT_MODE GLASS_AUTO
@@ -51383,7 +51453,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2297.500000 3505.500000
+        POS 2251.500000 3505.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line09_L
         LIGHT_MODE GLASS_AUTO
@@ -51395,7 +51465,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2296.500000 3466.500000
+        POS 2250.500000 3466.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line10_L
         LIGHT_MODE GLASS_AUTO
@@ -51407,7 +51477,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2297.500000 3426.500000
+        POS 2251.500000 3426.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line11_L
         LIGHT_MODE GLASS_AUTO
@@ -51419,7 +51489,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2297.500000 3387.500000
+        POS 2251.500000 3387.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line12_L
         LIGHT_MODE GLASS_AUTO
@@ -51431,7 +51501,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2296.500000 3350.500000
+        POS 2250.500000 3350.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line13_L
         LIGHT_MODE GLASS_AUTO
@@ -51443,7 +51513,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3311.500000
+        POS 2253.500000 3311.500000
         IMAGE FMS/big_white
         DATAREF Strato/B777/fms3/Line14_L
         LIGHT_MODE GLASS_AUTO
@@ -51458,7 +51528,7 @@ GROUP FMSs
     GROUP Small White
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3823.000000
+        POS 2253.500000 3823.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line01_S
         LIGHT_MODE GLASS_AUTO
@@ -51470,7 +51540,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3783.000000
+        POS 2253.500000 3783.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line02_S
         LIGHT_MODE GLASS_AUTO
@@ -51482,7 +51552,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3743.000000
+        POS 2253.500000 3743.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line03_S
         LIGHT_MODE GLASS_AUTO
@@ -51494,7 +51564,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3705.000000
+        POS 2253.500000 3705.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line04_S
         LIGHT_MODE GLASS_AUTO
@@ -51506,7 +51576,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3664.000000
+        POS 2253.500000 3664.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line05_S
         LIGHT_MODE GLASS_AUTO
@@ -51518,7 +51588,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3625.000000
+        POS 2253.500000 3625.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line06_S
         LIGHT_MODE GLASS_AUTO
@@ -51530,7 +51600,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3587.000000
+        POS 2253.500000 3587.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line07_S
         LIGHT_MODE GLASS_AUTO
@@ -51542,7 +51612,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3547.000000
+        POS 2253.500000 3547.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line08_S
         LIGHT_MODE GLASS_AUTO
@@ -51554,7 +51624,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3507.000000
+        POS 2253.500000 3507.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line09_S
         LIGHT_MODE GLASS_AUTO
@@ -51566,7 +51636,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3471.000000
+        POS 2253.500000 3471.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line10_S
         LIGHT_MODE GLASS_AUTO
@@ -51578,7 +51648,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3428.000000
+        POS 2253.500000 3428.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line11_S
         LIGHT_MODE GLASS_AUTO
@@ -51590,7 +51660,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3389.000000
+        POS 2253.500000 3389.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line12_S
         LIGHT_MODE GLASS_AUTO
@@ -51602,7 +51672,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3352.000000
+        POS 2253.500000 3352.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line13_S
         LIGHT_MODE GLASS_AUTO
@@ -51614,7 +51684,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2299.500000 3315.000000
+        POS 2253.500000 3315.000000
         IMAGE FMS/small_white
         DATAREF Strato/B777/fms3/Line14_S
         LIGHT_MODE GLASS_AUTO

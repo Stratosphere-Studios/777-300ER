@@ -8847,11 +8847,11 @@ IDX	7759
 	ANIM_end
 	ANIM_begin
 	ANIM_trans	0.12421	0.21953	-32.423641	0.12421	0.21953	-32.423641
-	ANIM_rotate_begin	0	1	-0	l stab trim cutout Strato/777/cockpit/ctr/button_cover/position[3]
+	ANIM_rotate_begin	0	1	-0	Strato/777/cockpit/ctr/button_cover/position[3]
 	ANIM_rotate_key	0	179.99985
 	ANIM_rotate_key	1	179.99985
 	ANIM_rotate_end
-	ANIM_rotate_begin	1	0	-0	l stab trim cutout Strato/777/cockpit/ctr/button_cover/position[3]
+	ANIM_rotate_begin	1	0	-0	Strato/777/cockpit/ctr/button_cover/position[3]
 	ANIM_rotate_key	0	179.99985
 	ANIM_rotate_key	1	270.00006
 	ANIM_rotate_end
