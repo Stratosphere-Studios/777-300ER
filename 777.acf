@@ -5062,8 +5062,8 @@ P _body/0/_locked/9,8 0
 P _body/0/_locked/9,9 0
 P _body/0/_locked/i_count 20
 P _body/0/_locked/j_count 18
-P _body/0/_part_area_rule 1.000000000
-P _body/0/_part_cd 0.071000002
+P _body/0/_part_area_rule 0.750000000
+P _body/0/_part_cd 0.083999999
 P _body/0/_part_phi 0.000000000
 P _body/0/_part_psi 0.000000000
 P _body/0/_part_rad 10.300000191
@@ -6533,8 +6533,8 @@ P _body/1/_locked/9,8 0
 P _body/1/_locked/9,9 0
 P _body/1/_locked/i_count 20
 P _body/1/_locked/j_count 18
-P _body/1/_part_area_rule 1.000000000
-P _body/1/_part_cd 0.054000001
+P _body/1/_part_area_rule 0.750000000
+P _body/1/_part_cd 0.067000002
 P _body/1/_part_phi 0.000000000
 P _body/1/_part_psi 0.000000000
 P _body/1/_part_rad 11.000000000
@@ -18229,9 +18229,9 @@ P _wing/2/_spoi1/0 0
 P _wing/2/_spoi1/1 0
 P _wing/2/_spoi1/2 1
 P _wing/2/_spoi1/3 0
-P _wing/2/_spoi1/4 1
+P _wing/2/_spoi1/4 0
 P _wing/2/_spoi1/5 0
-P _wing/2/_spoi1/6 1
+P _wing/2/_spoi1/6 0
 P _wing/2/_spoi1/7 0
 P _wing/2/_spoi1/8 1
 P _wing/2/_spoi1/9 0
@@ -18241,7 +18241,7 @@ P _wing/2/_spoi2/0 0
 P _wing/2/_spoi2/1 1
 P _wing/2/_spoi2/2 0
 P _wing/2/_spoi2/3 1
-P _wing/2/_spoi2/4 0
+P _wing/2/_spoi2/4 1
 P _wing/2/_spoi2/5 1
 P _wing/2/_spoi2/6 0
 P _wing/2/_spoi2/7 0
@@ -20032,9 +20032,9 @@ P _wing/3/_spoi1/0 0
 P _wing/3/_spoi1/1 0
 P _wing/3/_spoi1/2 1
 P _wing/3/_spoi1/3 0
-P _wing/3/_spoi1/4 1
+P _wing/3/_spoi1/4 0
 P _wing/3/_spoi1/5 0
-P _wing/3/_spoi1/6 1
+P _wing/3/_spoi1/6 0
 P _wing/3/_spoi1/7 0
 P _wing/3/_spoi1/8 1
 P _wing/3/_spoi1/9 0
@@ -20044,7 +20044,7 @@ P _wing/3/_spoi2/0 0
 P _wing/3/_spoi2/1 1
 P _wing/3/_spoi2/2 0
 P _wing/3/_spoi2/3 1
-P _wing/3/_spoi2/4 0
+P _wing/3/_spoi2/4 1
 P _wing/3/_spoi2/5 1
 P _wing/3/_spoi2/6 0
 P _wing/3/_spoi2/7 0
@@ -36767,7 +36767,7 @@ P acf/_fixed_role/7 0
 P acf/_fixed_role/8 0
 P acf/_fixed_role/count 9
 P acf/_flap1_cd 0.050000001
-P acf/_flap1_cl 1.299999952
+P acf/_flap1_cl 1.850000024
 P acf/_flap1_cm -0.259000003
 P acf/_flap1_cratR 0.209999993
 P acf/_flap1_cratT 0.209999993
@@ -36791,7 +36791,7 @@ P acf/_flap1_roll 0.000000000
 P acf/_flap1_roll_above_50 0
 P acf/_flap1_type 3
 P acf/_flap2_cd 0.025000000
-P acf/_flap2_cl 1.210000038
+P acf/_flap2_cl 1.710000038
 P acf/_flap2_cm -0.282000005
 P acf/_flap2_cratR 0.200000003
 P acf/_flap2_cratT 0.300000012
@@ -37698,7 +37698,7 @@ P acf/_tank_xyz_full/8,1 0.000000000
 P acf/_tank_xyz_full/8,2 0.000000000
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm -0.912936270
+P acf/_the_eqlbm -0.912935197
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
 P acf/_throt_max_fwd_emr 1.000000000
@@ -44638,9 +44638,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -20.000000 65.000000 1.000000
+      KEY_FRAME -33.000000 65.000000 1.000000
       KEY_FRAME 0.000000 33.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 27.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44654,9 +44654,9 @@ GROUP Lower Eicas
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
-      KEY_FRAME -20.000000 65.000000 1.000000
+      KEY_FRAME -33.000000 65.000000 1.000000
       KEY_FRAME 0.000000 33.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 27.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44727,6 +44727,7 @@ GROUP Lower Eicas
       POS 3144.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_5
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44734,7 +44735,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44743,6 +44744,7 @@ GROUP Lower Eicas
       POS 3092.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler1_deg[2]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_4
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44750,7 +44752,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 45.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44759,6 +44761,7 @@ GROUP Lower Eicas
       POS 3039.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_36
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44766,7 +44769,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44774,7 +44777,8 @@ GROUP Lower Eicas
     gen_pointer spoiler bar l6
       POS 2986.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
-      DATAREF sim/flightmodel2/wing/spoiler1_deg[2]
+      DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_2
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44782,7 +44786,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44791,6 +44795,7 @@ GROUP Lower Eicas
       POS 2934.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_17
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44798,7 +44803,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44839,6 +44844,7 @@ GROUP Lower Eicas
       POS 3667.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_5
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44846,7 +44852,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44855,6 +44861,7 @@ GROUP Lower Eicas
       POS 3719.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler1_deg[3]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_4
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44862,7 +44869,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 45.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44871,6 +44878,7 @@ GROUP Lower Eicas
       POS 3772.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_36
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44878,7 +44886,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44886,7 +44894,8 @@ GROUP Lower Eicas
     gen_pointer spoiler bar r6
       POS 3824.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
-      DATAREF sim/flightmodel2/wing/spoiler1_deg[3]
+      DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_2
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44894,7 +44903,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44903,6 +44912,7 @@ GROUP Lower Eicas
       POS 3877.000000 825.000000
       IMAGE EICAS lower/FCTL/white_bar
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
+      SHOW_EQUAL 0.000000 Strato/777/fctl/ace/ace_spoiler_fail_17
       SIZE 0.500000
       CLIP
       LIGHT_MODE GLASS_AUTO
@@ -44910,7 +44920,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 20.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44918,6 +44928,7 @@ GROUP Lower Eicas
     GROUP Hydraulic Press Low
       SHOW_EQUAL 1.000000 Strato/777/displays/hyd_press_low_any
       CHAINED
+      GROUP_OPEN
       gen_rotary HYDRAULICS
         POS 2935.000000 -150.000000
         IMAGE EICAS lower/FCTL/HYDRAULICS
@@ -45160,16 +45171,14 @@ GROUP Lower Eicas
       CLICK_DY 0
 
     GROUP INOP
-      SHOW_EQUAL 1.000000 testNum
-      HIDE
       CHAINED
+      GROUP_OPEN
       gen_rotary L AIL INOP
         POS 2829.000000 605.000000
         IMAGE EICAS lower/FCTL/inopBig
         DATAREF 
-        SHOW_EQUAL 1.000000 testNum
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ailrn_fail_L
         SIZE 1.350000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -45190,32 +45199,8 @@ GROUP Lower Eicas
         POS 3141.000000 604.000000
         IMAGE EICAS lower/FCTL/inopBig
         DATAREF 
-        SHOW_EQUAL 1.000000 testNum
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/flprn_fail_L
         SIZE 1.350000
-        HIDE
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 1.000000 6.000000
-        DIGITS 1
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-      gen_rotary R AIL INOP
-        POS 3683.000000 604.000000
-        IMAGE EICAS lower/FCTL/inopBig
-        DATAREF 
-        SHOW_EQUAL 1.000000 testNum
-        SIZE 1.350000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -45233,12 +45218,33 @@ GROUP Lower Eicas
         CLICK_DY 0
 
       gen_rotary R FLPRN INOP
+        POS 3683.000000 604.000000
+        IMAGE EICAS lower/FCTL/inopBig
+        DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/flprn_fail_R
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary R  AIL INOP
         POS 3995.000000 604.000000
         IMAGE EICAS lower/FCTL/inopBig
         DATAREF 
-        SHOW_EQUAL 1.000000 testNum
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ailrn_fail_R
         SIZE 1.350000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -45259,9 +45265,8 @@ GROUP Lower Eicas
         POS 3411.000000 23.500000
         IMAGE EICAS lower/FCTL/rudder_inop
         DATAREF 
-        SHOW_EQUAL 1.000000 testNum
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/rudder_fail
         SIZE 1.350000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -45282,9 +45287,8 @@ GROUP Lower Eicas
         POS 3168.000000 78.000000
         IMAGE EICAS lower/FCTL/inopBig
         DATAREF 
-        SHOW_EQUAL 1.000000 testNum
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/elevator_fail_L
         SIZE 1.350000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -45305,9 +45309,8 @@ GROUP Lower Eicas
         POS 3657.000000 78.000000
         IMAGE EICAS lower/FCTL/inopBig
         DATAREF 
-        SHOW_EQUAL 1.000000 testNum
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/elevator_fail_R
         SIZE 1.350000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -45328,9 +45331,9 @@ GROUP Lower Eicas
         POS 3284.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_17
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45351,9 +45354,9 @@ GROUP Lower Eicas
         POS 3231.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_36
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45374,9 +45377,9 @@ GROUP Lower Eicas
         POS 3151.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_5
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45397,9 +45400,9 @@ GROUP Lower Eicas
         POS 3099.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_4
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45420,9 +45423,9 @@ GROUP Lower Eicas
         POS 3046.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_36
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45443,9 +45446,9 @@ GROUP Lower Eicas
         POS 2993.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_2
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45466,9 +45469,9 @@ GROUP Lower Eicas
         POS 2941.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_17
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45489,9 +45492,9 @@ GROUP Lower Eicas
         POS 3541.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_17
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45512,9 +45515,9 @@ GROUP Lower Eicas
         POS 3594.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_36
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45535,9 +45538,9 @@ GROUP Lower Eicas
         POS 3674.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_5
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45558,9 +45561,9 @@ GROUP Lower Eicas
         POS 3726.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_4
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45581,9 +45584,9 @@ GROUP Lower Eicas
         POS 3779.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_36
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45604,9 +45607,9 @@ GROUP Lower Eicas
         POS 3832.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_2
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45627,9 +45630,9 @@ GROUP Lower Eicas
         POS 3884.500000 826.500000
         IMAGE EICAS lower/FCTL/inopSmall
         DATAREF 
+        SHOW_EQUAL 1.000000 Strato/777/fctl/ace/ace_spoiler_fail_17
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.360000
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
