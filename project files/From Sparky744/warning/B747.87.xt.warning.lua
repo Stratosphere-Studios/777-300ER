@@ -1,6 +1,6 @@
 --[[
 *****************************************************************************************
-* Program Script Name	:	B747.87.warning
+* Program Script Name	:	B777.87.warning
 * Author Name			:	Jim Gregory
 *
 *   Revisions:
@@ -21,8 +21,8 @@
 --#####################################################################################--
 --[[
 
-IN ANY SCRIPT THE MESSAGE STATUS DATAREFS "B747DR_CAS_warning_status[X]", 'B747DR_CAS_caution_status[X]",
-"B747DR_CAS_advisory_status[X]", OR "B747DR_CAS_memo_status[X]" SHOULD BE SET = 1 (ONE) OR 0 (ZERO),
+IN ANY SCRIPT THE MESSAGE STATUS DATAREFS "B777DR_CAS_warning_status[X]", 'B777DR_CAS_caution_status[X]",
+"B777DR_CAS_advisory_status[X]", OR "B777DR_CAS_memo_status[X]" SHOULD BE SET = 1 (ONE) OR 0 (ZERO),
 WHICH INDICATES THAT THE EICAS MESSAGE SHOULD BE ACTIVATED OR DE-ACTIVATED.
 
 THEN, THE SYSTEM AUTOMATICALLY COMPARES THE STATUS DATAREFS WITH THE APPROPRIATE MESSAGE
@@ -67,11 +67,11 @@ end
 
 local NUM_ALERT_MESSAGES = 109
 
-local B747_CASmemoMsg ={}
-local B747_CASadvisoryMsg={}
-local B747_CAScautionMsg={}
-local B747_CASwarningMsg={}
-B747_CASwarningMsg   = {
+local B777_CASmemoMsg ={}
+local B777_CASadvisoryMsg={}
+local B777_CAScautionMsg={}
+local B777_CASwarningMsg={}
+B777_CASwarningMsg   = {
     {DRindex = 0, name = ">AUTOPILOT DISC", status = 0},        --
     {DRindex = 1, name = "CABIN ALTITUDE", status = 0},         --
     {DRindex = 2, name = ">CONFIG FLAPS", status = 0},          --
@@ -106,7 +106,7 @@ B747_CASwarningMsg   = {
     {DRindex = 31, name = "ENG 4 FAIL", status = 0}            --
 }
 
-B747_CAScautionMsg   = {
+B777_CAScautionMsg   = {
     {DRindex = 0, name = ">AIRSPEED LOW", status = 0},          --
     {DRindex = 1, name = "ALT DISAGREE", status = 0},
     {DRindex = 2, name = ">ALTITUDE ALERT", status = 0},
@@ -184,7 +184,7 @@ B747_CAScautionMsg   = {
     {DRindex = 74, name = "ELEC GEN OFF 4", status = 0}
 }
 
-B747_CASadvisoryMsg   = {
+B777_CASadvisoryMsg   = {
     {DRindex = 0, name = ">ADC CENTRE", status = 0},
     {DRindex = 1, name = ">ADC LEFT", status = 0},
     {DRindex = 2, name = ">ADC RIGHT", status = 0},
@@ -491,7 +491,7 @@ B747_CASadvisoryMsg   = {
     {DRindex = 303, name = ">FUEL LOW CTR R", status = 0} 
 }
 
-B747_CASmemoMsg   = {
+B777_CASmemoMsg   = {
     {DRindex = 0, name = "ACARS MESSAGE", status = 0},
     {DRindex = 1, name = "APU RUNNING", status = 0},            --
     {DRindex = 2, name = "AUTOBRAKES 1", status = 0},           --
@@ -555,10 +555,10 @@ B747_CASmemoMsg   = {
 --** 					            LOCAL VARIABLES                 				 **--
 --*************************************************************************************--
 
-local B747_CASwarning   = {}
-local B747_CAScaution   = {}
-local B747_CASadvisory  = {}
-local B747_CASmemo      = {}
+local B777_CASwarning   = {}
+local B777_CAScaution   = {}
+local B777_CASadvisory  = {}
+local B777_CASmemo      = {}
 
 
 
@@ -569,7 +569,7 @@ simDR_bus_volts               = find_dataref("sim/cockpit2/electrical/bus_volts"
 
 simDR_startup_running               = find_dataref("sim/operation/prefs/startup_running")
 simDR_all_wheels_on_ground          = find_dataref("sim/flightmodel/failures/onground_any")
-simDR_ind_airspeed_kts_pilot        = find_dataref("laminar/B747/gauges/indicators/airspeed_kts_pilot")
+simDR_ind_airspeed_kts_pilot        = find_dataref("laminar/B777/gauges/indicators/airspeed_kts_pilot")
 
 
 
@@ -578,7 +578,7 @@ simDR_ind_airspeed_kts_pilot        = find_dataref("laminar/B747/gauges/indicato
 --** 				              FIND CUSTOM DATAREFS             			    	 **--
 --*************************************************************************************--
 
-B747DR_airspeed_Vmc                 = find_dataref("laminar/B747/airspeed/Vmc")
+B777DR_airspeed_Vmc                 = find_dataref("laminar/B777/airspeed/Vmc")
 
 
 
@@ -587,51 +587,51 @@ B747DR_airspeed_Vmc                 = find_dataref("laminar/B747/airspeed/Vmc")
 --** 				        CREATE READ-ONLY CUSTOM DATAREFS               	         **--
 --*************************************************************************************--
 simDR_esys1              = find_dataref("sim/operation/failures/rel_esys2")
-B747DR_CAS_warning_status       = deferred_dataref("laminar/B747/CAS/warning_status", string.format("array[%s]", #B747_CASwarningMsg))
-B747DR_CAS_caution_status       = deferred_dataref("laminar/B747/CAS/caution_status", string.format("array[%s]", #B747_CAScautionMsg))
-B747DR_CAS_advisory_status      = deferred_dataref("laminar/B747/CAS/advisory_status", string.format("array[%s]", #B747_CASadvisoryMsg))
-B747DR_CAS_memo_status          = deferred_dataref("laminar/B747/CAS/memo_status", string.format("array[%s]", #B747_CASmemoMsg))
+B777DR_CAS_warning_status       = deferred_dataref("laminar/B777/CAS/warning_status", string.format("array[%s]", #B777_CASwarningMsg))
+B777DR_CAS_caution_status       = deferred_dataref("laminar/B777/CAS/caution_status", string.format("array[%s]", #B777_CAScautionMsg))
+B777DR_CAS_advisory_status      = deferred_dataref("laminar/B777/CAS/advisory_status", string.format("array[%s]", #B777_CASadvisoryMsg))
+B777DR_CAS_memo_status          = deferred_dataref("laminar/B777/CAS/memo_status", string.format("array[%s]", #B777_CASmemoMsg))
 
 
-B747DR_CAS_gen_warning_msg = {}
+B777DR_CAS_gen_warning_msg = {}
 for i = 0, NUM_ALERT_MESSAGES do
-    B747DR_CAS_gen_warning_msg[i] = deferred_dataref(string.format("laminar/B747/CAS/gen_warning_msg_%03d", i), "string")
+    B777DR_CAS_gen_warning_msg[i] = deferred_dataref(string.format("laminar/B777/CAS/gen_warning_msg_%03d", i), "string")
 end
 
-B747DR_CAS_gen_caution_msg = {}
+B777DR_CAS_gen_caution_msg = {}
 for i = 0, NUM_ALERT_MESSAGES do
-    B747DR_CAS_gen_caution_msg[i] = deferred_dataref(string.format("laminar/B747/CAS/gen_caution_msg_%03d", i), "string")
+    B777DR_CAS_gen_caution_msg[i] = deferred_dataref(string.format("laminar/B777/CAS/gen_caution_msg_%03d", i), "string")
 end
 
-B747DR_CAS_gen_advisory_msg = {}
+B777DR_CAS_gen_advisory_msg = {}
 for i = 0, NUM_ALERT_MESSAGES do
-    B747DR_CAS_gen_advisory_msg[i] = deferred_dataref(string.format("laminar/B747/CAS/gen_advisory_msg_%03d", i), "string")
+    B777DR_CAS_gen_advisory_msg[i] = deferred_dataref(string.format("laminar/B777/CAS/gen_advisory_msg_%03d", i), "string")
 end
 
-B747DR_CAS_gen_memo_msg = {}
+B777DR_CAS_gen_memo_msg = {}
 for i = 0, NUM_ALERT_MESSAGES do
-    B747DR_CAS_gen_memo_msg[i] = deferred_dataref(string.format("laminar/B747/CAS/gen_memo_msg_%03d", i), "string")
+    B777DR_CAS_gen_memo_msg[i] = deferred_dataref(string.format("laminar/B777/CAS/gen_memo_msg_%03d", i), "string")
 end
 
 
-B747DR_CAS_recall_ind           = deferred_dataref("laminar/B747/CAS/recall_ind", "number")
-B747DR_CAS_sec_eng_exceed_cue   = deferred_dataref("laminar/B747/CAS/sec_eng_exceed_cue", "number")
-B747DR_CAS_status_cue           = deferred_dataref("laminar/B747/CAS/status_cue", "number")
-B747DR_CAS_msg_page             = deferred_dataref("laminar/B747/CAS/msg_page", "number")
-B747DR_CAS_num_msg_pages        = deferred_dataref("laminar/B747/CAS/num_msg_pages", "number")
-B747DR_CAS_caut_adv_display     = deferred_dataref("laminar/B747/CAS/caut_adv_display", "number")
+B777DR_CAS_recall_ind           = deferred_dataref("laminar/B777/CAS/recall_ind", "number")
+B777DR_CAS_sec_eng_exceed_cue   = deferred_dataref("laminar/B777/CAS/sec_eng_exceed_cue", "number")
+B777DR_CAS_status_cue           = deferred_dataref("laminar/B777/CAS/status_cue", "number")
+B777DR_CAS_msg_page             = deferred_dataref("laminar/B777/CAS/msg_page", "number")
+B777DR_CAS_num_msg_pages        = deferred_dataref("laminar/B777/CAS/num_msg_pages", "number")
+B777DR_CAS_caut_adv_display     = deferred_dataref("laminar/B777/CAS/caut_adv_display", "number")
 
 
-B747DR_master_warning           = find_dataref("laminar/B747/warning/master_warning")
-B747DR_warning_bell           	= deferred_dataref("laminar/B747/warning/warning_bell")
-B747DR_warning_siren           	= deferred_dataref("laminar/B747/warning/warning_siren")
-B747DR_warning_wailer           = deferred_dataref("laminar/B747/warning/warning_wailer")
-B747DR_master_caution           = find_dataref("laminar/B747/warning/master_caution")
-B747DR_master_caution_audio     = find_dataref("laminar/B747/warning/master_caution_audio")
-B747DR_fire_ovht_button_pos     = deferred_dataref("laminar/B747/fire/fire_ovht/button_pos", "number")
-B747DR_engine_fire              = find_dataref("sim/cockpit2/annunciators/engine_fire")
-B747DR_apu_fire                 = find_dataref("sim/operation/failures/rel_apu_fire")
-B747DR_init_warning_CD          = deferred_dataref("laminar/B747/warning/init_CD", "number")
+B777DR_master_warning           = find_dataref("laminar/B777/warning/master_warning")
+B777DR_warning_bell           	= deferred_dataref("laminar/B777/warning/warning_bell")
+B777DR_warning_siren           	= deferred_dataref("laminar/B777/warning/warning_siren")
+B777DR_warning_wailer           = deferred_dataref("laminar/B777/warning/warning_wailer")
+B777DR_master_caution           = find_dataref("laminar/B777/warning/master_caution")
+B777DR_master_caution_audio     = find_dataref("laminar/B777/warning/master_caution_audio")
+B777DR_fire_ovht_button_pos     = deferred_dataref("laminar/B777/fire/fire_ovht/button_pos", "number")
+B777DR_engine_fire              = find_dataref("sim/cockpit2/annunciators/engine_fire")
+B777DR_apu_fire                 = find_dataref("sim/operation/failures/rel_apu_fire")
+B777DR_init_warning_CD          = deferred_dataref("laminar/B777/warning/init_CD", "number")
 
 
 
@@ -663,11 +663,11 @@ B747DR_init_warning_CD          = deferred_dataref("laminar/B747/warning/init_CD
 --** 				              CUSTOM COMMAND HANDLERS            			     **--
 --*************************************************************************************--
 
-function B747_ai_warning_quick_start_CMDhandler(phase, duration)
+function B777_ai_warning_quick_start_CMDhandler(phase, duration)
     if phase == 0 then
-		B747_set_warning_all_modes()
-		B747_set_warning_CD()
-		B747_set_warning_ER()	
+		B777_set_warning_all_modes()
+		B777_set_warning_CD()
+		B777_set_warning_ER()	
 	end 	
 end	
 
@@ -679,7 +679,7 @@ end
 --*************************************************************************************--
 
 -- AI
-B747CMD_ai_warning_quick_start			= deferred_command("laminar/B747/ai/warning_quick_start", "number", B747_ai_warning_quick_start_CMDhandler)
+B777CMD_ai_warning_quick_start			= deferred_command("laminar/B777/ai/warning_quick_start", "number", B777_ai_warning_quick_start_CMDhandler)
 
 
 
@@ -700,7 +700,7 @@ B747CMD_ai_warning_quick_start			= deferred_command("laminar/B747/ai/warning_qui
 --*************************************************************************************--
 
 ----- RESCALE FLOAT AND CLAMP TO OUTER LIMITS -------------------------------------------
-function B747_rescale(in1, out1, in2, out2, x)
+function B777_rescale(in1, out1, in2, out2, x)
 
     if x < in1 then return out1 end
     if x > in2 then return out2 end
@@ -712,49 +712,49 @@ end
 
 
 ----- TERNARY CONDITIONAL ---------------------------------------------------------------
-function B747_ternary(condition, ifTrue, ifFalse)
+function B777_ternary(condition, ifTrue, ifFalse)
     if condition then return ifTrue else return ifFalse end
 end
 
 
 ----- CREW ALERT MESSAGE TABLE REMOVE ---------------------------------------------------
-function B747_removeWarning(message)
+function B777_removeWarning(message)
 
-    for i = #B747_CASwarning, 1, -1 do
-        if B747_CASwarning[i] == message then
-            table.remove(B747_CASwarning, i)
+    for i = #B777_CASwarning, 1, -1 do
+        if B777_CASwarning[i] == message then
+            table.remove(B777_CASwarning, i)
             break
         end
     end
 
 end
 
-function B747_removeCaution(message)
+function B777_removeCaution(message)
 
-    for i = #B747_CAScaution, 1, -1 do
-        if B747_CAScaution[i] == message then
-            table.remove(B747_CAScaution, i)
+    for i = #B777_CAScaution, 1, -1 do
+        if B777_CAScaution[i] == message then
+            table.remove(B777_CAScaution, i)
             break
         end
     end
 
 end
 
-function B747_removeAdvisory(message)
+function B777_removeAdvisory(message)
 
-    for i = #B747_CASadvisory, 1, -1 do
-        if B747_CASadvisory[i] == message then
-            table.remove(B747_CASadvisory, i)
+    for i = #B777_CASadvisory, 1, -1 do
+        if B777_CASadvisory[i] == message then
+            table.remove(B777_CASadvisory, i)
             break
         end
     end
 
 end
 
-function B747_removeMemo(message)
-    for i = #B747_CASmemo, 1, -1 do
-        if B747_CASmemo[i] == message then
-            table.remove(B747_CASmemo, i)
+function B777_removeMemo(message)
+    for i = #B777_CASmemo, 1, -1 do
+        if B777_CASmemo[i] == message then
+            table.remove(B777_CASmemo, i)
             break
         end
     end
@@ -764,106 +764,106 @@ end
 
 
 function cleanAllWhenOff()
-  for i = 1, #B747_CASwarningMsg do
-    B747_removeWarning(B747_CASwarningMsg[i].name)   
-    B747_CASwarningMsg[i].status=0
+  for i = 1, #B777_CASwarningMsg do
+    B777_removeWarning(B777_CASwarningMsg[i].name)   
+    B777_CASwarningMsg[i].status=0
   end
-  for i = 1, #B747_CAScautionMsg do
-    B747_removeCaution(B747_CAScautionMsg[i].name)
-    B747_CAScautionMsg[i].status=0
+  for i = 1, #B777_CAScautionMsg do
+    B777_removeCaution(B777_CAScautionMsg[i].name)
+    B777_CAScautionMsg[i].status=0
   end
-  for i = 1, #B747_CASadvisoryMsg do
-    B747_removeAdvisory(B747_CASadvisoryMsg[i].name) 
-    B747_CASadvisoryMsg[i].status=0
+  for i = 1, #B777_CASadvisoryMsg do
+    B777_removeAdvisory(B777_CASadvisoryMsg[i].name) 
+    B777_CASadvisoryMsg[i].status=0
   end
-  for i = 1, #B747_CASmemoMsg do
-     B747_removeMemo(B747_CASmemoMsg[i].name)
-     B747_CASmemoMsg[i].status = 0
+  for i = 1, #B777_CASmemoMsg do
+     B777_removeMemo(B777_CASmemoMsg[i].name)
+     B777_CASmemoMsg[i].status = 0
   end
 
-    B747DR_master_caution = 0                                                   -- SET THE MASTER CAUTION
-    B747DR_master_caution_audio     = 0
-    B747DR_master_warning = 0
-    B747DR_warning_bell           	= 0
-    B747DR_warning_siren           	= 0
-    B747DR_warning_wailer           = 0
+    B777DR_master_caution = 0                                                   -- SET THE MASTER CAUTION
+    B777DR_master_caution_audio     = 0
+    B777DR_master_warning = 0
+    B777DR_warning_bell           	= 0
+    B777DR_warning_siren           	= 0
+    B777DR_warning_wailer           = 0
     
 end
 
 function stop_caution_audio()
-    B747DR_master_caution_audio     = 0
+    B777DR_master_caution_audio     = 0
 end
 ----- BUILD THE ALERT QUEUE -------------------------------------------------------------
-function B747_CAS_queue() 
+function B777_CAS_queue() 
 
     ----- WARNINGS
-    for i = 1, #B747_CASwarningMsg do                                                                   -- ITERATE THE WARNINGS DATA TABLE
+    for i = 1, #B777_CASwarningMsg do                                                                   -- ITERATE THE WARNINGS DATA TABLE
 
-        if B747_CASwarningMsg[i].status ~= B747DR_CAS_warning_status[B747_CASwarningMsg[i].DRindex] then -- THE WARNING STATUS HAS CHANGED
+        if B777_CASwarningMsg[i].status ~= B777DR_CAS_warning_status[B777_CASwarningMsg[i].DRindex] then -- THE WARNING STATUS HAS CHANGED
 
-            if B747DR_CAS_warning_status[B747_CASwarningMsg[i].DRindex] == 1 then                       -- WARNING IS ACTIVE
-                table.insert(B747_CASwarning, B747_CASwarningMsg[i].name)                               -- ADD TO THE WARNING QUEUE
-                B747DR_master_warning = 1
+            if B777DR_CAS_warning_status[B777_CASwarningMsg[i].DRindex] == 1 then                       -- WARNING IS ACTIVE
+                table.insert(B777_CASwarning, B777_CASwarningMsg[i].name)                               -- ADD TO THE WARNING QUEUE
+                B777DR_master_warning = 1
                                                                                -- SET THE MASTER WARNING
                 if i==1 then --AP disconnect? 
-                    B747DR_warning_wailer = 1
+                    B777DR_warning_wailer = 1
                 end
-            elseif B747DR_CAS_warning_status[B747_CASwarningMsg[i].DRindex] == 0 then                   -- WARNING IS INACTIVE
-                B747_removeWarning(B747_CASwarningMsg[i].name)                                          -- REMOVE FROM THE WARNING QUEUE
+            elseif B777DR_CAS_warning_status[B777_CASwarningMsg[i].DRindex] == 0 then                   -- WARNING IS INACTIVE
+                B777_removeWarning(B777_CASwarningMsg[i].name)                                          -- REMOVE FROM THE WARNING QUEUE
             end
-            B747_CASwarningMsg[i].status = B747DR_CAS_warning_status[B747_CASwarningMsg[i].DRindex]     -- RESET WARNING STATUS
+            B777_CASwarningMsg[i].status = B777DR_CAS_warning_status[B777_CASwarningMsg[i].DRindex]     -- RESET WARNING STATUS
 
         end
 
     end
-    if #B747_CASwarning == 0 and B747DR_fire_ovht_button_pos==0 then 
-      B747DR_master_warning = 0 
-    elseif B747DR_fire_ovht_button_pos==1 then 
-      B747DR_master_warning = 1 
+    if #B777_CASwarning == 0 and B777DR_fire_ovht_button_pos==0 then 
+      B777DR_master_warning = 0 
+    elseif B777DR_fire_ovht_button_pos==1 then 
+      B777DR_master_warning = 1 
     end 
-    if B747DR_master_warning == 1 then
+    if B777DR_master_warning == 1 then
         --is there fire?
-        if B747DR_fire_ovht_button_pos > 0 or B747DR_engine_fire > 0 or B747DR_apu_fire > 0 then
-            B747DR_warning_bell           	= 1
-        elseif B747DR_warning_wailer == 0 then
-            B747DR_warning_siren = 1
+        if B777DR_fire_ovht_button_pos > 0 or B777DR_engine_fire > 0 or B777DR_apu_fire > 0 then
+            B777DR_warning_bell           	= 1
+        elseif B777DR_warning_wailer == 0 then
+            B777DR_warning_siren = 1
         end   
 
     else
-        B747DR_warning_bell           	= 0
-        B747DR_warning_siren           	= 0
-        B747DR_warning_wailer           = 0
+        B777DR_warning_bell           	= 0
+        B777DR_warning_siren           	= 0
+        B777DR_warning_wailer           = 0
     end
     ----- CAUTIONS
-    for i = 1, #B747_CAScautionMsg do                                                      -- ITERATE THE CAUTIONS DATA TABLE
+    for i = 1, #B777_CAScautionMsg do                                                      -- ITERATE THE CAUTIONS DATA TABLE
 
-        if B747_CAScautionMsg[i].status ~= B747DR_CAS_caution_status[B747_CAScautionMsg[i].DRindex] then -- THE CAUTION STATUS HAS CHANGED
+        if B777_CAScautionMsg[i].status ~= B777DR_CAS_caution_status[B777_CAScautionMsg[i].DRindex] then -- THE CAUTION STATUS HAS CHANGED
 
-            if B747DR_CAS_caution_status[B747_CAScautionMsg[i].DRindex] == 1 then                 -- CAUTION IS ACTIVE
-                table.insert(B747_CAScaution, B747_CAScautionMsg[i].name)                  -- ADD TO THE CAUTION QUEUE
-                B747DR_master_caution = 1                                                   -- SET THE MASTER CAUTION
-                B747DR_master_caution_audio     = 1
+            if B777DR_CAS_caution_status[B777_CAScautionMsg[i].DRindex] == 1 then                 -- CAUTION IS ACTIVE
+                table.insert(B777_CAScaution, B777_CAScautionMsg[i].name)                  -- ADD TO THE CAUTION QUEUE
+                B777DR_master_caution = 1                                                   -- SET THE MASTER CAUTION
+                B777DR_master_caution_audio     = 1
                 run_after_time(stop_caution_audio,1)
-            elseif B747DR_CAS_caution_status[B747_CAScautionMsg[i].DRindex] == 0 then             -- CAUTION IS INACTIVE
-                B747_removeCaution(B747_CAScautionMsg[i].name)                             -- REMOVE FROM THE CAUTION QUEUE
+            elseif B777DR_CAS_caution_status[B777_CAScautionMsg[i].DRindex] == 0 then             -- CAUTION IS INACTIVE
+                B777_removeCaution(B777_CAScautionMsg[i].name)                             -- REMOVE FROM THE CAUTION QUEUE
             end
-            B747_CAScautionMsg[i].status = B747DR_CAS_caution_status[B747_CAScautionMsg[i].DRindex]  -- RESET CAUTION STATUS
+            B777_CAScautionMsg[i].status = B777DR_CAS_caution_status[B777_CAScautionMsg[i].DRindex]  -- RESET CAUTION STATUS
         end
 
     end
-    if #B747_CAScaution == 0 then B747DR_master_caution = 0 end  
+    if #B777_CAScaution == 0 then B777DR_master_caution = 0 end  
 
     ----- ADVISORIES
-    for i = 1, #B747_CASadvisoryMsg do                                                      -- ITERATE THE CAUTIONS DATA TABLE
+    for i = 1, #B777_CASadvisoryMsg do                                                      -- ITERATE THE CAUTIONS DATA TABLE
 
-        if B747_CASadvisoryMsg[i].status ~= B747DR_CAS_advisory_status[B747_CASadvisoryMsg[i].DRindex] then -- THE CAUTION STATUS HAS CHANGED
+        if B777_CASadvisoryMsg[i].status ~= B777DR_CAS_advisory_status[B777_CASadvisoryMsg[i].DRindex] then -- THE CAUTION STATUS HAS CHANGED
 
-            if B747DR_CAS_advisory_status[B747_CASadvisoryMsg[i].DRindex] == 1 then                 -- CAUTION IS ACTIVE
-                table.insert(B747_CASadvisory, B747_CASadvisoryMsg[i].name)                  -- ADD TO THE CAUTION QUEUE
-            elseif B747DR_CAS_advisory_status[B747_CASadvisoryMsg[i].DRindex] == 0 then             -- CAUTION IS INACTIVE
-                B747_removeAdvisory(B747_CASadvisoryMsg[i].name)                             -- REMOVE FROM THE CAUTION QUEUE
+            if B777DR_CAS_advisory_status[B777_CASadvisoryMsg[i].DRindex] == 1 then                 -- CAUTION IS ACTIVE
+                table.insert(B777_CASadvisory, B777_CASadvisoryMsg[i].name)                  -- ADD TO THE CAUTION QUEUE
+            elseif B777DR_CAS_advisory_status[B777_CASadvisoryMsg[i].DRindex] == 0 then             -- CAUTION IS INACTIVE
+                B777_removeAdvisory(B777_CASadvisoryMsg[i].name)                             -- REMOVE FROM THE CAUTION QUEUE
             end
-            B747_CASadvisoryMsg[i].status = B747DR_CAS_advisory_status[B747_CASadvisoryMsg[i].DRindex]  -- RESET CAUTION STATUS
+            B777_CASadvisoryMsg[i].status = B777DR_CAS_advisory_status[B777_CASadvisoryMsg[i].DRindex]  -- RESET CAUTION STATUS
 
         end
 
@@ -871,16 +871,16 @@ function B747_CAS_queue()
 
     ----- MEMOS
     
-    for i = 1, #B747_CASmemoMsg do                                                          -- ITERATE THE CAUTIONS DATA TABLE
+    for i = 1, #B777_CASmemoMsg do                                                          -- ITERATE THE CAUTIONS DATA TABLE
 	
-        if B747_CASmemoMsg[i].status ~= B747DR_CAS_memo_status[B747_CASmemoMsg[i].DRindex] then    -- THE CAUTION STATUS HAS CHANGED
+        if B777_CASmemoMsg[i].status ~= B777DR_CAS_memo_status[B777_CASmemoMsg[i].DRindex] then    -- THE CAUTION STATUS HAS CHANGED
 
-            if B747DR_CAS_memo_status[B747_CASmemoMsg[i].DRindex] == 1 then                        -- CAUTION IS ACTIVE
-                table.insert(B747_CASmemo, B747_CASmemoMsg[i].name)                         -- ADD TO THE CAUTION QUEUE
-            elseif B747DR_CAS_memo_status[B747_CASmemoMsg[i].DRindex] == 0 then                    -- CAUTION IS INACTIVE
-                B747_removeMemo(B747_CASmemoMsg[i].name)                                -- REMOVE FROM THE CAUTION QUEUE
+            if B777DR_CAS_memo_status[B777_CASmemoMsg[i].DRindex] == 1 then                        -- CAUTION IS ACTIVE
+                table.insert(B777_CASmemo, B777_CASmemoMsg[i].name)                         -- ADD TO THE CAUTION QUEUE
+            elseif B777DR_CAS_memo_status[B777_CASmemoMsg[i].DRindex] == 0 then                    -- CAUTION IS INACTIVE
+                B777_removeMemo(B777_CASmemoMsg[i].name)                                -- REMOVE FROM THE CAUTION QUEUE
             end
-            B747_CASmemoMsg[i].status = B747DR_CAS_memo_status[B747_CASmemoMsg[i].DRindex]         -- RESET CAUTION STATUS
+            B777_CASmemoMsg[i].status = B777DR_CAS_memo_status[B777_CASmemoMsg[i].DRindex]         -- RESET CAUTION STATUS
 
         end
 
@@ -895,44 +895,44 @@ local powered = false
 
 
 ----- BUILD THE CAS DISPLAY PAGES -------------------------------------------------------
-function B747_CAS_display()
+function B777_CAS_display()
     
-    B747DR_CAS_num_msg_pages = #B747_CASwarning
-    if #B747_CASwarning < 11 then
-        B747DR_CAS_num_msg_pages = math.ceil(math.max(10, (#B747_CASwarning + #B747_CAScaution + #B747_CASadvisory + #B747_CASmemo)) / 11)
+    B777DR_CAS_num_msg_pages = #B777_CASwarning
+    if #B777_CASwarning < 11 then
+        B777DR_CAS_num_msg_pages = math.ceil(math.max(10, (#B777_CASwarning + #B777_CAScaution + #B777_CASadvisory + #B777_CASmemo)) / 11)
     end
-    local numAlertPages = 10 --math.ceil((#B747_CASwarning + #B747_CAScaution + #B747_CASadvisory + #B747_CASmemo) / 11)  -- TODO:  CHANGE TO FIXED NUMBER OF PAGES (GENERIC MESSAGES)
+    local numAlertPages = 10 --math.ceil((#B777_CASwarning + #B777_CAScaution + #B777_CASadvisory + #B777_CASmemo) / 11)  -- TODO:  CHANGE TO FIXED NUMBER OF PAGES (GENERIC MESSAGES)
     local genIndex = 0
     local lastGenIndex = 0
 
     -- RESET ALL MESSAGES
     --[[for x = 0, NUM_ALERT_MESSAGES do
-        B747DR_CAS_gen_warning_msg[x] = " "
-        B747DR_CAS_gen_caution_msg[x] = " "
-        B747DR_CAS_gen_advisory_msg[x] = " "
-        B747DR_CAS_gen_memo_msg[x] = " "
+        B777DR_CAS_gen_warning_msg[x] = " "
+        B777DR_CAS_gen_caution_msg[x] = " "
+        B777DR_CAS_gen_advisory_msg[x] = " "
+        B777DR_CAS_gen_memo_msg[x] = " "
     end]]
-    local set_B747DR_CAS_gen_warning_msg={}
-    local set_B747DR_CAS_gen_caution_msg={}
-    local set_B747DR_CAS_gen_advisory_msg={}
-    local set_B747DR_CAS_gen_memo_msg={}
+    local set_B777DR_CAS_gen_warning_msg={}
+    local set_B777DR_CAS_gen_caution_msg={}
+    local set_B777DR_CAS_gen_advisory_msg={}
+    local set_B777DR_CAS_gen_memo_msg={}
     for x = 0, NUM_ALERT_MESSAGES do
-        set_B747DR_CAS_gen_warning_msg[x] = 0
-        set_B747DR_CAS_gen_caution_msg[x] = 0
-        set_B747DR_CAS_gen_advisory_msg[x] = 0
-        set_B747DR_CAS_gen_memo_msg[x] = 0
+        set_B777DR_CAS_gen_warning_msg[x] = 0
+        set_B777DR_CAS_gen_caution_msg[x] = 0
+        set_B777DR_CAS_gen_advisory_msg[x] = 0
+        set_B777DR_CAS_gen_memo_msg[x] = 0
     end
     ----- WARNINGS ----------------------------------------------------------------------
 
-    for i = #B747_CASwarning, 1, -1 do                                                      -- REVERSE ITERATE THE TABLE (GET MOST RECENT FIRST)
+    for i = #B777_CASwarning, 1, -1 do                                                      -- REVERSE ITERATE THE TABLE (GET MOST RECENT FIRST)
 
-        B747DR_CAS_gen_warning_msg[genIndex] = B747_CASwarning[i]                               -- ASSIGN ALERT TO WARNING GENERIC
-        set_B747DR_CAS_gen_warning_msg[genIndex] = 1						-- MARK IT USED
+        B777DR_CAS_gen_warning_msg[genIndex] = B777_CASwarning[i]                               -- ASSIGN ALERT TO WARNING GENERIC
+        set_B777DR_CAS_gen_warning_msg[genIndex] = 1						-- MARK IT USED
 	lastGenIndex = genIndex
-        if #B747_CASwarning < 11 then                                                       -- NUM WARNINGS FILLS OR EXCEEDS ONE PAGE
+        if #B777_CASwarning < 11 then                                                       -- NUM WARNINGS FILLS OR EXCEEDS ONE PAGE
             for page = 2, numAlertPages  do                                                 -- ITERATE ALL OTHER ALERT PAGES
-                B747DR_CAS_gen_warning_msg[((page*11)-11) + genIndex] = B747DR_CAS_gen_warning_msg[genIndex]    -- DUPLICATE THE WARNING FOR ALL PAGES
-		set_B747DR_CAS_gen_warning_msg[genIndex] = 1						-- MARK IT USED
+                B777DR_CAS_gen_warning_msg[((page*11)-11) + genIndex] = B777DR_CAS_gen_warning_msg[genIndex]    -- DUPLICATE THE WARNING FOR ALL PAGES
+		set_B777DR_CAS_gen_warning_msg[genIndex] = 1						-- MARK IT USED
             end
         end
         genIndex = genIndex + 1                                                             -- INCREMENT THE GENERIC INDEX
@@ -940,19 +940,19 @@ function B747_CAS_display()
     end
 
 
-    if #B747_CASwarning < 11 then                                                           -- FIRST PAGE NOT FULL OF WARNINGS - OK TO PROCEED
+    if #B777_CASwarning < 11 then                                                           -- FIRST PAGE NOT FULL OF WARNINGS - OK TO PROCEED
 
-        if B747DR_CAS_caut_adv_display == 1 then
+        if B777DR_CAS_caut_adv_display == 1 then
 
             ----- CAUTIONS --------------------------------------------------------------
-            for i = #B747_CAScaution, 1, -1 do                                                      -- REVERSE ITERATE THE TABLE (MOST RECENT MESSAGE FIRST)
+            for i = #B777_CAScaution, 1, -1 do                                                      -- REVERSE ITERATE THE TABLE (MOST RECENT MESSAGE FIRST)
 
-                B747DR_CAS_gen_caution_msg[genIndex] = B747_CAScaution[i]                           -- ASSIGN ALERT TO CAUTION GENERIC
-		set_B747DR_CAS_gen_caution_msg[genIndex] =1						-- MARK IT USED
+                B777DR_CAS_gen_caution_msg[genIndex] = B777_CAScaution[i]                           -- ASSIGN ALERT TO CAUTION GENERIC
+		set_B777DR_CAS_gen_caution_msg[genIndex] =1						-- MARK IT USED
                 lastGenIndex = genIndex
                 genIndex = genIndex + 1                                                             -- INCREMENT THE GENERIC INDEX
                 if math.fmod(genIndex, 11) == 0 then                                                -- END OF PAGE
-                    genIndex = genIndex + #B747_CASwarning                                          -- INCREMENT THE INDEX BY THE NUM OF WARNINGS DISPLAYED (FOR NEXT PAGE)
+                    genIndex = genIndex + #B777_CASwarning                                          -- INCREMENT THE INDEX BY THE NUM OF WARNINGS DISPLAYED (FOR NEXT PAGE)
                 end
 
 
@@ -960,14 +960,14 @@ function B747_CAS_display()
 
 
             ----- ADVISORIES ------------------------------------------------------------
-            for i = #B747_CASadvisory, 1, -1 do                                                     -- REVERSE ITERATE THE TABLE (MOST RECENT MESSAGE FIRST)
+            for i = #B777_CASadvisory, 1, -1 do                                                     -- REVERSE ITERATE THE TABLE (MOST RECENT MESSAGE FIRST)
 
-                B747DR_CAS_gen_advisory_msg[genIndex] = B747_CASadvisory[i]                             -- ASSIGN ALERT TO ADVISORY GENERIC
-                set_B747DR_CAS_gen_advisory_msg[genIndex] = 1						-- MARK IT USED
+                B777DR_CAS_gen_advisory_msg[genIndex] = B777_CASadvisory[i]                             -- ASSIGN ALERT TO ADVISORY GENERIC
+                set_B777DR_CAS_gen_advisory_msg[genIndex] = 1						-- MARK IT USED
 		lastGenIndex = genIndex
                 genIndex = genIndex + 1                                                             -- INCREMENT THE GENERIC INDEX
                 if math.fmod(genIndex, 11) == 0 then                                                -- END OF PAGE
-                    genIndex = genIndex + #B747_CASwarning                                          -- INCREMENT THE INDEX BY THE NUM OF WARNINGS DISPLAYED (FOR NEXT PAGE)
+                    genIndex = genIndex + #B777_CASwarning                                          -- INCREMENT THE INDEX BY THE NUM OF WARNINGS DISPLAYED (FOR NEXT PAGE)
                 end
 
             end
@@ -984,7 +984,7 @@ function B747_CAS_display()
 
         genIndex = ((memoStartPage * 10) + (memoStartPage - 1))                                 -- START DISPLAY AT BOTTOM OF CURRENT PAGE
 
-        for i = #B747_CASmemo, 1, -1 do                                                         -- REVERSE ITERATE THE TABLE (MOST RECENT MESSAGE FIRST)
+        for i = #B777_CASmemo, 1, -1 do                                                         -- REVERSE ITERATE THE TABLE (MOST RECENT MESSAGE FIRST)
 
             -- FIRST PAGE IS FILLED
             if memoPageCheck == 1                                                               -- OK TO PERFORM CHECK
@@ -999,21 +999,21 @@ function B747_CAS_display()
                 memoPageCheck = 0                                                               -- SET THE FLAG TO STOP PAGE CHECK
             end
 
-            B747DR_CAS_gen_memo_msg[genIndex] = B747_CASmemo[i]                                     -- ASSIGN MEMO TO GENERIC
-            set_B747DR_CAS_gen_memo_msg[genIndex] = 1
+            B777DR_CAS_gen_memo_msg[genIndex] = B777_CASmemo[i]                                     -- ASSIGN MEMO TO GENERIC
+            set_B777DR_CAS_gen_memo_msg[genIndex] = 1
 	    genIndex = genIndex + increment                                                     -- ADJUST THE GENERIC INDEX
             if math.fmod(genIndex, 10) == 0 then                                                -- END OF PAGE
-                genIndex = genIndex + #B747_CASwarning                                          -- INCREMENT THE INDEX BY THE NUM OF WARNINGS DISPLAYED (FOR NEXT PAGE)
+                genIndex = genIndex + #B777_CASwarning                                          -- INCREMENT THE INDEX BY THE NUM OF WARNINGS DISPLAYED (FOR NEXT PAGE)
             end
 
         end
     end
     for x = 0, NUM_ALERT_MESSAGES do
 
-      if set_B747DR_CAS_gen_warning_msg[x]==0 then B747DR_CAS_gen_warning_msg[x] = " " end
-      if set_B747DR_CAS_gen_caution_msg[x]==0 then B747DR_CAS_gen_caution_msg[x] = " " end
-      if set_B747DR_CAS_gen_advisory_msg[x]==0 then B747DR_CAS_gen_advisory_msg[x] = " " end
-      if set_B747DR_CAS_gen_memo_msg[x]==0 then B747DR_CAS_gen_memo_msg[x] = " " end
+      if set_B777DR_CAS_gen_warning_msg[x]==0 then B777DR_CAS_gen_warning_msg[x] = " " end
+      if set_B777DR_CAS_gen_caution_msg[x]==0 then B777DR_CAS_gen_caution_msg[x] = " " end
+      if set_B777DR_CAS_gen_advisory_msg[x]==0 then B777DR_CAS_gen_advisory_msg[x] = " " end
+      if set_B777DR_CAS_gen_memo_msg[x]==0 then B777DR_CAS_gen_memo_msg[x] = " " end
     end
 end
 
@@ -1025,7 +1025,7 @@ end
 
 
 ----- EICAS MESSAGES --------------------------------------------------------------------
-function B747_warnings_EICAS_msg()
+function B777_warnings_EICAS_msg()
 
 
 
@@ -1038,12 +1038,12 @@ end
 
 
 ----- MONITOR AI FOR AUTO-BOARD CALL ----------------------------------------------------
-function B747_warning_monitor_AI()
+function B777_warning_monitor_AI()
 
-    if B747DR_init_warning_CD == 1 then
-        B747_set_warning_all_modes()
-        B747_set_warning_CD()
-        B747DR_init_warning_CD = 2
+    if B777DR_init_warning_CD == 1 then
+        B777_set_warning_all_modes()
+        B777_set_warning_CD()
+        B777DR_init_warning_CD = 2
     end
 
 end
@@ -1053,11 +1053,11 @@ end
 
 
 ----- SET STATE FOR ALL MODES -----------------------------------------------------------
-function B747_set_warning_all_modes()
+function B777_set_warning_all_modes()
 
-    B747DR_init_warning_CD = 0
-    B747DR_CAS_msg_page = 1
-    B747DR_CAS_caut_adv_display = 1
+    B777DR_init_warning_CD = 0
+    B777DR_CAS_msg_page = 1
+    B777DR_CAS_caut_adv_display = 1
 
 end
 
@@ -1066,7 +1066,7 @@ end
 
 
 ----- SET STATE TO COLD & DARK ----------------------------------------------------------
-function B747_set_warning_CD()
+function B777_set_warning_CD()
 
 
 
@@ -1077,10 +1077,10 @@ end
 
 
 ----- SET STATE TO ENGINES RUNNING ------------------------------------------------------
-function B747_set_warning_ER()
+function B777_set_warning_ER()
 	
-    B747DR_sfty_no_smoke_sel_dial_pos = 1
-    B747DR_sfty_seat_belts_sel_dial_pos = 1
+    B777DR_sfty_no_smoke_sel_dial_pos = 1
+    B777DR_sfty_seat_belts_sel_dial_pos = 1
 	
 end
 
@@ -1090,22 +1090,22 @@ end
 
 
 ----- FLIGHT START ----------------------------------------------------------------------
-function B747_flight_start_warning()
+function B777_flight_start_warning()
 
     -- ALL MODES ------------------------------------------------------------------------
-    B747_set_warning_all_modes()
+    B777_set_warning_all_modes()
 
 
     -- COLD & DARK ----------------------------------------------------------------------
     if simDR_startup_running == 0 then
 
-        B747_set_warning_CD()
+        B777_set_warning_CD()
 
 
     -- ENGINES RUNNING ------------------------------------------------------------------
     elseif simDR_startup_running == 1 then
 
-		B747_set_warning_ER()
+		B777_set_warning_ER()
 
     end
 
@@ -1128,14 +1128,14 @@ simDRTime=find_dataref("sim/time/total_running_time_sec")
 local lastUpdate=0;
 function flight_start() 
     lastUpdate=simDRTime
-    B747_flight_start_warning()
+    B777_flight_start_warning()
 
 end
 
 --function flight_crash() end
 
 --function before_physics() end
-debug_warning     = deferred_dataref("laminar/B747/debug/warning", "number")
+debug_warning     = deferred_dataref("laminar/B777/debug/warning", "number")
 function after_physics()
   if debug_warning>0 then return end
     local diff=simDRTime-lastUpdate
@@ -1145,12 +1145,12 @@ function after_physics()
 
       lastUpdate=simDRTime
     elseif diff>2 and powered == true then
-      B747_CAS_queue()
-      B747_CAS_display()
+      B777_CAS_queue()
+      B777_CAS_display()
 
-      B747_warnings_EICAS_msg()
+      B777_warnings_EICAS_msg()
 
-      B747_warning_monitor_AI()
+      B777_warning_monitor_AI()
       lastUpdate=simDRTime
     elseif diff>4 then
       powered = true

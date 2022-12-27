@@ -55,8 +55,8 @@ B777_FMCAlertMsg = {
     {DRindex = 52, name = "WIND DATA UPLINK READY",data="", status = 0}
 }
 function getAdvisoryMessages()
-  B747_FMCAdvisoryMsg = {}
-  B747_FMCAdvisoryMsg   = {
+  B777_FMCAdvisoryMsg = {}
+  B777_FMCAdvisoryMsg   = {
     {DRindex = 0, name = "ARR N/A FOR RUNWAY", status = 0},        --
     {DRindex = 1, name = "CRS REVERSAL AT FA FIX", status = 0},
     {DRindex = 2, name = "DELETE", status = 0},
@@ -73,5 +73,5 @@ function getAdvisoryMessages()
     {DRindex = 13, name = "UNABLE CRZ ALT", status = 0},
     {DRindex = 14, name = "VERIFY RNP ENTRY", status = 0}
   }
-  return B747_FMCAdvisoryMsg
+  return B777_FMCAdvisoryMsg
 end

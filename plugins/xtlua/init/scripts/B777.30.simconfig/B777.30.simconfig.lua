@@ -1,6 +1,6 @@
 --[[
 *****************************************************************************************
-* Program Script Name	:	B747.05.simconfig
+* Program Script Name	:	B777.05.simconfig
 * Author Name			:	Marauder28
 *
 *   Revisions:

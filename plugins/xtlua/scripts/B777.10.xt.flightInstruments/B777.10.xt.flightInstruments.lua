@@ -281,10 +281,6 @@ end
 --*************************************************************************************--
 --**                                 X-PLANE COMMANDS                                **--
 --*************************************************************************************--
-simCMD_dh_dn_capt                     = find_command("sim/instruments/dh_ref_down")
-simCMD_dh_up_capt                     = find_command("sim/instruments/dh_ref_up")
-simCMD_mda_up_capt                    = find_command("sim/instruments/mda_ref_up")
-simCMD_mda_dn_capt                    = find_command("sim/instruments/mda_ref_down")
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
@@ -312,17 +308,6 @@ function B777_fltInst_adiru_align_now_CMDhandler(phase, duration)
 		B777_align_adiru()
 	end
 end
---[[
-function B777_alt_up_CMDhandler(phase, duration)
-	if phase == 0 then
-		simDR_autopilot_alt = math.min(simDR_autopilot_alt + (100 * alt_is_fast), 50000)
-		alt_press_counter = alt_press_counter + 1
-		if (not is_timer_scheduled(checkAltSpd)) then run_after_time(checkAltSpd, 0.2) end
-	elseif phase == 2 then
-		simDR_autopilot_alt = simDR_autopilot_alt + 1000
-	end
-end
-]]
 
 function B777_alt_up_CMDhandler(phase, duration)
 	if phase == 0 then
@@ -372,6 +357,19 @@ function B777_minimums_rst_capt_CMDhandler(phase, duration)
 		B777DR_amber_minimums = 0
 	end
 end
+
+function B777_spd_up_cmdHandler(phase, duration)
+	if phase == 1 then
+		simDR_ap_airspeed = smartKnobUp(1, 10, 300, simDR_ap_airspeed)
+	end
+end
+
+function B777_spd_dn_cmdHandler(phase, duration)
+	if phase == 1 then
+		simDR_ap_airspeed = smartKnobDn(1, 10, 130, simDR_ap_airspeed)
+	end
+end
+
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
@@ -390,7 +388,7 @@ B777CMD_hdg_dn                       = deferred_command("Strato/777/hdg_dn", "Au
 B777CMD_spd_up                       = deferred_command("Strato/777/spd_up", "Autpilot Speed Up", B777_spd_up_cmdHandler)
 B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)]]
 
-function B777_hdg_up_cmdHandler(phase, duration)
+--[[function B777_hdg_up_cmdHandler(phase, duration)
 	if phase == 1 then
 		simDR_hdg_bug = smartKnobUp(1, 10, 361, simDR_hdg_bug)
 	end
@@ -401,18 +399,9 @@ function B777_hdg_dn_cmdHandler(phase, duration)
 		simDR_hdg_bug = smartKnobUp(1, 10, -1, simDR_hdg_bug)
 	end
 end
+]]
 
-function B777_spd_up_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_ap_airspeed = smartKnobUp(1, 10, 400, simDR_ap_airspeed)
-	end
-end
 
-function B777_spd_dn_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_ap_airspeed = smartKnobUp(1, 10, 0, simDR_ap_airspeed)
-	end
-end
 
 --*************************************************************************************--
 --**                                      CODE                                       **--

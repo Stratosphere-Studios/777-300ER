@@ -74,6 +74,7 @@ simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/
 B777DR_stab_cutout_C                      = find_dataref("Strato/777/fctl/stab_cutout_C")
 B777DR_stab_cutout_R                      = find_dataref("Strato/777/fctl/stab_cutout_R")
 B777DR_ace_tac_eng                        = find_dataref("Strato/777/fctl/ace/tac_eng")
+B777DR_rcl                                = find_dataref("Strato/777/eicas/rcl")
 B777DR_pfc_disc                           = find_dataref("Strato/777/fctl/ace/tac_eng")
 
 --*************************************************************************************--
@@ -326,6 +327,14 @@ end
 
 ---EFIS----------
 
+function B777_efis_lEicas_rcl_switch_CMDhandler(phase, duration)
+   if phase == 0 then
+      B777DR_rcl = 1
+   elseif phase == 2 then
+      B777DR_rcl = 0
+   end
+end
+
 function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
 	if phase == 0 then setEicasPage(4) end
 end
@@ -509,7 +518,7 @@ B777CMD_efis_lEicas_gear                  = deferred_command("Strato/B777/button
 B777CMD_efis_lEicas_fctl                  = deferred_command("Strato/B777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
 B777CMD_efis_lEicas_cam                   = deferred_command("Strato/B777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
 B777CMD_efis_lEicas_chkl                  = deferred_command("Strato/B777/button_switch/efis/lEicas/chkl", "Lower Eicas CHKL Page", B777_efis_lEicas_chkl_switch_CMDhandler)
-
+B777CMD_efis_lEicas_rcl                   = deferred_command("Strato/B777/button_switch/efis/lEicas/rcl", "Lower Eicas RECALL Button", B777_efis_lEicas_rcl_switch_CMDhandler)
 B777CMD_efis_wxr_button                   = deferred_command("Strato/B777/button_switch/efis/wxr", "ND Weather Radar Button", B777_efis_wxr_switch_CMDhandler)
 B777CMD_efis_sta_button                   = deferred_command("Strato/B777/button_switch/efis/sta", "ND STA Button", B777_efis_sta_switch_CMDhandler)
 B777CMD_efis_wpt_button                   = deferred_command("Strato/B777/button_switch/efis/wpt", "ND Waypoint Button", B777_efis_wpt_switch_CMDhandler)
@@ -565,7 +574,7 @@ function setEicasPage(id)
 	end
 end
 
-function coverPhysics() -- moves switches under switc covers when switch covers are closed
+function coverPhysics() -- moves switches under switch covers when switch covers are closed
    if B777DR_main_cover_positions[4] < 0.1 then -- manual gear extension
       B777DR_gear_altn_extnsn_target = 0
    end

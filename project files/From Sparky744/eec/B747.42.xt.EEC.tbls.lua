@@ -1,6 +1,6 @@
 --[[
 *****************************************************************************************
-* Program Script Name	:	B747.42.xt.EEC.tbls.lua
+* Program Script Name	:	B777.42.xt.EEC.tbls.lua
 * Author Name			:	Marauder28
 *
 *   Revisions:
