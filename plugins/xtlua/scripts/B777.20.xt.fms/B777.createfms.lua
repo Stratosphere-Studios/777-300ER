@@ -679,10 +679,6 @@ function fms:B777_fms_display()
       B777DR_fms_gn[thisID][i]=greenText
       B777DR_fms_c[thisID][i]=cyanText
       B777DR_fms_gy[thisID][i]=greyText
-      if i == 3 then
-        print("White: "..whiteText)
-        print("Green: "..greenText)
-      end
     end
 
     for i=1,13,1 do
