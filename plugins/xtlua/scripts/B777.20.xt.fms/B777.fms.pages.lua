@@ -16,60 +16,86 @@ B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
-
+local efisCTL = 1
+local dspCTL = 1
 fmsPages["INDEX"]=createPage("INDEX")
 fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
-  local acarsS="             "
 
-  if acars==1 and B777DR_rtp_C_off==0 then 
-	acarsS="<ACARS  <REQ>" 
-	fmsFunctionsDefs["INDEX"]["L2"]={"setpage","ACARS"}
-  else
-	fmsFunctionsDefs["INDEX"]["L2"]=nil
+	fmsFunctionsDefs["INDEX"]={}
+	fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
+	--fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
+	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
+	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCTL"}
+	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCTL"}
+
+	local efisln = "EFIS>"
+	local dspln = "DISP>"
+	local eicasOpt = "OFF<->ON;g2"
+	local dspOpt = "OFF<->ON;g2"
+
+	if efisCTL == 1 then
+		eicasOpt = "OFF<->ON;g2"
+		efisln = "EFIS>"
+		--fmsFunctionsDefs["INDEX"]["R2"]={"setpage","EFISCTL152"}
+	else
+		eicasOpt = "OFF;g3<->ON"
+		efisln = "     "
+		fmsFunctionsDefs["INDEX"]["R2"]=nil
 	end
-return {
 
-"         MENU           ",
-"                        ",
-"<FMC    <ACT>    SELECT>",
-"                        ",
-acarsS.."     SELECT>",
-"                        ",
-"<SAT                    ",
-"                        ",
-"                        ",
-"                        ",
-"<ACMS                   ",
-"                        ",
-"<CMC                    "
-}
+	if dspCTL == 1 then
+		dspOpt = "OFF<->ON;g2"
+		dspln = "DSP>"
+		fmsFunctionsDefs["INDEX"]["R4"]={"setpage","EICASMODES"}
+	else
+		dspOpt = "OFF;g3<->ON"
+		dspln = "    "
+		fmsFunctionsDefs["INDEX"]["R4"]=nil
+	end
+
+	--[[  local acarsS="             "
+
+	if acars==1 and B777DR_rtp_C_off==0 then 
+		acarsS="<ACARS  <REQ>" 
+		fmsFunctionsDefs["INDEX"]["L2"]={"setpage","ACARS"}
+	else
+		fmsFunctionsDefs["INDEX"]["L2"]=nil
+	end]]
+
+	return {
+		"         MENU           ",
+		"                        ",
+		"<FMC            "..eicasOpt,
+		"                        ",
+		"<SAT;r4               "..efisln,
+		"                        ",
+		"                "..dspOpt,
+		"                        ",
+		"                    "..dspln,
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        "
+	}
 end
+
 fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
-
-  return {
-      "                       ",
-      "                 EFIS CP",
-      "                        ",
-	  "                EICAS CP",
-      "                        ",
-      "                 CTL PNL",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      }
+	return {
+		"                        ",
+		"                EFIS CTL",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                 DSP CTL",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+	}
 end
-fmsFunctionsDefs["INDEX"]={}
-fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
-
-fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
-fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
-fmsFunctionsDefs["INDEX"]["R1"]={"setpage","EFISCTL152"}
-fmsFunctionsDefs["INDEX"]["R2"]={"setpage","EICASMODES"}
-fmsFunctionsDefs["INDEX"]["R4"]={"setpage","GNDHNDL"}
 
 fmsPages["RTE1"]=createPage("RTE1")
 fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
@@ -2331,9 +2357,18 @@ function fmsFunctions.showmessage(fmsO,value)
 end
 
 function fmsFunctions.doCMD(fmsO,value)
-  print("do fmc command "..value)
-  if fmsModules["cmds"][value] ~= nil then
+  --[[if fmsModules["cmds"][value] ~= nil then
 	fmsModules["cmds"][value]:once()
 	fmsModules["lastcmd"]=fmsModules["cmdstrings"][value]
-  end
+  end]]
+  find_command(value):once()
+  print("do fmc command "..value)
+end
+
+function fmsFunctions.toggleVar(fmsO, value)
+	if value == "efisCTL" then
+		efisCTL = 1 - efisCTL
+	elseif value == "dspCTL" then
+		dspCTL = 1 - dspCTL
+	end
 end

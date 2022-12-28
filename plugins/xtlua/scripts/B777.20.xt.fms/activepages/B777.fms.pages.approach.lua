@@ -1,7 +1,7 @@
 -- Very minor modification by crazytimtimtim
 simDR_acf_weight_total_kg          				= find_dataref("sim/flightmodel/weight/m_total")
-B777DR_airspeed_Vf25                            = find_dataref("laminar/B777/airspeed/Vf25")
-B777DR_airspeed_Vf30                            = find_dataref("laminar/B777/airspeed/Vf30")
+B777DR_airspeed_Vf25                            = find_dataref("Strato/B777/airspeed/Vf25")
+B777DR_airspeed_Vf30                            = find_dataref("Strato/B777/airspeed/Vf30")
 
 fmsPages["APPROACH"]=createPage("APPROACH")
 fmsPages["APPROACH"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be this way

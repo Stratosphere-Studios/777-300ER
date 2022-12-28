@@ -1,9 +1,9 @@
 
 -- small modification by crazytimtimtim
 
-B777DR_airspeed_V1                              = deferred_dataref("laminar/B777/airspeed/V1", "number")
-B777DR_airspeed_Vr                              = deferred_dataref("laminar/B777/airspeed/Vr", "number")
-B777DR_airspeed_V2                              = deferred_dataref("laminar/B777/airspeed/V2", "number")
+B777DR_airspeed_V1                              = deferred_dataref("Strato/B777/airspeed/V1", "number")
+B777DR_airspeed_Vr                              = deferred_dataref("Strato/B777/airspeed/Vr", "number")
+B777DR_airspeed_V2                              = deferred_dataref("Strato/B777/airspeed/V2", "number")
 cg_lineLg	= ""
 cg_lineSm	= ""
 clbF_Sm = ""
@@ -18,7 +18,7 @@ function roundToIncrement(number, increment)
 
 end
 --simDR_wing_flap1_deg                = find_dataref("sim/flightmodel2/wing/flap1_deg")
-B777DR_airspeed_flapsRef                              = find_dataref("laminar/B777/airspeed/flapsRef")
+B777DR_airspeed_flapsRef                              = find_dataref("Strato/B777/airspeed/flapsRef")
 fmsPages["TAKEOFF"]=createPage("TAKEOFF")
 fmsPages["TAKEOFF"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be this way
   local flaps = string.format("%02d",roundToIncrement(B777DR_airspeed_flapsRef, 5))

@@ -110,7 +110,7 @@ function simconfig_values()
 		},
 		FMC = {
 			nav_data = "",
-			active = "",
+--			active = "",
 			op_program = fmcVersion,
 			drag_ff = "+0.0/-0.0",
 		},
