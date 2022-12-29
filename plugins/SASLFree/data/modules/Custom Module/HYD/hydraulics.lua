@@ -432,7 +432,7 @@ function UpdateSysLoad()
 				local h_load_r = globalPropertyfae("Strato/777/hydraulics/load", 11)
 				load_r = get(h_load_r) + get(brake_load) * 0.3
 			end
-			set(h_load, Round(load_all / n_sys_operative, 2) + load_c + load_r + load_l)
+			set(h_load, Round(load_all, 2) + load_c + load_r + load_l)
 		end
 	end
 end
@@ -515,7 +515,7 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 				local desired_pressure = 0
 				local increase = 0
 				local load_total = globalPropertyfae("Strato/777/hydraulics/sys_load", sys_idx)
-				local decrease = 300 * get(load_total) + bool2num(i ~= 2) * round(math.random(-1, 1)) * 10 --decrease due to performance degradation when overheating and due to change in load
+				local decrease = 500 * get(load_total) + bool2num(i ~= 2) * round(math.random(-1, 1)) * 10 --decrease due to performance degradation when overheating and due to change in load
 				if i ~= 2 then
 					l_past = get(load_total)
 				end

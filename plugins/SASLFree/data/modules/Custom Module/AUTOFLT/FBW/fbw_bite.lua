@@ -6,6 +6,8 @@
 *****************************************************************************************
 --]]
 
+fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
+
 --Global variables
 sys_avail_last = {false, false, false}
 self_test_time = 0
@@ -18,9 +20,9 @@ dir_init = false
 dir_time = 0
 
 function UpdateSelfTest()
-	local l_avail = get(sys_L_press) >= 400
-	local c_avail = get(sys_C_press) >= 400
-	local r_avail = get(sys_R_press) >= 400
+	local l_avail = get(hyd_pressure, 1) >= 400
+	local c_avail = get(hyd_pressure, 2) >= 400
+	local r_avail = get(hyd_pressure, 3) >= 400
 	past_avail = sys_avail_last[1] or sys_avail_last[2] or sys_avail_last[3]
 	curr_avail = l_avail or c_avail or r_avail
 	if past_avail == true and c_avail == false then

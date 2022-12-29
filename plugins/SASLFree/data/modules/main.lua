@@ -10,6 +10,7 @@ addSearchPath(moduleDirectory.."/Custom Module/EICASCHECK")
 addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
 addSearchPath(moduleDirectory.."/Custom Module/FCTL")
+addSearchPath(moduleDirectory.."/Custom Module/ELEC")
 addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
@@ -41,9 +42,13 @@ set(throttle_ovrd, 1)
 components = {
 
 	timers {},
+	elec_main {},
 	speed_calc {},
 	hydraulics {},
-	fbw_main {},
+	fbw_drefs {},
+	ace_logic {},
+	pfc_logic {},
+	auto_calib {},
 	fctl {},
 	eec {},
 	gear {},

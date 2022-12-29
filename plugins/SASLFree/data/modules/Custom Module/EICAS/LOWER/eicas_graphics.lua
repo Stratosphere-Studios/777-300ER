@@ -17,6 +17,7 @@ battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
 
 c_time = globalPropertyf("Strato/777/time/current")
 brake_acc_in_use = globalPropertyi("Strato/777/gear/brake_acc_in_use")
+eicas_power_lower = globalPropertyi("Strato/777/elec/eicas_power_lower")
 
 --Creating our own
 
@@ -265,7 +266,7 @@ function DrawDoorStatus()
 end
 
 function draw()
-	if get(battery) == 1 or IsAcConnected == 1 then
+	if get(eicas_power_lower) == 1 then
 		local eicas_mode = globalPropertyi("Strato/777/displays/eicas_mode")
 		if get(eicas_mode) == 8 then 
 			--drawing the valves. For now they are just static

@@ -31,10 +31,13 @@ stab_cutout_R = globalPropertyi("Strato/777/fctl/stab_cutout_R")
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 --Finding own datarefs
-
+ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
+man_keyboard = globalPropertyi("Strato/777/gear/man_keyboard")
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
+rud_trim_man = globalPropertyf("Strato/777/fctl/ace/rud_trim_man")
+rud_trim_reset = globalPropertyi("Strato/777/fctl/ace/rud_trim_reset")
 
 --Finding simulator commands
 toggle_regular = sasl.findCommand("sim/flight_controls/brakes_toggle_regular")
@@ -43,24 +46,31 @@ toggle_max = sasl.findCommand("sim/flight_controls/brakes_toggle_max")
 gear_down = sasl.findCommand("sim/flight_controls/landing_gear_down")
 gear_up = sasl.findCommand("sim/flight_controls/landing_gear_up")
 gear_toggle = sasl.findCommand("sim/flight_controls/landing_gear_toggle")
-trim_up = sasl.findCommand("sim/flight_controls/pitch_trim_up")
-trim_down = sasl.findCommand("sim/flight_controls/pitch_trim_down")
+stab_trim_up = sasl.findCommand("sim/flight_controls/pitch_trim_up")
+stab_trim_down = sasl.findCommand("sim/flight_controls/pitch_trim_down")
+rudder_trim_left = sasl.findCommand("sim/flight_controls/rudder_trim_left")
+rudder_trim_right = sasl.findCommand("sim/flight_controls/rudder_trim_right")
+rudder_trim_center = sasl.findCommand("sim/flight_controls/rudder_trim_center")
 
 park_brake_past = 0
 
 function BrakeHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
+		set(man_keyboard, 1)
 		set(man_brakes_L, 1 - get(man_brakes_L))
 		set(man_brakes_R, 1 - get(man_brakes_R))
 		if 1 - get(man_brakes_L) == 0 and get(park_brake_valve) == 1 then
 			set(park_brake_valve, 0)
 			park_brake_past = 0
 		end
+	elseif phase == SASL_COMMAND_END then
+		set(man_keyboard, 0)
 	end
 end
 
 function BrakeHoldHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
+		set(man_keyboard, 1)
 		if park_brake_past == 1 and get(park_brake_valve) == 1 then
 			set(park_brake_valve, 0)
 			park_brake_past = 0
@@ -71,6 +81,7 @@ function BrakeHoldHandler(phase)
 	elseif phase == SASL_COMMAND_END then
 		set(man_brakes_L, 0)
 		set(man_brakes_R, 0)
+		set(man_keyboard, 0)
 	end
 end
 
@@ -113,7 +124,7 @@ function ToggleGear(phase)
 end
 
 function StabTrimUp(phase)
-	if get(on_ground) == 1 or get(fbw_mode) == 3 then
+	if get(on_ground) == 1 or get(fbw_mode) ~= 1 then
 		if get(sys_C_press) * (1 - get(stab_cutout_C)) > 900 or get(sys_R_press) * (1 - get(stab_cutout_R)) > 900 then
 			return 1
 		end
@@ -126,7 +137,7 @@ function StabTrimUp(phase)
 end
 
 function StabTrimDown(phase)
-	if get(on_ground) == 1 or get(fbw_mode) == 3 then
+	if get(on_ground) == 1 or get(fbw_mode) ~= 1 then
 		if get(sys_C_press) * (1 - get(stab_cutout_C)) > 900 or get(sys_R_press) * (1 - get(stab_cutout_R)) > 900 then
 			return 1
 		end
@@ -138,14 +149,42 @@ function StabTrimDown(phase)
 	return 0
 end
 
+function RudderTrimLeft(phase)
+	if get(ace_fail, 1) == 0 then
+		if get(rud_trim_man) - 0.1 >= -17.6 then
+			set(rud_trim_man, get(rud_trim_man) - 0.1)
+		end
+	end
+	return 0
+end
+
+function RudderTrimRight(phase)
+	if get(ace_fail, 1) == 0 then
+		if get(rud_trim_man) + 0.1 <= 17.6 then
+			set(rud_trim_man, get(rud_trim_man) + 0.1)
+		end
+	end
+	return 0
+end
+
+function RudderTrimReset(phase)
+	if get(fbw_mode) ~= 3 then
+		set(rud_trim_reset, 1)
+	end
+	return 0
+end
+
 --Registering own command handlers
 sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
 sasl.registerCommandHandler(hold_regular, 1, BrakeHoldHandler)
 sasl.registerCommandHandler(toggle_max, 1, ParkBrakeHandler)
 sasl.registerCommandHandler(gear_up, 1, GearUp)
 sasl.registerCommandHandler(gear_toggle, 1, ToggleGear)
-sasl.registerCommandHandler(trim_up, 1, StabTrimUp)
-sasl.registerCommandHandler(trim_down, 1, StabTrimDown)
+sasl.registerCommandHandler(stab_trim_up, 1, StabTrimUp)
+sasl.registerCommandHandler(stab_trim_down, 1, StabTrimDown)
+sasl.registerCommandHandler(rudder_trim_left, 1, RudderTrimLeft)
+sasl.registerCommandHandler(rudder_trim_right, 1, RudderTrimRight)
+sasl.registerCommandHandler(rudder_trim_center, 1, RudderTrimReset)
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)

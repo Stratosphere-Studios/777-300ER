@@ -86,10 +86,11 @@ function PID_Compute(kp, ki, kd, target, current, errtotal, errlast, lim1, lim2)
 end	
 
 function EvenChange(val, tgt, step)
-	if math.abs(val - tgt) <= step then
+	local tmp_step = step * get(f_time) / 0.0166
+	if math.abs(val - tgt) <= tmp_step then
 		return val
 	else
-		return val + (bool2num(val < tgt) - bool2num(val > tgt)) * step * get(f_time) / 0.0166
+		return val + (bool2num(val < tgt) - bool2num(val > tgt)) * tmp_step
 	end
 end
 
