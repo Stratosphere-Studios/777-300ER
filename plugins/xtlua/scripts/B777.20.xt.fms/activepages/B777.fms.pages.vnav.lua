@@ -18,7 +18,7 @@ simDR_eng_fuel_flow_kg_sec = find_dataref("sim/cockpit2/engine/indicators/fuel_f
 --simDR_lon=find_dataref("sim/flightmodel/position/longitude")
 
 -- the following was replaced by B777DR_airspeed_V2
---simDR_V2 =find_dataref("laminar/B777/airspeed/V2")
+--simDR_V2 =find_dataref("Strato/B777/airspeed/V2")
 
 -- the following was replaced by simDR_fueL_tank_weight_total_kg
 --fob_kg = find_dataref("sim/flightmodel/weight/m_fuel_total") -- fuel weight total, kg
@@ -32,7 +32,7 @@ local dLat = 0 --destination latitude
 local dLon = 0 --destination longitude
 local dNM = -1 --distance to destination, this is currently assigned and used on Pg1 and also used on Pg2
 local ClbV2 = 0 --backup of V2 speed which
---dNM = find_dataref("laminar/B777/autopilot/dist/remaining_distance") -- this is too inconsistent to use right now
+--dNM = find_dataref("Strato/B777/autopilot/dist/remaining_distance") -- this is too inconsistent to use right now
 
 local conv = 1.0 --converter (pounds to kilos)
 

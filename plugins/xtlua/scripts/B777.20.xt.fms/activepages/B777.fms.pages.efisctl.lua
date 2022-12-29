@@ -1,4 +1,4 @@
-registerFMCCommand("laminar/B777/efis/dh/capt/reset_switch","")
+registerFMCCommand("Strato/B777/efis/dh/capt/reset_switch","")
 fmsPages["EFISCTL152"]=createPage("EFISCTL152")
 fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
 
@@ -38,7 +38,7 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
     elseif mapMode==2 then mapSelected="<SEL>" 
     elseif mapMode==3 then plnSelected="<SEL>"
     end
-     
+
     if mapCenter==1 then ctrSelected ="<SEL>" end  
     local page={
     "      EFIS CONTROL      ",
@@ -55,7 +55,7 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
     "             -----------",
     "<RANGE DECR     OPTIONS>"
     }
-  return page
+    return page
 end
 
 local ranges = {" 10", " 20", " 40", " 80", "160", "320", "640"}
@@ -87,7 +87,7 @@ fmsPages["EFISCTL152"].getSmallPage=function(self,pgNo,fmsID)
 fmsFunctionsDefs["EFISCTL152"]={}
 fmsFunctionsDefs["EFISCTL152"]["L1"]={"setdata","BARO"}
 fmsFunctionsDefs["EFISCTL152"]["L2"]={"setdata","DH"}
-fmsFunctionsDefs["EFISCTL152"]["L3"]={"doCMD","laminar/B777/efis/dh/capt/reset_switch"}
+fmsFunctionsDefs["EFISCTL152"]["L3"]={"doCMD","Strato/B777/efis/dh/capt/reset_switch"}
 fmsFunctionsDefs["EFISCTL152"]["L4"]={"setdata","MDA"}
 fmsFunctionsDefs["EFISCTL152"]["L5"]={"setdata","RANGEINC"}
 fmsFunctionsDefs["EFISCTL152"]["L6"]={"setdata","RANGEDEC"}

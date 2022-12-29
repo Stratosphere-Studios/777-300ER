@@ -226,7 +226,7 @@ P _gear/0/_lonE 0.0
 P _gear/0/_lonN 0.0
 P _gear/0/_lonR 110.0
 P _gear/0/_scon 204845.437500000
-P _gear/0/_stat_def 0.579100668
+P _gear/0/_stat_def 0.579100788
 P _gear/0/_steerdeg_hispeed 7.0
 P _gear/0/_steerdeg_lospeed 70.0
 P _gear/0/_strut_comp 0.0
@@ -260,7 +260,7 @@ P _gear/1/_lonE -9.0
 P _gear/1/_lonN -9.0
 P _gear/1/_lonR 8.0
 P _gear/1/_scon 259000.0
-P _gear/1/_stat_def 1.170852304
+P _gear/1/_stat_def 1.170852661
 P _gear/1/_steerdeg_hispeed 6.500000000
 P _gear/1/_steerdeg_lospeed 6.500000000
 P _gear/1/_strut_comp 0.0
@@ -294,7 +294,7 @@ P _gear/2/_lonE -9.0
 P _gear/2/_lonN -9.0
 P _gear/2/_lonR 8.0
 P _gear/2/_scon 259000.0
-P _gear/2/_stat_def 1.370846629
+P _gear/2/_stat_def 1.370846272
 P _gear/2/_steerdeg_hispeed 6.500000000
 P _gear/2/_steerdeg_lospeed 6.500000000
 P _gear/2/_strut_comp 0.0
@@ -31850,7 +31850,7 @@ P _part/87/_part_specs_invis 1
 P _part/87/_part_tex 0
 P _part/87/_part_the 0.0
 P _part/87/_part_x -16.500000000
-P _part/87/_part_y -15.775258064
+P _part/87/_part_y -15.775259018
 P _part/87/_part_z 108.315429688
 P _part/87/_patt_con 0
 P _part/87/_patt_prt 0
@@ -51356,12 +51356,1127 @@ GROUP FMSs
   GROUP Left (3)
     LOCKED
     CHAINED
+    GROUP Big Cyan
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3821.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line01_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3781.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line02_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3741.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line03_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3703.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line04_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3662.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line05_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3623.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line06_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3585.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line07_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3545.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line08_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3505.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line09_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3466.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line10_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3426.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line11_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3387.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line12_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3350.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line13_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3311.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line14_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Magenta
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3821.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line01_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3781.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line02_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3741.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line03_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3703.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line04_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3662.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line05_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3623.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line06_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3585.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line07_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3545.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line08_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3505.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line09_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3466.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line10_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3426.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line11_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3387.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line12_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3350.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line13_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3311.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line14_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Grey
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3821.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line01_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3781.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line02_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3741.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line03_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3703.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line04_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3662.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line05_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3623.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line06_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3585.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line07_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3545.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line08_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3505.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line09_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3466.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line10_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3426.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line11_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3387.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line12_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3350.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line13_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3311.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line14_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Green
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3821.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line01_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3781.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line02_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3741.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line03_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3703.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line04_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3662.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line05_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3623.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line06_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3585.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line07_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3545.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line08_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3505.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line09_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3466.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line10_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3426.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line11_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3387.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line12_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3350.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line13_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3311.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line14_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Highlight
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3821.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line01_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3781.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line02_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3741.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line03_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3703.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line04_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3662.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line05_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3623.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line06_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3585.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line07_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3545.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line08_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3505.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line09_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3466.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line10_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3426.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line11_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3387.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line12_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3350.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line13_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3311.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line14_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Small Highlight
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3823.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line01_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3783.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line02_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3743.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line03_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3705.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line04_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3664.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line05_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3625.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line06_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3587.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line07_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3547.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line08_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3507.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line09_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3471.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line10_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 7
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3428.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line11_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3389.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line12_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3352.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line13_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 1636.500000 3315.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line14_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
     GROUP Big White
       LOCKED
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1637.500000 3821.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3821.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line01_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51373,8 +52488,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1637.500000 3781.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3781.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line02_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51386,8 +52501,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1637.500000 3741.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3741.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line03_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51400,7 +52515,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 1636.500000 3703.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line04_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51412,8 +52527,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1637.500000 3662.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3662.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line05_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51425,8 +52540,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1637.500000 3623.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3623.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line06_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51439,7 +52554,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 1636.500000 3585.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line07_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51452,7 +52567,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 1636.500000 3545.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line08_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51465,7 +52580,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 1636.500000 3505.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line09_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51477,8 +52592,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1635.500000 3466.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3466.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line10_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51491,7 +52606,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 1636.500000 3426.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line11_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51504,7 +52619,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 1636.500000 3387.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line12_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51516,8 +52631,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1635.500000 3350.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3350.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line13_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51529,8 +52644,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3311.500000
-        IMAGE FMS/big_white
+        POS 1636.500000 3311.500000
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line14_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51546,8 +52661,8 @@ GROUP FMSs
       LOCKED
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3823.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3823.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line01_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51559,8 +52674,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3783.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3783.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line02_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51572,8 +52687,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3743.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3743.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line03_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51585,8 +52700,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3705.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3705.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line04_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51598,8 +52713,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3664.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3664.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line05_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51611,8 +52726,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3625.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3625.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line06_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51624,8 +52739,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3587.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3587.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line07_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51637,8 +52752,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3547.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3547.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line08_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51650,8 +52765,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3507.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3507.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line09_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51663,8 +52778,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3471.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3471.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line10_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51676,8 +52791,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3428.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3428.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line11_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51689,8 +52804,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3389.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3389.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line12_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51702,8 +52817,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3352.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3352.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line13_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51715,8 +52830,8 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1638.500000 3315.000000
-        IMAGE FMS/small_white
+        POS 1636.500000 3315.000000
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms3/Line14_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51732,12 +52847,1127 @@ GROUP FMSs
   GROUP Center (1)
     LOCKED
     CHAINED
+    GROUP Big Cyan
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3821.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line01_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3781.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line02_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3741.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line03_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3703.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line04_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3662.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line05_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3623.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line06_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3585.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line07_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3545.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line08_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3505.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line09_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3466.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line10_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3426.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line11_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3387.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line12_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3350.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line13_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3311.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line14_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Magenta
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3821.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line01_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3781.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line02_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3741.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line03_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3703.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line04_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3662.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line05_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3623.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line06_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3585.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line07_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3545.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line08_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3505.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line09_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3466.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line10_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3426.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line11_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3387.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line12_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3350.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line13_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3311.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line14_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Grey
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3821.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line01_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3781.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line02_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3741.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line03_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3703.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line04_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3662.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line05_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3623.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line06_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3585.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line07_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3545.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line08_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3505.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line09_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3466.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line10_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3426.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line11_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3387.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line12_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3350.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line13_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3311.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line14_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Green
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3821.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line01_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3781.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line02_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3741.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line03_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3703.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line04_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3662.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line05_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3623.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line06_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3585.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line07_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3545.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line08_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3505.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line09_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3466.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line10_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3426.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line11_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3387.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line12_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3350.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line13_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3311.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line14_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Highlight
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3821.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line01_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3781.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line02_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3741.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line03_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3703.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line04_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3662.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line05_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3623.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line06_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3585.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line07_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3545.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line08_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3505.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line09_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3466.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line10_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3426.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line11_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3387.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line12_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3350.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line13_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3311.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line14_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Small Highlight
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3823.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line01_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3783.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line02_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3743.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line03_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3705.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line04_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3664.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line05_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3625.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line06_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3587.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line07_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3547.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line08_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3507.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line09_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3471.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line10_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 7
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3428.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line11_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3389.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line12_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3352.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line13_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2252.500000 3315.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line14_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
     GROUP Big White
       LOCKED
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2252.500000 3821.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line01_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51750,7 +53980,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2252.500000 3781.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line02_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51763,7 +53993,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2252.500000 3741.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line03_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51776,7 +54006,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2251.500000 3703.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line04_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51789,7 +54019,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2252.500000 3662.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line05_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51802,7 +54032,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2252.500000 3623.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line06_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51815,7 +54045,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2251.500000 3585.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line07_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51828,7 +54058,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2251.500000 3545.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line08_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51841,7 +54071,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2251.500000 3505.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line09_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51854,7 +54084,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2250.500000 3466.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line10_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51867,7 +54097,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2251.500000 3426.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line11_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51880,7 +54110,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2251.500000 3387.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line12_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51893,7 +54123,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2250.500000 3350.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line13_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51906,7 +54136,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3311.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line14_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51923,7 +54153,7 @@ GROUP FMSs
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3823.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line01_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51936,7 +54166,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3783.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line02_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51949,7 +54179,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3743.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line03_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51962,7 +54192,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3705.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line04_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51975,7 +54205,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3664.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line05_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -51988,7 +54218,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3625.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line06_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52001,7 +54231,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3587.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line07_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52014,7 +54244,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3547.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line08_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52027,7 +54257,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3507.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line09_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52040,7 +54270,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3471.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line10_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52053,7 +54283,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3428.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line11_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52066,7 +54296,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3389.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line12_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52079,7 +54309,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3352.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line13_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52092,7 +54322,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2253.500000 3315.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms1/Line14_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52119,12 +54349,1127 @@ GROUP FMSs
   GROUP Right (2)
     LOCKED
     CHAINED
+    GROUP Big Cyan
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3821.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line01_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3781.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line02_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3741.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line03_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3703.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line04_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3662.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line05_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3623.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line06_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3585.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line07_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3545.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line08_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3505.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line09_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3466.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line10_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3426.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line11_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3387.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line12_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3350.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line13_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3311.500000
+        IMAGE CDU/big/cdu_big_cyan
+        DATAREF Strato/B777/fms3/Line14_L_c
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Magenta
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3821.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line01_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3781.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line02_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3741.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line03_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3703.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line04_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3662.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line05_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3623.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line06_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3585.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line07_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3545.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line08_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3505.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line09_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3466.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line10_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3426.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line11_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3387.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line12_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3350.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line13_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3311.500000
+        IMAGE CDU/big/cdu_big_magenta
+        DATAREF Strato/B777/fms3/Line14_L_m
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Grey
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3821.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line01_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3781.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line02_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3741.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line03_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3703.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line04_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3662.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line05_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3623.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line06_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3585.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line07_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3545.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line08_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3505.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line09_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3466.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line10_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3426.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line11_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3387.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line12_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3350.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line13_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3311.500000
+        IMAGE CDU/big/cdu_big_grey
+        DATAREF Strato/B777/fms3/Line14_L_gy
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Green
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3821.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line01_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3781.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line02_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3741.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line03_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3703.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line04_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3662.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line05_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3623.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line06_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3585.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line07_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3545.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line08_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3505.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line09_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3466.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line10_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3426.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line11_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3387.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line12_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3350.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line13_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3311.500000
+        IMAGE CDU/big/cdu_big_green
+        DATAREF Strato/B777/fms3/Line14_L_gn
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Big Highlight
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3821.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line01_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3781.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line02_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3741.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line03_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3703.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line04_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3662.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line05_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3623.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line06_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3585.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line07_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3545.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line08_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3505.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line09_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3466.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line10_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3426.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line11_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3387.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line12_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3350.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line13_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3311.500000
+        IMAGE CDU/big/cdu_big_highlight
+        DATAREF Strato/B777/fms3/Line14_L_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
+    GROUP Small Highlight
+      LOCKED
+      CHAINED
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3823.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line01_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3783.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line02_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3743.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line03_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3705.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line04_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3664.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line05_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3625.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line06_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3587.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line07_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3547.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line08_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3507.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line09_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3471.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line10_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 7
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3428.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line11_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3389.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line12_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3352.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line13_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+      gen_text XXXXXXXXXXXXXXXXXXX
+        POS 2867.500000 3315.000000
+        IMAGE CDU/small/cdu_small_highlight
+        DATAREF Strato/B777/fms3/Line14_S_hl
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 6
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 1.000000
+        OFFSET_X -250
+        OFFSET_Y -25.000000
+
+    END_GROUP
     GROUP Big White
       LOCKED
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2867.500000 3821.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line01_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52137,7 +55482,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2867.500000 3781.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line02_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52150,7 +55495,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2867.500000 3741.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line03_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52163,7 +55508,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2866.500000 3703.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line04_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52176,7 +55521,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2867.500000 3662.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line05_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52189,7 +55534,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2867.500000 3623.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line06_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52202,7 +55547,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2866.500000 3585.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line07_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52215,7 +55560,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2866.500000 3545.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line08_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52228,7 +55573,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2866.500000 3505.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line09_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52241,7 +55586,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2865.500000 3466.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line10_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52254,7 +55599,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2866.500000 3426.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line11_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52267,7 +55612,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2866.500000 3387.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line12_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52280,7 +55625,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2865.500000 3350.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line13_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52293,7 +55638,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3311.500000
-        IMAGE FMS/big_white
+        IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms2/Line14_L
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52310,7 +55655,7 @@ GROUP FMSs
       CHAINED
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3823.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line01_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52323,7 +55668,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3783.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line02_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52336,7 +55681,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3743.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line03_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52349,7 +55694,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3705.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line04_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52362,7 +55707,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3664.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line05_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52375,7 +55720,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3625.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line06_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52388,7 +55733,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3587.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line07_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52401,7 +55746,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3547.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line08_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52414,7 +55759,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3507.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line09_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52427,7 +55772,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3471.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line10_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52440,7 +55785,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3428.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line11_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52453,7 +55798,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3389.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line12_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52466,7 +55811,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3352.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line13_S
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -52479,7 +55824,7 @@ GROUP FMSs
 
       gen_text XXXXXXXXXXXXXXXXXXX
         POS 2868.500000 3315.000000
-        IMAGE FMS/small_white
+        IMAGE CDU/small/cdu_small_white
         DATAREF Strato/B777/fms2/Line14_S
         LOCKED
         LIGHT_MODE GLASS_AUTO

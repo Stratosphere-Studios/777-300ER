@@ -1,19 +1,19 @@
 simDR_latitude=find_dataref("sim/flightmodel/position/latitude")
 simDR_longitude=find_dataref("sim/flightmodel/position/longitude")
 simDR_groundspeed=find_dataref("sim/flightmodel/position/groundspeed")
-B777DR_iru_mode_sel_pos         = find_dataref("laminar/B777/flt_mgmt/iru/mode_sel_dial_pos")
+B777DR_iru_mode_sel_pos         = find_dataref("Strato/B777/flt_mgmt/iru/mode_sel_dial_pos")
 local timeToAlign=600
-irs_A_status=find_dataref("laminar/B777/irs/line1") 
-irs_L_status=find_dataref("laminar/B777/irs/line2") 
-irs_C_status=find_dataref("laminar/B777/irs/line3") 
-irs_R_status=find_dataref("laminar/B777/irs/line4") 
+irs_A_status=find_dataref("Strato/B777/irs/line1") 
+irs_L_status=find_dataref("Strato/B777/irs/line2") 
+irs_C_status=find_dataref("Strato/B777/irs/line3") 
+irs_R_status=find_dataref("Strato/B777/irs/line4") 
 local allIRSOff=true
 
 startLat=0
 startLon=0
 
 --IRS ND DISPLAY
-B777DR_ND_IRS_Line	= deferred_dataref("laminar/B777/irs/irs_display_line", "string")
+B777DR_ND_IRS_Line	= deferred_dataref("Strato/B777/irs/irs_display_line", "string")
 
 
 irs={

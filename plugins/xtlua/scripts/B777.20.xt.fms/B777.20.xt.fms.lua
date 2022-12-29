@@ -40,7 +40,7 @@ B777DR_irs_src_capt	                = find_dataref("Strato/B777/flt_inst/irs_src
 B777DR_ap_fpa                       = find_dataref("Strato/B777/autopilot/navadata/fpa")
 B777DR_ap_vb                        = find_dataref("Strato/B777/autopilot/navadata/vb")
 simDR_autopilot_vs_fpm              = find_dataref("sim/cockpit2/autopilot/vvi_dial_fpm")
-B777DR_fmc_notifications            = deferred_dataref("laminar/B777/fms/notification","array[53]")
+B777DR_fmc_notifications            = deferred_dataref("Strato/B777/fms/notification","array[53]")
 B777DR_airspeed_Vref                = find_dataref("Strato/B777/airspeed/Vref")
 B777DR_airspeed_VrefFlap            = find_dataref("Strato/B777/airspeed/VrefFlap")
 B777DR_altimter_ft_adjusted         = find_dataref("Strato/B777/altimeter/ft_adjusted")
@@ -480,8 +480,9 @@ fmsModules["cmds"]={}
 fmsModules["cmdstrings"]={}
 
 function registerFMCCommand(commandID,dataString)
-	fmsModules["cmds"][commandID]=find_command(commandID)
-	fmsModules["cmdstrings"][commandID]=dataString
+	--[[fmsModules["cmds"][commandID]=find_command(commandID)
+	fmsModules["cmdstrings"][commandID]=dataString]]
+	return
 end
 
 function switchCustomMode()

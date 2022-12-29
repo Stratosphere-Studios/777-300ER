@@ -265,42 +265,149 @@ function create_keypad(fms)
   fmsKeyFunc[fms].funcs.parent=fms
 end
 
+B777DR_fms_hl={}
+B777DR_fms_c={}
+B777DR_fms_gn={}
+B777DR_fms_gy={}
+B777DR_fms_m={}
 B777DR_fms={}
 B777DR_fms_s={}
+B777DR_fms_s_hl={}
 B777DR_srcfms={}
 
 function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
   B777DR_fms[fmsO.id]={}
-  B777DR_fms[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L", "string")
-  B777DR_fms[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L", "string")
-  B777DR_fms[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L", "string")
-  B777DR_fms[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L", "string")
-  B777DR_fms[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L", "string")
-  B777DR_fms[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L", "string")
-  B777DR_fms[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L", "string")
-  B777DR_fms[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L", "string")
-  B777DR_fms[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L", "string")
-  B777DR_fms[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L", "string")
-  B777DR_fms[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L", "string")
-  B777DR_fms[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L", "string")
-  B777DR_fms[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L", "string")
-  B777DR_fms[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L", "string")
+  B777DR_fms[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L")
+  B777DR_fms[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L")
+  B777DR_fms[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L")
+  B777DR_fms[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L")
+  B777DR_fms[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L")
+  B777DR_fms[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L")
+  B777DR_fms[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L")
+  B777DR_fms[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L")
+  B777DR_fms[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L")
+  B777DR_fms[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L")
+  B777DR_fms[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L")
+  B777DR_fms[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L")
+  B777DR_fms[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L")
+  B777DR_fms[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L")
 
   B777DR_fms_s[fmsO.id]={}
-  B777DR_fms_s[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_S", "string")
-  B777DR_fms_s[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_S", "string")
-  B777DR_fms_s[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_S", "string")
-  B777DR_fms_s[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_S", "string")
-  B777DR_fms_s[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_S", "string")
-  B777DR_fms_s[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_S", "string")
-  B777DR_fms_s[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_S", "string")
-  B777DR_fms_s[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_S", "string")
-  B777DR_fms_s[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_S", "string")
-  B777DR_fms_s[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_S", "string")
-  B777DR_fms_s[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_S", "string")
-  B777DR_fms_s[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_S", "string")
-  B777DR_fms_s[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_S", "string")
-  B777DR_fms_s[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_S", "string")
+  B777DR_fms_s[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_S")
+  B777DR_fms_s[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_S")
+  B777DR_fms_s[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_S")
+  B777DR_fms_s[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_S")
+  B777DR_fms_s[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_S")
+  B777DR_fms_s[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_S")
+  B777DR_fms_s[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_S")
+  B777DR_fms_s[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_S")
+  B777DR_fms_s[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_S")
+  B777DR_fms_s[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_S")
+  B777DR_fms_s[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_S")
+  B777DR_fms_s[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_S")
+  B777DR_fms_s[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_S")
+  B777DR_fms_s[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_S")
+
+	-- highlight
+  B777DR_fms_hl[fmsO.id]={}
+	B777DR_fms_hl[fmsO.id][1]               = find_dataref("Strato/B777/"..fmsid.."/Line01_L_hl")
+	B777DR_fms_hl[fmsO.id][2]               = find_dataref("Strato/B777/"..fmsid.."/Line02_L_hl")
+	B777DR_fms_hl[fmsO.id][3]               = find_dataref("Strato/B777/"..fmsid.."/Line03_L_hl")
+	B777DR_fms_hl[fmsO.id][4]               = find_dataref("Strato/B777/"..fmsid.."/Line04_L_hl")
+	B777DR_fms_hl[fmsO.id][5]               = find_dataref("Strato/B777/"..fmsid.."/Line05_L_hl")
+	B777DR_fms_hl[fmsO.id][6]               = find_dataref("Strato/B777/"..fmsid.."/Line06_L_hl")
+	B777DR_fms_hl[fmsO.id][7]               = find_dataref("Strato/B777/"..fmsid.."/Line07_L_hl")
+	B777DR_fms_hl[fmsO.id][8]               = find_dataref("Strato/B777/"..fmsid.."/Line08_L_hl")
+	B777DR_fms_hl[fmsO.id][9]               = find_dataref("Strato/B777/"..fmsid.."/Line09_L_hl")
+	B777DR_fms_hl[fmsO.id][10]              = find_dataref("Strato/B777/"..fmsid.."/Line10_L_hl")
+	B777DR_fms_hl[fmsO.id][11]              = find_dataref("Strato/B777/"..fmsid.."/Line11_L_hl")
+	B777DR_fms_hl[fmsO.id][12]              = find_dataref("Strato/B777/"..fmsid.."/Line12_L_hl")
+	B777DR_fms_hl[fmsO.id][13]              = find_dataref("Strato/B777/"..fmsid.."/Line13_L_hl")
+	B777DR_fms_hl[fmsO.id][14]              = find_dataref("Strato/B777/"..fmsid.."/Line14_L_hl")
+
+  B777DR_fms_s_hl[fmsO.id]={}
+	B777DR_fms_s_hl[fmsO.id][1]             = find_dataref("Strato/B777/"..fmsid.."/Line01_S_hl")
+	B777DR_fms_s_hl[fmsO.id][2]             = find_dataref("Strato/B777/"..fmsid.."/Line02_S_hl")
+	B777DR_fms_s_hl[fmsO.id][3]             = find_dataref("Strato/B777/"..fmsid.."/Line03_S_hl")
+	B777DR_fms_s_hl[fmsO.id][4]             = find_dataref("Strato/B777/"..fmsid.."/Line04_S_hl")
+	B777DR_fms_s_hl[fmsO.id][5]             = find_dataref("Strato/B777/"..fmsid.."/Line05_S_hl")
+	B777DR_fms_s_hl[fmsO.id][6]             = find_dataref("Strato/B777/"..fmsid.."/Line06_S_hl")
+	B777DR_fms_s_hl[fmsO.id][7]             = find_dataref("Strato/B777/"..fmsid.."/Line07_S_hl")
+	B777DR_fms_s_hl[fmsO.id][8]             = find_dataref("Strato/B777/"..fmsid.."/Line08_S_hl")
+	B777DR_fms_s_hl[fmsO.id][9]             = find_dataref("Strato/B777/"..fmsid.."/Line09_S_hl")
+	B777DR_fms_s_hl[fmsO.id][10]            = find_dataref("Strato/B777/"..fmsid.."/Line10_S_hl")
+	B777DR_fms_s_hl[fmsO.id][11]            = find_dataref("Strato/B777/"..fmsid.."/Line11_S_hl")
+	B777DR_fms_s_hl[fmsO.id][12]            = find_dataref("Strato/B777/"..fmsid.."/Line12_S_hl")
+	B777DR_fms_s_hl[fmsO.id][13]            = find_dataref("Strato/B777/"..fmsid.."/Line13_S_hl")
+	B777DR_fms_s_hl[fmsO.id][14]            = find_dataref("Strato/B777/"..fmsid.."/Line14_S_hl")
+
+  -- cyan
+	B777DR_fms_c[fmsO.id]={}
+	B777DR_fms_c[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L_c")
+	B777DR_fms_c[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L_c")
+	B777DR_fms_c[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L_c")
+	B777DR_fms_c[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L_c")
+	B777DR_fms_c[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L_c")
+	B777DR_fms_c[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L_c")
+	B777DR_fms_c[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L_c")
+	B777DR_fms_c[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L_c")
+	B777DR_fms_c[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L_c")
+	B777DR_fms_c[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L_c")
+	B777DR_fms_c[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L_c")
+	B777DR_fms_c[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L_c")
+	B777DR_fms_c[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L_c")
+	B777DR_fms_c[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L_c")
+
+	-- green
+  B777DR_fms_gn[fmsO.id]={}
+	B777DR_fms_gn[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L_gn")
+	B777DR_fms_gn[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L_gn")
+	B777DR_fms_gn[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L_gn")
+	B777DR_fms_gn[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L_gn")
+	B777DR_fms_gn[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L_gn")
+	B777DR_fms_gn[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L_gn")
+	B777DR_fms_gn[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L_gn")
+	B777DR_fms_gn[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L_gn")
+	B777DR_fms_gn[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L_gn")
+	B777DR_fms_gn[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L_gn")
+	B777DR_fms_gn[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L_gn")
+	B777DR_fms_gn[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L_gn")
+	B777DR_fms_gn[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L_gn")
+	B777DR_fms_gn[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L_gn")
+
+	-- grey
+  B777DR_fms_gy[fmsO.id]={}
+	B777DR_fms_gy[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L_gy")
+	B777DR_fms_gy[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L_gy")
+	B777DR_fms_gy[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L_gy")
+	B777DR_fms_gy[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L_gy")
+	B777DR_fms_gy[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L_gy")
+	B777DR_fms_gy[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L_gy")
+	B777DR_fms_gy[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L_gy")
+	B777DR_fms_gy[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L_gy")
+	B777DR_fms_gy[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L_gy")
+	B777DR_fms_gy[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L_gy")
+	B777DR_fms_gy[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L_gy")
+	B777DR_fms_gy[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L_gy")
+	B777DR_fms_gy[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L_gy")
+	B777DR_fms_gy[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L_gy")
+
+	-- magenta
+  B777DR_fms_m[fmsO.id]={}
+	B777DR_fms_m[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L_m")
+	B777DR_fms_m[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L_m")
+	B777DR_fms_m[fmsO.id][3]                = find_dataref("Strato/B777/"..fmsid.."/Line03_L_m")
+	B777DR_fms_m[fmsO.id][4]                = find_dataref("Strato/B777/"..fmsid.."/Line04_L_m")
+	B777DR_fms_m[fmsO.id][5]                = find_dataref("Strato/B777/"..fmsid.."/Line05_L_m")
+	B777DR_fms_m[fmsO.id][6]                = find_dataref("Strato/B777/"..fmsid.."/Line06_L_m")
+	B777DR_fms_m[fmsO.id][7]                = find_dataref("Strato/B777/"..fmsid.."/Line07_L_m")
+	B777DR_fms_m[fmsO.id][8]                = find_dataref("Strato/B777/"..fmsid.."/Line08_L_m")
+	B777DR_fms_m[fmsO.id][9]                = find_dataref("Strato/B777/"..fmsid.."/Line09_L_m")
+	B777DR_fms_m[fmsO.id][10]               = find_dataref("Strato/B777/"..fmsid.."/Line10_L_m")
+	B777DR_fms_m[fmsO.id][11]               = find_dataref("Strato/B777/"..fmsid.."/Line11_L_m")
+	B777DR_fms_m[fmsO.id][12]               = find_dataref("Strato/B777/"..fmsid.."/Line12_L_m")
+	B777DR_fms_m[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L_m")
+	B777DR_fms_m[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L_m")
 
   B777DR_srcfms[fmsO.id]={}
   B777DR_srcfms[fmsO.id][1]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line0")
@@ -489,11 +596,11 @@ end
 function fms:B777_fms_display()
   local thisID = self.id
   if self.inCustomFMC ~= self.targetCustomFMC or self.currentPage ~= self.targetPage or self.pgNo ~= self.targetpgNo then
-    for i=1, 14, 1 do
+    --[[for i=1, 14, 1 do
       print("func 2")
       B777DR_fms[thisID][i] = "                        "
       B777DR_fms_s[thisID][i] = "                        "
-    end
+    end]]
     return
   end
   --self.swipeOut=1
@@ -501,10 +608,10 @@ function fms:B777_fms_display()
   local inCustomFMC=self.inCustomFMC
   local page=self.currentPage
   if not inCustomFMC then
-    for i=1,13,1 do
+    --[[for i=1,13,1 do
       B777DR_fms[thisID][i]=cleanFMSLine(B777DR_srcfms[thisID][i])
       B777DR_fms_s[thisID][i] = "                        "
-    end
+    end]]
 
     if string.len(self.notify)>0 then 
       B777DR_fms[thisID][14]=self.notify
@@ -520,13 +627,93 @@ function fms:B777_fms_display()
     local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
     local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
     local tmpSRC
+
     for i=1,13,1 do
       tmpSRC=B777DR_srcfms[thisID][i] -- make sure src is always fresh
-      B777DR_fms[thisID][i]=fmsPage[i]
+
+      local input = ""
+      local greenText = ""
+      local highlightText = ""
+      local magentaText = ""
+      local greyText = ""
+      local cyanText = ""
+      local whiteText = ""
+      local code = ""
+      local color = ""
+      local codePos = 0
+      local numChars = ""
+      local result = ""
+      local colorOutput = ""
+
+      input = fmsPage[i]
+      code = string.match(input, ';..')
+
+      if code ~= nil then
+          codePos = string.find(input, code)
+          color = string.lower(string.sub(code, 2, 2))
+          numChars = string.sub(code, 3, 3)
+          result = string.sub(input, codePos - numChars, codePos - 1)
+          colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
+          whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
+
+          if color == "g" then
+            greenText = colorOutput
+          elseif color == "h" then
+            highlightText = colorOutput
+          elseif color == "r" then
+            greyText = colorOutput
+          elseif color == "m" then
+            magentaText = colorOutput
+          elseif color == "c" then
+            cyanText = colorOutput
+          else
+            print("WARNING: invalid color: ".. color)
+          end
+      else
+        whiteText = input
+      end
+
+      B777DR_fms[thisID][i]=whiteText
+      B777DR_fms_hl[thisID][i]=highlightText
+      B777DR_fms_m[thisID][i]=magentaText
+      B777DR_fms_gn[thisID][i]=greenText
+      B777DR_fms_c[thisID][i]=cyanText
+      B777DR_fms_gy[thisID][i]=greyText
     end
 
     for i=1,13,1 do
-      B777DR_fms_s[thisID][i]=fmsPagesmall[i]
+
+      local input = ""
+      local highlightText = ""
+      local whiteText = ""
+      local code = ""
+      local color = ""
+      local codePos = 0
+      local numChars = ""
+      local result = ""
+      local colorOutput = ""
+
+      input = fmsPagesmall[i]
+      code = string.match(input, ';..')
+
+      if code ~= nil then
+          codePos = string.find(input, code)
+          color = string.lower(string.sub(code, 2, 2))
+          numChars = string.sub(code, 3, 3)
+          result = string.sub(input, codePos - numChars, codePos - 1)
+          colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
+          whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
+
+          if color == "h" then
+            highlightText = colorOutput
+          else
+            print("WARNING: invalid color: ".. color)
+          end
+      else
+        whiteText = input
+      end
+      B777DR_fms_s[thisID][i]=whiteText
+      B777DR_fms_s_hl[thisID][i]=highlightText
     end
 
     if string.len(string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]",""))>0 then

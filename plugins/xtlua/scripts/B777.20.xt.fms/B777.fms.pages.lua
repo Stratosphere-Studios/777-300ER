@@ -16,60 +16,86 @@ B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
-
+local efisCTL = 1
+local dspCTL = 1
 fmsPages["INDEX"]=createPage("INDEX")
 fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
-  local acarsS="             "
 
-  if acars==1 and B777DR_rtp_C_off==0 then 
-	acarsS="<ACARS  <REQ>" 
-	fmsFunctionsDefs["INDEX"]["L2"]={"setpage","ACARS"}
-  else
-	fmsFunctionsDefs["INDEX"]["L2"]=nil
+	fmsFunctionsDefs["INDEX"]={}
+	fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
+	--fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
+	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
+	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCTL"}
+	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCTL"}
+
+	local efisln = "EFIS>"
+	local dspln = "DISP>"
+	local eicasOpt = "OFF<->ON;g2"
+	local dspOpt = "OFF<->ON;g2"
+
+	if efisCTL == 1 then
+		eicasOpt = "OFF<->ON;g2"
+		efisln = "EFIS>"
+		--fmsFunctionsDefs["INDEX"]["R2"]={"setpage","EFISCTL152"}
+	else
+		eicasOpt = "OFF;g3<->ON"
+		efisln = "     "
+		fmsFunctionsDefs["INDEX"]["R2"]=nil
 	end
-return {
 
-"         MENU           ",
-"                        ",
-"<FMC    <ACT>    SELECT>",
-"                        ",
-acarsS.."     SELECT>",
-"                        ",
-"<SAT                    ",
-"                        ",
-"                        ",
-"                        ",
-"<ACMS                   ",
-"                        ",
-"<CMC                    "
-}
+	if dspCTL == 1 then
+		dspOpt = "OFF<->ON;g2"
+		dspln = "DSP>"
+		fmsFunctionsDefs["INDEX"]["R4"]={"setpage","EICASMODES"}
+	else
+		dspOpt = "OFF;g3<->ON"
+		dspln = "    "
+		fmsFunctionsDefs["INDEX"]["R4"]=nil
+	end
+
+	--[[  local acarsS="             "
+
+	if acars==1 and B777DR_rtp_C_off==0 then 
+		acarsS="<ACARS  <REQ>" 
+		fmsFunctionsDefs["INDEX"]["L2"]={"setpage","ACARS"}
+	else
+		fmsFunctionsDefs["INDEX"]["L2"]=nil
+	end]]
+
+	return {
+		"         MENU           ",
+		"                        ",
+		"<FMC            "..eicasOpt,
+		"                        ",
+		"<SAT;r4               "..efisln,
+		"                        ",
+		"                "..dspOpt,
+		"                        ",
+		"                    "..dspln,
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        "
+	}
 end
+
 fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
-
-  return {
-      "                       ",
-      "                 EFIS CP",
-      "                        ",
-	  "                EICAS CP",
-      "                        ",
-      "                 CTL PNL",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      "                        ",
-      }
+	return {
+		"                        ",
+		"                EFIS CTL",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                 DSP CTL",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"                        ",
+	}
 end
-fmsFunctionsDefs["INDEX"]={}
-fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
-
-fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
-fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
-fmsFunctionsDefs["INDEX"]["R1"]={"setpage","EFISCTL152"}
-fmsFunctionsDefs["INDEX"]["R2"]={"setpage","EICASMODES"}
-fmsFunctionsDefs["INDEX"]["R4"]={"setpage","GNDHNDL"}
 
 fmsPages["RTE1"]=createPage("RTE1")
 fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
@@ -188,63 +214,63 @@ fmsFunctionsDefs["RTE1"]["next"]={"custom2fmc","next"}
 fmsFunctionsDefs["RTE1"]["prev"]={"custom2fmc","prev"}
 fmsFunctionsDefs["RTE1"]["exec"]={"custom2fmc","exec"}
 
-dofile("activepages/B744.fms.pages.legs.lua")
-dofile("activepages/B744.fms.pages.maint.lua")
-dofile("activepages/B744.fms.pages.maintbite.lua")
-dofile("activepages/B744.fms.pages.maintcrossload.lua")
-dofile("activepages/B744.fms.pages.maintperffactor.lua")
-dofile("activepages/B744.fms.pages.fmccomm.lua")
-dofile("activepages/B744.fms.pages.cmc.lua")
-dofile("activepages/B744.fms.pages.acms.lua")
-dofile("activepages/atc/B744.fms.pages.atcindex.lua")
-dofile("activepages/atc/B744.fms.pages.atclogonstatus.lua")
-dofile("activepages/atc/B744.fms.pages.atcreport.lua")
-dofile("activepages/atc/B744.fms.pages.request.lua")
-dofile("activepages/atc/B744.fms.pages.whencanwe.lua")
-dofile("activepages/B744.fms.pages.actrte1.lua")
-dofile("activepages/B744.fms.pages.identpage.lua")
-dofile("activepages/B744.fms.pages.eicasctl.lua")
---[[dofile("activepages/B744.fms.pages.posinit.lua")
-dofile("activepages/B744.fms.pages.perfinit.lua")
-dofile("activepages/B744.fms.pages.thrustlim.lua")
-dofile("activepages/B744.fms.pages.takeoff.lua")
-dofile("activepages/B744.fms.pages.approach.lua")
-dofile("activepages/B744.fms.pages.maintirsmonitor.lua")
-dofile("activepages/B744.fms.pages.progress.lua")
-dofile("activepages/B744.fms.pages.vnav.lua")
-dofile("activepages/B744.fms.pages.vnav.lrc.lua")
-dofile("activepages/atc/B744.fms.pages.posreport.lua")
-dofile("activepages/B744.fms.pages.efisctl.lua")
+dofile("activepages/B777.fms.pages.legs.lua")
+dofile("activepages/B777.fms.pages.maint.lua")
+dofile("activepages/B777.fms.pages.maintbite.lua")
+dofile("activepages/B777.fms.pages.maintcrossload.lua")
+dofile("activepages/B777.fms.pages.maintperffactor.lua")
+dofile("activepages/B777.fms.pages.fmccomm.lua")
+dofile("activepages/B777.fms.pages.cmc.lua")
+dofile("activepages/B777.fms.pages.acms.lua")
+dofile("activepages/atc/B777.fms.pages.atcindex.lua")
+dofile("activepages/atc/B777.fms.pages.atclogonstatus.lua")
+dofile("activepages/atc/B777.fms.pages.atcreport.lua")
+dofile("activepages/atc/B777.fms.pages.request.lua")
+dofile("activepages/atc/B777.fms.pages.whencanwe.lua")
+dofile("activepages/B777.fms.pages.actrte1.lua")
+dofile("activepages/B777.fms.pages.identpage.lua")
+dofile("activepages/B777.fms.pages.eicasctl.lua")
+--[[dofile("activepages/B777.fms.pages.posinit.lua")
+dofile("activepages/B777.fms.pages.perfinit.lua")
+dofile("activepages/B777.fms.pages.thrustlim.lua")
+dofile("activepages/B777.fms.pages.takeoff.lua")
+dofile("activepages/B777.fms.pages.approach.lua")
+dofile("activepages/B777.fms.pages.maintirsmonitor.lua")
+dofile("activepages/B777.fms.pages.progress.lua")
+dofile("activepages/B777.fms.pages.vnav.lua")
+dofile("activepages/B777.fms.pages.vnav.lrc.lua")
+dofile("activepages/atc/B777.fms.pages.posreport.lua")
+dofile("activepages/B777.fms.pages.efisctl.lua")
 
 -- DO NOT UNCOMMENT
-dofile("B744.fms.pages.actclb.lua")
-dofile("B744.fms.pages.actcrz.lua")
-dofile("B744.fms.pages.actdes.lua")
-dofile("B744.fms.pages.actirslegs.lua")
-dofile("B744.fms.pages.actrte1data.lua")
-dofile("B744.fms.pages.actrte1hold.lua")
-dofile("B744.fms.pages.actrte1legs.lua")
-dofile("B744.fms.pages.altnnavradio.lua")
-dofile("B744.fms.pages.approach.lua")
-dofile("B744.fms.pages.arrivals.lua")
+dofile("B777.fms.pages.actclb.lua")
+dofile("B777.fms.pages.actcrz.lua")
+dofile("B777.fms.pages.actdes.lua")
+dofile("B777.fms.pages.actirslegs.lua")
+dofile("B777.fms.pages.actrte1data.lua")
+dofile("B777.fms.pages.actrte1hold.lua")
+dofile("B777.fms.pages.actrte1legs.lua")
+dofile("B777.fms.pages.altnnavradio.lua")
+dofile("B777.fms.pages.approach.lua")
+dofile("B777.fms.pages.arrivals.lua")
 
 
-dofile("B744.fms.pages.atcrejectdueto.lua")
+dofile("B777.fms.pages.atcrejectdueto.lua")
 
-dofile("B744.fms.pages.atcreport2.lua")
-dofile("B744.fms.pages.atcuplink.lua")
-dofile("B744.fms.pages.atcverifyresponse.lua")
-dofile("B744.fms.pages.deparrindex.lua")
-dofile("B744.fms.pages.departures.lua")
-dofile("B744.fms.pages.fixinfo.lua")
+dofile("B777.fms.pages.atcreport2.lua")
+dofile("B777.fms.pages.atcuplink.lua")
+dofile("B777.fms.pages.atcverifyresponse.lua")
+dofile("B777.fms.pages.deparrindex.lua")
+dofile("B777.fms.pages.departures.lua")
+dofile("B777.fms.pages.fixinfo.lua")
 
-dofile("B744.fms.pages.identpage.lua")
-dofile("B744.fms.pages.irsprogress.lua")
-dofile("B744.fms.pages.navradpage.lua")
-dofile("B744.fms.pages.progress.lua")
-dofile("B744.fms.pages.refnavdata1.lua")
-dofile("B744.fms.pages.satcom.lua")
-dofile("B744.fms.pages.waypointwinds.lua")
+dofile("B777.fms.pages.identpage.lua")
+dofile("B777.fms.pages.irsprogress.lua")
+dofile("B777.fms.pages.navradpage.lua")
+dofile("B777.fms.pages.progress.lua")
+dofile("B777.fms.pages.refnavdata1.lua")
+dofile("B777.fms.pages.satcom.lua")
+dofile("B777.fms.pages.waypointwinds.lua")
 
 ]]
 
@@ -2331,9 +2357,18 @@ function fmsFunctions.showmessage(fmsO,value)
 end
 
 function fmsFunctions.doCMD(fmsO,value)
-  print("do fmc command "..value)
-  if fmsModules["cmds"][value] ~= nil then
+  --[[if fmsModules["cmds"][value] ~= nil then
 	fmsModules["cmds"][value]:once()
 	fmsModules["lastcmd"]=fmsModules["cmdstrings"][value]
-  end
+  end]]
+  find_command(value):once()
+  print("do fmc command "..value)
+end
+
+function fmsFunctions.toggleVar(fmsO, value)
+	if value == "efisCTL" then
+		efisCTL = 1 - efisCTL
+	elseif value == "dspCTL" then
+		dspCTL = 1 - dspCTL
+	end
 end

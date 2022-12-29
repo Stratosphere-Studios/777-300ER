@@ -18,7 +18,7 @@ function fmsFunctions.initAcars(fmsO,value)
   if currentInit~= newInit then
     fmsModules["data"]["acarsInitString"]=newInit
     initData["type"]="initData"
-    initData["af"]="B744"
+    initData["af"]="B777"
     local newInitSend=json.encode(initData)
     print(newInitSend)
     fmsFunctions.acarsSystemSend(fmsO,newInitSend)
