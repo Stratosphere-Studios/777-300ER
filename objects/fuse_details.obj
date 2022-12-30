@@ -3632,6 +3632,8 @@ IDX	3281
 	ANIM_rotate_key	270	270.00006
 	ANIM_rotate_key	360	360.00026
 	ANIM_rotate_end
+	ANIM_show	200	1000	sim/cockpit2/engine/indicators/engine_speed_rpm[0]
+	ANIM_hide	0	200	sim/cockpit2/engine/indicators/engine_speed_rpm[0]
 		TRIS	2922 90
 		TRIS	3102 90
 	ANIM_end
@@ -3644,9 +3646,11 @@ IDX	3281
 	ANIM_rotate_key	270	270.00006
 	ANIM_rotate_key	360	360.00026
 	ANIM_rotate_end
+	ANIM_show	200	1000	sim/cockpit2/engine/indicators/engine_speed_rpm[1]
+	ANIM_hide	0	200	sim/cockpit2/engine/indicators/engine_speed_rpm[1]
 		TRIS	3012 90
 		TRIS	3192 90
 	ANIM_end
 	TRIS	0 2922
 
-# Build with Blender 3.0.1 (build b'dc2d18018171'). Exported with XPlane2Blender 4.1.0-beta.2+104.20220106141815
+# Build with Blender 3.0.1 (build b'dc2d18018171'). Exported with XPlane2Blender 4.1.0-rc.1+104.20220317232939
