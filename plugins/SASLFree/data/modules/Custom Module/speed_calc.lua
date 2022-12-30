@@ -65,7 +65,7 @@ function update()
         end
         local vs = math.sqrt((curr_gw * 9.8) / (0.5 * curr_cl * get(air_density) * 428.8))
         local red_band_si = vs * 1.05
-        local amber_band_si = vs * 1.23
+        local amber_band_si = vs * 1.3
         local red_band_conv = (toCAS(red_band_si) + correction) * 1.944
         local amber_band_conv = (toCAS(amber_band_si) + correction) * 1.944
         set(max_allowable, curr_max)

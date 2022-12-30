@@ -41,13 +41,15 @@ on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 --Finding own datarefs
 
+eicas_power_upper = globalPropertyi("Strato/777/elec/eicas_power_upper")
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
-tac_engage = globalPropertyi("Strato/777/fctl/pfc/tac_eng", 1)
+tac_fail = globalPropertyi("Strato/777/fctl/ace/tac_fail")
 fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
+flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 c_time = globalPropertyf("Strato/777/time/current")
 eicas_brake_temp = globalPropertyi("Strato/777/eicas/brake_temp")
 eicas_tire_press = globalPropertyi("Strato/777/eicas/tire_press")
@@ -59,6 +61,15 @@ sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
 sys_R_press = globalPropertyfae("Strato/777/hydraulics/press", 3)
 stab_cutout_C = globalPropertyi("Strato/777/fctl/stab_cutout_C")
 stab_cutout_R = globalPropertyi("Strato/777/fctl/stab_cutout_R")
+--Flight controls
+ace_spoiler_fail_17 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_17", 0)
+ace_spoiler_fail_2 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_2", 0)
+ace_spoiler_fail_36 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_36", 0)
+ace_spoiler_fail_4 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_4", 0)
+ace_spoiler_fail_5 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_5", 0)
+ace_elevator_fail_L = globalPropertyi("Strato/777/fctl/ace/elevator_fail_L", 0)
+ace_elevator_fail_R = globalPropertyi("Strato/777/fctl/ace/elevator_fail_R", 0)
+spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ace_spoiler_fail_4, ace_spoiler_fail_5}
 
 --Creating datarefs
 
@@ -67,7 +78,6 @@ recall_past = createGlobalPropertyi("Strato/777/eicas/rcl_past", 0)
 canc = createGlobalPropertyi("Strato/777/eicas/canc", 0)
 windows = createGlobalPropertyfa("Strato/777/windows", {0, 0})
 window_target = createGlobalPropertyia("Strato/777/windows_tgt", {0, 0})
-tr_time = createGlobalPropertyf("Strato/777/test/tr_time", 0)
 
 font = loadFont("BoeingFont.ttf")
 
@@ -79,16 +89,18 @@ detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 
 stab_c_past = 0
 flaps_past = 0
-flap_retract_time = -11
+park_brake_past = 0
+handle_past = 1
+altn_gear_past = 0
 advisories_past = {}
 n_dsp = 0
 advisories_start = 1
-handle_past = 1
-altn_gear_past = 0
+flap_retract_time = -11
+park_brake_time = -1
+park_brake_time_set = false
 gear_display_time = -11
 gear_transit_time = -26
 gear_dn = true
-eicas_nest = 0
 
 function UpdateAdvisorySide(messages, text_L, text_R, text_both, dref_l, dref_r)
 	if round(get(dref_l)) == 1 and round(get(dref_r)) == 0 then
@@ -233,12 +245,22 @@ function UpdateWindowAdvisory(messages)
 	UpdateAdvisorySide(messages, "WINDOW FLT DECK L", "WINDOW FLT DECK R", "WINDOWS", pos_w_l, pos_w_r)
 end
 
-function UpdateStabCutoutAdvisory(messages)
-	if get(stab_cutout_C) == 1 then
-		table.insert(messages, tlen(messages) + 1, "STABILIZER C")
+function UpdateSpoilerAdvisory(messages)
+	sp_inop = false
+	for i, v in ipairs(spoiler_fail) do
+		if get(v) == 1 then
+			table.insert(messages, tlen(messages) + 1, "SPOILERS")
+			break
+		end
 	end
+end
+
+function UpdateStabCutoutAdvisory(messages)
 	if get(stab_cutout_R) == 1 then
 		table.insert(messages, tlen(messages) + 1, "STABILIZER R")
+	end
+	if get(stab_cutout_C) == 1 then
+		table.insert(messages, tlen(messages) + 1, "STABILIZER C")
 	end
 	if get(stab_cutout_C) * get(stab_cutout_R) == 1  then
 		table.insert(messages, tlen(messages) + 1, "STABILIZER CUTOUT")
@@ -250,7 +272,6 @@ function UpdateGearPos()
 	gear_status_pos = {990, 620, 900, 554, 1080, 554} --Coordinates of the bottom left corner of gear status signs for alternate extension
 	--If gear has been retracted, weit 10 seconds before we hide the status
 	local gear_in_pos = Round(get(nw_actual), 2) ~= 0 or Round(get(mlg_actual_L), 2) ~= 0 or Round(get(mlg_actual_R), 2) ~= 0
-	set(tr_time, gear_display_time)
 	if gear_in_pos == false and handle_past == 1 and Round(get(handle_pos), 2) == 0 then
 		gear_display_time = get(c_time)
 		handle_past = 0
@@ -434,6 +455,9 @@ function UpdateEicasAdvisory(messages)
 			table.insert(messages, tlen(messages) + 1, "SPEEDBRAKE EXTENDED")
 		end
 	end
+	if get(tac_fail) == 1 then
+		table.insert(messages, tlen(messages) + 1, "THRUST ASYM COMP")
+	end
 	UpdateStabCutoutAdvisory(messages)
 	local door_stat = checkGearDoors()
 	if door_stat == 1 then
@@ -442,14 +466,9 @@ function UpdateEicasAdvisory(messages)
 	if get(acc) == 1 then
 		table.insert(messages, tlen(messages) + 1, "BRAKE SOURCE")
 	end
-	if get(pressure_L) < 1200 or get(pressure_C) < 1200 or get(pressure_R) < 1200 then
-		table.insert(messages, tlen(messages) + 1, "SPOILERS")
-	end
+	UpdateSpoilerAdvisory(messages)
 	if get(pressure_C) < 1200 or (get(fbw_mode) > 1 and get(fbw_self_test) == 0) then
 		table.insert(messages, tlen(messages) + 1, "AUTO SPEEDBRAKE")
-	end
-	if (get(fbw_mode) > 1 and get(fbw_self_test) == 0) or get(tac_engage) == 0 then
-		table.insert(messages, tlen(messages) + 1, "THRUST ASYM COMP")
 	end
 	if get(eicas_tire_press) == 1 then
 		table.insert(messages, tlen(messages) + 1, "TIRE PRESS")
@@ -467,7 +486,16 @@ end
 
 function UpdateMemo(messages, msg_avail)
 	local c_avail = msg_avail
-	if get(park_brake_valve) == 1 and c_avail >= 1 then
+	if get(park_brake_valve) ~= park_brake_past then
+		if not park_brake_time_set then
+			park_brake_time = get(c_time)
+			park_brake_time_set = true
+		elseif park_brake_time_set and get(c_time) > park_brake_time + 1 then
+			park_brake_past = get(park_brake_valve)
+			park_brake_time_set = false
+		end
+	end
+	if park_brake_past == 1 and c_avail >= 1 then
 		table.insert(messages, 1, "PARKING BRAKE SET")
 		c_avail = c_avail - 1
 	end
@@ -483,6 +511,7 @@ end
 function DisplayMessages(messages, offset, color, step, start_p, end_p)
 	if end_p >= start_p then
 		local hyd_idx = nil
+		local fctl_mode_idx = indexOf(messages, "FLIGHT CONTROL MODE")
 		local hyd_press_idx1 = indexOf(messages, "HYD PRESS SYS L")
 		local hyd_press_idx2 = indexOf(messages, "HYD PRESS SYS C")
 		local hyd_press_idx3 = indexOf(messages, "HYD PRESS SYS R")
@@ -508,10 +537,8 @@ function DisplayMessages(messages, offset, color, step, start_p, end_p)
 end
 
 function draw()
-	UpdateGearPos()
-	flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 	UpdateWindows()
-	if get(battery) == 1 or IsAcConnected() == 1 then
+	if get(eicas_power_upper) == 1 then
 		local offset = 1275
 		local n_dsp = 0
 		local curr_end = 0
@@ -520,6 +547,7 @@ function draw()
 		local warnings = {}
 		local advisories = {}
 		local memo = {}
+		UpdateGearPos()
 		UpdateFlaps()
 		UpdateEicasWarnings(warnings)
 		if get(c_time) >= tmp1 + 1 then
