@@ -19,6 +19,7 @@ function deferred_dataref(name,nilType,callFunction)
    return find_dataref(name)
 end
 
+dofile("json/json.lua")
 
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--
@@ -45,7 +46,15 @@ local pages = {
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
 
+
+
+--*************************************************************************************--
+--**                              FIND CUSTOM DATAREFS                               **--
+--*************************************************************************************--
+
 avitabEnabled                          = find_dataref("avitab/panel_enabled") -- or 'avitab/panel_powered'
+B777DR_simconfig_data                  = find_dataref("Strato/777/simconfig")
+B777DR_newsimconfig_data               = find_dataref("Strato/777/newsimconfig")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -172,32 +181,62 @@ function efb_boot()
    B777DR_efb_page = 2
 end
 
+--Simulator Config Options
+simConfigData = {}
+function doneNewSimConfig()
+	B777DR_newsimconfig_data = 0
+end
+
+function pushSimConfig(values)
+	B777DR_simconfig_data = json.encode(values)
+	B777DR_newsimconfig_data = 1
+	run_after_time(doneNewSimConfig, 1)
+end
+
+local setSimConfig=false
+function hasSimConfig()
+	if B777DR_newsimconfig_data == 1 then
+		if string.len(B777DR_simconfig_data) > 1 then
+			simConfigData["data"] = json.decode(B777DR_simconfig_data)
+			setSimConfig=true
+		else
+			return false
+		end
+	end
+	return setSimConfig
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
 
---function aircraft_load()
-
+function aircraft_load()
+   print("EFB loaded")
+end
 --function aircraft_unload()
 
 function flight_start()
    avitabEnabled = 1 -- change to 0 once ui made
    B777DR_efb_page = 1
    run_after_time(efb_boot, 3)
-   print("EFB loaded")
 end
 
 --function flight_crash()
 
+--function livery_load()
+
 --function before_physics()
 
 function after_physics()
+   if hasSimConfig() == false then return end
+
    if B777DR_efb_page == 0 or B777DR_efb_page == 1000 then -- off, or avitab
       B777DR_efb_page_type = 0
    else
       B777DR_efb_page_type = pages[B777DR_efb_page].type
    end
-   --print("EFB WORKING")
+
+   local simconfig = B777DR_simconfig_data -- ensure simconfig is fresh
 end
 
 --function after_replay()

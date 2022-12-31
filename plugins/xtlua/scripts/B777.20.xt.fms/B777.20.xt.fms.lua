@@ -17,6 +17,9 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
+B777DR_cdu_efis_ctl         = find_dataref("Strato/777/cdu_efis_ctl")
+B777DR_cdu_eicas_ctl        = find_dataref("Strato/777/cdu_eicas_ctl")
+
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
 

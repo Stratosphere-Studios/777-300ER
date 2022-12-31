@@ -10,7 +10,7 @@ Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studi
 
 **Q: When is the release date?**
 
-A: As we are early in development, and have no release date at this time.
+A: We have no release date at this time, however, you can still download the aircraft whenever you'd like.
 
 **Q: Where can I download liveries?**
 
@@ -44,7 +44,7 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 **Q: Why is my aircraft broken/gving me error messages?**
 
-A: You have selected the wrong aircraft. The 777 download includes two aircraft which show up in the X-Plane menu - one for X-Plane 11 and one for x-Plane 12. Make sure you select the correct version!
+A: You might be running the aircraft in X-Plane 11. We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
 
 **Q: Even after following the above instructions, why my aircraft is still broken?**
 

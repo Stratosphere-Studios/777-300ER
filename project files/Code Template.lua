@@ -39,7 +39,13 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 
 
 --*************************************************************************************--
---**                                  FIND DATAREFS                                  **--
+--**                             FIND X-PLANE DATAREFS                               **--
+--*************************************************************************************--
+
+
+
+--*************************************************************************************--
+--**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
 
 
@@ -97,6 +103,8 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --function flight_start()
 
 --function flight_crash()
+
+--function livery_load()
 
 --function before_physics()
 

@@ -18,37 +18,51 @@ fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
 local efisCTL = 1
 local dspCTL = 1
+local efisOptS = "OFF     "
+local dspOptS = "OFF     "
 fmsPages["INDEX"]=createPage("INDEX")
 fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
-
-	fmsFunctionsDefs["INDEX"]={}
-	fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
 	--fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
 	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
+	fmsFunctionsDefs["INDEX"]={}
+	fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
+	--fmsFunctionsDefs["INDEX"]["R1"]={"setDref", "cdu_efis_ctrl_"..fmsID}
 	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCTL"}
 	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCTL"}
 
 	local efisln = "EFIS>"
 	local dspln = "DISP>"
-	local eicasOpt = "OFF<->ON;g2"
-	local dspOpt = "OFF<->ON;g2"
+	local efisOptL = "OFF<->ON;g2"
+	local dspOptL = "OFF<->ON;g2"
 
 	if efisCTL == 1 then
-		eicasOpt = "OFF<->ON;g2"
+		if fmsID ~= "fmsC" then
+			efisOptL = "      ON;g2"
+		else
+			efisOptL = "        "
+		end
+		efisOptS = "OFF<->  "
 		efisln = "EFIS>"
 		--fmsFunctionsDefs["INDEX"]["R2"]={"setpage","EFISCTL152"}
 	else
-		eicasOpt = "OFF;g3<->ON"
+		if fmsID ~= "fmsC" then
+			efisOptL = "OFF;g3     "
+		else
+			efisOptL = "        "
+		end
+		efisOptS = "   <->ON"
 		efisln = "     "
 		fmsFunctionsDefs["INDEX"]["R2"]=nil
 	end
 
 	if dspCTL == 1 then
-		dspOpt = "OFF<->ON;g2"
+		dspOptL = "      ON;g2"
+		dspOptS = "OFF<->     "
 		dspln = "DSP>"
-		fmsFunctionsDefs["INDEX"]["R4"]={"setpage","EICASMODES"}
+		--fmsFunctionsDefs["INDEX"]["R4"]={"setpage","EICASMODES"}
 	else
-		dspOpt = "OFF;g3<->ON"
+		dspOptL = "OFF;g3     "
+		dspOptS = "   <->ON"
 		dspln = "    "
 		fmsFunctionsDefs["INDEX"]["R4"]=nil
 	end
@@ -62,39 +76,55 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		fmsFunctionsDefs["INDEX"]["L2"]=nil
 	end]]
 
-	return {
+	local page = {
 		"         MENU           ",
 		"                        ",
-		"<FMC            "..eicasOpt,
+		"<FMC            "..efisOptL,
 		"                        ",
 		"<SAT;r4               "..efisln,
 		"                        ",
-		"                "..dspOpt,
+		"                "..dspOptL,
 		"                        ",
 		"                    "..dspln,
 		"                        ",
+		"                DISPLAY>;r8",
 		"                        ",
-		"                        ",
-		"                        "
+		"                 MEMORY>;r7"
 	}
+
+	if fmsID == "fmsC" then
+		page[3] = "                       "
+		page[5] = "<SAT;r4                "
+		page[9] = "<CAB INT;r8            "..dspln
+	end
+
+
+	return page
 end
 
 fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
-	return {
+	local page = {
 		"                        ",
 		"                EFIS CTL",
-		"                        ",
+		"                "..efisOptS,
 		"                        ",
 		"                        ",
 		"                 DSP CTL",
+		"                "..dspOptS,
 		"                        ",
 		"                        ",
-		"                        ",
-		"                        ",
+		"              MAINT INFO",
 		"                        ",
 		"                        ",
 		"                        ",
 	}
+
+	if fmsID == "fmsC" then
+		page[2] = "                        "
+		page[3] = "                        "
+	end
+
+	return page
 end
 
 fmsPages["RTE1"]=createPage("RTE1")
@@ -193,7 +223,7 @@ fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
 		"                        ",
 		"                        ",
 		}
-	return page 
+	return page
 end
 fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
 --fmsFunctionsDefs["RTE1"]["L1"]={"setdata","origin"}
@@ -548,7 +578,7 @@ function fmsFunctions.setpage(fmsO,value) -- set page
 	--sim/FMS2/navrad
 end
 
-function fmsFunctions.custom2fmc(fmsO,value) -- whatever this is
+function fmsFunctions.custom2fmc(fmsO,value)
 	print("custom2fmc" .. value)
 	simCMD_FMS_key[fmsO["id"]]["del"]:once()
 	simCMD_FMS_key[fmsO["id"]]["clear"]:once()
@@ -616,6 +646,17 @@ end
 ]]
 
 function fmsFunctions.getdata(fmsO,value) -- getdata
+-----STRATOSPHERE 777----------
+
+
+
+
+
+
+
+
+
+	-----SPARKY 744----------
 	local data = ""
 	if value == "gpspos" then
 		data = irsSystem.getLat("gpsL") .." " .. irsSystem.getLon("gpsL")
@@ -796,6 +837,12 @@ end
 timer_start = 0
 
 function fmsFunctions.setdata(fmsO,value)
+----- STRATOSPHERE 777 ----------
+
+
+
+
+----- SPARKY 744 ----------
 	local del=false  
 	if fmsO["scratchpad"]=="DELETE" then fmsO["scratchpad"]="" del=true end
 	if value=="WXR" then
@@ -2261,7 +2308,41 @@ function fmsFunctions.setdata(fmsO,value)
 end
 
 function fmsFunctions.setDref(fmsO,value)
-   local val=tonumber(fmsO["scratchpad"])
+-----STRATOSPHERE 777----------
+
+	if value == "setEfisCAPT" then
+		if simDR_efis_sel1 == 1 then
+			simDR_efis_sel1 = 0
+		elseif simDR_efis_sel1 == 0 then
+			simDR_efis_sel1 = 2
+		else
+			simDR_efis_sel1 = 1
+		end
+	end
+
+	if value == "setEfisFO" then
+		if simDR_efis_sel1_fo == 1 then
+			simDR_efis_sel1_fo = 0
+		elseif simDR_efis_sel1_fo == 0 then
+			simDR_efis_sel1_fo = 2
+		else
+			simDR_efis_sel1_fo = 1
+		end
+	end
+
+	----- SPARKY 744 ----------
+	local val=tonumber(fmsO["scratchpad"])
+	print(fmsO.id)
+	--[[if value == "cdu_efis_ctrl_fmsL" then
+		B777DR_cdu_efis_ctl[0] = 1 - B777DR_cdu_efis_ctl[0]
+		return
+	end
+
+	if value == "cdu_efis_ctrl_fmsR" then
+		B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
+		return
+	end]]
+
   if value=="VNAVS1" and B777DR_ap_vnav_system ~=1.0 then B777DR_ap_vnav_system=1 return elseif value=="VNAVS1" then B777DR_ap_vnav_system=0 return end 
   if value=="VNAVS2" and B777DR_ap_vnav_system ~=2.0 then B777DR_ap_vnav_system=2 return elseif value=="VNAVS2" then B777DR_ap_vnav_system=0 return end 
   if value=="VNAVSPAUSE" then 
@@ -2371,4 +2452,19 @@ function fmsFunctions.toggleVar(fmsO, value)
 	elseif value == "dspCTL" then
 		dspCTL = 1 - dspCTL
 	end
+end
+
+function fmsFunctions.setDref2(fmsO, value)
+    local valuesplit = split(value,"_")
+	local dref = find_dataref(valuesplit[1])
+	if string.lower(valuesplit[3]) == "s" then
+		dref = valuesplit[2]
+	else
+		dref = tonumber(valuesplit[2])
+	end
+end
+
+function fmsFunctions.toggleDref(fmsO, value)
+	local dref = find_dataref(value)
+	dref = 1 - dref
 end
