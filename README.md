@@ -44,7 +44,7 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 **Q: Why is my aircraft broken/gving me error messages?**
 
-A: You might be running the aircraft in X-Plane 11. We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
+A: You might be running the aircraft in X-Plane 11. We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
 
 **Q: Even after following the above instructions, why my aircraft is still broken?**
 
