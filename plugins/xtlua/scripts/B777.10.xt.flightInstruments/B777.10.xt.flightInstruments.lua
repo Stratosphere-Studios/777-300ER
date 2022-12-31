@@ -179,6 +179,7 @@ simDR_efis_ndb_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_nd
 simDR_spd_trend                        = {find_dataref("sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot"), find_dataref("sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_copilot")}
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
 simDR_efis_adf_vor                     = {find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_copilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_copilot")}
+simDR_airspeed_is_mach                 = find_dataref("sim/cockpit/autopilot/airspeed_is_mach")
 
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
@@ -639,17 +640,7 @@ function B777_minimums_rst_fo_CMDhandler(phase, duration)
 	end
 end
 
-function B777_spd_up_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_ap_airspeed = smartKnobUp(1, 10, 300, simDR_ap_airspeed)
-	end
-end
 
-function B777_spd_dn_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_ap_airspeed = smartKnobDn(1, 10, 130, simDR_ap_airspeed)
-	end
-end
 
 function B777_efis_mtrs_capt_CMDhandler(phase, duration)
 	if phase == 0 then
@@ -666,6 +657,38 @@ function B777_efis_mtrs_fo_CMDhandler(phase, duration)
 		B777DR_efis_button_target[9] = 1
 	elseif phase == 2 then
 		B777DR_efis_button_target[9] = 0
+	end
+end
+
+function B777_hdg_up_cmdHandler(phase, duration)
+	if phase == 0 then
+		simDR_hdg_bug = smartKnobUp(1, 10, 361, simDR_hdg_bug)
+	end
+end
+
+function B777_hdg_dn_cmdHandler(phase, duration)
+	if phase == 0 then
+		simDR_hdg_bug = smartKnobDn(1, 10, -1, simDR_hdg_bug)
+	end
+end
+
+function B777_spd_up_cmdHandler(phase, duration)
+	if phase == 0 then
+		if simDR_airspeed_is_mach == 0 then
+			simDR_ap_airspeed = smartKnobUp(1, 10, 399, simDR_ap_airspeed)
+		else
+			simDR_ap_airspeed = smartKnobUp(0.01, 0.1, 0.95, simDR_ap_airspeed)
+		end
+	end
+end
+
+function B777_spd_dn_cmdHandler(phase, duration)
+	if phase == 0 then
+		if simDR_airspeed_is_mach == 0 then
+			simDR_ap_airspeed = smartKnobDn(1, 10, 100, simDR_ap_airspeed)
+		else
+			simDR_ap_airspeed = smartKnobDn(0.01, 0.1, 0.4, simDR_ap_airspeed)
+		end
 	end
 end
 --*************************************************************************************--
@@ -714,30 +737,28 @@ B777CMD_efis_arpt_fo_button          = deferred_command("Strato/777/button_switc
 B777CMD_efis_terr_fo_button          = deferred_command("Strato/777/button_switch/efis/terr_fo", "F/O ND Terrain Button", B777_efis_terr_fo_switch_CMDhandler)
 B777CMD_efis_tfc_fo_button           = deferred_command("Strato/777/button_switch/efis/tfc_fo", "F/O ND Traffic Button", B777_efis_tfc_fo_switch_CMDhandler)
 
+B777CMD_hdg_up                       = deferred_command("Strato/777/hdg_up", "Autpilot Heading Up", B777_hdg_up_cmdHandler)
+B777CMD_hdg_dn                       = deferred_command("Strato/777/hdg_dn", "Autpilot Heading Down", B777_hdg_dn_cmdHandler)
+B777CMD_spd_up                       = deferred_command("Strato/777/spd_up", "Autpilot Speed Up", B777_spd_up_cmdHandler)
+B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)
+
 --[[B777CMD_altm_baro_up                 = deferred_command("Strato/777/altm_baro_up_capt", "Captain Altimeter Setting Up", B777_altm_baro_up_capt_CMDhandler)
 B777CMD_altm_baro_dn                 = deferred_command("Strato/777/altm_baro_dn_capt", "Captain Altimeter Setting Down", B777_altm_baro_dn_capt_CMDhandler)
 B777CMD_altm_baro_up_fo              = deferred_command("Strato/777/altm_baro_up_fo", "F/O Altimeter Setting Up", B777_altm_baro_up_fo_CMDhandler)
 B777CMD_altm_baro_dn_fo              = deferred_command("Strato/777/altm_baro_dn_fo", "F/O Altimeter Setting Down", B777_altm_baro_dn_fo_CMDhandler)
 B777CMD_altm_baro_rst                = deferred_command("Strato/777/altm_baro_rst_capt", "Captain Altimeter Setting Reset", B777_altm_baro_rst_capt_CMDhandler)
-B777CMD_altm_baro_rst_fo             = deferred_command("Strato/777/altm_baro_rst_fo", "F/O Altimeter Setting Reset", B777_altm_baro_rst_fo_CMDhandler)]]
-
---[[B777CMD_hdg_up                       = deferred_command("Strato/777/hdg_up", "Autpilot Heading Up", B777_hdg_up_cmdHandler)
-B777CMD_hdg_dn                       = deferred_command("Strato/777/hdg_dn", "Autpilot Heading Down", B777_hdg_dn_cmdHandler)
-B777CMD_spd_up                       = deferred_command("Strato/777/spd_up", "Autpilot Speed Up", B777_spd_up_cmdHandler)
-B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)]]
-
---[[function B777_hdg_up_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_hdg_bug = smartKnobUp(1, 10, 361, simDR_hdg_bug)
-	end
-end
-
-function B777_hdg_dn_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_hdg_bug = smartKnobUp(1, 10, -1, simDR_hdg_bug)
-	end
-end
+B777CMD_altm_baro_rst_fo             = deferred_command("Strato/777/altm_baro_rst_fo", "F/O Altimeter Setting Reset", B777_altm_baro_rst_fo_CMDhandler)
 ]]
+
+
+
+--[[
+B777CMD_fmsL_brt_up                  = deferred_command("Strato/777/fms_brt_up", "FMS L Brightness Up", B777_fmsL_brt_up_cmdHandler)
+B777CMD_fmsL_brt_dn                  = deferred_command("Strato/777/fms_brt_dn", "FMS L Brightness Down", B777_fmsL_brt_dn_cmdHandler)
+B777CMD_fmsC_brt_up                  = deferred_command("Strato/777/fms_brt_up", "FMS C Brightness Up", B777_fmsC_brt_up_cmdHandler)
+B777CMD_fmsC_brt_dn                  = deferred_command("Strato/777/fms_brt_dn", "FMS C Brightness Down", B777_fmsC_brt_dn_cmdHandler)
+B777CMD_fmsR_brt_up                  = deferred_command("Strato/777/fms_brt_up", "FMS R Brightness Up", B777_fmsR_brt_up_cmdHandler)
+B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fms_brt_dn", "FMS R Brightness Down", B777_fmsR_brt_dn_cmdHandler)]]
 
 --*************************************************************************************--
 --**                                      CODE                                       **--
@@ -1314,6 +1335,14 @@ function after_physics()
 	if B777DR_cdu_efis_ctl[1] == 0 then
 		simDR_efis_adf_vor[3] = B777DR_efis_vor_adf[2]
 		simDR_efis_adf_vor[4] = B777DR_efis_vor_adf[3]
+	end
+
+	if simDR_airspeed_is_mach == 0 then
+		simDR_ap_airspeed = math.min(simDR_ap_airspeed, 399)
+		simDR_ap_airspeed = math.max(simDR_ap_airspeed, 100)
+	else
+		simDR_ap_airspeed = math.min(simDR_ap_airspeed, 0.95)
+		simDR_ap_airspeed = math.max(simDR_ap_airspeed, 0.4)
 	end
 end
 

@@ -11178,7 +11178,7 @@ IDX	9045
 	TRIS	7839 18
 	ATTR_manip_command_knob	rotate_small	Strato/777/autopilot/alt_up	Strato/777/autopilot/alt_dn	Autopilot Altitude
 	TRIS	7857 84
-	ATTR_manip_command_knob	rotate_small	sim/autopilot/heading_up	sim/autopilot/heading_down	Autopilot Heading
+	ATTR_manip_command_knob	rotate_small	Strato/777/hdg_up	Strato/777/hdg_dn	Autopilot Heading
 	TRIS	7941 84
 	ATTR_manip_command	button	sim/instruments/barometer_2992	Reset Altimeter Setting to Standard
 	TRIS	8025 18
@@ -11192,7 +11192,7 @@ IDX	9045
 	TRIS	8331 18
 	ATTR_manip_command	button	sim/FMS/key_0	
 	TRIS	8349 18
-	ATTR_manip_command_knob	rotate_medium	sim/autopilot/airspeed_up	sim/autopilot/airspeed_down	Autopilot Airspeed
+	ATTR_manip_command_knob	rotate_medium	Strato/777/spd_up	Strato/777/spd_dn	Autopilot Airspeed
 	TRIS	8367 84
 	ATTR_manip_command_knob	rotate_medium	sim/instruments/barometer_up	sim/instruments/barometer_down	Captain Altimeter Setting
 	TRIS	8451 84

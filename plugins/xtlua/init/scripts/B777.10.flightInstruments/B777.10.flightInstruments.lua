@@ -74,24 +74,10 @@ B777CMD_altm_baro_dn_fo              = deferred_command("Strato/777/altm_baro_dn
 B777CMD_altm_baro_rst                = deferred_command("Strato/777/altm_baro_rst_capt", "Captain Altimeter Setting Reset", B777_altm_baro_rst_capt_CMDhandler)
 B777CMD_altm_baro_rst_fo             = deferred_command("Strato/777/altm_baro_rst_fo", "F/O Altimeter Setting Reset", B777_altm_baro_rst_fo_CMDhandler)]]
 
---[[B777CMD_hdg_up                       = deferred_command("Strato/777/hdg_up", "Autpilot Heading Up", B777_hdg_up_cmdHandler)
+B777CMD_hdg_up                       = deferred_command("Strato/777/hdg_up", "Autpilot Heading Up", B777_hdg_up_cmdHandler)
 B777CMD_hdg_dn                       = deferred_command("Strato/777/hdg_dn", "Autpilot Heading Down", B777_hdg_dn_cmdHandler)
 B777CMD_spd_up                       = deferred_command("Strato/777/spd_up", "Autpilot Speed Up", B777_spd_up_cmdHandler)
-B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)]]
-
---[[function B777_hdg_up_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_hdg_bug = smartKnobUp(1, 10, 361, simDR_hdg_bug)
-	end
-end
-
-function B777_hdg_dn_cmdHandler(phase, duration)
-	if phase == 1 then
-		simDR_hdg_bug = smartKnobUp(1, 10, -1, simDR_hdg_bug)
-	end
-end
-]]
-
+B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
