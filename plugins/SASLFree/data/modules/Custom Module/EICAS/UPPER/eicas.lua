@@ -73,6 +73,8 @@ spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ac
 
 --Creating datarefs
 
+dsp_ctrl = createGlobalPropertyi("Strato/777/eicas/dsp_ctrl", 0)
+efis_ctrl = createGlobalPropertyia("Strato/777/eicas/efis_ctrl", {0, 0})
 recall = createGlobalPropertyi("Strato/777/eicas/rcl", 0)
 recall_past = createGlobalPropertyi("Strato/777/eicas/rcl_past", 0)
 canc = createGlobalPropertyi("Strato/777/eicas/canc", 0)
@@ -262,8 +264,17 @@ function UpdateStabCutoutAdvisory(messages)
 	if get(stab_cutout_C) == 1 then
 		table.insert(messages, tlen(messages) + 1, "STABILIZER C")
 	end
-	if get(stab_cutout_C) * get(stab_cutout_R) == 1  then
-		table.insert(messages, tlen(messages) + 1, "STABILIZER CUTOUT")
+end
+
+function UpdateCDUCtrl(messages)
+	if get(dsp_ctrl) == 1 then
+		table.insert(messages, tlen(messages) + 1, "DISPLAY SELECT PNL")
+	end
+	if get(efis_ctrl, 1) == 1 then
+		table.insert(messages, tlen(messages) + 1, "EFIS CONTROL PNL L")
+	end
+	if get(efis_ctrl, 2) == 1 then
+		table.insert(messages, tlen(messages) + 1, "EFIS CONTROL PNL R")
 	end
 end
 
@@ -466,6 +477,9 @@ function UpdateEicasAdvisory(messages)
 	if get(acc) == 1 then
 		table.insert(messages, tlen(messages) + 1, "BRAKE SOURCE")
 	end
+	if get(stab_cutout_C) * get(stab_cutout_R) == 1  then
+		table.insert(messages, tlen(messages) + 1, "STABILIZER CUTOUT")
+	end
 	UpdateSpoilerAdvisory(messages)
 	if get(pressure_C) < 1200 or (get(fbw_mode) > 1 and get(fbw_self_test) == 0) then
 		table.insert(messages, tlen(messages) + 1, "AUTO SPEEDBRAKE")
@@ -476,10 +490,11 @@ function UpdateEicasAdvisory(messages)
 	if get(eicas_brake_temp) == 1 then
 		table.insert(messages, tlen(messages) + 1, "BRAKE TEMP")
 	end
-	CheckOvht(1, messages)
-	CheckOvht(2, messages)
+	UpdateCDUCtrl(messages)
 	CheckFail(1, messages)
 	CheckFail(2, messages)
+	CheckOvht(1, messages)
+	CheckOvht(2, messages)
 	--window advisory
 	UpdateWindowAdvisory(messages)
 end

@@ -9536,7 +9536,7 @@ P _gear/0/_eagle_claw_deg 0.000000000
 P _gear/0/_gear_brakes 0
 P _gear/0/_gear_can_retract 1
 P _gear/0/_gear_castors 0
-P _gear/0/_gear_renders_geo 1
+P _gear/0/_gear_renders_geo 0
 P _gear/0/_gear_type 3
 P _gear/0/_gear_x 0.000000000
 P _gear/0/_gear_y -7.000000000
@@ -9568,7 +9568,7 @@ P _gear/1/_eagle_claw_deg 19.000000000
 P _gear/1/_gear_brakes 1
 P _gear/1/_gear_can_retract 1
 P _gear/1/_gear_castors 0
-P _gear/1/_gear_renders_geo 1
+P _gear/1/_gear_renders_geo 0
 P _gear/1/_gear_type 6
 P _gear/1/_gear_x 16.500000000
 P _gear/1/_gear_y -4.599999905
@@ -9600,7 +9600,7 @@ P _gear/2/_eagle_claw_deg 19.000000000
 P _gear/2/_gear_brakes 1
 P _gear/2/_gear_can_retract 1
 P _gear/2/_gear_castors 0
-P _gear/2/_gear_renders_geo 1
+P _gear/2/_gear_renders_geo 0
 P _gear/2/_gear_type 6
 P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.599999905
@@ -12734,7 +12734,7 @@ P _wing/0/_locked/j_count 18
 P _wing/0/_part_phi 0.000000000
 P _wing/0/_part_psi 0.000000000
 P _wing/0/_part_specs_eq 1
-P _wing/0/_part_specs_invis 0
+P _wing/0/_part_specs_invis 1
 P _wing/0/_part_specs_rmod 1
 P _wing/0/_part_tex 0
 P _wing/0/_part_the 0.000000000
@@ -14537,7 +14537,7 @@ P _wing/1/_locked/j_count 18
 P _wing/1/_part_phi 0.000000000
 P _wing/1/_part_psi 0.000000000
 P _wing/1/_part_specs_eq 1
-P _wing/1/_part_specs_invis 0
+P _wing/1/_part_specs_invis 1
 P _wing/1/_part_specs_rmod 1
 P _wing/1/_part_tex 0
 P _wing/1/_part_the 0.000000000
@@ -16340,7 +16340,7 @@ P _wing/11/_locked/j_count 18
 P _wing/11/_part_phi 0.000000000
 P _wing/11/_part_psi 0.000000000
 P _wing/11/_part_specs_eq 1
-P _wing/11/_part_specs_invis 0
+P _wing/11/_part_specs_invis 1
 P _wing/11/_part_specs_rmod 1
 P _wing/11/_part_tex 0
 P _wing/11/_part_the 0.000000000
@@ -18143,7 +18143,7 @@ P _wing/2/_locked/j_count 18
 P _wing/2/_part_phi 0.000000000
 P _wing/2/_part_psi 0.000000000
 P _wing/2/_part_specs_eq 1
-P _wing/2/_part_specs_invis 0
+P _wing/2/_part_specs_invis 1
 P _wing/2/_part_specs_rmod 1
 P _wing/2/_part_tex 0
 P _wing/2/_part_the 0.000000000
@@ -19946,7 +19946,7 @@ P _wing/3/_locked/j_count 18
 P _wing/3/_part_phi 0.000000000
 P _wing/3/_part_psi 0.000000000
 P _wing/3/_part_specs_eq 1
-P _wing/3/_part_specs_invis 0
+P _wing/3/_part_specs_invis 1
 P _wing/3/_part_specs_rmod 1
 P _wing/3/_part_tex 0
 P _wing/3/_part_the 0.000000000
@@ -21749,7 +21749,7 @@ P _wing/32/_locked/j_count 18
 P _wing/32/_part_phi 0.000000000
 P _wing/32/_part_psi 0.000000000
 P _wing/32/_part_specs_eq 1
-P _wing/32/_part_specs_invis 0
+P _wing/32/_part_specs_invis 1
 P _wing/32/_part_specs_rmod 1
 P _wing/32/_part_tex 0
 P _wing/32/_part_the 0.000000000
@@ -23552,7 +23552,7 @@ P _wing/33/_locked/j_count 18
 P _wing/33/_part_phi 0.000000000
 P _wing/33/_part_psi 0.000000000
 P _wing/33/_part_specs_eq 1
-P _wing/33/_part_specs_invis 0
+P _wing/33/_part_specs_invis 1
 P _wing/33/_part_specs_rmod 1
 P _wing/33/_part_tex 0
 P _wing/33/_part_the 0.000000000
@@ -25355,7 +25355,7 @@ P _wing/4/_locked/j_count 18
 P _wing/4/_part_phi 0.000000000
 P _wing/4/_part_psi 0.000000000
 P _wing/4/_part_specs_eq 1
-P _wing/4/_part_specs_invis 0
+P _wing/4/_part_specs_invis 1
 P _wing/4/_part_specs_rmod 1
 P _wing/4/_part_tex 0
 P _wing/4/_part_the 0.000000000
@@ -27158,7 +27158,7 @@ P _wing/5/_locked/j_count 18
 P _wing/5/_part_phi 0.000000000
 P _wing/5/_part_psi 0.000000000
 P _wing/5/_part_specs_eq 1
-P _wing/5/_part_specs_invis 0
+P _wing/5/_part_specs_invis 1
 P _wing/5/_part_specs_rmod 1
 P _wing/5/_part_tex 0
 P _wing/5/_part_the 0.000000000
@@ -28961,7 +28961,7 @@ P _wing/6/_locked/j_count 18
 P _wing/6/_part_phi 0.000000000
 P _wing/6/_part_psi 0.000000000
 P _wing/6/_part_specs_eq 1
-P _wing/6/_part_specs_invis 0
+P _wing/6/_part_specs_invis 1
 P _wing/6/_part_specs_rmod 1
 P _wing/6/_part_tex 0
 P _wing/6/_part_the 0.000000000
@@ -30764,7 +30764,7 @@ P _wing/7/_locked/j_count 18
 P _wing/7/_part_phi 0.000000000
 P _wing/7/_part_psi 0.000000000
 P _wing/7/_part_specs_eq 1
-P _wing/7/_part_specs_invis 0
+P _wing/7/_part_specs_invis 1
 P _wing/7/_part_specs_rmod 1
 P _wing/7/_part_tex 0
 P _wing/7/_part_the 0.000000000
@@ -32567,7 +32567,7 @@ P _wing/8/_locked/j_count 18
 P _wing/8/_part_phi 0.000000000
 P _wing/8/_part_psi 0.000000000
 P _wing/8/_part_specs_eq 1
-P _wing/8/_part_specs_invis 0
+P _wing/8/_part_specs_invis 1
 P _wing/8/_part_specs_rmod 1
 P _wing/8/_part_tex 0
 P _wing/8/_part_the 0.000000000
@@ -34370,7 +34370,7 @@ P _wing/9/_locked/j_count 18
 P _wing/9/_part_phi 0.000000000
 P _wing/9/_part_psi 0.000000000
 P _wing/9/_part_specs_eq 1
-P _wing/9/_part_specs_invis 0
+P _wing/9/_part_specs_invis 1
 P _wing/9/_part_specs_rmod 1
 P _wing/9/_part_tex 0
 P _wing/9/_part_the 0.000000000
