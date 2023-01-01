@@ -78,6 +78,13 @@ B777CMD_hdg_up                       = deferred_command("Strato/777/hdg_up", "Au
 B777CMD_hdg_dn                       = deferred_command("Strato/777/hdg_dn", "Autpilot Heading Down", B777_hdg_dn_cmdHandler)
 B777CMD_spd_up                       = deferred_command("Strato/777/spd_up", "Autpilot Speed Up", B777_spd_up_cmdHandler)
 B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)
+
+B777CMD_fmsL_brt_up                  = deferred_command("Strato/777/fmsL_brt_up", "FMS L Brightness Up", B777_fmsL_brt_up_cmdHandler)
+B777CMD_fmsL_brt_dn                  = deferred_command("Strato/777/fmsL_brt_dn", "FMS L Brightness Down", B777_fmsL_brt_dn_cmdHandler)
+B777CMD_fmsC_brt_up                  = deferred_command("Strato/777/fmsC_brt_up", "FMS C Brightness Up", B777_fmsC_brt_up_cmdHandler)
+B777CMD_fmsC_brt_dn                  = deferred_command("Strato/777/fmsC_brt_dn", "FMS C Brightness Down", B777_fmsC_brt_dn_cmdHandler)
+B777CMD_fmsR_brt_up                  = deferred_command("Strato/777/fmsR_brt_up", "FMS R Brightness Up", B777_fmsR_brt_up_cmdHandler)
+B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn", "FMS R Brightness Down", B777_fmsR_brt_dn_cmdHandler)
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
@@ -169,3 +176,6 @@ B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/ef
 
 B777DR_pfd_mtrs                        = deferred_dataref("Strato/777/displays/mtrs", "array[2]")
 B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta", "array[2]")
+B777DR_cdu_brt                       = deferred_dataref("Strato/777/cdu_brt", "array[3]")
+B777DR_show_cdu_brt                  = deferred_dataref("Strato/777/show_cdu_brt", "array[3]")
+B777DR_cdu_brt_dir                   = deferred_dataref("Strato/777/cdu_brt_dir", "array[3]")

@@ -10973,7 +10973,7 @@ IDX	9045
 	TRIS	1911 36
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/fd/fo	First Officer Flight Director Switch
 	TRIS	1947 36
-	ATTR_manip_command	button	Strato/B777/button_switch/fltInst/adiru_switch	ADIRU Switch
+	ATTR_manip_command	button	Strato/777/button_switch/fltInst/adiru_switch	ADIRU Switch
 	TRIS	1983 36
 	ATTR_manip_toggle	button	1.000	0.000	Strato/777/hydraulics/pump/primary/state[0]	Left Engine Primary Pump
 	TRIS	2019 36
@@ -11410,9 +11410,9 @@ IDX	9045
 	TRIS	10731 6
 	ATTR_manip_toggle	button	1.000	0.000	Strato/777/gear/park_brake_realistic	Toggle realistic parking brakes
 	TRIS	10737 6
-	ATTR_manip_axis_switch_left_right	left_right	0.000	1.000	0.100	0.100	sim/cockpit2/switches/instrument_brightness_ratio[6]	Left CDU Brightness
+	ATTR_manip_command_switch_left_right	left_right	Strato/777/fmsL_brt_up	Strato/777/fmsL_brt_dn	Left CDU Brightness
 	TRIS	10743 6
-	ATTR_manip_axis_switch_left_right	left_right	0.000	1.000	0.100	0.100	sim/cockpit2/switches/instrument_brightness_ratio[8]	Right CDU Brightness
+	ATTR_manip_command_switch_left_right	left_right	Strato/777/fmsR_brt_up	Strato/777/fmsR_brt_dn	Right CDU Brightness
 	TRIS	10749 6
 	ATTR_manip_toggle	button	1.000	0.000	Strato/777/pfd_mach_gs	Toggle Mach and Groundspeed indicator on PFD
 	TRIS	10755 6
@@ -11420,9 +11420,9 @@ IDX	9045
 	TRIS	10761 6
 	ATTR_manip_toggle	button	1.000	0.000	Strato/777/displays/pfd_aoa_enabled	Toggle Angle of Attack indicator on PFD
 	TRIS	10767 6
-	ATTR_manip_command	button	Strato/B777/adiru_align_now	Align ADIRU Instantly
+	ATTR_manip_command	button	Strato/777/adiru_align_now	Align ADIRU Instantly
 	TRIS	10773 6
-	ATTR_manip_axis_switch_left_right	left_right	0.000	1.000	0.100	0.100	sim/cockpit2/switches/instrument_brightness_ratio[7]	Center CDU Brightness
+	ATTR_manip_command_switch_left_right	left_right	Strato/777/fmsC_brt_up	Strato/777/fmsC_brt_dn	Center CDU Brightness
 	TRIS	10779 6
 	ATTR_manip_command	button	Strato/B777/fms3/func_key/fpln	
 	TRIS	10785 6

@@ -180,6 +180,7 @@ simDR_spd_trend                        = {find_dataref("sim/cockpit2/gauges/indi
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
 simDR_efis_adf_vor                     = {find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_copilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_copilot")}
 simDR_airspeed_is_mach                 = find_dataref("sim/cockpit/autopilot/airspeed_is_mach")
+simDR_instrument_brt                   = find_dataref("sim/cockpit2/switches/instrument_brightness_ratio")
 
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
@@ -254,6 +255,9 @@ B777D_altimiter_std                    = deferred_dataref("Strato/777/displays/a
 B777DR_efis_vor_adf                    = deferred_dataref("Strato/777/efis/vor_adf", "array[4]") -- captain L, captain R, fo L, fo R
 B777DR_cdu_efis_ctl                    = deferred_dataref("Strato/777/cdu_efis_ctl", "array[2]")
 B777DR_cdu_eicas_ctl                   = deferred_dataref("Strato/777/cdu_eicas_ctl", "array[3]")
+B777DR_cdu_brt                         = deferred_dataref("Strato/777/cdu_brt", "array[3]")
+B777DR_show_cdu_brt                    = deferred_dataref("Strato/777/show_cdu_brt", "array[3]")
+B777DR_cdu_brt_dir                     = deferred_dataref("Strato/777/cdu_brt_dir", "array[3]")
 
 --sim/cockpit2/autopilot/autothrottle_arm set to 0
 -- Temporary datarefs for display text until custom textures are made
@@ -640,8 +644,6 @@ function B777_minimums_rst_fo_CMDhandler(phase, duration)
 	end
 end
 
-
-
 function B777_efis_mtrs_capt_CMDhandler(phase, duration)
 	if phase == 0 then
 		B777DR_pfd_mtrs[0] = 1 - B777DR_pfd_mtrs[0]
@@ -689,6 +691,124 @@ function B777_spd_dn_cmdHandler(phase, duration)
 		else
 			simDR_ap_airspeed = smartKnobDn(0.01, 0.1, 0.4, simDR_ap_airspeed)
 		end
+	end
+end
+
+function cduBrtIncr()
+	for i = 0, 3 do
+		if B777DR_show_cdu_brt[i] == 1 then
+			B777DR_cdu_brt[i] = math.min(B777DR_cdu_brt[i] + 1, 23)
+		end
+	end
+end
+
+function cduBrtDecr()
+	for i = 0, 3 do
+		if B777DR_show_cdu_brt[i] == 1 then
+			B777DR_cdu_brt[i] = math.max(B777DR_cdu_brt[i] - 1, 0)
+		end
+	end
+end
+
+function cduHideBrt()
+	for i = 0, 3 do
+		B777DR_show_cdu_brt[i] = 0
+	end
+end
+
+function B777_fmsL_brt_up_cmdHandler(phase, duration)
+	if phase == 0 then
+		stop_timer(cduHideBrt)
+		B777DR_show_cdu_brt[0] = 1
+		B777DR_cdu_brt[0] = math.min(B777DR_cdu_brt[0] + 1, 23)
+		B777DR_cdu_brt_dir[0] = 1
+	elseif phase == 1 then
+		if duration >= 0.5 and not is_timer_scheduled(cduBrtIncr) then
+			run_after_time(cduBrtIncr, 0.5)
+		end
+	else
+		run_after_time(cduHideBrt, 2)
+		stop_timer(cduBrtIncr)
+	end
+end
+
+function B777_fmsC_brt_up_cmdHandler(phase, duration)
+	if phase == 0 then
+		stop_timer(cduHideBrt)
+		B777DR_show_cdu_brt[1] = 1
+		B777DR_cdu_brt[1] = math.min(B777DR_cdu_brt[1] + 1, 23)
+		B777DR_cdu_brt_dir[1] = 1
+	elseif phase == 1 then
+		if duration >= 0.5 and not is_timer_scheduled(cduBrtIncr) then
+			run_after_time(cduBrtIncr, 0.5)
+		end
+	else
+		run_after_time(cduHideBrt, 2)
+		stop_timer(cduBrtIncr)
+	end
+end
+
+function B777_fmsR_brt_up_cmdHandler(phase, duration)
+	if phase == 0 then
+		stop_timer(cduHideBrt)
+		B777DR_show_cdu_brt[2] = 1
+		B777DR_cdu_brt[2] = math.min(B777DR_cdu_brt[2] + 1, 23)
+		B777DR_cdu_brt_dir[2] = 1
+	elseif phase == 1 then
+		if duration >= 0.5 and not is_timer_scheduled(cduBrtIncr) then
+			run_after_time(cduBrtIncr, 0.5)
+		end
+	else
+		run_after_time(cduHideBrt, 2)
+		stop_timer(cduBrtIncr)
+	end
+end
+
+function B777_fmsL_brt_dn_cmdHandler(phase, duration)
+	if phase == 0 then
+		stop_timer(cduHideBrt)
+		B777DR_show_cdu_brt[0] = 1
+		B777DR_cdu_brt[0] = math.max(B777DR_cdu_brt[0] - 1, 0)
+		B777DR_cdu_brt_dir[0] = -1
+	elseif phase == 1 then
+		if duration >= 0.5 and not is_timer_scheduled(cduBrtDecr) then
+			run_after_time(cduBrtDecr, 0.5)
+		end
+	else
+		run_after_time(cduHideBrt, 2)
+		stop_timer(cduBrtDecr)
+	end
+end
+
+function B777_fmsC_brt_dn_cmdHandler(phase, duration)
+	if phase == 0 then
+		stop_timer(cduHideBrt)
+		B777DR_show_cdu_brt[1] = 1
+		B777DR_cdu_brt[1] = math.max(B777DR_cdu_brt[1] - 1, 0)
+		B777DR_cdu_brt_dir[1] = -1
+	elseif phase == 1 then
+		if duration >= 0.5 and not is_timer_scheduled(cduBrtDecr) then
+			run_after_time(cduBrtDecr, 0.5)
+		end
+	else
+		run_after_time(cduHideBrt, 2)
+		stop_timer(cduBrtDecr)
+	end
+end
+
+function B777_fmsR_brt_dn_cmdHandler(phase, duration)
+	if phase == 0 then
+		stop_timer(cduHideBrt)
+		B777DR_show_cdu_brt[2] = 1
+		B777DR_cdu_brt[2] = math.max(B777DR_cdu_brt[2] - 1, 0)
+		B777DR_cdu_brt_dir[2] = -1
+	elseif phase == 1 then
+		if duration >= 0.5 and not is_timer_scheduled(cduBrtDecr) then
+			run_after_time(cduBrtDecr, 0.5)
+		end
+	else
+		run_after_time(cduHideBrt, 2)
+		stop_timer(cduBrtDecr)
 	end
 end
 --*************************************************************************************--
@@ -750,15 +870,12 @@ B777CMD_altm_baro_rst                = deferred_command("Strato/777/altm_baro_rs
 B777CMD_altm_baro_rst_fo             = deferred_command("Strato/777/altm_baro_rst_fo", "F/O Altimeter Setting Reset", B777_altm_baro_rst_fo_CMDhandler)
 ]]
 
-
-
---[[
-B777CMD_fmsL_brt_up                  = deferred_command("Strato/777/fms_brt_up", "FMS L Brightness Up", B777_fmsL_brt_up_cmdHandler)
-B777CMD_fmsL_brt_dn                  = deferred_command("Strato/777/fms_brt_dn", "FMS L Brightness Down", B777_fmsL_brt_dn_cmdHandler)
-B777CMD_fmsC_brt_up                  = deferred_command("Strato/777/fms_brt_up", "FMS C Brightness Up", B777_fmsC_brt_up_cmdHandler)
-B777CMD_fmsC_brt_dn                  = deferred_command("Strato/777/fms_brt_dn", "FMS C Brightness Down", B777_fmsC_brt_dn_cmdHandler)
-B777CMD_fmsR_brt_up                  = deferred_command("Strato/777/fms_brt_up", "FMS R Brightness Up", B777_fmsR_brt_up_cmdHandler)
-B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fms_brt_dn", "FMS R Brightness Down", B777_fmsR_brt_dn_cmdHandler)]]
+B777CMD_fmsL_brt_up                  = deferred_command("Strato/777/fmsL_brt_up", "FMS L Brightness Up", B777_fmsL_brt_up_cmdHandler)
+B777CMD_fmsL_brt_dn                  = deferred_command("Strato/777/fmsL_brt_dn", "FMS L Brightness Down", B777_fmsL_brt_dn_cmdHandler)
+B777CMD_fmsC_brt_up                  = deferred_command("Strato/777/fmsC_brt_up", "FMS C Brightness Up", B777_fmsC_brt_up_cmdHandler)
+B777CMD_fmsC_brt_dn                  = deferred_command("Strato/777/fmsC_brt_dn", "FMS C Brightness Down", B777_fmsC_brt_dn_cmdHandler)
+B777CMD_fmsR_brt_up                  = deferred_command("Strato/777/fmsR_brt_up", "FMS R Brightness Up", B777_fmsR_brt_up_cmdHandler)
+B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn", "FMS R Brightness Down", B777_fmsR_brt_dn_cmdHandler)
 
 --*************************************************************************************--
 --**                                      CODE                                       **--
@@ -1200,6 +1317,9 @@ function flight_start()
 	B777CMD_efis_mtrs_capt:once()
 	B777DR_minimums_dh = 200
 	B777DR_minimums_mda = 400
+	for i = 0, 3 do
+		B777DR_cdu_brt[i] = 23
+	end
 end
 
 --function flight_crash()
@@ -1344,6 +1464,11 @@ function after_physics()
 		simDR_ap_airspeed = math.min(simDR_ap_airspeed, 0.95)
 		simDR_ap_airspeed = math.max(simDR_ap_airspeed, 0.4)
 	end
+
+	simDR_instrument_brt[6] = B777DR_cdu_brt[0] / 23
+	simDR_instrument_brt[7] = B777DR_cdu_brt[1] / 23
+	simDR_instrument_brt[8] = B777DR_cdu_brt[2] / 23
+
 end
 
 --function after_replay()
