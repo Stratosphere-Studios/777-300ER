@@ -489,6 +489,9 @@ function registerFMCCommand(commandID,dataString)
 end
 
 function switchCustomMode()
+	fmsModules["fmsL"]["prevPage"] = fmsModules["fmsL"]["currentPage"]
+	fmsModules["fmsC"]["prevPage"] = fmsModules["fmsC"]["currentPage"]
+	fmsModules["fmsR"]["prevPage"] = fmsModules["fmsR"]["currentPage"]
 	fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
 	fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
 	fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
@@ -915,6 +918,7 @@ function after_physics()
 	--[[local payload_weight = B777DR_payload_weight s777 comment
 	local fuel_qty = simDR_fuel_qty]]
 	local simconfig = B777DR_simconfig_data
+	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
 end
 
 function aircraft_load()

@@ -13,22 +13,41 @@ B777DR_airspeed_flapsRef	= deferred_dataref("Strato/B777/airspeed/flapsRef", "nu
 --Refuel DR
 B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 --Marauder28
+B777DR_cdu_efis_ctl                    = find_dataref("Strato/777/cdu_efis_ctl")
+B777DR_cdu_eicas_ctl                   = find_dataref("Strato/777/cdu_eicas_ctl")
+
+B777DR_cdu_fmc_act                     = deferred_dataref("Strato/777/cdu_fmc_act", "array[2]")
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
-local efisCTL = 1
-local dspCTL = 1
-local efisOptS = "OFF     "
-local dspOptS = "OFF     "
+
 fmsPages["INDEX"]=createPage("INDEX")
 fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
+
+	local efisCTL = 1
+	local dspCTL = 1
+	local fmcACT = ""
+	efisOptS = "OFF     "
+	dspOptS = "OFF     "
+
 	--fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
 	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
 	fmsFunctionsDefs["INDEX"]={}
-	fmsFunctionsDefs["INDEX"]["L1"]={"setpage","IDENT"}
-	--fmsFunctionsDefs["INDEX"]["R1"]={"setDref", "cdu_efis_ctrl_"..fmsID}
-	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCTL"}
-	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCTL"}
+	fmsFunctionsDefs["INDEX"]["L1"]={"setpage2","FMC"}
+	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCtrl"}
+	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCtrl"}
+
+	if fmsID == "fmsL" then
+		efisCTL = B777DR_cdu_efis_ctl[0]
+		dspCTL = B777DR_cdu_eicas_ctl[0]
+		if B777DR_cdu_fmc_act[0] == 1 then fmcACT = "<ACT>" else fmcACT = "     " end
+	elseif fmsID == "fmsR" then
+		efisCTL = B777DR_cdu_efis_ctl[1]
+		dspCTL = B777DR_cdu_eicas_ctl[2]
+		if B777DR_cdu_fmc_act[1] == 1 then fmcACT = "<ACT>" else fmcACT = "     " end
+	else
+		dspCTL = B777DR_cdu_eicas_ctl[1]
+	end
 
 	local efisln = "EFIS>"
 	local dspln = "DISP>"
@@ -36,20 +55,11 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	local dspOptL = "OFF<->ON;g2"
 
 	if efisCTL == 1 then
-		if fmsID ~= "fmsC" then
-			efisOptL = "      ON;g2"
-		else
-			efisOptL = "        "
-		end
+		efisOptL = "      ON;g2"
 		efisOptS = "OFF<->  "
 		efisln = "EFIS>"
-		--fmsFunctionsDefs["INDEX"]["R2"]={"setpage","EFISCTL152"}
 	else
-		if fmsID ~= "fmsC" then
-			efisOptL = "OFF;g3     "
-		else
-			efisOptL = "        "
-		end
+		efisOptL = "OFF;g3     "
 		efisOptS = "   <->ON"
 		efisln = "     "
 		fmsFunctionsDefs["INDEX"]["R2"]=nil
@@ -59,13 +69,13 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		dspOptL = "      ON;g2"
 		dspOptS = "OFF<->     "
 		dspln = "DSP>"
-		--fmsFunctionsDefs["INDEX"]["R4"]={"setpage","EICASMODES"}
 	else
 		dspOptL = "OFF;g3     "
 		dspOptS = "   <->ON"
 		dspln = "    "
 		fmsFunctionsDefs["INDEX"]["R4"]=nil
 	end
+
 
 	--[[  local acarsS="             "
 
@@ -79,7 +89,7 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	local page = {
 		"         MENU           ",
 		"                        ",
-		"<FMC           "..efisOptL..">",
+		"<FMC    "..fmcACT.."  "..efisOptL..">",
 		"                        ",
 		"<SAT;r4               "..efisln,
 		"                        ",
@@ -96,11 +106,31 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		page[3] = "                       "
 		page[5] = "<SAT;r4                "
 		page[9] = "<CAB INT;r8            "..dspln
-	end
+		fmsFunctionsDefs["INDEX"]["R1"]=nil
+		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
+			B777DR_cdu_eicas_ctl[1] = 0
+			page[7] = "                        "
+			page[9] = "<CAB INT;r8                "
+		end
 
+	elseif fmsID == "fmsL" then
+		if B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
+			B777DR_cdu_eicas_ctl[0] = 0
+			page[7] = "                        "
+			page[9] = "                        "
+		end
+
+	else
+		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 then
+			B777DR_cdu_eicas_ctl[2] = 0
+			page[7] = "                        "
+			page[9] = "                        "
+		end
+	end
 
 	return page
 end
+
 
 fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
 	local page = {
@@ -122,6 +152,23 @@ fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
 	if fmsID == "fmsC" then
 		page[2] = "                        "
 		page[3] = "                        "
+		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
+			page[6] = "                        "
+			page[7] = "                        "
+		else
+		end
+	elseif fmsID == "fmsL" then
+		if B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
+			page[6] = "                        "
+			page[7] = "                        "
+		else
+		end
+	else
+		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 then
+			page[6] = "                        "
+			page[7] = "                        "
+		else
+		end
 	end
 
 	return page
@@ -2308,40 +2355,13 @@ function fmsFunctions.setdata(fmsO,value)
 end
 
 function fmsFunctions.setDref(fmsO,value)
------STRATOSPHERE 777----------
-
-	if value == "setEfisCAPT" then
-		if simDR_efis_sel1 == 1 then
-			simDR_efis_sel1 = 0
-		elseif simDR_efis_sel1 == 0 then
-			simDR_efis_sel1 = 2
-		else
-			simDR_efis_sel1 = 1
-		end
-	end
-
-	if value == "setEfisFO" then
-		if simDR_efis_sel1_fo == 1 then
-			simDR_efis_sel1_fo = 0
-		elseif simDR_efis_sel1_fo == 0 then
-			simDR_efis_sel1_fo = 2
-		else
-			simDR_efis_sel1_fo = 1
-		end
-	end
-
-	----- SPARKY 744 ----------
 	local val=tonumber(fmsO["scratchpad"])
 	print(fmsO.id)
-	--[[if value == "cdu_efis_ctrl_fmsL" then
-		B777DR_cdu_efis_ctl[0] = 1 - B777DR_cdu_efis_ctl[0]
-		return
-	end
 
-	if value == "cdu_efis_ctrl_fmsR" then
-		B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
-		return
-	end]]
+	-----STRATOSPHERE 777----------
+
+
+	----- SPARKY 744 ----------
 
   if value=="VNAVS1" and B777DR_ap_vnav_system ~=1.0 then B777DR_ap_vnav_system=1 return elseif value=="VNAVS1" then B777DR_ap_vnav_system=0 return end 
   if value=="VNAVS2" and B777DR_ap_vnav_system ~=2.0 then B777DR_ap_vnav_system=2 return elseif value=="VNAVS2" then B777DR_ap_vnav_system=0 return end 
@@ -2447,10 +2467,36 @@ function fmsFunctions.doCMD(fmsO,value)
 end
 
 function fmsFunctions.toggleVar(fmsO, value)
-	if value == "efisCTL" then
-		efisCTL = 1 - efisCTL
-	elseif value == "dspCTL" then
-		dspCTL = 1 - dspCTL
+	if value == "dspCtrl" then
+		if fmsO.id == "fmsL" then
+			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
+				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
+			else
+				fmsModules[fmsModule].notify="KEY/FUNCTION INOP"
+			end
+		elseif fmsO.id == "fmsC" then
+			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
+				B777DR_cdu_eicas_ctl[1] = 1 - B777DR_cdu_eicas_ctl[1]
+			else
+				fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+			end
+		else
+			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[1] == 0 then
+				B777DR_cdu_eicas_ctl[2] = 1 - B777DR_cdu_eicas_ctl[2]
+			else
+				fmsModules["fmsR"].notify="KEY/FUNCTION INOP"
+			end
+		end
+		return
+	end
+
+	if value == "efisCtrl" then
+		if fmsO.id == "fmsL" then
+			B777DR_cdu_efis_ctl[0] = 1 - B777DR_cdu_efis_ctl[0]
+		elseif fmsO.id == "fmsR" then
+			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
+		end
+		return
 	end
 end
 
@@ -2467,4 +2513,25 @@ end
 function fmsFunctions.toggleDref(fmsO, value)
 	local dref = find_dataref(value)
 	dref = 1 - dref
+end
+
+function fmsFunctions.setpage2(fmsO, value)
+	if value == "FMC" then
+		if fmsO.id == "fmsL" then
+			if B777DR_cdu_fmc_act[0] == 0 then
+				B777DR_cdu_fmc_act[0] = 1
+				fmsFunctions["setpage"](fmsO,"IDENT")
+			else
+				fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"])
+			end
+		else
+			if B777DR_cdu_fmc_act[1] == 0 then
+				B777DR_cdu_fmc_act[1] = 1
+				fmsFunctions["setpage"](fmsO,"IDENT")
+			else
+				fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"])
+			end
+		end
+		return
+	end
 end

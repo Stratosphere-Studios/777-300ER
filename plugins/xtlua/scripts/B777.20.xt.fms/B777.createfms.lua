@@ -9,6 +9,7 @@ fms={
   id,
   page1=false,
   swipeOut=1,
+  prevPage = "INDEX",
   currentPage = "INDEX",
   targetPage = "INDEX",
   targetpgNo = 1,

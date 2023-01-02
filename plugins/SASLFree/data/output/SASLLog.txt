@@ -35,6 +35,3 @@
 [STRATO777 INFO]: [LUA]: loading	custom_commands
 [STRATO777 INFO]: Module loaded
 [STRATO777 INFO]: [LUA]: loading	interactive
-[STRATO777 INFO]: Disabling...
-[STRATO777 INFO]: [LUA]: Shutting down
-[STRATO777 INFO]: SASL plugin stopped...
