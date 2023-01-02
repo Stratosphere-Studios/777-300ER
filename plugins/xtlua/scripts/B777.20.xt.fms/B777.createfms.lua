@@ -49,7 +49,7 @@ function keyDown(fmsModule,key)
   elseif fmsModule == "fmsR" then i = 1
   else i = 2 end
 
-  if B777DR_cdu_fmc_act[i] == 1 then
+  if B777DR_cdu_fmc_act[i] == 1 and fmsModule ~= "fmcC" then
     if key=="index" then
       fmsModules[fmsModule].targetCustomFMC = true
       fmsModules[fmsModule].targetPage = "INITREF"
