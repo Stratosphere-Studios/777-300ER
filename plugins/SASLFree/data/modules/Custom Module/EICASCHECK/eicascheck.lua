@@ -1,6 +1,7 @@
---eicascheck.lua
+-- eicascheck.lua
 -- Language: lua
 -- Path: Custom Module\EICASCHECK\eicascheck.lua
+
 size = {1200, 1200}
 addSearchPath(moduleDirectory .. "/Custom Module/EICASCHECK")
 addSearchPath(moduleDirectory .. "/Custom Module/CURSOR")
@@ -97,12 +98,34 @@ function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMad
             position = {0, 990+tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM, 1200, 50},
 
             onMouseDown = function()
-                if (bfrstartchecklistvalues[i]==0) then
-                    bfrstartchecklistvalues[i] = 1
-                elseif (bfrstartchecklistvalues[i]==1) then
-                    bfrstartchecklistvalues[i] = 0
+                if (get(page == 2)) then
+                    if (bfrstartchecklistvalues[i]==0) then
+                        bfrstartchecklistvalues[i] = 1
+                    elseif (bfrstartchecklistvalues[i]==1) then
+                        bfrstartchecklistvalues[i] = 0
+                    end
                 end
+
+                if (get(page == 1)) then
+                    if (preflightchecklistvalues[i]==0) then
+                        preflightchecklistvalues[i] = 1
+                    elseif (preflightchecklistvalues[i]==1) then
+                        preflightchecklistvalues[i] = 0
+                    end
+                end
+
+                if (get(page ==10)) then
+                    if (securechecklistvalues[i]==0) then
+                        securechecklistvalues[i] = 1
+                    elseif (securechecklistvalues[i]==1) then
+                        securechecklistvalues[i] = 0
+                    end
+                end
+
             end,
+
+
+         
             
             onMouseMove = function()
                 otherpagesurr = i
@@ -110,7 +133,8 @@ function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMad
             end,
         
             onMouseLeave = function()
-                otherpagesurr = 0
+                --otherpagesurr = 0
+                --exhibit A.
                 return true
             end
         }
@@ -166,6 +190,15 @@ function update()
         veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(7)
   
     end
+
+    if (get(page) == 1) then
+        veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(3)
+  
+    end
+
+    if (get(page) == 10) then
+        veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(4)
+    end
 end
 
 
@@ -212,6 +245,28 @@ end
                 drawText(opensans, 1200/2, 1200-145, "BEFORE START", 45, false, false, TEXT_ALIGN_CENTER, white)
                 drawTexture(triLeft, 375+63+295, 1200-145, 25, 32.6, white) 
                 chklDraw(bfrstartchecklist, bfrstartchecklistvalues)
+                if (get(otherpagesurr) ~= 0) then
+                    surroun2(-65*(get(otherpagesurr)))
+                end
+            
+            end
+
+            if get(page) == 1 then
+                drawTexture(triRight, 375+63, 1200-145, 25, 32.6, white) 
+                drawText(opensans, 1200/2, 1200-145, "PREFLIGHT", 45, false, false, TEXT_ALIGN_CENTER, white)
+                drawTexture(triLeft, 375+63+295, 1200-145, 25, 32.6, white) 
+                chklDraw(preflightchecklist, preflightchecklistvalues)
+                if (get(otherpagesurr) ~= 0) then
+                    surroun2(-65*(get(otherpagesurr)))
+                end
+            
+            end
+
+            if get(page) == 10 then
+                drawTexture(triRight, 375+63, 1200-145, 25, 32.6, white) 
+                drawText(opensans, 1200/2, 1200-145, "SECURE", 45, false, false, TEXT_ALIGN_CENTER, white)
+                drawTexture(triLeft, 375+63+295, 1200-145, 25, 32.6, white) 
+                chklDraw(securechecklist, securechecklistvalues)
                 if (get(otherpagesurr) ~= 0) then
                     surroun2(-65*(get(otherpagesurr)))
                 end
@@ -274,16 +329,16 @@ end
 
             --PAGE FUCTNIONALS
             if get(page) == 0 then
-                drawText(opensans, 450, 1035, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) 
-                drawText(opensans, 450, 1035-95, "<-PAGE FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, green) 
-                drawText(opensans, 450, 1035-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) 
-                drawText(opensans, 450, 1035-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) 
-                drawText(opensans, 450, 1035-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) 
-                drawText(opensans, 450, 1035-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) 
-                drawText(opensans, 450, 1035-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) 
-                drawText(opensans, 450, 1035-95-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red)
-                drawText(opensans, 450, 1035-95-95-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red)  
-                drawText(opensans, 450, 1035-95-95-95-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red)  
+                drawText(opensans, 450, 1035, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --1
+                drawText(opensans, 450, 1035-95, "<-PAGE FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, green) --2
+                drawText(opensans, 450, 1035-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --3 
+                drawText(opensans, 450, 1035-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --4
+                drawText(opensans, 450, 1035-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --5
+                drawText(opensans, 450, 1035-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --6
+                drawText(opensans, 450, 1035-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --7
+                drawText(opensans, 450, 1035-95-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --8
+                drawText(opensans, 450, 1035-95-95-95-95-95-95-95-95, "<-PAGE NON-FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, red) --9 
+                drawText(opensans, 450, 1035-95-95-95-95-95-95-95-95-95, "<-PAGE FUNCTIONAL", 35, false, false, TEXT_ALIGN_LEFT, green)  --10
             end
         end
         
