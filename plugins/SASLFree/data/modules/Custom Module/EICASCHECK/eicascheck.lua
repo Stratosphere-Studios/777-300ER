@@ -178,7 +178,7 @@ function update()
                 end,
             
                 onMouseLeave = function()
-                    homepagesurr = 0
+                  --  homepagesurr = 0
                     return true
                 end
             
