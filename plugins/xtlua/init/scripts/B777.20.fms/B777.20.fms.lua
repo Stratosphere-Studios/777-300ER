@@ -20,7 +20,7 @@ toderate                        = deferred_dataref("Strato/B777/engine/derate/TO
 clbderate                       = deferred_dataref("Strato/B777/engine/derate/CLB","number")
 
 radioModes                      = deferred_dataref("Strato/B777/radio/tuningmodes", "string")
-B777DR_cdu_fmc_act              = deferred_dataref("Strato/777/cdu_fmc_act", "array[2]")
+B777DR_cdu_fmc_act              = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
 B777DR_TAS_pilot                = deferred_dataref("Strato/B777/nd/TAS_pilot", "number")
 radioModes                      = "AAAMM" --ils,vor l/r,adf l/r (ADF is manual only
 B777DR_FMSdata                  = deferred_dataref("Strato/B777/fms/data", "string")

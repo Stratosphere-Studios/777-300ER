@@ -16,16 +16,15 @@ B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 B777DR_cdu_efis_ctl                    = find_dataref("Strato/777/cdu_efis_ctl")
 B777DR_cdu_eicas_ctl                   = find_dataref("Strato/777/cdu_eicas_ctl")
 
-B777DR_cdu_fmc_act                     = deferred_dataref("Strato/777/cdu_fmc_act", "array[2]")
+
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
-
+local efisCTL = 0
+local dspCTL = 0
 fmsPages["INDEX"]=createPage("INDEX")
 fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 
-	local efisCTL = 1
-	local dspCTL = 1
 	local fmcACT = ""
 	efisOptS = "OFF     "
 	dspOptS = "OFF     "
@@ -36,6 +35,7 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	fmsFunctionsDefs["INDEX"]["L1"]={"setpage2","FMC"}
 	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCtrl"}
 	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCtrl"}
+	fmsFunctionsDefs["INDEX"]["R4"]={"setpage2","EICASMODES"}
 
 	if fmsID == "fmsL" then
 		efisCTL = B777DR_cdu_efis_ctl[0]
@@ -73,7 +73,6 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		dspOptL = "OFF;g3     "
 		dspOptS = "   <->ON"
 		dspln = "    "
-		fmsFunctionsDefs["INDEX"]["R4"]=nil
 	end
 
 
@@ -2472,7 +2471,7 @@ function fmsFunctions.toggleVar(fmsO, value)
 			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
 			else
-				fmsModules[fmsModule].notify="KEY/FUNCTION INOP"
+				fmsModules["fmsL"].notify="KEY/FUNCTION INOP"
 			end
 		elseif fmsO.id == "fmsC" then
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
@@ -2495,6 +2494,8 @@ function fmsFunctions.toggleVar(fmsO, value)
 			B777DR_cdu_efis_ctl[0] = 1 - B777DR_cdu_efis_ctl[0]
 		elseif fmsO.id == "fmsR" then
 			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
+		else
+			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
 		end
 		return
 	end
@@ -2515,6 +2516,80 @@ function fmsFunctions.toggleDref(fmsO, value)
 	dref = 1 - dref
 end
 
+function setEicasPage(id)
+	print(id)
+	if B777DR_eicas_mode == id then
+		B777DR_eicas_mode = 0
+	else
+		B777DR_eicas_mode = id
+	end
+end
+
+function rclRST()
+	B777DR_eicas_rcl = 0
+end
+
+function fmsFunctions.setDisp(fmsO, value)
+
+	if value == "eicasEng" then
+		setEicasPage(4)
+		return
+	end
+	if value == "eicasStat" then
+		setEicasPage(9)
+		return
+	end
+	if value == "eicasChkl" then
+		setEicasPage(10)
+		return
+	end
+	if value == "eicasDoor" then
+		setEicasPage(2)
+		return
+	end
+	if value == "eicasGear" then
+		setEicasPage(7)
+		return
+	end
+	if value == "eicasElec" then
+		setEicasPage(3)
+		return
+	end
+	if value == "eicasHyd" then
+		setEicasPage(8)
+		return
+	end
+	if value == "eicasFuel" then
+		setEicasPage(6)
+		return
+	end
+	if value == "eicasAir" then
+		setEicasPage(1)
+		return
+	end
+	if value == "eicasFctl" then
+		setEicasPage(5)
+		return
+	end
+	if value == "eicasEng" then
+		setEicasPage(4)
+		return
+	end
+	if value == "eicasRcl" then
+		B777DR_eicas_rcl = 1
+		run_after_time(rclRST, 0.1)
+		return
+	end
+end
+
+--[[
+function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
+	if B777DR_cdu_eicas_ctl_any == 0 then
+		if phase == 0 then setEicasPage(11) end
+	end
+end
+]]
+
 function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id == "fmsL" then
@@ -2522,14 +2597,39 @@ function fmsFunctions.setpage2(fmsO, value)
 				B777DR_cdu_fmc_act[0] = 1
 				fmsFunctions["setpage"](fmsO,"IDENT")
 			else
-				fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"])
+				if not string.match(fmsModules["fmsL"]["prevPage"], "EICAS") and not string.match(fmsModules["fmsL"]["prevPage"], "EFIS") then fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"]) end
 			end
-		else
+		elseif fmsO.id == "fmsR" then
 			if B777DR_cdu_fmc_act[1] == 0 then
 				B777DR_cdu_fmc_act[1] = 1
 				fmsFunctions["setpage"](fmsO,"IDENT")
 			else
-				fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"])
+				if not string.match(fmsModules["fmsR"]["prevPage"], "EICAS") and not string.match(fmsModules["fmsR"]["prevPage"], "EFIS") then fmsFunctions["setpage"](fmsO,fmsModules["fmsR"]["prevPage"]) end
+			end
+		else
+			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+		end
+		return
+	end
+
+	if value == "EICASMODES" then
+		if fmsO.id == "fmsL" then
+			if B777DR_cdu_eicas_ctl[0] == 1 then
+				fmsFunctions["setpage"](fmsO,"EICASMODES")
+			else
+				fmsModules["fmsL"].notify="KEY/FUNCTION INOP"
+			end
+		elseif fmdO.id == "fmsC" then
+			if B777DR_cdu_eicas_ctl[1] == 1 then
+				fmsFunctions["setpage"](fmsO,"EICASMODES")
+			else
+				fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+			end
+		else
+			if B777DR_cdu_eicas_ctl[2] == 1 then
+				fmsFunctions["setpage"](fmsO,"EICASMODES")
+			else
+				fmsModules["fmsR"].notify="KEY/FUNCTION INOP"
 			end
 		end
 		return

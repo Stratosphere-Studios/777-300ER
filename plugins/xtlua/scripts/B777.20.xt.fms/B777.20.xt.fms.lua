@@ -54,6 +54,9 @@ simDR_autopilot_airspeed_is_mac     = find_dataref("sim/cockpit2/autopilot/airsp
 simDR_autopilot_airspeed_kts_mach   = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts_mach")
 simDR_autopilot_airspeed_kts   	    = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts")
 B777DR_elec_ext_pwr1_available      = find_dataref("Strato/B777/electrical/ext_pwr1_avail")
+B777DR_eicas_rcl                    = find_dataref("Strato/777/eicas/rcl")
+B777DR_eicas_mode                   = find_dataref("Strato/777/displays/eicas_mode")
+
 --Workaround for stack overflow in init.lua namespace_read
 
 function replace_char(pos, str, r)
@@ -314,6 +317,8 @@ B777DR_elevator_trim				    = deferred_dataref("Strato/B777/fmc/elevator_trim", 
 B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
 B777DR_SNDoptions_volume    = find_dataref("Strato/777/fmod/options/volume") --TODO
 B777DR_SNDoptions_gpws      = find_dataref("Strato/777/fmod/options/gpws")
+
+B777DR_cdu_fmc_act          = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
 
 --Simulator Config Options
 simConfigData = {}
