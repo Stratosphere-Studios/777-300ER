@@ -18,11 +18,11 @@ fmsPages["EICASMODES"].getPage=function(self,pgNo,fmsID)
     return {
         "     DISPLAY MODES      ",
         "                        ",
-        "<L INBD            CHKL>",
+        "<L INBD;r7            CHKL>",
         "                        ",
-        "<LWR CTR<SEL>      COMM>",
+        "<LWR CTR<SEL>      COMM>;r5",
         "                        ",
-        "<R INBD             NAV>",
+        "<R INBD             NAV>;r4",
         "                        ",
         "<ENG                    ",
         "                        ",
@@ -51,10 +51,10 @@ fmsPages["EICASMODES"].getSmallPage=function(self,pgNo,fmsID)
 end
 
 fmsFunctionsDefs["EICASMODES"]={}
-fmsFunctionsDefs["EICASMODES"]["L4"]={"doCMD","Strato/B777/button_switch/efis/lEicas/eng"}
-fmsFunctionsDefs["EICASMODES"]["L5"]={"doCMD","Strato/B777/button_switch/efis/lEicas/stat"}
-fmsFunctionsDefs["EICASMODES"]["R1"]={"doCMD","Strato/B777/button_switch/efis/lEicas/chkl"}
-fmsFunctionsDefs["EICASMODES"]["R5"]={"doCMD","Strato/B777/button_switch/efis/lEicas/rcl"}
+fmsFunctionsDefs["EICASMODES"]["L4"]={"setDisp","eicasEng"}
+fmsFunctionsDefs["EICASMODES"]["L5"]={"setDisp","eicasStat"}
+fmsFunctionsDefs["EICASMODES"]["R1"]={"setDisp","eicasChkl"}
+fmsFunctionsDefs["EICASMODES"]["R5"]={"setDisp","eicasRcl"}
 fmsFunctionsDefs["EICASMODES"]["R6"]={"setpage","EICASSYN"}
 
 fmsPages["EICASSYN"]=createPage("EICASSYN")
@@ -62,11 +62,11 @@ fmsPages["EICASSYN"].getPage=function(self,pgNo,fmsID)
     return {
         "   DISPLAY SYNOPTICS    ",
         "                        ",
-        "<L INBD            ELEC>",
+        "<L INBD;r7            ELEC>",
         "                        ",
         "<LWR CTR<SEL>     DOORS>",
         "                        ",
-        "<R INBD            FUEL>",
+        "<R INBD;r7            FUEL>",
         "                        ",
         "<DOOR               AIR>",
         "                        ",
@@ -95,11 +95,11 @@ fmsPages["EICASSYN"].getSmallPage=function(self,pgNo,fmsID)
 end
 
 fmsFunctionsDefs["EICASSYN"]={}
-fmsFunctionsDefs["EICASSYN"]["L4"]={"doCMD","Strato/B777/button_switch/efis/lEicas/door"}
-fmsFunctionsDefs["EICASSYN"]["L5"]={"doCMD","Strato/B777/button_switch/efis/lEicas/gear"}
-fmsFunctionsDefs["EICASSYN"]["R1"]={"doCMD","Strato/B777/button_switch/efis/lEicas/elec"}
-fmsFunctionsDefs["EICASSYN"]["R2"]={"doCMD","Strato/B777/button_switch/efis/lEicas/hyd"}
-fmsFunctionsDefs["EICASSYN"]["R3"]={"doCMD","Strato/B777/button_switch/efis/lEicas/fuel"}
-fmsFunctionsDefs["EICASSYN"]["R4"]={"doCMD","Strato/B777/button_switch/efis/lEicas/air"}
-fmsFunctionsDefs["EICASSYN"]["R5"]={"doCMD","Strato/B777/button_switch/efis/lEicas/fctl"}
+fmsFunctionsDefs["EICASSYN"]["L4"]={"setDisp","eicasDoor"}
+fmsFunctionsDefs["EICASSYN"]["L5"]={"setDisp","eicasGear"}
+fmsFunctionsDefs["EICASSYN"]["R1"]={"setDisp","eicasElec"}
+fmsFunctionsDefs["EICASSYN"]["R2"]={"setDisp","eicasHyd"}
+fmsFunctionsDefs["EICASSYN"]["R3"]={"setDisp","eicasFuel"}
+fmsFunctionsDefs["EICASSYN"]["R4"]={"setDisp","eicasAir"}
+fmsFunctionsDefs["EICASSYN"]["R5"]={"setDisp","eicasFctl"}
 fmsFunctionsDefs["EICASSYN"]["R6"]={"setpage","EICASMODES"}

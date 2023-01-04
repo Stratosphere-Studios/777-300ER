@@ -1132,7 +1132,9 @@ function flight_start()
 
 end
 
---function flight_crash() end
+--function flight_crash()
+
+--function livery_load() end
 
 --function before_physics() end
 debug_warning     = deferred_dataref("laminar/B777/debug/warning", "number")

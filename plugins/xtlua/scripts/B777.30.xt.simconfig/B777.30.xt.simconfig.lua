@@ -37,8 +37,6 @@ simDR_baro_capt				= find_dataref("sim/cockpit/misc/barometer_setting")
 simDR_baro_fo				= find_dataref("sim/cockpit/misc/barometer_setting2")
 
 B777DR_acf_is_pax           = find_dataref("Strato/777/acf_is_pax")
-B777DR_baro_mode            = find_dataref("Strato/777/baro_mode") -- TODO
-B777DR_minimums_mode        = find_dataref("Strato/777/minimums_mode") -- TODO
 
 --*************************************************************************************--
 --** 				              CREATE CUSTOM DATAREFS                             **--
@@ -200,8 +198,12 @@ function flight_start()
 	run_after_time(aircraft_simConfig, 1)  --Load specific simConfig data for current livery
 end
 
+function aircraft_load()
+	print("simconfig loaded")
+end
+
 function livery_load()
-	--print("simcongfig livery_load")
+	--print("simconfig livery_load")
 	local refreshLivery = simDR_livery_path
 	B777DR_newsimconfig_data = 1
 	run_after_time(aircraft_simConfig, 2)  --Load specific simConfig data for current livery

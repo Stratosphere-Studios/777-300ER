@@ -37,4 +37,20 @@ bfrstartchecklist = {
 }
 
 
+preflightchecklist = {
+    [1] = 'goof',
+    [2] = 'boof',
+    [3] = 'doof'
+}
+
+securechecklist = {
+    [1] = 'ADIRU.................................OFF',
+    [2] = 'Emergency lights......................OFF',
+    [3] = 'Packs.................................OFF',
+    [4] = 'BATTERY switch........................OFF'
+}
+
+
 bfrstartchecklistvalues = {0, 0, 0, 0, 0, 0, 3}
+preflightchecklistvalues = {0, 0, 0}
+securechecklistvalues = {0, 0, 0, 0}

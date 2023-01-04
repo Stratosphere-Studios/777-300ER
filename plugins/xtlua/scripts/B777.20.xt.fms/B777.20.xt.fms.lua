@@ -17,6 +17,9 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
+B777DR_cdu_efis_ctl         = find_dataref("Strato/777/cdu_efis_ctl")
+B777DR_cdu_eicas_ctl        = find_dataref("Strato/777/cdu_eicas_ctl")
+
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
 
@@ -51,6 +54,9 @@ simDR_autopilot_airspeed_is_mac     = find_dataref("sim/cockpit2/autopilot/airsp
 simDR_autopilot_airspeed_kts_mach   = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts_mach")
 simDR_autopilot_airspeed_kts   	    = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts")
 B777DR_elec_ext_pwr1_available      = find_dataref("Strato/B777/electrical/ext_pwr1_avail")
+B777DR_eicas_rcl                    = find_dataref("Strato/777/eicas/rcl")
+B777DR_eicas_mode                   = find_dataref("Strato/777/displays/eicas_mode")
+
 --Workaround for stack overflow in init.lua namespace_read
 
 function replace_char(pos, str, r)
@@ -312,6 +318,8 @@ B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
 B777DR_SNDoptions_volume    = find_dataref("Strato/777/fmod/options/volume") --TODO
 B777DR_SNDoptions_gpws      = find_dataref("Strato/777/fmod/options/gpws")
 
+B777DR_cdu_fmc_act          = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
+
 --Simulator Config Options
 simConfigData = {}
 function doneNewSimConfig()
@@ -486,6 +494,9 @@ function registerFMCCommand(commandID,dataString)
 end
 
 function switchCustomMode()
+	fmsModules["fmsL"]["prevPage"] = fmsModules["fmsL"]["currentPage"]
+	fmsModules["fmsC"]["prevPage"] = fmsModules["fmsC"]["currentPage"]
+	fmsModules["fmsR"]["prevPage"] = fmsModules["fmsR"]["currentPage"]
 	fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
 	fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
 	fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
@@ -912,6 +923,7 @@ function after_physics()
 	--[[local payload_weight = B777DR_payload_weight s777 comment
 	local fuel_qty = simDR_fuel_qty]]
 	local simconfig = B777DR_simconfig_data
+	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
 end
 
 function aircraft_load()
