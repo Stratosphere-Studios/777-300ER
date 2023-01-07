@@ -34,6 +34,8 @@ f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
 man_keyboard = globalPropertyi("Strato/777/gear/man_keyboard")
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
+pfc_disc = globalPropertyi("Strato/777/fctl/pfc/disc")
+tac_engage = globalPropertyi("Strato/777/fctl/ace/tac_eng")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
 rud_trim_man = globalPropertyf("Strato/777/fctl/ace/rud_trim_man")
@@ -51,6 +53,9 @@ stab_trim_down = sasl.findCommand("sim/flight_controls/pitch_trim_down")
 rudder_trim_left = sasl.findCommand("sim/flight_controls/rudder_trim_left")
 rudder_trim_right = sasl.findCommand("sim/flight_controls/rudder_trim_right")
 rudder_trim_center = sasl.findCommand("sim/flight_controls/rudder_trim_center")
+--Creating own commands
+pfc_disc_switch = sasl.createCommand("Strato/777/commands/overhead/pfc_disc", "Command for the PFC disc switch")
+tac_switch = sasl.createCommand("Strato/777/commands/overhead/tac", "Command for the TAC button")
 
 park_brake_past = 0
 
@@ -96,6 +101,18 @@ function ParkBrakeHandler(phase)
 		end
 	elseif phase == SASL_COMMAND_END then
 		park_brake_past = 1 - park_brake_past
+	end
+end
+
+function PFCDiscHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(pfc_disc, 1 - get(pfc_disc))
+	end
+end
+
+function TACHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(tac_engage, 1 - get(tac_engage))
 	end
 end
 
@@ -175,6 +192,7 @@ function RudderTrimReset(phase)
 end
 
 --Registering own command handlers
+--Sim commands
 sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
 sasl.registerCommandHandler(hold_regular, 1, BrakeHoldHandler)
 sasl.registerCommandHandler(toggle_max, 1, ParkBrakeHandler)
@@ -185,6 +203,9 @@ sasl.registerCommandHandler(stab_trim_down, 1, StabTrimDown)
 sasl.registerCommandHandler(rudder_trim_left, 1, RudderTrimLeft)
 sasl.registerCommandHandler(rudder_trim_right, 1, RudderTrimRight)
 sasl.registerCommandHandler(rudder_trim_center, 1, RudderTrimReset)
+--Own commands
+sasl.registerCommandHandler(pfc_disc_switch, 1, PFCDiscHandler)
+sasl.registerCommandHandler(tac_switch, 1, TACHandler)
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
