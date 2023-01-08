@@ -64,7 +64,7 @@ fmsPages["EICASSYN"].getPage=function(self,pgNo,fmsID)
         "                        ",
         "<L INBD;r7            ELEC>",
         "                        ",
-        "<LWR CTR<SEL>     DOORS>",
+        "<LWR CTR<SEL>     	 HYD>",
         "                        ",
         "<R INBD;r7            FUEL>",
         "                        ",
