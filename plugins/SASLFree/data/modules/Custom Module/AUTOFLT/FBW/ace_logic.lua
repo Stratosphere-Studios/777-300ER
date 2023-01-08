@@ -100,11 +100,13 @@ pfc_rudder_command = globalPropertyf("Strato/777/fctl/pfc/rudder")
 pfc_stab_trim_cmd = globalPropertyf("Strato/777/fctl/pfc/stab_trim")
 
 ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
+--Commanded positions
 ace_aileron = globalProperty("Strato/777/fctl/ace/ailrn_cmd")
 ace_flaperon = globalProperty("Strato/777/fctl/ace/flprn_cmd")
 ace_spoiler = globalProperty("Strato/777/fctl/ace/spoiler_cmd")
 ace_elevator = globalProperty("Strato/777/fctl/ace/elevator_cmd")
 ace_rudder = globalPropertyf("Strato/777/fctl/ace/rudder_cmd")
+--Flight control status
 ace_aileron_fail_L = globalPropertyi("Strato/777/fctl/ace/ailrn_fail_L")
 ace_aileron_fail_R = globalPropertyi("Strato/777/fctl/ace/ailrn_fail_R")
 ace_flaperon_fail_L = globalPropertyi("Strato/777/fctl/ace/flprn_fail_L")
@@ -117,11 +119,22 @@ ace_spoiler_fail_5 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_5")
 ace_elevator_fail_L = globalPropertyi("Strato/777/fctl/ace/elevator_fail_L")
 ace_elevator_fail_R = globalPropertyi("Strato/777/fctl/ace/elevator_fail_R")
 ace_rudder_fail = globalPropertyi("Strato/777/fctl/ace/rudder_fail")
+--PCU modes
+pcu_aileron = globalProperty("Strato/777/fctl/pcu/ail")
+pcu_flaperon = globalProperty("Strato/777/fctl/pcu/flprn")
+pcu_elevator = globalProperty("Strato/777/fctl/pcu/elev")
+pcu_rudder = globalProperty("Strato/777/fctl/pcu/rudder")
+pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
+
+--PCU modes:
+--0 - bypass
+--1 - normal
+--2 - blocking
 
 Ail_neutral = {0, 0, 5, 5, 5, 0, 0}
 Flprn_neutral = {0, 0, 5, 14, 16, 29, 29}
 rud_trim_auto_past = 0
-Control_surface = {aces = {0, 0}, hyd_sys = {0, 0}, ratio1 = 18, ratio2 = 18, mode = 1}
+Control_surface = {aces = {0, 0}, hyd_sys = {0, 0}, ratio1 = 18, ratio2 = 18, mode = 0}
 
 function Control_surface:new(tmp)
     tmp = tmp or {}
@@ -172,6 +185,7 @@ function Control_surface:setCmd(dref_nml, dref_fail, cmd, idx, fail_handler)
     if not self:isHydLow() and self:isOperational() then
         set(dref_nml, cmd, idx)
         set(dref_fail, 0)
+        set(self.mode, 1, idx)
     else
         set(dref_fail, 1)
         fail_handler(self, idx)
@@ -314,25 +328,21 @@ function GetRudderRatio(tas, flap_pos)
 end
 
 function BasicFailHandler(sfc, idx, control_dref, dref_list)
-    if get(dref_list[idx]) == 0 then
-        sfc.mode = 2
-    end
-    set(control_dref, 0, idx)
+    set(sfc.mode, 0, idx)
 end
 
 function AilFailHandler(sfc, idx)
     local ail_drefs = {ail_L_act, ail_R_act}
-    BasicFailHandler(sfc, idx, ace_aileron, ail_drefs)
-end
-
-function SpoilerFailHandler(sfc, idx)
-    local spoiler_drefs = {spoiler_L1_act, spoiler_L2_act, spoiler_R1_act, spoiler_R2_act}
-    BasicFailHandler(sfc, idx, ace_spoiler, spoiler_drefs)
+    set(sfc.mode, 2, idx)
 end
 
 function ElevatorFailHandler(sfc, idx)
     local elevator_datarefs = {elevator_L_act, elevator_R_act}
-    BasicFailHandler(sfc, idx, ace_elevator, elevator_datarefs)
+    if math.abs(get(elevator_datarefs[idx])) <= 2 then
+        set(sfc.mode, 2, idx)
+    else
+        set(sfc.mode, 0, idx)
+    end
 end
 
 function RudderFailHandler(sfc, idx)
@@ -341,9 +351,14 @@ end
 
 function FlprnFailHandler(sfc, idx)
     local flprn_drefs = {flprn_L_act, flprn_R_act}
+    BasicFailHandler(sfc, idx, ace_flaperon, flprn_drefs)
+end
+
+function FlprnTOHandler(sfc, idx)
+    local flprn_drefs = {flprn_L_act, flprn_R_act}
     local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
-    if get(flprn_drefs[idx]) == sfc.ratio2 or avg_cas > 100 then
-        sfc.mode = 0
+    if Round(get(flprn_drefs[idx]), 2) == sfc.ratio2 or avg_cas > 100 then
+        set(sfc.mode, 0, idx)
     else
         local flprn_command = EvenChange(get(ace_flaperon, idx), sfc.ratio2, 0.2)
         set(ace_flaperon, flprn_command, idx)
@@ -363,8 +378,10 @@ end
 function UpdateSpoilers(avg_cas, spoilers, sp_fail_drefs, sp_cmd_dref, activation_limit)
     sp_main_avail = false
     sp_sec_avail = false
-    local spoiler_command_L = lim(get(spoiler_handle), 1, 0)
-    local spoiler_command_R = spoiler_command_L
+    local pri_spoiler_command_L = lim(get(spoiler_handle), 1, 0)
+    local pri_spoiler_command_R = pri_spoiler_command_L
+    local sec_spoiler_command_L = pri_spoiler_command_L
+    local sec_spoiler_command_R = pri_spoiler_command_L
     --Getting states of the spoilers
     for i=1,5 do
         local state = spoilers[i]:isOperational() and not spoilers[i]:isHydLow()
@@ -378,27 +395,41 @@ function UpdateSpoilers(avg_cas, spoilers, sp_fail_drefs, sp_cmd_dref, activatio
     --Checking control wheel
     if math.abs(get(yoke_roll_ratio)) >= activation_limit then
         local tmp = -0.3
+        local pri_coeff = 1
+        if get(spoiler_handle) <= 0 then
+            pri_coeff = 0.9
+        end
         if get(yoke_roll_ratio) < 0 then
             tmp = tmp * -1
         end
         local cw_component = (get(yoke_roll_ratio) + tmp) / 0.7
-        spoiler_command_L = spoiler_command_L - getPosition(cw_component, 0, 1 - spoiler_command_L, spoiler_command_L)
-        spoiler_command_R = spoiler_command_R - getPosition(-cw_component, 0, 1 - spoiler_command_R, spoiler_command_R)
+        pri_spoiler_command_L = pri_spoiler_command_L - getPosition(cw_component * pri_coeff, 0, 1 - pri_spoiler_command_L, pri_spoiler_command_L)
+        pri_spoiler_command_R = pri_spoiler_command_R - getPosition(-cw_component * pri_coeff, 0, 1 - pri_spoiler_command_R, pri_spoiler_command_R)
+        sec_spoiler_command_L = sec_spoiler_command_L - getPosition(cw_component, 0, 1 - sec_spoiler_command_L, sec_spoiler_command_L)
+        sec_spoiler_command_R = sec_spoiler_command_R - getPosition(-cw_component, 0, 1 - sec_spoiler_command_R, sec_spoiler_command_R)
     end
     --Setting Commands
     if sp_main_avail then
-        set(sp_cmd_dref, spoiler_command_L * spoilers[1].ratio1 - (1 / 16) * avg_cas, 2)
-        set(sp_cmd_dref, spoiler_command_R * spoilers[1].ratio1 - (1 / 16) * avg_cas, 4)
+        set(sp_cmd_dref, pri_spoiler_command_L * spoilers[1].ratio1 - (1 / 16) * avg_cas, 2)
+        set(sp_cmd_dref, pri_spoiler_command_R * spoilers[1].ratio1 - (1 / 16) * avg_cas, 4)
+        set(pcu_sp, 1, 2)
+        set(pcu_sp, 1, 4)
     else
         set(sp_cmd_dref, 0, 2)
         set(sp_cmd_dref, 0, 4)
+        set(pcu_sp, 0, 2)
+        set(pcu_sp, 0, 4)
     end
     if sp_sec_avail then
-        set(sp_cmd_dref, spoiler_command_L * spoilers[4].ratio1, 1)
-        set(sp_cmd_dref, spoiler_command_R * spoilers[4].ratio1, 3)
+        set(sp_cmd_dref, sec_spoiler_command_L * spoilers[4].ratio1, 1)
+        set(sp_cmd_dref, sec_spoiler_command_R * spoilers[4].ratio1, 3)
+        set(pcu_sp, 1, 1)
+        set(pcu_sp, 1, 3)
     else
         set(sp_cmd_dref, 0, 1)
         set(sp_cmd_dref, 0, 3)
+        set(pcu_sp, 0, 1)
+        set(pcu_sp, 0, 3)
     end
 end
 
@@ -420,11 +451,9 @@ function UpdateRoll(avg_cas, avg_alt, ail_L, ail_R, flp_L, flp_R)
     ail_L:setCmd(ace_aileron, ace_aileron_fail_L, ail_pos_L, 1, ail_fail)
     ail_R:setCmd(ace_aileron, ace_aileron_fail_R, ail_pos_R, 2, ail_fail)
     if avg_cas < 100 and (get(thrust_engn_L) > 215000 or get(thrust_engn_R) > 215000) then
-        flp_fail(flp_L, 1)
-        flp_fail(flp_R, 2)
+        FlprnTOHandler(flp_L, 1)
+        FlprnTOHandler(flp_R, 2)
     else
-        flp_L.mode = 1
-        flp_R.mode = 1
         local flp_pos_L = getPosition(roll_command, flprn_neutral, flp_L.ratio1, flp_L.ratio2)
         local flp_pos_R = getPosition(-roll_command, flprn_neutral, flp_R.ratio1, flp_R.ratio2)
         flp_L:setCmd(ace_flaperon, ace_flaperon_fail_L, flp_pos_L, 1, flp_fail)
@@ -497,30 +526,30 @@ function UpdateStabTrim()
     set(ths_degrees, get(stab_trim) * -11)
 end
 
-ail_L = Control_surface:new{aces = {2, 3}, hyd_sys = {1, 2}, ratio1 = 18, ratio2 = 18, mode = 0}
-ail_R = Control_surface:new{aces = {1, 4}, hyd_sys = {1, 2}, ratio1 = 18, ratio2 = 18, mode = 0}
-flp_L = Control_surface:new{aces = {1, 4}, hyd_sys = {1, 3}, ratio1 = 18, ratio2 = 36, mode = 0}
-flp_R = Control_surface:new{aces = {2, 3}, hyd_sys = {2, 3}, ratio1 = 18, ratio2 = 36, mode = 0}
-sp_1 = Control_surface:new{aces = {3}, hyd_sys = {2}, ratio1 = 60, ratio2 = 0, mode = 0}
-sp_2 = Control_surface:new{aces = {1}, hyd_sys = {1}, ratio1 = 60, ratio2 = 0, mode = 0}
-sp_3 = Control_surface:new{aces = {4}, hyd_sys = {3}, ratio1 = 60, ratio2 = 0, mode = 0}
-sp_4 = Control_surface:new{aces = {2}, hyd_sys = {1}, ratio1 = 45, ratio2 = 0, mode = 0}
-sp_5 = Control_surface:new{aces = {2}, hyd_sys = {2}, ratio1 = 60, ratio2 = 0, mode = 0}
-elev_L = Control_surface:new{aces = {1, 3}, hyd_sys = {1, 2}, ratio1 = 33, ratio2 = 27, mode = 0}
-elev_R = Control_surface:new{aces = {2, 4}, hyd_sys = {1, 3}, ratio1 = 33, ratio2 = 27, mode = 0}
-rudder = Control_surface:new{aces = {1, 3, 4}, hyd_sys = {1, 2, 3}, ratio1 = 27, ratio2 = 27, mode = 0}
+ail_L = Control_surface:new{aces = {2, 3}, hyd_sys = {1, 2}, ratio1 = 18, ratio2 = 18, mode = pcu_aileron}
+ail_R = Control_surface:new{aces = {1, 4}, hyd_sys = {1, 2}, ratio1 = 18, ratio2 = 18, mode = pcu_aileron}
+flp_L = Control_surface:new{aces = {1, 4}, hyd_sys = {1, 3}, ratio1 = 18, ratio2 = 36, mode = pcu_flaperon}
+flp_R = Control_surface:new{aces = {2, 3}, hyd_sys = {2, 3}, ratio1 = 18, ratio2 = 36, mode = pcu_flaperon}
+sp_1 = Control_surface:new{aces = {3}, hyd_sys = {2}, ratio1 = 60, ratio2 = 0, mode = pcu_sp}
+sp_2 = Control_surface:new{aces = {1}, hyd_sys = {1}, ratio1 = 60, ratio2 = 0, mode = pcu_sp}
+sp_3 = Control_surface:new{aces = {4}, hyd_sys = {3}, ratio1 = 60, ratio2 = 0, mode = pcu_sp}
+sp_4 = Control_surface:new{aces = {2}, hyd_sys = {1}, ratio1 = 45, ratio2 = 0, mode = pcu_sp}
+sp_5 = Control_surface:new{aces = {2}, hyd_sys = {2}, ratio1 = 60, ratio2 = 0, mode = pcu_sp}
+elev_L = Control_surface:new{aces = {1, 3}, hyd_sys = {1, 2}, ratio1 = 33, ratio2 = 27, mode = pcu_elevator}
+elev_R = Control_surface:new{aces = {2, 4}, hyd_sys = {1, 3}, ratio1 = 33, ratio2 = 27, mode = pcu_elevator}
+rudder = Control_surface:new{aces = {1, 3, 4}, hyd_sys = {1, 2, 3}, ratio1 = 27, ratio2 = 27, mode = pcu_rudder}
 
 spoilers = {sp_1, sp_2, sp_3, sp_4, sp_5}
 spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ace_spoiler_fail_4, ace_spoiler_fail_5}
 
 function update()
     local avg_alt_baro = (get(altitude_pilot) + get(altitude_stdby) + get(altitude_copilot)) / 3
-    local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
+    local avg_cas = lim((get(cas_pilot) + get(cas_copilot)) / 2, 1000, 0)
     SetSpeedbrkHandle()
     UpdateSelfTest()
 	DoSelfTest()
     sendFLTdata()
-    UpdateSpoilers(avg_cas, spoilers, spoiler_fail, ace_spoiler, 0.3)
+    UpdateSpoilers(avg_cas, spoilers, spoiler_fail, ace_spoiler, 0.32)
     UpdateRoll(avg_cas, avg_alt_baro, ail_L, ail_R, flp_L, flp_R)
     UpdateYaw(rudder)
     UpdatePitch(elev_L, elev_R)

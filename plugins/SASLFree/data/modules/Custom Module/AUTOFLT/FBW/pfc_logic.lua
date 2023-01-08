@@ -279,7 +279,7 @@ function UpdateStabTrim()
 				if get(pfc_flaps) > 5 then
 					s_ = 0.0001
 				end
-				local step = (-bool2num(get(pfc_elevator_command) < 0) + bool2num(get(pfc_elevator_command) >= 0)) * s_ * Round(get(f_time), 4) / 0.0166
+				local step = (-bool2num(get(pfc_elevator_command) < 0) + bool2num(get(pfc_elevator_command) >= 0)) * s_
 				if math.abs(get(pfc_ths_current) + step) < 1 then
 					set(pfc_stab_trim_cmd, get(pfc_ths_current) + step)
 				end

@@ -49,6 +49,12 @@ ace_spoiler_fail_5 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail
 ace_elevator_fail_L = createGlobalPropertyi("Strato/777/fctl/ace/elevator_fail_L", 0)
 ace_elevator_fail_R = createGlobalPropertyi("Strato/777/fctl/ace/elevator_fail_R", 0)
 ace_rudder_fail = createGlobalPropertyi("Strato/777/fctl/ace/rudder_fail", 0)
+--PCU modes
+pcu_aileron = createGlobalPropertyia("Strato/777/fctl/pcu/ail", {0, 0})
+pcu_flaperon = createGlobalPropertyia("Strato/777/fctl/pcu/flprn", {0, 0})
+pcu_elevator = createGlobalPropertyia("Strato/777/fctl/pcu/elev", {0, 0})
+pcu_rudder = createGlobalPropertyi("Strato/777/fctl/pcu/rudder", 0)
+pcu_sp = createGlobalPropertyia("Strato/777/fctl/pcu/sp", {0, 0, 0, 0})
 --General fbw datarefs
 fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 0)
 fbw_pitch_dref = createGlobalPropertyf("Strato/777/fctl/pitch", 0)
