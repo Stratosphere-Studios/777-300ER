@@ -124,14 +124,18 @@ end
 
 Control_sfc = {pos_up = 0, pos_dn = 0, dref_pos = 0, dref_ace = 0, dref_pcu = 0, rt_nml = 0, rt_damped = 0, rt_coeff_damped = 0, vab = 0, vad = 0, load_idx = 1, load_max = 0.1} 
 
+function ResetLoad()
+	for i=1,6 do
+		set(hyd_load, 0, i)
+	end
+end
+
 function Control_sfc:new(tmp)
     tmp = tmp or {}
     setmetatable(tmp, self)
     self.__index = self
     return tmp
 end
-
---TODO: eicas dsp and efis
 
 function Control_sfc:setPosForNegativeSpeed(cmpval, rt)
 	if get(self.dref_pos) > cmpval then
@@ -140,6 +144,18 @@ function Control_sfc:setPosForNegativeSpeed(cmpval, rt)
 		EvenAnim(self.dref_pos, self.pos_up, rt)
 	else
 		EvenAnim(self.dref_pos, 0, rt)
+	end
+end
+
+function Control_sfc:updateLoad()
+	if get(self.dref_pos) >= 0 then
+		local tmp_pos = self.pos_dn
+		if self.pos_dn == 0 then
+			tmp_pos = self.pos_up
+		end
+		set(hyd_load, get(hyd_load, self.load_idx) + self.load_max * get(self.dref_pos) / tmp_pos, self.load_idx)
+	else
+		set(hyd_load, get(hyd_load, self.load_idx) + self.load_max * get(self.dref_pos) / self.pos_up, self.load_idx)
 	end
 end
 
@@ -168,6 +184,7 @@ function Control_sfc:updatePositionAil(airspeed, idx)
 	elseif get(self.dref_pcu, idx) == 2 then
 		EvenAnim(self.dref_pos, 0, self.rt_damped)
 	end
+	self:updateLoad()
 end
 
 function Control_sfc:updatePositionRud(airspeed)
@@ -195,6 +212,7 @@ function Control_sfc:updatePositionRud(airspeed)
 	elseif get(self.dref_pcu) == 1 then
 		EvenAnim(self.dref_pos, get(self.dref_ace), self.rt_nml)
 	end
+	self:updateLoad()
 end
 
 function GetClosestFlapSetting()
@@ -219,28 +237,7 @@ function UpdateReversers()
 	set(h_load_R, 0.2 * bool2num(get(pressure_R) > 300) * get(R_reverser_deployed))
 end
 
---Spoilers
-
-function GetSpoilerResponseTime() --Spoiler response time that is influenced by hydraulic pressure
-	local pressure = GetMaxHydPress()
-	local speed = get(tas)
-	if pressure > 2000 and speed < 149 then
-		return pressure * 7 / 3340
-	elseif pressure >= 570 and pressure <= 2000 then
-		return pressure * 2 / 3340
-	else
-		return 1
-	end
-end
-
 --Flaps
-
-function GetMaxHydPress() --since some things are driven by all 3 hydraulic systems, we need to know the maximum pressure
-	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
-	local pressure_C = globalPropertyiae("Strato/777/hydraulics/press", 2)
-	local pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
-	return math.max(get(pressure_L), get(pressure_C), get(pressure_R))
-end
 
 function SetFlapTarget()
 	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
@@ -296,21 +293,6 @@ function GetFlapCurrent()
 	end
 end
 
---Elevator
-
---Rudder
-
-function GetRudderResponseTime()
-	local max_press = GetMaxHydPress()
-	local wind_mag = get(wind_speed)
-	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
-	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength
-	if max_press < reqd_press then
-		return wind_mag * 0.00194 * ((reqd_press - max_press) / reqd_press) + max_press / 3000
-	end
-	return 1
-end
-
 --these functions set a bunch of datarefs for flight controls to the same value. I guess this is needed because of something in plane maker
 function UpdateRudder(value)
 	set(upper_rudder, value)
@@ -347,21 +329,22 @@ function UpdateFlaps(value)
 end
 
 airspeed_vec = vec3d:new{x = 0, y = 0, z = 0}
-sp_L1 = Control_sfc:new{pos_up = 60, pos_dn = 0, dref_pos = spoiler_L1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.1}
-sp_L2 = Control_sfc:new{pos_up = 45, pos_dn = 0, dref_pos = spoiler_L2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.1}
-sp_R1 = Control_sfc:new{pos_up = 60, pos_dn = 0, dref_pos = spoiler_R1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.1}
-sp_R2 = Control_sfc:new{pos_up = 45, pos_dn = 0, dref_pos = spoiler_R2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.1}
-ail_L = Control_sfc:new{pos_up = -18, pos_dn = 18, dref_pos = outbd_ail_L, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 30, vad = 50, load_idx = 1, load_max = 0.1}
-ail_R = Control_sfc:new{pos_up = -18, pos_dn = 18, dref_pos = outbd_ail_R, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 10, vad = 20, load_idx = 1, load_max = 0.1}
-flprn_L = Control_sfc:new{pos_up = -18, pos_dn = 36, dref_pos = inbd_ail_L, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 1, load_max = 0.1}
-flprn_R = Control_sfc:new{pos_up = -18, pos_dn = 36, dref_pos = inbd_ail_R, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 1, load_max = 0.1}
-elev_L = Control_sfc:new{pos_up = -33, pos_dn = 27, dref_pos = elevator_L, dref_ace = ace_elevator, dref_pcu = pcu_elevator, rt_nml = 0.6, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 15, vad = 34, load_idx = 1, load_max = 0.1}
-elev_R = Control_sfc:new{pos_up = -33, pos_dn = 27, dref_pos = elevator_R, dref_ace = ace_elevator, dref_pcu = pcu_elevator, rt_nml = 0.6, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 15, vad = 34, load_idx = 1, load_max = 0.1}
-rudder_top = Control_sfc:new{pos_up = -27, pos_dn = 27, dref_pos = upper_rudder, dref_ace = ace_rudder, dref_pcu = pcu_rudder, rt_nml = 0.5, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 1, vad = 4, load_idx = 1, load_max = 0.1}
+sp_L1 = Control_sfc:new{pos_up = 60, pos_dn = 0, dref_pos = spoiler_L1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_L2 = Control_sfc:new{pos_up = 45, pos_dn = 0, dref_pos = spoiler_L2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_R1 = Control_sfc:new{pos_up = 60, pos_dn = 0, dref_pos = spoiler_R1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 2, load_max = 0.025}
+sp_R2 = Control_sfc:new{pos_up = 45, pos_dn = 0, dref_pos = spoiler_R2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 2, load_max = 0.025}
+ail_L = Control_sfc:new{pos_up = -18, pos_dn = 18, dref_pos = outbd_ail_L, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 30, vad = 50, load_idx = 3, load_max = 0.08}
+ail_R = Control_sfc:new{pos_up = -18, pos_dn = 18, dref_pos = outbd_ail_R, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 10, vad = 20, load_idx = 3, load_max = 0.08}
+flprn_L = Control_sfc:new{pos_up = -18, pos_dn = 36, dref_pos = inbd_ail_L, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 4, load_max = 0.07}
+flprn_R = Control_sfc:new{pos_up = -18, pos_dn = 36, dref_pos = inbd_ail_R, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 4, load_max = 0.07}
+elev_L = Control_sfc:new{pos_up = -33, pos_dn = 27, dref_pos = elevator_L, dref_ace = ace_elevator, dref_pcu = pcu_elevator, rt_nml = 0.6, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 15, vad = 34, load_idx = 5, load_max = 0.1}
+elev_R = Control_sfc:new{pos_up = -33, pos_dn = 27, dref_pos = elevator_R, dref_ace = ace_elevator, dref_pcu = pcu_elevator, rt_nml = 0.6, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 15, vad = 34, load_idx = 5, load_max = 0.1}
+rudder_top = Control_sfc:new{pos_up = -27, pos_dn = 27, dref_pos = upper_rudder, dref_ace = ace_rudder, dref_pcu = pcu_rudder, rt_nml = 0.5, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 1, vad = 4, load_idx = 6, load_max = 0.1}
 
 function update()
 	airspeed_vec.x = get(speed_x)
 	airspeed_vec.z = get(speed_z)
+	ResetLoad()
 	--Move flight controls in sim
 	sp_L1:updatePositionAil(airspeed_vec, 2)
 	sp_L2:updatePositionAil(airspeed_vec, 1)
