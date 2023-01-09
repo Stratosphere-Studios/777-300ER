@@ -39,6 +39,10 @@ fbw_trim_speed = globalPropertyf("Strato/777/fctl/trs")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 c_time = globalPropertyf("Strato/777/time/current")
 
+--Failures
+fbw_secondary_fail = globalPropertyi("Strato/777/failures/fctl/secondary")
+fbw_direct_fail = globalPropertyi("Strato/777/failures/fctl/direct")
+
 pid_d_maintain = {4.1, 0.01}
 d_int = {2.8, 2.9, 2.9, 3.1, 3.1, 3.9, 3.5, 3.3, 3.3}
 pid_trs_maintain = {-0.19, -0.023, 0}
@@ -75,8 +79,6 @@ thrust_corrections =
 }
 
 --Other globals
-ace_fail_past = 0
-pfc_disc_past = 0
 flprn_ratio_degrade = 0 --This is to increase stiffness of the yoke
 man_pitch = 0
 pitch_last = 0
@@ -293,16 +295,23 @@ function UpdateStabTrim()
 end
 
 function UpdateMode()
-	if get(pfc_disc) == 1 and pfc_disc_past == 0 then
-		set(fbw_mode, 3)
-	else
-		local n_ace_fail = 0
-		for i=1,4 do
-			if get(ace_fail, i) == 1 then
-				n_ace_fail = n_ace_fail + 1
-			end
+	if get(fbw_secondary_fail) == 1 or get(fbw_direct_fail) == 1 then
+		if get(fbw_secondary_fail) == 1 then
+			set(fbw_mode, 2)
 		end
-		if n_ace_fail ~= ace_fail_past or pfc_disc_past ~= get(pfc_disc) then
+		if get(fbw_direct_fail) == 1 then
+			set(fbw_mode, 3)
+		end
+	else
+		if get(pfc_disc) == 1 then
+			set(fbw_mode, 3)
+		else
+			local n_ace_fail = 0
+			for i=1,4 do
+				if get(ace_fail, i) == 1 then
+					n_ace_fail = n_ace_fail + 1
+				end
+			end
 			if n_ace_fail == 3 then
 				set(fbw_mode, 2)
 			elseif n_ace_fail == 4 then
@@ -310,10 +319,8 @@ function UpdateMode()
 			else
 				set(fbw_mode, 1)
 			end
-			ace_fail_past = n_ace_fail
 		end
 	end
-	pfc_disc_past = get(pfc_disc)
 end
 
 function update()
