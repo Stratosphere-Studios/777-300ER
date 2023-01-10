@@ -2,7 +2,10 @@
     "Lua.diagnostics.disable": [
         "undefined-global",
         "lowercase-global",
-        "deprecated"
+        "deprecated",
+        "duplicate-set-field",
+        "cast-local-type",
+        "need-check-nil"
     ],
     "Lua.runtime.version": "Lua 5.1"
 }
