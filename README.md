@@ -34,7 +34,7 @@ A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwM
 
 **Q: What is the black console window that appears when I start the aircraft?**
 
-A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. **This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's "plugins/xtlua/64/" folder.
+A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's "plugins/xtlua/64/" folder.
 
 **Q: How do I start the aircraft?**
 
@@ -50,11 +50,7 @@ A: Please use the [GitHub issue page](https://github.com/Stratosphere-Studios/77
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Why is my aircraft broken/gving me error messages?**
-
-A: You might be running the aircraft in X-Plane 11. We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
-
-**Q: Even after following the above instructions, why my aircraft is still broken?**
+**Q: Even after following the above instructions, why my is aircraft still broken?**
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
 
