@@ -8,7 +8,11 @@ Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studi
 
 ## FAQ
 
-**Sim compatibility**
+**Q: Why is the aircraft not showing up in the aircraft menu?**
+
+A: If you're using X-Plane 11, please read the "Sim Compatibility" section below. If you are on X-Plane 12, please check the "Installation" section and send us a message if it still doesn't work.
+
+**Sim Compatibility**
 
 A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. An XP11 acf file can be downloaded from an earlier commit and dragged into the up-to-date 777 folder and _most_ features will update.
 
