@@ -577,7 +577,7 @@ function B777_alt_dn_CMDhandler(phase, duration)
 end
 
 function B777_minimums_dn_capt_CMDhandler(phase, duration)
-	if phase == 0  then
+	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
 		if B777DR_minimums_mode[0] == 0 then
 			B777DR_minimums_dh[0] = smartKnobDn(1, 10, 0, B777DR_minimums_dh[0])
 		else
@@ -588,7 +588,7 @@ function B777_minimums_dn_capt_CMDhandler(phase, duration)
 end
 
 function B777_minimums_up_capt_CMDhandler(phase, duration)
-	if phase == 0  then
+	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
 		if B777DR_minimums_mode[0] == 0 then
 			B777DR_minimums_dh[0] = smartKnobUp(1, 10, 1000, B777DR_minimums_dh[0])
 		else
@@ -599,7 +599,7 @@ function B777_minimums_up_capt_CMDhandler(phase, duration)
 end
 
 function B777_minimums_dn_fo_CMDhandler(phase, duration)
-	if phase == 0  then
+	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
 		if B777DR_minimums_mode[1] == 0 then
 			B777DR_minimums_dh[1] = smartKnobDn(1, 10, 0, B777DR_minimums_dh[1])
 		else
@@ -610,7 +610,7 @@ function B777_minimums_dn_fo_CMDhandler(phase, duration)
 end
 
 function B777_minimums_up_fo_CMDhandler(phase, duration)
-	if phase == 0  then
+	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
 		if B777DR_minimums_mode[1] == 0 then
 			B777DR_minimums_dh[1] = smartKnobUp(1, 10, 1000, B777DR_minimums_dh[1])
 		else
@@ -885,7 +885,7 @@ B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn"
 
 --- ADIRU ----------
 function countdown()
-	if B777DR_adiru_status == 1  then
+	if B777DR_adiru_status == 1 then
 		if adiru_time_remaining_min > 1 then
 			adiru_time_remaining_min = adiru_time_remaining_min - 1
 			run_after_time(countdown2, 1)
@@ -1395,7 +1395,7 @@ function after_physics()
 		B777DR_kill_pax = 1
 		B777DR_kill_pax_interior = 1
 		B777DR_kill_cargo = 0
-		if B777DR_cockpit_door_target == 1 then
+		if B777DR_cockpit_door_pos == 1 then
 			B777DR_kill_cargo_interior = 0
 		else
 			B777DR_kill_cargo_interior = 1
@@ -1404,7 +1404,7 @@ function after_physics()
 		B777DR_kill_cargo = 1
 		B777DR_kill_cargo_interior = 1
 		B777DR_kill_pax = 0
-		if B777DR_cockpit_door_target == 1 then
+		if B777DR_cockpit_door_pos == 1 then
 			B777DR_kill_pax_interior = 0
 		else
 			B777DR_kill_pax_interior = 1
@@ -1445,16 +1445,6 @@ function after_physics()
 		B777DR_cdu_eicas_ctl_any = 1
 	else
 		B777DR_cdu_eicas_ctl_any = 0
-	end
-
-	if B777DR_cdu_efis_ctl[0] == 0 then
-		simDR_efis_adf_vor[1] = B777DR_efis_vor_adf[0]
-		simDR_efis_adf_vor[2] = B777DR_efis_vor_adf[1]
-	end
-
-	if B777DR_cdu_efis_ctl[1] == 0 then
-		simDR_efis_adf_vor[3] = B777DR_efis_vor_adf[2]
-		simDR_efis_adf_vor[4] = B777DR_efis_vor_adf[3]
 	end
 
 	if simDR_airspeed_is_mach == 0 then

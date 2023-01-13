@@ -43,3 +43,5 @@ B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "
 --*************************************************************************************--
 --**                              CREATE COMMANDS                                    **--
 --*************************************************************************************--
+
+B777CMD_save_simconfig = deferred_command("Strato/777/save_simconfig", "Save Configuration Options", saveSimconfig_CMDhandler)

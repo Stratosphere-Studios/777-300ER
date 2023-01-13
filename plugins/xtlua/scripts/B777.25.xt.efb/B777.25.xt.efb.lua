@@ -68,11 +68,12 @@ B777DR_newsimconfig_data               = find_dataref("Strato/777/newsimconfig")
 
 B777DR_efb_page                        = deferred_dataref("Strato/777/displays/efb_page", "number")
 B777DR_efb_page_type                   = deferred_dataref("Strato/777/displays/efb_page_type", "number")
+--B777DR_efb_keypad                      = deferred_dataref("Strato/777/displays/efb_keypad", "number")
+--B777DR_efb_keypad_scratchpad           = deferred_dataref("Strato/777/displays/efb_keypad_scratchpad", "string")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
 --*************************************************************************************--
-
 
 
 --*************************************************************************************--
@@ -206,6 +207,16 @@ function hasSimConfig()
 	return setSimConfig
 end
 
+function doCMD(cmd)
+   local var = find_command(cmd)
+   var:once()
+end
+
+function setDref(dref, value)
+   local var = find_dataref(dref)
+   var = value
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
@@ -227,7 +238,31 @@ end
 
 --function before_physics()
 
+-- TODO: KEYPAD
+--[[
+   
+yes i know this code is bad, i've already rewritten and will upoad later
+
+function keypad()
+   B777DR_efb_keypad = 1
+end
+
+function keypadButtons(key)
+   if key ~= "backsp" and key ~= "enter" Sand key ~= "canc" then
+      B777DR_efb_keypad_scratchpad = B777DR_efb_keypad_scratchpad..key
+   end
+
+   if key == "canc" then
+      B777DR_efb_keypad_scratchpad  = ""
+      B777DR_efb_keypad = 0
+      return
+   elseif key == "enter" then
+      
+   end
+]]
+
 function after_physics()
+   
    if hasSimConfig() == false then return end
 
    if B777DR_efb_page == 0 or B777DR_efb_page == 1000 then -- off, or avitab
