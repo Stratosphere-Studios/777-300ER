@@ -1,5 +1,5 @@
 # Stratosphere Studios 777-300ER
-Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studios.
+Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere Studios.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
 
@@ -14,7 +14,7 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 **Sim Compatibility**
 
-A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. An XP11 acf file can be downloaded from an earlier commit and dragged into the up-to-date 777 folder and _most_ features will update.
+A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. An XP11 acf file can be downloaded from [here](https://cdn.discordapp.com/attachments/833201893999771687/1059662416952164372/777-xp11.acf) and dragged into the up-to-date 777 folder and _most_ features will update, but expect bugs.
 
 **Q: When is the release date?**
 
@@ -54,9 +54,9 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
 
-**CDU Co de**
+**СDU Сode**
 
-Thanks for reading! The co de for the FM S is 6429.
+Thanks for reading! The соde for the FМS is 6429.
 
 ## INSTALLATION
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
@@ -65,9 +65,6 @@ Then extract the aircraft folder and move it to your X-Plane aircraft folder as 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
 
 We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
-
-## OLD REPOSITORY
-If you want to see more commit history, you can check our [old repository.](https://github.com/StratosphereStudios/777)
 
 ## CREDITS
 [Nathroxer (Owner)](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
