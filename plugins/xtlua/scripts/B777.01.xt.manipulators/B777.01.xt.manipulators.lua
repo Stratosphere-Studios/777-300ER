@@ -77,7 +77,7 @@ B777DR_grd_pwr_primary                    = find_dataref("Strato/B777/ext_pwr")
 B777DR_stab_cutout_C                      = find_dataref("Strato/777/fctl/stab_cutout_C")
 B777DR_stab_cutout_R                      = find_dataref("Strato/777/fctl/stab_cutout_R")
 B777DR_ace_tac_eng                        = find_dataref("Strato/777/fctl/ace/tac_eng")
-B777DR_pfc_disc                           = find_dataref("Strato/777/fctl/ace/tac_eng")
+B777DR_pfc_disc                           = find_dataref("Strato/777/fctl/pfc/disc")
 
 --*************************************************************************************--
 --**                              CUSTOM DATAREF HANDLERS                            **--
@@ -475,8 +475,8 @@ function after_physics()
    B777DR_ctr1_button_pos[7] = B777_animate(B777DR_stab_cutout_R, B777DR_ctr1_button_pos[7], 20)
 
    B777DR_ovhd_aft_button_positions[1] = B777_animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 20)
-   --B777DR_ovhd_aft_button_positions[2] = B777_animate(B777DR_ovhd_aft_button_target[2], B777DR_ace_tac_eng, 20)
-   --B777DR_ovhd_aft_button_positions[3] = B777_animate(B777DR_ovhd_aft_button_target[3], B777DR_pfc_disc, 20)
+   B777DR_ovhd_aft_button_positions[2] = B777_animate(B777DR_ovhd_aft_button_target[2], B777DR_ace_tac_eng, 20)
+   B777DR_ovhd_aft_button_positions[3] = B777_animate(B777DR_ovhd_aft_button_target[3], B777DR_pfc_disc, 20)
 
    for i = 1, 5 do
       B777DR_ovhd_fwd_button_positions[i] = B777_animate(simDR_landing_light_switches[i], B777DR_ovhd_fwd_button_positions[i], 20)
