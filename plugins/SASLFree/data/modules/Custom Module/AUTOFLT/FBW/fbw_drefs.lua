@@ -8,18 +8,20 @@
 
 --Creating our own datarefs
 --PFC datarefs
+--data bus
 pfc_calc = createGlobalPropertyi("Strato/777/fctl/databus/calc", 0) --whether or not PFCs should do calculations
 pfc_pilot_input = createGlobalPropertyfa("Strato/777/fctl/databus/pilot_input", {0, 0, 0}) --pitch, roll, yaw
 pfc_ra = createGlobalPropertyf("Strato/777/fctl/databus/rad_alt", 0)
 pfc_alt_baro = createGlobalPropertyf("Strato/777/fctl/databus/alt_baro", 0)
 pfc_cas = createGlobalPropertyf("Strato/777/fctl/databus/cas", 0)
-pfc_flt_axes = createGlobalPropertyfa("Strato/777/fctl/databus/flt_axes", {0, 0}) --pitch, roll
+pfc_flt_axes = createGlobalPropertyfa("Strato/777/fctl/databus/flt_axes", {0, 0, 0}) --pitch, roll, yaw
 pfc_thrust = createGlobalPropertyfa("Strato/777/fctl/databus/thrust", {0, 0})
 pfc_mass = createGlobalPropertyf("Strato/777/fctl/databus/mass_total", 0)
 pfc_ths_current = createGlobalPropertyf("Strato/777/fctl/databus/ths_current", 0)
 pfc_stab_trim_operative = createGlobalPropertyi("Strato/777/fctl/databus/stab_trim_op", 1)
 pfc_stab_trim_cmd = createGlobalPropertyf("Strato/777/fctl/pfc/stab_trim", 0)
 pfc_flaps = createGlobalPropertyf("Strato/777/fctl/databus/flaps", 0)
+--Other
 pfc_maneuver_speeds = createGlobalPropertyfa("Strato/777/fctl/databus/maneuver_speeds", {0, 0})
 fbw_mode = createGlobalPropertyi("Strato/777/fctl/pfc/mode", 1)
 pfc_disc = createGlobalPropertyi("Strato/777/fctl/pfc/disc", 0)

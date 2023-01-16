@@ -64,6 +64,8 @@ c_time = globalPropertyf("Strato/777/time/current")
 curr_g = globalPropertyf("sim/flightmodel/forces/g_nrml")
 cg = globalPropertyf("sim/flightmodel/misc/cgz_ref_to_default")
 total_mass = globalPropertyf("sim/flightmodel/weight/m_total")
+yaw = globalPropertyf("sim/flightmodel/position/R")
+slip = globalPropertyf("sim/cockpit2/gauges/indicators/slip_deg")
 --Speeds
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
@@ -224,6 +226,7 @@ function sendFLTdata()
         --Flight axes
         set(pfc_flt_axes, avg_pitch, 1)
         set(pfc_flt_axes, avg_roll, 2)
+        set(pfc_flt_axes, get(yaw), 3)
         --Flaps
         set(pfc_flaps, get(flaps))
         --Stab trim

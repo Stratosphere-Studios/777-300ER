@@ -8,6 +8,7 @@
 
 include("misc_tools.lua")
 include("fbw_test_drefs.lua")
+include("fbw_controllers.lua")
 
 fbw_iasln = globalProperty("Strato/777/fctl/iasln_table")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace")
@@ -89,6 +90,7 @@ p_delta_last = 0
 roll_input_last = 0
 heading_input_last = 0
 fbw_roll_past = 0
+fbw_yaw_past = 0
 fbw_elevator_past = 0 --This is for stab trim
 fbw_pitch = 0
 stab_trim_engage = 0
@@ -166,17 +168,14 @@ function UpdatePFCElevatorCommand()
 				set(fbw_trim_speed, tmp)
 			end
 			--Calculating the pitch angle
-			local tmp_pitch = PID_Compute(pid_trs_maintain[1], pid_trs_maintain[2], pid_trs_maintain[3], round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
+			trs_pid:update{tgt = round(get(fbw_trim_speed)), curr = avg_cas}
 			--local tmp_pitch = PID_Compute(get(pt), get(it), get(dt), round(get(fbw_trim_speed)), avg_cas, trs_error_total, trs_error_last, 1000, 25)
-			set(errtotal, tmp_pitch[2])
-            fbw_pitch = fbw_pitch + tmp_pitch[1]
+            fbw_pitch = fbw_pitch + trs_pid.output
 			if get(pitch_ovrd) == 0 then
-				fbw_pitch = fbw_pitch + tmp_pitch[1]
+				fbw_pitch = fbw_pitch + trs_pid.output
 			else
 				fbw_pitch = 0
 			end
-			trs_error_total = tmp_pitch[2]
-			trs_error_last = tmp_pitch[3]
 		end
 		set(fbw_pitch_cmd, fbw_pitch)
 		if get(f_time) ~= 0 then
@@ -188,12 +187,10 @@ function UpdatePFCElevatorCommand()
 			--Maintain a certain pitch rate
 			local fbw_delta = (fbw_pitch - avg_pitch) * 0.3
 			local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
-			local tmp = PID_Compute(pid_d_maintain[1], tmp_int, pid_d_maintain[2], fbw_delta + commanded_pitch, curr_delta, d_error_total, d_error_last, 100, 33)
+			p_delta_pid:update{tgt = fbw_delta + commanded_pitch, curr = curr_delta, ki = tmp_int}
 			--local tmp = PID_Compute(get(pt), get(it), get(dt), get(delta_maintain), curr_delta, d_error_total, d_error_last, 100, 20)
 			set(pitch_delta, curr_delta)
-			set(pfc_elevator_command, tmp[1])
-			d_error_total = tmp[2]
-			d_error_last = tmp[3]
+			set(pfc_elevator_command, p_delta_pid.output)
 			pitch_last = avg_pitch
 		end
 		fbw_elevator_past = get(pfc_elevator_command)
@@ -214,10 +211,11 @@ function UpdateRollCommand()
 	local bank_correction_rudder = false
 	local bank_correction_ail = false
 	local ail_component = 0 --For rudder to cw cross tie
-	if r_delta ~= 0 then
+	local curr_yaw = get(pfc_flt_axes, 3)
+	if Round(math.abs(get(pfc_pilot_input, 1)), 2) > 0.09 or r_delta ~= 0 then
 		fbw_roll_past = avg_roll
-		--r_error_total = 0
 	end
+	--set(roll_maint, fbw_roll_past)
 	if get(fbw_mode) == 1 then
 		--Engage bank angle protection if bank is higher than 30 degrees
 		if fbw_roll_past > 30 then
@@ -240,7 +238,7 @@ function UpdateRollCommand()
 		if (ail_engage_nml or bank_correction_ail == true) then
 			local tmp = PID_Compute(pid_gust_supr[1], pid_gust_supr[2], pid_gust_supr[3], fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 600, 18)
 			--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 600, 18)
-			set(pfc_roll_command, tmp[1])
+			--set(pfc_roll_command, tmp[1])
 			ail_error_total = tmp[2]
 			ail_error_last = tmp[3]
 		else
@@ -253,13 +251,23 @@ function UpdateRollCommand()
 	end
 	--Rudder logic
     local rud_engage_nml = math.abs(get(pfc_pilot_input, 2)) <= 0.14 and h_delta <= 0.07
-	if (rud_engage_nml or bank_correction_rudder == true) then
-		local tmp = PID_Compute(pid_coefficients_rudder[1], pid_coefficients_rudder[2], pid_coefficients_rudder[3], fbw_roll_past, avg_roll, r_error_total, r_error_last, 600, 27)
-		--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_roll_past, avg_roll, r_error_total, r_error_last, 300, 27)
+	if (rud_engage_nml or bank_correction_rudder == true) and get(f_time) ~= 0 then
+		--roll_maintain_pid:update{tgt = fbw_roll_past, curr = avg_roll}
+		local pfc_yaw_delta = (curr_yaw - fbw_yaw_past) * (1 / get(f_time))
+		local yaw_term = 0
+		if math.abs(fbw_roll_past) <= 26.1 then
+			yaw_term = 0.09 * fbw_roll_past
+		else
+			yaw_term = 0.46 * math.sqrt(math.abs(fbw_roll_past)) * (bool2num(fbw_roll_past > 0) - bool2num(fbw_roll_past < 0))
+		end
+		local tgt_yaw = yaw_term * 193 / avg_cas
+		tgt_yaw = lim(tgt_yaw, 2.7, -2.7)
+		set(yaw_delta, tgt_yaw)
+		yaw_damper_pid:update{tgt = tgt_yaw, curr = get(pfc_flt_axes, 3)}
 		--set(fbw_r_past, fbw_roll_past)
-		set(pfc_rudder_command, tmp[1] + ail_component * 8)
-		r_error_total = tmp[2]
-		r_error_last = tmp[3]
+		--set(errtotal, yaw_damper_pid.errtotal)
+		set(pfc_rudder_command, yaw_damper_pid.output + ail_component * 8)
+		fbw_yaw_past = curr_yaw
 	else
 		tgt = get(pfc_pilot_input, 2) * 27 + ail_component * 8
 		tgt = lim(tgt, 27, -27)
