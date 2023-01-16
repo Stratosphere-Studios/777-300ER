@@ -13,68 +13,74 @@ B777DR_airspeed_flapsRef	= deferred_dataref("Strato/B777/airspeed/flapsRef", "nu
 --Refuel DR
 B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 --Marauder28
-B777DR_cdu_efis_ctl                    = find_dataref("Strato/777/cdu_efis_ctl")
-B777DR_cdu_eicas_ctl                   = find_dataref("Strato/777/cdu_eicas_ctl")
 
-
+--B777DR_cdu_act [0] left, [1] center, [2] right. 0 none actived, 1 fmc, 2 sat, 3 cab int
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
 local efisCTL = 0
 local dspCTL = 0
+local efisOptS, dspOptS = "", ""
 fmsPages["INDEX"]=createPage("INDEX")
 fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 
-	local fmcACT = ""
-	efisOptS = "OFF     "
-	dspOptS = "OFF     "
+	local fmcACT, satACT, intACT = "     ", "     ", "     "
 
-	--fmsFunctionsDefs["INDEX"]["L5"]={"setpage","ACMS"}
+	--fmsFunctionsDefs,["INDEX"]["L5"]={"setpage","ACMS"}
 	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
 	fmsFunctionsDefs["INDEX"]={}
 	fmsFunctionsDefs["INDEX"]["L1"]={"setpage2","FMC"}
 	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCtrl"}
 	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCtrl"}
 	fmsFunctionsDefs["INDEX"]["R4"]={"setpage2","EICASMODES"}
+	fmsFunctionsDefs["INDEX"]["R2"]={"setpage2","EFISOPTIONS152"}
 
 	if fmsID == "fmsL" then
 		efisCTL = B777DR_cdu_efis_ctl[0]
 		dspCTL = B777DR_cdu_eicas_ctl[0]
-		if B777DR_cdu_fmc_act[0] == 1 then fmcACT = "<ACT>" else fmcACT = "     " end
+		if B777DR_cdu_act[0] == 1 then
+			fmcACT = "<ACT>"
+		elseif B777DR_cdu_act[0] == 2 then
+			satACT = "<ACT>"
+		elseif B777DR_cdu_act[0] == 3 then
+			intACT = "ACT"
+		end
 	elseif fmsID == "fmsR" then
 		efisCTL = B777DR_cdu_efis_ctl[1]
 		dspCTL = B777DR_cdu_eicas_ctl[2]
-		if B777DR_cdu_fmc_act[1] == 1 then fmcACT = "<ACT>" else fmcACT = "     " end
-	else
+		if B777DR_cdu_act[1] == 1 then
+			fmcACT = "<ACT>"
+		elseif B777DR_cdu_act[1] == 2 then
+			satACT = "<ACT>"
+		elseif B777DR_cdu_act[1] == 3 then
+			intACT = "ACT"
+		end
+	else -- fmsC
 		dspCTL = B777DR_cdu_eicas_ctl[1]
+		if B777DR_cdu_act[2] == 2 then
+			satACT = "<ACT>"
+		elseif B777DR_cdu_act[2] == 3 then
+			intACT = "<ACT>"
+		end
 	end
 
-	local efisln = "EFIS>"
-	local dspln = "DISP>"
-	local efisOptL = "OFF<->ON;g2"
-	local dspOptL = "OFF<->ON;g2"
+	local efisln = "     "
+	local dspln = "    "
+	local efisOptL = "OFF;g3     "
+	local dspOptL = "OFF;g3     "
+	efisOptS, dspOptS  = "   <->ON", "   <->ON"
 
 	if efisCTL == 1 then
 		efisOptL = "      ON;g2"
 		efisOptS = "OFF<->  "
 		efisln = "EFIS>"
-	else
-		efisOptL = "OFF;g3     "
-		efisOptS = "   <->ON"
-		efisln = "     "
-		fmsFunctionsDefs["INDEX"]["R2"]=nil
 	end
 
 	if dspCTL == 1 then
 		dspOptL = "      ON;g2"
 		dspOptS = "OFF<->     "
 		dspln = "DSP>"
-	else
-		dspOptL = "OFF;g3     "
-		dspOptS = "   <->ON"
-		dspln = "    "
 	end
-
 
 	--[[  local acarsS="             "
 
@@ -90,11 +96,11 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		"                        ",
 		"<FMC    "..fmcACT.."  "..efisOptL..">",
 		"                        ",
-		"<SAT;r4               "..efisln,
+		"<SAT;r4    "..satACT.."      "..efisln,
 		"                        ",
 		"               "..dspOptL..">",
 		"                        ",
-		"                    "..dspln,
+		"<CAB INT;r8"..intACT.."       "..dspln,
 		"                        ",
 		"                DISPLAY>;r8",
 		"                        ",
@@ -104,26 +110,25 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	if fmsID == "fmsC" then
 		page[3] = "                       "
 		page[5] = "<SAT;r4                "
-		page[9] = "<CAB INT;r8            "..dspln
 		fmsFunctionsDefs["INDEX"]["R1"]=nil
 		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 			B777DR_cdu_eicas_ctl[1] = 0
 			page[7] = "                        "
-			page[9] = "<CAB INT;r8                "
+			page[9] ="<CAB INT;r8                "
 		end
 
 	elseif fmsID == "fmsL" then
 		if B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 			B777DR_cdu_eicas_ctl[0] = 0
 			page[7] = "                        "
-			page[9] = "                        "
+			page[9] = "<CAB INT;r8                "
 		end
 
 	else
 		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 then
 			B777DR_cdu_eicas_ctl[2] = 0
 			page[7] = "                        "
-			page[9] = "                        "
+			page[9] = "<CAB INT;r8                "
 		end
 	end
 
@@ -271,6 +276,7 @@ fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
 		}
 	return page
 end
+
 fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
 --fmsFunctionsDefs["RTE1"]["L1"]={"setdata","origin"}
 fmsFunctionsDefs["RTE1"]["L2"]={"setdata","runway"}
@@ -306,6 +312,7 @@ dofile("activepages/atc/B777.fms.pages.whencanwe.lua")
 dofile("activepages/B777.fms.pages.actrte1.lua")
 dofile("activepages/B777.fms.pages.identpage.lua")
 dofile("activepages/B777.fms.pages.eicasctl.lua")
+dofile("activepages/B777.fms.pages.readme.lua")
 --[[dofile("activepages/B777.fms.pages.posinit.lua")
 dofile("activepages/B777.fms.pages.perfinit.lua")
 dofile("activepages/B777.fms.pages.thrustlim.lua")
@@ -315,10 +322,10 @@ dofile("activepages/B777.fms.pages.maintirsmonitor.lua")
 dofile("activepages/B777.fms.pages.progress.lua")
 dofile("activepages/B777.fms.pages.vnav.lua")
 dofile("activepages/B777.fms.pages.vnav.lrc.lua")
-dofile("activepages/atc/B777.fms.pages.posreport.lua")
+dofile("activepages/atc/B777.fms.pages.posreport.lua")]]
 dofile("activepages/B777.fms.pages.efisctl.lua")
 
--- DO NOT UNCOMMENT
+--[[ DO NOT UNCOMMENT
 dofile("B777.fms.pages.actclb.lua")
 dofile("B777.fms.pages.actcrz.lua")
 dofile("B777.fms.pages.actdes.lua")
@@ -347,9 +354,7 @@ dofile("B777.fms.pages.progress.lua")
 dofile("B777.fms.pages.refnavdata1.lua")
 dofile("B777.fms.pages.satcom.lua")
 dofile("B777.fms.pages.waypointwinds.lua")
-
 ]]
-
 
 fmsPages["INITREF"]=createPage("INITREF")
 fmsPages["INITREF"].getPage=function(self,pgNo,fmsID)
@@ -883,151 +888,67 @@ end
 timer_start = 0
 
 function fmsFunctions.setdata(fmsO,value)
------ STRATOSPHERE 777 ----------
+	local del=false
 
+	if fmsO["scratchpad"]=="DELETE" then fmsO["scratchpad"]="" del=true end
+	----- STRATOSPHERE 777 ----------
 
+	if value == "BARO" then
+		local baro = tonumber(fmsO["scratchpad"])
 
+		if tonumber(fmsO["scratchpad"]) == nil then
+			fmsO["notify"] = "INVALID ENTRY"
+		else
+			if fmso.id == "fmsR" then
+				if fmsO["scratchpad"] == "S" or fmsO["scratchpad"] == "STD" then
+					simDR_altimiter_setting[1] = 29.92
+					return
+				end
+
+				if B777DR_baro_mode[1] == 1 then
+					baro = baro / 33.863892
+				end
+				simDR_altimiter_setting[1] = baro
+			else
+				if fmsO["scratchpad"] == "S" or fmsO["scratchpad"] == "STD" then
+					simDR_altimiter_setting[0] = 29.92
+					return
+				end
+
+				if B777DR_baro_mode[0] == 1 then
+					baro = baro / 33.863892
+				end
+				simDR_altimiter_setting[0] = baro
+			end
+		end
+		return
+	end
+
+	if value == "readmeCode" then
+		if simConfigData["data"].FMC.unlocked == 0 then
+			if string.len(fmsO["scratchpad"]) ~= 4 then
+				fmsO["notify"] = "INVALID ENTRY"
+			else
+				setFMSData("readmeCodeInput", fmsO["scratchpad"])
+				if fmsO["scratchpad"] == "BIRD" then
+					fmsO["notify"] = "UNLOCKED"
+					fmsO["scratchpad"] = ""
+					simConfigData["data"].FMC.unlocked = 1
+					pushSimConfig(simConfigData["data"]["values"])
+					fmsFunctions["doCMD"](fmsO, "Strato/777/save_simconfig")
+				else
+					fmsO["notify"] = "INCORRECT CODE"
+				end
+			end
+		else
+			fmsO["notify"] = "ALREADY UNLOCKED"
+		end
+		return
+	end
 
 ----- SPARKY 744 ----------
-	local del=false  
-	if fmsO["scratchpad"]=="DELETE" then fmsO["scratchpad"]="" del=true end
-	if value=="WXR" then
-		fmsModules["cmds"]["sim/instruments/EFIS_wxr"]:once()
-	elseif value=="POS" then
-	elseif value=="TERR" then
-		if fmsO.id=="fmsR" then
-			B777DR_nd_fo_terr = 1-B777DR_nd_fo_terr
-		else
-			B777DR_nd_capt_terr=1-B777DR_nd_capt_terr
-		end
-	elseif value=="TFC" then
-		if fmsO.id=="fmsR" then
-			B777DR_nd_fo_traffic_Selected=1-B777DR_nd_fo_traffic_Selected
-		else
-			B777DR_nd_capt_traffic_Selected=1-B777DR_nd_capt_traffic_Selected
-		end
-	elseif value=="VORDISP" then
-		if fmsO.id=="fmsR" then 
-			simDR_EFIS_1_sel_fo =2
-			simDR_EFIS_2_sel_fo =2
-		else
-			simDR_EFIS_1_sel_pilot=2
-			simDR_EFIS_2_sel_pilot=2
-		end
-	elseif value=="WPT" then
-		if fmsO.id=="fmsR" then
-			B777DR_nd_fo_wpt=1-B777DR_nd_fo_wpt 
-		else
-			B777DR_nd_capt_wpt=1-B777DR_nd_capt_wpt
-		end
-	elseif value=="STA" then
-		if fmsO.id=="fmsR" then 
-			B777DR_nd_fo_vor_ndb = 1-B777DR_nd_fo_vor_ndb 
-		else
-			B777DR_nd_capt_vor_ndb=1-B777DR_nd_capt_vor_ndb
-		end
-	elseif value=="ARPT" then
-		if fmsO.id=="fmsR" then 
-			B777DR_nd_fo_apt=1-B777DR_nd_fo_apt
-		else
-			B777DR_nd_capt_apt=1-B777DR_nd_capt_apt
-		end
-	elseif value=="DATA" then
-	elseif value=="ADFDISP" then
-		if fmsO.id=="fmsR" then 
-			simDR_EFIS_1_sel_fo =0
-			simDR_EFIS_2_sel_fo =0
-		else
-			simDR_EFIS_1_sel_pilot=0
-			simDR_EFIS_2_sel_pilot=0
-		end
-	elseif value=="DH" then
-		if tonumber(fmsO["scratchpad"]) ==nil then
-			fmsO["notify"]="INVALID ENTRY"
-			return
-		end
-		local alt=tonumber(fmsO["scratchpad"])
-		if fmsO.id=="fmsR" then 
-			simDR_radio_alt_DH_fo=alt
-		else
-			simDR_radio_alt_DH_capt=alt
-		end
-	elseif value=="MDA" then
-		if tonumber(fmsO["scratchpad"]) ==nil then 
-			fmsO["notify"]="INVALID ENTRY"
-			return
-		end
-		local alt=tonumber(fmsO["scratchpad"])
-		if fmsO.id=="fmsR" then 
-			B777DR_efis_baro_alt_ref_fo=alt
-		else
-			B777DR_efis_baro_alt_ref_capt=alt
-		end
-	elseif value=="EFISMAP" then
-		if fmsO.id=="fmsR" then
-			simDR_nd_mode_dial_fo= 2
-		else
-			simDR_nd_mode_dial_capt= 2
-		end
-	elseif value=="EFISPLN" then
-		if fmsO.id=="fmsR" then 
-			simDR_nd_mode_dial_fo= 3
-		else
-			simDR_nd_mode_dial_capt= 3
-		end	
-	elseif value=="EFISAPP" then
-		if fmsO.id=="fmsR" then 
-			simDR_nd_mode_dial_fo= 0
-		else
-			simDR_nd_mode_dial_capt= 0
-		end	
-	elseif value=="EFISVOR" then
-		if fmsO.id=="fmsR" then
-			simDR_nd_mode_dial_fo= 1
-		else
-			simDR_nd_mode_dial_capt= 1
-		end	
-	elseif value=="EFISCTR" then
-		if fmsO.id=="fmsR" then
-			simDR_nd_center_dial_fo= 1-simDR_nd_center_dial_fo
-		else
-			simDR_nd_center_dial_capt= 1-simDR_nd_center_dial_capt
-		end
-	elseif value=="BARO" then
-		if fmsO["scratchpad"]=="S" or fmsO["scratchpad"]=="STD" then
-			simDR_altimeter_baro_inHg_fo=29.92
-			simDR_altimeter_baro_inHg=29.92
-			B777DR_efis_baro_std_capt_switch_pos=1
-			B777DR_efis_baro_std_fo_switch_pos=1
-			return
-		end
-		if tonumber(fmsO["scratchpad"]) ==nil then 
-			fmsO["notify"]="INVALID ENTRY"
-			return
-		end
-		local baro=tonumber(fmsO["scratchpad"])
-		if fmsO.id=="fmsR" then 
-			if B777DR_efis_baro_ref_fo_sel_dial_pos==1 then 
-				baro=baro/33.863892
-			end
-		else
-			if B777DR_efis_baro_ref_capt_sel_dial_pos==1 then 
-				baro=baro/33.863892
-			end
-		end
-		simDR_altimeter_baro_inHg_fo=baro
-		simDR_altimeter_baro_inHg=baro
-		B777DR_efis_baro_std_capt_switch_pos=0
-		B777DR_efis_baro_std_fo_switch_pos=0
-	elseif value=="RANGEINC" then
-		simDR_range_dial_fo=math.min(simDR_range_dial_fo+1, 6)
-		simDR_range_dial_capt=simDR_range_dial_fo
-		simDR_EFIS_map_range=simDR_range_dial_fo
-	elseif value=="RANGEDEC" then	
-		simDR_range_dial_fo=math.max(simDR_range_dial_fo-1, 0)
-		simDR_range_dial_capt=simDR_range_dial_fo
-		simDR_EFIS_map_range=simDR_range_dial_fo
-	elseif value=="depdst" and string.len(fmsO["scratchpad"])>3  then
+
+	if value=="depdst" and string.len(fmsO["scratchpad"])>3  then
 		dep=string.sub(fmsO["scratchpad"],1,4)
 		dst=string.sub(fmsO["scratchpad"],-4)
 		--fmsModules["data"]["fltdep"]=dep
@@ -2201,16 +2122,6 @@ function fmsFunctions.setdata(fmsO,value)
 		simConfigData["data"].SIM.fo_lwr = fmsO.scratchpad
 		pushSimConfig(simConfigData["data"]["values"])
 	end
-	elseif value=="simConfigSave" then
-			local file_location = simDR_livery_path.."B777-400_simconfig.dat"
-			--print("File = "..file_location)
-			local file = io.open(file_location, "w")
-
-			if file ~= nil then
-				io.output(file)
-				io.write(B777DR_simconfig_data)
-				io.close(file)
-			end
 --Plane Config Page
 	elseif value=="model" then
 		simConfigData["data"].PLANE.model = fmsO.scratchpad
@@ -2449,6 +2360,7 @@ function fmsFunctions.setDref(fmsO,value)
 
   fmsO["scratchpad"]=""
 end
+
 function fmsFunctions.showmessage(fmsO,value)
   acarsSystem.currentMessage=value
   fmsO["inCustomFMC"]=true
@@ -2461,8 +2373,9 @@ function fmsFunctions.doCMD(fmsO,value)
 	fmsModules["cmds"][value]:once()
 	fmsModules["lastcmd"]=fmsModules["cmdstrings"][value]
   end]]
-  find_command(value):once()
-  print("do fmc command "..value)
+	local cmd = find_command(value)
+	cmd:once()
+	print("do fmc command "..value)
 end
 
 function fmsFunctions.toggleVar(fmsO, value)
@@ -2580,6 +2493,23 @@ function fmsFunctions.setDisp(fmsO, value)
 		run_after_time(rclRST, 0.1)
 		return
 	end
+
+	if value=="adfvor" then
+		if fmsO.id=="fmsL" then
+			if vor_adf[1] ~= 2 then
+				vor_adf[1] = vor_adf[1] + 1
+			else
+				vor_adf[1] = 0
+			end
+		else
+			if vor_adf[2] ~= 2 then
+				vor_adf[2] = vor_adf[2] + 1
+			else
+				vor_adf[2] = 0
+			end
+		end
+		return
+	end
 end
 
 --[[
@@ -2593,18 +2523,30 @@ end
 function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id == "fmsL" then
-			if B777DR_cdu_fmc_act[0] == 0 then
-				B777DR_cdu_fmc_act[0] = 1
+			if B777DR_cdu_act[0] == 0 then
+				B777DR_cdu_act[0] = 1
 				fmsFunctions["setpage"](fmsO,"IDENT")
 			else
-				if not string.match(fmsModules["fmsL"]["prevPage"], "EICAS") and not string.match(fmsModules["fmsL"]["prevPage"], "EFIS") then fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"]) end
+				if not string.match(fmsModules["fmsL"]["prevPage"], "EICAS") and
+				not string.match(fmsModules["fmsL"]["prevPage"], "EFIS")
+				and fmsModules["fmsL"]["prevPage"] ~= "README" then
+
+					fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"])
+
+				end
 			end
 		elseif fmsO.id == "fmsR" then
-			if B777DR_cdu_fmc_act[1] == 0 then
-				B777DR_cdu_fmc_act[1] = 1
+			if B777DR_cdu_act[1] == 0 then
+				B777DR_cdu_act[1] = 1
 				fmsFunctions["setpage"](fmsO,"IDENT")
 			else
-				if not string.match(fmsModules["fmsR"]["prevPage"], "EICAS") and not string.match(fmsModules["fmsR"]["prevPage"], "EFIS") then fmsFunctions["setpage"](fmsO,fmsModules["fmsR"]["prevPage"]) end
+				if not string.match(fmsModules["fmsR"]["prevPage"], "EICAS") and
+				not string.match(fmsModules["fmsR"]["prevPage"], "EFIS")
+				and fmsModules["fmsR"]["prevPage"] ~= "README" then
+
+					fmsFunctions["setpage"](fmsO,fmsModules["fmsR"]["prevPage"])
+
+				end
 			end
 		else
 			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
@@ -2615,23 +2557,50 @@ function fmsFunctions.setpage2(fmsO, value)
 	if value == "EICASMODES" then
 		if fmsO.id == "fmsL" then
 			if B777DR_cdu_eicas_ctl[0] == 1 then
-				fmsFunctions["setpage"](fmsO,"EICASMODES")
+				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules["fmsL"].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
 			end
 		elseif fmdO.id == "fmsC" then
 			if B777DR_cdu_eicas_ctl[1] == 1 then
-				fmsFunctions["setpage"](fmsO,"EICASMODES")
+				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
 			end
 		else
 			if B777DR_cdu_eicas_ctl[2] == 1 then
-				fmsFunctions["setpage"](fmsO,"EICASMODES")
+				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules["fmsR"].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
 			end
 		end
 		return
+	end
+
+	if value == "EFISOPTIONS152" then
+		if fmsO.id == "fmsL" then
+			if B777DR_cdu_efis_ctl[0] == 1 then
+				fmsFunctions["setpage"](fmsO,value)
+			else
+				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+			end
+		elseif fmsO.id == "fmsR" then
+			if B777DR_cdu_efis_ctl[1] == 1 then
+				fmsFunctions["setpage"](fmsO,value)
+			else
+				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+			end
+		else
+			fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+		end
+		return
+	end
+
+	if value == "MENU" then
+		if simConfigData["data"].FMC.unlocked == 1 then
+			fmsFunctions["setpage"](fmsO,"INDEX")
+		else
+			fmsModules[fmsO.id].notify="CDU LOCKED"
+		end
 	end
 end

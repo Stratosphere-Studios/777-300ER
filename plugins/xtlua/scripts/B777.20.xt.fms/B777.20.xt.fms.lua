@@ -19,6 +19,16 @@ end
 
 B777DR_cdu_efis_ctl         = find_dataref("Strato/777/cdu_efis_ctl")
 B777DR_cdu_eicas_ctl        = find_dataref("Strato/777/cdu_eicas_ctl")
+vor_adf = {0, 0}
+simDR_vor_adf = {find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_copilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_copilot")}
+B777DR_efis_vor_adf                    = find_dataref("Strato/777/efis/vor_adf")
+B777DR_baro_mode                       = find_dataref("Strato/777/baro_mode")
+B777DR_minimums_mda                    = find_dataref("Strato/777/minimums_mda")
+B777DR_minimums_dh                     = find_dataref("Strato/777/minimums_dh")
+simDR_nd_mode                          = {find_dataref("sim/cockpit2/EFIS/map_mode"), find_dataref("sim/cockpit2/EFIS/map_mode_copilot")}
+simDR_nd_range                         = {find_dataref("sim/cockpit2/EFIS/map_range"), find_dataref("sim/cockpit2/EFIS/map_range_copilot")}
+B777DR_minimums_mode                   = find_dataref("Strato/777/minimums_mode") --TODO: Override physical control
+simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
 
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
@@ -318,7 +328,8 @@ B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
 B777DR_SNDoptions_volume    = find_dataref("Strato/777/fmod/options/volume") --TODO
 B777DR_SNDoptions_gpws      = find_dataref("Strato/777/fmod/options/gpws")
 
-B777DR_cdu_fmc_act          = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
+B777DR_cdu_act          = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
+B777DR_readme_unlocked  = deferred_dataref("Strato/777/readme_unlocked", "number")
 
 --Simulator Config Options
 simConfigData = {}
@@ -413,7 +424,7 @@ function defaultFMSData()
 	lastpos = string.rep(" ", 18),
 	sethdg = string.rep(" ", 4),
 	stepsize = "ICAO",
-	cg_mac = string.rep("-", 2),
+	--[[cg_mac = string.rep("-", 2),
 	stab_trim = string.rep(" ", 4),
 	paxFirstClassA = string.rep("0", 2),
 	paxBusClassB = string.rep("0", 2),
@@ -436,8 +447,10 @@ function defaultFMSData()
 	freightZoneC = string.rep("0", 6),
 	freightZoneD = string.rep("0", 6),
 	freightZoneE = string.rep("0", 6),
-	freightTotal = string.rep("0", 7),
-	--irsAlignTime = string.rep("0", 3),
+	freightTotal = string.rep("0", 7),]]
+	irsAlignTime = string.rep("0", 3),
+	fmcUnlocked = false,
+	readmeCodeInput = "****"
 }
 end
 
@@ -565,8 +578,9 @@ fmsC.id="fmsC"
 setDREFs(fmsC,"cdu1","fms1","sim/FMS/","fms3")
 fmsC.inCustomFMC=true
 fmsC.targetCustomFMC=true
-fmsC.currentPage="INDEX"
-fmsC.targetPage="INDEX"
+fmsC.prevPage="README"
+fmsC.currentPage="README"
+fmsC.targetPage="README"
 
 fmsL = {}
 setmetatable(fmsL, {__index = fms})
@@ -574,8 +588,9 @@ fmsL.id="fmsL"
 setDREFs(fmsL,"cdu1","fms3","sim/FMS/","fms1")
 fmsL.inCustomFMC=true
 fmsL.targetCustomFMC=true
-fmsL.currentPage="INDEX"
-fmsL.targetPage="INDEX"
+fmsL.prevPage = "README"
+fmsL.currentPage ="README"
+fmsL.targetPage="README"
 
 fmsR = {}
 setmetatable(fmsR, {__index = fms})
@@ -583,8 +598,9 @@ fmsR.id="fmsR"
 setDREFs(fmsR,"cdu1","fms2","sim/FMS/","fms2")
 fmsR.inCustomFMC=true
 fmsR.targetCustomFMC=true
-fmsR.currentPage="INDEX"
-fmsR.targetPage="INDEX"
+fmsR.prevPage = "README"
+fmsR.currentPage = "README"
+fmsR.targetPage = "README"
 
 fmsModules.fmsL=fmsL;
 fmsModules.fmsC=fmsC;
@@ -869,6 +885,7 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 	if hasSimConfig() == false then return end
+	
 --     for i =1,24,1 do
 --       print(string.byte(fms_style,i))
 --     end
@@ -924,6 +941,7 @@ function after_physics()
 	local fuel_qty = simDR_fuel_qty]]
 	local simconfig = B777DR_simconfig_data
 	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
+	B777DR_readme_unlocked = simConfigData["data"].FMC.unlocked
 end
 
 function aircraft_load()
