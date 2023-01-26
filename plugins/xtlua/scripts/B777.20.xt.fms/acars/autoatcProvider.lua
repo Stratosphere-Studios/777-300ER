@@ -14,6 +14,7 @@ function getCycle()
   if file==nil then
     return "2107 \n" 
   end
+---@diagnostic disable-next-line: discard-returns
   file:read("*l")
   local buildData=file:read("*l")
   io.close(file)

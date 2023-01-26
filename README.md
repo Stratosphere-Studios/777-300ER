@@ -1,5 +1,5 @@
 # Stratosphere Studios 777-300ER
-Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studios.
+Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere Studios.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
 
@@ -8,17 +8,25 @@ Freeware Boeing 777-300ER for the X-Plane flight simulator by Stratosphere Studi
 
 ## FAQ
 
+**Q: Why is the aircraft not showing up in the aircraft menu?**
+
+A: If you're using X-Plane 11, please read the "Sim Compatibility" section below. If you are on X-Plane 12, please check the "Installation" section and send us a message if it still doesn't work.
+
+**Sim Compatibility**
+
+A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. An XP11 acf file can be downloaded from [here](https://cdn.discordapp.com/attachments/833201893999771687/1059662416952164372/777-xp11.acf) and dragged into the up-to-date 777 folder and _most_ features will update, but expect bugs.
+
 **Q: When is the release date?**
 
 A: We have no release date at this time, however, you can still download the aircraft whenever you'd like.
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries from various authors from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries). This repository also has the official Stratosphere livery for other aircraft.
+A: You can download liveries from various authors from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries), where we also have official Stratosphere liveries for other aircraft.
 
 **Livery Painters**
 
-If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. Note that while the modeling is mostly complete, it's still subject to some changes.
+If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. There's a channel in the Discord server names "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
@@ -26,7 +34,7 @@ A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwM
 
 **Q: What is the black console window that appears when I start the aircraft?**
 
-A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. **This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's "plugins/xtlua/64/" folder.
+A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's "plugins/xtlua/64/" folder.
 
 **Q: How do I start the aircraft?**
 
@@ -42,14 +50,13 @@ A: Please use the [GitHub issue page](https://github.com/Stratosphere-Studios/77
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Why is my aircraft broken/gving me error messages?**
-
-A: You might be running the aircraft in X-Plane 11. We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
-
-**Q: Even after following the above instructions, why my aircraft is still broken?**
+**Q: Even after following the above instructions, why my is aircraft still broken?**
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
 
+**СDU Сode**
+
+Thanks for reading! The соde for the FМS is "BIRD".
 
 ## INSTALLATION
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
@@ -58,9 +65,6 @@ Then extract the aircraft folder and move it to your X-Plane aircraft folder as 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
 
 We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
-
-## OLD REPOSITORY
-If you want to see more update history, you can check our [old repository.](https://github.com/StratosphereStudios/777)
 
 ## CREDITS
 [Nathroxer (Owner)](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.

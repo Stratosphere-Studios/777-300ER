@@ -30,19 +30,19 @@ cas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 tas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/true_airspeed_kts_copilot")
 cas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_copilot")
 --Weather and position
-ac_heading = globalPropertyf("sim/flightmodel/position/magpsi")
-wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
-wind_speed = globalPropertyf("sim/weather/wind_speed_kt") --this is in meters per second
-tas = globalPropertyf("sim/flightmodel/position/true_airspeed") --true airspeed in meters per second. Needed for accurate drooping
+--Components of airspeed relative to l'avion.In SI units.
+speed_x = globalPropertyf("sim/flightmodel/forces/vx_air_on_acf")
+speed_y = globalPropertyf("sim/flightmodel/forces/vy_air_on_acf")
+speed_z = globalPropertyf("sim/flightmodel/forces/vz_air_on_acf")
 --Flight controls
 outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 5)
 inbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1)
 outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 6)
 inbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 2)
-spoiler_L1 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 3)
-spoiler_L2 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 3)
-spoiler_R1 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 4)
-spoiler_R2 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 4)
+spoiler_L1 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 3)
+spoiler_L2 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 3)
+spoiler_R1 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 4)
+spoiler_R2 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 4)
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 2)
 inbd_flap_L = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 inbd_flap_R = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 2)
@@ -70,22 +70,25 @@ pfc_rudder_command = globalPropertyf("Strato/777/fctl/pfc/rudder")
 fbw_ail_ratio = globalPropertyf("Strato/777/fctl/ail_ratio")
 fbw_flprn_ratio_l = globalPropertyf("Strato/777/fctl/flprn_ratio_l")
 fbw_flprn_ratio_u = globalPropertyf("Strato/777/fctl/flprn_ratio_u")
-
+--ACE command datarefs
 ace_aileron = globalProperty("Strato/777/fctl/ace/ailrn_cmd")
 ace_flaperon = globalProperty("Strato/777/fctl/ace/flprn_cmd")
 ace_spoiler = globalProperty("Strato/777/fctl/ace/spoiler_cmd")
 ace_elevator = globalProperty("Strato/777/fctl/ace/elevator_cmd")
 ace_rudder = globalPropertyf("Strato/777/fctl/ace/rudder_cmd")
+--PCU modes
+pcu_aileron = globalProperty("Strato/777/fctl/pcu/ail")
+pcu_flaperon = globalProperty("Strato/777/fctl/pcu/flprn")
+pcu_elevator = globalProperty("Strato/777/fctl/pcu/elev")
+pcu_rudder = globalProperty("Strato/777/fctl/pcu/rudder")
+pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
 
 --creating our own datarefs
 
---pcu modes: 
+--PCU modes: 
 --0 - bypass
---1 - normal for flaperons, blocking for elevators
---2 - normal for elevators
-
-pcu_mode_flprn = createGlobalPropertyia("Strato/777/fctl/flprn/pcu_mode", {0, 0})
-pcu_mode_elevator = createGlobalPropertyia("Strato/777/fctl/elevator/pcu_mode", {0, 0})
+--1 - normal
+--2 - blocking
 
 --load indexation:
 --1, 2 - spoilers
@@ -102,9 +105,115 @@ flap_tgt = globalPropertyf("Strato/777/flaps/tgt")
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 flap_handle_used = createGlobalPropertyf("Strato/777/flaps/handle_used", 0)
 
-flap_settings = {0, 1, 5, 15, 20, 25, 30}
+flap_settings = {0, 1, 5, 15, 20, 25, 30}  
 
-Control_surface = {mass = 0, area = 0, ratio1 = 18, ratio2 = 18, mode = 1}
+vec3d = {x = 0, y = 0, z = 0}
+
+function vec3d:new(tmp)
+    tmp = tmp or {}
+    setmetatable(tmp, self)
+    self.__index = self
+    return tmp
+end
+
+--Control_sfc description:
+--dref_ace - dataref for ACE command, NOT ACE status
+--rt stands for response time
+--vab, vab are velocity airborne begin and velocity airborne done respectively
+--rt_coeff_damped - coefficient for calculation of response time as function of airspeed
+
+Control_sfc = {pos_up = 0, pos_dn = 0, dref_pos = 0, dref_ace = 0, dref_pcu = 0, rt_nml = 0, rt_damped = 0, rt_coeff_damped = 0, vab = 0, vad = 0, load_idx = 1, load_max = 0.1} 
+
+function ResetLoad()
+	for i=1,6 do
+		set(hyd_load, 0, i)
+	end
+end
+
+function Control_sfc:new(tmp)
+    tmp = tmp or {}
+    setmetatable(tmp, self)
+    self.__index = self
+    return tmp
+end
+
+function Control_sfc:setPosForNegativeSpeed(cmpval, rt)
+	if get(self.dref_pos) > cmpval then
+		EvenAnim(self.dref_pos, self.pos_dn, rt)
+	elseif get(self.dref_pos) < -cmpval then
+		EvenAnim(self.dref_pos, self.pos_up, rt)
+	else
+		EvenAnim(self.dref_pos, 0, rt)
+	end
+end
+
+function Control_sfc:updateLoad()
+	if get(self.dref_pos) >= 0 then
+		local tmp_pos = self.pos_dn
+		if self.pos_dn == 0 then
+			tmp_pos = self.pos_up
+		end
+		set(hyd_load, get(hyd_load, self.load_idx) + self.load_max * get(self.dref_pos) / tmp_pos, self.load_idx)
+	else
+		set(hyd_load, get(hyd_load, self.load_idx) + self.load_max * get(self.dref_pos) / self.pos_up, self.load_idx)
+	end
+end
+
+function Control_sfc:updatePositionAil(airspeed, idx)
+	if get(self.dref_pcu, idx) == 0 then
+		if math.abs(airspeed.z) < self.vab then
+			EvenAnim(self.dref_pos, self.pos_dn, self.rt_damped)
+		elseif math.abs(airspeed.z) >= self.vab and math.abs(airspeed.z) < self.vad then
+			local rt = self.rt_damped + self.rt_coeff_damped * (math.abs(airspeed.z) - self.vab) ^ 2
+			if airspeed.z >= 0 then
+				local pos = self.pos_dn - (airspeed.z - self.vab) * self.pos_dn / (self.vad - self.vab)
+				EvenAnim(self.dref_pos, pos, rt)
+			else
+				self:setPosForNegativeSpeed(1, rt)
+			end
+		else
+			local rt = self.rt_damped + self.rt_coeff_damped * (self.vad - self.vab) ^ 2
+			if airspeed.z >= 0 then
+				EvenAnim(self.dref_pos, 0, rt)
+			else
+				self:setPosForNegativeSpeed(1, rt)
+			end
+		end
+	elseif get(self.dref_pcu, idx) == 1 then
+		EvenAnim(self.dref_pos, get(self.dref_ace, idx), self.rt_nml)
+	elseif get(self.dref_pcu, idx) == 2 then
+		EvenAnim(self.dref_pos, 0, self.rt_damped)
+	end
+	self:updateLoad()
+end
+
+function Control_sfc:updatePositionRud(airspeed)
+	if get(self.dref_pcu) == 0 then
+		local mov_x = 0
+		local rt = self.rt_damped
+		if math.abs(airspeed.x) >= self.vab then
+			if airspeed.x < 0 then
+				mov_x = self.pos_up
+			elseif airspeed.x > 0 then
+				mov_x = self.pos_dn
+			end
+		end
+		if airspeed.z >= self.vab and airspeed.z < self.vad then
+			local tmp = 1 - (airspeed.z - self.vab) / (self.vad - self.vab)
+			mov_x = mov_x * tmp
+		end
+		local airspeed_sum = math.sqrt(airspeed.x^2 + airspeed.z^2)
+		if airspeed_sum >= self.vab and airspeed_sum < self.vad then
+			rt = self.rt_damped + self.rt_coeff_damped * (math.abs(airspeed_sum) - self.vab) ^ 2
+		elseif airspeed_sum >= self.vad then
+			rt = self.rt_damped + self.rt_coeff_damped * (self.vad - self.vab) ^ 2
+		end
+		EvenAnim(self.dref_pos, mov_x, rt)
+	elseif get(self.dref_pcu) == 1 then
+		EvenAnim(self.dref_pos, get(self.dref_ace), self.rt_nml)
+	end
+	self:updateLoad()
+end
 
 function GetClosestFlapSetting()
 	local tmp = 1
@@ -117,13 +226,6 @@ function GetClosestFlapSetting()
 	return tmp
 end
 
-function GetMaxHydPress() --since some things are driven by all 3 hydraulic systems, we need to know the maximum pressure
-	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
-	local pressure_C = globalPropertyiae("Strato/777/hydraulics/press", 2)
-	local pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
-	return math.max(get(pressure_L), get(pressure_C), get(pressure_R))
-end
-
 function UpdateReversers()
 	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
 	local h_load_L = globalPropertyfae("Strato/777/hydraulics/load", 10)
@@ -133,45 +235,6 @@ function UpdateReversers()
 	set(h_load_L, 0.2 * bool2num(get(pressure_L) > 300) * get(L_reverser_deployed))
 	set(R_reverser_fail, 6 * bool2num(get(pressure_R) < 300 or get(on_ground) == 0))
 	set(h_load_R, 0.2 * bool2num(get(pressure_R) > 300) * get(R_reverser_deployed))
-end
-
---Ailerons
-
-function GetSurfaceResponseTime(hyd_sys, type) --aileron response time based on pressure
-	--types:
-	--1 - aileron/flaperon
-	--2 - elevator
-	local resp_times_max = {0.4, 2}
-	local resp_times_min = {0.08, 0.3}
-	local press = {0, 0}
-	if hyd_sys[1] == 4 then
-		press[1] = GetMaxHydPress()
-	else
-		for i=1,tlen(hyd_sys) do
-			local h_press = globalPropertyiae("Strato/777/hydraulics/press", hyd_sys[i])
-			press[i] = get(h_press)
-		end
-	end
-	local pressure = math.max(unpack(press))
-	local tmp = pressure * resp_times_max[type] / 3340
-	if tmp >= resp_times_min[type] then
-		return tmp
-	end
-	return resp_times_min[type]
-end
-
---Spoilers
-
-function GetSpoilerResponseTime() --Spoiler response time that is influenced by hydraulic pressure
-	local pressure = GetMaxHydPress()
-	local speed = get(tas)
-	if pressure > 2000 and speed < 149 then
-		return pressure * 7 / 3340
-	elseif pressure >= 570 and pressure <= 2000 then
-		return pressure * 2 / 3340
-	else
-		return 1
-	end
 end
 
 --Flaps
@@ -230,21 +293,6 @@ function GetFlapCurrent()
 	end
 end
 
---Elevator
-
---Rudder
-
-function GetRudderResponseTime()
-	local max_press = GetMaxHydPress()
-	local wind_mag = get(wind_speed)
-	local strength = 1 - math.abs((math.abs(get(ac_heading) - get(wind_dir)) % 180) - 90) / 90
-	local reqd_press = 3000 * get(wind_speed) * 0.01 * strength
-	if max_press < reqd_press then
-		return wind_mag * 0.00194 * ((reqd_press - max_press) / reqd_press) + max_press / 3000
-	end
-	return 1
-end
-
 --these functions set a bunch of datarefs for flight controls to the same value. I guess this is needed because of something in plane maker
 function UpdateRudder(value)
 	set(upper_rudder, value)
@@ -280,32 +328,40 @@ function UpdateFlaps(value)
 	set(outbd_flap_R, value)
 end
 
+airspeed_vec = vec3d:new{x = 0, y = 0, z = 0}
+sp_L1 = Control_sfc:new{pos_up = 60, pos_dn = 0, dref_pos = spoiler_L1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_L2 = Control_sfc:new{pos_up = 45, pos_dn = 0, dref_pos = spoiler_L2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_R1 = Control_sfc:new{pos_up = 60, pos_dn = 0, dref_pos = spoiler_R1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 2, load_max = 0.025}
+sp_R2 = Control_sfc:new{pos_up = 45, pos_dn = 0, dref_pos = spoiler_R2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 2, load_max = 0.025}
+ail_L = Control_sfc:new{pos_up = -18, pos_dn = 18, dref_pos = outbd_ail_L, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 30, vad = 50, load_idx = 3, load_max = 0.08}
+ail_R = Control_sfc:new{pos_up = -18, pos_dn = 18, dref_pos = outbd_ail_R, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 10, vad = 20, load_idx = 3, load_max = 0.08}
+flprn_L = Control_sfc:new{pos_up = -18, pos_dn = 36, dref_pos = inbd_ail_L, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 4, load_max = 0.07}
+flprn_R = Control_sfc:new{pos_up = -18, pos_dn = 36, dref_pos = inbd_ail_R, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 4, load_max = 0.07}
+elev_L = Control_sfc:new{pos_up = -33, pos_dn = 27, dref_pos = elevator_L, dref_ace = ace_elevator, dref_pcu = pcu_elevator, rt_nml = 0.6, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 15, vad = 34, load_idx = 5, load_max = 0.1}
+elev_R = Control_sfc:new{pos_up = -33, pos_dn = 27, dref_pos = elevator_R, dref_ace = ace_elevator, dref_pcu = pcu_elevator, rt_nml = 0.6, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 15, vad = 34, load_idx = 5, load_max = 0.1}
+rudder_top = Control_sfc:new{pos_up = -27, pos_dn = 27, dref_pos = upper_rudder, dref_ace = ace_rudder, dref_pcu = pcu_rudder, rt_nml = 0.5, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 1, vad = 4, load_idx = 6, load_max = 0.1}
+
 function update()
-	UpdateReversers()
-	--Update PCU modes
-	SetFlapTarget()
-	--Obtaining response times for all of the flight controls
-	local outbd_ail_response_time = GetSurfaceResponseTime({1, 2}, 1)
-	local L_inbd_ail_response_time = GetSurfaceResponseTime({1, 3}, 1)
-	local R_inbd_ail_response_time = GetSurfaceResponseTime({2, 3}, 1)
-	local L_elevator_response_time = GetSurfaceResponseTime({1, 2}, 2)
-	local R_elevator_response_time = GetSurfaceResponseTime({1, 3}, 2)
-	local spoiler_response_time = GetSpoilerResponseTime()
-	local rud_time = GetRudderResponseTime()
+	airspeed_vec.x = get(speed_x)
+	airspeed_vec.z = get(speed_z)
+	ResetLoad()
 	--Move flight controls in sim
-	EvenAnim(outbd_ail_L, get(ace_aileron, 1), outbd_ail_response_time)
-	EvenAnim(inbd_ail_L, get(ace_flaperon, 1), L_inbd_ail_response_time)
-	EvenAnim(outbd_ail_R, get(ace_aileron, 2), outbd_ail_response_time)
-	EvenAnim(inbd_ail_R, get(ace_flaperon, 2), R_inbd_ail_response_time)
-	UpdateRudder(get(upper_rudder)+(get(ace_rudder) - get(upper_rudder))*get(f_time)*rud_time)
-	set(spoiler_L1, get(spoiler_L1)+(get(ace_spoiler, 1) - get(spoiler_L1))*get(f_time)*spoiler_response_time)
-	set(spoiler_L2, get(spoiler_L2)+(get(ace_spoiler, 2) - get(spoiler_L2))*get(f_time)*spoiler_response_time)
-	set(spoiler_R1, get(spoiler_R1)+(get(ace_spoiler, 3) - get(spoiler_R1))*get(f_time)*spoiler_response_time)
-	set(spoiler_R2, get(spoiler_R2)+(get(ace_spoiler, 4) - get(spoiler_R2))*get(f_time)*spoiler_response_time)
+	sp_L1:updatePositionAil(airspeed_vec, 2)
+	sp_L2:updatePositionAil(airspeed_vec, 1)
+	sp_R1:updatePositionAil(airspeed_vec, 4)
+	sp_R2:updatePositionAil(airspeed_vec, 3)
+	ail_L:updatePositionAil(airspeed_vec, 1)
+	ail_R:updatePositionAil(airspeed_vec, 2)
+	flprn_L:updatePositionAil(airspeed_vec, 1)
+	flprn_R:updatePositionAil(airspeed_vec, 2)
+	elev_L:updatePositionAil(airspeed_vec, 1)
+	elev_R:updatePositionAil(airspeed_vec, 2)
+	rudder_top:updatePositionRud(airspeed_vec)
+	UpdateReversers()
+	SetFlapTarget()
 	UpdateFlaps(GetFlapCurrent())
 	UpdateSlats()
-	set(elevator_L, get(elevator_L)+(get(ace_elevator, 1) - get(elevator_L)) * get(f_time) * L_elevator_response_time)
-	set(elevator_R, get(elevator_R)+(get(ace_elevator, 2) - get(elevator_R)) * get(f_time) * R_elevator_response_time)
+	set(bottom_rudder, get(upper_rudder))
 end
 
 function onAirportLoaded()

@@ -15,6 +15,8 @@ addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
+--Systems datarefs
+
 max_allowable = createGlobalPropertyi("Strato/777/fctl/vmax", 0)
 stall_speed = createGlobalPropertyi("Strato/777/fctl/vstall", 0)
 manuever_speed = createGlobalPropertyi("Strato/777/fctl/vmanuever", 0)
@@ -26,6 +28,12 @@ brake_qty_L = createGlobalPropertyf("Strato/777/gear/qty_brake_L", 0)
 brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R", 0)
 stab_cutout_C = createGlobalPropertyi("Strato/777/fctl/stab_cutout_C", 0)
 stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
+
+--Failure datarefs
+
+fbw_secondary_fail = createGlobalPropertyi("Strato/777/failures/fctl/secondary", 0)
+fbw_direct_fail = createGlobalPropertyi("Strato/777/failures/fctl/direct", 0)
+goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
 
 --Overrides
 
@@ -72,7 +80,8 @@ components = {
 		visible = true,
 		fpsLimit = 50
 	},
-	custom_commands {}
+	custom_commands {},
+	failures {}
 }
 
 function onModuleDone()

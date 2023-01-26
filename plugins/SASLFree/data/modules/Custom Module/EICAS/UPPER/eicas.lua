@@ -41,6 +41,8 @@ on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 --Finding own datarefs
 
+efis_ctrl = globalProperty("Strato/777/cdu_efis_ctl")
+dsp_ctrl = globalProperty("Strato/777/cdu_eicas_ctl")
 eicas_power_upper = globalPropertyi("Strato/777/elec/eicas_power_upper")
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
@@ -73,8 +75,6 @@ spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ac
 
 --Creating datarefs
 
-dsp_ctrl = createGlobalPropertyi("Strato/777/eicas/dsp_ctrl", 0)
-efis_ctrl = createGlobalPropertyia("Strato/777/eicas/efis_ctrl", {0, 0})
 recall = createGlobalPropertyi("Strato/777/eicas/rcl", 0)
 recall_past = createGlobalPropertyi("Strato/777/eicas/rcl_past", 0)
 canc = createGlobalPropertyi("Strato/777/eicas/canc", 0)
@@ -267,7 +267,7 @@ function UpdateStabCutoutAdvisory(messages)
 end
 
 function UpdateCDUCtrl(messages)
-	if get(dsp_ctrl) == 1 then
+	if get(dsp_ctrl, 1) == 1 or get(dsp_ctrl, 2) == 1 or get(dsp_ctrl, 3) == 1 then
 		table.insert(messages, tlen(messages) + 1, "DISPLAY SELECT PNL")
 	end
 	if get(efis_ctrl, 1) == 1 then

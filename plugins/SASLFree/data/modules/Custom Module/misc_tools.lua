@@ -88,7 +88,7 @@ end
 function EvenChange(val, tgt, step)
 	local tmp_step = step * get(f_time) / 0.0166
 	if math.abs(val - tgt) <= tmp_step then
-		return val
+		return tgt
 	else
 		return val + (bool2num(val < tgt) - bool2num(val > tgt)) * tmp_step
 	end

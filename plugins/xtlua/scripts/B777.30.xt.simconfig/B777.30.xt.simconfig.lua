@@ -1,3 +1,4 @@
+---@diagnostic disable: param-type-mismatch
 --[[
 *****************************************************************************************
 * Program Script Name	:	B777.20.xt.simconfig
@@ -53,6 +54,19 @@ B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "
 --*************************************************************************************--
 --** 				        MAIN PROGRAM LOGIC                                       **--
 --*************************************************************************************--
+local file_location = "Output/preferences/Strato_777_config.dat"
+
+function saveSimconfig_CMDhandler(phase, duration)
+	if phase == 0 then
+		local file = io.open(file_location, "w")
+		file:write(B777DR_simconfig_data)
+		file:close()
+		print("finished saving simconfig file "..file_location)
+	end
+end
+
+B777CMD_save_simconfig = deferred_command("Strato/777/save_simconfig", "Save Configuration Options", saveSimconfig_CMDhandler)
+
 simConfigData = {}
 dofile("version.lua")
 
@@ -99,23 +113,22 @@ function simconfig_values()
 			GPWS40 = 1,
 			GPWS30 = 1,
 			GPWS20 = 1,
-			GPWS10 = 1,
-			GPWS5 = 1,
+			GPWS10 = 1
 		},
 		PLANE = {
 			aircraft_type = 0, -- 0 = pax, 1 = Freighter
 			airline = "",
 		},
 		FMC = {
-			nav_data = "",
+--			nav_data = "",
 --			active = "",
-			op_program = fmcVersion,
+--			op_program = fmcVersion,
 			drag_ff = "+0.0/-0.0",
+			unlocked = 0 -- 1 if readme code unlocked, 0 if locked
 		},
 		OPTIONS = {
 			weight_display_units = "LBS",
 			iru_align_real = 1,
-			iru_align_time = 0, -- if manual
 			real_park_brake = 1,
 			trs_bug = 1,
 			aoa_indicator = 1,
@@ -167,7 +180,6 @@ function set_loaded_configs()
 end
 
 function aircraft_simConfig()
-	local file_location = simDR_livery_path.."B777-300ER_simconfig.dat"
 	print("File = "..file_location)
 	local file = io.open(file_location, "r")
 
@@ -176,8 +188,8 @@ function aircraft_simConfig()
 		local tmpDataS = io.read()
 		io.close(file)
 		--print("read "..tmpDataS)
-		local tmpData=json.decode(tmpDataS)
-		tmpData.FMC.op_program = fmcVersion
+		local tmpData = json.decode(tmpDataS)
+		--tmpData.FMC.op_program = fmcVersion
 		--print("encoding "..tmpDataS)
 		B777DR_simconfig_data = json.encode(tmpData)
 		--print("done encoding "..B777DR_simconfig_data)
@@ -185,11 +197,12 @@ function aircraft_simConfig()
 		run_after_time(set_loaded_configs, 3)  --Apply loaded configs.  Wait a few seconds to ensure they load correctly.
 	else
 		B777DR_simconfig_data = json.encode(simconfig_values())
+		saveSimconfig_CMDhandler(0, 0)
 		run_after_time(set_loaded_configs, 3)  --Apply loaded configs.  Wait a few seconds to ensure they load correctly.
 	end
 end
 
-simConfigData["data"]=simconfig_values()
+simConfigData["data"] = simconfig_values()
 
 function flight_start()
 	local refreshLivery = simDR_livery_path
@@ -198,12 +211,8 @@ function flight_start()
 	run_after_time(aircraft_simConfig, 1)  --Load specific simConfig data for current livery
 end
 
-function aircraft_load()
-	print("simconfig loaded")
-end
-
 function livery_load()
-	--print("simconfig livery_load")
+	print("simconfig livery_load")
 	local refreshLivery = simDR_livery_path
 	B777DR_newsimconfig_data = 1
 	run_after_time(aircraft_simConfig, 2)  --Load specific simConfig data for current livery
