@@ -23,7 +23,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "BROKEN BEFORE READING IT",
             "                        ",
             "                        ",
-            fmsModules["data"].readmeCodeInput..";m4 -------------------",
+            fmsModules["data"].readmeCodeInput..";m5 ------------------",
             "                        "
         }
     else
@@ -39,7 +39,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            fmsModules["data"].readmeCodeInput..";g4 ------------- MENU>",
+            fmsModules["data"].readmeCodeInput..";g5 ------------ MENU>",
             "                        "
         }
     end

@@ -179,7 +179,7 @@ end
 
 function readmeCode()
 	local file = io.open("Output/777 Readme Code.txt", "w")
-	B777DR_readme_code = randomChar()..randomChar()..randomChar()..randomChar()
+	B777DR_readme_code = randomChar()..randomChar()..randomChar()..randomChar()..randomChar()
 	file:write("Enter this code into the FMS to unlock the flight instruments: \""..B777DR_readme_code.."\"")
 	file:close()
 	print("created readme code "..B777DR_readme_code)

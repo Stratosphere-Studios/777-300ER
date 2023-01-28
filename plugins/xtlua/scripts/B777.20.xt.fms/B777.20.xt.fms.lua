@@ -451,7 +451,7 @@ function defaultFMSData()
 	freightTotal = string.rep("0", 7),]]
 	irsAlignTime = string.rep("0", 3),
 	fmcUnlocked = false,
-	readmeCodeInput = "****"
+	readmeCodeInput = "*****"
 }
 end
 
