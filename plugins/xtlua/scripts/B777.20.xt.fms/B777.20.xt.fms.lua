@@ -29,6 +29,7 @@ simDR_nd_mode                          = {find_dataref("sim/cockpit2/EFIS/map_mo
 simDR_nd_range                         = {find_dataref("sim/cockpit2/EFIS/map_range"), find_dataref("sim/cockpit2/EFIS/map_range_copilot")}
 B777DR_minimums_mode                   = find_dataref("Strato/777/minimums_mode") --TODO: Override physical control
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
+B777DR_readme_code                     = find_dataref("Strato/777/readme_code")
 
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")

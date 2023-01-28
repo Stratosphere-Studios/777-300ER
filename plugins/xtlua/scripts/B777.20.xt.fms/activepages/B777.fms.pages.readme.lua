@@ -1,22 +1,16 @@
 --[[
 *****************************************************************************************
-* Page Name:
+* Page Name: readme verification
 * Author Name: crazytimtimtim
 * Page Description:
 *****************************************************************************************
 --]]
 
-local unlocked = " LOCKED"
+
 fmsPages["README"] = createPage("README")
 fmsPages["README"].getPage = function(self,pgNo,fmsID)
-    local menuBtn = "-----"
-    local code = fmsModules["data"].readmeCodeInput..";m4"
-    if simConfigData["data"].FMC.unlocked == 1 then
-        menuBtn = " MENU>"
-        code = fmsModules["data"].readmeCodeInput..";g4"
-        unlocked = "UNLOCKED;h8"
-    end
-    if pgNo == 1 then
+
+    if simConfigData["data"].FMC.unlocked == 0 then
         return {
             "    READ THE README!    ",
             "                        ",
@@ -29,13 +23,35 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "BROKEN BEFORE READING IT",
             "                        ",
             "                        ",
-            code.." -------------"..menuBtn,
+            fmsModules["data"].readmeCodeInput..";m4 -------------------",
+            "                        "
+        }
+    else
+        return {
+            "    READ THE README!    ",
+            "                        ",
+            "FLIGHT INSTRUMENTS      ",
+            "UNLOCKED. THANKS FOR    ",
+            "READING THE README.     ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            fmsModules["data"].readmeCodeInput..";g4 ------------- MENU>",
             "                        "
         }
     end
 end
 
 fmsPages["README"].getSmallPage = function(self,pgNo,fmsID)
+    local unlocked = " LOCKED"
+
+    if simConfigData["data"].FMC.unlocked == 1 then
+        unlocked = "UNLOCKED;h8"
+    end
+
 	return {
 		"                        ",
 		"                        ",

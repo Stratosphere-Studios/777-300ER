@@ -50,6 +50,7 @@ B777DR_newsimconfig_data    = deferred_dataref("Strato/777/newsimconfig", "numbe
 B777DR_SNDoptions           = deferred_dataref("Strato/777/fmod/options", "array[7]")
 B777DR_SNDoptions_volume    = deferred_dataref("Strato/777/fmod/options/volume", "array[8]") --TODO
 B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "array[16]")
+B777DR_readme_code          = deferred_dataref("Strato/777/readme_code", "string")
 
 --*************************************************************************************--
 --** 				        MAIN PROGRAM LOGIC                                       **--
@@ -170,6 +171,20 @@ function setSoundOption(key,value)
 	if key == "GPWS5" then B777DR_SNDoptions_gpws[15] = value end
 end
 
+function randomChar()
+	local num = math.random(1, 26)
+	local alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	return string.sub(alpha, num, num)
+end
+
+function readmeCode()
+	local file = io.open("Output/777 Readme Code.txt", "w")
+	B777DR_readme_code = randomChar()..randomChar()..randomChar()..randomChar()
+	file:write("Enter this code into the FMS to unlock the flight instruments: \""..B777DR_readme_code.."\"")
+	file:close()
+	print("created readme code "..B777DR_readme_code)
+end
+
 function set_loaded_configs()
 	for key, value in pairs(simConfigData["data"].SOUND) do
 		setSoundOption(key,value)
@@ -205,6 +220,7 @@ end
 simConfigData["data"] = simconfig_values()
 
 function flight_start()
+	readmeCode()
 	local refreshLivery = simDR_livery_path
 	B777DR_simconfig_data = json.encode(simConfigData["data"]["values"]) --make the simConfig data available to other modules
 	B777DR_newsimconfig_data = 1

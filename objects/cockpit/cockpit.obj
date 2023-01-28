@@ -10685,7 +10685,7 @@ IDX	9123
 		ATTR_manip_drag_rotate	hand	0.030549958	0.29393482	-33.019852	1.000	0.000	-0.000	48.934	-3.029	0.000	0.000	1.000	0.000	0.000	sim/cockpit2/engine/actuators/throttle_ratio_all		Throttle (Both)
 		ATTR_manip_keyframe	0.5	22.226178
 		TRIS	4923 84
-		ATTR_manip_drag_rotate	hand	0.030549958	0.29393482	-33.019852	1.000	0.000	-0.000	48.934	-3.029	0.000	0.000	1.000	0.000	0.000	sim/cockpit2/engine/actuators/throttle_ratio[0]		Left Throttle
+		ATTR_manip_drag_rotate	up_down	0.030549958	0.29393482	-33.019852	1.000	0.000	-0.000	48.934	-3.029	0.000	0.000	1.000	0.000	0.000	sim/cockpit2/engine/actuators/throttle_ratio[0]		Left Throttle
 		ATTR_manip_keyframe	0.5	22.226178
 		TRIS	6765 84
 	ANIM_end
@@ -10720,7 +10720,7 @@ IDX	9123
 	ANIM_rotate_key	1	-3.029228
 	ANIM_rotate_end
 	ATTR_manip_none
-		ATTR_manip_drag_rotate	hand	0.030549958	0.29393482	-33.019852	1.000	0.000	-0.000	48.934	-3.029	0.000	0.000	1.000	0.000	0.000	sim/cockpit2/engine/actuators/throttle_ratio[1]		Right Throttle
+		ATTR_manip_drag_rotate	down	0.030549958	0.29393482	-33.019852	1.000	0.000	-0.000	48.934	-3.029	0.000	0.000	1.000	0.000	0.000	sim/cockpit2/engine/actuators/throttle_ratio[1]		Right Throttle
 		ATTR_manip_keyframe	0.5	22.226178
 		TRIS	8235 84
 		ATTR_manip_drag_rotate	hand	0.030549958	0.29393482	-33.019852	1.000	0.000	-0.000	48.934	-3.029	0.000	0.000	1.000	0.000	0.000	sim/cockpit2/engine/actuators/throttle_ratio_all		Throttle (Both)

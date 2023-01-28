@@ -30,8 +30,8 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
 	fmsFunctionsDefs["INDEX"]={}
 	fmsFunctionsDefs["INDEX"]["L1"]={"setpage2","FMC"}
-	fmsFunctionsDefs["INDEX"]["R1"]={"toggleVar", "efisCtrl"}
-	fmsFunctionsDefs["INDEX"]["R3"]={"toggleVar", "dspCtrl"}
+	fmsFunctionsDefs["INDEX"]["R1"]={"setDref", "efisCtrl"}
+	fmsFunctionsDefs["INDEX"]["R3"]={"setDref", "dspCtrl"}
 	fmsFunctionsDefs["INDEX"]["R4"]={"setpage2","EICASMODES"}
 	fmsFunctionsDefs["INDEX"]["R2"]={"setpage2","EFISOPTIONS152"}
 
@@ -930,7 +930,7 @@ function fmsFunctions.setdata(fmsO,value)
 				fmsO["notify"] = "INVALID ENTRY"
 			else
 				setFMSData("readmeCodeInput", fmsO["scratchpad"])
-				if fmsO["scratchpad"] == "BIRD" then
+				if fmsO["scratchpad"] == B777DR_readme_code then
 					fmsO["notify"] = "UNLOCKED"
 					fmsO["scratchpad"] = ""
 					simConfigData["data"].FMC.unlocked = 1
@@ -2270,6 +2270,40 @@ function fmsFunctions.setDref(fmsO,value)
 
 	-----STRATOSPHERE 777----------
 
+	if value == "dspCtrl" then
+		if fmsO.id == "fmsL" then
+			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
+				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
+			else
+				fmsModules["fmsL"].notify="KEY/FUNCTION INOP"
+			end
+		elseif fmsO.id == "fmsC" then
+			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
+				B777DR_cdu_eicas_ctl[1] = 1 - B777DR_cdu_eicas_ctl[1]
+			else
+				fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+			end
+		else
+			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[1] == 0 then
+				B777DR_cdu_eicas_ctl[2] = 1 - B777DR_cdu_eicas_ctl[2]
+			else
+				fmsModules["fmsR"].notify="KEY/FUNCTION INOP"
+			end
+		end
+		return
+	end
+
+	if value == "efisCtrl" then
+		if fmsO.id == "fmsL" then
+			B777DR_cdu_efis_ctl[0] = 1 - B777DR_cdu_efis_ctl[0]
+		elseif fmsO.id == "fmsR" then
+			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
+		else
+			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+		end
+		return
+	end
+
 
 	----- SPARKY 744 ----------
 
@@ -2373,45 +2407,13 @@ function fmsFunctions.doCMD(fmsO,value)
 	fmsModules["cmds"][value]:once()
 	fmsModules["lastcmd"]=fmsModules["cmdstrings"][value]
   end]]
-	local cmd = find_command(value)
-	cmd:once()
+	find_command(value):once()
 	print("do fmc command "..value)
 end
 
-function fmsFunctions.toggleVar(fmsO, value)
-	if value == "dspCtrl" then
-		if fmsO.id == "fmsL" then
-			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
-				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
-			else
-				fmsModules["fmsL"].notify="KEY/FUNCTION INOP"
-			end
-		elseif fmsO.id == "fmsC" then
-			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
-				B777DR_cdu_eicas_ctl[1] = 1 - B777DR_cdu_eicas_ctl[1]
-			else
-				fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
-			end
-		else
-			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[1] == 0 then
-				B777DR_cdu_eicas_ctl[2] = 1 - B777DR_cdu_eicas_ctl[2]
-			else
-				fmsModules["fmsR"].notify="KEY/FUNCTION INOP"
-			end
-		end
-		return
-	end
 
-	if value == "efisCtrl" then
-		if fmsO.id == "fmsL" then
-			B777DR_cdu_efis_ctl[0] = 1 - B777DR_cdu_efis_ctl[0]
-		elseif fmsO.id == "fmsR" then
-			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
-		else
-			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
-		end
-		return
-	end
+function fmsFunctions.setDref(fmsO, value)
+
 end
 
 function fmsFunctions.setDref2(fmsO, value)
@@ -2496,20 +2498,65 @@ function fmsFunctions.setDisp(fmsO, value)
 
 	if value=="adfvor" then
 		if fmsO.id=="fmsL" then
-			if vor_adf[1] ~= 2 then
-				vor_adf[1] = vor_adf[1] + 1
+			if vor_adf[1] == 0 then
+				vor_adf[1] = 2
+			elseif vor_adf[1] == 2 then
+				vor_adf[1] = 1
 			else
 				vor_adf[1] = 0
 			end
 		else
-			if vor_adf[2] ~= 2 then
-				vor_adf[2] = vor_adf[2] + 1
+			if vor_adf[2] == 0 then
+				vor_adf[2] = 2
+			elseif vor_adf[2] == 2 then
+				vor_adf[2] = 1
 			else
 				vor_adf[2] = 0
 			end
 		end
 		return
 	end
+
+	if fmsO.id == "fmsL" then
+		if value == "wxr" then
+			find_command("sim/instruments/EFIS_wxr"):once()
+		elseif value == "fix" then
+			find_command("sim/instruments/EFIS_fix"):once()
+		elseif value == "apt" then
+			find_command("sim/instruments/EFIS_apt"):once()
+		elseif value == "terr" then
+			find_command("sim/instruments/EFIS_terr"):once()
+		elseif value == "tcas" then
+			find_command("sim/instruments/EFIS_tcas"):once()
+		elseif value == "minsRst" then
+			find_command("Strato/B777/minimums_rst_capt"):once()
+		elseif value == "zoomOut" then
+			find_command("sim/instruments/map_zoom_out"):once()
+		elseif value == "zoomIn" then
+			find_command("sim/instruments/map_zoom_in"):once()
+		end
+		return
+	else
+		if value == "wxr" then
+			find_command("sim/instruments/EFIS_copilot_wxr"):once()
+		elseif value == "fix" then
+			find_command("sim/instruments/EFIS_copilot_fix"):once()
+		elseif value == "apt" then
+			find_command("sim/instruments/EFIS_copilot_apt"):once()
+		elseif value == "terr" then
+			find_command("sim/instruments/EFIS_copilot_terr"):once()
+		elseif value == "tcas" then
+			find_command("sim/instruments/EFIS_copilot_tcas"):once()
+		elseif value == "minsRst" then
+			find_command("Strato/B777/minimums_rst_fo"):once()
+		elseif value == "zoomOut" then
+			find_command("sim/instruments/map_copilot_zoom_out"):once()
+		elseif value == "zoomIn" then
+			find_command("sim/instruments/map_copilot_zoom_in"):once()
+		end
+		return
+	end
+
 end
 
 --[[

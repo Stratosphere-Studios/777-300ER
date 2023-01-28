@@ -56,7 +56,7 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 
 **СDU Сode**
 
-Thanks for reading! The соde for the FМS is "BIRD".
+Thanks for reading! The соde to unlock the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
 
 ## INSTALLATION
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
