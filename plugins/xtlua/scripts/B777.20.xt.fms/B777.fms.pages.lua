@@ -2411,11 +2411,6 @@ function fmsFunctions.doCMD(fmsO,value)
 	print("do fmc command "..value)
 end
 
-
-function fmsFunctions.setDref(fmsO, value)
-
-end
-
 function fmsFunctions.setDref2(fmsO, value)
     local valuesplit = split(value,"_")
 	local dref = find_dataref(valuesplit[1])
