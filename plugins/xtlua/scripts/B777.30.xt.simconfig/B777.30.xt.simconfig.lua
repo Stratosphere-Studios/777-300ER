@@ -182,7 +182,7 @@ function readmeCode()
 	B777DR_readme_code = randomChar()..randomChar()..randomChar()..randomChar()..randomChar()
 	file:write("Enter this code into the FMS to unlock the flight instruments: \""..B777DR_readme_code.."\"")
 	file:close()
-	print("created readme code "..B777DR_readme_code)
+	--print("created readme code "..B777DR_readme_code)
 end
 
 function set_loaded_configs()
