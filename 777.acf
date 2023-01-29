@@ -9600,7 +9600,7 @@ P _gear/2/_eagle_claw_deg 19.000000000
 P _gear/2/_gear_brakes 1
 P _gear/2/_gear_can_retract 1
 P _gear/2/_gear_castors 0
-P _gear/2/_gear_renders_geo 1
+P _gear/2/_gear_renders_geo 0
 P _gear/2/_gear_type 6
 P _gear/2/_gear_x -16.500000000
 P _gear/2/_gear_y -4.599999905
