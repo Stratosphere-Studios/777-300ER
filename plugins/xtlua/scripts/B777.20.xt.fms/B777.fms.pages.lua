@@ -926,8 +926,9 @@ function fmsFunctions.setdata(fmsO,value)
 
 	if value == "readmeCode" then
 		if simConfigData["data"].FMC.unlocked == 0 then
-				setFMSData("readmeCodeInput", fmsO["scratchpad"])
-				if fmsO["scratchpad"] == B777DR_readme_code or fmsO["scratchpad"] == "LDBRH" then
+			setFMSData("readmeCodeInput", fmsO["scratchpad"])
+			if string.len(fmsO["scratchpad"]) == 5 then
+				if fmsO["scratchpad"] == B777DR_readme_code or fmsO["scratchpad"] == "BIRDS" then
 					fmsO["notify"] = "UNLOCKED"
 					fmsO["scratchpad"] = ""
 					simConfigData["data"].FMC.unlocked = 1
@@ -936,6 +937,9 @@ function fmsFunctions.setdata(fmsO,value)
 				else
 					fmsO["notify"] = "INCORRECT CODE"
 				end
+			else
+				fmsO["notify"] = "INVALID ENTRY"
+			end
 		else
 			fmsO["notify"] = "ALREADY UNLOCKED"
 		end
