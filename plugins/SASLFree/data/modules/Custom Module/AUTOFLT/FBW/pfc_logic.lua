@@ -212,10 +212,10 @@ function UpdateRollCommand()
 	local bank_correction_ail = false
 	local ail_component = 0 --For rudder to cw cross tie
 	local curr_yaw = get(pfc_flt_axes, 3)
-	if Round(math.abs(get(pfc_pilot_input, 1)), 2) > 0.09 or r_delta ~= 0 then
+	if Round(math.abs(get(pfc_pilot_input, 1)), 2) > 0.14 or r_delta > 0.1 then
 		fbw_roll_past = avg_roll
 	end
-	--set(roll_maint, fbw_roll_past)
+	set(roll_maint, fbw_roll_past)
 	if get(fbw_mode) == 1 then
 		--Engage bank angle protection if bank is higher than 30 degrees
 		if fbw_roll_past > 30 then
@@ -238,7 +238,7 @@ function UpdateRollCommand()
 		if (ail_engage_nml or bank_correction_ail == true) then
 			local tmp = PID_Compute(pid_gust_supr[1], pid_gust_supr[2], pid_gust_supr[3], fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 600, 18)
 			--local tmp = PID_Compute(get(pt), get(it), get(dt), fbw_roll_past, avg_roll, ail_error_total, ail_error_last, 600, 18)
-			--set(pfc_roll_command, tmp[1])
+			set(pfc_roll_command, 0)
 			ail_error_total = tmp[2]
 			ail_error_last = tmp[3]
 		else
@@ -254,18 +254,21 @@ function UpdateRollCommand()
 	if (rud_engage_nml or bank_correction_rudder == true) and get(f_time) ~= 0 then
 		--roll_maintain_pid:update{tgt = fbw_roll_past, curr = avg_roll}
 		local pfc_yaw_delta = (curr_yaw - fbw_yaw_past) * (1 / get(f_time))
-		local yaw_term = 0
-		if math.abs(fbw_roll_past) <= 26.1 then
-			yaw_term = 0.09 * fbw_roll_past
-		else
-			yaw_term = 0.46 * math.sqrt(math.abs(fbw_roll_past)) * (bool2num(fbw_roll_past > 0) - bool2num(fbw_roll_past < 0))
-		end
+		local sign_term = bool2num(fbw_roll_past > 0) - bool2num(fbw_roll_past < 0)
+		local yaw_term = get(k1) * fbw_roll_past^2 * sign_term
+		--if math.abs(fbw_roll_past) < 3 then
+		--	yaw_term = get(k1) * fbw_roll_past^2 * sign_term
+		--elseif math.abs(fbw_roll_past) >= 3 and math.abs(fbw_roll_past) <= 26.1 then
+		--	yaw_term = 0.09 * fbw_roll_past
+		--else
+		--	yaw_term = 0.46 * math.sqrt(math.abs(fbw_roll_past)) * sign_term
+		--end
 		local tgt_yaw = yaw_term * 193 / avg_cas
 		tgt_yaw = lim(tgt_yaw, 2.7, -2.7)
 		set(yaw_delta, tgt_yaw)
-		yaw_damper_pid:update{tgt = tgt_yaw, curr = get(pfc_flt_axes, 3)}
+		yaw_damper_pid:update{tgt = tgt_yaw, curr = get(pfc_flt_axes, 3), kp = get(pt), ki = get(it), kd = get(dt)}
 		--set(fbw_r_past, fbw_roll_past)
-		--set(errtotal, yaw_damper_pid.errtotal)
+		set(errtotal, yaw_damper_pid.errtotal)
 		set(pfc_rudder_command, yaw_damper_pid.output + ail_component * 8)
 		fbw_yaw_past = curr_yaw
 	else
