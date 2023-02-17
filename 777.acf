@@ -9994,7 +9994,7 @@ P _obja/10/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/10/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/10/_v10_is_internal 912572
 P _obja/10/_v10_steers_with_gear 0
-P _obja/11/_obj_flags 9
+P _obja/11/_obj_flags 13
 P _obja/11/_v10_att_body -1
 P _obja/11/_v10_att_file_stl cockpit/yokes.obj
 P _obja/11/_v10_att_gear -1
@@ -10118,7 +10118,7 @@ P _obja/19/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/19/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/19/_v10_is_internal 313642
 P _obja/19/_v10_steers_with_gear 0
-P _obja/2/_obj_flags 6153
+P _obja/2/_obj_flags 6157
 P _obja/2/_v10_att_body -1
 P _obja/2/_v10_att_file_stl cockpit/cockpit.obj
 P _obja/2/_v10_att_gear -1
@@ -10144,7 +10144,7 @@ P _obja/20/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/20/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/20/_v10_is_internal 854706
 P _obja/20/_v10_steers_with_gear 0
-P _obja/21/_obj_flags 8203
+P _obja/21/_obj_flags 8207
 P _obja/21/_v10_att_body -1
 P _obja/21/_v10_att_file_stl cockpit/cockpit_glass.obj
 P _obja/21/_v10_att_gear -1
@@ -10170,7 +10170,7 @@ P _obja/22/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/22/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/22/_v10_is_internal 48270
 P _obja/22/_v10_steers_with_gear 0
-P _obja/23/_obj_flags 9
+P _obja/23/_obj_flags 13
 P _obja/23/_v10_att_body -1
 P _obja/23/_v10_att_file_stl cockpit/clocks.obj
 P _obja/23/_v10_att_gear -1
@@ -10225,7 +10225,7 @@ P _obja/26/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/26/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/26/_v10_is_internal -960522704
 P _obja/26/_v10_steers_with_gear 0
-P _obja/27/_obj_flags 9
+P _obja/27/_obj_flags 13
 P _obja/27/_v10_att_body -1
 P _obja/27/_v10_att_file_stl cockpit/cockpit_misc.obj
 P _obja/27/_v10_att_gear -1
@@ -10238,7 +10238,7 @@ P _obja/27/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/27/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/27/_v10_is_internal -1275331856
 P _obja/27/_v10_steers_with_gear 0
-P _obja/28/_obj_flags 9
+P _obja/28/_obj_flags 13
 P _obja/28/_v10_att_body -1
 P _obja/28/_v10_att_file_stl cockpit/Int_Lights.obj
 P _obja/28/_v10_att_gear -1
@@ -10251,7 +10251,7 @@ P _obja/28/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/28/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/28/_v10_is_internal 24114832
 P _obja/28/_v10_steers_with_gear 0
-P _obja/29/_obj_flags 16
+P _obja/29/_obj_flags 20
 P _obja/29/_v10_att_body -1
 P _obja/29/_v10_att_file_stl ext_lights.obj
 P _obja/29/_v10_att_gear -1
@@ -10388,7 +10388,20 @@ P _obja/37/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/37/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/37/_v10_is_internal 0
 P _obja/37/_v10_steers_with_gear 0
-P _obja/4/_obj_flags 9
+P _obja/38/_obj_flags 13
+P _obja/38/_v10_att_body -1
+P _obja/38/_v10_att_file_stl cockpit/moving_parts.obj
+P _obja/38/_v10_att_gear -1
+P _obja/38/_v10_att_phi_ref 0.000000000
+P _obja/38/_v10_att_psi_ref 0.000000000
+P _obja/38/_v10_att_the_ref 0.000000000
+P _obja/38/_v10_att_wing -1
+P _obja/38/_v10_att_x_acf_prt_ref 0.000000000
+P _obja/38/_v10_att_y_acf_prt_ref 0.000000000
+P _obja/38/_v10_att_z_acf_prt_ref 100.000000000
+P _obja/38/_v10_is_internal 0
+P _obja/38/_v10_steers_with_gear 0
+P _obja/4/_obj_flags 13
 P _obja/4/_v10_att_body -1
 P _obja/4/_v10_att_file_stl cockpit/no_efb.obj
 P _obja/4/_v10_att_gear -1
@@ -10453,7 +10466,7 @@ P _obja/8/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/8/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/8/_v10_is_internal 777586
 P _obja/8/_v10_steers_with_gear 0
-P _obja/9/_obj_flags 9
+P _obja/9/_obj_flags 13
 P _obja/9/_v10_att_body -1
 P _obja/9/_v10_att_file_stl cockpit/ovhd_2.obj
 P _obja/9/_v10_att_gear -1
@@ -10466,7 +10479,7 @@ P _obja/9/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/9/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/9/_v10_is_internal 289402
 P _obja/9/_v10_steers_with_gear 0
-P _obja/count 38
+P _obja/count 39
 P _prop/0/_des_AOA_pwr 1.000000000
 P _prop/0/_des_AOA_root 0.000000000
 P _prop/0/_des_AOA_tip 0.000000000
@@ -36711,7 +36724,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 120057
+P acf/_file_writer_version 120300
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -41805,7 +41818,7 @@ GROUP Captain ND
         SHOW_GREATER 0.010000 sim/cockpit2/radios/indicators/fms_fpta_pilot
         LOCKED
         GROUP VNav Dev Expand
-          SHOW_EQUAL 2.000000 sim/cockpit/switches/EFIS_map_submode
+          SHOW_EQUAL 3.000000 sim/cockpit/switches/EFIS_map_submode
           LOCKED
           gen_rotary VERT DEVIATION DOTS
             POS 2683.000000 1500.000000
@@ -56604,7 +56617,7 @@ GROUP First Officer ND
         SHOW_GREATER 0.010000 sim/cockpit2/radios/indicators/fms_fpta_copilot
         LOCKED
         GROUP VNav Dev Expand
-          SHOW_EQUAL 2.000000 sim/cockpit/switches/EFIS_map_submode
+          SHOW_EQUAL 3.000000 sim/cockpit/switches/EFIS_map_submode_copilot
           LOCKED
           gen_rotary VERT DEVIATION DOTS
             POS 2686.000000 138.000000

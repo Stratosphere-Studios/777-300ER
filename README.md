@@ -14,7 +14,7 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 **Sim Compatibility**
 
-A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. An XP11 acf file can be downloaded from [here](https://cdn.discordapp.com/attachments/833201893999771687/1059662416952164372/777-xp11.acf) and dragged into the up-to-date 777 folder and _most_ features will update, but expect bugs.
+A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
 
 **Q: When is the release date?**
 

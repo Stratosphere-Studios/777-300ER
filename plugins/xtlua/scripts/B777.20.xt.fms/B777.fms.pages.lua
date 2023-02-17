@@ -889,37 +889,68 @@ timer_start = 0
 
 function fmsFunctions.setdata(fmsO,value)
 	local del=false
-
 	if fmsO["scratchpad"]=="DELETE" then fmsO["scratchpad"]="" del=true end
 	----- STRATOSPHERE 777 ----------
 
 	if value == "BARO" then
+
+		local id = fmsO.id == "fmsL" and 0 or 1;
+
+		if fmsO["scratchpad"] == "S" or fmsO["scratchpad"] == "STD" then
+			simDR_altimiter_setting[id+1] = 29.92
+			fmsO["scratchpad"] = ""
+			return
+		end
+
 		local baro = tonumber(fmsO["scratchpad"])
 
-		if tonumber(fmsO["scratchpad"]) == nil then
+		if baro == nil then
 			fmsO["notify"] = "INVALID ENTRY"
 		else
-			if fmso.id == "fmsR" then
-				if fmsO["scratchpad"] == "S" or fmsO["scratchpad"] == "STD" then
-					simDR_altimiter_setting[1] = 29.92
-					return
+			if baro % 1 == 0 then
+				if baro >= 950 and baro <= 1050 then
+					B777DR_baro_mode[id] = 1
+					simDR_altimiter_setting[id+1] = baro / 33.863892
+					fmsO["scratchpad"] = ""
+				else
+					fmsO["notify"] = "INVALID ENTRY"
 				end
-
-				if B777DR_baro_mode[1] == 1 then
-					baro = baro / 33.863892
-				end
-				simDR_altimiter_setting[1] = baro
 			else
-				if fmsO["scratchpad"] == "S" or fmsO["scratchpad"] == "STD" then
-					simDR_altimiter_setting[0] = 29.92
-					return
+				if baro <= 31 and baro >= 29 then
+					B777DR_baro_mode[id] = 0
+					simDR_altimiter_setting[id+1] = baro
+					fmsO["scratchpad"] = ""
+				else
+					fmsO["notify"] = "INVALID ENTRY"
 				end
-
-				if B777DR_baro_mode[0] == 1 then
-					baro = baro / 33.863892
-				end
-				simDR_altimiter_setting[0] = baro
 			end
+		end
+		return
+	end
+
+	if value == "mins" then
+		local id = fmsO.id == "fmsL" and 0 or 1;
+		local mins = tonumber(fmsO["scratchpad"])
+		if mins ~= nil then
+			if B777DR_minimums_mode[id] == 0 then
+				if mins >= 0 and mins <= 1000 then
+					B777DR_minimums_dh[id] = mins
+					fmsO["scratchpad"] = ""
+					B777DR_minimums_visible[id] = 1
+				else
+					fmsO["notify"] = "INVALID ENTRY"
+				end
+			else
+				if mins >= -1000 and mins <= 15000 then
+					B777DR_minimums_mda[id] = mins
+					fmsO["scratchpad"] = ""
+					B777DR_minimums_visible[id] = 1
+				else
+					fmsO["notify"] = "INVALID ENTRY"
+				end
+			end
+		else
+			fmsO["notify"] = "INVALID ENTRY"
 		end
 		return
 	end
@@ -2411,7 +2442,7 @@ function fmsFunctions.doCMD(fmsO,value)
 	print("do fmc command "..value)
 end
 
-function fmsFunctions.setDref2(fmsO, value)
+function fmsFunctions.setDrefNum(fmsO, value)
     local valuesplit = split(value,"_")
 	local dref = find_dataref(valuesplit[1])
 	if string.lower(valuesplit[3]) == "s" then
@@ -2524,11 +2555,27 @@ function fmsFunctions.setDisp(fmsO, value)
 		elseif value == "tcas" then
 			find_command("sim/instruments/EFIS_tcas"):once()
 		elseif value == "minsRst" then
-			find_command("Strato/B777/minimums_rst_capt"):once()
+			find_command("Strato/777/minimums_rst_capt_fmc"):once()
+		elseif value == "sta" then
+			B777DR_nd_sta[0] = 1 - B777DR_nd_sta[0]
 		elseif value == "zoomOut" then
 			find_command("sim/instruments/map_zoom_out"):once()
 		elseif value == "zoomIn" then
 			find_command("sim/instruments/map_zoom_in"):once()
+		elseif value == "mtrs" then
+			B777DR_pfd_mtrs[0] = 1 - B777DR_pfd_mtrs[0]
+		elseif value == "mapMode_0" then
+			simDR_nd_mode[1] = 0
+		elseif value == "mapMode_1" then
+			simDR_nd_mode[1] = 1
+		elseif value == "mapMode_2" then
+			simDR_nd_mode[1] = 3
+		elseif value == "mapMode_3" then
+			simDR_nd_mode[1] = 4
+		elseif value == "mapMode_4" then
+			simDR_map_hsi[1] = 1 - simDR_map_hsi[1]
+		elseif value == "radBaro" then
+			B777DR_minimums_mode[0] = 1 - B777DR_minimums_mode[0]
 		end
 		return
 	else
@@ -2543,15 +2590,30 @@ function fmsFunctions.setDisp(fmsO, value)
 		elseif value == "tcas" then
 			find_command("sim/instruments/EFIS_copilot_tcas"):once()
 		elseif value == "minsRst" then
-			find_command("Strato/B777/minimums_rst_fo"):once()
+			find_command("Strato/777/minimums_rst_fo_fmc"):once()
+		elseif value == "sta" then
+			B777DR_nd_sta[1] = 1 - B777DR_nd_sta[1]
 		elseif value == "zoomOut" then
 			find_command("sim/instruments/map_copilot_zoom_out"):once()
 		elseif value == "zoomIn" then
 			find_command("sim/instruments/map_copilot_zoom_in"):once()
+		elseif value == "mtrs" then
+			B777DR_pfd_mtrs[1] = 1 - B777DR_pfd_mtrs[1]
+		elseif value == "mapMode_0" then
+			simDR_nd_mode[2] = 0
+		elseif value == "mapMode_1" then
+			simDR_nd_mode[2] = 1
+		elseif value == "mapMode_2" then
+			simDR_nd_mode[2] = 3
+		elseif value == "mapMode_3" then
+			simDR_nd_mode[2] = 4
+		elseif value == "mapMode_4" then
+			simDR_map_hsi[2] = 1 - simDR_map_hsi[2]
+		elseif value == "radBaro" then
+			B777DR_minimums_mode[1] = 1 - B777DR_minimums_mode[1]
 		end
 		return
 	end
-
 end
 
 --[[

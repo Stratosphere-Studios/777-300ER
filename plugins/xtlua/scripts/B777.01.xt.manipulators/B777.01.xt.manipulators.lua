@@ -458,7 +458,7 @@ end
 
 function after_physics()
    B777DR_kill_cabin = 1 - B777DR_cockpit_door_target
-   B777DR_cockpit_door_pos = B777_animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 4)
+   B777DR_cockpit_door_pos = B777_animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 3)
 
    for i = 1, 18 do
       if i ~= 15 or i ~= 13 then

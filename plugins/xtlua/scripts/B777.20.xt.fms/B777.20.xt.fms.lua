@@ -27,9 +27,10 @@ B777DR_minimums_mda                    = find_dataref("Strato/777/minimums_mda")
 B777DR_minimums_dh                     = find_dataref("Strato/777/minimums_dh")
 simDR_nd_mode                          = {find_dataref("sim/cockpit2/EFIS/map_mode"), find_dataref("sim/cockpit2/EFIS/map_mode_copilot")}
 simDR_nd_range                         = {find_dataref("sim/cockpit2/EFIS/map_range"), find_dataref("sim/cockpit2/EFIS/map_range_copilot")}
-B777DR_minimums_mode                   = find_dataref("Strato/777/minimums_mode") --TODO: Override physical control
+B777DR_minimums_mode                   = find_dataref("Strato/777/minimums_mode")
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
 B777DR_readme_code                     = find_dataref("Strato/777/readme_code")
+B777DR_minimums_visible                = find_dataref("Strato/777/minimums_visible")
 
 simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
@@ -67,6 +68,19 @@ simDR_autopilot_airspeed_kts   	    = find_dataref("sim/cockpit2/autopilot/airsp
 B777DR_elec_ext_pwr1_available      = find_dataref("Strato/B777/electrical/ext_pwr1_avail")
 B777DR_eicas_rcl                    = find_dataref("Strato/777/eicas/rcl")
 B777DR_eicas_mode                   = find_dataref("Strato/777/displays/eicas_mode")
+simDR_map_hsi                       = {find_dataref("sim/cockpit2/EFIS/map_mode_is_HSI"), find_dataref("sim/cockpit2/EFIS/map_mode_is_HSI_copilot")}
+
+simDR_efis_terr                        = find_dataref("sim/cockpit2/EFIS/EFIS_terrain_on")
+simDR_efis_tfc                         = find_dataref("sim/cockpit2/EFIS/EFIS_tcas_on")
+simDR_efis_arpt                        = find_dataref("sim/cockpit2/EFIS/EFIS_airport_on")
+simDR_efis_fix                         = find_dataref("sim/cockpit2/EFIS/EFIS_fix_on")
+simDR_efis_wxr_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_weather_on_copilot")
+simDR_efis_terr_fo                     = find_dataref("sim/cockpit2/EFIS/EFIS_terrain_on_copilot")
+simDR_efis_tfc_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_tcas_on_copilot")
+simDR_efis_arpt_fo                     = find_dataref("sim/cockpit2/EFIS/EFIS_airport_on_copilot")
+simDR_efis_fix_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_fix_on_copilot")
+B777DR_nd_sta                          = find_dataref("Strato/777/EFIS/sta")
+B777DR_pfd_mtrs                        = find_dataref("Strato/777/displays/mtrs")
 
 --Workaround for stack overflow in init.lua namespace_read
 
@@ -220,24 +234,6 @@ B777DR_efis_baro_fo_set_dial_pos                = find_dataref("Strato/B777/efis
 B777DR_efis_baro_fo_preselect                   = find_dataref("Strato/B777/efis/baro/fo/preselect")
 B777DR_efis_baro_alt_ref_fo                     = find_dataref("Strato/B777/efis/baro_ref/fo")
 
-
-simDR_EFIS_1_sel_pilot              = find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_pilot")
-simDR_EFIS_1_sel_fo                 = find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_copilot")
-simDR_EFIS_2_sel_pilot              = find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_pilot")
-simDR_EFIS_2_sel_fo                 = find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_copilot")
-B777DR_nd_capt_terr                 = deferred_dataref("Strato/B777/nd/data/capt/terr", "number")
-B777DR_nd_fo_terr                   = deferred_dataref("Strato/B777/nd/data/fo/terr", "number")
-B777DR_nd_capt_vor_ndb              = find_dataref("Strato/B777/nd/data/capt/vor_ndb")
-B777DR_nd_capt_wpt                  = find_dataref("Strato/B777/nd/data/capt/wpt")
-B777DR_nd_fo_vor_ndb                = find_dataref("Strato/B777/nd/data/fo/vor_ndb")
-B777DR_nd_fo_wpt                    = find_dataref("Strato/B777/nd/data/fo/wpt")
-B777DR_nd_capt_apt	                = find_dataref("Strato/B777/nd/data/capt/apt")
-B777DR_nd_fo_apt	                = find_dataref("Strato/B777/nd/data/fo/apt")
-B777DR_nd_fo_ftc	                = find_dataref("Strato/B777/nd/fo/tfc")
-B777DR_nd_capt_ftc	                = find_dataref("Strato/B777/nd/capt/tfc")
-B777DR_nd_capt_traffic_Selected     = find_dataref("Strato/B777/nd/traffic/capt/selected")
-B777DR_nd_fo_traffic_Selected       = find_dataref("Strato/B777/nd/traffic/fo/selected")
-B777DR_nd_wxr	                    = find_dataref("sim/cockpit2/EFIS/EFIS_weather_on")
 simDR_radio_alt_DH_capt             = find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot")
 simDR_radio_alt_DH_fo               = find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot")
 
@@ -561,7 +557,7 @@ function createPage(page)
 	retVal.getPage=function(self,pgNo) return self.template end
 	retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
 	print("createPage")
-	retVal.getNumPages=function(self) print("thing") return 1 end
+	retVal.getNumPages=function(self) return 1 end
 	fmsFunctionsDefs[page]={}
 	print("createDone")
 	return retVal
@@ -943,6 +939,23 @@ function after_physics()
 	local simconfig = B777DR_simconfig_data
 	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
 	B777DR_readme_unlocked = simConfigData["data"].FMC.unlocked
+
+	if B777DR_cdu_efis_ctl[0] == 1 then
+		simDR_vor_adf[1] = vor_adf[1]
+		simDR_vor_adf[2] = vor_adf[1]
+	else
+		simDR_vor_adf[1] = B777DR_efis_vor_adf[0]
+		simDR_vor_adf[2] = B777DR_efis_vor_adf[1]
+	end
+
+	if B777DR_cdu_efis_ctl[1] == 1 then
+		simDR_vor_adf[3] = vor_adf[2]
+		simDR_vor_adf[4] = vor_adf[2]
+	else
+		simDR_vor_adf[4] = B777DR_efis_vor_adf[2]
+		simDR_vor_adf[4] = B777DR_efis_vor_adf[3]
+	end
+
 end
 
 function aircraft_load()
