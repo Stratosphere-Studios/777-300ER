@@ -181,6 +181,7 @@ simDR_instrument_brt                   = find_dataref("sim/cockpit2/switches/ins
 simDR_map_hsi                          = {find_dataref("sim/cockpit2/EFIS/map_mode_is_HSI"), find_dataref("sim/cockpit2/EFIS/map_mode_is_HSI_copilot")}
 simDR_map_mode                         = {find_dataref("sim/cockpit2/EFIS/map_mode"), find_dataref("sim/cockpit2/EFIS/map_mode_copilot")}
 simDR_map_range                        = {find_dataref("sim/cockpit2/EFIS/map_range"), find_dataref("sim/cockpit2/EFIS/map_range_copilot")}
+simDR_map_steps                        = find_dataref("sim/cockpit2/EFIS/map_range_steps")
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
@@ -1418,6 +1419,16 @@ function efis()
 	end
 end
 
+function setMapSteps()
+	simDR_map_steps[0] = 10
+	simDR_map_steps[1] = 20
+	simDR_map_steps[2] = 40
+	simDR_map_steps[3] = 80
+	simDR_map_steps[4] = 160
+	simDR_map_steps[5] = 320
+	simDR_map_steps[6] = 640
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--1
@@ -1442,8 +1453,12 @@ function flight_start()
 	B777DR_smart_knobs = 1
 	B777DR_pfd_mach_gs = 1
 	B777CMD_efis_mtrs_capt:once()
-	B777DR_minimums_dh = 200
-	B777DR_minimums_mda = 400
+	B777DR_minimums_dh[0] = 200
+	B777DR_minimums_mda[0] = 400
+	B777DR_minimums_dh[1] = 200
+	B777DR_minimums_mda[1] = 400
+	setMapSteps()
+
 	for i = 0, 3 do
 		B777DR_cdu_brt[i] = 23
 	end
@@ -1462,8 +1477,6 @@ function after_physics()
 
 	B777DR_displayed_com2_act_khz = simDR_com2_act_khz / 1000
 	B777DR_displayed_com2_stby_khz = simDR_com2_stby_khz / 1000
-
-
 
 	if (simDR_groundSpeed >= 1 or (simDR_bus_voltage[0] == 0 and simDR_bus_voltage[1] == 0)) and B777DR_adiru_status == 1 then
 		stop_timer(B777_align_adiru)

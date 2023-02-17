@@ -34516,7 +34516,7 @@ P _wing/count 48
 P _wpna/count 24
 P acf/_APU_cooldown_time 60.000000000
 P acf/_APU_door_time 10.000000000
-P acf/_APU_ff_kgh 0.000000000
+P acf/_APU_ff_kgh 260.000000000
 P acf/_APU_fuel_src 0
 P acf/_APU_spooldn_time 15.000000000
 P acf/_APU_spoolup_time 60.000000000
@@ -34549,6 +34549,7 @@ P acf/_ASlo_roll_rat 1.000000000
 P acf/_ASlo_the_V 0.000000000
 P acf/_ASlo_thedot_k 0.000000000
 P acf/_CHT_is_C 0
+P acf/_EFIS2_on_avio 1
 P acf/_EFIS_camera_xyz/0 0.000000000
 P acf/_EFIS_camera_xyz/1 0.000000000
 P acf/_EFIS_camera_xyz/2 0.000000000
@@ -35539,14 +35540,14 @@ P acf/_bus_gen_is_on/6 1
 P acf/_bus_gen_is_on/7 1
 P acf/_bus_gen_is_on/count 8
 P acf/_buses_always_tied 0
-P acf/_bypass_ratio 9.100000381
+P acf/_bypass_ratio 9.000000000
 P acf/_callsign Stratosphere 777W
 P acf/_camera_fov_zoom 60.000000000
 P acf/_camera_offset_phi 0.000000000
 P acf/_camera_offset_psi 0.000000000
 P acf/_camera_offset_the 0.000000000
-P acf/_cdi_auto_crs_gps0 0
-P acf/_cdi_auto_crs_gps1 0
+P acf/_cdi_auto_crs_gps0 1
+P acf/_cdi_auto_crs_gps1 1
 P acf/_cgX_lft -0.010000000
 P acf/_cgX_rgt 0.010000000
 P acf/_cgY -1.649999976
@@ -36713,7 +36714,7 @@ P acf/_fadec_tla/0 0.000000000
 P acf/_fadec_tla/1 0.000000000
 P acf/_fadec_tla/2 0.000000000
 P acf/_fadec_tla/count 3
-P acf/_fan_rpm_for_n1_100 2500.000000000
+P acf/_fan_rpm_for_n1_100 2355.000000000
 P acf/_fbrk_on_td_EQ 1
 P acf/_fdir_needed_to_engage_servo 0
 P acf/_feather_on_engn_fail_EQ 0
@@ -36724,7 +36725,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 120300
+P acf/_file_writer_version 120401
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -36923,10 +36924,10 @@ P acf/_go_to_pitch_mode_on_alt_arm 0
 P acf/_govnr_EQ 0
 P acf/_govnr_del 0.010000000
 P acf/_govnr_dot 0.010000000
-P acf/_gps_has_429_output0 0
-P acf/_gps_has_429_output1 0
+P acf/_gps_has_429_output0 1
+P acf/_gps_has_429_output1 1
 P acf/_green_hi_CHT 280.000000000
-P acf/_green_hi_EGT 965.000000000
+P acf/_green_hi_EGT 1750.000000000
 P acf/_green_hi_EPR 4.000000000
 P acf/_green_hi_FF 9999.000000000
 P acf/_green_hi_ITT 544.000000000
@@ -36943,14 +36944,14 @@ P acf/_green_hi_gen_amp 0.000000000
 P acf/_green_hi_gen_volt 0.000000000
 P acf/_green_hi_inverter 0.000000000
 P acf/_green_hi_oilP 70.000000000
-P acf/_green_hi_oilT 118.000000000
+P acf/_green_hi_oilT 132.000000000
 P acf/_green_hi_pwr 0.000000000
 P acf/_green_hi_stator 0.000000000
 P acf/_green_hi_vac 4.800000191
 P acf/_green_hi_xmsn_P 0.000000000
 P acf/_green_hi_xmsn_T 0.000000000
 P acf/_green_lo_CHT 140.000000000
-P acf/_green_lo_EGT 750.000000000
+P acf/_green_lo_EGT 0.000000000
 P acf/_green_lo_EPR 2.000000000
 P acf/_green_lo_FF 7730.000000000
 P acf/_green_lo_ITT 272.000000000
@@ -37067,7 +37068,7 @@ P acf/_hyd_flightcons 3
 P acf/_hyd_gear 3
 P acf/_hyd_gear_fail_mode 0
 P acf/_hyd_gear_fail_speed 200.000000000
-P acf/_hyd_gear_has_dnlock 0
+P acf/_hyd_gear_has_dnlock 1
 P acf/_hyd_gear_has_off 0
 P acf/_hyd_max_p 4000.000000000
 P acf/_hyd_max_p_RAT 3000.000000000
@@ -37095,8 +37096,8 @@ P acf/_hyd_prop_pump_0123/9 0
 P acf/_hyd_prop_pump_0123/count 16
 P acf/_hyd_rat_pump_0123 1
 P acf/_hyd_slats 7
-P acf/_hyd_thrust_rev_L 0
-P acf/_hyd_thrust_rev_R 0
+P acf/_hyd_thrust_rev_L 3
+P acf/_hyd_thrust_rev_R 3
 P acf/_idle_rat/0 0.509999990
 P acf/_idle_rat/1 0.529999971
 P acf/_idle_rat/count 2
@@ -37156,8 +37157,8 @@ P acf/_lock_n2 30.000000000
 P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.000000000
 P acf/_m_displaced_Y 0.000000000
-P acf/_m_empty 3.7E5
-P acf/_m_fuel_max_tot 3.20863E5
+P acf/_m_empty 3.536E5
+P acf/_m_fuel_max_tot 3.207726E5
 P acf/_m_jett 0.000000000
 P acf/_m_max 7.77E5
 P acf/_m_shift 0.000000000
@@ -37312,7 +37313,7 @@ P acf/_radiator_frontal_area 0.000000000
 P acf/_radiator_in_propwash 0
 P acf/_radio_alt_callout_advance 80.000000000
 P acf/_red_hi_CHT 350.000000000
-P acf/_red_hi_EGT 1200.000000000
+P acf/_red_hi_EGT 1790.000000000
 P acf/_red_hi_EPR 4.199999809
 P acf/_red_hi_FF 9999.000000000
 P acf/_red_hi_ITT 1416.000000000
@@ -37329,7 +37330,7 @@ P acf/_red_hi_gen_amp 0.000000000
 P acf/_red_hi_gen_volt 0.000000000
 P acf/_red_hi_inverter 0.000000000
 P acf/_red_hi_oilP 80.000000000
-P acf/_red_hi_oilT 135.000000000
+P acf/_red_hi_oilT 143.000000000
 P acf/_red_hi_pwr 0.000000000
 P acf/_red_hi_stator 0.000000000
 P acf/_red_hi_vac 8.000000000
@@ -37633,9 +37634,9 @@ P acf/_tank_psi/6 10.000000000
 P acf/_tank_psi/7 10.000000000
 P acf/_tank_psi/8 10.000000000
 P acf/_tank_psi/count 9
-P acf/_tank_rat/0 0.211999997
-P acf/_tank_rat/1 0.575999975
-P acf/_tank_rat/2 0.211999997
+P acf/_tank_rat/0 0.215000004
+P acf/_tank_rat/1 0.569999993
+P acf/_tank_rat/2 0.215000004
 P acf/_tank_rat/3 0.000000000
 P acf/_tank_rat/4 0.000000000
 P acf/_tank_rat/5 0.000000000
@@ -37721,7 +37722,7 @@ P acf/_throt_time_jet 5.000000000
 P acf/_throt_time_prop 1.000000000
 P acf/_throttle_drives_EPR 0
 P acf/_throttle_drives_N2 1
-P acf/_thrust_max_limit 1.153E5
+P acf/_thrust_max_limit 1.1554E5
 P acf/_thrust_rev_dep_time 1.500000000
 P acf/_tip_AOA_des 0.000000000
 P acf/_tip_mach_des_100 0.000000000

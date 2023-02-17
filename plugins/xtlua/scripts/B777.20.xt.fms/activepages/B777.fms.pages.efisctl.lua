@@ -52,7 +52,6 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
     return page
 end
 
-local ranges = {" 10", " 20", " 40", " 80", "160", "320", "640"}
 fmsPages["EFISCTL152"].getSmallPage=function(self,pgNo,fmsID)
     local id = fmsID == "fmsL" and 0 or 1;
 
@@ -61,7 +60,7 @@ fmsPages["EFISCTL152"].getSmallPage=function(self,pgNo,fmsID)
     local radBaro = " RAD<->    "
     local ft = "   FT "
 
-    range = ranges[simDR_nd_range[id+1] + 1]
+    range = simDR_nd_range[id+1]
 
     if B777DR_minimums_mode[id] == 0 then
         radBaro = "    <->BARO"
