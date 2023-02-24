@@ -51,7 +51,7 @@ end
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setpage","PAGE_pgNo"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setDref","DREF"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"doCMD","CMD"}
---fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setDref2","dataref_val_type"} -- type blank if number, "s" if string
+--fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setDrefNum","dataref_val"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"toggleDref","dataref"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"getdata","data"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"showmessage","message"}

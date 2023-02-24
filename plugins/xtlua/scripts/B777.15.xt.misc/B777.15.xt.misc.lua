@@ -38,13 +38,14 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 
 --[[local B777_eag_claw_sync = 1
 local B777_eag_target = 0]]
-
-
+local avg_gear_pos;
+local avg_gear_door_pos;
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
 
 simDR_ldg_gear_pos                        = find_dataref("sim/aircraft/parts/acf_gear_deploy")
+B777DR_gear_door_pos                      = find_dataref("Strato/777/gear/doors")
 --[[simDR_eag_claw_pos                        = find_dataref("sim/flightmodel2/gear/eagle_claw_angle_deg")
 simDR_whichOnGround                       = find_dataref("sim/flightmodel2/gear/on_ground")
 simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")]]
@@ -76,7 +77,7 @@ simDR_reverser_1_fail                     = find_dataref("sim/operation/failures
 B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
 B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
 B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
-B777DR_avg_gear_pos                     = deferred_dataref("Strato/777/avg_main_gear_pos", "number")
+
 B777DR_oil_press_psi                    = deferred_dataref("Strato/777/oil_press_psi", "array[2]")
 
 --*************************************************************************************--
@@ -175,10 +176,9 @@ function B777_rescale(in1, out1, in2, out2, x)
 end
 
 function gear()
-
-   B777DR_avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
-
-   if B777DR_avg_gear_pos == 0 then
+   avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
+   avg_gear_door_pos = (B777DR_gear_door_pos[1] + B777DR_gear_door_pos[2]) / 2
+   if avg_gear_pos == 0 and avg_gear_door_pos == 0 then
       B777DR_ldg_gear_kill = 1
    else
       B777DR_ldg_gear_kill = 0
@@ -207,7 +207,7 @@ end
 --function before_physics()
 
 function after_physics()
-   --print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok. IF YOU HAVE ANY ISSUES, PLEASE CHECK THE README BEFORE ASKING THE DEVELOPERS!!!")
+   print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok. IF YOU HAVE ANY ISSUES, PLEASE CHECK THE README BEFORE ASKING THE DEVELOPERS!!!")
    gear()
 
    if simDR_oil_press_fail_0 ~= 6 then

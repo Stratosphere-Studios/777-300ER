@@ -1,20 +1,29 @@
---Control Datarefs--
-Flaperon_L (inbd aileron) - Aileron 1 (sim/flightmodel2/wing/aileron1_deg[0])
-Flaperon_R (inbd aileron) - Aileron 1 (sim/flightmodel2/wing/aileron1_deg[1])
-Inboard flap            - Flap 1 (sim/flightmodel2/wing/flap1_deg)
-Inboard slats           - Slat 1 (sim/flightmodel2/controls/slat1_deploy_ratio)
-Roll spoilers/spdbrakes - sb2, sb1 ... rs2, rs1, rs2, rs1, rs2, rs1
-	rs_L1 - sim/flightmodel2/wing/spoiler1_deg[2]
-	rs_L2 - sim/flightmodel2/wing/spoiler2_deg[2]
-	rs_R1 - sim/flightmodel2/wing/spoiler1_deg[3]
-	rs_R2 - sim/flightmodel2/wing/spoiler2_deg[3]
-	sb1 - sim/flightmodel2/wing/speedbrake1_deg
-	sb2 - sim/flightmodel2/wing/speedbrake2_deg
-Outboard flap           - Flap 2 (sim/flightmodel2/wing/flap2_deg)
-Outboard slat           - Slat 2 (sim/flightmodel2/controls/slat2_deploy_ratio)
-Normal (outbrd) aileron_L - Aileron 2 (sim/flightmodel2/wing/aileron2_deg[4])
-Normal (outbrd) aileron_R - Aileron 2 (sim/flightmodel2/wing/aileron2_deg[5])
-Elevators               - Elevator 1 (sim/flightmodel2/wing/elevator1_deg)
-Lower rudder half       - Rudder 2 (sim/flightmodel2/wing/rudder2_deg)
-Upper rudder half       - Rudder 1 (sim/flightmodel2/wing/rudder1_deg)
-Stabilizer trim         - sim/flightmodel2/controls/elevator_trim (ranges from -1 to 1; not degrees)
+
+/* Format: 
+	Name - (dref) [full up deg:full down deg]
+*/
+
+Flaperon_L (inbd aileron) - (sim/flightmodel2/wing/aileron1_deg[0])        [-11:37]
+Flaperon_R (inbd aileron) - (sim/flightmodel2/wing/aileron1_deg[1])        [-11:37]
+Inboard flap L            - (sim/flightmodel2/wing/flap1_deg[0])           [0:30]
+Inboard flap R            - (sim/flightmodel2/wing/flap1_deg[1])           [0:30]
+Outboard flap L           - (sim/flightmodel2/wing/flap2_deg[2])           [0:30]
+Outboard flap R           - (sim/flightmodel2/wing/flap2_deg[3])           [0:30]
+Inboard slats             - (sim/flightmodel2/controls/slat1_deploy_ratio) [0:1]
+Outboard slat             - (sim/flightmodel2/controls/slat2_deploy_ratio) [0:1]
+Normal (outbrd) aileron_L - (sim/flightmodel2/wing/aileron2_deg[4])        [-33:19]
+Normal (outbrd) aileron_R - (sim/flightmodel2/wing/aileron2_deg[5])        [-33:19]
+Elevator L                - (sim/flightmodel2/wing/elevator1_deg[8])       [-33:27]
+Elevator L                - (sim/flightmodel2/wing/elevator1_deg[9])       [-33:27]
+Lower rudder half         - (sim/flightmodel2/wing/rudder2_deg[12])        [-27:27]
+Upper rudder half         - (sim/flightmodel2/wing/rudder1_deg[12])        [-27:27]
+Stabilizer trim           - (sim/flightmodel2/controls/elevator_trim)      [-1:1] (not degrees)
+Roll spoilers/spdbrakes
+	spoiler 4               - (sim/flightmodel2/wing/spoiler1_deg[2]) [45:0]
+	spoiler 1-5 except 4    - (sim/flightmodel2/wing/spoiler2_deg[2]) [60:0]
+	spoiler 11              - (sim/flightmodel2/wing/spoiler1_deg[3]) [45:0]
+	spoiler 10-14 except 11 - (sim/flightmodel2/wing/spoiler2_deg[3]) [60:0]
+	
+	Do not touch these for now!
+	//sb1 - sim/flightmodel2/wing/speedbrake1_deg
+	//sb2 - sim/flightmodel2/wing/speedbrake2_deg

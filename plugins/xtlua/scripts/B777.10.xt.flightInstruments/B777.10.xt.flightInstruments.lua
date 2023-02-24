@@ -136,6 +136,7 @@ local kgs_to_lbs = 2.204623
 local hpa_to_inhg = 33.863892
 local ft_to_mtrs = 0.3048
 local kts_to_mach = 0.001512
+local INHG_PER_QNH = 0.029530
 
 local adiru_time_remaining_min = 0
 
@@ -170,18 +171,17 @@ simDR_onGround                         = find_dataref("sim/flightmodel/failures/
 simDR_vertical_speed                   = {find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_pilot"), find_dataref("sim/cockpit2/gauges/indicators/vvi_fpm_copilot")}
 simDR_hdg_bug                          = find_dataref("sim/cockpit/autopilot/heading_mag")
 simDR_hdg                              = {find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot"), find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_copilot")}
-simDR_map_mode                         = find_dataref("sim/cockpit/switches/EFIS_map_submode")
 simDR_airspeed_mach                    = {find_dataref("sim/cockpit2/gauges/indicators/mach_pilot"), find_dataref("sim/cockpit2/gauges/indicators/mach_copilot")}
-simDR_efis_vor                         = find_dataref("sim/cockpit2/EFIS/EFIS_vor_on")
-simDR_efis_vor_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_vor_on_copilot")
-simDR_efis_ndb                         = find_dataref("sim/cockpit2/EFIS/EFIS_ndb_on")
-simDR_efis_ndb_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_ndb_on_copilot")
+simDR_efis_vor                         = {find_dataref("sim/cockpit2/EFIS/EFIS_vor_on"), find_dataref("sim/cockpit2/EFIS/EFIS_vor_on_copilot")}
+simDR_efis_ndb                         = {find_dataref("sim/cockpit2/EFIS/EFIS_ndb_on"), find_dataref("sim/cockpit2/EFIS/EFIS_ndb_on_copilot")}
 simDR_spd_trend                        = {find_dataref("sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot"), find_dataref("sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_copilot")}
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
-simDR_efis_adf_vor                     = {find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_pilot"), find_dataref("sim/cockpit2/EFIS/EFIS_1_selection_copilot"), find_dataref("sim/cockpit2/EFIS/EFIS_2_selection_copilot")}
 simDR_airspeed_is_mach                 = find_dataref("sim/cockpit/autopilot/airspeed_is_mach")
 simDR_instrument_brt                   = find_dataref("sim/cockpit2/switches/instrument_brightness_ratio")
-
+simDR_map_hsi                          = {find_dataref("sim/cockpit2/EFIS/map_mode_is_HSI"), find_dataref("sim/cockpit2/EFIS/map_mode_is_HSI_copilot")}
+simDR_map_mode                         = {find_dataref("sim/cockpit2/EFIS/map_mode"), find_dataref("sim/cockpit2/EFIS/map_mode_copilot")}
+simDR_map_range                        = {find_dataref("sim/cockpit2/EFIS/map_range"), find_dataref("sim/cockpit2/EFIS/map_range_copilot")}
+simDR_map_steps                        = find_dataref("sim/cockpit2/EFIS/map_range_steps")
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
@@ -195,6 +195,8 @@ B777DR_cockpit_door_target             = find_dataref("Strato/cockpit/door_targe
 B777DR_ace_fail                        = find_dataref("Strato/777/failures/fctl/ace")
 
 B777DR_rcl                             = find_dataref("Strato/777/eicas/rcl")
+B777DR_unlocked                        = find_dataref("Strato/777/readme_unlocked")
+B777DR_cockpit_door_pos                = find_dataref("Strato/777/cockpit_door_pos")
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -203,7 +205,7 @@ B777DR_rcl                             = find_dataref("Strato/777/eicas/rcl")
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
-B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "number")
+B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "array[2]")
 B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
 B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_total", "number")
 B777DR_alt_mtrs                        = deferred_dataref("Strato/777/displays/alt_mtrs", "array[2]")
@@ -231,6 +233,7 @@ B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_k
 B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "array[2]")
 B777DR_alt_bug_diff                    = deferred_dataref("Strato/777/displays/alt_bug_diff", "array[2]")
 B777DR_baro_mode                       = deferred_dataref("Strato/777/baro_mode", "array[2]")
+B777DR_baro_mode_knob                  = deferred_dataref("Strato/777/baro_mode_knob", "array[2]")
 B777DR_minimums_mode                   = deferred_dataref("Strato/777/minimums_mode", "array[2]")
 B777DR_minimums_diff                   = deferred_dataref("Strato/777/minimums_diff", "array[2]")
 B777DR_minimums_visible                = deferred_dataref("Strato/777/minimums_visible", "array[2]")
@@ -293,6 +296,9 @@ B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/ef
 
 B777DR_pfd_mtrs                        = deferred_dataref("Strato/777/displays/mtrs", "array[2]")
 B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta", "array[2]")
+
+B777DR_map_zoom_knob                   = deferred_dataref("Strato/777/map_zoom_knob", "array[2]")
+B777DR_mins_mode_knob                  = deferred_dataref("Strato/777/mins_mode_knob", "array[2]")
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
 --*************************************************************************************--
@@ -414,11 +420,16 @@ function B777_efis_sta_switch_CMDhandler(phase, duration)
 	if phase == 0 then
 		B777DR_efis_button_target[2] = 1
 			if B777DR_cdu_efis_ctl[0] == 0 then
-				simCMD_efis_vor:once()
-				simCMD_efis_ndb:once()
+				B777DR_nd_sta[0] = 1 - B777DR_nd_sta[0]
 			end
 	elseif phase == 2 then
 		B777DR_efis_button_target[2] = 0
+	end
+end
+
+function B777_efis_sta_fmc_CMDhandler(phase, duration)
+	if phase == 0 then
+		B777DR_nd_sta[0] = 1 - B777DR_nd_sta[0]
 	end
 end
 
@@ -480,12 +491,17 @@ end
 function B777_efis_sta_fo_switch_CMDhandler(phase, duration)
 	if phase == 0 then
 		B777DR_efis_button_target[11] = 1
-			if B777DR_cdu_efis_ctl[1] == 0 then
-				simCMD_efis_fo_vor:once()
-				simCMD_efis_fo_ndb:once()
-			end
+		if B777DR_cdu_efis_ctl[1] == 0 then
+			B777DR_nd_sta[1] = 1 - B777DR_nd_sta[1]
+		end
 	elseif phase == 2 then
 		B777DR_efis_button_target[11] = 0
+	end
+end
+
+function B777_efis_sta_fo_fmc_CMDhandler(phase, duration)
+	if phase == 0 then
+		B777DR_nd_sta[1] = 1 - B777DR_nd_sta[1]
 	end
 end
 
@@ -621,6 +637,28 @@ function B777_minimums_up_fo_CMDhandler(phase, duration)
 end
 
 function B777_minimums_rst_capt_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
+		stop_timer("minimums_flash_on_capt")
+		stop_timer("minimums_flash_off_capt")
+		B777DR_minimums_visible[0] = 0
+		B777DR_amber_minimums[0] = 0
+		minsFlashed[1] = false
+		minimumsFlashCount[1] = 0
+	end
+end
+
+function B777_minimums_rst_fo_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
+		stop_timer("minimums_flash_on_fo")
+		stop_timer("minimums_flash_off_fo")
+		B777DR_minimums_visible[1] = 0
+		B777DR_amber_minimums[1] = 0
+		minsFlashed[2] = false
+		minimumsFlashCount[2] = 0
+	end
+end
+
+function B777_minimums_rst_capt_fmc_CMDhandler(phase, duration)
 	if phase == 0 then
 		stop_timer("minimums_flash_on_capt")
 		stop_timer("minimums_flash_off_capt")
@@ -628,12 +666,10 @@ function B777_minimums_rst_capt_CMDhandler(phase, duration)
 		B777DR_amber_minimums[0] = 0
 		minsFlashed[1] = false
 		minimumsFlashCount[1] = 0
-	else
-
 	end
 end
 
-function B777_minimums_rst_fo_CMDhandler(phase, duration)
+function B777_minimums_rst_fo_fmc_CMDhandler(phase, duration)
 	if phase == 0 then
 		stop_timer("minimums_flash_on_fo")
 		stop_timer("minimums_flash_off_fo")
@@ -646,7 +682,9 @@ end
 
 function B777_efis_mtrs_capt_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_pfd_mtrs[0] = 1 - B777DR_pfd_mtrs[0]
+		if B777DR_cdu_efis_ctl[0] == 0 then
+			B777DR_pfd_mtrs[0] = 1 - B777DR_pfd_mtrs[0]
+		end
 		B777DR_efis_button_target[8] = 1
 	elseif phase == 2 then
 		B777DR_efis_button_target[8] = 0
@@ -655,7 +693,9 @@ end
 
 function B777_efis_mtrs_fo_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_pfd_mtrs[1] = 1 - B777DR_pfd_mtrs[1]
+		if B777DR_cdu_efis_ctl[1] == 0 then
+			B777DR_pfd_mtrs[1] = 1 - B777DR_pfd_mtrs[1]
+		end
 		B777DR_efis_button_target[9] = 1
 	elseif phase == 2 then
 		B777DR_efis_button_target[9] = 0
@@ -811,6 +851,58 @@ function B777_fmsR_brt_dn_cmdHandler(phase, duration)
 		stop_timer(cduBrtDecr)
 	end
 end
+
+function B777_altm_baro_up_capt_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
+		if B777DR_baro_mode[0] == 0 then
+			simDR_altimiter_setting[1] = smartKnobUp(0.01, 0.02, 31, simDR_altimiter_setting[1])
+		else
+			simDR_altimiter_setting[1] = smartKnobUp(INHG_PER_QNH, INHG_PER_QNH * 2, 31, simDR_altimiter_setting[1])
+		end
+	end
+end
+
+function B777_altm_baro_dn_capt_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
+		if B777DR_baro_mode[0] == 0 then
+			simDR_altimiter_setting[1] = smartKnobDn(0.01, 0.02, 29, simDR_altimiter_setting[1])
+		else
+			simDR_altimiter_setting[1] = smartKnobDn(INHG_PER_QNH, INHG_PER_QNH * 2, 29, simDR_altimiter_setting[1])
+		end
+	end
+end
+
+function B777_altm_baro_up_fo_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
+		if B777DR_baro_mode[1] == 0 then
+			simDR_altimiter_setting[2] = smartKnobUp(0.01, 0.02, 31, simDR_altimiter_setting[2])
+		else
+			simDR_altimiter_setting[2] = smartKnobUp(INHG_PER_QNH, INHG_PER_QNH * 2, 31, simDR_altimiter_setting[2])
+		end
+	end
+end
+
+function B777_altm_baro_dn_fo_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
+		if B777DR_baro_mode[1] == 0 then
+			simDR_altimiter_setting[2] = smartKnobDn(0.01, 0.02, 29, simDR_altimiter_setting[2])
+		else
+			simDR_altimiter_setting[2] = smartKnobFn(INHG_PER_QNH, INHG_PER_QNH * 2, 29, simDR_altimiter_setting[2])
+		end
+	end
+end
+
+function B777_altm_baro_rst_capt_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
+		simDR_altimiter_setting[1] = 29.92
+	end
+end
+
+function B777_altm_baro_rst_fo_CMDhandler(phase, duration)
+	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
+		simDR_altimiter_setting[2] = 29.92
+	end
+end
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
@@ -827,6 +919,8 @@ B777CMD_minimums_up_fo               = deferred_command("Strato/777/minimums_up_
 B777CMD_minimums_dn_fo               = deferred_command("Strato/777/minimums_dn_fo", "F/O Minimums Down", B777_minimums_dn_fo_CMDhandler)
 B777CMD_minimums_rst                 = deferred_command("Strato/777/minimums_rst_capt", "Captain Minimums Reset", B777_minimums_rst_capt_CMDhandler)
 B777CMD_minimums_rst_fo              = deferred_command("Strato/777/minimums_rst_fo", "F/O Minimums Reset", B777_minimums_rst_fo_CMDhandler)
+B777CMD_minimums_rst_fmc             = deferred_command("Strato/777/minimums_rst_capt_fmc", "Captain Minimums Reset (FMC)", B777_minimums_rst_capt_fmc_CMDhandler)
+B777CMD_minimums_rst_fo_fmc          = deferred_command("Strato/777/minimums_rst_fo_fmc", "F/O Minimums Reset (FMC)", B777_minimums_rst_fo_fmc_CMDhandler)
 B777CMD_efis_mtrs_capt               = deferred_command("Strato/777/efis_mtrs_capt", "Captain EFIS Meters Button", B777_efis_mtrs_capt_CMDhandler)
 B777CMD_efis_mtrs_fo                 = deferred_command("Strato/777/efis_mtrs_fo", "F/O EFIS Meters Button", B777_efis_mtrs_fo_CMDhandler)
 
@@ -857,18 +951,20 @@ B777CMD_efis_arpt_fo_button          = deferred_command("Strato/777/button_switc
 B777CMD_efis_terr_fo_button          = deferred_command("Strato/777/button_switch/efis/terr_fo", "F/O ND Terrain Button", B777_efis_terr_fo_switch_CMDhandler)
 B777CMD_efis_tfc_fo_button           = deferred_command("Strato/777/button_switch/efis/tfc_fo", "F/O ND Traffic Button", B777_efis_tfc_fo_switch_CMDhandler)
 
+B777CMD_efis_sta_fmc                 = deferred_command("Strato/777/button_switch/efis/sta_fmc", "Captain ND STA Button (FMC)", B777_efis_sta_fmc_CMDhandler)
+B777CMD_efis_sta_fo_fmc              = deferred_command("Strato/777/button_switch/efis/sta_fo_fmc", "F/O ND STA Button (FMC) ", B777_efis_sta_fo_fmc_CMDhandler)
+
 B777CMD_hdg_up                       = deferred_command("Strato/777/hdg_up", "Autpilot Heading Up", B777_hdg_up_cmdHandler)
 B777CMD_hdg_dn                       = deferred_command("Strato/777/hdg_dn", "Autpilot Heading Down", B777_hdg_dn_cmdHandler)
 B777CMD_spd_up                       = deferred_command("Strato/777/spd_up", "Autpilot Speed Up", B777_spd_up_cmdHandler)
 B777CMD_spd_dn                       = deferred_command("Strato/777/spd_dn", "Autopilot Speed Down", B777_spd_dn_cmdHandler)
 
---[[B777CMD_altm_baro_up                 = deferred_command("Strato/777/altm_baro_up_capt", "Captain Altimeter Setting Up", B777_altm_baro_up_capt_CMDhandler)
+B777CMD_altm_baro_up                 = deferred_command("Strato/777/altm_baro_up_capt", "Captain Altimeter Setting Up", B777_altm_baro_up_capt_CMDhandler)
 B777CMD_altm_baro_dn                 = deferred_command("Strato/777/altm_baro_dn_capt", "Captain Altimeter Setting Down", B777_altm_baro_dn_capt_CMDhandler)
 B777CMD_altm_baro_up_fo              = deferred_command("Strato/777/altm_baro_up_fo", "F/O Altimeter Setting Up", B777_altm_baro_up_fo_CMDhandler)
 B777CMD_altm_baro_dn_fo              = deferred_command("Strato/777/altm_baro_dn_fo", "F/O Altimeter Setting Down", B777_altm_baro_dn_fo_CMDhandler)
 B777CMD_altm_baro_rst                = deferred_command("Strato/777/altm_baro_rst_capt", "Captain Altimeter Setting Reset", B777_altm_baro_rst_capt_CMDhandler)
 B777CMD_altm_baro_rst_fo             = deferred_command("Strato/777/altm_baro_rst_fo", "F/O Altimeter Setting Reset", B777_altm_baro_rst_fo_CMDhandler)
-]]
 
 B777CMD_fmsL_brt_up                  = deferred_command("Strato/777/fmsL_brt_up", "FMS L Brightness Up", B777_fmsL_brt_up_cmdHandler)
 B777CMD_fmsL_brt_dn                  = deferred_command("Strato/777/fmsL_brt_dn", "FMS L Brightness Down", B777_fmsL_brt_dn_cmdHandler)
@@ -984,7 +1080,7 @@ end
 function setAnimations()
 	for i = 0, 1 do
 		B777DR_minimums_mode_knob_anim[i] = B777_animate(B777DR_minimums_mode[i], B777DR_minimums_mode_knob_anim[i], 15)
-		B777DR_baro_mode_knob_anim[i] = B777_animate(B777DR_baro_mode[i], B777DR_baro_mode_knob_anim[i], 15)
+		B777DR_baro_mode_knob_anim[i] = B777_animate(B777DR_baro_mode_knob[i], B777DR_baro_mode_knob_anim[i], 15)
 	end
 end
 
@@ -1056,7 +1152,7 @@ function smartKnobDn(slow, fast, min, dataref)
 end
 
 function checkKnobSpd()
-	if press_counter >= 3 then
+	if press_counter >= 4 then
 		knob_is_fast = 1
 		print("knob is fast")
 	else
@@ -1291,6 +1387,48 @@ function setEicasPage(id)
 		B777DR_eicas_mode = id
 	end
 end
+
+function efis()
+	for i = 0, 13 do
+		B777DR_efis_button_positions[i] = B777_animate(B777DR_efis_button_target[i], B777DR_efis_button_positions[i], 20)
+	end
+	B777DR_efis_button_positions[14] = B777_animate(B777DR_efis_vor_adf[0], B777DR_efis_button_positions[14], 20)
+	B777DR_efis_button_positions[15] = B777_animate(B777DR_efis_vor_adf[1], B777DR_efis_button_positions[15], 20)
+	B777DR_efis_button_positions[16] = B777_animate(B777DR_efis_vor_adf[2], B777DR_efis_button_positions[16], 20)
+	B777DR_efis_button_positions[17] = B777_animate(B777DR_efis_vor_adf[3], B777DR_efis_button_positions[17], 20)
+
+	if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
+		B777DR_cdu_eicas_ctl_any = 1
+	else
+		B777DR_cdu_eicas_ctl_any = 0
+	end
+
+	for i = 0, 1 do
+		if B777DR_cdu_efis_ctl[i] == 0 then
+			if B777DR_nd_mode_selector[i] >= 2 then
+				simDR_map_mode[i+1] = B777DR_nd_mode_selector[i] + 1
+			else
+				simDR_map_mode[i+1] = B777DR_nd_mode_selector[i]
+			end
+
+			simDR_map_range[i+1] = B777DR_map_zoom_knob[i]
+			B777DR_minimums_mode[i] = B777DR_mins_mode_knob[i]
+			B777DR_baro_mode[i] = B777DR_baro_mode_knob[i]
+			simDR_efis_vor[i+1], simDR_efis_ndb[i+1] = B777DR_nd_sta[i], B777DR_nd_sta[i]
+		end
+	end
+end
+
+function setMapSteps()
+	simDR_map_steps[0] = 10
+	simDR_map_steps[1] = 20
+	simDR_map_steps[2] = 40
+	simDR_map_steps[3] = 80
+	simDR_map_steps[4] = 160
+	simDR_map_steps[5] = 320
+	simDR_map_steps[6] = 640
+end
+
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--1
@@ -1315,8 +1453,12 @@ function flight_start()
 	B777DR_smart_knobs = 1
 	B777DR_pfd_mach_gs = 1
 	B777CMD_efis_mtrs_capt:once()
-	B777DR_minimums_dh = 200
-	B777DR_minimums_mda = 400
+	B777DR_minimums_dh[0] = 200
+	B777DR_minimums_mda[0] = 400
+	B777DR_minimums_dh[1] = 200
+	B777DR_minimums_mda[1] = 400
+	setMapSteps()
+
 	for i = 0, 3 do
 		B777DR_cdu_brt[i] = 23
 	end
@@ -1336,8 +1478,6 @@ function after_physics()
 	B777DR_displayed_com2_act_khz = simDR_com2_act_khz / 1000
 	B777DR_displayed_com2_stby_khz = simDR_com2_stby_khz / 1000
 
-
-
 	if (simDR_groundSpeed >= 1 or (simDR_bus_voltage[0] == 0 and simDR_bus_voltage[1] == 0)) and B777DR_adiru_status == 1 then
 		stop_timer(B777_align_adiru)
 		B777_adiru_off()
@@ -1351,12 +1491,6 @@ function after_physics()
 --	print("time remaining min/sec: "..tonumber(B777DR_adiru_time_remaining_min.."."..B777DR_adiru_time_remaining_sec))
 
 	B777DR_autopilot_alt_mtrs = simDR_autopilot_alt * ft_to_mtrs
-
-	if B777DR_nd_mode_selector < 3 then
-		simDR_map_mode = B777DR_nd_mode_selector
-	else
-		simDR_map_mode = 4
-	end
 
 	setDispAlt()
 	setAnimations()
@@ -1374,6 +1508,7 @@ function after_physics()
 	setDispSPD()
 	spdTrend()
 	altimiter()
+	efis()
 
 	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
 		B777DR_hyd_press_low_any = 1
@@ -1395,7 +1530,7 @@ function after_physics()
 		B777DR_kill_pax = 1
 		B777DR_kill_pax_interior = 1
 		B777DR_kill_cargo = 0
-		if B777DR_cockpit_door_pos == 1 then
+		if B777DR_cockpit_door_pos > 0 then
 			B777DR_kill_cargo_interior = 0
 		else
 			B777DR_kill_cargo_interior = 1
@@ -1404,7 +1539,7 @@ function after_physics()
 		B777DR_kill_cargo = 1
 		B777DR_kill_cargo_interior = 1
 		B777DR_kill_pax = 0
-		if B777DR_cockpit_door_pos == 1 then
+		if B777DR_cockpit_door_pos > 0 then
 			B777DR_kill_pax_interior = 0
 		else
 			B777DR_kill_pax_interior = 1
@@ -1417,35 +1552,6 @@ function after_physics()
 		B777DR_hyd_ace_fail_any = 0
 	end
 
-	if B777DR_nd_sta[0] == 1 then
-		simDR_efis_vor = 1
-		simDR_efis_ndb = 1
-	else
-		simDR_efis_vor = 0
-		simDR_efis_ndb = 0
-	end
-
-	if B777DR_nd_sta[1] == 1 then
-		simDR_efis_vor_fo = 1
-		simDR_efis_ndb_fo = 1
-	else
-		simDR_efis_vor_fo = 0
-		simDR_efis_ndb_fo = 0
-	end
-
-	for i = 0, 13 do
-		B777DR_efis_button_positions[i] = B777_animate(B777DR_efis_button_target[i], B777DR_efis_button_positions[i], 20)
-	end
-	B777DR_efis_button_positions[14] = B777_animate(B777DR_efis_vor_adf[0], B777DR_efis_button_positions[14], 20)
-	B777DR_efis_button_positions[15] = B777_animate(B777DR_efis_vor_adf[1], B777DR_efis_button_positions[15], 20)
-	B777DR_efis_button_positions[16] = B777_animate(B777DR_efis_vor_adf[2], B777DR_efis_button_positions[16], 20)
-	B777DR_efis_button_positions[17] = B777_animate(B777DR_efis_vor_adf[3], B777DR_efis_button_positions[17], 20)
-
-	if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
-		B777DR_cdu_eicas_ctl_any = 1
-	else
-		B777DR_cdu_eicas_ctl_any = 0
-	end
 
 	if simDR_airspeed_is_mach == 0 then
 		simDR_ap_airspeed = math.min(simDR_ap_airspeed, 399)
