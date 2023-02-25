@@ -1530,20 +1530,20 @@ function after_physics()
 		B777DR_kill_pax = 1
 		B777DR_kill_pax_interior = 1
 		B777DR_kill_cargo = 0
-		if B777DR_cockpit_door_pos > 0 then
+		--[[if B777DR_cockpit_door_pos > 0 then
 			B777DR_kill_cargo_interior = 0
 		else
 			B777DR_kill_cargo_interior = 1
-		end
+		end]]
 	else
 		B777DR_kill_cargo = 1
 		B777DR_kill_cargo_interior = 1
 		B777DR_kill_pax = 0
-		if B777DR_cockpit_door_pos > 0 then
+		--[[if B777DR_cockpit_door_pos > 0 then
 			B777DR_kill_pax_interior = 0
 		else
 			B777DR_kill_pax_interior = 1
-		end
+		end]]
 	end
 
 	if B777DR_ace_fail[0] == 1 or B777DR_ace_fail[1] == 1 or B777DR_ace_fail[2] == 1 or B777DR_ace_fail[3] == 1 then
