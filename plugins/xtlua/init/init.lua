@@ -420,8 +420,6 @@ function create_namespace()
 		end,
 		parent = _G
 	}
-	-- TODO: use __len operator to restore # for Jim
-	-- TODO: look at __pairs, __ipairs support
 	mt = { __index = namespace_read, __newindex = namespace_write, __pairs = namespace_pairs, __ipairs = namespace_ipairs, __len = namespace_len }
 	setmetatable(ret,mt)
 	return ret

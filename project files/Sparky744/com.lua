@@ -400,13 +400,6 @@ simCMD_com2_stby_fine_dn    = find_command("sim/radios/stby_com2_fine_down_833")
 simCMD_com1_stby_flip       = find_command("sim/radios/com1_standy_flip")
 simCMD_com2_stby_flip       = find_command("sim/radios/com2_standy_flip")
 
---simCMD_audio_xmt_com1       = find_command("sim/audio_panel/transmit_audio_com1")     TODO:  ADD USER HARDWARE INPUT LOGIC (WRAP COMMAND?)
---simCMD_audio_xmt_com2       = find_command("sim/audio_panel/transmit_audio_com2")
-
-
-
-
-
 --*************************************************************************************--
 --** 				              CUSTOM COMMAND HANDLERS            			     **--
 --*************************************************************************************--

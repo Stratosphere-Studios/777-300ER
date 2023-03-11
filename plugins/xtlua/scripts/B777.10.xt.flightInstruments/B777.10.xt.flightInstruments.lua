@@ -197,6 +197,8 @@ B777DR_ace_fail                        = find_dataref("Strato/777/failures/fctl/
 B777DR_rcl                             = find_dataref("Strato/777/eicas/rcl")
 B777DR_unlocked                        = find_dataref("Strato/777/readme_unlocked")
 B777DR_cockpit_door_pos                = find_dataref("Strato/777/cockpit_door_pos")
+B777R_rudder_trim_man                  = find_dataref("Strato/777/fctl/ace/rud_trim_man")
+B777R_rudder_trim_auto                 = find_dataref("Strato/777/fctl/ace/rud_trim_auto")
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -204,6 +206,8 @@ B777DR_cockpit_door_pos                = find_dataref("Strato/777/cockpit_door_p
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
+B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
+B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
 B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "array[2]")
 B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
@@ -1177,7 +1181,7 @@ function spdTrend()
 	end
 end
 
-function altimiter() --TODO: Custom altimiter
+function altimiter()
 	for i = 0, 1 do
 		if simDR_altimiter_setting[i+1] < 29.925 and simDR_altimiter_setting[i+1] > 29.915 then
 			B777D_altimiter_std[i] = 1
@@ -1434,12 +1438,6 @@ end
 --*************************************************************************************--1
 
 function aircraft_load()
-	print("flightIinstruments loaded")
-end
-
---function aircraft_unload()
-
-function flight_start()
 	B777DR_eicas_mode = 4
 
 	if simDR_startup_running == 1 then
@@ -1462,12 +1460,16 @@ function flight_start()
 	for i = 0, 3 do
 		B777DR_cdu_brt[i] = 23
 	end
+	print("flightIinstruments loaded")
 end
+
+--function aircraft_unload()
+
+--function flight_start()
 
 --function flight_crash()
 
 --function livery_load()
-
 
 --function before_physics()
 
@@ -1565,6 +1567,8 @@ function after_physics()
 	simDR_instrument_brt[7] = B777DR_cdu_brt[1] / 23
 	simDR_instrument_brt[8] = B777DR_cdu_brt[2] / 23
 
+	B777DR_rudder_trim_total = B777R_rudder_trim_man + B777R_rudder_trim_auto
+	B777DR_rudder_trim_total_abs = math.abs(B777DR_rudder_trim_total)
 end
 
 --function after_replay()

@@ -73,29 +73,6 @@ B777CMD_save_simconfig = deferred_command("Strato/777/save_simconfig", "Save Con
 simConfigData = {}
 dofile("version.lua")
 
---[[
-SIM = {
-		 kgs_to_lbs = 2.2046226218488,
-		 lbs_to_kgs = 0.45359237,
-		 weight_display_units = "KGS",  --KGS, LBS
-		 std_pax_weight = 120.0,  --KGS
-		 baro_indicator = "IN",  --IN = 0, HPA = 1
-		 baro_sync = "NO",  --Sync to CAPT
-		 capt_inbd = "NORM",  --EICAS = 0, NORM = 1, PFD = 2
-		 capt_lwr = "NORM",  --EICAS PRI = 0, NORM = 1, ND = 2
-		 fo_inbd = "NORM",  --PFD = 0, NORM = 1, EICAS = 2
-		 fo_lwr = "NORM",  --ND = 0, NORM = 1, EICAS PRI = 2
-},
-FMC = {
-		  INIT = {
-					nav_data = "",
-					active = "",
-					op_program = fmcVersion,
-					drag_ff = "+0.0/-0.0",
-		  },
-}
-]]
-
 function simconfig_values()
 	return {
 		SOUND = {
@@ -123,10 +100,7 @@ function simconfig_values()
 			airline = "",
 		},
 		FMC = {
---			nav_data = "",
---			active = "",
---			op_program = fmcVersion,
-			drag_ff = "+0.0/-0.0",
+			drag_ff = "+0.0/+0.0",
 			unlocked = 0 -- 1 if readme code unlocked, 0 if locked
 		},
 		OPTIONS = {
@@ -197,6 +171,7 @@ function set_loaded_configs()
 end
 
 function aircraft_simConfig()
+	B777DR_newsimconfig_data = 1
 	print("File = "..file_location)
 	local file = io.open(file_location, "r")
 
@@ -221,19 +196,12 @@ end
 
 simConfigData["data"] = simconfig_values()
 
-function flight_start()
-	readmeCode()
-	local refreshLivery = simDR_livery_path
-	B777DR_simconfig_data = json.encode(simConfigData["data"]["values"]) --make the simConfig data available to other modules
-	B777DR_newsimconfig_data = 1
-	run_after_time(aircraft_simConfig, 1)  --Load specific simConfig data for current livery
-end
+--function flight_start()
 
-function livery_load()
-	print("simconfig livery_load")
-	local refreshLivery = simDR_livery_path
-	B777DR_newsimconfig_data = 1
-	run_after_time(aircraft_simConfig, 2)  --Load specific simConfig data for current livery
+function aircraft_load()
+	readmeCode()
+	print("simconfig loaded")
+	run_after_time(aircraft_simConfig, 5)  --Load specific simConfig data for current livery
 end
 
 local setSimConfig=false

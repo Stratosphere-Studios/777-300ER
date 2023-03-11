@@ -39,7 +39,7 @@ irs_line2=" "
 irs_line3=" "
 irs_line4=" "
 
-function createFMSDatarefs(fmsid) --TODO: figure out how to make fms specific pages and only use green and white for center fms
+function createFMSDatarefs(fmsid)
 	-- white
 	create_dataref("Strato/B777/"..fmsid.."/Line01_L", "string")
 	create_dataref("Strato/B777/"..fmsid.."/Line02_L", "string")

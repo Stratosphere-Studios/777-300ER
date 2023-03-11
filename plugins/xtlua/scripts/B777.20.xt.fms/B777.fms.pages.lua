@@ -177,7 +177,7 @@ fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
 	return page
 end
 
-fmsPages["RTE1"]=createPage("RTE1")
+--[[fmsPages["RTE1"]=createPage("RTE1")
 fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
   local l1=cleanFMSLine(B777DR_srcfms[fmsID][1])
   local pageNo=tonumber(string.sub(l1,21,22))
@@ -217,7 +217,7 @@ fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
   fmsFunctionsDefs["RTE1"]["R3"]={"setpage","FMC"}
   
   local line5="                "..string.sub(cleanFMSLine(B777DR_srcfms[fmsID][5]),1,8)
-  if acarsSystem.provider.online() then line5=" <SEND          "..string.sub(cleanFMSLine(B777DR_srcfms[fmsID][5]),1,8) end
+  --if acarsSystem.provider.online() then line5=" <SEND          "..string.sub(cleanFMSLine(B777DR_srcfms[fmsID][5]),1,8) end
   local page={
   "      ACT RTE 1     " .. string.sub(cleanFMSLine(B777DR_srcfms[fmsID][1]),-4,-1) ,
   "                        ",
@@ -233,50 +233,52 @@ fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
   cleanFMSLine(B777DR_srcfms[fmsID][12]),
   lastLine,
   }
-  return page 
-end
-fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
-	local l1=cleanFMSLine(B777DR_srcfms[fmsID][1])
-  local pageNo=tonumber(string.sub(l1,21,22))
-  if pageNo~=1 then
-	return {
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
+  return page
+  
+end]]
+
+fmsPages["RTE1"]=createPage("RTE1")
+fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
+	if pgNo~=1 then
+		return {
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
 		}
-  end
-	local line4 = "               CO ROUTE "
-	if acarsSystem.provider.online() then line4=" REQUEST       CO ROUTE " end
-	local page={
-		"                        ",
-		cleanFMSLine(B777DR_srcfms[fmsID][2]),
-		"                        ",
-		" RUNWAY          FLT NO ",
-		"                        ",
-		line4,
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		"                        ",
-		}
-	return page
+	end
 end
 
-fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
+fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
+	if pgNo~=1 then
+		return {
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+		}
+	end
+end
+
+--[[fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
 --fmsFunctionsDefs["RTE1"]["L1"]={"setdata","origin"}
 fmsFunctionsDefs["RTE1"]["L2"]={"setdata","runway"}
 
@@ -293,7 +295,7 @@ fmsFunctionsDefs["RTE1"]["R6"]={"setpage","PERFINIT"}
 
 fmsFunctionsDefs["RTE1"]["next"]={"custom2fmc","next"}
 fmsFunctionsDefs["RTE1"]["prev"]={"custom2fmc","prev"}
-fmsFunctionsDefs["RTE1"]["exec"]={"custom2fmc","exec"}
+fmsFunctionsDefs["RTE1"]["exec"]={"custom2fmc","exec"}]]
 
 dofile("activepages/B777.fms.pages.legs.lua")
 dofile("activepages/B777.fms.pages.maint.lua")
@@ -312,8 +314,8 @@ dofile("activepages/B777.fms.pages.actrte1.lua")
 dofile("activepages/B777.fms.pages.identpage.lua")
 dofile("activepages/B777.fms.pages.eicasctl.lua")
 dofile("activepages/B777.fms.pages.readme.lua")
---[[dofile("activepages/B777.fms.pages.posinit.lua")
-dofile("activepages/B777.fms.pages.perfinit.lua")
+dofile("activepages/B777.fms.pages.posinit.lua")
+--[[dofile("activepages/B777.fms.pages.perfinit.lua")
 dofile("activepages/B777.fms.pages.thrustlim.lua")
 dofile("activepages/B777.fms.pages.takeoff.lua")
 dofile("activepages/B777.fms.pages.approach.lua")
@@ -696,22 +698,9 @@ end
 ]]
 
 function fmsFunctions.getdata(fmsO,value) -- getdata
------STRATOSPHERE 777----------
-
-
-
-
-
-
-
-
-
-	-----SPARKY 744----------
 	local data = ""
 	if value == "gpspos" then
-		data = irsSystem.getLat("gpsL") .." " .. irsSystem.getLon("gpsL")
-	elseif value == "lastpos" then
-		data = irsSystem.calcLatA() .." "..irsSystem.calcLonA()
+		data = fmsModules["data"].pos
 	else
 		data = getFMSData(value)
 	end
@@ -1071,28 +1060,38 @@ function fmsFunctions.setdata(fmsO,value)
 			end
 		end
 	elseif value=="airportpos" then --and string.len(fmsO["scratchpad"])>3 then
-		if string.len(navAidsJSON) > 1 and string.len(fmsO["scratchpad"])>3 then
+		if string.len(navAidsJSON) > 1 and (string.len(fmsO["scratchpad"]) == 3 or string.len(fmsO["scratchpad"]) == 4) and string.match(fmsO["scratchpad"], '%a..') then
 			local navAids=json.decode(navAidsJSON)
 			print(table.getn(navAids).." navaids")
-			--print(navAidsJSON)
+			print(navAidsJSON)
+			local found = false
 			for n=table.getn(navAids),1,-1 do
-				if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
+				--if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
+				if navAids[n][8]==fmsO["scratchpad"] then
 					print("navaid "..n.."->".. navAids[n][1].." ".. navAids[n][2].." ".. navAids[n][3].." ".. navAids[n][4].." ".. navAids[n][5].." ".. navAids[n][6].." ".. navAids[n][7].." ".. navAids[n][8])
+					print("airport pos1")
 					local lat=toDMS(navAids[n][5],true)
 					local lon=toDMS(navAids[n][6],false)
-					setFMSData("irsLat",lat)
-					setFMSData("irsLon",lon)
-					--irsSystem["irsLat"]=lat
-					--irsSystem["irsLon"]=lon
+					print("airport pos2: "..lat..", "..lon)
+					setFMSData("aptLat",lat)
+					setFMSData("aptLon",lon)
+					print("airport pos3: "..lat..", "..lon)
+					found = true
 				end
 			end
-			setFMSData("airportpos",fmsO["scratchpad"])
-			setFMSData("airportgate","----")
+			if found then
+				setFMSData("airportpos",fmsO["scratchpad"])
+				setFMSData("airportgate","-----")
+			else
+				fmsO["notify"]="NOT IN DATABASE"
+			end
 		elseif del == true then
 			setFMSData("airportpos",defaultFMSData().airportpos)
 			setFMSData("airportpos",defaultFMSData().airportgate)
 			setFMSData("irsLat",defaultFMSData().irsLat)
-			setFMSData("irsLon",defaultFMSData().irsLon)		
+			setFMSData("irsLon",defaultFMSData().irsLon)
+		else
+			fmsO["notify"]="NOT IN DATABASE"
 		end
 	elseif value=="flttime" then 
 		hhV=string.sub(fmsO["scratchpad"],1,2)
@@ -1172,14 +1171,12 @@ function fmsFunctions.setdata(fmsO,value)
 		fmsO["notify"]="INVALID ENTRY"
 	end
    elseif value=="airportgate" then
-	if string.len(fmsO["scratchpad"])>0 then
-		local lat=toDMS(simDR_latitude,true)
+	if string.len(fmsO["scratchpad"]) <= 5 then
+		--[[local lat=toDMS(simDR_latitude,true)
 		local lon=toDMS(simDR_longitude,false)
-		irsSystem["irsLat"]=lat
-		irsSystem["irsLon"]=lon
 		setFMSData("irsLat",lat)
-		setFMSData("irsLon",lon)
-		setFMSData(value,fmsO["scratchpad"])
+		setFMSData("irsLon",lon)]]
+		fmsModules["data"].airportgate = fmsO["scratchpad"]
 	else
 		fmsO["notify"]="INVALID ENTRY"
 	end
@@ -2707,3 +2704,63 @@ function fmsFunctions.setpage2(fmsO, value)
 		end
 	end
 end
+
+function lim(val, upper, lower)
+	if val > upper then
+		return upper
+	elseif val < lower then
+		return lower
+	end
+	return val
+end
+
+function tableLen(T) --Returns length of a table
+	local idx = 0
+	for i in pairs(T) do idx = idx + 1 end
+	return idx
+end
+
+function bool2num(value)
+	return value and 1 or 0
+end
+
+function round(number) --rounds everything behind the decimal
+	return math.floor(number + 0.5)
+end
+
+function indexOf(array, value) --returns index of a value in an array.
+    for k, v in ipairs(array) do
+        if v == value then
+            return k
+        end
+    end
+    return nil
+end
+
+function animate(target, variable, speed)
+	if math.abs(target - variable) < 0.1 then return target end
+	variable = variable + ((target - variable) * (speed * SIM_PERIOD))
+	return variable
+end
+
+function ternary(condition, ifTrue, ifFalse)
+	if condition then return ifTrue else return ifFalse end
+end
+
+--[[B777DR_print_input = find_dataref("Strato/777/print_input");
+B777CMD_print = find_command("Strato/777/fmc_print");
+
+function print(input)
+	B777DR_print_input = input
+	B777CMD_print:once()
+end
+
+B777DR_metar_input = find_dataref("Strato/777/metar_input")
+B777DR_metar_output = find_dataref("Strato/777/metar_output")
+B777CMD_getMetar = find_command("Strato/777/get_metar")
+
+function fetchMetar(icao)
+	B777DR_metar_input = icao
+	getMetar:once()
+	return B777DR_metar_output
+end]]

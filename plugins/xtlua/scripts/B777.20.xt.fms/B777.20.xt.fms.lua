@@ -144,21 +144,16 @@ function getDistance(lat1,lon1,lat2,lon2)
 end
 
 function toDMS(value,isLat)
-	degrees = value
-	if value <0 then
-    	degrees = degrees * -1
+	local degrees = math.abs(value)
+	local minutes = (value-math.floor(value))*60
+	local seconds = minutes - math.floor(minutes)
+	local prefix="E"
+	if isLat then
+		prefix = value > 0 and "N" or "S"
+	else
+		prefix = value > 0 and "E" or "W"
 	end
-	minutes=(value-math.floor(value))*60
-	seconds=minutes-math.floor(minutes)
-	local p="E"
-	if isLat==true and value<0 then 
-		p = "S"
-	elseif isLat==true then  
-		p = "N"
-	elseif value<0 then
-		p = "W"
-	end
-	retVal=string.format(p .. "%03d`%02d.%1d", degrees, minutes, seconds*10)
+	local retVal = string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
 	return retVal
 end
 
@@ -264,7 +259,6 @@ simDR_total_air_temp		= find_dataref("sim/cockpit2/temperature/outside_air_LE_te
 simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
 simDR_aircraft_hdg		 	= find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
 
---[[WB CG Info
 simDR_cgZ_ref_point			= find_dataref("sim/aircraft/weight/acf_cgZ_original")
 simDR_cgz_ref_to_default	= find_dataref("sim/flightmodel/misc/cgz_ref_to_default")
 simDR_empty_weight			= find_dataref("sim/aircraft/weight/acf_m_empty")
@@ -275,7 +269,7 @@ simDR_onground				= find_dataref("sim/flightmodel/failures/onground_any")
 simDR_payload_weight		= find_dataref("sim/flightmodel/weight/m_fixed")
 simDR_fuel_totalizer_kg		= find_dataref("sim/cockpit2/fuel/fuel_totalizer_init_kg")
 --Marauder28
-ss777 comment]]
+
 
 --*************************************************************************************--
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
@@ -410,6 +404,8 @@ function defaultFMSData()
 	vref2="***",
 	irsLat=string.rep(" ", 9),
 	irsLon=string.rep(" ", 9),
+	aptLat=string.rep(" ", 9),
+	aptLon=string.rep(" ", 9),
 	initIRSLat="****`**.*",
 	initIRSLon="****`**.*",
 	flapspeed="**/***",
@@ -447,7 +443,8 @@ function defaultFMSData()
 	freightTotal = string.rep("0", 7),]]
 	irsAlignTime = string.rep("0", 3),
 	fmcUnlocked = false,
-	readmeCodeInput = "*****"
+	readmeCodeInput = "*****",
+	pos = string.rep(" ", 18),
 }
 end
 
@@ -805,27 +802,31 @@ function nd_speed_wind_display()
 	end
 end
 
-function aircraft_last_pos(phase)
-	file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
-	--print("File = "..file_location)
-
-	if phase == "LOAD" then
-		--Load FMC last position
+function loadLastPos()
+		local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+		print("lastpos file = "..file_location)
 		local file = io.open(file_location, "r")
 		if file ~= nil then
-			io.input(file)
-			fmsModules["data"].lastpos = io.read()
-			io.close(file)
+			fmsModules["data"].lastpos = file:read()
+			file:close()
+			print("loaded lastpos: "..fmsModules["data"].lastpos)
+		else
+			print("lastpos file is nil")
 		end
-	else  --UNLOAD
-		local file = io.open(file_location, "w+")
-		if file ~= nil then
-			io.output(file)
-			-- io.write(irsSystem.getLat("gpsL") .." " .. irsSystem.getLon("gpsL")) comment for ss777
-			io.close(file)
-		end
-	end
+		loadedLastPos = true
 end
+
+function unloadLastPos()
+	local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+	print("lastpos file = "..file_location)
+	local file = io.open(file_location, "w")
+	file:write(fmsModules["data"].pos)
+	file:close()
+	print("Unloaded lastpos: "..fmsModules["data"].pos)
+end
+
+--function livery_load() end
+
 --Marauder28
 debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 function flight_start()
@@ -955,14 +956,16 @@ function after_physics()
 		simDR_vor_adf[4] = B777DR_efis_vor_adf[2]
 		simDR_vor_adf[4] = B777DR_efis_vor_adf[3]
 	end
-
+	if not is_timer_scheduled(unloadLastPos) then
+		run_after_time(unloadLastPos, 30)
+	end
 end
 
 function aircraft_load()
-	-- simDR_cg_adjust = 0 --reset CG slider to begin current flight, ss777 comment
+	simDR_cg_adjust = 0 --reset CG slider to begin current flight
+	run_after_time(loadLastPos, 5)
 end
 
 function aircraft_unload()
-	aircraft_last_pos("UNLOAD")
 	-- simDR_cg_adjust = 0 --reset CG slider to neutral for future flights s777 comment
 end

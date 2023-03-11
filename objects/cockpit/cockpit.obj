@@ -10625,7 +10625,7 @@ IDX	8429
 	TRIS	9945 6
 	ATTR_manip_command	button	Strato/B777/fms2/func_key/fix	
 	TRIS	9951 6
-	ATTR_manip_command	button	Strato/B777fms2/func_key/next_pg	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/next_pg	
 	TRIS	9957 6
 	ATTR_manip_command	button	Strato/B777/fms2/func_key/prev_pg	
 	TRIS	9963 6
@@ -10699,7 +10699,7 @@ IDX	8429
 	TRIS	10167 6
 	ATTR_manip_command	button	Strato/B777/fms3/func_key/prev_pg	
 	TRIS	10173 6
-	ATTR_manip_command	button	Strato/B777fms3/func_key/next_pg	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/next_pg	
 	TRIS	10179 6
 	ATTR_manip_command	button	Strato/B777/fms3/func_key/fix	
 	TRIS	10185 6
@@ -10749,7 +10749,7 @@ IDX	8429
 	TRIS	10317 6
 	ATTR_manip_command	button	Strato/B777/fms1/func_key/prev_pg	
 	TRIS	10323 6
-	ATTR_manip_command	button	Strato/B777fms1/func_key/next_pg	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/next_pg	
 	TRIS	10329 6
 	ATTR_manip_command	button	Strato/B777/fms1/func_key/fix	
 	TRIS	10335 6

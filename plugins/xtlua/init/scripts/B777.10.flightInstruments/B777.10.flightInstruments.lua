@@ -28,7 +28,6 @@ end
 B777CMD_fltInst_adiru_switch         = deferred_command("Strato/777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
 
 B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/777/adiru_align_now", "Align ADIRU Instantly", B777_fltInst_adiru_align_now_CMDhandler)
-
 B777CMD_ap_alt_up                    = deferred_command("Strato/777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
 B777CMD_ap_alt_dn                    = deferred_command("Strato/777/autopilot/alt_dn", "Autopilot Altitude Down", B777_alt_dn_CMDhandler)
 B777CMD_minimums_up                  = deferred_command("Strato/777/minimums_up_capt", "Captain Minimums Up", B777_minimums_up_capt_CMDhandler)
@@ -150,7 +149,8 @@ B777DR_cdu_eicas_ctl                   = deferred_dataref("Strato/777/cdu_eicas_
 B777DR_cdu_brt                         = deferred_dataref("Strato/777/cdu_brt", "array[3]")
 B777DR_show_cdu_brt                    = deferred_dataref("Strato/777/show_cdu_brt", "array[3]")
 B777DR_cdu_brt_dir                     = deferred_dataref("Strato/777/cdu_brt_dir", "array[3]")
-
+B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
+B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 --sim/cockpit2/autopilot/autothrottle_arm set to 0
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
