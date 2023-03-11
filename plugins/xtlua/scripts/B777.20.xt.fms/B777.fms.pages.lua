@@ -1,6 +1,7 @@
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4
+*         Converted for 777 by remenkemi (crazytimtimtim)
 *****************************************************************************************
 ]]
 --Marauder28
@@ -100,7 +101,7 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		"                        ",
 		"               "..dspOptL..">",
 		"                        ",
-		"<CAB INT;r8"..intACT.."       "..dspln,
+		"                    "..dspln,
 		"                        ",
 		"                DISPLAY>;r8",
 		"                        ",
@@ -114,21 +115,19 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 			B777DR_cdu_eicas_ctl[1] = 0
 			page[7] = "                        "
-			page[9] ="<CAB INT;r8                "
+			page[9] = "<CAB INT;r8"..intACT.."       "..dspln
 		end
 
 	elseif fmsID == "fmsL" then
 		if B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 			B777DR_cdu_eicas_ctl[0] = 0
 			page[7] = "                        "
-			page[9] = "<CAB INT;r8                "
 		end
 
 	else
 		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 then
 			B777DR_cdu_eicas_ctl[2] = 0
 			page[7] = "                        "
-			page[9] = "<CAB INT;r8                "
 		end
 	end
 

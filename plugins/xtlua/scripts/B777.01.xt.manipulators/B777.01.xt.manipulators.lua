@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Program Script Name: manipulators
-* Author Name: crazytimtimtim
+* Author Name: remenkemi (crazytimtimtim)
 * Script Description: functions for cockpit switches
 * Notes: 1. Information on default datarefs for some switches provided.
          2. Can't find probe/window heat switches, might always be on? If so will command them on on aircraft load.

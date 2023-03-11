@@ -73,7 +73,7 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 kudosi#2916(Discord): references, testing
 
-[Crazytimtimtim](https://github.com/crazytimtimtim): XTLua code, flight model + other aircraft data, manipulators, readme, Github management.
+[remenkemi (crazytimtimtim)](https://github.com/crazytimtimtim): XTLua code, flight model + other aircraft data, manipulators, readme, Github management.
 
 [Matt726](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 

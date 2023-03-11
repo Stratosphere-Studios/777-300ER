@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: manipulators
-* Author Name: crazytimtimtim
+* Author Name: remenkemi (crazytimtimtim)
 * Script Description: functions for cockpit switches
 *****************************************************************************************
 --]]

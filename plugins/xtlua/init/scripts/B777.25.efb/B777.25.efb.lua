@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: EFB
-* Author Name: crazytimtimtim
+* Author Name: remenkemi (crazytimtimtim)
 * Script Description: (Init) Electronic Flight Bag Code
 *****************************************************************************************
 --]]

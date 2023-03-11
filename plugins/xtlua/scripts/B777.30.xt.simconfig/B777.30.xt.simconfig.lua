@@ -3,7 +3,7 @@
 *****************************************************************************************
 * Program Script Name	:	B777.20.xt.simconfig
 * Author Name			:	Marauder28
-* Converted to 777 by crazytimtimtim
+* Converted to 777 by remenkemi (crazytimtimtim)
 *
 *   Revisions:
 *   -- DATE --   --- REV NO ---   --- DESCRIPTION ---  
@@ -23,6 +23,8 @@ function deferred_dataref(name,nilType,callFunction)
 	end
     return find_dataref(name)
 end
+
+math.randomseed(os.time())
 
 --*************************************************************************************--
 --**                                Find Datarefs                                    **--

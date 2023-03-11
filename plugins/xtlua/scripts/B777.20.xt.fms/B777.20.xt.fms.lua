@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4
-*     Converted from Sparky744 to Stratosphere 777 by crazytimtimtim
+*     Converted from Sparky744 to Stratosphere 777 by remenkemi (crazytimtimtim)
 *****************************************************************************************
 ]]
 

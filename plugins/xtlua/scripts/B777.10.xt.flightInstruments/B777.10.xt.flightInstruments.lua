@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: flightInstruments
-* Author Name: Crazytimtimtim
+* Author Name: remenkemi (crazytimtimtim)
 * Script Description: Code for cockpit instruments
 Plan:
 dataref for pilot and copilot inboard knob
