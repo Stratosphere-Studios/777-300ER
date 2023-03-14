@@ -9,7 +9,9 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
     fmsFunctionsDefs["POSINIT"]["R6"]={"setpage", "RTE1"}
     fmsFunctionsDefs["POSINIT"]["R4"]={"getdata","gpspos"}
     fmsFunctionsDefs["POSINIT"]["R2"]={"getdata","lastpos"}
-    local time = (hh * 100) + mm
+
+    local hrs, mins = hh < 10 and "0"..hh or hh, mm < 10 and "0"..mm or mm
+
     fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
     return {
       "      POS INIT          ",
@@ -20,7 +22,7 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
       "                        ",
       fmsModules["data"].airportgate.."                    ",
       "                        ",
-      time.."  "..fmsModules["data"].pos,
+      hrs..mins.."  "..fmsModules["data"].pos,
       "                        ",
       "      ***`**.* ****`**.*",
       "                        ",

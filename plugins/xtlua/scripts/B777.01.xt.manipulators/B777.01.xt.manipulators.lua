@@ -7,7 +7,7 @@
          2. Can't find probe/window heat switches, might always be on? If so will command them on on aircraft load.
 *****************************************************************************************
 --]]
-
+-- RUDDER TRIM KNOB IS IN FLIGHT INSTRUMENTS
 --replace create_command
 function deferred_command(name,desc,realFunc)
 	return replace_command(name,realFunc)
@@ -98,7 +98,6 @@ B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
 
-B777DR_ovhd_fwd_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/fwd/buttons/target", "array[20]")
 B777DR_ovhd_ctr_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target", "array[46]")
 B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/target", "array[24]")
 

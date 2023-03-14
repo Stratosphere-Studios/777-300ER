@@ -27,9 +27,9 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 	--simConfigData["data"].FMC.op_program = fmcVersion
     return{
 
-		"       IDENT            ",
+		"          IDENT         ",
 		"                        ",
-		"777.300.1      GE90-115L",
+		"777.300.1     GE90-115BL",
 		"                        ",
 		airac.." "..navdata,
 		"                        ",
@@ -44,23 +44,27 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 	}
 end
 
-fmsPages["IDENT"]["templateSmall"]={
-	"                        ",
-	" MODEL           ENGINES",
-	"                        ",
-	" NAV DATA         ACTIVE",
-	"                        ",
-	"                        ",
-	"                        ",
-	--" OP PROGRAM             ",
-	"                        ",
-	"                        ",
-	"                 DRAG/FF",
-	"                        ",
-	"                        ",
-	"                        "
-}
+fmsPages["IDENT"].getSmallPage=function(self,pgNo,fmsID)
+	local dragffArmed = "   "
+	return {
+		"                        ",
+		" MODEL        ENG RATING",
+		"                        ",
+		" NAV DATA         ACTIVE",
+		"                        ",
+		"                        ",
+		"                        ",
+		--" OP PROGRAM             ",
+		"                        ",
+		"                        ",
+		"             "..dragffArmed.." DRAG/FF",
+		"                        ",
+		"                        ",
+		"                        "
+	}
+end
 
 fmsFunctionsDefs["IDENT"]={}
 fmsFunctionsDefs["IDENT"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["IDENT"]["R6"]={"setpage","POSINIT"}
+fmsFunctionsDefs["IDENT"]["R5"]={"setdata", "drag_ff"} -- TODO: drag ff set

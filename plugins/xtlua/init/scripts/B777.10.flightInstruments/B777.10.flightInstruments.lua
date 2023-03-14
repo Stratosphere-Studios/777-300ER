@@ -90,6 +90,9 @@ B777CMD_fmsC_brt_dn                  = deferred_command("Strato/777/fmsC_brt_dn"
 B777CMD_fmsR_brt_up                  = deferred_command("Strato/777/fmsR_brt_up", "FMS R Brightness Up", B777_fmsR_brt_up_cmdHandler)
 B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn", "FMS R Brightness Down", B777_fmsR_brt_dn_cmdHandler)
 
+B777CMD_rudder_trim_knob_l           = deferred_command("Strato/777/button_switch/rud_trim_l", "Rudder Trim Left", B777_rudder_trim_l_CMDhandler)
+B777CMD_rudder_trim_knob_r           = deferred_command("Strato/777/button_switch/rud_trim_r", "Rudder Trim Right", B777_rudder_trim_r_CMDhandler)
+
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
@@ -188,3 +191,4 @@ B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta",
 
 B777DR_map_zoom_knob                   = deferred_dataref("Strato/777/map_zoom_knob", "array[2]")
 B777DR_mins_mode_knob                  = deferred_dataref("Strato/777/mins_mode_knob", "array[2]")
+B777DR_rudder_trim_pos                 = deferred_dataref("Strato/777/cockpit/rudder_trim_knob_pos", "number")

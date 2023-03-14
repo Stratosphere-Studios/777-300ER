@@ -1,22 +1,22 @@
 fmsPages["ACTRTE1"]=createPage("ACTRTE1")
 fmsPages["ACTRTE1"].getPage=function(self,pgNo,fmsID)
   if pgNo==1 then return {
-    "      ACT RTE 1         ",
+    "      RTE 1;c5             ",
     "                        ",
     ""..fmsModules["data"]["fltdep"] .."                "..fmsModules["data"]["fltdst"] ,
     "                        ",
     ""..fmsModules["data"]["runway"] .."             "..fmsModules["data"]["fltno"] ,
     "                        ",
-    "<SEND              "..fmsModules["data"]["coroute"] ,
-    "             -----------",
-    "<LOAD                   ",
+    "<REQUEST           "..fmsModules["data"]["coroute"] ,
     "                        ",
-    "<RTE COPY          SEND>", 
+    "                        ",
+    "------------------------",
+    "<PRINT;r6             ALTN>",
     "                        ",
     "<RTE 2        PERF INIT>"
     }
   elseif pgNo==2 then return {
-    "      ACT RTE 1         ",
+    "      RTE 1             ",
     "                        ",
     "                        ",
     "                        ",
@@ -30,26 +30,26 @@ fmsPages["ACTRTE1"].getPage=function(self,pgNo,fmsID)
     "------------------------",
     "<RTE 2        PERF INIT>"
     }
-end
+  end
 end
 
 fmsPages["ACTRTE1"].getSmallPage=function(self,pgNo,fmsID)
   if pgNo==1 then return {
-"                    1/3 ",
-" ORIGIN             DEST",
-"                        ",
-" RUNWAY           FLT NO",
-"                        ",
-" REQUEST        CO ROUTE",
-"                        ",
-"ROUTE UPLINK -----------",
-"                        ",
-"               CO REPORT",
-"                        ", 
-"                        ",
-"                        "
-}
-elseif pgNo==2 then return {
+    "                    1/3 ",
+    " ORIGIN             DEST",
+    "                        ",
+    " RUNWAY           FLT NO",
+    "                        ",
+    " ROUTE          CO ROUTE",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        ",
+    "                        "
+    }
+  elseif pgNo==2 then return {
     "                    2/3 ",
     " VIA                  TO",
     "                        ",
@@ -60,13 +60,12 @@ elseif pgNo==2 then return {
     "                        ",
     "                        ",
     "                        ",
-    "                        ", 
+    "                        ",
     "                        ",
     "                        "
-    } 
+    }
+  end
 end
-end
-
 
 fmsFunctionsDefs["ACTRTE1"]={}
 --fmsFunctionsDefs["ACTRTE1"]["L1"]={"setdata","origin"}

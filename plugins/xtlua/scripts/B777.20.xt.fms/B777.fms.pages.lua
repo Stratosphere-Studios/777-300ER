@@ -237,23 +237,27 @@ fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
   
 end]]
 
+route1 = {
+
+}
+
 fmsPages["RTE1"]=createPage("RTE1")
 fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
 	if pgNo~=1 then
 		return {
+			"      RTE 1;c5             ",
+			"                        ",
+			"****                ****",
+			"                        ",
+			"-----         ----------",
+			"                        ",
+			"<REQUEST      ----------",
 			"                        ",
 			"                        ",
 			"                        ",
+			"<PRINT             ALTN>",
 			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
+			"<RTE 2         ACTIVATE>",
 		}
 	end
 end
@@ -261,21 +265,25 @@ end
 fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
 	if pgNo~=1 then
 		return {
+			"                    1/2 ",
+			" ORIGIN             DEST",
+			"                        ",
+			" RUNWAY           FLT NO",
+			"                        ",
+			" ROUTE          CO ROUTE",
 			"                        ",
 			"                        ",
 			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
+			" ROUTE -----------------",
 			"                        ",
 			"                        ",
 			"                        ",
 		}
 	end
+end
+
+fmsPages["RTE1"].getNumPages=function(self)
+	return 2
 end
 
 --[[fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
@@ -1060,38 +1068,42 @@ function fmsFunctions.setdata(fmsO,value)
 			end
 		end
 	elseif value=="airportpos" then --and string.len(fmsO["scratchpad"])>3 then
-		if string.len(navAidsJSON) > 1 and (string.len(fmsO["scratchpad"]) == 3 or string.len(fmsO["scratchpad"]) == 4) and string.match(fmsO["scratchpad"], '%a..') then
-			local navAids=json.decode(navAidsJSON)
-			print(table.getn(navAids).." navaids")
-			print(navAidsJSON)
-			local found = false
-			for n=table.getn(navAids),1,-1 do
-				--if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
-				if navAids[n][8]==fmsO["scratchpad"] then
-					print("navaid "..n.."->".. navAids[n][1].." ".. navAids[n][2].." ".. navAids[n][3].." ".. navAids[n][4].." ".. navAids[n][5].." ".. navAids[n][6].." ".. navAids[n][7].." ".. navAids[n][8])
-					print("airport pos1")
-					local lat=toDMS(navAids[n][5],true)
-					local lon=toDMS(navAids[n][6],false)
-					print("airport pos2: "..lat..", "..lon)
-					setFMSData("aptLat",lat)
-					setFMSData("aptLon",lon)
-					print("airport pos3: "..lat..", "..lon)
-					found = true
+		if string.len(navAidsJSON) > 1 then
+			if string.match(fmsO["scratchpad"], '%a%a%a%a') and string.len(fmsO["scratchpad"]) == 4 then
+				local navAids=json.decode(navAidsJSON)
+				print(table.getn(navAids).." navaids")
+				print(navAidsJSON)
+				local found = false
+				for n=table.getn(navAids),1,-1 do
+					--if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
+					if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
+						print("navaid "..n.."->".. navAids[n][1].." ".. navAids[n][2].." ".. navAids[n][3].." ".. navAids[n][4].." ".. navAids[n][5].." ".. navAids[n][6].." ".. navAids[n][7].." ".. navAids[n][8])
+						print("airport pos1")
+						local lat=toDMS(navAids[n][5],true)
+						local lon=toDMS(navAids[n][6],false)
+						print("airport pos2: "..lat..", "..lon)
+						setFMSData("aptLat",lat)
+						setFMSData("aptLon",lon)
+						print("airport pos3: "..lat..", "..lon)
+						found = true
+					end
 				end
-			end
-			if found then
-				setFMSData("airportpos",fmsO["scratchpad"])
-				setFMSData("airportgate","-----")
+				if found then
+					setFMSData("airportpos",fmsO["scratchpad"])
+					setFMSData("airportgate","-----")
+				else
+					fmsO["notify"]="NOT IN DATABASE"
+				end
+			elseif del == true then
+				setFMSData("airportpos",defaultFMSData().airportpos)
+				setFMSData("airportpos",defaultFMSData().airportgate)
+				setFMSData("irsLat",defaultFMSData().irsLat)
+				setFMSData("irsLon",defaultFMSData().irsLon)
 			else
-				fmsO["notify"]="NOT IN DATABASE"
+				fmsO["notify"]="INVALID ENTRY"
 			end
-		elseif del == true then
-			setFMSData("airportpos",defaultFMSData().airportpos)
-			setFMSData("airportpos",defaultFMSData().airportgate)
-			setFMSData("irsLat",defaultFMSData().irsLat)
-			setFMSData("irsLon",defaultFMSData().irsLon)
 		else
-			fmsO["notify"]="NOT IN DATABASE"
+			print("ERROR: navAidsJSON is invalid: "..navAidsJSON)
 		end
 	elseif value=="flttime" then 
 		hhV=string.sub(fmsO["scratchpad"],1,2)

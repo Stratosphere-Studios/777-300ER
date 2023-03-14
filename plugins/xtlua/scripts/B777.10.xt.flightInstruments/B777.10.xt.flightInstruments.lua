@@ -147,6 +147,8 @@ local minimumsFlashCount = {0,0}
 local iasFlashCount = {0,0}
 local minsFlashed = {false, false}
 local iasFlashed = {false, false}
+
+local rudderTrimTarget = 1
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
@@ -303,6 +305,7 @@ B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta",
 
 B777DR_map_zoom_knob                   = deferred_dataref("Strato/777/map_zoom_knob", "array[2]")
 B777DR_mins_mode_knob                  = deferred_dataref("Strato/777/mins_mode_knob", "array[2]")
+B777DR_rudder_trim_pos                 = deferred_dataref("Strato/777/cockpit/rudder_trim_knob_pos", "number")
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
 --*************************************************************************************--
@@ -327,6 +330,9 @@ simCMD_efis_fo_vor                       = find_command("sim/instruments/EFIS_co
 simCMD_efis_fo_ndb                       = find_command("sim/instruments/EFIS_copilot_ndb")
 simCMD_efis_fo_apt                       = find_command("sim/instruments/EFIS_copilot_apt")
 simCMD_efis_fo_terr                      = find_command("sim/instruments/EFIS_copilot_terr")
+
+simCMD_rudder_trim_l                     = find_command("sim/flight_controls/rudder_trim_left")
+simCMD_rudder_trim_r                     = find_command("sim/flight_controls/rudder_trim_right")
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
 --*************************************************************************************--
@@ -907,12 +913,33 @@ function B777_altm_baro_rst_fo_CMDhandler(phase, duration)
 		simDR_altimiter_setting[2] = 29.92
 	end
 end
+
+function B777_rudder_trim_l_CMDhandler(phase, duration)
+	if phase ~= 2 then
+		rudderTrimTarget = 0
+		simCMD_rudder_trim_l:once()
+	else
+		rudderTrimTarget = 1
+	end
+end
+
+function B777_rudder_trim_r_CMDhandler(phase, duration)
+	if phase ~= 2 then
+		rudderTrimTarget = 2
+		simCMD_rudder_trim_r:once()
+	else
+		rudderTrimTarget = 1
+	end
+end
+
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
 
-B777CMD_fltInst_adiru_switch         = deferred_command("Strato/777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
+B777CMD_rudder_trim_knob_l           = deferred_command("Strato/777/button_switch/rud_trim_l", "Rudder Trim Left", B777_rudder_trim_l_CMDhandler)
+B777CMD_rudder_trim_knob_r           = deferred_command("Strato/777/button_switch/rud_trim_r", "Rudder Trim Right", B777_rudder_trim_r_CMDhandler)
 
+B777CMD_fltInst_adiru_switch         = deferred_command("Strato/777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
 B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/777/adiru_align_now", "Align ADIRU Instantly", B777_fltInst_adiru_align_now_CMDhandler)
 
 B777CMD_ap_alt_up                    = deferred_command("Strato/777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
@@ -1086,6 +1113,7 @@ function setAnimations()
 		B777DR_minimums_mode_knob_anim[i] = B777_animate(B777DR_minimums_mode[i], B777DR_minimums_mode_knob_anim[i], 15)
 		B777DR_baro_mode_knob_anim[i] = B777_animate(B777DR_baro_mode_knob[i], B777DR_baro_mode_knob_anim[i], 15)
 	end
+	B777DR_rudder_trim_pos = B777_animate(rudderTrimTarget, B777DR_rudder_trim_pos, 15)
 end
 
 function setDispAlt()

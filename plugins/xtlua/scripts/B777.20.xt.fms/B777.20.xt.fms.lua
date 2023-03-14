@@ -153,7 +153,7 @@ function toDMS(value,isLat)
 	else
 		prefix = value > 0 and "E" or "W"
 	end
-	local retVal = string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
+	local retVal = isLat and string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds * 10) or string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
 	return retVal
 end
 
@@ -825,6 +825,12 @@ function unloadLastPos()
 	print("Unloaded lastpos: "..fmsModules["data"].pos)
 end
 
+function closeReadme()
+	find_command("Strato/B777/fms1/ls_key/R6"):once()
+	find_command("Strato/B777/fms2/ls_key/R6"):once()
+	find_command("Strato/B777/fms3/ls_key/R6"):once()
+end
+
 --function livery_load() end
 
 --Marauder28
@@ -964,6 +970,7 @@ end
 function aircraft_load()
 	simDR_cg_adjust = 0 --reset CG slider to begin current flight
 	run_after_time(loadLastPos, 5)
+	run_after_time(closeReadme, 5.1)
 end
 
 function aircraft_unload()
