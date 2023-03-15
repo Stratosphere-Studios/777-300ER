@@ -11,7 +11,7 @@ include("misc_tools.lua")
 --X plane datarefs
 --Cockpit controls
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
-yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
+rudder_pedals = globalPropertyf("Strato/777/cockpit/switches/rud_pedals")
 --gear_handle = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 --Indicators
 ra_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
@@ -480,13 +480,13 @@ function UpdateGearStrg(r_time)
 	if get(sys_C_press) > 450 then
 		local nw_tgt = 0
 		if get(nw_onground) == 1 then --steering happens only on ground to prevent tire skidding
-			nw_tgt = nw_ratio * get(yoke_heading_ratio)
+			nw_tgt = nw_ratio * get(rudder_pedals)
 		end
 		set(nw_strg, get(nw_strg) + (nw_tgt - get(nw_strg)) * r_time * get(f_time))
-		l_all = 0.05 * math.abs(get(yoke_heading_ratio))
+		l_all = 0.05 * math.abs(get(rudder_pedals))
 		if math.abs(get(nw_strg)) > 13 and get(throttle_pos) < 0.5 then
 			set(main_s_locked, 0)
-			w_tgt = (-1 * Round(get(yoke_heading_ratio), 3) - 0.185) / 0.815 * 14
+			w_tgt = (-1 * Round(get(rudder_pedals), 3) - 0.185) / 0.815 * 14
 		else
 			if math.abs(get(r_w_strg)) < 0.1 and math.abs(get(r_w_strg)) < 0.1 then
 				set(main_s_locked, 1)
@@ -506,38 +506,6 @@ function UpdateGearStrg(r_time)
 	set(r_w_strg, get(r_w_strg) + (w_tgt - get(r_w_strg)) * r_time * get(f_time))
 	set(l_w_strg, get(l_w_strg) + (w_tgt - get(l_w_strg)) * r_time * get(f_time))
 end
-
---function GetGVector()
---	
---end
---
---function UpdateGearPos()
---	--local sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
---	for i=2,3 do
---		local lock = globalPropertyfae("Strato/777/gear/lock_f", i)
---		local act_press = globalPropertyiae("Strato/777/gear/actuator_press", i)
---		local tgt_d = globalPropertyfae("Strato/777/gear/tgt", i)
---		local side = -1
---		local p_factor = 0 --pressure factor
---		if get(sys_C_press) < 500 then
---			p_factor = 1
---		end
---		if i == 3 then
---			side = 1
---		end
---		local gear_actual = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", i)
---		--print((get(gear_handle) - get(gear_actual)) * 0.008 * (1 - p_factor))
---		local tgt = get(gear_actual) + (1 - get(gear_actual)) * 0.001 * p_factor + (get(gear_handle) - get(gear_actual)) * 0.008 * (1 - p_factor)
---		local phi = get(t_phi) * side
---		if phi >= 0 and phi < 90 then
---			tgt = get(gear_actual) + (1 - phi * get(lock) / 90 - get(gear_actual)) * get(f_time) * 0.5 * p_factor + (get(gear_handle) - get(gear_actual)) * 0.008 * (1 - p_factor)
---		--elseif phi > 90 then
---		--	tgt = get(gear_actual) + (0.3 - get(gear_actual)) * 0.1 * get(lock)
---		end
---		set(tgt_d, tgt)
---		set(gear_actual, tgt)
---	end
---end
 
 function IsNoseReady()
 	local door = globalPropertyfae("Strato/777/gear/doors", 2)
@@ -664,10 +632,13 @@ function UpdateActuatorPress()
 			--setting up eagle claw for target
 			eag_claw_target[1] = get(sim_eag_R) * mlg_target
 			eag_claw_target[2] = get(sim_eag_L) * mlg_target
-			eag_claw_sync = mlg_target
+			if math.abs(get(custom_eag_L) - eag_claw_target[1]) < 0.08 and math.abs(get(custom_eag_R) - eag_claw_target[2]) < 0.08 then
+				eag_claw_sync = mlg_target
+			else
+				eag_claw_sync = 0
+			end
 		end
 		if ldg_extend == 1 and get(custom_eag_L) == eag_claw_target[1] and get(custom_eag_R) == eag_claw_target[2] then
-			eag_claw_sync = 1
 			ldg_extend = 0
 		end
 		--Locking gear
@@ -748,6 +719,7 @@ end
 
 function update()
 	set(gear_ovrd, 6)
+	UpdateManualBraking()
 	UpdateShuttleValve()
 	UpdateGearDoors()
 	set(handle_pos, get(handle_pos) + (get(normal_gear) - get(handle_pos)) * get(f_time) * 5)

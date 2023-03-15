@@ -135,8 +135,9 @@ function DrawLinesEICAS()
 			end
 			if get(c_time) >= dem_time[i] + 3 then
 				set(demand_past, get(demand_state))
-				dem_set[i] = 0
 			end
+		else
+			dem_set[i] = 0
 		end
 		if get(primary_state) ~= get(primary_past) then
 			if pri_set[i] == 0 then
@@ -145,13 +146,14 @@ function DrawLinesEICAS()
 			end
 			if get(c_time) >= pri_time[i] + 3 then
 				set(primary_past, get(primary_state))
-				pri_set[i] = 0
 			end
+		else
+			pri_set[i] = 0
 		end
 	end
 end
 
-function DrawBrakes()
+function DrawBrakes()   
 	local max_temp_L = globalPropertyf("Strato/777/gear/truck_L_max")
 	local max_temp_R = globalPropertyf("Strato/777/gear/truck_R_max")
 	--Drawing PSI of front tires

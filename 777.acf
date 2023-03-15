@@ -36794,9 +36794,9 @@ P acf/_fixed_role/6 0
 P acf/_fixed_role/7 0
 P acf/_fixed_role/8 0
 P acf/_fixed_role/count 9
-P acf/_flap1_cd 0.079999998
-P acf/_flap1_cl 1.850000024
-P acf/_flap1_cm -0.259000003
+P acf/_flap1_cd 0.064999998
+P acf/_flap1_cl 1.649999976
+P acf/_flap1_cm -0.282000005
 P acf/_flap1_cratR 0.209999993
 P acf/_flap1_cratT 0.209999993
 P acf/_flap1_dn/0 0.000000000
@@ -36818,8 +36818,8 @@ P acf/_flap1_ptch_above_50 0
 P acf/_flap1_roll 0.000000000
 P acf/_flap1_roll_above_50 0
 P acf/_flap1_type 3
-P acf/_flap2_cd 0.045000002
-P acf/_flap2_cl 1.710000038
+P acf/_flap2_cd 0.064999998
+P acf/_flap2_cl 1.649999976
 P acf/_flap2_cm -0.282000005
 P acf/_flap2_cratR 0.200000003
 P acf/_flap2_cratT 0.300000012
@@ -43415,6 +43415,7 @@ END_GROUP
 GROUP Lower Eicas
   LOCKED
   CHAINED
+  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     LOCKED
@@ -44322,6 +44323,7 @@ GROUP Lower Eicas
     SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
     LOCKED
     CHAINED
+    GROUP_OPEN
     GROUP ACE fail
       SHOW_EQUAL 1.000000 Strato/777/displays/ace_fail_any
       LOCKED
@@ -44612,7 +44614,7 @@ GROUP Lower Eicas
     gen_pointer RUDDER
       POS 3247.000000 -5.500000
       IMAGE EICAS lower/FCTL/pointer_up
-      DATAREF sim/flightmodel2/wing/rudder1_deg[12]
+      DATAREF sim/flightmodel2/wing/rudder1_deg[11]
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED

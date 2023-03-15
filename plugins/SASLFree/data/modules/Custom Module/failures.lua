@@ -10,7 +10,6 @@ This is the only way to get the menu stuff working with sasl. There will be a pr
 fbw_secondary_fail = globalPropertyi("Strato/777/failures/fctl/secondary")
 fbw_direct_fail = globalPropertyi("Strato/777/failures/fctl/direct")
 
-fbw_mode = globalProperty("Strato/777/fctl/pfc/mode")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
 
 function UpdateCheckMark(dref, idx, menu, item, value)

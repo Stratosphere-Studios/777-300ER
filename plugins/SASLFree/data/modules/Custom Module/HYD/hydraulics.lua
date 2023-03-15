@@ -70,20 +70,10 @@ hyd_temp = {0, 0, 0}
 fuel_temp = {0, 0, 0} --Will be implemented later
 
 brake_qty_past = {0, 0}
+load_past = {0, 0, 0}
 
---Fault light logic
---Primary pumps
-primary_past  = {0, 0, 0, 0}
-primary_shutdown = {0, 0, 0, 0}
-primary_ovht = {0, 0, 0, 0}
 primary_start_time = {0, 0, 0, 0}
-
---Demand pumps
-demand_ovht = {0, 0, 0, 0}
-demand_time = {0, 0, 0, 0}
 demand_start_time = {0, 0, 0, 0}
-demand_shutdown = {0, 0, 0, 0}
-demand_was_working = {0, 0, 0, 0} --Was the demand pump working at time of shut down?
 
 --Left ACMP low pressure logic
 L_ACMP_time = -16 -- time when pressure reached 2400 psi with both pumps on
@@ -108,63 +98,6 @@ R_ACMP_engage = false
 
 temp_acc = {0, 0, 0}
 hyd_qty_initial = {0.98, 0.95, 0.97}
-
-function UpdateLights()
-	for i=1,4 do
-		local pressure = globalPropertyiae("Strato/777/hydraulics/press", GetSysIdx(i))
-		--DRefs for primary pumps
-		local light_primary = globalPropertyiae("Strato/777/hydraulics/pump/primary/fault", i)
-		local primary_switch = globalPropertyiae("Strato/777/hydraulics/pump/primary/state", i)
-		local primary_fail = globalPropertyiae("Strato/777/hydraulics/pump/primary/fail", i) 
-		local primary_temperature = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
-		--Low pressure logic
-		if get(primary_switch) ~= primary_past[i] then
-			if get(primary_switch) == 0 then
-				primary_shutdown[i] = get(c_time)
-			end
-			primary_past[i] = get(primary_switch)
-		end
-		--Overheat logic
-		if get(primary_temperature) == 1 and primary_ovht[i] == 0 then
-			primary_shutdown[i] = get(c_time)
-			primary_ovht[i] = 1
-		elseif get(primary_temperature) == 0 then
-			primary_ovht[i] = 0
-		end
-		if get(primary_switch) == 0 and get(c_time) >= primary_shutdown[i] + 5 or get(primary_fail) == 1 or get(pressure) < 1200 then
-			set(light_primary, 1)
-		elseif get(c_time) >= primary_shutdown[i] + 5 and get(primary_temperature) == 1 then
-			set(light_primary, 1)
-		else
-			set(light_primary, 0)
-		end
-		--DRefs for demand pumps
-		local light_demand = globalPropertyiae("Strato/777/hydraulics/pump/demand/fault", i)
-		local demand_switch = globalPropertyiae("Strato/777/hydraulics/pump/demand/state", i)
-		local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
-		local demand_past = globalPropertyiae("Strato/777/hydraulics/pump/demand/past", i)
-		local demand_temperature = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
-		--Wait 5 seconds if a working demand pump was shut down
-		if get(demand_past) == 1 and get(demand_switch) == 0 and demand_was_working[i] == 0 then
-			demand_shutdown[i] = get(c_time)
-			demand_was_working[i] = 1
-		elseif get(demand_past) == 0 and get(demand_switch) == 0 and demand_was_working[i] == 0 then
-			demand_shutdown[i] = get(c_time) - 5
-		end
-		--Demand pump overheat logic
-		if get(demand_temperature) == 1 and demand_ovht[i] == 0 then
-			demand_ovht[i] = 1
-			demand_time[i] = get(c_time)
-		elseif get(demand_temperature) == 0 then
-			demand_ovht[i] = 0
-		end
-		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch) == 0) or (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) or get(demand_fail) == 1 or get(pressure) < 1200 then
-			set(light_demand, 1)
-		else
-			set(light_demand, 0)
-		end
-	end
-end
 
 function GetMaxHydPress() --since some things are driven by all 3 hydraulic systems, we need to know the maximum pressure
 	local pressure_L = globalPropertyiae("Strato/777/hydraulics/press", 1)
@@ -514,19 +447,24 @@ function UpdatePressure(delay) --Updates hydraulic pressure based on quantity, w
 				local demand_fail = globalPropertyiae("Strato/777/hydraulics/pump/demand/fail", i) 
 				local desired_pressure = 0
 				local increase = 0
-				local load_total = globalPropertyfae("Strato/777/hydraulics/sys_load", sys_idx)
-				local decrease = 500 * get(load_total) + bool2num(i ~= 2) * round(math.random(-1, 1)) * 10 --decrease due to performance degradation when overheating and due to change in load
+				local load_total = get(system_load, sys_idx)
+				if load_total >= load_past[sys_idx] then
+					load_total = load_total - load_past[sys_idx]
+				else
+					load_total = 0
+				end
+				local decrease = 500 * load_total + bool2num(i ~= 2) * round(math.random(-1, 1)) * 10 --decrease due to performance degradation when overheating and due to change in load
 				if i ~= 2 then
-					l_past = get(load_total)
+					load_past[sys_idx] = get(system_load, sys_idx)
 				end
 				local total_pumps = GetTotalPumpsWorking()
 				if get(primary_temp) >= 75 and get(primary_fail) == 0 or get(demand_temp) >= 75 and get(demand_fail) == 0 then
 					decrease = decrease + 400 / pumps_on
 				end
 				if get(pressure) < 2700 then
-					increase = 80 * (1 - get(load_total) / total_pumps) --pressure increase would vary depending on load
+					increase = 80 * (1 - get(system_load, sys_idx) / total_pumps) --pressure increase would vary depending on load
 				else
-					increase = 20 * (1 - get(load_total) / total_pumps)
+					increase = 20 * (1 - get(system_load, sys_idx) / total_pumps)
 				end
 				if i == 2 or i == 3 then
 					desired_pressure = (3000 + 50 * (pumps_on - 1)) * round(get(quantity)) + 40 - decrease --Center hydraulic system is more powerful than others
@@ -581,7 +519,6 @@ function UpdateQuantity()
 		local h_temp = hyd_temp[i]
 		local qty = globalPropertyfae("Strato/777/hydraulics/qty", i)
 		local press = globalPropertyiae("Strato/777/hydraulics/press", i)
-		local load_total = globalPropertyfae("Strato/777/hydraulics/sys_load", i)
 		local qty_initial = hyd_qty_initial[i]
 		local increase = 0
 		if i == get(brake_sys) then
@@ -590,9 +527,9 @@ function UpdateQuantity()
 			brake_qty_past[1] = get(brake_qty_L)
 			brake_qty_past[2] = get(brake_qty_R)
 			hyd_qty_initial[i] = hyd_qty_initial[i] + increase
-			increase = increase - 0.03 * ((get(press) - 50) / press_max[i] + 3 * (get(load_total) - get(brake_load) * 0.3))
+			increase = increase - 0.03 * ((get(press) - 50) / press_max[i] + 3 * (get(system_load, i) - get(brake_load) * 0.3))
 		else
-			increase = - 0.03 * ((get(press) - 50) / press_max[i] + 4 * get(load_total))
+			increase = - 0.03 * ((get(press) - 50) / press_max[i] + 4 * get(system_load, i))
 		end
 		if math.abs(h_temp - get(oat)) >= 20 then --the higher the temperature, the higher the oil density => qty will increase with temperature
 			increase = increase + math.floor((h_temp - get(oat)) / 20) * 0.03
@@ -609,7 +546,6 @@ function update()
 	UpdateActualState()
 	UpdateTemperatures(0.5)
 	UpdatePressure(0.5)
-	UpdateLights()
 end
 
 function onAirportLoaded() --set all the pressures and pumps to normal if engines are running

@@ -15,6 +15,15 @@ addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
+--Data Ref registering/finding:
+
+--Switches
+
+pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
+pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
+pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
+rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
+
 --Systems datarefs
 
 max_allowable = createGlobalPropertyi("Strato/777/fctl/vmax", 0)
@@ -80,6 +89,7 @@ components = {
 		visible = true,
 		fpsLimit = 50
 	},
+	lights {},
 	custom_commands {},
 	failures {}
 }
