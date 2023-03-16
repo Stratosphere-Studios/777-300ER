@@ -6,7 +6,10 @@
 *****************************************************************************************
 --]]
 
+--EICAS control:
+recall = globalPropertyi("Strato/777/eicas/rcl", 0)
 --Landing gear
+gear_lever = globalPropertyi("Strato/777/cockpit/switches/gear_tgt")
 normal_gear = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 lock_ovrd = globalPropertyi("Strato/777/gear/lock_ovrd")
 --Brakes
@@ -31,6 +34,7 @@ stab_cutout_R = globalPropertyi("Strato/777/fctl/stab_cutout_R")
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 --Finding own datarefs
+dsp_ctrl = globalProperty("Strato/777/cdu_eicas_ctl")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
 man_keyboard = globalPropertyi("Strato/777/gear/man_keyboard")
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
@@ -38,6 +42,9 @@ pfc_disc = globalPropertyi("Strato/777/fctl/pfc/disc")
 tac_engage = globalPropertyi("Strato/777/fctl/ace/tac_eng")
 rud_trim_man = globalPropertyf("Strato/777/fctl/ace/rud_trim_man")
 rud_trim_reset = globalPropertyi("Strato/777/fctl/ace/rud_trim_reset")
+
+--Creating own datarefs:
+
 
 --Finding simulator commands
 toggle_regular = sasl.findCommand("sim/flight_controls/brakes_toggle_regular")
@@ -60,6 +67,8 @@ pfc_disc_switch = sasl.createCommand("Strato/777/commands/overhead/pfc_disc",
 										"Command for the PFC disc switch")
 tac_switch = sasl.createCommand("Strato/777/commands/overhead/tac", 
 										"Command for the TAC button")
+recall_btn = sasl.createCommand("Strato/777/commands/glareshield/recall", 
+										"Command for the recall button")
 altn_trim_up = sasl.createCommand("Strato/777/commands/pedestal/pitch_trim_altn_up", 
 										"Command for the alternate stab trim switch")
 altn_trim_dn = sasl.createCommand("Strato/777/commands/pedestal/pitch_trim_altn_down", 
@@ -116,6 +125,20 @@ function ParkBrakeHandler(phase)
 	end
 end
 
+--EICAS control
+
+function ToggleRecall(phase)
+	if phase == SASL_COMMAND_CONTINUE then
+		if get(dsp_ctrl, 1) == 0 and 
+		   get(dsp_ctrl, 2) == 0 and
+		   get(dsp_ctrl, 3) == 0 then
+			set(recall, 1)
+		end
+	elseif phase == SASL_COMMAND_END then
+		set(recall, 0)
+	end
+end
+
 --FBW:
 
 function PFCDiscHandler(phase)
@@ -133,27 +156,29 @@ end
 --Gear:
 
 function GearUp(phase)
-	if get(on_ground) == 1 then
-		if get(lock_ovrd) == 1 and get(normal_gear) == 1 then
-			return 1
+	if phase == 0 then
+		if get(on_ground) == 1 then
+			if get(lock_ovrd) == 1 and get(gear_lever) == 1 then
+				set(gear_lever, 0)
+			end
 		else
-			return 0
+			set(gear_lever, 0)
 		end
-	else
-		return 1
 	end
+	return 0
 end
 
 function ToggleGear(phase)
-	if get(on_ground) == 1 and get(normal_gear) == 1 then
-		if get(lock_ovrd) == 1 then
-			return 1
+	if phase == 0 then
+		if get(on_ground) == 1 then
+			if (get(lock_ovrd) == 1 and get(gear_lever) == 1) or get(gear_lever) == 0 then
+				set(gear_lever, 1 - get(gear_lever))
+			end
 		else
-			return 0
+			set(gear_lever, 1 - get(gear_lever))
 		end
-	else
-		return 1
 	end
+	return 0
 end
 
 --Horizontal stabilizer trim
@@ -280,6 +305,7 @@ sasl.registerCommandHandler(rudder_trim_left, 1, RudderTrimLeft)
 sasl.registerCommandHandler(rudder_trim_right, 1, RudderTrimRight)
 sasl.registerCommandHandler(rudder_trim_center, 1, RudderTrimReset)
 --Own commands
+sasl.registerCommandHandler(recall_btn, 1, ToggleRecall)
 sasl.registerCommandHandler(pfc_disc_switch, 1, PFCDiscHandler)
 sasl.registerCommandHandler(tac_switch, 1, TACHandler)
 sasl.registerCommandHandler(altn_trim_up, 1, PitchTrimUpAltn)
@@ -287,6 +313,9 @@ sasl.registerCommandHandler(altn_trim_dn, 1, PitchTrimDnAltn)
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
+	if get(on_ground) == 0 then
+		set(normal_gear, get(gear_lever))
+	end
 end
 
 function onAirportLoaded()

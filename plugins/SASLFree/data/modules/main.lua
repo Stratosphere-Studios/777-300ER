@@ -19,6 +19,7 @@ addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
 
 --Switches
 
+gear_lever = createGlobalPropertyi("Strato/777/cockpit/switches/gear_tgt", 0)
 pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
