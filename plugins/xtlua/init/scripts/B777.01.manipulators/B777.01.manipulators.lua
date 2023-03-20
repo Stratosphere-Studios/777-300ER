@@ -58,6 +58,8 @@ B777CMD_mcp_ap_flch                       = deferred_command("Strato/B777/button
 
 --AFT-----
 
+B777CMD_ail_trim_r                        = deferred_command("Strato/777/cockpit/ail_trim_r", "Aileron Trim ", ail_trim_r_CMDhandler)
+B777CMD_ail_trim_l                        = deferred_command("Strato/777/cockpit/ail_trim_l", "Aileron Trim ", ail_trim_l_CMDhandler)
 
 ---MAIN PANEL----------
 
@@ -107,9 +109,9 @@ B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovh
 
 B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")
 
-B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lock_ovrd/btn_pos", "number")
-
 B777DR_cockpit_panel_lights_brightness    = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
 B777DR_cockpit_panel_lights_knob_pos      = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights_knob_pos", "array[6]")
 
 B777DR_cockpit_door_target                = deferred_dataref("Strato/cockpit/door_target", "number")
+B777DR_rudder_trim_ctr                    = deferred_dataref("Strato/777/cockpit/rudder_trim_ctr", "number")
+B777DR_ail_trim                           = deferred_dataref("Strato/777/cockpit/ail_trim", "number")

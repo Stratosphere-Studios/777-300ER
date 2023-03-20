@@ -63,10 +63,6 @@ rudder_trim_left = sasl.findCommand("sim/flight_controls/rudder_trim_left")
 rudder_trim_right = sasl.findCommand("sim/flight_controls/rudder_trim_right")
 rudder_trim_center = sasl.findCommand("sim/flight_controls/rudder_trim_center")
 --Creating own commands
-pfc_disc_switch = sasl.createCommand("Strato/777/commands/overhead/pfc_disc", 
-										"Command for the PFC disc switch")
-tac_switch = sasl.createCommand("Strato/777/commands/overhead/tac", 
-										"Command for the TAC button")
 recall_btn = sasl.createCommand("Strato/777/commands/glareshield/recall", 
 										"Command for the recall button")
 altn_trim_up = sasl.createCommand("Strato/777/commands/pedestal/pitch_trim_altn_up", 
@@ -136,20 +132,6 @@ function ToggleRecall(phase)
 		end
 	elseif phase == SASL_COMMAND_END then
 		set(recall, 0)
-	end
-end
-
---FBW:
-
-function PFCDiscHandler(phase)
-	if phase == SASL_COMMAND_BEGIN then
-		set(pfc_disc, 1 - get(pfc_disc))
-	end
-end
-
-function TACHandler(phase)
-	if phase == SASL_COMMAND_BEGIN then
-		set(tac_engage, 1 - get(tac_engage))
 	end
 end
 
@@ -306,8 +288,6 @@ sasl.registerCommandHandler(rudder_trim_right, 1, RudderTrimRight)
 sasl.registerCommandHandler(rudder_trim_center, 1, RudderTrimReset)
 --Own commands
 sasl.registerCommandHandler(recall_btn, 1, ToggleRecall)
-sasl.registerCommandHandler(pfc_disc_switch, 1, PFCDiscHandler)
-sasl.registerCommandHandler(tac_switch, 1, TACHandler)
 sasl.registerCommandHandler(altn_trim_up, 1, PitchTrimUpAltn)
 sasl.registerCommandHandler(altn_trim_dn, 1, PitchTrimDnAltn)
 

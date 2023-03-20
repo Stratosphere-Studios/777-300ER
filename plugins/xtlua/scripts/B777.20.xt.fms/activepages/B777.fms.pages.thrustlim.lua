@@ -1,4 +1,4 @@
-simDR_EPR_target_bug		= find_dataref("sim/cockpit2/engine/actuators/EPR_target_bug")
+--[[simDR_EPR_target_bug		= find_dataref("sim/cockpit2/engine/actuators/EPR_target_bug")
 simDR_N1_target_bug			= find_dataref("sim/cockpit2/engine/actuators/N1_target_bug")
 
 thrust_text = ""
@@ -121,7 +121,7 @@ fmsPages["THRUSTLIM"]["templateSmall"]={
 "                        ",
 "                        "
 }
-
+]]
 --[[ Only if in the air!
 fmsPages["THRUSTLIM"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be this way
     return{
@@ -159,7 +159,7 @@ fmsPages["THRUSTLIM"]["templateSmall"]={
 
 ]]
 
-fmsFunctionsDefs["THRUSTLIM"]={}
+--[[fmsFunctionsDefs["THRUSTLIM"]={}
 
 
 fmsFunctionsDefs["THRUSTLIM"]["L1"]={"setdata","thrustsel"}
@@ -170,4 +170,49 @@ fmsFunctionsDefs["THRUSTLIM"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["THRUSTLIM"]["R1"]={"setdata","thrustn1"}
 fmsFunctionsDefs["THRUSTLIM"]["R2"]={"setDref","CLB"}
 fmsFunctionsDefs["THRUSTLIM"]["R3"]={"setDref","CLB1"}
-fmsFunctionsDefs["THRUSTLIM"]["R4"]={"setDref","CLB2"}
+fmsFunctionsDefs["THRUSTLIM"]["R4"]={"setDref","CLB2"}]]
+
+fmsPages["THRUSTLIM"]=createPage("THRUSTLIM")
+fmsPages["THRUSTLIM"].getPage=function(self,pgNo,fmsID)
+	return {
+		"       THRUST LIM       ",
+		"                        ",
+		"---                    %",
+		"                        ",
+		"<TO   <SEL><ARM>    CLB>",
+		"                        ",
+		"<-10%             CLB 1>",
+		"                        ",
+		"<-20%             CLB 2>",
+		"                        ",
+		"                        ",
+		"                        ",
+		"<INDEX          TAKEOFF>"
+	}
+end
+
+fmsPages["THRUSTLIM"].getSmallPage=function(self,pgNo,fmsID)
+	return {
+		"                        ",
+		" SEL      OAT    TO  N1 ",
+		"            `C          ",
+		"                        ",
+		"                        ",
+		" TO 1                   ",
+		"                        ",
+		" TO 2                   ",
+		"                        ",
+		"                        ",
+		"                        ",
+		"------------------------",
+		"                        "
+	}
+end
+
+fmsPages["THRUSTLIM"].getNumPages=function(self)
+	return 1
+end
+
+fmsFunctionsDefs["THRUSTLIM"]={}
+fmsFunctionsDefs["THRUSTLIM"]["L6"]={"setpage","INITREF"}
+fmsFunctionsDefs["THRUSTLIM"]["R6"]={"setpage","TAKEOFF"}

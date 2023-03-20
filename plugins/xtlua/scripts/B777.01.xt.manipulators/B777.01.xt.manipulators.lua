@@ -40,6 +40,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --*************************************************************************************--
 
 local B777_ctr1_button_target = {0, 0, 0, 0, 0}
+local ailTrimPos = 1
 
 --*************************************************************************************--
 --**                               FIND X-PLANE DATAREFS                             **--
@@ -57,7 +58,7 @@ simDR_beacon_light_switch                 = find_dataref("sim/cockpit2/switches/
 simDR_bus_volts                           = find_dataref("sim/cockpit2/electrical/bus_volts")
 simDR_at_armed                            = find_dataref("sim/cockpit2/autopilot/autothrottle_arm")
 simDR_fd_enabled                          = find_dataref("sim/cockpit2/autopilot/flight_director_mode")
-simDR_xp_version                          = find_dataref("sim/version/xplane_internal_version")
+simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch")
 
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
@@ -65,15 +66,9 @@ simDR_xp_version                          = find_dataref("sim/version/xplane_int
 B777DR_primary_hyd_pump_sw                = find_dataref("Strato/777/hydraulics/pump/primary/state")
 B777DR_demand_hyd_pump_sw                 = find_dataref("Strato/777/hydraulics/pump/demand/state")
 B777DR_gear_altn_extnsn_target            = find_dataref("Strato/777/gear/altn_extnsn")
-B777DR_gear_lock_ovrd_target              = find_dataref("Strato/777/gear/lock_ovrd")
 --B777DR_hdg_mode                           = find_dataref("Strato/777/displays/hdg_mode")
 B777DR_prk_brk_target                     = find_dataref("Strato/777/gear/park_brake")
 B777DR_grd_pwr_primary                    = find_dataref("Strato/B777/ext_pwr")
-
---if string.match(tostring(simDR_xp_version), "12") then
-   simDR_wiper_switch                        = find_dataref("sim/cockpit2/switches/wiper_speed_switch")
---end
-
 B777DR_stab_cutout_C                      = find_dataref("Strato/777/fctl/stab_cutout_C")
 B777DR_stab_cutout_R                      = find_dataref("Strato/777/fctl/stab_cutout_R")
 B777DR_ace_tac_eng                        = find_dataref("Strato/777/fctl/ace/tac_eng")
@@ -120,22 +115,28 @@ B777DR_hyd_demand_switch_pos              = deferred_dataref("Strato/cockpit/ovh
 
 B777DR_gear_altn_extnsn_pos               = deferred_dataref("Strato/777/gear_alt_extnsn_pos", "number")
 
-B777DR_gear_lock_ovrd_pos                 = deferred_dataref("Strato/777/gear/lock_ovrd/btn_pos", "number")
-
 B777DR_cockpit_panel_lights_brightness    = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights", "array[6]")
 B777DR_cockpit_panel_lights_knob_pos      = deferred_dataref("Strato/777/cockpit/cockpit_panel_lights_knob_pos", "array[6]")
 
-B777DR_cockpit_door_target = deferred_dataref("Strato/cockpit/door_target", "number")
+B777DR_cockpit_door_target                = deferred_dataref("Strato/cockpit/door_target", "number")
+B777DR_rudder_trim_ctr                    = deferred_dataref("Strato/777/cockpit/rudder_trim_ctr", "number")
+B777DR_ail_trim                           = deferred_dataref("Strato/777/cockpit/ail_trim", "number")
+
 
 --*************************************************************************************--
 --**                              X-PLANE COMMAND HANDLERS                           **--
 --*************************************************************************************--
 
 
+
+
 --*************************************************************************************--
 --**                               FIND X-PLANE COMMANDS                            **--
 --*************************************************************************************--
 
+simCMD_rudder_trim_ctr                   = find_command("sim/flight_controls/rudder_trim_center")
+simCMD_ail_trim_r                        = find_command("sim/flight_controls/aileron_trim_right")
+simCMD_ail_trim_l                        = find_command("sim/flight_controls/aileron_trim_left")
 
 ---MCP----------
 simCMD_ap_servos_on                      = find_command("sim/autopilot/servos_on")
@@ -356,6 +357,23 @@ function B777_ctr1_at_disco_CMDhandler(phase, duration)
    end
 end
 
+function ail_trim_r_CMDhandler(phase, duration)
+   if phase ~= 2 then
+      simCMD_ail_trim_r:once()
+      ailTrimPos = 2
+   else
+      ailTrimPos = 1
+   end
+end
+
+function ail_trim_l_CMDhandler(phase, duration)
+   if phase ~= 2 then
+      simCMD_ail_trim_l:once()
+      ailTrimPos = 0
+   else
+      ailTrimPos = 1
+   end
+end
 --*************************************************************************************--
 --**                              CREATE CUSTOM COMMANDS                             **--
 --*************************************************************************************--
@@ -392,6 +410,8 @@ B777CMD_mcp_ap_flch                       = deferred_command("Strato/B777/button
 
 --AFT-----
 
+B777CMD_ail_trim_r                        = deferred_command("Strato/777/cockpit/ail_trim_r", "Aileron Trim ", ail_trim_r_CMDhandler)
+B777CMD_ail_trim_l                        = deferred_command("Strato/777/cockpit/ail_trim_l", "Aileron Trim ", ail_trim_l_CMDhandler)
 
 ---MAIN PANEL----------
 
@@ -429,6 +449,10 @@ function coverPhysics() -- moves switches under switch covers when switch covers
    if B777DR_ctr_cover_positions[1] < 0.1 then
       B777DR_stab_cutout_R = 0
    end
+
+   if B777DR_ovhd_aft_cover_target[0] < 0.1 then
+      B777DR_pfc_disc = 0
+   end
 end
 
 --*************************************************************************************--
@@ -459,13 +483,19 @@ function after_physics()
    B777DR_kill_cabin = 1 - B777DR_cockpit_door_target
    B777DR_cockpit_door_pos = B777_animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 3)
 
-   for i = 1, 18 do
+   --[[for i = 1, 18 do
       if i ~= 15 or i ~= 13 then
          B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 20)
       end
-   end
+   end]]
    B777DR_mcp_button_pos[15] = B777_animate(simDR_at_armed, B777DR_mcp_button_pos[15], 20)
    B777DR_mcp_button_pos[13] = B777_animate(simDR_fd_enabled, B777DR_mcp_button_pos[13], 20)
+
+   for i = 1, 18 do
+      if i ~= 15 or i ~= 13 then
+         B777DR_mcp_button_pos[i] = B777DR_mcp_button_target[i]
+      end
+   end
 
    for i = 1, 5 do
       B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 20)
@@ -473,9 +503,9 @@ function after_physics()
    B777DR_ctr1_button_pos[6] = B777_animate(B777DR_stab_cutout_C, B777DR_ctr1_button_pos[6], 20)
    B777DR_ctr1_button_pos[7] = B777_animate(B777DR_stab_cutout_R, B777DR_ctr1_button_pos[7], 20)
 
-   B777DR_ovhd_aft_button_positions[1] = B777_animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 20)
-   B777DR_ovhd_aft_button_positions[2] = B777_animate(B777DR_ovhd_aft_button_target[2], B777DR_ace_tac_eng, 20)
-   B777DR_ovhd_aft_button_positions[3] = B777_animate(B777DR_ovhd_aft_button_target[3], B777DR_pfc_disc, 20)
+   B777DR_ovhd_aft_button_positions[1] = B777_animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 15)
+   B777DR_ovhd_aft_button_positions[2] = B777_animate(B777DR_ace_tac_eng,  B777DR_ovhd_aft_button_positions[2], 15)
+   B777DR_ovhd_aft_button_positions[3] = B777_animate(B777DR_pfc_disc,  B777DR_ovhd_aft_button_positions[3], 15)
 
    for i = 1, 5 do
       B777DR_ovhd_fwd_button_positions[i] = B777_animate(simDR_landing_light_switches[i], B777DR_ovhd_fwd_button_positions[i], 20)
@@ -485,10 +515,8 @@ function after_physics()
    B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 20)
    B777DR_ovhd_fwd_button_positions[9] = B777_animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 20)
 
-   if string.match(tostring(simDR_xp_version), "12") then
-      B777DR_ovhd_fwd_button_positions[10] = B777_animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[10], 20)
-      B777DR_ovhd_fwd_button_positions[11] = B777_animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[11], 20)
-   end
+   B777DR_ovhd_fwd_button_positions[10] = B777_animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[10], 20)
+   B777DR_ovhd_fwd_button_positions[11] = B777_animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[11], 20)
 
    for i = 0, 3 do
       B777DR_hyd_primary_switch_pos[i] = B777_animate(B777DR_primary_hyd_pump_sw[i], B777DR_hyd_primary_switch_pos[i], 20)
@@ -513,8 +541,6 @@ function after_physics()
 
    B777DR_gear_altn_extnsn_pos = B777_animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 20)
 
-   B777DR_gear_lock_ovrd_pos = B777_animate(B777DR_gear_lock_ovrd_target, B777DR_gear_lock_ovrd_pos, 20)
-
    for i = 0, 5 do
       if simDR_bus_volts[0] >=5 or simDR_bus_volts[1] >=5 or simDR_bus_volts[2] >=5 then
          B777DR_cockpit_panel_lights_brightness[i] = B777DR_cockpit_panel_lights_knob_pos[i]
@@ -523,9 +549,16 @@ function after_physics()
       end
    end
 
+   B777DR_ail_trim = B777_animate(ailTrimPos, B777DR_ail_trim, 15)
+
    B777DR_ovhd_ctr_button_positions[0] = B777_animate(B777DR_grd_pwr_primary, B777DR_ctr_cover_positions[0], 10)
 
 	coverPhysics()
+
+   if B777DR_rudder_trim_ctr == 1 then
+      simCMD_rudder_trim_ctr:once()
+   end
+
 end
 
 --function after_replay()

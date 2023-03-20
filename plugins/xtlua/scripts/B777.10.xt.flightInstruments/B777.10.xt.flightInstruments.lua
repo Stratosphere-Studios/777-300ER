@@ -196,7 +196,6 @@ B777DR_vman_min                        = find_dataref("Strato/777/fctl/vmanuever
 B777DR_cockpit_door_target             = find_dataref("Strato/cockpit/door_target")
 B777DR_ace_fail                        = find_dataref("Strato/777/failures/fctl/ace")
 
-B777DR_rcl                             = find_dataref("Strato/777/eicas/rcl")
 B777DR_unlocked                        = find_dataref("Strato/777/readme_unlocked")
 B777DR_cockpit_door_pos                = find_dataref("Strato/777/cockpit_door_pos")
 B777R_rudder_trim_man                  = find_dataref("Strato/777/fctl/ace/rud_trim_man")
@@ -297,8 +296,8 @@ B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
 B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
 B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
-B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[18]")
-B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[14]")
+B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[35]")
+B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[35]")
 
 B777DR_pfd_mtrs                        = deferred_dataref("Strato/777/displays/mtrs", "array[2]")
 B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta", "array[2]")
@@ -333,6 +332,8 @@ simCMD_efis_fo_terr                      = find_command("sim/instruments/EFIS_co
 
 simCMD_rudder_trim_l                     = find_command("sim/flight_controls/rudder_trim_left")
 simCMD_rudder_trim_r                     = find_command("sim/flight_controls/rudder_trim_right")
+
+B777CMD_efis_rcl                         = find_command("Strato/777/commands/glareshield/recall")
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
 --*************************************************************************************--
@@ -341,79 +342,134 @@ simCMD_rudder_trim_r                     = find_command("sim/flight_controls/rud
 function B777_efis_lEicas_rcl_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
 		if phase == 0 then
-			B777DR_rcl = 1
+			B777DR_efis_button_target[32] = 1
+			B777CMD_efis_rcl:once()
 		elseif phase == 2 then
-			B777DR_rcl = 0
+			B777DR_efis_button_target[32] = 0
 		end
 	end
 end
 
 function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(4) end
+		if phase == 0 then
+			setEicasPage(4)
+			B777DR_efis_button_target[21] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[21] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_stat_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(9) end
+		if phase == 0 then
+			setEicasPage(9)
+			B777DR_efis_button_target[22] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[22] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_elec_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(3) end
+		if phase == 0 then
+			setEicasPage(3)
+			B777DR_efis_button_target[23] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[23] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_hyd_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(8) end
+		if phase == 0 then
+			setEicasPage(8)
+			B777DR_efis_button_target[24] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[24] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_fuel_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(6) end
+		if phase == 0 then
+			setEicasPage(6)
+			B777DR_efis_button_target[25] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[25] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_air_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(1) end
+		if phase == 0 then
+			setEicasPage(1)
+			B777DR_efis_button_target[26] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[26] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_door_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(2) end
+		if phase == 0 then
+			setEicasPage(2)
+			B777DR_efis_button_target[27] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[27] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_gear_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(7) end
+		if phase == 0 then
+			setEicasPage(7)
+			B777DR_efis_button_target[28] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[28] = 0
+		end
 	end
 end
 
 function B777_efis_lEicas_fctl_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(5) end
+		if phase == 0 then
+			setEicasPage(5)
+			B777DR_efis_button_target[29] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[29] = 0
+		end
 	end
 end
-
 
 function B777_efis_lEicas_chkl_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(10) end
+		if phase == 0 then
+			setEicasPage(10)
+			B777DR_efis_button_target[31] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[31] = 0
+		end
 	end
 end
 
-function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
+--[[function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
 	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(11) end
+		if phase == 0 then
+			setEicasPage(11)
+			B777DR_efis_button_target[30] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[30] = 0
+		end
 	end
-end
+end]]
 
 function B777_efis_wxr_switch_CMDhandler(phase, duration)
 	if phase == 0 then
@@ -915,20 +971,34 @@ function B777_altm_baro_rst_fo_CMDhandler(phase, duration)
 end
 
 function B777_rudder_trim_l_CMDhandler(phase, duration)
-	if phase ~= 2 then
+	--[[if phase ~= 2 then
 		rudderTrimTarget = 0
 		simCMD_rudder_trim_l:once()
 	else
 		rudderTrimTarget = 1
+	end]]
+	if phase == 0 then
+		rudderTrimTarget = 0
+		simCMD_rudder_trim_l:start()
+	elseif phase == 2 then
+		rudderTrimTarget = 1
+		simCMD_rudder_trim_l:stop()
 	end
 end
 
 function B777_rudder_trim_r_CMDhandler(phase, duration)
-	if phase ~= 2 then
+	--[[if phase ~= 2 then
 		rudderTrimTarget = 2
 		simCMD_rudder_trim_r:once()
 	else
 		rudderTrimTarget = 1
+	end]]
+	if phase == 0 then
+		rudderTrimTarget = 2
+		simCMD_rudder_trim_r:start()
+	elseif phase == 2 then
+		rudderTrimTarget = 1
+		simCMD_rudder_trim_r:stop()
 	end
 end
 
@@ -964,7 +1034,7 @@ B777CMD_efis_lEicas_air              = deferred_command("Strato/777/button_switc
 B777CMD_efis_lEicas_door             = deferred_command("Strato/777/button_switch/efis/lEicas/door", "Lower Eicas DOOR Page", B777_efis_lEicas_door_switch_CMDhandler)
 B777CMD_efis_lEicas_gear             = deferred_command("Strato/777/button_switch/efis/lEicas/gear", "Lower Eicas GEAR Page", B777_efis_lEicas_gear_switch_CMDhandler)
 B777CMD_efis_lEicas_fctl             = deferred_command("Strato/777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
-B777CMD_efis_lEicas_cam              = deferred_command("Strato/777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
+--B777CMD_efis_lEicas_cam              = deferred_command("Strato/777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
 B777CMD_efis_lEicas_chkl             = deferred_command("Strato/777/button_switch/efis/lEicas/chkl", "Lower Eicas CHKL Page", B777_efis_lEicas_chkl_switch_CMDhandler)
 B777CMD_efis_lEicas_rcl              = deferred_command("Strato/777/button_switch/efis/lEicas/rcl", "Lower Eicas RECALL Button", B777_efis_lEicas_rcl_switch_CMDhandler)
 
@@ -1421,13 +1491,21 @@ function setEicasPage(id)
 end
 
 function efis()
-	for i = 0, 13 do
+	--[[for i = 0, 13 do
 		B777DR_efis_button_positions[i] = B777_animate(B777DR_efis_button_target[i], B777DR_efis_button_positions[i], 20)
 	end
 	B777DR_efis_button_positions[14] = B777_animate(B777DR_efis_vor_adf[0], B777DR_efis_button_positions[14], 20)
 	B777DR_efis_button_positions[15] = B777_animate(B777DR_efis_vor_adf[1], B777DR_efis_button_positions[15], 20)
 	B777DR_efis_button_positions[16] = B777_animate(B777DR_efis_vor_adf[2], B777DR_efis_button_positions[16], 20)
-	B777DR_efis_button_positions[17] = B777_animate(B777DR_efis_vor_adf[3], B777DR_efis_button_positions[17], 20)
+	B777DR_efis_button_positions[17] = B777_animate(B777DR_efis_vor_adf[3], B777DR_efis_button_positions[17], 20)]]
+
+	for i = 0, 13 do
+		B777DR_efis_button_positions[i] = B777DR_efis_button_target[i]
+	end
+	B777DR_efis_button_positions[14] = B777DR_efis_vor_adf[0]
+	B777DR_efis_button_positions[15] = B777DR_efis_vor_adf[1]
+	B777DR_efis_button_positions[16] = B777DR_efis_vor_adf[2]
+	B777DR_efis_button_positions[17] = B777DR_efis_vor_adf[3]
 
 	if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 		B777DR_cdu_eicas_ctl_any = 1
@@ -1448,6 +1526,10 @@ function efis()
 			B777DR_baro_mode[i] = B777DR_baro_mode_knob[i]
 			simDR_efis_vor[i+1], simDR_efis_ndb[i+1] = B777DR_nd_sta[i], B777DR_nd_sta[i]
 		end
+	end
+
+	for i = 21, 32 do
+		B777DR_efis_button_positions[i] = B777DR_efis_button_target[i]
 	end
 end
 

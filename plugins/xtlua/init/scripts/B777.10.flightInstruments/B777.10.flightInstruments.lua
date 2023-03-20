@@ -25,9 +25,12 @@ end
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
 
-B777CMD_fltInst_adiru_switch         = deferred_command("Strato/777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
+B777CMD_rudder_trim_knob_l           = deferred_command("Strato/777/button_switch/rud_trim_l", "Rudder Trim Left", B777_rudder_trim_l_CMDhandler)
+B777CMD_rudder_trim_knob_r           = deferred_command("Strato/777/button_switch/rud_trim_r", "Rudder Trim Right", B777_rudder_trim_r_CMDhandler)
 
+B777CMD_fltInst_adiru_switch         = deferred_command("Strato/777/button_switch/fltInst/adiru_switch", "ADIRU Switch", B777_fltInst_adiru_switch_CMDhandler)
 B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/777/adiru_align_now", "Align ADIRU Instantly", B777_fltInst_adiru_align_now_CMDhandler)
+
 B777CMD_ap_alt_up                    = deferred_command("Strato/777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
 B777CMD_ap_alt_dn                    = deferred_command("Strato/777/autopilot/alt_dn", "Autopilot Altitude Down", B777_alt_dn_CMDhandler)
 B777CMD_minimums_up                  = deferred_command("Strato/777/minimums_up_capt", "Captain Minimums Up", B777_minimums_up_capt_CMDhandler)
@@ -50,7 +53,7 @@ B777CMD_efis_lEicas_air              = deferred_command("Strato/777/button_switc
 B777CMD_efis_lEicas_door             = deferred_command("Strato/777/button_switch/efis/lEicas/door", "Lower Eicas DOOR Page", B777_efis_lEicas_door_switch_CMDhandler)
 B777CMD_efis_lEicas_gear             = deferred_command("Strato/777/button_switch/efis/lEicas/gear", "Lower Eicas GEAR Page", B777_efis_lEicas_gear_switch_CMDhandler)
 B777CMD_efis_lEicas_fctl             = deferred_command("Strato/777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
-B777CMD_efis_lEicas_cam              = deferred_command("Strato/777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
+--B777CMD_efis_lEicas_cam              = deferred_command("Strato/777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
 B777CMD_efis_lEicas_chkl             = deferred_command("Strato/777/button_switch/efis/lEicas/chkl", "Lower Eicas CHKL Page", B777_efis_lEicas_chkl_switch_CMDhandler)
 B777CMD_efis_lEicas_rcl              = deferred_command("Strato/777/button_switch/efis/lEicas/rcl", "Lower Eicas RECALL Button", B777_efis_lEicas_rcl_switch_CMDhandler)
 
@@ -90,12 +93,11 @@ B777CMD_fmsC_brt_dn                  = deferred_command("Strato/777/fmsC_brt_dn"
 B777CMD_fmsR_brt_up                  = deferred_command("Strato/777/fmsR_brt_up", "FMS R Brightness Up", B777_fmsR_brt_up_cmdHandler)
 B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn", "FMS R Brightness Down", B777_fmsR_brt_dn_cmdHandler)
 
-B777CMD_rudder_trim_knob_l           = deferred_command("Strato/777/button_switch/rud_trim_l", "Rudder Trim Left", B777_rudder_trim_l_CMDhandler)
-B777CMD_rudder_trim_knob_r           = deferred_command("Strato/777/button_switch/rud_trim_r", "Rudder Trim Right", B777_rudder_trim_r_CMDhandler)
-
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
+B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
+B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
 B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "array[2]")
 B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
@@ -103,7 +105,7 @@ B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/f
 B777DR_alt_mtrs                        = deferred_dataref("Strato/777/displays/alt_mtrs", "array[2]")
 B777DR_autopilot_alt_mtrs              = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what page the lower eicas is on
-B777DR_baro_mode_knob                  = deferred_dataref("Strato/777/baro_mode_knob", "array[2]")
+
 B777DR_displayed_com1_act_khz          = deferred_dataref("Strato/777/displays/com1_act_khz", "number") -- COM1 Radio Active Display
 B777DR_displayed_com1_stby_khz         = deferred_dataref("Strato/777/displays/com1_stby_khz", "number") -- COM1 Radio Standby Display
 B777DR_displayed_com2_act_khz          = deferred_dataref("Strato/777/displays/com2_act_khz", "number") -- COM2 Radio Active Display
@@ -125,6 +127,7 @@ B777DR_alt_is_fast_ovrd                = deferred_dataref("Strato/777/alt_step_k
 B777DR_displayed_alt                   = deferred_dataref("Strato/777/displays/displayed_alt", "array[2]")
 B777DR_alt_bug_diff                    = deferred_dataref("Strato/777/displays/alt_bug_diff", "array[2]")
 B777DR_baro_mode                       = deferred_dataref("Strato/777/baro_mode", "array[2]")
+B777DR_baro_mode_knob                  = deferred_dataref("Strato/777/baro_mode_knob", "array[2]")
 B777DR_minimums_mode                   = deferred_dataref("Strato/777/minimums_mode", "array[2]")
 B777DR_minimums_diff                   = deferred_dataref("Strato/777/minimums_diff", "array[2]")
 B777DR_minimums_visible                = deferred_dataref("Strato/777/minimums_visible", "array[2]")
@@ -152,8 +155,7 @@ B777DR_cdu_eicas_ctl                   = deferred_dataref("Strato/777/cdu_eicas_
 B777DR_cdu_brt                         = deferred_dataref("Strato/777/cdu_brt", "array[3]")
 B777DR_show_cdu_brt                    = deferred_dataref("Strato/777/show_cdu_brt", "array[3]")
 B777DR_cdu_brt_dir                     = deferred_dataref("Strato/777/cdu_brt_dir", "array[3]")
-B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
-B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
+
 --sim/cockpit2/autopilot/autothrottle_arm set to 0
 -- Temporary datarefs for display text until custom textures are made
 B777DR_txt_TIME_TO_ALIGN               = deferred_dataref("Strato/777/displays/txt/TIME_TO_ALIGN", "string")
@@ -183,8 +185,8 @@ B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
 B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
 B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
-B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[18]")
-B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[14]")
+B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[35]")
+B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[35]")
 
 B777DR_pfd_mtrs                        = deferred_dataref("Strato/777/displays/mtrs", "array[2]")
 B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta", "array[2]")

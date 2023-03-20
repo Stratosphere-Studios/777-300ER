@@ -54,7 +54,7 @@ simDR_spoiler_handle                      = find_dataref("sim/cockpit2/controls/
 simDR_trottle_pos                         = find_dataref("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
 simDR_onground                            = find_dataref("sim/flightmodel/failures/onground_any")
 
-simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
+--simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
 
 simDR_N1                                  = find_dataref("sim/flightmodel2/engines/N1_percent")
 simDR_oil_pressure_psi                    = find_dataref("sim/flightmodel/engine/ENGN_oil_press_psi")
@@ -196,7 +196,7 @@ end
 --function aircraft_unload()
 
 function flight_start()
-   simDR_camera_fov = 40
+   --ssimDR_camera_fov = 40
    simCMD_avionics_on:once()
 end
 

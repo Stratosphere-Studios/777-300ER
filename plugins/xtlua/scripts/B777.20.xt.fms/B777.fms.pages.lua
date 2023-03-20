@@ -243,7 +243,7 @@ route1 = {
 
 fmsPages["RTE1"]=createPage("RTE1")
 fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
-	if pgNo~=1 then
+	if pgNo == 1 then
 		return {
 			"      RTE 1;c5             ",
 			"                        ",
@@ -259,11 +259,27 @@ fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
 			"                        ",
 			"<RTE 2         ACTIVATE>",
 		}
+	else
+		return {
+			"      RTE 1;c5             ",
+			"                        ",
+			"-----              -----",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"<RTE 2         ACTIVATE>"
+		}
 	end
 end
 
 fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
-	if pgNo~=1 then
+	if pgNo == 1 then
 		return {
 			"                    1/2 ",
 			" ORIGIN             DEST",
@@ -278,6 +294,22 @@ fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
 			"                        ",
 			"                        ",
 			"                        ",
+		}
+	else
+		return {
+			"                    2/2 ",
+			" VIA                  TO",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"                        ",
+			"------------------------",
+			"                        "
 		}
 	end
 end
@@ -323,16 +355,18 @@ dofile("activepages/B777.fms.pages.identpage.lua")
 dofile("activepages/B777.fms.pages.eicasctl.lua")
 dofile("activepages/B777.fms.pages.readme.lua")
 dofile("activepages/B777.fms.pages.posinit.lua")
---[[dofile("activepages/B777.fms.pages.perfinit.lua")
-dofile("activepages/B777.fms.pages.thrustlim.lua")
 dofile("activepages/B777.fms.pages.takeoff.lua")
 dofile("activepages/B777.fms.pages.approach.lua")
+dofile("activepages/B777.fms.pages.perfinit.lua")
+dofile("activepages/B777.fms.pages.efisctl.lua")
+dofile("activepages/B777.fms.pages.thrustlim.lua")
+
+--[[
 dofile("activepages/B777.fms.pages.maintirsmonitor.lua")
 dofile("activepages/B777.fms.pages.progress.lua")
 dofile("activepages/B777.fms.pages.vnav.lua")
 dofile("activepages/B777.fms.pages.vnav.lrc.lua")
 dofile("activepages/atc/B777.fms.pages.posreport.lua")]]
-dofile("activepages/B777.fms.pages.efisctl.lua")
 
 --[[ DO NOT UNCOMMENT
 dofile("B777.fms.pages.actclb.lua")
@@ -367,33 +401,32 @@ dofile("B777.fms.pages.waypointwinds.lua")
 
 fmsPages["INITREF"]=createPage("INITREF")
 fmsPages["INITREF"].getPage=function(self,pgNo,fmsID)
-  local lineA="                        "
-  local LineB="<APPROACH               "
-  if simDR_onGround ==1 then
+	local lineA="                        "
+	local lineB="<APPROACH               "
+--  if simDR_onGround ==1 then
     fmsFunctionsDefs["INITREF"]["L5"]={"setpage","TAKEOFF"}
     fmsFunctionsDefs["INITREF"]["R6"]={"setpage","MAINT"}
     lineA="<TAKEOFF                "
-    LineB="<APPROACH         MAINT>"
-  else
-    fmsFunctionsDefs["INITREF"]["L5"]=nil
-    fmsFunctionsDefs["INITREF"]["R6"]=nil
-  end
-  return {
-
-  "     INIT/REF INDEX     ",
-  "                        ",
-  "<IDENT         NAV DATA>",
-  "                        ",
-  "<POS               ALTN>",
-  "                        ",
-  "<PERF                   ",
-  "                        ",
-  "<THRUST LIM             ",
-  "                        ",
-  lineA,
-  "                        ",
-  LineB
-  }
+    lineB="<APPROACH         MAINT>;r6"
+--  else
+--    fmsFunctionsDefs["INITREF"]["L5"]=nil
+--    fmsFunctionsDefs["INITREF"]["R6"]=nil
+--  end
+	return {
+	"     INIT/REF INDEX     ",
+	"                        ",
+	"<IDENT         NAV DATA>;r9",
+	"                        ",
+	"<POS               ALTN>;r5",
+	"                        ",
+	"<PERF                   ",
+	"                        ",
+	"<THRUST LIM             ",
+	"                        ",
+	lineA,
+	"                        ",
+	lineB
+	}
 end
 
 fmsFunctionsDefs["INITREF"]={}
@@ -401,15 +434,14 @@ fmsFunctionsDefs["INITREF"]["L1"]={"setpage","IDENT"}
 fmsFunctionsDefs["INITREF"]["L2"]={"setpage","POSINIT"}
 fmsFunctionsDefs["INITREF"]["L3"]={"setpage","PERFINIT"}
 fmsFunctionsDefs["INITREF"]["L4"]={"setpage","THRUSTLIM"}
-
 fmsFunctionsDefs["INITREF"]["L6"]={"setpage","APPROACH"}
-
 fmsFunctionsDefs["INITREF"]["R1"]={"setpage","DATABASE"}
+
 local navAids
 simDR_variation=find_dataref("sim/flightmodel/position/magnetic_variation")
 B777DR_ils_dots           	= deferred_dataref("Strato/B777/autopilot/ils_dots", "number")
 function findILS(value)
-  
+
   local modes=B777DR_radioModes
   if navAidsJSON==nil or string.len(navAidsJSON)<5 then return false end
   if value=="DELETE" then 
@@ -2453,7 +2485,7 @@ end
 function fmsFunctions.setDrefNum(fmsO, value)
     local valuesplit = split(value,"_")
 	local dref = find_dataref(valuesplit[1])
-	if string.lower(valuesplit[3]) == "s" then
+	if #valuesplit == 3 then
 		dref = valuesplit[2]
 	else
 		dref = tonumber(valuesplit[2])
@@ -2472,10 +2504,6 @@ function setEicasPage(id)
 	else
 		B777DR_eicas_mode = id
 	end
-end
-
-function rclRST()
-	B777DR_eicas_rcl = 0
 end
 
 function fmsFunctions.setDisp(fmsO, value)
@@ -2522,11 +2550,6 @@ function fmsFunctions.setDisp(fmsO, value)
 	end
 	if value == "eicasEng" then
 		setEicasPage(4)
-		return
-	end
-	if value == "eicasRcl" then
-		B777DR_eicas_rcl = 1
-		run_after_time(rclRST, 0.1)
 		return
 	end
 
@@ -2624,14 +2647,6 @@ function fmsFunctions.setDisp(fmsO, value)
 	end
 end
 
---[[
-function B777_efis_lEicas_cam_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then setEicasPage(11) end
-	end
-end
-]]
-
 function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id == "fmsL" then
@@ -2639,7 +2654,7 @@ function fmsFunctions.setpage2(fmsO, value)
 				B777DR_cdu_act[0] = 1
 				fmsFunctions["setpage"](fmsO,"IDENT")
 			else
-				if not string.match(fmsModules["fmsL"]["prevPage"], "EICAS") and
+				if not string.match(fmsModules["fmsL"]["prevPage"], "EIswS") and
 				not string.match(fmsModules["fmsL"]["prevPage"], "EFIS")
 				and fmsModules["fmsL"]["prevPage"] ~= "README" then
 

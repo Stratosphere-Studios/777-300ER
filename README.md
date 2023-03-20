@@ -16,6 +16,10 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
 
+**Q: Why do I get an error whenever I load the aircraft? What do I do with it?**
+
+A: This error is a known FMOD bug. As our sound developer hasn't responded in a while, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
+
 **Q: When is the release date?**
 
 A: We have no release date at this time, however, you can still download the aircraft whenever you'd like.
@@ -62,7 +66,7 @@ Thanks for reading! The соde to unlock the flight instruments can be found in 
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
-If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft.
+If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft (your computer probably already has this, but if the aircraft is broken, this is why).
 
 We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
 

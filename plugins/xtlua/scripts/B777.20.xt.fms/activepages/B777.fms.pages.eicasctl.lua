@@ -54,7 +54,7 @@ fmsFunctionsDefs["EICASMODES"]={}
 fmsFunctionsDefs["EICASMODES"]["L4"]={"setDisp","eicasEng"}
 fmsFunctionsDefs["EICASMODES"]["L5"]={"setDisp","eicasStat"}
 fmsFunctionsDefs["EICASMODES"]["R1"]={"setDisp","eicasChkl"}
-fmsFunctionsDefs["EICASMODES"]["R5"]={"setDisp","eicasRcl"}
+fmsFunctionsDefs["EICASMODES"]["R5"]={"doCMD","Strato/777/commands/glareshield/recall"}
 fmsFunctionsDefs["EICASMODES"]["R6"]={"setpage","EICASSYN"}
 
 fmsPages["EICASSYN"]=createPage("EICASSYN")

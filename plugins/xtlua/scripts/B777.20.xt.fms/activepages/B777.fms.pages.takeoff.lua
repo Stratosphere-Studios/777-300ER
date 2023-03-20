@@ -1,6 +1,4 @@
-
--- small modification by crazytimtimtim
-
+--[[
 B777DR_airspeed_V1                              = deferred_dataref("Strato/B777/airspeed/V1", "number")
 B777DR_airspeed_Vr                              = deferred_dataref("Strato/B777/airspeed/Vr", "number")
 B777DR_airspeed_V2                              = deferred_dataref("Strato/B777/airspeed/V2", "number")
@@ -126,10 +124,56 @@ end
 
 
 fmsFunctionsDefs["TAKEOFF"]={}
-fmsFunctionsDefs["TAKEOFF"]["L6"]={"setpage","INITREF"}
-fmsFunctionsDefs["TAKEOFF"]["R6"]={"setpage","POSINIT"}
+
 fmsFunctionsDefs["TAKEOFF"]["R1"]={"setDref","V1"}
 fmsFunctionsDefs["TAKEOFF"]["R2"]={"setDref","VR"}
 fmsFunctionsDefs["TAKEOFF"]["R3"]={"setDref","V2"}
 fmsFunctionsDefs["TAKEOFF"]["R4"]={"setdata","cg_mac"}
-fmsFunctionsDefs["TAKEOFF"]["L1"]={"setDref","flapsRef"}
+fmsFunctionsDefs["TAKEOFF"]["L1"]={"setDref","flapsRef"}]]
+
+fmsPages["TAKEOFF"]=createPage("TAKEOFF")
+fmsPages["TAKEOFF"].getPage=function(self,pgNo,fmsID)
+  if pgNo == 1 then
+    return{
+      "      TAKEOFF REF       ",
+      "                        ",
+      "**                   ---",
+      "                        ",
+      "                     ---",
+      "                        ",
+      "**%                  ---",
+      "                        ",
+      "                        ",
+      "                        ",
+      "                     ON;g2>",
+      "                        ",
+      "<INDEX         POS INIT>"
+    }
+  end
+end
+
+fmsPages["TAKEOFF"].getSmallPage=function(self,pgNo,fmsID)
+  return{
+    "                    1/2 ",
+    " FLAPS                V1",
+    "                        ",
+    " THRUST               VR",
+    "                        ",
+    " CG                   V2",
+    "                        ",
+    " RWY/POS    GR WT   TOGW",
+    "                        ",
+    " TAKEOFF DATA   REF SPDS",
+    "               OFF<->   ",
+    "------------------------",
+    "                        "
+  }
+end
+
+fmsPages["TAKEOFF"].getNumPages=function(self)
+	return 1
+end
+
+fmsFunctionsDefs["TAKEOFF"]={}
+fmsFunctionsDefs["TAKEOFF"]["L6"]={"setpage","INITREF"}
+fmsFunctionsDefs["TAKEOFF"]["R6"]={"setpage","POSINIT"}
