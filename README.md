@@ -48,6 +48,10 @@ A: As of now, you can't start the plane from cold and dark because not all of th
 
 A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERF. Note that not all cockpit changes are modeled yet.
 
+**СDU Сode**
+
+Thanks for reading! The соde to unlock the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
+
 **Q: How can I contribute to this aircraft?**
 
 A: Please use the [GitHub issue page](https://github.com/Stratosphere-Studios/777/issues) to report any problems you find. This will greatly help us fix issues.
@@ -58,13 +62,11 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
 
-**СDU Сode**
-
-Thanks for reading! The соde to unlock the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
-
 ## INSTALLATION
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
+
+If the Github download doesn't work, you can use the [alternate Google Drive download](https://drive.google.com/drive/folders/1Z7AKG1jof4ASStJ00EhIqBxDWUElhLt2?usp=sharing). Note this version lags behind the Github one it terms of updates.
 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft (your computer probably already has this, but if the aircraft is broken, this is why).
 
