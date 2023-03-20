@@ -16,6 +16,7 @@ include("misc_tools.lua")
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
 spoiler_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
+stab_trim = globalPropertyf("sim/cockpit2/controls/elevator_trim")
 --Electrical
 battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
 gen_1 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 1)
@@ -89,13 +90,19 @@ tmp1 = 0
 flap_settings = {0, 1, 5, 15, 20, 25, 30}
 detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 
+THS_greenband_min_val = 2.5
+THS_greenband_max_val = 9
 stab_c_past = 0
+stab_time_no_pwr = 0
 flaps_past = 0
 park_brake_past = 0
 handle_past = 1
 altn_gear_past = 0
+n_conf_warns_past = 0
+conf_warns_past = {}
 advisories_past = {}
 n_dsp = 0
+conf_time = 0
 advisories_start = 1
 flap_retract_time = -11
 park_brake_time = -1
@@ -411,10 +418,12 @@ function UpdateFlaps() --this is for updating flap position on eicas
 	end
 end
 
-function UpdateEicasWarnings(messages)
+function UpdateEicasWarnings(messages, conf_warn)
+	local ths_min_val_conv = THS_greenband_min_val * (2/15)-1
+	local ths_max_val_conv = THS_greenband_max_val * (2/15)-1
 	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
 	local avg_ra = (get(ra_pilot) + get(ra_copilot)) / 2
-	to_flaps = {1, 5, 15}
+	local to_flaps = {5, 15, 20}
 	if get(on_ground) == 0 then
 		if avg_cas < get(stall_speed) then
 			table.insert(messages, tlen(messages) + 1, "STALL")
@@ -423,28 +432,51 @@ function UpdateEicasWarnings(messages)
 		end
 	else
 		--Config warnings
+		local tmp_warns = {}
+		local n_warns = 0
 		if get(throttle_pos) > 0.5 then
 			local idx = indexOf(to_flaps, get(flaps), 1)
 			if get(spoiler_handle) < 0 then
-				table.insert(messages, tlen(messages) + 1, "CONFIG SPOILERS")
+				table.insert(tmp_warns, tlen(tmp_warns) + 1, "CONFIG SPOILERS")
+				n_warns = n_warns + 1
+			end
+			if get(stab_trim) < ths_min_val_conv or get(stab_trim) > ths_max_val_conv then
+				table.insert(tmp_warns, tlen(tmp_warns) + 1, "CONFIG STABILIZER")
+				n_warns = n_warns + 1
 			end
 			if get(park_brake_valve) == 1 then
-				table.insert(messages, tlen(messages) + 1, "CONFIG PARKING BRAKE")
+				table.insert(tmp_warns, tlen(tmp_warns) + 1, "CONFIG PARKING BRAKE")
+				n_warns = n_warns + 1
 			end
 			if get(main_s_locked) == 0 then
-				table.insert(messages, tlen(messages) + 1, "CONFIG GEAR STEERING")
+				table.insert(tmp_warns, tlen(tmp_warns) + 1, "CONFIG GEAR STEERING")
+				n_warns = n_warns + 1
 			end
 			if idx == nil then
-				table.insert(messages, tlen(messages) + 1, "CONFIG FLAPS")
+				table.insert(tmp_warns, tlen(tmp_warns) + 1, "CONFIG FLAPS")
+				n_warns = n_warns + 1
 			end
 		end
+		if (get(c_time) >= conf_time + 10 and n_conf_warns_past == 0) or n_warns > 0 then
+			conf_warn = tmp_warns
+			conf_time = get(c_time)
+		end
+		n_conf_warns_past = n_warns
+	end
+	for k in pairs(conf_warn) do
+		table.insert(messages, tlen(messages) + 1, conf_warn[k])
 	end
 	if avg_ra < 800 and get(throttle_pos) < 0.05 and gear_dn == false then
 		table.insert(messages, tlen(messages) + 1, "CONFIG GEAR")
 	end
 	if get(sys_C_press) < 900 and get(sys_R_press) < 900 and get(stab_cutout_C) * get(stab_cutout_R) == 0 then
-		table.insert(messages, tlen(messages) + 1, "STABILIZER")
+		if get(c_time) > stab_time_no_pwr + 5 then
+			table.insert(messages, tlen(messages) + 1, "STABILIZER")
+		end
+	else
+		stab_time_no_pwr = get(c_time)
 	end
+	return conf_warn
 end
 
 function UpdateEicasAdvisory(messages)
@@ -564,7 +596,7 @@ function draw()
 		local memo = {}
 		UpdateGearPos()
 		UpdateFlaps()
-		UpdateEicasWarnings(warnings)
+		conf_warns_past = UpdateEicasWarnings(warnings, conf_warns_past)
 		if get(c_time) >= tmp1 + 1 then
 			UpdateEicasAdvisory(advisories)
 			advisories_past = advisories

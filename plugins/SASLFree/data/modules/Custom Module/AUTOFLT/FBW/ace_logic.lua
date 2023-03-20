@@ -596,6 +596,7 @@ function update()
 end
 
 function onAirportLoaded()
+    set(stab_trim, -0.46)
     --Disable pfc self test
 	self_test_init = false
 end

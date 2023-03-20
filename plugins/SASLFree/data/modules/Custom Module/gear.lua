@@ -77,6 +77,7 @@ act_press = globalPropertyi("Strato/777/gear/actuator_press")
 kill_gear = globalPropertyi("Strato/777/kill_gear")
 
 handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
+autobrk_pos = createGlobalPropertyi("Strato/777/gear/autobrake_pos", 0)
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
 realistic_prk_brk = createGlobalPropertyi("Strato/777/gear/park_brake_realistic", 1)
 main_s_locked = createGlobalPropertyi("Strato/777/gear/main_s_locked", 1)
@@ -106,6 +107,7 @@ mlg_door_tgt = 0
 nose_door_tgt = 0
 nose_door_ready = false
 mlg_door_ready = false
+eag_claw_adjust = false
 mlg_target = 1
 nose_gear_target = 1
 ldg_extend = 0
@@ -571,6 +573,7 @@ function UpdateActuatorPress()
 			nose_door_tgt = 1
 			UpdateGearDoors()
 			if IsNoseReady() == true then
+				print(nose_door_tgt, nose_gear_target)
 				ldg_extend = 1
 				nose_gear_locked = 0
 				if get(sys_C_press) >= 100 and get(altn_gear) == 0 then
@@ -587,14 +590,16 @@ function UpdateActuatorPress()
 		actuator_press[1] = 0
 		nose_gear_locked = 1
 	end
+	
 	if get(lmw_speed) / 6.28 < 0.5 and get(rmw_speed) / 6.28 < 0.5 and get(mlg_actual_R) ~= mlg_target then
 		if mlg_target == 0 and get(sys_C_press) >= 1000 then
 			--Gear retraction
 			eag_claw_sync = 0
+			eag_claw_adjust = false
 			eag_claw_target[1] = 0
 			eag_claw_target[2] = 0
 			mlg_door_tgt = 1
-			if AreMlgReady() == true then
+			if AreMlgReady() then
 				mlg_locked = 0 --Unlocking gear to allow movement
 				eag_claw_sync = 0
 				if get(mlg_actual_R) > 0.8 and get(custom_eag_L) == 0 and get(custom_eag_R) == 0 then
@@ -606,8 +611,9 @@ function UpdateActuatorPress()
 		elseif mlg_target == 1 then
 			set(kill_gear, 0)
 			mlg_door_tgt = 1
-			if AreMlgReady() == true then
+			if AreMlgReady() then
 				--Gear extension
+				eag_claw_adjust = true
 				ldg_extend = 1
 				mlg_locked = 0
 				if get(sys_C_press) >= 200 and get(altn_gear) == 0 then
@@ -629,22 +635,23 @@ function UpdateActuatorPress()
 		elseif get(altn_gear) == 1 then
 			mlg_door_tgt = 1
 		end
-		if AreMlgReady() == true then 
+		eag_claw_target[1] = get(sim_eag_R) * mlg_target
+		eag_claw_target[2] = get(sim_eag_L) * mlg_target
+		if AreMlgReady() and eag_claw_adjust then 
 			--setting up eagle claw for target
-			eag_claw_target[1] = get(sim_eag_R) * mlg_target
-			eag_claw_target[2] = get(sim_eag_L) * mlg_target
-			if math.abs(get(custom_eag_L) - eag_claw_target[1]) < 0.08 and math.abs(get(custom_eag_R) - eag_claw_target[2]) < 0.08 then
+			if math.abs(get(custom_eag_L) - eag_claw_target[1]) < 0.08 and 
+			   math.abs(get(custom_eag_R) - eag_claw_target[2]) < 0.08 then
 				eag_claw_sync = mlg_target
 			else
 				eag_claw_sync = 0
 			end
+			eag_claw_adjust = false
 		end
 		if ldg_extend == 1 and get(custom_eag_L) == eag_claw_target[1] and get(custom_eag_R) == eag_claw_target[2] then
 			ldg_extend = 0
 		end
 		--Locking gear
 		actuator_press[2] = 0
-		nose_gear_locked = 1
 		mlg_locked = 1
 	end
 	set(gear_load, 0.3 * (actuator_press[2] / 3000))
