@@ -66,7 +66,7 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
-If the Github download doesn't work, you can use the [alternate Google Drive download](https://drive.google.com/drive/folders/1Z7AKG1jof4ASStJ00EhIqBxDWUElhLt2?usp=sharing). Note this version lags behind the Github one it terms of updates.
+If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). Note this version lags behind the Github one it terms of updates.
 
 If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft (your computer probably already has this, but if the aircraft is broken, this is why).
 
