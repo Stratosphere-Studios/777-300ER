@@ -10048,7 +10048,7 @@ P _obja/14/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/14/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/14/_v10_is_internal 141358
 P _obja/14/_v10_steers_with_gear 0
-P _obja/15/_obj_flags 24
+P _obja/15/_obj_flags 56
 P _obja/15/_obj_hide_dataref Strato/777/misc/kill_pax
 P _obja/15/_v10_att_body -1
 P _obja/15/_v10_att_file_stl fuse_1.obj
@@ -10332,7 +10332,7 @@ P _obja/33/_v10_att_y_acf_prt_ref 0.000000000
 P _obja/33/_v10_att_z_acf_prt_ref 100.000000000
 P _obja/33/_v10_is_internal 0
 P _obja/33/_v10_steers_with_gear 0
-P _obja/34/_obj_flags 16
+P _obja/34/_obj_flags 48
 P _obja/34/_obj_hide_dataref Strato/777/misc/kill_cargo
 P _obja/34/_v10_att_body -1
 P _obja/34/_v10_att_file_stl 300ERF/fuse_1.obj

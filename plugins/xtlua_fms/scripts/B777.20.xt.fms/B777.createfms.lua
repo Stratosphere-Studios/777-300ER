@@ -666,17 +666,21 @@ function fms:B777_fms_display()
       local result = ""
       local colorOutput = ""
 
-      input = fmsPage[i]
-      code = string.match(input, ';..')
+      input = fmsPage[i] -- read the line
+      code = string.match(input, ';..') 
+      -- check if there's a color command. constructed like this: ;[color][num chars to color] so ;m5 means make the last 5 characters magenta
 
-      if code ~= nil then
-          codePos = string.find(input, code)
-          color = string.sub(code, 2, 2)
-          numChars = string.sub(code, 3, 3)
-          result = string.sub(input, codePos - numChars, codePos - 1)
+      if code ~= nil then -- if there is a color code
+          codePos = string.find(input, code) -- find where the code is located
+          color = string.sub(code, 2, 2) -- find the commanded color
+          numChars = string.sub(code, 3, 3) -- find the number of chars to color
+          result = string.sub(input, codePos - numChars, codePos - 1) -- find the chars to be colored
           colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
+          -- generate blank spaces where white text would have been to make colored text line up with white text
           whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
+          -- generate blanks where colored text and color command were
 
+          -- save colors to respective datarefs
           if color == "g" then
             greenText = colorOutput
           elseif color == "h" then
