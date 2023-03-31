@@ -12,7 +12,7 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
 
     local hrs, mins = hh < 10 and "0"..hh or hh, mm < 10 and "0"..mm or mm
 
-    fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
+    --fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
     return {
       "      POS INIT          ",
       "                        ",

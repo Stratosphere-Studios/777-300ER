@@ -803,7 +803,8 @@ function nd_speed_wind_display()
 end
 
 function loadLastPos()
-		local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+		---local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+		local file_location = "Output/preferences/Strato_777_lastpos.dat"
 		print("lastpos file = "..file_location)
 		local file = io.open(file_location, "r")
 		if file ~= nil then
@@ -817,7 +818,8 @@ function loadLastPos()
 end
 
 function unloadLastPos()
-	local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+	--local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+	local file_location = "Output/preferences/Strato_777_lastpos.dat"
 	print("lastpos file = "..file_location)
 	local file = io.open(file_location, "w")
 	file:write(fmsModules["data"].pos)
@@ -889,6 +891,8 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 	if hasSimConfig() == false then return end
+
+	fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
 	
 --     for i =1,24,1 do
 --       print(string.byte(fms_style,i))
