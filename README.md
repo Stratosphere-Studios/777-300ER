@@ -30,7 +30,7 @@ A: You can download liveries from various authors from our [livery repository](h
 
 **Livery Painters**
 
-If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. There's a channel in the Discord server names "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
+If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
@@ -38,11 +38,11 @@ A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwM
 
 **Q: What is the black console window that appears when I start the aircraft?**
 
-A: Don't close it. It helps the developers find bugs and fix them. If you close this window, X-Plane will crash. Along with the log.txt, this is one of the primary tools for investigating issues. This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's "plugins/xtlua/64/" folder.
+A: Don't close it. It helps the developers find bugs and fix them. Closing this window WILL crash X-Plane. Along with the log.txt, this is one of the primary tools for investigating issues. This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's `plugins/xtlua/64/` and `plugins/xtlua_fms/64/` folders.
 
 **Q: How do I start the aircraft?**
 
-A: As of now, you can't start the plane from cold and dark because not all of the systems have been implemented yet. For now, enable "Start with engines running" in the aircraft menu. When systems are implemented, you should follow the checklists and manuals found [here.](https://github.com/Stratosphere-Studios/777/tree/main/Documentation)
+A: Currently, you can't start from cold and dark because not all required systems have been implemented yet. For now, enable "Start with engines running" in X-Plane's aircraft menu.
 
 **Q: Is there a cargo version available?**
 
@@ -60,7 +60,7 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 **Q: Even after following the above instructions, why my is aircraft still broken?**
 
-A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental dev version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and once again, we don't have a set release date yet, so please don't ask!
+A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft.
 
 ## INSTALLATION
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
