@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{48bd97e8-49da-0ead-2b5b-52d980ad65db}">
+		<property name="name">
+			<value>sim/cockpit2/gauges/indicators/vvi_fpm_pilot</value>
+		</property>
+		<relationship name="folder">
+			<destination>{1625a9ff-90b2-4da8-a477-825f8e3e0176}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{08b95148-c150-4daa-9cf8-91637226a67a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{08b95148-c150-4daa-9cf8-91637226a67a}">
+		<property name="minimum">
+			<value>-10000</value>
+		</property>
+		<property name="maximum">
+			<value>10000</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

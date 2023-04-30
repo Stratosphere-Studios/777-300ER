@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{734eadd1-d6ff-050c-3558-1391ed59799f}">
+		<property name="name">
+			<value>sim/flightmodel2/gear/eagle_claw_angle_deg[0]</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b7522a24-0010-4b7e-9dc0-ccaf8fc6feb4}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{334a6b71-5e75-460b-82fb-d02b1fd2ba3e}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{334a6b71-5e75-460b-82fb-d02b1fd2ba3e}">
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

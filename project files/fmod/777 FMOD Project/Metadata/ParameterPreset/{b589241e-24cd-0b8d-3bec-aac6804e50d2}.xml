@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{b589241e-24cd-0b8d-3bec-aac6804e50d2}">
+		<property name="name">
+			<value>sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]</value>
+		</property>
+		<relationship name="folder">
+			<destination>{0f6db028-2512-490f-b09c-ede74285dffd}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{f58de2be-ac47-488a-8c4f-697c72c59373}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{f58de2be-ac47-488a-8c4f-697c72c59373}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

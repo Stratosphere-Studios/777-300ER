@@ -20,6 +20,14 @@ A: We have removed X-Plane 11 support to make it easier for us to focus on X-Pla
 
 A: This error is a known FMOD bug. As our sound developer hasn't responded in a while, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
 
+**Q: Why are my liveries broken?**
+
+A: You are using a freighter livery with a passenger aircraft or vice versa. Make sure the livery you are using is correct for the type of aircraft you're flying. You can toggle the aircraft type on the EFB.
+
+**Q: Why does the CDU say "KEY/FUNCTION INOP" which I try to do stuff on it?**
+
+A: That notification means that key doesn't do anything. If it's supposed to, then we just haven't written the code for that functionality yet.
+
 **Q: When is the release date?**
 
 A: We have no release date at this time, however, you can still download the aircraft whenever you'd like.

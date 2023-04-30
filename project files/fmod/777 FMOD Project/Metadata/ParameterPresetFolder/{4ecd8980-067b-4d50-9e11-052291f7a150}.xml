@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPresetFolder" id="{4ecd8980-067b-4d50-9e11-052291f7a150}">
+		<property name="name">
+			<value>nose_roll</value>
+		</property>
+		<relationship name="folder">
+			<destination>{fd7fca19-0fd6-4d95-9b4d-32c608e51c43}</destination>
+		</relationship>
+	</object>
+</objects>

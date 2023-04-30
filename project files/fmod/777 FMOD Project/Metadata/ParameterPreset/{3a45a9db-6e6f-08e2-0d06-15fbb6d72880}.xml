@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{3a45a9db-6e6f-08e2-0d06-15fbb6d72880}">
+		<property name="name">
+			<value>sim/cockpit2/electrical/APU_N1_percent</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6ff0d93e-f6fc-4198-b54f-6f6d5e85558f}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{7a416f7b-e6e5-4be5-baa5-d641445ceb21}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{7a416f7b-e6e5-4be5-baa5-d641445ceb21}">
+		<property name="maximum">
+			<value>100</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{b84efa8c-595a-0021-3736-97f2e2315e4c}">
+		<property name="name">
+			<value>sim/cockpit/warnings/annunciators/GPWS</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ea2a8335-57a3-4234-9725-5752691b76e4}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{f84a3c2c-d1d0-4326-8095-544810ba9ded}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{f84a3c2c-d1d0-4326-8095-544810ba9ded}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="Bank" id="{e9918aeb-8e48-4597-8bb5-508ec99c3b39}">
+		<property name="name">
+			<value>engineGE</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b7ac943f-fb9a-41a0-8831-ef635adb2796}</destination>
+		</relationship>
+	</object>
+</objects>

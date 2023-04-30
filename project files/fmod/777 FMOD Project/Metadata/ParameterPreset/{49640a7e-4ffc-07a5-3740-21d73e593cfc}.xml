@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{49640a7e-4ffc-07a5-3740-21d73e593cfc}">
+		<property name="name">
+			<value>T7Avionics/irs/fast_align</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c3b31e07-1a69-0471-2a9a-46231ee83a8c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{0960ccde-c776-44a2-80e3-e26dccd2ff5d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{0960ccde-c776-44a2-80e3-e26dccd2ff5d}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

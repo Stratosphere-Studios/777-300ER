@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPresetFolder" id="{d62a0ac9-85a8-44c8-b57c-33481dfd1d69}">
+		<property name="name">
+			<value>GPWS</value>
+		</property>
+		<relationship name="folder">
+			<destination>{bdcb678b-b765-491c-9feb-02bebde4282f}</destination>
+		</relationship>
+	</object>
+</objects>

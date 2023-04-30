@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{2fa6dc23-8769-4253-9334-ffd21620b637}">
+        <property name="assetPath">
+            <value>fire_handle_twist_2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.16961451247165532</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{e26eb768-3a3a-41bf-8cc8-8bfd664eb35a}</destination>
+        </relationship>
+    </object>
+</objects>

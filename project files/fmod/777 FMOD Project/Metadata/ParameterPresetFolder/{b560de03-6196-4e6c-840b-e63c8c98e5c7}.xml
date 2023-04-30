@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPresetFolder" id="{b560de03-6196-4e6c-840b-e63c8c98e5c7}">
+		<property name="name">
+			<value>dontsink</value>
+		</property>
+		<relationship name="folder">
+			<destination>{d62a0ac9-85a8-44c8-b57c-33481dfd1d69}</destination>
+		</relationship>
+	</object>
+</objects>

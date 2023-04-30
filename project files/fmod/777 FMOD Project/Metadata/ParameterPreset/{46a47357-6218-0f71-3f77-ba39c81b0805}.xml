@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{46a47357-6218-0f71-3f77-ba39c81b0805}">
+		<property name="name">
+			<value>sim/cockpit2/engine/actuators/throttle_ratio_all</value>
+		</property>
+		<relationship name="folder">
+			<destination>{1625a9ff-90b2-4da8-a477-825f8e3e0176}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{06a0b5f7-ea92-4c76-88d4-79833a90cba4}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{06a0b5f7-ea92-4c76-88d4-79833a90cba4}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{64ea8a68-0800-4e58-a30b-290b312050a6}">
+        <property name="assetPath">
+            <value>ecs_test.wav</value>
+        </property>
+        <property name="isStreaming">
+            <value>true</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>335.59993197278914</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{e26eb768-3a3a-41bf-8cc8-8bfd664eb35a}</destination>
+        </relationship>
+    </object>
+</objects>

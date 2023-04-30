@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPresetFolder" id="{6ff0d93e-f6fc-4198-b54f-6f6d5e85558f}">
+		<property name="name">
+			<value>APU</value>
+		</property>
+		<relationship name="folder">
+			<destination>{1184b5a7-3c4c-45c8-aa92-bd06f01b693e}</destination>
+		</relationship>
+	</object>
+</objects>

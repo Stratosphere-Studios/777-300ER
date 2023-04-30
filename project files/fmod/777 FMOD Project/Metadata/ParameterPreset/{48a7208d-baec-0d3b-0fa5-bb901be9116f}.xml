@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{48a7208d-baec-0d3b-0fa5-bb901be9116f}">
+		<property name="name">
+			<value>sim/graphics/view/pilots_head_z</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b8219022-fd73-464b-bec0-5c67c1ac2b2a}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{08a3e62d-3266-4e3c-b806-782ae962d2ce}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{08a3e62d-3266-4e3c-b806-782ae962d2ce}">
+		<property name="minimum">
+			<value>-30</value>
+		</property>
+		<property name="maximum">
+			<value>30</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{c6c01a97-f8cf-028a-21fd-f6d7e6f3bdcd}">
+		<property name="name">
+			<value>1-sim/sound/packL</value>
+		</property>
+		<relationship name="folder">
+			<destination>{bf21ae63-c8dd-4404-a7aa-53ad08e61eac}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{86c4dc37-7045-418d-965e-356d14787e6c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{86c4dc37-7045-418d-965e-356d14787e6c}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

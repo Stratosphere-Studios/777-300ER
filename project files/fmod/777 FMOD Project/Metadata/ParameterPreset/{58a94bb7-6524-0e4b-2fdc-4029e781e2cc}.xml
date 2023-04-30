@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{58a94bb7-6524-0e4b-2fdc-4029e781e2cc}">
+		<property name="name">
+			<value>sim/flightmodel/position/indicated_airspeed</value>
+		</property>
+		<relationship name="folder">
+			<destination>{1625a9ff-90b2-4da8-a477-825f8e3e0176}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{18ad8d17-edae-4d4c-987f-8393150a216d}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{18ad8d17-edae-4d4c-987f-8393150a216d}">
+		<property name="maximum">
+			<value>200</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

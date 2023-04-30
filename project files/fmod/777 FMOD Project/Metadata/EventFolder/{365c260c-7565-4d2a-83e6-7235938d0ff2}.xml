@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="EventFolder" id="{365c260c-7565-4d2a-83e6-7235938d0ff2}">
+        <property name="name">
+            <value>GPWS</value>
+        </property>
+        <relationship name="folder">
+            <destination>{34193dbf-ea92-4bad-954c-4baff9b63bab}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -23,8 +23,8 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "BROKEN BEFORE READING IT",
             "                        ",
             "                        ",
-            fmsModules["data"].readmeCodeInput..";m5 ------------------",
-            "                        "
+            "                        ",
+            "<"..fmsModules["data"].readmeCodeInput..";m5                  ",
         }
     else
         return {
@@ -39,17 +39,17 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            fmsModules["data"].readmeCodeInput..";g5 ------------ MENU>",
-            "                        "
+            "                        ",
+            "<"..fmsModules["data"].readmeCodeInput..";g5             MENU>"
         }
     end
 end
 
 fmsPages["README"].getSmallPage = function(self,pgNo,fmsID)
-    local unlocked = " LOCKED"
+    local unlocked = "-- LOCKED"
 
     if simConfigData["data"].FMC.unlocked == 1 then
-        unlocked = "UNLOCKED;h8"
+        unlocked = " UNLOCKED;h8"
     end
 
 	return {
@@ -62,9 +62,9 @@ fmsPages["README"].getSmallPage = function(self,pgNo,fmsID)
 		"                        ",
 		"                        ",
 		"                        ",
-		"                        ",
-		"CODE:           "..unlocked,
-		"                        ",
+        "                        ",
+        "                        ",
+        "CODE: ---------"..unlocked,
 		"                        ",
 	}
 end

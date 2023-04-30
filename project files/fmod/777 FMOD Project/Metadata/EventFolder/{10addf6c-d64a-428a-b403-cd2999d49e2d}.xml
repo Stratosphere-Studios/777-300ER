@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="EventFolder" id="{10addf6c-d64a-428a-b403-cd2999d49e2d}">
+        <property name="name">
+            <value>GPU</value>
+        </property>
+        <relationship name="folder">
+            <destination>{5b39e6dd-25db-4800-ae0b-589d445a95a0}</destination>
+        </relationship>
+    </object>
+</objects>

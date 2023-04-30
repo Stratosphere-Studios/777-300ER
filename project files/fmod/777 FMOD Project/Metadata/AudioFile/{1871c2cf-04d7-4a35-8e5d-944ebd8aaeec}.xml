@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{1871c2cf-04d7-4a35-8e5d-944ebd8aaeec}">
+        <property name="assetPath">
+            <value>ge90rev2.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>4.5365532879818593</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{e26eb768-3a3a-41bf-8cc8-8bfd664eb35a}</destination>
+        </relationship>
+    </object>
+</objects>

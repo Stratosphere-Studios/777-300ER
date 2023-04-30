@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ccafdd5a-ede7-0b29-02a3-8a1af0416a36}">
+		<property name="name">
+			<value>sim/flightmodel2/gear/deploy_ratio[1]</value>
+		</property>
+		<relationship name="folder">
+			<destination>{81423743-a086-4815-bf85-723199cc1481}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{8cab1bfa-656d-482e-b500-49a002caa997}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{8cab1bfa-656d-482e-b500-49a002caa997}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

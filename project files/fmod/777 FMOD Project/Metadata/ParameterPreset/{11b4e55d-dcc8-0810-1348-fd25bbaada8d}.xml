@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{11b4e55d-dcc8-0810-1348-fd25bbaada8d}">
+		<property name="name">
+			<value>sim/cockpit2/engine/indicators/N1_percent[1]</value>
+		</property>
+		<relationship name="folder">
+			<destination>{0f6db028-2512-490f-b09c-ede74285dffd}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{51b023fd-5442-4b17-a4eb-3e9f4921192c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{51b023fd-5442-4b17-a4eb-3e9f4921192c}">
+		<property name="maximum">
+			<value>100</value>
+		</property>
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

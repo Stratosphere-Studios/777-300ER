@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{0df42e34-b44b-0347-21b8-0989a728458b}">
+		<property name="name">
+			<value>sim/graphics/view/view_is_external</value>
+		</property>
+		<relationship name="folder">
+			<destination>{c3b31e07-1a69-0471-2a9a-46231ee83a8c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{4df0e894-3cc1-4040-961b-ca3355a3862a}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{4df0e894-3cc1-4040-961b-ca3355a3862a}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

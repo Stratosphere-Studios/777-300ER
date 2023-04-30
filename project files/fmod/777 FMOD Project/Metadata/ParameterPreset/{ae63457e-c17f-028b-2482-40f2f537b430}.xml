@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ae63457e-c17f-028b-2482-40f2f537b430}">
+		<property name="name">
+			<value>sim/cockpit2/controls/flap_ratio</value>
+		</property>
+		<relationship name="folder">
+			<destination>{b560de03-6196-4e6c-840b-e63c8c98e5c7}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{ee6783de-49f5-418c-9321-834807bc7791}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{ee6783de-49f5-418c-9321-834807bc7791}">
+		<property name="isExposedRecursively">
+			<value>false</value>
+		</property>
+	</object>
+</objects>

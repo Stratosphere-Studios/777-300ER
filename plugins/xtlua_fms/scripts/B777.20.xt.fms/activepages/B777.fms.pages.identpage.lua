@@ -46,6 +46,7 @@ end
 
 fmsPages["IDENT"].getSmallPage=function(self,pgNo,fmsID)
 	local dragffArmed = "   "
+	
 	return {
 		"                        ",
 		" MODEL        ENG RATING",
@@ -57,7 +58,7 @@ fmsPages["IDENT"].getSmallPage=function(self,pgNo,fmsID)
 		--" OP PROGRAM             ",
 		"                        ",
 		"                        ",
-		"             "..dragffArmed.." DRAG/FF",
+		"             "..fmsModules["data"].dragFF_armed.." DRAG/FF",
 		"                        ",
 		"                        ",
 		"                        "
