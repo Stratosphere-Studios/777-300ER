@@ -9497,6 +9497,7 @@ P _body/22/_top_t2 1.000000000
 P _body/count 39
 P _engn/0/_RSC_max_pwr_ENGN 1.000000000
 P _engn/0/_RSC_redline_ENGN 1.000000000
+P _engn/0/_burner_inc 0.000000000
 P _engn/0/_engn_clutch_EQ 0
 P _engn/0/_engn_freewheels 0
 P _engn/0/_engn_vector_EQ 0
@@ -9510,9 +9511,11 @@ P _engn/0/_part_x -30.020000458
 P _engn/0/_part_y -7.699999809
 P _engn/0/_part_z 90.599998474
 P _engn/0/_power_max_limit 0.000000000
+P _engn/0/_thrust_max_limit 1.1554E5
 P _engn/0/_type JET_2SPOOL
 P _engn/1/_RSC_max_pwr_ENGN 1.000000000
 P _engn/1/_RSC_redline_ENGN 1.000000000
+P _engn/1/_burner_inc 0.000000000
 P _engn/1/_engn_clutch_EQ 0
 P _engn/1/_engn_freewheels 0
 P _engn/1/_engn_vector_EQ 0
@@ -9526,6 +9529,7 @@ P _engn/1/_part_x 30.020000458
 P _engn/1/_part_y -7.699999809
 P _engn/1/_part_z 90.599998474
 P _engn/1/_power_max_limit 0.000000000
+P _engn/1/_thrust_max_limit 1.1554E5
 P _engn/1/_type JET_2SPOOL
 P _engn/count 16
 P _gear/0/_axiE 0.000000000
@@ -12761,7 +12765,7 @@ P _wing/0/_locked/j_count 18
 P _wing/0/_part_phi 0.000000000
 P _wing/0/_part_psi 0.000000000
 P _wing/0/_part_specs_eq 1
-P _wing/0/_part_specs_invis 0
+P _wing/0/_part_specs_invis 1
 P _wing/0/_part_specs_rmod 1
 P _wing/0/_part_tex 0
 P _wing/0/_part_the 0.000000000
@@ -14564,7 +14568,7 @@ P _wing/1/_locked/j_count 18
 P _wing/1/_part_phi 0.000000000
 P _wing/1/_part_psi 0.000000000
 P _wing/1/_part_specs_eq 1
-P _wing/1/_part_specs_invis 0
+P _wing/1/_part_specs_invis 1
 P _wing/1/_part_specs_rmod 1
 P _wing/1/_part_tex 0
 P _wing/1/_part_the 0.000000000
@@ -16367,7 +16371,7 @@ P _wing/11/_locked/j_count 18
 P _wing/11/_part_phi 0.000000000
 P _wing/11/_part_psi 0.000000000
 P _wing/11/_part_specs_eq 1
-P _wing/11/_part_specs_invis 0
+P _wing/11/_part_specs_invis 1
 P _wing/11/_part_specs_rmod 1
 P _wing/11/_part_tex 0
 P _wing/11/_part_the 0.000000000
@@ -18170,7 +18174,7 @@ P _wing/2/_locked/j_count 18
 P _wing/2/_part_phi 0.000000000
 P _wing/2/_part_psi 0.000000000
 P _wing/2/_part_specs_eq 1
-P _wing/2/_part_specs_invis 0
+P _wing/2/_part_specs_invis 1
 P _wing/2/_part_specs_rmod 1
 P _wing/2/_part_tex 0
 P _wing/2/_part_the 0.000000000
@@ -19973,7 +19977,7 @@ P _wing/3/_locked/j_count 18
 P _wing/3/_part_phi 0.000000000
 P _wing/3/_part_psi 0.000000000
 P _wing/3/_part_specs_eq 1
-P _wing/3/_part_specs_invis 0
+P _wing/3/_part_specs_invis 1
 P _wing/3/_part_specs_rmod 1
 P _wing/3/_part_tex 0
 P _wing/3/_part_the 0.000000000
@@ -25382,7 +25386,7 @@ P _wing/4/_locked/j_count 18
 P _wing/4/_part_phi 0.000000000
 P _wing/4/_part_psi 0.000000000
 P _wing/4/_part_specs_eq 1
-P _wing/4/_part_specs_invis 0
+P _wing/4/_part_specs_invis 1
 P _wing/4/_part_specs_rmod 1
 P _wing/4/_part_tex 0
 P _wing/4/_part_the 0.000000000
@@ -27185,7 +27189,7 @@ P _wing/5/_locked/j_count 18
 P _wing/5/_part_phi 0.000000000
 P _wing/5/_part_psi 0.000000000
 P _wing/5/_part_specs_eq 1
-P _wing/5/_part_specs_invis 0
+P _wing/5/_part_specs_invis 1
 P _wing/5/_part_specs_rmod 1
 P _wing/5/_part_tex 0
 P _wing/5/_part_the 0.000000000
@@ -28988,7 +28992,7 @@ P _wing/6/_locked/j_count 18
 P _wing/6/_part_phi 0.000000000
 P _wing/6/_part_psi 0.000000000
 P _wing/6/_part_specs_eq 1
-P _wing/6/_part_specs_invis 0
+P _wing/6/_part_specs_invis 1
 P _wing/6/_part_specs_rmod 1
 P _wing/6/_part_tex 0
 P _wing/6/_part_the 0.000000000
@@ -30791,7 +30795,7 @@ P _wing/7/_locked/j_count 18
 P _wing/7/_part_phi 0.000000000
 P _wing/7/_part_psi 0.000000000
 P _wing/7/_part_specs_eq 1
-P _wing/7/_part_specs_invis 0
+P _wing/7/_part_specs_invis 1
 P _wing/7/_part_specs_rmod 1
 P _wing/7/_part_tex 0
 P _wing/7/_part_the 0.000000000
@@ -32594,7 +32598,7 @@ P _wing/8/_locked/j_count 18
 P _wing/8/_part_phi 0.000000000
 P _wing/8/_part_psi 0.000000000
 P _wing/8/_part_specs_eq 1
-P _wing/8/_part_specs_invis 0
+P _wing/8/_part_specs_invis 1
 P _wing/8/_part_specs_rmod 1
 P _wing/8/_part_tex 0
 P _wing/8/_part_the 0.000000000
@@ -34397,7 +34401,7 @@ P _wing/9/_locked/j_count 18
 P _wing/9/_part_phi 0.000000000
 P _wing/9/_part_psi 0.000000000
 P _wing/9/_part_specs_eq 1
-P _wing/9/_part_specs_invis 0
+P _wing/9/_part_specs_invis 1
 P _wing/9/_part_specs_rmod 1
 P _wing/9/_part_tex 0
 P _wing/9/_part_the 0.000000000
@@ -34569,6 +34573,8 @@ P acf/_EFIS_camera_xyz/1 0.000000000
 P acf/_EFIS_camera_xyz/2 0.000000000
 P acf/_EFIS_camera_xyz/count 3
 P acf/_EGT_is_C 1
+P acf/_FBWL 0.000000000
+P acf/_FBWVco 0.000000000
 P acf/_FBW_apply_P_to_engine/0 0
 P acf/_FBW_apply_P_to_engine/1 0
 P acf/_FBW_apply_P_to_engine/10 0
@@ -34620,6 +34626,9 @@ P acf/_FBW_apply_R_to_engine/7 0
 P acf/_FBW_apply_R_to_engine/8 0
 P acf/_FBW_apply_R_to_engine/9 0
 P acf/_FBW_apply_R_to_engine/count 16
+P acf/_FBWtheD 0.000000000
+P acf/_FBWtheI 0.000000000
+P acf/_FBWtheP 0.000000000
 P acf/_FF_is_lbsph 0
 P acf/_Gneg 2.500000000
 P acf/_Gpos 2.500000000
@@ -34653,6 +34662,7 @@ P acf/_SFC_half_lo_PRP 0.400000006
 P acf/_SFC_recip_rich_ratio 1.000000000
 P acf/_TOGA_discos_servos 0
 P acf/_TRQ_is_pcnt 0
+P acf/_Va_kts 0.000000000
 P acf/_Vbg_kts 0.000000000
 P acf/_Vfe1_kts 265.000000000
 P acf/_Vfem_kts 180.000000000
@@ -36739,7 +36749,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 120405
+P acf/_file_writer_version 120503
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -37223,6 +37233,7 @@ P acf/_min_vec_on_ground 0.000000000
 P acf/_mixt_x_ctr 0.000000000
 P acf/_n1_power_curve1 1.370000005
 P acf/_n1_power_curve2 3.500000000
+P acf/_n1_rated_thrust 100.000000000
 P acf/_n2_power_curve 4.320000172
 P acf/_name 777-300ER/ERF XP12
 P acf/_new_plot_XP3D_cock/0 1
@@ -37479,6 +37490,7 @@ P acf/_slat1_dn/7 0.000000000
 P acf/_slat1_dn/8 0.000000000
 P acf/_slat1_dn/9 0.000000000
 P acf/_slat1_dn/count 12
+P acf/_slat1_dn_max_deg 10.000000000
 P acf/_slat1_inc 8.000000000
 P acf/_slat1_type 1
 P acf/_slat2_dn/0 0.000000000
@@ -37494,6 +37506,7 @@ P acf/_slat2_dn/7 0.000000000
 P acf/_slat2_dn/8 0.000000000
 P acf/_slat2_dn/9 0.000000000
 P acf/_slat2_dn/count 12
+P acf/_slat2_dn_max_deg 10.000000000
 P acf/_slat2_inc 8.000000000
 P acf/_slat2_type 1
 P acf/_slat_EQ 1
@@ -37658,6 +37671,16 @@ P acf/_tank_rat/6 0.000000000
 P acf/_tank_rat/7 0.000000000
 P acf/_tank_rat/8 0.000000000
 P acf/_tank_rat/count 9
+P acf/_tank_rat_def/0 0.500000000
+P acf/_tank_rat_def/1 0.500000000
+P acf/_tank_rat_def/2 0.500000000
+P acf/_tank_rat_def/3 0.500000000
+P acf/_tank_rat_def/4 0.500000000
+P acf/_tank_rat_def/5 0.500000000
+P acf/_tank_rat_def/6 0.500000000
+P acf/_tank_rat_def/7 0.500000000
+P acf/_tank_rat_def/8 0.500000000
+P acf/_tank_rat_def/count 9
 P acf/_tank_role/0 0
 P acf/_tank_role/1 0
 P acf/_tank_role/2 0
@@ -38573,6 +38596,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED VS_positive
       POS 1360.000000 2144.000000
@@ -38590,6 +38614,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary VSI_background
       POS 1282.500000 1789.500000
@@ -38916,6 +38941,7 @@ GROUP Captain PFD
       DECIMALS 3
       PERIOD_WIDTH 12
       LED_ROWS 6
+      ROUNDING ROUND_ROUND
 
     gen_LED sel_kts
       POS 196.000000 2349.000000
@@ -38933,6 +38959,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 12
       LED_ROWS 6
+      ROUNDING ROUND_ROUND
 
     gen_rotary spd window
       POS 93.500000 1789.500000
@@ -39068,6 +39095,7 @@ GROUP Captain PFD
         DECIMALS 3
         PERIOD_WIDTH 16
         LED_ROWS 1
+        ROUNDING ROUND_ROUND
 
       gen_LED Ground Speed 3 digi
         POS 176.000000 1242.000000
@@ -39085,6 +39113,7 @@ GROUP Captain PFD
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary GS
         POS 66.000000 1235.000000
@@ -39626,6 +39655,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Alt Meters Neg
       POS 1212.000000 1882.000000
@@ -39644,6 +39674,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   gen_rotary windshear
@@ -39743,6 +39774,7 @@ GROUP Captain PFD
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary DME---
         POS 333.000000 2245.000000
@@ -39782,6 +39814,7 @@ GROUP Captain PFD
         DECIMALS 1
         PERIOD_WIDTH 4
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary ILS
         POS 308.000000 2184.000000
@@ -39882,6 +39915,7 @@ GROUP Captain PFD
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary DME---
         POS 333.000000 2245.000000
@@ -39921,6 +39955,7 @@ GROUP Captain PFD
         DECIMALS 1
         PERIOD_WIDTH 4
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary ILS
         POS 308.000000 2184.000000
@@ -40079,6 +40114,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED dh
       POS 920.000000 1280.000000
@@ -40096,6 +40132,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP Baro Minimums
@@ -40207,6 +40244,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED mda
       POS 920.000000 1280.000000
@@ -40224,6 +40262,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   gen_rotary black
@@ -40312,6 +40351,7 @@ GROUP Captain PFD
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED sel_alt_ft
     POS 1229.000000 2349.000000
@@ -40328,6 +40368,7 @@ GROUP Captain PFD
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED sel_alt_ft_hundreds
     POS 1202.000000 2346.000000
@@ -40344,6 +40385,7 @@ GROUP Captain PFD
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_rotary FMA_background
     POS 605.500000 2402.500000
@@ -40387,6 +40429,7 @@ GROUP Captain PFD
       DECIMALS 2
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED BARO HPA
       POS 1206.000000 1230.000000
@@ -40404,6 +40447,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary IN_HPA
       POS 1217.000000 1226.000000
@@ -41008,6 +41052,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED RA 3 Digits
       POS 678.000000 1494.000000
@@ -41026,6 +41071,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED RA 2 Digits
       POS 652.000000 1494.000000
@@ -41044,6 +41090,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED RA 1 Digit
       POS 631.000000 1494.000000
@@ -41062,6 +41109,7 @@ GROUP Captain PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP LOC Needle
@@ -41415,6 +41463,7 @@ GROUP Captain PFD
         DECIMALS 0
         PERIOD_WIDTH 12
         LED_ROWS 6
+        ROUNDING ROUND_ROUND
 
       gen_text H
         POS 505.500000 1101.500000
@@ -41540,6 +41589,7 @@ GROUP Captain PFD
       DECIMALS 1
       PERIOD_WIDTH 9
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED AOA numeration pos
       POS 894.000000 2226.000000
@@ -41559,6 +41609,7 @@ GROUP Captain PFD
       DECIMALS 1
       PERIOD_WIDTH 9
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
 END_GROUP
@@ -41625,6 +41676,7 @@ GROUP Captain ND
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED align time sec
       POS 1545.000000 2317.500000
@@ -41641,6 +41693,7 @@ GROUP Captain ND
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 1
+      ROUNDING ROUND_ROUND
 
     gen_LED pd1
       POS 1482.000000 2347.500000
@@ -41657,6 +41710,7 @@ GROUP Captain ND
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 1
+      ROUNDING ROUND_ROUND
 
     gen_LED pd2
       POS 1482.000000 2320.500000
@@ -41673,6 +41727,7 @@ GROUP Captain ND
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 1
+      ROUNDING ROUND_ROUND
 
     gen_text ---
       POS 2131.500000 2416.000000
@@ -41896,6 +41951,7 @@ GROUP Captain ND
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
     END_GROUP
     EFIS_map_s_HM ND
@@ -41927,6 +41983,7 @@ GROUP Captain ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary GS
         POS 1442.000000 2424.000000
@@ -41994,6 +42051,7 @@ GROUP Captain ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 1
+        ROUNDING ROUND_ROUND
 
       gen_LED Wind Speed
         POS 1640.000000 2372.000000
@@ -42010,6 +42068,7 @@ GROUP Captain ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary TAS_LAB
         POS 1620.000000 2423.000000
@@ -42049,6 +42108,7 @@ GROUP Captain ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary Degree Slash
         POS 1512.000000 2373.000000
@@ -42095,6 +42155,7 @@ GROUP Captain ND
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       GROUP EFIS mode
         LOCKED
@@ -42386,6 +42447,7 @@ GROUP Captain ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
         GROUP DME1
@@ -42489,6 +42551,7 @@ GROUP Captain ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
         GROUP VOR2
@@ -42593,6 +42656,7 @@ GROUP Captain ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
         GROUP DME2
@@ -42697,6 +42761,7 @@ GROUP Captain ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
       END_GROUP
@@ -42739,6 +42804,7 @@ GROUP Captain ND
             DECIMALS 1
             PERIOD_WIDTH 15
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_LED GPS DME 9999 nm
             POS 2614.000000 2353.000000
@@ -42756,6 +42822,7 @@ GROUP Captain ND
             DECIMALS 0
             PERIOD_WIDTH 7
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_LED DEST Minutes
             POS 2614.000000 2389.000000
@@ -42773,6 +42840,7 @@ GROUP Captain ND
             DECIMALS 1
             PERIOD_WIDTH 7
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_LED DEST Minutes 2
             POS 2614.000000 2389.000000
@@ -42790,6 +42858,7 @@ GROUP Captain ND
             DECIMALS 0
             PERIOD_WIDTH 7
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_rotary MIN
             POS 2642.000000 2387.000000
@@ -42923,6 +42992,7 @@ GROUP Captain ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME1
               SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
@@ -42967,6 +43037,7 @@ GROUP Captain ND
                 DECIMALS 1
                 PERIOD_WIDTH 6
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -43051,6 +43122,7 @@ GROUP Captain ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME2
               SHOW_EQUAL 1.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
@@ -43095,6 +43167,7 @@ GROUP Captain ND
                 DECIMALS 1
                 PERIOD_WIDTH 6
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -43185,6 +43258,7 @@ GROUP Captain ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME1
               SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
@@ -43229,6 +43303,7 @@ GROUP Captain ND
                 DECIMALS 1
                 PERIOD_WIDTH 12
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -43314,6 +43389,7 @@ GROUP Captain ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME2
               SHOW_EQUAL 1.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
@@ -43357,6 +43433,7 @@ GROUP Captain ND
                 DECIMALS 1
                 PERIOD_WIDTH 12
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -43415,7 +43492,6 @@ GROUP Lower Eicas
   LOCKED
   HIDE
   CHAINED
-  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     LOCKED
@@ -43518,6 +43594,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED bat_amps
       POS 3039.000000 -183.000000
@@ -43535,6 +43612,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED APU BAT AMPS
       POS 3895.000000 -183.000000
@@ -43552,6 +43630,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED APU BAT VOLTS
       POS 3895.000000 -126.000000
@@ -43569,6 +43648,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP ENG
@@ -43665,6 +43745,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED N2_2_r
       POS 3433.000000 903.000000
@@ -43684,6 +43765,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary Background
       POS 3412.000000 413.000000
@@ -43724,6 +43806,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED N2_2
       POS 3432.000000 902.000000
@@ -43741,6 +43824,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary red box
       POS 3026.000000 901.500000
@@ -43808,6 +43892,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED ff_R
       POS 3353.000000 666.000000
@@ -43825,6 +43910,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary OIL QTY BOX 1
       POS 2954.000000 47.000000
@@ -43895,6 +43981,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED oil_qty_R_w
       POS 3319.000000 48.000000
@@ -43913,6 +44000,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED oil_qty_L_b
       POS 2993.000000 48.000000
@@ -43931,6 +44019,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED oil_qty_R_b
       POS 3325.000000 48.000000
@@ -43949,6 +44038,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary OIL PRESS BOX 1
       POS 2940.500000 479.000000
@@ -44020,6 +44110,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED oil_press_R
       POS 3348.000000 479.000000
@@ -44037,6 +44128,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Press Orange 1
       POS 2990.000000 480.000000
@@ -44057,6 +44149,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Press Red 1
       POS 2990.000000 480.000000
@@ -44077,6 +44170,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Press Orange 2
       POS 3348.000000 479.000000
@@ -44097,6 +44191,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Press Red 2
       POS 3348.000000 479.000000
@@ -44117,6 +44212,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED oil_temp_L
       POS 2990.000000 217.000000
@@ -44135,6 +44231,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Temp Orange 1
       POS 2990.000000 217.000000
@@ -44154,6 +44251,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Temp Red 1
       POS 2990.000000 217.000000
@@ -44173,6 +44271,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED oil_temp_R
       POS 3348.000000 217.000000
@@ -44191,6 +44290,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Temp Orange 2
       POS 3348.000000 217.000000
@@ -44210,6 +44310,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Oil Temp Red 2
       POS 3348.000000 217.000000
@@ -44229,6 +44330,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 10
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_pointer Oil temp ptr 1
       POS 3036.000000 133.500000
@@ -44373,7 +44475,6 @@ GROUP Lower Eicas
     SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
     LOCKED
     CHAINED
-    GROUP_OPEN
     GROUP ACE fail
       SHOW_EQUAL 1.000000 Strato/777/displays/ace_fail_any
       LOCKED
@@ -44727,6 +44828,7 @@ GROUP Lower Eicas
       DECIMALS 2
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary R
       POS 3997.500000 225.500000
@@ -44791,6 +44893,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 20
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_pointer spoiler bar l1
       POS 3277.000000 825.000000
@@ -44804,7 +44907,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 45.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44821,7 +44924,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 45.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44923,7 +45026,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 45.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -44940,7 +45043,7 @@ GROUP Lower Eicas
       BUS_SRC 1
       CORNERS -2.000000 0.000000  -2.000000 0.000000  16.000000 0.000000  16.000000 0.000000
       KEY_FRAME 0.000000 -200.000000 1.000000
-      KEY_FRAME 45.000000 0.000000
+      KEY_FRAME 60.000000 0.000000
       IS_DRAGGABLE 0
       IS_VERTICAL 1
       OFFSET 0.000000
@@ -45878,6 +45981,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED fuel_L
       POS 3000.000000 579.000000
@@ -45895,6 +45999,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED fuel_C
       POS 3454.000000 338.000000
@@ -45912,6 +46017,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED fuel_R
       POS 3906.000000 580.000000
@@ -45929,6 +46035,7 @@ GROUP Lower Eicas
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP GEAR
@@ -46033,6 +46140,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED APU_EGT
       POS 3623.000000 685.000000
@@ -46050,6 +46158,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED hyd_R_qty
       POS 3830.000000 938.000000
@@ -46067,6 +46176,7 @@ GROUP Lower Eicas
       DECIMALS 2
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED hyd_L_qty
       POS 3173.000000 938.000000
@@ -46084,6 +46194,7 @@ GROUP Lower Eicas
       DECIMALS 2
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Hydraulic L Press
       POS 3190.000000 880.000000
@@ -46101,6 +46212,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Hydraulic R Press
       POS 3848.000000 880.000000
@@ -46118,6 +46230,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Hydraulic C Qty
       POS 3517.000000 938.000000
@@ -46135,6 +46248,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Hydraulic C Press
       POS 3517.000000 880.000000
@@ -46152,6 +46266,7 @@ GROUP Lower Eicas
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
 END_GROUP
@@ -46267,6 +46382,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED N1 Target 2
     POS 3388.000000 2360.000000
@@ -46284,6 +46400,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED N1_1
     POS 3045.000000 2298.000000
@@ -46301,6 +46418,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 20
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED N1_2
     POS 3415.000000 2298.000000
@@ -46318,6 +46436,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 20
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED N1_1_r
     POS 3045.000000 2298.000000
@@ -46335,6 +46454,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 20
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED N1_2_r
     POS 3415.000000 2298.000000
@@ -46353,6 +46473,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 20
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_pie N1 pie #1
     POS 2904.500000 2255.500000
@@ -46467,6 +46588,7 @@ GROUP Upper Eicas
     DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_rotary TAT Positive
     POS 2861.000000 2441.500000
@@ -46552,6 +46674,7 @@ GROUP Upper Eicas
     DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED EGT_2
     POS 3440.000000 1967.000000
@@ -46569,6 +46692,7 @@ GROUP Upper Eicas
     DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED EGT_1_r
     POS 3071.000000 1967.000000
@@ -46586,6 +46710,7 @@ GROUP Upper Eicas
     DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED EGT_2_r
     POS 3440.000000 1968.000000
@@ -46604,6 +46729,7 @@ GROUP Upper Eicas
     DECIMALS 0
     PERIOD_WIDTH 15
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_pie EGT pie #1
     POS 2904.500000 1924.500000
@@ -46930,6 +47056,7 @@ GROUP Upper Eicas
     DECIMALS 1
     PERIOD_WIDTH 20
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
 END_GROUP
 GROUP Radios
@@ -46953,6 +47080,7 @@ GROUP Radios
       DECIMALS 3
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED COM1 Stby Mhz
       POS 2690.000000 3220.000000
@@ -46969,6 +47097,7 @@ GROUP Radios
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED COM1 Act Khz
       POS 2334.000000 3220.000000
@@ -46985,6 +47114,7 @@ GROUP Radios
       DECIMALS 3
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED COM1 Act Mhz
       POS 2163.000000 3220.000000
@@ -47001,6 +47131,7 @@ GROUP Radios
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP COM2
@@ -47021,6 +47152,7 @@ GROUP Radios
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED COM2 Act Khz
       POS 2334.000000 3064.000000
@@ -47037,6 +47169,7 @@ GROUP Radios
       DECIMALS 3
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED COM2 Stby Khz
       POS 2859.000000 3065.000000
@@ -47053,6 +47186,7 @@ GROUP Radios
       DECIMALS 3
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED COM2 Stby Mhz
       POS 2690.000000 3065.000000
@@ -47069,6 +47203,7 @@ GROUP Radios
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   gen_LED Transponder
@@ -47086,6 +47221,7 @@ GROUP Radios
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
 END_GROUP
 GROUP MCP
@@ -47243,6 +47379,7 @@ GROUP MCP
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED VS
     POS 4063.000000 2794.000000
@@ -47260,6 +47397,7 @@ GROUP MCP
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED fpa
     POS 4063.000000 2794.000000
@@ -47278,6 +47416,7 @@ GROUP MCP
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED Heading
     POS 4060.000000 2667.000000
@@ -47294,6 +47433,7 @@ GROUP MCP
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED Airspeed_mach
     POS 3992.000000 2921.000000
@@ -47311,6 +47451,7 @@ GROUP MCP
     DECIMALS 2
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED Airspeed_kts
     POS 4060.000000 2921.000000
@@ -47328,6 +47469,7 @@ GROUP MCP
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
 END_GROUP
 GROUP FMSs
@@ -53028,6 +53170,7 @@ GROUP Expanded Mode CAPT
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_needle HSI Deviation 2
     POS 2057.000000 1681.000000
@@ -53067,6 +53210,7 @@ GROUP Centered Mode CAPT
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_needle HSI Deviation
     POS 2057.000000 1819.000000
@@ -53699,6 +53843,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED VS_positive
       POS 1360.000000 801.000000
@@ -53717,6 +53862,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary VSI_background
       POS 1282.500000 446.500000
@@ -54057,6 +54203,7 @@ GROUP FO PFD
       DECIMALS 3
       PERIOD_WIDTH 12
       LED_ROWS 6
+      ROUNDING ROUND_ROUND
 
     gen_LED sel_kts
       POS 196.000000 1006.000000
@@ -54075,6 +54222,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 12
       LED_ROWS 6
+      ROUNDING ROUND_ROUND
 
     gen_rotary spd window
       POS 93.500000 446.500000
@@ -54217,6 +54365,7 @@ GROUP FO PFD
         DECIMALS 3
         PERIOD_WIDTH 16
         LED_ROWS 1
+        ROUNDING ROUND_ROUND
 
       gen_LED Ground Speed 3 digi
         POS 176.000000 -101.000000
@@ -54235,6 +54384,7 @@ GROUP FO PFD
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary GS
         POS 66.000000 -108.000000
@@ -54804,6 +54954,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED Alt Meters Neg
       POS 1212.000000 539.000000
@@ -54823,6 +54974,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   gen_rotary windshear
@@ -54927,6 +55079,7 @@ GROUP FO PFD
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary DME---
         POS 333.000000 902.000000
@@ -54968,6 +55121,7 @@ GROUP FO PFD
         DECIMALS 1
         PERIOD_WIDTH 4
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary ILS
         POS 308.000000 841.000000
@@ -55073,6 +55227,7 @@ GROUP FO PFD
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary DME---
         POS 333.000000 902.000000
@@ -55114,6 +55269,7 @@ GROUP FO PFD
         DECIMALS 1
         PERIOD_WIDTH 4
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary ILS
         POS 308.000000 841.000000
@@ -55279,6 +55435,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED dh
       POS 920.000000 -63.000000
@@ -55297,6 +55454,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP Baro Minimums
@@ -55413,6 +55571,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED mda
       POS 920.000000 -63.000000
@@ -55431,6 +55590,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   gen_rotary black
@@ -55523,6 +55683,7 @@ GROUP FO PFD
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED sel_alt_ft
     POS 1229.000000 1006.000000
@@ -55540,6 +55701,7 @@ GROUP FO PFD
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_LED sel_alt_ft_hundreds
     POS 1202.000000 1003.000000
@@ -55557,6 +55719,7 @@ GROUP FO PFD
     DECIMALS 0
     PERIOD_WIDTH 0
     LED_ROWS 0
+    ROUNDING ROUND_ROUND
 
   gen_rotary FMA_background
     POS 605.500000 1059.500000
@@ -55602,6 +55765,7 @@ GROUP FO PFD
       DECIMALS 2
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED BARO HPA
       POS 1206.000000 -113.000000
@@ -55620,6 +55784,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 5
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_rotary IN_HPA
       POS 1217.000000 -117.000000
@@ -56249,6 +56414,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED RA 3 Digits
       POS 678.000000 151.000000
@@ -56268,6 +56434,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED RA 2 Digits
       POS 652.000000 151.000000
@@ -56287,6 +56454,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED RA 1 Digit
       POS 631.000000 151.000000
@@ -56306,6 +56474,7 @@ GROUP FO PFD
       DECIMALS 0
       PERIOD_WIDTH 0
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
   GROUP LOC Needle
@@ -56675,6 +56844,7 @@ GROUP FO PFD
         DECIMALS 0
         PERIOD_WIDTH 12
         LED_ROWS 6
+        ROUNDING ROUND_ROUND
 
       gen_text H
         POS 505.500000 -241.500000
@@ -56806,6 +56976,7 @@ GROUP FO PFD
       DECIMALS 1
       PERIOD_WIDTH 9
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED AOA numeration pos
       POS 894.000000 883.000000
@@ -56826,6 +56997,7 @@ GROUP FO PFD
       DECIMALS 1
       PERIOD_WIDTH 9
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
   END_GROUP
 END_GROUP
@@ -56895,6 +57067,7 @@ GROUP First Officer ND
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 0
+      ROUNDING ROUND_ROUND
 
     gen_LED align time sec
       POS 1548.000000 955.500000
@@ -56912,6 +57085,7 @@ GROUP First Officer ND
       DECIMALS 0
       PERIOD_WIDTH 15
       LED_ROWS 1
+      ROUNDING ROUND_ROUND
 
     gen_LED pd1
       POS 1485.000000 985.500000
@@ -56929,6 +57103,7 @@ GROUP First Officer ND
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 1
+      ROUNDING ROUND_ROUND
 
     gen_LED pd2
       POS 1485.000000 958.500000
@@ -56946,6 +57121,7 @@ GROUP First Officer ND
       DECIMALS 1
       PERIOD_WIDTH 15
       LED_ROWS 1
+      ROUNDING ROUND_ROUND
 
     gen_text ---
       POS 2134.500000 1054.000000
@@ -57179,6 +57355,7 @@ GROUP First Officer ND
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
     END_GROUP
     EFIS_map_s_HM ND
@@ -57212,6 +57389,7 @@ GROUP First Officer ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary GS
         POS 1445.000000 1062.000000
@@ -57282,6 +57460,7 @@ GROUP First Officer ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 1
+        ROUNDING ROUND_ROUND
 
       gen_LED Wind Speed
         POS 1643.000000 1010.000000
@@ -57299,6 +57478,7 @@ GROUP First Officer ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary TAS_LAB
         POS 1623.000000 1061.000000
@@ -57340,6 +57520,7 @@ GROUP First Officer ND
         DECIMALS 0
         PERIOD_WIDTH 15
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       gen_rotary Degree Slash
         POS 1515.000000 1011.000000
@@ -57388,6 +57569,7 @@ GROUP First Officer ND
         DECIMALS 0
         PERIOD_WIDTH 0
         LED_ROWS 0
+        ROUNDING ROUND_ROUND
 
       GROUP EFIS mode
         LOCKED
@@ -57691,6 +57873,7 @@ GROUP First Officer ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
         GROUP DME1
@@ -57799,6 +57982,7 @@ GROUP First Officer ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
         GROUP VOR2
@@ -57908,6 +58092,7 @@ GROUP First Officer ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
         GROUP DME2
@@ -58017,6 +58202,7 @@ GROUP First Officer ND
             DECIMALS 1
             PERIOD_WIDTH 6
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
         END_GROUP
       END_GROUP
@@ -58061,6 +58247,7 @@ GROUP First Officer ND
             DECIMALS 1
             PERIOD_WIDTH 15
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_LED GPS DME 9999 nm
             POS 2617.000000 991.000000
@@ -58079,6 +58266,7 @@ GROUP First Officer ND
             DECIMALS 0
             PERIOD_WIDTH 7
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_LED DEST Minutes
             POS 2617.000000 1027.000000
@@ -58097,6 +58285,7 @@ GROUP First Officer ND
             DECIMALS 1
             PERIOD_WIDTH 7
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_LED DEST Minutes 2
             POS 2617.000000 1027.000000
@@ -58115,6 +58304,7 @@ GROUP First Officer ND
             DECIMALS 0
             PERIOD_WIDTH 7
             LED_ROWS 0
+            ROUNDING ROUND_ROUND
 
           gen_rotary MIN
             POS 2645.000000 1025.000000
@@ -58254,6 +58444,7 @@ GROUP First Officer ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME1
               SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_copilot
@@ -58300,6 +58491,7 @@ GROUP First Officer ND
                 DECIMALS 1
                 PERIOD_WIDTH 6
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -58388,6 +58580,7 @@ GROUP First Officer ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME2
               SHOW_EQUAL 1.000000 sim/cockpit2/radios/actuators/HSI_source_select_copilot
@@ -58434,6 +58627,7 @@ GROUP First Officer ND
                 DECIMALS 1
                 PERIOD_WIDTH 6
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -58528,6 +58722,7 @@ GROUP First Officer ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME1
               SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_copilot
@@ -58574,6 +58769,7 @@ GROUP First Officer ND
                 DECIMALS 1
                 PERIOD_WIDTH 12
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
@@ -58663,6 +58859,7 @@ GROUP First Officer ND
               DECIMALS 0
               PERIOD_WIDTH 6
               LED_ROWS 0
+              ROUNDING ROUND_ROUND
 
             GROUP DME2
               SHOW_EQUAL 1.000000 sim/cockpit2/radios/actuators/HSI_source_select_copilot
@@ -58708,6 +58905,7 @@ GROUP First Officer ND
                 DECIMALS 1
                 PERIOD_WIDTH 12
                 LED_ROWS 0
+                ROUNDING ROUND_ROUND
 
             END_GROUP
           END_GROUP
