@@ -1,0 +1,4 @@
+For cockpit displays, .xcf files can be found in their respective folders (PFD file in PFD folder, etc.) in cockpit_3d.
+
+.blend and FMOD files can be found in our project files repository:
+[[REPO_LINK]]
