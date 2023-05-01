@@ -10703,7 +10703,7 @@ IDX	8513
 	TRIS	10029 6
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/hdgHold	Heading Hold Mode
 	TRIS	10035 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/acf_is_freighter	Toggle Passenger/Freighter (ER/ERF)
+	ATTR_manip_command	button	Strato/777/options/acfType_toggle	Toggle Passenger/Freighter (ER/ERF)
 	TRIS	10041 6
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/altHold	Altitude Hold Mode
 	TRIS	10047 6
@@ -10761,7 +10761,7 @@ IDX	8513
 	TRIS	10203 6
 	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/fctl	Eicas Flight Control Page
 	TRIS	10209 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/lbs_kgs	Switch between pounds and kilograms
+	ATTR_manip_command	button	Strato/777/options/weight_mode_toggle	Switch between pounds and kilograms
 	TRIS	10215 6
 	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/eng	Eicas Engine Page
 	TRIS	10221 6
@@ -10769,19 +10769,19 @@ IDX	8513
 	TRIS	10227 6
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/autothrottle/clbcon	Autothrottle CLB/CON Mode
 	TRIS	10233 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/smart_knobs	Toggle "Smart" MCP Knobs
+	ATTR_manip_command	button	Strato/777/options/smartKnobs_toggle	Toggle "Smart" MCP Knobs
 	TRIS	10239 6
 	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/door	EIcas Checklist Page
 	TRIS	10245 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/gear/park_brake_realistic	Toggle realistic parking brakes
+	ATTR_manip_command	button	Strato/777/options/prkBrk_mode_toggle	Toggle realistic parking brakes
 	TRIS	10251 6
 	ATTR_manip_command	left	Strato/777/fmsL_brt_dn	Left CDU Brightness Down
 	TRIS	10257 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/pfd_mach_gs	Toggle Mach and Groundspeed indicator on PFD
+	ATTR_manip_command	button	Strato/777/options/gsInd_mode_toggle	Toggle Mach and Groundspeed indicator on PFD
 	TRIS	10263 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/displays/trs_bug_enabled	Toggle trim reference speed bug on PFD
+	ATTR_manip_command	button	Strato/777/options/trsInd_toggle	Toggle trim reference speed bug on PFD
 	TRIS	10269 6
-	ATTR_manip_toggle	button	1.000	0.000	Strato/777/displays/pfd_aoa_enabled	Toggle Angle of Attack indicator on PFD
+	ATTR_manip_command	button	Strato/777/options/aoaInd_toggle	Toggle Angle of Attack indicator on PFD
 	TRIS	10275 6
 	ATTR_manip_command	button	Strato/777/adiru_align_now	Align ADIRU Instantly
 	TRIS	10281 6

@@ -81,9 +81,9 @@ simDR_efis_arpt_fo                     = find_dataref("sim/cockpit2/EFIS/EFIS_ai
 simDR_efis_fix_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_fix_on_copilot")
 B777DR_nd_sta                          = find_dataref("Strato/777/EFIS/sta")
 B777DR_pfd_mtrs                        = find_dataref("Strato/777/displays/mtrs")
+B777CMD_save_simconfig                     = find_command("Strato/777/save_simconfig")
 
 --Workaround for stack overflow in init.lua namespace_read
-
 function replace_char(pos, str, r)
     return str:sub(1, pos-1) .. r .. str:sub(pos+1)
 end
@@ -98,7 +98,7 @@ function hasChild(parent,childKey)
 end
 
 function split(s, delimiter)
-    result = {};
+    local result = {};
     for match in (s..delimiter):gmatch("(.-)"..delimiter) do
         table.insert(result, match);
     end
@@ -106,7 +106,7 @@ function split(s, delimiter)
 end
 
 function round(x)
-	return x>=0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
+	return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end
 
 function cleanFMSLine(line)
@@ -324,13 +324,14 @@ B777DR_readme_unlocked  = deferred_dataref("Strato/777/readme_unlocked", "number
 
 --Simulator Config Options
 simConfigData = {}
-function doneNewSimConfig()
-	B777DR_newsimconfig_data=0
-end
+--function doneNewSimConfig()
+--	B777DR_newsimconfig_data=0
+--end
+
 function pushSimConfig(values)
 	B777DR_simconfig_data=json.encode(values)
 	B777DR_newsimconfig_data=1
-	run_after_time(doneNewSimConfig, 1)
+	--run_after_time(doneNewSimConfig, 1)
 end
 
 local setSimConfig=false
@@ -346,7 +347,7 @@ function hasSimConfig()
 	return setSimConfig
 end
 
--- see "fms wb code.lua in project files"
+-- see "fms wb code.lua" in project files
 
 fmsPages={}
 --fmsPagesmall={}
@@ -445,6 +446,7 @@ function defaultFMSData()
 	fmcUnlocked = false,
 	readmeCodeInput = "*****",
 	pos = string.rep(" ", 18),
+	dragFF_armed = "   "
 }
 end
 
@@ -547,7 +549,7 @@ function createPage(page)
 		"                        ",
 		"                        ",
 		"                        ",
-		"                        ", 
+		"                        ",
 		"                        "
 	}
 
@@ -801,20 +803,19 @@ function nd_speed_wind_display()
 		end
 	end
 end
-
+debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 function loadLastPos()
-		---local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
-		local file_location = "Output/preferences/Strato_777_lastpos.dat"
-		print("lastpos file = "..file_location)
-		local file = io.open(file_location, "r")
-		if file ~= nil then
-			fmsModules["data"].lastpos = file:read()
-			file:close()
-			print("loaded lastpos: "..fmsModules["data"].lastpos)
-		else
-			print("lastpos file is nil")
-		end
-		loadedLastPos = true
+	--local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
+	local file_location = "Output/preferences/Strato_777_lastpos.dat"
+	print("lastpos file = "..file_location)
+	local file = io.open(file_location, "r")
+	if file ~= nil then
+		fmsModules["data"].lastpos = file:read()
+		file:close()
+		print("loaded lastpos: "..fmsModules["data"].lastpos)
+	else
+		print("lastpos file is nil")
+	end
 end
 
 function unloadLastPos()
@@ -836,7 +837,7 @@ end
 --function livery_load() end
 
 --Marauder28
-debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
+
 function flight_start()
 	B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
 	--[[if simDR_startup_running == 0 then commented out for ss777
@@ -971,10 +972,15 @@ function after_physics()
 	end
 end
 
+function popup(text)
+	os.execute("msg * "..text)
+end
+
 function aircraft_load()
 	simDR_cg_adjust = 0 --reset CG slider to begin current flight
-	run_after_time(loadLastPos, 5)
-	run_after_time(closeReadme, 5.1)
+	run_after_time(loadLastPos, 2)
+	--run_after_time(closeReadme, 2.1)
+	popup("Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Happy flying!")
 end
 
 function aircraft_unload()

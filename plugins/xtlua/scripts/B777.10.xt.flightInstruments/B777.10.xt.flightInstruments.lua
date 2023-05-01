@@ -200,6 +200,13 @@ B777DR_unlocked                        = find_dataref("Strato/777/readme_unlocke
 B777DR_cockpit_door_pos                = find_dataref("Strato/777/cockpit_door_pos")
 B777R_rudder_trim_man                  = find_dataref("Strato/777/fctl/ace/rud_trim_man")
 B777R_rudder_trim_auto                 = find_dataref("Strato/777/fctl/ace/rud_trim_auto")
+
+B777DR_lbs_kgs                         = find_dataref("Strato/777/lbs_kgs")
+B777DR_trs_bug_enabled                 = find_dataref("Strato/777/displays/trs_bug_enabled")
+B777DR_aoa_enabled                     = find_dataref("Strato/777/displays/pfd_aoa_enabled")
+B777DR_smart_knobs                     = find_dataref("Strato/777/smart_knobs")
+B777DR_pfd_mach_gs                     = find_dataref("Strato/777/pfd_mach_gs")
+
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -211,8 +218,8 @@ B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_tri
 B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
 B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "array[2]")
-B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
-B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_total", "number")
+B777DR_fuel_lbs_kgs                    = deferred_dataref("Strato/777/displays/fuel_lbs_kgs", "array[3]")
+B777DR_fuel_lbs_kgs_total              = deferred_dataref("Strato/777/displays/fuel_lbs_kgs_total", "number")
 B777DR_alt_mtrs                        = deferred_dataref("Strato/777/displays/alt_mtrs", "array[2]")
 B777DR_autopilot_alt_mtrs              = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what page the lower eicas is on
@@ -285,12 +292,7 @@ B777DR_txt_PFD_AOA_INDICATOR           = deferred_dataref("Strato/777/displays/t
 B777DR_txt_SMART_MCP_KNOBS             = deferred_dataref("Strato/777/displays/txt/SMART_MCP_KNOBS", "string")
 B777DR_txt_MACH_GS_PFD                 = deferred_dataref("Strato/777/displays/txt/MACH_GS_PFD", "string")
 
-B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
-B777DR_lbs_kgs                         = deferred_dataref("Strato/777/lbs_kgs", "number")
-B777DR_trs_bug_enabled                 = deferred_dataref("Strato/777/displays/trs_bug_enabled", "number")
-B777DR_aoa_enabled                     = deferred_dataref("Strato/777/displays/pfd_aoa_enabled", "number")
-B777DR_smart_knobs                     = deferred_dataref("Strato/777/smart_knobs", "number")
-B777DR_pfd_mach_gs                     = deferred_dataref("Strato/777/pfd_mach_gs", "number")
+B777DR_acf_is_freighter                = find_dataref("Strato/777/acf_is_freighter")
 
 B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
@@ -1371,15 +1373,15 @@ end
 --- WEIGHT CONVERSIONS ----------
 function weightConv()
 	if B777DR_lbs_kgs == 1 then
-		B777DR_fuel_lbs_total = (simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]) * kgs_to_lbs
+		B777DR_fuel_lbs_kgs_total = (simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]) * kgs_to_lbs
 		for i = 0, 2 do
-			B777DR_fuel_lbs[i] = simDR_fuel_kgs[i] * kgs_to_lbs
+			B777DR_fuel_lbs_kgs[i] = simDR_fuel_kgs[i] * kgs_to_lbs
 		end
 		B777DR_lbs_kgs_status = "LBS"
 	else
-		B777DR_fuel_lbs_total = simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]
+		B777DR_fuel_lbs_kgs_total = simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]
 		for i = 0, 2 do
-			B777DR_fuel_lbs[i] = simDR_fuel_kgs[i]
+			B777DR_fuel_lbs_kgs[i] = simDR_fuel_kgs[i]
 		end
 		B777DR_lbs_kgs_status = "KGS"
 	end

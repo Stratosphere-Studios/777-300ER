@@ -11,7 +11,6 @@ function deferred_dataref(name,type,notifier)
 	return wrap_dref_any(dref,type) 
 end
 
-debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 B777DR_ap_vnav_pause            = deferred_dataref("Strato/B777/autopilot/vnav_pause","number")
 B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
 ilsData                         = deferred_dataref("Strato/B777/radio/ilsData", "string")
@@ -29,7 +28,7 @@ irs_line1                       = deferred_dataref("Strato/B777/irs/line1", "str
 irs_line2                       = deferred_dataref("Strato/B777/irs/line2", "string") 
 irs_line3                       = deferred_dataref("Strato/B777/irs/line3", "string") 
 irs_line4                       = deferred_dataref("Strato/B777/irs/line4", "string") 
-B777DR_readme_unlocked = deferred_dataref("Strato/777/readme_unlocked", "number")
+B777DR_readme_unlocked          = deferred_dataref("Strato/777/readme_unlocked", "number")
 --[[irs_line1="TIME TO ALIGN"
 irs_line2="L OFF"
 irs_line3="C OFF"
