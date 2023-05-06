@@ -14,8 +14,8 @@ WIPER_texture	glass_WPR.png
 #THERMAL_source	laminar/A333/anti_ice/window_temp3    sim/cockpit2/ice/ice_window_heat_on_window[2]
 #THERMAL_source	laminar/A333/anti_ice/window_temp4    sim/cockpit2/ice/ice_window_heat_on_window[3]
 GLOBAL_specular	1
-WIPER_param	sim/flightmodel2/misc/wiper_angle_deg[0]    0.0   70.0    0.02
-WIPER_param	sim/flightmodel2/misc/wiper_angle_deg[1]    0.0   70.0    0.02
+WIPER_param	sim/flightmodel2/misc/wiper_angle_deg[0]    0.0   70.0    0.01
+WIPER_param	sim/flightmodel2/misc/wiper_angle_deg[1]    0.0   70.0    0.01
 GLOBAL_specular	1
 BLEND_GLASS
 POINT_COUNTS	16842	0	0	16842

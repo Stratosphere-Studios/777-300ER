@@ -1,8 +1,9 @@
---[[simDR_GRWT=find_dataref("sim/flightmodel/weight/m_total")
 simDR_fuel=find_dataref("sim/flightmodel/weight/m_fuel_total")
---simDR_payload=find_dataref("sim/flightmodel/weight/m_fixed")
---simDR_fuel_tanks=find_dataref("sim/flightmodel/weight/m_fuel") --res on 5 and 6
---simDR_cg=find_dataref("sim/flightmodel/misc/cgz_ref_to_default")
+simDR_payload=find_dataref("sim/flightmodel/weight/m_fixed")
+simDR_fuel_tanks=find_dataref("sim/flightmodel/weight/m_fuel") --res on 5 and 6
+simDR_cg=find_dataref("sim/flightmodel/misc/cgz_ref_to_default")
+
+--[[simDR_GRWT=find_dataref("sim/flightmodel/weight/m_total")
 
 --Marauder28
 grwt_lineLg = ""
@@ -124,12 +125,6 @@ fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
       }
 end
 
-  
-  
-fmsFunctionsDefs["PERFINIT"]={}
-
-
-fmsFunctionsDefs["PERFINIT"]["L1"]={"setdata","grwt"}
 fmsFunctionsDefs["PERFINIT"]["L2"]={"setdata","fuel"}
 fmsFunctionsDefs["PERFINIT"]["L3"]={"setdata","zfw"}
 fmsFunctionsDefs["PERFINIT"]["L4"]={"setdata","reserves"}
@@ -141,14 +136,22 @@ fmsFunctionsDefs["PERFINIT"]["R5"]={"setdata","stepsize"}
 fmsFunctionsDefs["PERFINIT"]["R6"]={"setpage","THRUSTLIM"}
 ]]
 
+local weightUnits;
+
 fmsPages["PERFINIT"]=createPage("PERFINIT")
 fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
+
+	weightUnits = simConfigData["data"].OPTIONS.weight_display_units:sub(1, -2)
+
+	local fuelWeight = (weightUnits == "LB") and simDR_fueL_tank_weight_total_kg * 2.204623 or simDR_fueL_tank_weight_total_kg
+	fuelWeight = string.format("%.1f", fuelWeight / 100)
+
 	return {
 		"       PERF INIT        ",
 		"                        ",
-		"***.*              *****",
+		getFMSData("grwt").."              *****",
 		"                        ",
-		"                    ****",
+		" "..fuelWeight.."               ****",
 		"                        ",
 		"***.*                 ` ",
 		"                        ",
@@ -166,7 +169,7 @@ fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
 		" GR WT           CRZ ALT",
 		"                        ",
 		" FUEL         COST INDEX",
-		"     WT CALC            ",
+		"     "..weightUnits.." CALC            ",
 		" ZFW       MIN FUEL TEMP",
 		"                       C",
 		" RESERVES         CRZ CG",
@@ -179,6 +182,12 @@ fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
 end
 
 fmsFunctionsDefs["PERFINIT"]={}
+fmsFunctionsDefs["PERFINIT"]["L1"]={"setdata","grwt"}
+--fmsFunctionsDefs["PERFINIT"]["L3"]={"setdata","zfw"}
+--fmsFunctionsDefs["PERFINIT"]["L4"]={"setdata","reserves"}
+--fmsFunctionsDefs["PERFINIT"]["R2"]={"setdata","costindex"}
+fmsFunctionsDefs["PERFINIT"]["R4"]={"setdata","crzcg"}
+fmsFunctionsDefs["PERFINIT"]["R5"]={"setdata","stepsize"}
 fmsFunctionsDefs["PERFINIT"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["PERFINIT"]["R6"]={"setpage","THRUSTLIM"}
 

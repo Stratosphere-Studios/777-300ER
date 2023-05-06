@@ -9,21 +9,24 @@ Inboard flap L            - (sim/flightmodel2/wing/flap1_deg[0])           [0:30
 Inboard flap R            - (sim/flightmodel2/wing/flap1_deg[1])           [0:30]
 Outboard flap L           - (sim/flightmodel2/wing/flap2_deg[2])           [0:30]
 Outboard flap R           - (sim/flightmodel2/wing/flap2_deg[3])           [0:30]
-Inboard slats             - (sim/flightmodel2/controls/slat1_deploy_ratio) [0:1]
-Outboard slat             - (sim/flightmodel2/controls/slat2_deploy_ratio) [0:1]
+Inboard slats             - (sim/flightmodel2/controls/slat1_deploy_ratio) [0:1] (ratio)
+Outboard slat             - (sim/flightmodel2/controls/slat2_deploy_ratio) [0:1] (ratio)
 Normal (outbrd) aileron_L - (sim/flightmodel2/wing/aileron2_deg[4])        [-33:19]
 Normal (outbrd) aileron_R - (sim/flightmodel2/wing/aileron2_deg[5])        [-33:19]
 Elevator L                - (sim/flightmodel2/wing/elevator1_deg[8])       [-33:27]
 Elevator R                - (sim/flightmodel2/wing/elevator1_deg[9])       [-33:27]
 Lower rudder half         - (sim/flightmodel2/wing/rudder2_deg[11])        [-27:27]
 Upper rudder half         - (sim/flightmodel2/wing/rudder1_deg[11])        [-27:27]
-Stabilizer trim           - (sim/flightmodel2/controls/elevator_trim)      [-1:1] (not degrees)
-Roll spoilers/spdbrakes
+Stabilizer trim           - (sim/flightmodel2/controls/elevator_trim)      [-1:1] (ratio)
+Spoilers
+	// Outboard
 	spoiler 4               - (sim/flightmodel2/wing/spoiler1_deg[2]) [45:0]
 	spoiler 1-5 except 4    - (sim/flightmodel2/wing/spoiler2_deg[2]) [60:0]
 	spoiler 11              - (sim/flightmodel2/wing/spoiler1_deg[3]) [45:0]
 	spoiler 10-14 except 11 - (sim/flightmodel2/wing/spoiler2_deg[3]) [60:0]
 	
-	Do not touch these for now!
-	//sb1 - sim/flightmodel2/wing/speedbrake1_deg
-	//sb2 - sim/flightmodel2/wing/speedbrake2_deg
+	// Inboard
+	spoiler 6 - (sim/flightmodel2/wing/speedbrake1_deg[0]) [?:?]
+	spoiler 7 - (sim/flightmodel2/wing/speedbrake2_deg[0]) [?:?]
+	spoiler 8 - (sim/flightmodel2/wing/speedbrake2_deg[1]) [?:?]
+	spoiler 9 - (sim/flightmodel2/wing/speedbrake1_deg[1]) [?:?]

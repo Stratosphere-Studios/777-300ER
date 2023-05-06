@@ -6,6 +6,10 @@
 ]]
 --Marauder28
 --V Speeds
+
+--pushSimConfig(simConfigData["data"]["values"])
+--B777CMD_save_simconfig:once()
+
 B777DR_airspeed_V1			= deferred_dataref("Strato/B777/airspeed/V1", "number")
 B777DR_airspeed_Vr			= deferred_dataref("Strato/B777/airspeed/Vr", "number")
 B777DR_airspeed_V2			= deferred_dataref("Strato/B777/airspeed/V2", "number")
@@ -43,8 +47,6 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 			fmcACT = "<ACT>"
 		elseif B777DR_cdu_act[0] == 2 then
 			satACT = "<ACT>"
-		elseif B777DR_cdu_act[0] == 3 then
-			intACT = "ACT"
 		end
 	elseif fmsID == "fmsR" then
 		efisCTL = B777DR_cdu_efis_ctl[1]
@@ -53,8 +55,6 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 			fmcACT = "<ACT>"
 		elseif B777DR_cdu_act[1] == 2 then
 			satACT = "<ACT>"
-		elseif B777DR_cdu_act[1] == 3 then
-			intACT = "ACT"
 		end
 	else -- fmsC
 		dspCTL = B777DR_cdu_eicas_ctl[1]
@@ -111,11 +111,10 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 	if fmsID == "fmsC" then
 		page[3] = "                       "
 		page[5] = "<SAT;r4                "
-		fmsFunctionsDefs["INDEX"]["R1"]=nil
+		page[9] = "<CAB INT;r8 "..intACT.."       "..dspln
 		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 			B777DR_cdu_eicas_ctl[1] = 0
 			page[7] = "                        "
-			page[9] = "<CAB INT;r8"..intACT.."       "..dspln
 		end
 
 	elseif fmsID == "fmsL" then
@@ -913,8 +912,31 @@ end
 --Marauder28
 ]]
 
-timer_start = 0
+function saveSimconfig()
+    pushSimConfig(simConfigData["data"]["values"])
+	B777CMD_save_simconfig:once()
+end
 
+function slashEntry(input, field)
+	local fieldPreSlash = field:sub(1, field:find("/") - 1)
+    local fieldPostSlash= field:sub(field:find("/") + 1, -1)
+	local inputSlashPos = input:find("/")
+
+    if inputSlashPos then
+        if inputSlashPos == 1 then
+            return fieldPreSlash..input
+        elseif inputSlashPos == input:len() then
+            return input..fieldPostSlash
+        elseif inputSlashPos > 1 and inputSlashPos < input:len() then
+            return input
+        end
+    else
+        return input.."/"..fieldPostSlash
+    end
+end
+
+timer_start = 0
+local kgs_to_lbs = 2.204623
 function fmsFunctions.setdata(fmsO,value)
 	local del=false
 	if fmsO["scratchpad"]=="DELETE" then fmsO["scratchpad"]="" del=true end
@@ -991,8 +1013,7 @@ function fmsFunctions.setdata(fmsO,value)
 					fmsO["notify"] = "UNLOCKED"
 					fmsO["scratchpad"] = ""
 					simConfigData["data"].FMC.unlocked = 1
-					pushSimConfig(simConfigData["data"]["values"])
-					fmsFunctions["doCMD"](fmsO, "Strato/777/save_simconfig")
+					saveSimconfig();
 				else
 					fmsO["notify"] = "INCORRECT CODE"
 				end
@@ -1214,153 +1235,215 @@ function fmsFunctions.setdata(fmsO,value)
 	else
 		fmsO["notify"]="INVALID ENTRY"
 	end
-   elseif value=="airportgate" then
-	if string.len(fmsO["scratchpad"]) <= 5 then
-		--[[local lat=toDMS(simDR_latitude,true)
-		local lon=toDMS(simDR_longitude,false)
-		setFMSData("irsLat",lat)
-		setFMSData("irsLon",lon)]]
-		fmsModules["data"].airportgate = fmsO["scratchpad"]
-	else
-		fmsO["notify"]="INVALID ENTRY"
-	end
-  elseif value == "sethdg" then
-	if validate_sethdg(fmsO["scratchpad"]) == false then
-		fmsO["notify"]="INVALID ENTRY"
-	else
-		if fmsModules["data"] ~= "---`" then
-			if (fmsO["scratchpad"] == "0" or fmsO["scratchpad"] == "00" or fmsO["scratchpad"] == "000") then
-				fmsO["scratchpad"] = "360`"
+	elseif value=="airportgate" then
+		if string.len(fmsO["scratchpad"]) <= 5 then
+			--[[local lat=toDMS(simDR_latitude,true)
+			local lon=toDMS(simDR_longitude,false)
+			setFMSData("irsLat",lat)
+			setFMSData("irsLon",lon)]]
+			fmsModules["data"].airportgate = fmsO["scratchpad"]
+		else
+			fmsO["notify"]="INVALID ENTRY"
+		end
+		return
+	elseif value == "sethdg" then
+		if validate_sethdg(fmsO["scratchpad"]) == false then
+			fmsO["notify"]="INVALID ENTRY"
+		else
+			if fmsModules["data"] ~= "---`" then
+				if (fmsO["scratchpad"] == "0" or fmsO["scratchpad"] == "00" or fmsO["scratchpad"] == "000") then
+					fmsO["scratchpad"] = "360`"
+				end
+				setFMSData(value, fmsO["scratchpad"].."`")
+				timer_start = simDRTime
 			end
-			setFMSData(value, fmsO["scratchpad"].."`")
-			timer_start = simDRTime
 		end
-	end
-  elseif value == "vref1" then
-	fmsO["scratchpad"]=string.format("25/%3d", B777DR_airspeed_Vf25)
-	return
-  elseif value == "vref2" then
-	fmsO["scratchpad"]=string.format("30/%3d", B777DR_airspeed_Vf30)
-	return
-  elseif value == "flapspeed" then
-	if fmsO["scratchpad"]=="" then 
-		B777DR_airspeed_VrefFlap=0
-		setFMSData(value,"") 
-		return 
-	end
-	local vref=tonumber(string.sub(fmsO["scratchpad"],4))
-	if vref==nil or vref<110 or vref>180 then 
-		fmsO["notify"]="INVALID ENTRY" 
-		return 
-	end
-	B777DR_airspeed_Vref=vref
-	print(string.sub(fmsO["scratchpad"],1,2))
-	if string.sub(fmsO["scratchpad"],1,2) == "25" then
-		B777DR_airspeed_VrefFlap=1
-  	else
-		B777DR_airspeed_VrefFlap=2
-	end	
-	setFMSData(value,fmsO["scratchpad"])
-  elseif value == "grwt" then
-	local grwt
-	if string.len(fmsO["scratchpad"]) ~= 0 and string.len(fmsO["scratchpad"]) ~= 3 and string.len(fmsO["scratchpad"]) ~= 5 then
-		fmsO["notify"]="INVALID ENTRY"
-		fmsO["scratchpad"] = ""
 		return
-  	elseif string.len(fmsO["scratchpad"]) > 0 and string.len(fmsO["scratchpad"]) <= 5 and string.match(fmsO["scratchpad"], "%d") then
-		if simConfigData["data"].SIM.weight_display_units == "LBS" then
-			grwt = fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs  --store LBS in KGS
+	elseif value == "vref1" then
+		fmsO["scratchpad"]=string.format("25/%3d", B777DR_airspeed_Vf25)
+		return
+	elseif value == "vref2" then
+		fmsO["scratchpad"]=string.format("30/%3d", B777DR_airspeed_Vf30)
+		return
+	elseif value == "flapspeed" then
+		if fmsO["scratchpad"]=="" then
+			B777DR_airspeed_VrefFlap=0
+			setFMSData(value,"")
+			return
+		end
+		local vref=tonumber(string.sub(fmsO["scratchpad"],4))
+		if vref==nil or vref<110 or vref>180 then
+			fmsO["notify"]="INVALID ENTRY"
+			return
+		end
+		B777DR_airspeed_Vref=vref
+		print(string.sub(fmsO["scratchpad"],1,2))
+		if string.sub(fmsO["scratchpad"],1,2) == "25" then
+			B777DR_airspeed_VrefFlap=1
 		else
-			grwt = fmsO["scratchpad"]
-		end
-	elseif fmsO["scratchpad"] == "" then
-		grwt = simDR_GRWT / 1000
-	else
-		fmsO["notify"]="INVALID ENTRY"
-		fmsO["scratchpad"] = ""
+			B777DR_airspeed_VrefFlap=2
+		end	
+		setFMSData(value,fmsO["scratchpad"])
 		return
-	end
-	grwt = string.format("%5.1f", grwt)
-	if tonumber(grwt) > 999 then
-		fmsO["notify"]="INVALID ENTRY"
-		fmsO["scratchpad"] = ""
-		return
-	end
-	zfw = string.format("%5.1f", tonumber(grwt) - (simDR_fuel / 1000))
-	if tonumber(zfw) <50 then
-		fmsO["notify"]="INVALID ENTRY"
-		fmsO["scratchpad"] = ""
-		return
-	end
-	setFMSData(value, grwt)
-	setFMSData("zfw", zfw)
-	calc_CGMAC()  --Recalc CG %MAC and TRIM units
-	if (B777DR_airspeed_V1 < 999 or B777DR_airspeed_Vr < 999 or B777DR_airspeed_V2 < 999) and simDR_onground == 1 then
-		B777DR_airspeed_flapsRef = 0
-		--B777DR_airspeed_V1 = 999
-		--B777DR_airspeed_Vr = 999
-		--B777DR_airspeed_V2 = 999
-		fmsO["notify"] = "TAKEOFF SPEEDS DELETED"
-	end
+	elseif value == "drag_ff" then
+		local input = fmsO["scratchpad"]
 
-  elseif value == "zfw" and not del then
-	local zfw
-	if string.len(fmsO["scratchpad"]) > 0 and string.len(fmsO["scratchpad"]) <= 5 and string.match(fmsO["scratchpad"], "%d") then
-		if simConfigData["data"].SIM.weight_display_units == "LBS" then
-			zfw = fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs  --store LBS in KGS
+		if input == "ARM" then
+			if getFMSData("dragFF_armed") == "ARM" then
+				setFMSData("dragFF_armed", "   ")
+			else
+				setFMSData("dragFF_armed", "ARM")
+			end
+			return
 		else
-			zfw = fmsO["scratchpad"]
+			if getFMSData("dragFF_armed") == "ARM" then
+				local output = ""
+				if input:match("/") then
+					local inputSplit = split(input, "/")
+					for i = 1, 2 do
+						if inputSplit[i] then
+							if not tonumber(inputSplit[i]) then
+								fmsO["notify"]="INVALID ENTRY"
+								return
+							else
+								inputSplit[i] = string.format("%.1f", inputSplit[i])
+								if inputSplit[i]:sub(1, 1):match("%d") then
+									inputSplit[i] = "+"..inputSplit[i]
+								end
+								if tonumber(inputSplit[i]) < -5.0 then
+									inputSplit[i] = "-5.0"
+								elseif tonumber(inputSplit[i]) > 9.9 then
+									inputSplit[i] = "9.9"
+								end
+								output = output..inputSplit[i].."/"
+							end
+						end
+					end
+					output = output:sub(1, -2)
+				else
+					if not tonumber(input) then
+						fmsO["notify"]="INVALID ENTRY"
+						return
+					else
+						if tonumber(input) < -5.0 then
+							input = "-5.0"
+						elseif tonumber(input) > 9.9 then
+							input = "9.9"
+						end
+						if output:sub(1, 1):match("%d") then
+							output = "+"..string.format("%.1f", input)
+						else
+							output = string.format("%.1f", input)
+						end
+					end
+				end
+				output = slashEntry(output, simConfigData["data"].FMC.drag_ff)
+				simConfigData["data"].FMC.drag_ff = output
+				saveSimconfig();
+			end
 		end
-	elseif fmsO["scratchpad"] == "" then
-		zfw = (simDR_GRWT-simDR_fuel) / 1000
-	else
-		fmsO["notify"]="INVALID ENTRY"
-		fmsO["scratchpad"] = ""
 		return
-	end
-	zfw = string.format("%5.1f", zfw)
-	grwt = string.format("%5.1f", tonumber(zfw) + (simDR_fuel / 1000))
-	setFMSData(value, zfw)
-	setFMSData("grwt", grwt)
-	calc_CGMAC()  --Recalc CG %MAC and TRIM units
-	if (B777DR_airspeed_V1 < 999 or B777DR_airspeed_Vr < 999 or B777DR_airspeed_V2 < 999) and simDR_onground == 1 then
-		B777DR_airspeed_flapsRef = 0
-		--B777DR_airspeed_V1 = 999
-		--B777DR_airspeed_Vr = 999
-		--B777DR_airspeed_V2 = 999
-		fmsO["notify"] = "TAKEOFF SPEEDS DELETED"
-	end
-  elseif value == "reserves" then
+	elseif value == "grwt" then
+		local grwt
+		if string.len(fmsO["scratchpad"]) ~= 0 and string.len(fmsO["scratchpad"]) ~= 3 and string.len(fmsO["scratchpad"]) ~= 5 then
+			fmsO["notify"]="INVALID ENTRY"
+			fmsO["scratchpad"] = ""
+			return
+			
+		elseif string.len(fmsO["scratchpad"]) > 0 and string.len(fmsO["scratchpad"]) <= 5 and string.match(fmsO["scratchpad"], "%d") then
+			if simConfigData["data"].OPTIONS.weight_display_units == "LBS" then
+				grwt = fmsO["scratchpad"] / kgs_to_lbs
+			else
+				grwt = fmsO["scratchpad"]
+			end
+		elseif fmsO["scratchpad"] == "" then
+			grwt = simDR_GRWT / 1000
+		else
+			fmsO["notify"]="INVALID ENTRY"
+			fmsO["scratchpad"] = ""
+			return
+		end
+		grwt = string.format("%5.1f", grwt)
+		if tonumber(grwt) > 999 then
+			fmsO["notify"]="INVALID ENTRY"
+			fmsO["scratchpad"] = ""
+			return
+		end
+		local zfw = string.format("%5.1f", tonumber(grwt) - (simDR_fuel / 1000))
+		if tonumber(zfw) <50 then
+			fmsO["notify"]="INVALID ENTRY"
+			fmsO["scratchpad"] = ""
+			return
+		end
+		setFMSData(value, grwt)
+		setFMSData("zfw", zfw)
+		calc_CGMAC()  --Recalc CG %MAC and TRIM units
+		if (B777DR_airspeed_V1 < 999 or B777DR_airspeed_Vr < 999 or B777DR_airspeed_V2 < 999) and simDR_onground == 1 then
+			B777DR_airspeed_flapsRef = 0
+			--B777DR_airspeed_V1 = 999
+			--B777DR_airspeed_Vr = 999
+			--B777DR_airspeed_V2 = 999
+			fmsO["notify"] = "TAKEOFF SPEEDS DELETED"
+		end
+		return
+	elseif value == "zfw" and not del then
+		local zfw;
+		if string.len(fmsO["scratchpad"]) > 0 and string.len(fmsO["scratchpad"]) <= 5 and string.match(fmsO["scratchpad"], "%d") then
+			if simConfigData["data"].SIM.weight_display_units == "LBS" then
+				zfw = fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs  --store LBS in KGS
+			else
+				zfw = fmsO["scratchpad"]
+			end
+		elseif fmsO["scratchpad"] == "" then
+			zfw = (simDR_GRWT-simDR_fuel) / 1000
+		else
+			fmsO["notify"]="INVALID ENTRY"
+			fmsO["scratchpad"] = ""
+			return
+		end
+		zfw = string.format("%5.1f", zfw)
+		grwt = string.format("%5.1f", tonumber(zfw) + (simDR_fuel / 1000))
+		setFMSData(value, zfw)
+		setFMSData("grwt", grwt)
+		calc_CGMAC()  --Recalc CG %MAC and TRIM units
+		if (B777DR_airspeed_V1 < 999 or B777DR_airspeed_Vr < 999 or B777DR_airspeed_V2 < 999) and simDR_onground == 1 then
+			B777DR_airspeed_flapsRef = 0
+			--B777DR_airspeed_V1 = 999
+			--B777DR_airspeed_Vr = 999
+			--B777DR_airspeed_V2 = 999
+			fmsO["notify"] = "TAKEOFF SPEEDS DELETED"
+		end
+		return
+	elseif value == "reserves" then
 	local rsv = 0
-	if not string.match(fmsO["scratchpad"], "%d") or string.len(fmsO["scratchpad"]) > 5 then
-		fmsO["notify"] = "INVALID ENTRY"
-		fmsO["scratchpad"] = ""
-		return
-	else
-		if simConfigData["data"].SIM.weight_display_units == "LBS" then
-			rsv = string.format("%5.1f", fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs)  --store LBS in KGS
+		if not string.match(fmsO["scratchpad"], "%d") or string.len(fmsO["scratchpad"]) > 5 then
+			fmsO["notify"] = "INVALID ENTRY"
+			fmsO["scratchpad"] = ""
+			return
 		else
-			rsv = string.format("%5.1f", fmsO["scratchpad"])
+			if simConfigData["data"].SIM.weight_display_units == "LBS" then
+				rsv = string.format("%5.1f", fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs)  --store LBS in KGS
+			else
+				rsv = string.format("%5.1f", fmsO["scratchpad"])
+			end
+			setFMSData(value, rsv)
 		end
-		setFMSData(value, rsv)
-	end
-  elseif value == "crzcg" then
-	if string.len(fmsO["scratchpad"]) > 0 and not string.find(fmsO["scratchpad"], " ") then
-		setFMSData(value, fmsO["scratchpad"])
-	end
-	if string.len(fmsModules["data"].crzcg) > 0 then
-		crzcg_lineLg = string.format("%4.1f%%", tonumber(fmsModules["data"].crzcg))
-	end
-  elseif value == "stepsize" then
-	if fmsO["scratchpad"] == "ICAO" then
-		setFMSData(value, fmsO["scratchpad"])
-	elseif tonumber(fmsO["scratchpad"]) == nil then
-		fmsO["notify"] = "INVALID ENTRY"
-	elseif tonumber(fmsO["scratchpad"]) < 0 or tonumber(fmsO["scratchpad"]) > 9000 or math.fmod(tonumber(fmsO["scratchpad"]), 1000) > 0 then  --ensure increments of 1000
-		fmsO["notify"] = "INVALID ENTRY"
-	else
-		setFMSData(value, fmsO["scratchpad"])
-	end
+	elseif value == "crzcg" then
+		if len(fmsO["scratchpad"]):len() > 0 and not string.find(fmsO["scratchpad"], " ") then
+			setFMSData("crzcg", fmsO["scratchpad"])
+			crzcg_lineLg = string.format("%4.1f%%", tonumber(fmsModules["data"].crzcg))
+		end
+	elseif value == "stepsize" then
+		if fmsO["scratchpad"] == "ICAO" or fmsO["scratchpad"] == "RVSM "then
+			setFMSData(value, fmsO["scratchpad"])
+		elseif tonumber(fmsO["scratchpad"]) == nil then
+			fmsO["notify"] = "INVALID ENTRY"
+		elseif tonumber(fmsO["scratchpad"]) < 0 or tonumber(fmsO["scratchpad"]) > 9000 or math.fmod(tonumber(fmsO["scratchpad"]), 1000) > 0 then  --ensure increments of 1000
+			fmsO["notify"] = "INVALID ENTRY"
+		else
+			setFMSData(value, fmsO["scratchpad"])
+		end
+		return
   elseif value == "cg_mac" then
 	if string.match(fmsO["scratchpad"], "%a") or string.match(fmsO["scratchpad"], "%s") or fmsModules["data"].cg_mac == "--" then
 		fmsO["notify"] = "INVALID ENTRY"
@@ -2646,8 +2729,7 @@ function fmsFunctions.setDisp(fmsO, value)
 		return
 	end
 end
-
-function fmsFunctions.setpage2(fmsO, value)
+--[[function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id == "fmsL" then
 			if B777DR_cdu_act[0] == 0 then
@@ -2675,6 +2757,29 @@ function fmsFunctions.setpage2(fmsO, value)
 
 				end
 			end
+]]
+function fmcPageButton(fmsO)
+	local idNum = fmsO.id == "fmsL" and 0 or 1
+	if B777DR_cdu_act[idNum] == 0 then
+
+		B777DR_cdu_act[idNum] = 1
+		fmsFunctions["setpage"](fmsO,"IDENT")
+
+	else
+		if not string.match(fmsModules[fmsO.id]["prevPage"], "EICAS")
+		and not string.match(fmsModules[fmsO.id]["prevPage"], "EFIS")
+		and fmsModules[fmsO.id]["prevPage"] ~= "README" then
+
+			fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
+
+		end
+	end
+end
+
+function fmsFunctions.setpage2(fmsO, value)
+	if value == "FMC" then
+		if fmsO.id ~= "fmsC" then
+			--fmcPageButton(fmsO);
 		else
 			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
 		end
