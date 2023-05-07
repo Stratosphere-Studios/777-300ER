@@ -66,7 +66,7 @@ local checklistnames = {
     'BEFORE TAKEOFF',
     'AFTER TAKEOFF',
     'DECENT',
-    'APPORACH',
+    'APPROACH',
     'LANDING',
     'SHUTDOWN',
     'SECURE'
