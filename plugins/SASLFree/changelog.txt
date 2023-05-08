@@ -1,4 +1,31 @@
 ----------------------------------------------------------
+SASL 3.16.2 (XP11.25+ support)
+----------------------------------------------------------
+
+-- Included changes for Commercial versions
+
+----------------------------------------------------------
+SASL 3.16.1 (XP11.25+ support)
+----------------------------------------------------------
+
+-- Added native plugin version for Apple Silicon ARM64 processors
+-- Signed/notarized macOS plugin binaries
+-- Switched to LuaJIT version supporting 64bit address space and use its default allocator
+-- Changed some minor UI in widgets
+-- Make ESC key unfocus currently selected command in Developer Widget commands tab
+-- Added project option to call 'update' callback after XP flightmodel calculation (default is before XP FM)
+-- Added "*" mode for product serial key field in Activation Widget (Commercial version)
+
+----------------------------------------------------------
+SASL 3.15.0 (XP11.25+ support)
+----------------------------------------------------------
+
+- Fixed possible issue with sound playback in XP12 on macOS (switched to OpenAL-soft implementation)
+- Added functions to save/load XP situations (.sit files)
+- Added functions to place user aircraft at specific airport or other location
+- Updated X-Plane SDK and MSVC tools used to build SASL plugin
+
+----------------------------------------------------------
 SASL 3.14.5 (XP11.25+ support)
 ----------------------------------------------------------
 

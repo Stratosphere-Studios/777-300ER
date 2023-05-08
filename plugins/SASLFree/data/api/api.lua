@@ -1325,6 +1325,20 @@ sasl.drawObject = drawObject;
 function reloadScenery() end;
 sasl.reloadScenery = reloadScenery;
 
+--- Saves XP situation to situation data file
+--- @param path string @Relative path to situation data file
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#saveXpSituation
+function saveXpSituation(path) end;
+sasl.loadXpSituation = saveXpSituation;
+
+--- Loads XP situation from situation data file
+--- @param path string @Relative path to situation data file
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadXpSituation
+function loadXpSituation(path) end;
+sasl.loadXpSituation = loadXpSituation;
+
 --- Converts simulator world coordinates to local OpenGL coordinates.
 --- @param latitude number
 --- @param longitude number
