@@ -22,11 +22,12 @@ function deferred_command(name,desc,nilFunc)
 	--XLuaReplaceCommand(c,null_command)
 	return nil --make_command_obj(c)
 end
+
 --replace create_dataref
 function deferred_dataref(name,type,notifier)
-	--print("Deffereed dataref: "..name)
+	--print("Deferred dataref: "..name)
 	dref=XLuaCreateDataRef(name, type,"yes",notifier)
-	return wrap_dref_any(dref,type) 
+	return wrap_dref_any(dref,type)
 end
 
 --*************************************************************************************--
@@ -47,7 +48,6 @@ B777DR_trs_bug_enabled            = deferred_dataref("Strato/777/displays/trs_bu
 B777DR_aoa_enabled                = deferred_dataref("Strato/777/displays/pfd_aoa_enabled", "number")
 B777DR_smart_knobs                = deferred_dataref("Strato/777/smart_knobs", "number")
 B777DR_pfd_mach_gs                = deferred_dataref("Strato/777/pfd_mach_gs", "number")
-B777DR_realistic_prk_brk          = find_dataref("Strato/777/gear/park_brake_realistic")
 
 --*************************************************************************************--
 --**                              CREATE COMMANDS                                    **--
