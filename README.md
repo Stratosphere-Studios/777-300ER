@@ -34,7 +34,7 @@ A: We have no release date at this time, however, you can still download the air
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries from various authors from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries), where we also have official Stratosphere liveries for other aircraft.
+A: You can download liveries from us and various third parties from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries)
 
 **Livery Painters**
 
@@ -104,13 +104,3 @@ Potatohead123: Cockpit help.
 Phil Paysse: Fuselage.
 
 [Spherrrical](https://github.com/Spherrrical/): Logo design.
-
-**Liveries:**
-
-A.joshua - Air India (Star Alliance) VT-ALJ, ANA JA792A, Korean Air HL8007, Swiss Air HB-JNB, Cathay Pacific B-KPM
-
-CptTrxpic - Japan Airlines JA731A, [Kuwait Airways 9K-AOC](https://forums.x-plane.org/index.php?/files/file/80509-kuwait-airways-9k-aoc-stratosphere-b777-300er/), [Ethiopian Airlines ET-ASL](https://forums.x-plane.org/index.php?/files/file/80486-ethiopian-airlines-et-asl-stratosphere-b777-300er/), [China Eastern Airlines B-7343](https://forums.x-plane.org/index.php?/files/file/80495-china-eastern-airlines-b-7343-stratosphere-studios-b777-300er/), [British Airways G-STBK](https://forums.x-plane.org/index.php?/files/file/80530-british-airways-g-stbk-stratosphere-studios-b777-300er/)
-
-[SGFlightSimmerYT](https://github.com/SGFlightSimmerYT) - Philippine Airlines RP-C7775, Qatar Airways A7-BAL, Singapore Airlines (Star Alliance) 9V-SWM, Singapore Airlines 9V-SWW v2, Turkish Airlines TC-LJI, United Airlines Evo-Blue N2749U, China Eastern Airlines B-2001, Air France F-GSQE
-
-URL_Link - Qatar Airways (Retro) A7-BOC, KLM SkyTeam PH-BVD, [Korean Air SkyTeam HL7783](https://forums.x-plane.org/index.php?/files/file/79712-korean-air-skyteam-hl7783-livery-for-freeware-stratosphere-777-300er/)
