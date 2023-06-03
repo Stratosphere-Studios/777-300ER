@@ -81,7 +81,6 @@ simDR_efis_arpt_fo                     = find_dataref("sim/cockpit2/EFIS/EFIS_ai
 simDR_efis_fix_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_fix_on_copilot")
 B777DR_nd_sta                          = find_dataref("Strato/777/EFIS/sta")
 B777DR_pfd_mtrs                        = find_dataref("Strato/777/displays/mtrs")
-B777CMD_save_simconfig                     = find_command("Strato/777/save_simconfig")
 
 --Workaround for stack overflow in init.lua namespace_read
 function replace_char(pos, str, r)
@@ -324,30 +323,11 @@ B777DR_readme_unlocked  = deferred_dataref("Strato/777/readme_unlocked", "number
 
 --Simulator Config Options
 simConfigData = {}
---function doneNewSimConfig()
---	B777DR_newsimconfig_data=0
---end
 
-function pushSimConfig(values)
-	B777DR_simconfig_data=json.encode(values)
-	B777DR_newsimconfig_data=1
-	--run_after_time(doneNewSimConfig, 1)
+function setSimConfig() -- call this function after setting the simConfigData table"
+	B777DR_simconfig_data = json.encode(simConfigData["values"])
+	B777DR_newsimconfig_data = 1
 end
-
-local setSimConfig=false
-function hasSimConfig()
-	if B777DR_newsimconfig_data==1 then
-		if string.len(B777DR_simconfig_data) > 1 then
-			simConfigData["data"] = json.decode(B777DR_simconfig_data)
-			setSimConfig=true
-		else
-			return false
-		end
-	end
-	return setSimConfig
-end
-
--- see "fms wb code.lua" in project files
 
 fmsPages={}
 --fmsPagesmall={}
@@ -549,7 +529,7 @@ function createPage(page)
 		"                        ",
 		"                        ",
 		"                        ",
-		"                        ",
+		"                        ", 
 		"                        "
 	}
 
@@ -562,11 +542,11 @@ function createPage(page)
 	return retVal
 end
 
+dofile("B777.createfms.lua")
 dofile("B777.notifications.lua")
 --dofile("irs/irs_system.lua")
 dofile("B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
-dofile("B777.createfms.lua")
 
 fmsC = {}
 setmetatable(fmsC, {__index = fms})
@@ -891,7 +871,11 @@ end
 
 function after_physics()
 	if debug_fms > 0 then return end
-	if hasSimConfig() == false then return end
+
+	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 and false then
+		print("fms: "..B777DR_simconfig_data)
+		simConfigData = json.decode(B777DR_simconfig_data)
+	end
 
 	fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
 	
@@ -905,9 +889,9 @@ function after_physics()
     setNotifications()
     B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
     --print(B777DR_FMSdata)
-    fmsL:B777_fms_display()
-    fmsC:B777_fms_display()
-    fmsR:B777_fms_display()
+    --fmsL:B777_fms_display() PROBLEM HERE!!!
+    --fmsC:B777_fms_display()
+    --fmsR:B777_fms_display()
 	--print("FMS WORKING")
 	--[[if simDR_bus_volts[0]>24 then ss777 comment
 		irsSystem.update()
@@ -935,22 +919,20 @@ function after_physics()
     end
 ]]
 	--Display Waypoint ETA on ND
-	waypoint_eta_display()
+	--waypoint_eta_display()
 
 	--Display range NM on ND
-	nd_range_display()
+	--nd_range_display()
 
 	--Display speed and wind info on ND
-	nd_speed_wind_display()
-
-	--Ensure simConfig data is fresh	
+	--nd_speed_wind_display()
 
 	--Ensure DR's are updated in time for use in calc_CGMAC()
 	--[[local payload_weight = B777DR_payload_weight s777 comment
 	local fuel_qty = simDR_fuel_qty]]
-	local simconfig = B777DR_simconfig_data
+
 	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
-	B777DR_readme_unlocked = simConfigData["data"].FMC.unlocked
+	--B777DR_readme_unlocked = simConfigData.FMC.unlocked
 
 	if B777DR_cdu_efis_ctl[0] == 1 then
 		simDR_vor_adf[1] = vor_adf[1]
@@ -972,17 +954,13 @@ function after_physics()
 	end
 end
 
-function popup(text)
-	os.execute("msg * "..text)
-end
-
 function aircraft_load()
 	simDR_cg_adjust = 0 --reset CG slider to begin current flight
-	run_after_time(loadLastPos, 2)
-	--run_after_time(closeReadme, 2.1)
-	popup("Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Happy flying!")
+	loadLastPos()
+	--run_after_time(closeReadme, 2)
+	os.execute("msg * Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Happy flying!")
 end
 
 function aircraft_unload()
-	-- simDR_cg_adjust = 0 --reset CG slider to neutral for future flights s777 comment
+	simDR_cg_adjust = 0 --reset CG slider to neutral for future flights
 end

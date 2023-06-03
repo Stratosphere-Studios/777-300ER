@@ -39,8 +39,8 @@ fmsKeyFunc={}
 
 function keyDown(fmsModule,key)
 
-  if simConfigData["data"].FMC.unlocked == 1 then
-
+  --if simConfigData.FMC.unlocked == 1 then
+  if false then
     run_after_time(switchCustomMode, 0.5)
     print(fmsModule.. " do " .. key)
 

@@ -53,7 +53,6 @@ B777DR_pfd_mach_gs                = deferred_dataref("Strato/777/pfd_mach_gs", "
 --**                              CREATE COMMANDS                                    **--
 --*************************************************************************************--
 
-B777CMD_save_simconfig                = deferred_command("Strato/777/save_simconfig", "Save Configuration Options", saveSimconfig_CMDhandler)
 B777CMD_toggle_weight_mode            = deferred_command("Strato/777/options/weight_mode_toggle", "Toggle Weight Mode", weight_mode_toggle_CMDHandler)
 B777CMD_toggle_prkBrk_mode            = deferred_command("Strato/777/options/prkBrk_mode_toggle", "Toggle Parking Brake Mode", prkBrk_mode_toggle_CMDHandler)
 B777CMD_toggle_smartKnobs             = deferred_command("Strato/777/options/smartKnobs_toggle", "Toggle Smart Knobs", smartKnobs_toggle_CMDHandler)

@@ -55,6 +55,16 @@ local pages = {
 avitabEnabled                          = find_dataref("avitab/panel_enabled") -- or 'avitab/panel_powered'
 B777DR_simconfig_data                  = find_dataref("Strato/777/simconfig")
 B777DR_newsimconfig_data               = find_dataref("Strato/777/newsimconfig")
+testNum                                = find_dataref("testNum")
+B777DR_oldsimconfig_data               = find_dataref("Strato/777/oldsimconfig_data")
+
+B777DR_acf_is_freighter                = find_dataref("Strato/777/acf_is_freighter")
+B777DR_lbs_kgs                         = find_dataref("Strato/777/lbs_kgs")
+B777DR_trs_bug_enabled                 = find_dataref("Strato/777/displays/trs_bug_enabled")
+B777DR_aoa_enabled                     = find_dataref("Strato/777/displays/pfd_aoa_enabled")
+B777DR_smart_knobs                     = find_dataref("Strato/777/smart_knobs")
+B777DR_pfd_mach_gs                     = find_dataref("Strato/777/pfd_mach_gs")
+B777DR_realistic_prk_brk               = find_dataref("Strato/777/gear/park_brake_realistic")
 
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
@@ -81,6 +91,31 @@ B777DR_efb_page_type                   = deferred_dataref("Strato/777/displays/e
 --*************************************************************************************--
 
 
+--*************************************************************************************--
+--**                                      CODE                                       **--
+--*************************************************************************************--
+local temp = {}
+function efb_boot()
+   B777DR_efb_page = 2
+end
+
+--Simulator Config
+simConfigData = {}
+
+function setSimConfig() -- call this function after setting the simConfigData table")
+   B777DR_simconfig_data = json.encode(simConfigData["values"])
+   B777DR_newsimconfig_data = 1
+end
+
+function doCMD(cmd)
+   local var = find_command(cmd)
+   var:once()
+end
+
+function setDref(dref, value)
+   local var = find_dataref(dref)
+   var = value
+end
 
 --*************************************************************************************--
 --**                             CUSTOM COMMAND HANDLERS                             **--
@@ -157,6 +192,56 @@ function efb_pwr_CMDhandler(phase, duration)
    end
 end
 
+function weight_mode_toggle_CMDHandler(phase, duration)
+	if phase == 0 then
+		simConfigData.PLANE.weight_display_units = simConfigData.PLANE.weight_display_units == "LBS" and "KGS" or "LBS";
+		B777DR_lbs_kgs = simConfigData.PLANE.weight_display_units == "LBS" and 1 or 0;
+      setSimConfig()
+	end
+end
+function prkBrk_mode_toggle_CMDHandler(phase, duration)
+   if phase == 0 then
+		simConfigData.PLANE.real_park_brake = 1 - simConfigData.PLANE.real_park_brake
+		B777DR_realistic_prk_brk = simConfigData.PLANE.real_park_brake
+      setSimConfig()
+	end
+end
+function smartKnobs_toggle_CMDHandler(phase, duration)
+	if phase == 0 then
+		simConfigData.PLANE.smart_knobs = 1 - simConfigData.PLANE.smart_knobs
+		B777DR_smart_knobs = simConfigData.PLANE.smart_knobs
+      setSimConfig()
+	end
+end
+function gsInd_toggle_CMDHandler(phase, duration)
+	if phase == 0 then
+		simConfigData.PLANE.gs_mach_indicator = 1 - simConfigData.PLANE.gs_mach_indicator
+		B777DR_pfd_mach_gs = simConfigData.PLANE.gs_mach_indicator
+      setSimConfig()
+	end
+end
+function trsInd_toggle_CMDHandler(phase, duration)
+	if phase == 0 then
+		simConfigData.PLANE.trs_bug = 1 - simConfigData.PLANE.trs_bug
+		B777DR_trs_bug_enabled = simConfigData.PLANE.trs_bug
+      setSimConfig()
+	end
+end
+function aoaInd_toggle_CMDHandler(phase, duration)
+	if phase == 0 then
+		simConfigData.PLANE.aoa_indicator = 1 - simConfigData.PLANE.aoa_indicator
+		B777DR_aoa_enabled = simConfigData.PLANE.aoa_indicator
+      setSimConfig()
+	end
+end
+function acfType_toggle_CMDHandler(phase, duration)
+	if phase == 0 then
+		simConfigData.PLANE.aircraft_type = 1 - simConfigData.PLANE.aircraft_type
+		B777DR_acf_is_freighter = simConfigData.PLANE.aircraft_type
+      setSimConfig()
+	end
+end
+
 --*************************************************************************************--
 --**                             CREATE CUSTOM COMMANDS                               **--
 --*************************************************************************************--
@@ -174,56 +259,20 @@ B777CMD_efb_home                       = deferred_command("Strato/777/efb_home",
 B777CMD_efb_pwr                        = deferred_command("Strato/777/efb_pwr", "EFB Power Button", efb_pwr_CMDhandler)
 B777CMD_efb_back                       = deferred_command("Strato/777/efb_back", "EFB Back Button", efb_back_CMDhandler)
 
---*************************************************************************************--
---**                                      CODE                                       **--
---*************************************************************************************--
-
-function efb_boot()
-   B777DR_efb_page = 2
-end
-
---Simulator Config Options
-simConfigData = {}
-function doneNewSimConfig()
-	B777DR_newsimconfig_data = 0
-end
-
-function pushSimConfig(values)
-	B777DR_simconfig_data = json.encode(values)
-	B777DR_newsimconfig_data = 1
-	run_after_time(doneNewSimConfig, 1)
-end
-
-local setSimConfig=false
-function hasSimConfig()
-	if B777DR_newsimconfig_data == 1 then
-		if string.len(B777DR_simconfig_data) > 1 then
-			simConfigData["data"] = json.decode(B777DR_simconfig_data)
-			setSimConfig=true
-		else
-			return false
-		end
-	end
-	return setSimConfig
-end
-
-function doCMD(cmd)
-   local var = find_command(cmd)
-   var:once()
-end
-
-function setDref(dref, value)
-   local var = find_dataref(dref)
-   var = value
-end
+B777CMD_toggle_weight_mode             = deferred_command("Strato/777/options/weight_mode_toggle", "Toggle Weight Mode", weight_mode_toggle_CMDHandler)
+B777CMD_toggle_prkBrk_mode             = deferred_command("Strato/777/options/prkBrk_mode_toggle", "Toggle Parking Brake Mode", prkBrk_mode_toggle_CMDHandler)
+B777CMD_toggle_smartKnobs              = deferred_command("Strato/777/options/smartKnobs_toggle", "Toggle Smart Knobs", smartKnobs_toggle_CMDHandler)
+B777CMD_toggle_gsInd                   = deferred_command("Strato/777/options/gsInd_mode_toggle", "Toggle GS/MACH Indicator", gsInd_toggle_CMDHandler)
+B777CMD_toggle_trsInd                  = deferred_command("Strato/777/options/trsInd_toggle", "Toggle TRS Indicator", trsInd_toggle_CMDHandler)
+B777CMD_toggle_aoaInd                  = deferred_command("Strato/777/options/aoaInd_toggle", "Toggle AOA Indicator", aoaInd_toggle_CMDHandler)
+B777CMD_toggle_acfType                 = deferred_command("Strato/777/options/acfType_toggle", "Toggle Aircraft Type", acfType_toggle_CMDHandler)
 
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
 
-function aircraft_load()
-   print("EFB loaded")
-end
+--function aircraft_load()
+
 --function aircraft_unload()
 
 function flight_start()
@@ -238,40 +287,15 @@ end
 
 --function before_physics()
 
--- TODO: KEYPAD
---[[
-   
-yes i know this code is bad, i've already rewritten and will upoad later
-
-function keypad()
-   B777DR_efb_keypad = 1
-end
-
-function keypadButtons(key)
-   if key ~= "backsp" and key ~= "enter" Sand key ~= "canc" then
-      B777DR_efb_keypad_scratchpad = B777DR_efb_keypad_scratchpad..key
-   end
-
-   if key == "canc" then
-      B777DR_efb_keypad_scratchpad  = ""
-      B777DR_efb_keypad = 0
-      return
-   elseif key == "enter" then
-      
-   end
-]]
-
 function after_physics()
-   
-   if hasSimConfig() == false then return end
-
+   if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
+      simConfigData = json.decode(B777DR_simconfig_data)
+   end
    if B777DR_efb_page == 0 or B777DR_efb_page == 1000 then -- off, or avitab
       B777DR_efb_page_type = 0
    else
       B777DR_efb_page_type = pages[B777DR_efb_page].type
    end
-
-   local simconfig = B777DR_simconfig_data -- ensure simconfig is fresh
 end
 
 --function after_replay()
