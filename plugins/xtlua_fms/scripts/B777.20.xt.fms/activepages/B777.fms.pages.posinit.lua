@@ -11,8 +11,6 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
     fmsFunctionsDefs["POSINIT"]["R2"]={"getdata","lastpos"}
 
     local hrs, mins = hh < 10 and "0"..hh or hh, mm < 10 and "0"..mm or mm
-      print("lat: "..fmsModules["data"].aptLat)
-      print("lon: "..fmsModules["data"].aptLon)
     -- position is updated in after_physics()
     return {
       "      POS INIT          ",

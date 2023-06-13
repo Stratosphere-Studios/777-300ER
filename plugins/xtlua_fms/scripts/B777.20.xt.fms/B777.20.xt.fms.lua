@@ -895,7 +895,7 @@ function after_physics()
 	cM = mm
 	cM = ss
     setNotifications()
-	
+
 	--[[if simDR_bus_volts[0]>24 then ss777 comment
 		irsSystem.update()
 		B777_setNAVRAD()
@@ -966,7 +966,7 @@ function aircraft_load()
 	find_command("Strato/B777/fms1/ls_key/R6"):once()
 	find_command("Strato/B777/fms2/ls_key/R6"):once()
 	find_command("Strato/B777/fms3/ls_key/R6"):once()
-	os.execute("msg * Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Happy flying!")
+	os.execute("msg * Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!")
 end
 
 function aircraft_unload()
