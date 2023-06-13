@@ -59,7 +59,7 @@ B777DR_pfd_mach_gs          = deferred_dataref("Strato/777/pfd_mach_gs", "number
 --*************************************************************************************--
 --** 				        MAIN PROGRAM LOGIC                                       **--
 --*************************************************************************************--
-local file_location = "Output/preferences/Strato_777_config.dat"
+local fileLocation = "Output/preferences/Strato_777_config.json"
 
 simConfigData = {}
 
@@ -105,9 +105,9 @@ function defaultValues()
 end
 
 function baro_sync()
-	if simConfigData.PLANE.baro_mins_sync == 1 then
+	if getSimConfig("PLANE","baro_mins_sync") == 1 then
 		simDR_baro_fo = simDR_baro_capt
-	elseif simConfigData.PLANE.baro_mins_sync == 2 then
+	elseif getSimConfig("PLANE","baro_mins_sync") == 2 then
 		simDR_baro_capt = simDR_baro_fo
 	end
 end
@@ -148,52 +148,74 @@ function readmeCode()
 	--print("created readme code "..B777DR_readme_code)
 end
 
-function setSimConfig() -- call this function after setting the simConfigData table
-	B777DR_simconfig_data = json.encode(simConfigData["values"])
-	B777DR_newsimconfig_data = 1
+function getSimConfig(p1, p2)
+    if simConfigData[p1] then
+		if simConfigData[p1][p2] then
+			return simConfigData[p1][p2]
+		end
+    end
+    print("ERROR: Attempt to get invalid simconfig value in SIMCONFIG")
+	return "fail"
 end
 
-function setLoadedConfigs()  --TODO: Fix configs not loading when file is old version
+function setSimConfig(p1, p2, value)
+	if simConfigData[p1] then
+		if simConfigData[p1][p2] then
+			simConfigData[p1][p2] = value
+			B777DR_simconfig_data = json.encode(simConfigData["values"])
+			B777DR_newsimconfig_data = 1
+			return "success"
+		end
+	end
+	print("ERROR: Attempt to set invalid simconfig value in SIMCONFIG.")
+	return "fail"
+end
+
+function setLoadedConfigs()
 	if B777DR_simconfig_data:match("\"VERSION\":"..version) then
 		for key, value in pairs(simConfigData.SOUND) do
 			setSoundOption(key,value)
 		end
-		B777DR_lbs_kgs = simConfigData.PLANE.weight_display_units == "LBS" and 1 or 0;
-		B777DR_realistic_prk_brk = simConfigData.PLANE.real_park_brake
-		B777DR_smart_knobs = simConfigData.PLANE.smart_knobs
-		B777DR_pfd_mach_gs = simConfigData.PLANE.gs_mach_indicator
-		B777DR_trs_bug_enabled = simConfigData.PLANE.trs_bug
-		B777DR_aoa_enabled = simConfigData.PLANE.aoa_indicator
-		B777DR_acf_is_freighter = simConfigData.PLANE.aircraft_type
+		B777DR_lbs_kgs = getSimConfig("PLANE", "weight_display_units") == "LBS" and 1 or 0;
+		B777DR_realistic_prk_brk = getSimConfig("PLANE","real_park_brake")
+		B777DR_smart_knobs = getSimConfig("PLANE","smart_knobs")
+		B777DR_pfd_mach_gs = getSimConfig("PLANE","gs_mach_indicator")
+		B777DR_trs_bug_enabled = getSimConfig("PLANE","trs_bug")
+		B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
+		B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
 	else
 		print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
 		os.execute("msg * The 777's settings file is from an older version. Settings have been reset.")
-		os.remove(file_location)
+		os.remove(fileLocation)
 		loadSimConfig()
 	end
 end
 
+-- for possible performance improvement
+local open = io.open
+local close = io.close
+
 function loadSimConfig()
-	print("File = "..file_location)
-	local file = io.open(file_location, "r")
+	os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
+	print("File = "..fileLocation)
+	local file = open(fileLocation, "r")
 
 	if file then
 		local data = ""
 		data = file:read()
 		B777DR_simconfig_data = data
-		file:close()
+		close(file)
 	else
-		local newFile = io.open(file_location, "w")
+		local newFile = open(fileLocation, "w")
 		local data = {}
 		data = json.encode(defaultValues())
 		B777DR_simconfig_data = data
 		newFile:write(data)
-		newFile:close()
+		close(newFile)
 	end
 
 	--print("simconfig: "..B777DR_simconfig_data)
 	B777DR_newsimconfig_data = 1
-	hasSimConfig()
 	run_after_time(setLoadedConfigs, 0.5)
 end
 
@@ -210,16 +232,18 @@ end
 
 function hasSimConfig()
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
-		local file = io.open(file_location, "w")
+		local file = open(fileLocation, "w")
 		local data = B777DR_simconfig_data
 		simConfigData = json.decode(data)
 		--print(data)
 		file:write(data)
-		file:close()
-		if not is_timer_scheduled(noNewData) then run_after_time(noNewData, 0.5) end
+		close(file)
+		if not is_timer_scheduled(noNewData) then run_after_time(noNewData, 0.2) end
 	end
 end
 
 function after_physics()
+	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	hasSimConfig()
+	baro_sync()
 end

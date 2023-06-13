@@ -50,19 +50,19 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be
     --local reservesV=(simDR_fuel_tanks[5]+simDR_fuel_tanks[6])/1000
     local jet_weightV=simDR_m_jettison/1000
 
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
+	if simConfigData.SIM.weight_display_units == "LBS" then
 	  --Marauder28
-	  if not string.match(grwt, "***.*") then grwt = string.format("%5.1f", tonumber(grwt) * simConfigData["data"].SIM.kgs_to_lbs) end
-	  if not string.match(zfw, "***.*") then zfw = string.format("%5.1f", tonumber(zfw) * simConfigData["data"].SIM.kgs_to_lbs) end
-      if not string.match(rsv, "***.*") then rsv = string.format("%5.1f", tonumber(rsv) * simConfigData["data"].SIM.kgs_to_lbs) end
-	  calc_gw = string.format("%5.1f", tonumber(calc_gw) * simConfigData["data"].SIM.kgs_to_lbs)
-	  calc_zfw = string.format("%5.1f", tonumber(calc_zfw) * simConfigData["data"].SIM.kgs_to_lbs)	  
+	  if not string.match(grwt, "***.*") then grwt = string.format("%5.1f", tonumber(grwt) * simConfigData.SIM.kgs_to_lbs) end
+	  if not string.match(zfw, "***.*") then zfw = string.format("%5.1f", tonumber(zfw) * simConfigData.SIM.kgs_to_lbs) end
+      if not string.match(rsv, "***.*") then rsv = string.format("%5.1f", tonumber(rsv) * simConfigData.SIM.kgs_to_lbs) end
+	  calc_gw = string.format("%5.1f", tonumber(calc_gw) * simConfigData.SIM.kgs_to_lbs)
+	  calc_zfw = string.format("%5.1f", tonumber(calc_zfw) * simConfigData.SIM.kgs_to_lbs)	  
 	  --Marauder28
 
-      --grwtV=grwtV * simConfigData["data"].kgs_to_lbs
-      grfuelV=grfuelV * simConfigData["data"].SIM.kgs_to_lbs
-      --zfwV=zfwV * simConfigData["data"].kgs_to_lbs
-      jet_weightV=jet_weightV * simConfigData["data"].SIM.kgs_to_lbs
+      --grwtV=grwtV * simConfigData.kgs_to_lbs
+      grfuelV=grfuelV * simConfigData.SIM.kgs_to_lbs
+      --zfwV=zfwV * simConfigData.kgs_to_lbs
+      jet_weightV=jet_weightV * simConfigData.SIM.kgs_to_lbs
     end
 	
     --local grwt=string.format("%05.1f",grwtV)
@@ -141,7 +141,7 @@ local weightUnits;
 fmsPages["PERFINIT"]=createPage("PERFINIT")
 fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 
-	weightUnits = simConfigData["data"].PLANE.weight_display_units:sub(1, -2)
+	weightUnits = getSimConfig("PLANE", "weight_display_units"):sub(1, -2)
 
 	local fuelWeight = (weightUnits == "LB") and simDR_fueL_tank_weight_total_kg * 2.204623 or simDR_fueL_tank_weight_total_kg
 	fuelWeight = string.format("%.1f", fuelWeight / 100)

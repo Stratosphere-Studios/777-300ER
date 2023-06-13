@@ -82,7 +82,6 @@ simDR_efis_fix_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_fi
 B777DR_nd_sta                          = find_dataref("Strato/777/EFIS/sta")
 B777DR_pfd_mtrs                        = find_dataref("Strato/777/displays/mtrs")
 
---Workaround for stack overflow in init.lua namespace_read
 function replace_char(pos, str, r)
     return str:sub(1, pos-1) .. r .. str:sub(pos+1)
 end
@@ -198,7 +197,6 @@ acars                               = deferred_dataref("Strato/B777/comm/acars",
 toderate                            = deferred_dataref("Strato/B777/engine/derate/TO","number") 
 clbderate                           = deferred_dataref("Strato/B777/engine/derate/CLB","number")
 B777DR_radioModes                   = deferred_dataref("Strato/B777/radio/tuningmodes", "string")
-B777DR_FMSdata                      = deferred_dataref("Strato/B777/fms/data", "string")
 B777DR_ap_vnav_state                = find_dataref("Strato/B777/autopilot/vnav_state")
 simDR_autopilot_vs_status           = find_dataref("sim/cockpit2/autopilot/vvi_status")
 B777BR_totalDistance                = find_dataref("Strato/B777/autopilot/dist/remaining_distance")
@@ -324,9 +322,27 @@ B777DR_readme_unlocked  = deferred_dataref("Strato/777/readme_unlocked", "number
 --Simulator Config Options
 simConfigData = {}
 
-function setSimConfig() -- call this function after setting the simConfigData table"
-	B777DR_simconfig_data = json.encode(simConfigData["values"])
-	B777DR_newsimconfig_data = 1
+function getSimConfig(p1, p2)
+    if simConfigData[p1] then
+		if simConfigData[p1][p2] then
+			return simConfigData[p1][p2]
+		end
+    end
+    print("ERROR: Attempt to get invalid simconfig value in FMS")
+	return "fail"
+end
+
+function setSimConfig(p1, p2, value)
+	if simConfigData[p1] then
+		if simConfigData[p1][p2] then
+			simConfigData[p1][p2] = value
+			B777DR_simconfig_data = json.encode(simConfigData["values"])
+			B777DR_newsimconfig_data = 1
+			return "success"
+		end
+	end
+	print("ERROR: Attempt to set invalid simconfig value in FMS.")
+	return "fail"
 end
 
 fmsPages={}
@@ -431,7 +447,6 @@ function defaultFMSData()
 end
 
 fmsModules["data"]=defaultFMSData()
-B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
 
 fmsModules["setData"]=function(self,id,value)
     --always retain the same length
@@ -452,7 +467,6 @@ fmsModules["setData"]=function(self,id,value)
     end
     --newVal=string.sub(value,1,len)
     self["data"][id]=string.format("%s%"..(len-string.len(value)).."s",value,"")
-	B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
 end
 
 function setFMSData(id,value)
@@ -463,20 +477,20 @@ function setFMSData(id,value)
 end
 
 function getFMSData(id)
+	print("getting getFMSData:"..id)
 	if hasChild(fmsModules["data"],id) then
+		print("  curently "..fmsModules["data"][id])
 		return fmsModules["data"][id]
 	end
-	print("getting getFMSData" )
-	print("getting " .. id )
-	print(" curently "..fmsModules["data"][id])
-	return fmsModules["data"][id]
+	print("  ERROR: FMS data not found")
+	return "fail"
 end
 
 fmsModules["lastcmd"]=" "
 fmsModules["cmds"]={}
 fmsModules["cmdstrings"]={}
 
-function registerFMCCommand(commandID,dataString)
+function registerFMCCommand(commandID,dataString) -- here to avoid breaking existing pages; inop
 	--[[fmsModules["cmds"][commandID]=find_command(commandID)
 	fmsModules["cmdstrings"][commandID]=dataString]]
 	return
@@ -784,12 +798,13 @@ function nd_speed_wind_display()
 	end
 end
 debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
+
+local fileLocation = "Output/preferences/Strato_777_lastpos.dat"
+
 function loadLastPos()
-	--local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
-	local file_location = "Output/preferences/Strato_777_lastpos.dat"
-	print("lastpos file = "..file_location)
-	local file = io.open(file_location, "r")
-	if file ~= nil then
+	print("lastpos file = "..fileLocation)
+	local file = io.open(fileLocation, "r")
+	if file then
 		fmsModules["data"].lastpos = file:read()
 		file:close()
 		print("loaded lastpos: "..fmsModules["data"].lastpos)
@@ -799,19 +814,11 @@ function loadLastPos()
 end
 
 function unloadLastPos()
-	--local file_location = simDR_livery_path.."B777-300ER_lastpos.dat"
-	local file_location = "Output/preferences/Strato_777_lastpos.dat"
-	print("lastpos file = "..file_location)
-	local file = io.open(file_location, "w")
+	print("lastpos file = "..fileLocation)
+	local file = io.open(fileLocation, "w")
 	file:write(fmsModules["data"].pos)
 	file:close()
 	print("Unloaded lastpos: "..fmsModules["data"].pos)
-end
-
-function closeReadme()
-	find_command("Strato/B777/fms1/ls_key/R6"):once()
-	find_command("Strato/B777/fms2/ls_key/R6"):once()
-	find_command("Strato/B777/fms3/ls_key/R6"):once()
 end
 
 --function livery_load() end
@@ -872,7 +879,8 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 
-	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 and false then
+	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
+	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
 		print("fms: "..B777DR_simconfig_data)
 		simConfigData = json.decode(B777DR_simconfig_data)
 	end
@@ -887,12 +895,7 @@ function after_physics()
 	cM = mm
 	cM = ss
     setNotifications()
-    B777DR_FMSdata=json.encode(fmsModules["data"]["values"])--make the fms data available to other modules
-    --print(B777DR_FMSdata)
-    --fmsL:B777_fms_display() PROBLEM HERE!!!
-    --fmsC:B777_fms_display()
-    --fmsR:B777_fms_display()
-	--print("FMS WORKING")
+	
 	--[[if simDR_bus_volts[0]>24 then ss777 comment
 		irsSystem.update()
 		B777_setNAVRAD()
@@ -932,7 +935,7 @@ function after_physics()
 	local fuel_qty = simDR_fuel_qty]]
 
 	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
-	--B777DR_readme_unlocked = simConfigData.FMC.unlocked
+	B777DR_readme_unlocked = getSimConfig("FMC", "unlocked")
 
 	if B777DR_cdu_efis_ctl[0] == 1 then
 		simDR_vor_adf[1] = vor_adf[1]
@@ -952,12 +955,17 @@ function after_physics()
 	if not is_timer_scheduled(unloadLastPos) then
 		run_after_time(unloadLastPos, 30)
 	end
+	fmsL:B777_fms_display()
+    fmsC:B777_fms_display()
+    fmsR:B777_fms_display()
 end
 
 function aircraft_load()
 	simDR_cg_adjust = 0 --reset CG slider to begin current flight
 	loadLastPos()
-	--run_after_time(closeReadme, 2)
+	find_command("Strato/B777/fms1/ls_key/R6"):once()
+	find_command("Strato/B777/fms2/ls_key/R6"):once()
+	find_command("Strato/B777/fms3/ls_key/R6"):once()
 	os.execute("msg * Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Happy flying!")
 end
 

@@ -18,10 +18,10 @@ fmsPages["THRUSTLIM"].getPage=function(self,pgNo,fmsID)--dynamic pages need to b
   local c3="     "
   local thrust_ref = 0.0  --string.format("%4.2f", simDR_EPR_target_bug[0])
   
-  if simConfigData["data"].PLANE.thrust_ref == "EPR" then
+  if simConfigData.PLANE.thrust_ref == "EPR" then
 	thrust_ref = string.format("%6.2f", simDR_EPR_target_bug[0])
 	thrust_text = "EPR"
-  elseif simConfigData["data"].PLANE.thrust_ref == "N1" then
+  elseif simConfigData.PLANE.thrust_ref == "N1" then
 	thrust_ref = string.format("%5.1f", simDR_N1_target_bug[0]).."%"
 	thrust_text = "N1"
   end

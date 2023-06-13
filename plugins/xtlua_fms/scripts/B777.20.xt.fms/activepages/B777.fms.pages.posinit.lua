@@ -11,14 +11,15 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
     fmsFunctionsDefs["POSINIT"]["R2"]={"getdata","lastpos"}
 
     local hrs, mins = hh < 10 and "0"..hh or hh, mm < 10 and "0"..mm or mm
-
-    --fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
+      print("lat: "..fmsModules["data"].aptLat)
+      print("lon: "..fmsModules["data"].aptLon)
+    -- position is updated in after_physics()
     return {
       "      POS INIT          ",
       "                        ",
       "      "..fmsModules["data"].lastpos,
       "                        ",
-      fmsModules["data"].airportpos.."  "..fmsModules["data"].aptLat.." "..fmsModules["data"].aptLon,
+      fmsModules["data"].airportpos.."  "..fmsModules["data"].aptLat..fmsModules["data"].aptLon,
       "                        ",
       fmsModules["data"].airportgate.."                    ",
       "                        ",
@@ -27,6 +28,7 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
       "      ***`**.* ****`**.*",
       "                        ",
       "<INDEX            ROUTE>"
+
     }
 
   elseif pgNo==2 then

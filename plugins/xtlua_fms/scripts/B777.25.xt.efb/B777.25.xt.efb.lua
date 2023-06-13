@@ -102,9 +102,27 @@ end
 --Simulator Config
 simConfigData = {}
 
-function setSimConfig() -- call this function after setting the simConfigData table")
-   B777DR_simconfig_data = json.encode(simConfigData["values"])
-   B777DR_newsimconfig_data = 1
+function getSimConfig(p1, p2)
+   if simConfigData[p1] then
+      if simConfigData[p1][p2] then
+         return simConfigData[p1][p2]
+      end
+   end
+   print("ERROR: Attempt to get invalid simconfig value in EFB")
+   return "fail"
+end
+
+function setSimConfig(p1, p2, value)
+   if simConfigData[p1] then
+      if simConfigData[p1][p2] then
+         simConfigData[p1][p2] = value
+         B777DR_simconfig_data = json.encode(simConfigData["values"])
+         B777DR_newsimconfig_data = 1
+         return "success"
+      end
+   end
+   print("ERROR: Attempt to set invalid simconfig value in EFB.")
+   return "fail"
 end
 
 function doCMD(cmd)
@@ -194,51 +212,44 @@ end
 
 function weight_mode_toggle_CMDHandler(phase, duration)
 	if phase == 0 then
-		simConfigData.PLANE.weight_display_units = simConfigData.PLANE.weight_display_units == "LBS" and "KGS" or "LBS";
-		B777DR_lbs_kgs = simConfigData.PLANE.weight_display_units == "LBS" and 1 or 0;
-      setSimConfig()
+		setSimConfig("PLANE", "weight_display_units", getSimConfig("PLANE", "weight_display_units") == "LBS" and "KGS" or "LBS")
+		B777DR_lbs_kgs = getSimConfig("PLANE", "weight_display_units") == "LBS" and 1 or 0;
 	end
 end
 function prkBrk_mode_toggle_CMDHandler(phase, duration)
    if phase == 0 then
-		simConfigData.PLANE.real_park_brake = 1 - simConfigData.PLANE.real_park_brake
-		B777DR_realistic_prk_brk = simConfigData.PLANE.real_park_brake
-      setSimConfig()
+		setSimConfig("PLANE", "real_park_brake", 1 - getSimConfig("PLANE", "real_park_brake"))
+		B777DR_realistic_prk_brk = getSimConfig("PLANE", "real_park_brake")
 	end
 end
 function smartKnobs_toggle_CMDHandler(phase, duration)
 	if phase == 0 then
-		simConfigData.PLANE.smart_knobs = 1 - simConfigData.PLANE.smart_knobs
-		B777DR_smart_knobs = simConfigData.PLANE.smart_knobs
-      setSimConfig()
+		setSimConfig("PLANE", "smart_knobs", 1 - getSimConfig("PLANE", "smart_knobs"))
+		B777DR_smart_knobs = getSimConfig("PLANE", "smart_knobs")
 	end
 end
 function gsInd_toggle_CMDHandler(phase, duration)
 	if phase == 0 then
-		simConfigData.PLANE.gs_mach_indicator = 1 - simConfigData.PLANE.gs_mach_indicator
-		B777DR_pfd_mach_gs = simConfigData.PLANE.gs_mach_indicator
-      setSimConfig()
+		setSimConfig("PLANE", "gs_mach_indicator", 1 - getSimConfig("PLANE", "gs_mach_indicator"))
+		B777DR_pfd_mach_gs = getSimConfig("PLANE", "gs_mach_indicator")
 	end
 end
 function trsInd_toggle_CMDHandler(phase, duration)
 	if phase == 0 then
-		simConfigData.PLANE.trs_bug = 1 - simConfigData.PLANE.trs_bug
-		B777DR_trs_bug_enabled = simConfigData.PLANE.trs_bug
-      setSimConfig()
+		setSimConfig("PLANE", "trs_bug", 1 - getSimConfig("PLANE", "trs_bug"))
+		B777DR_trs_bug_enabled = getSimConfig("PLANE", "trs_bug")
 	end
 end
 function aoaInd_toggle_CMDHandler(phase, duration)
 	if phase == 0 then
-		simConfigData.PLANE.aoa_indicator = 1 - simConfigData.PLANE.aoa_indicator
-		B777DR_aoa_enabled = simConfigData.PLANE.aoa_indicator
-      setSimConfig()
+		setSimConfig("PLANE", "aoa_indicator", 1 - getSimConfig("PLANE", "aoa_indicator"))
+		B777DR_aoa_enabled = getSimConfig("PLANE", "aoa_indicator")
 	end
 end
 function acfType_toggle_CMDHandler(phase, duration)
 	if phase == 0 then
-		simConfigData.PLANE.aircraft_type = 1 - simConfigData.PLANE.aircraft_type
-		B777DR_acf_is_freighter = simConfigData.PLANE.aircraft_type
-      setSimConfig()
+		setSimConfig("PLANE", "aircraft_type", 1 - getSimConfig("PLANE", "aircraft_type"))
+		B777DR_acf_is_freighter = getSimConfig("PLANE", "aircraft_type")
 	end
 end
 
@@ -288,9 +299,11 @@ end
 --function before_physics()
 
 function after_physics()
+   local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
    if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
       simConfigData = json.decode(B777DR_simconfig_data)
    end
+
    if B777DR_efb_page == 0 or B777DR_efb_page == 1000 then -- off, or avitab
       B777DR_efb_page_type = 0
    else
