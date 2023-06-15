@@ -6,8 +6,8 @@ fmsPages["APPROACH"]=createPage("APPROACH")
 fmsPages["APPROACH"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be this way
 --[[    local acf_weight = simDR_acf_weight_total_kg
 
-    if simConfigData["data"].SIM.weight_display_units == "LBS" then
-    	acf_weight = simDR_acf_weight_total_kg * simConfigData["data"].SIM.kgs_to_lbs
+    if simConfigData.SIM.weight_display_units == "LBS" then
+    	acf_weight = simDR_acf_weight_total_kg * simConfigData.SIM.kgs_to_lbs
     end
 string.format("                   %3d", B777DR_airspeed_Vf30),
 string.format("%4.1f              %3d", acf_weight/1000,B777DR_airspeed_Vf25),

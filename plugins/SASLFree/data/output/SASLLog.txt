@@ -1,6 +1,6 @@
 [STRATO777 INFO]: Initializing...
-[STRATO777 INFO]: [DISPLAY] Monitor 0: 0, 0, 2560, 1440
-[STRATO777 INFO]: Path to module: C:\Users/Apex Gaming/Documents/X-Plane 12/Aircraft/777-300ER/plugins/SASLFree/data/modules/main.lua
+[STRATO777 INFO]: [DISPLAY] Monitor 0: 0, 0, 1920, 1200
+[STRATO777 INFO]: Path to module: /mnt/Games/X-Plane 12/Aircraft/Github/777-300ER/plugins/SASLFree/data/modules/main.lua
 [STRATO777 INFO]: Loading module...
 [STRATO777 INFO]: [LUA]: loading	module
 [STRATO777 INFO]: [LUA]: loading	timers
@@ -33,7 +33,10 @@
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: [LUA]: loading	eicas
 [STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	lights
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
 [STRATO777 INFO]: [LUA]: loading	custom_commands
 [STRATO777 INFO]: [LUA]: loading	failures
+[STRATO777 INFO]: Loading cursors...
 [STRATO777 INFO]: Module loaded
 [STRATO777 INFO]: [LUA]: loading	interactive

@@ -64,6 +64,9 @@ simDR_oil_press_fail_1                    = find_dataref("sim/operation/failures
 --[[simDR_reverser_0_fail                     = find_dataref("sim/operation/failures/rel_revers0")
 simDR_reverser_1_fail                     = find_dataref("sim/operation/failures/rel_revers1")]]
 
+simDR_rud_tab                             = find_dataref("sim/flightmodel2/wing/rudder2_deg")
+simDR_rud                                 = find_dataref("sim/flightmodel2/wing/rudder1_deg")
+
 --*************************************************************************************--
 --**                             CUSTOM DATAREF HANDLERS                             **--
 --*************************************************************************************--
@@ -79,6 +82,8 @@ B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/c
 B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
 
 B777DR_oil_press_psi                    = deferred_dataref("Strato/777/oil_press_psi", "array[2]")
+
+B777DR_rud_tab_pos                      = deferred_dataref("Strato/777/controls/rud_tab_pos", "number")
 
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
@@ -191,6 +196,7 @@ end
 
 function aircraft_load()
    print("misc loaded")
+   os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
 end
 
 --function aircraft_unload()
@@ -207,8 +213,10 @@ end
 --function before_physics()
 
 function after_physics()
-   print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok. IF YOU HAVE ANY ISSUES, PLEASE CHECK THE README BEFORE ASKING THE DEVELOPERS!!!")
+   print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.")
    gear()
+
+   B777DR_rud_tab_pos = simDR_rud_tab[11] - simDR_rud[11];
 
    if simDR_oil_press_fail_0 ~= 6 then
       B777DR_oil_press_psi[0] = -0.0027*(simDR_N1[0]*simDR_N1[0]) + 0.6464*simDR_N1[0] + 30

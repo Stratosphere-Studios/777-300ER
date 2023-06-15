@@ -6,11 +6,10 @@
 *****************************************************************************************
 --]]
 
-
 fmsPages["README"] = createPage("README")
 fmsPages["README"].getPage = function(self,pgNo,fmsID)
 
-    if simConfigData["data"].FMC.unlocked == 0 then
+    if getSimConfig("FMC", "unlocked") == 0 then
         return {
             "    READ THE README!    ",
             "                        ",
@@ -24,7 +23,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            "<"..fmsModules["data"].readmeCodeInput..";m5                  ",
+            "<"..fmsModules["data"].readmeCodeInput..";m5                  "
         }
     else
         return {
@@ -48,7 +47,7 @@ end
 fmsPages["README"].getSmallPage = function(self,pgNo,fmsID)
     local unlocked = "-- LOCKED"
 
-    if simConfigData["data"].FMC.unlocked == 1 then
+    if getSimConfig("FMC", "unlocked") == 1 then
         unlocked = " UNLOCKED;h8"
     end
 
