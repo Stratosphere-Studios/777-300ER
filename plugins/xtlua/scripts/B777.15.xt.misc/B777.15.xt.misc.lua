@@ -196,6 +196,7 @@ end
 
 function aircraft_load()
    print("misc loaded")
+   os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
 end
 
 --function aircraft_unload()

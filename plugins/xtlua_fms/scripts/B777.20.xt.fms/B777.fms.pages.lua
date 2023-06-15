@@ -1320,6 +1320,7 @@ function fmsFunctions.setdata(fmsO,value)
 				if result[1] then
 					print("result: "..result[2])
 					setSimConfig("FMC", "drag_ff", result[2])
+					fmsO["scratchpad"] = ""
 					return
 				end
 			end
