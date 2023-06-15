@@ -144,14 +144,17 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 	weightUnits = getSimConfig("PLANE", "weight_display_units"):sub(1, -2)
 
 	local fuelWeight = (weightUnits == "LB") and simDR_fueL_tank_weight_total_kg * 2.204623 or simDR_fueL_tank_weight_total_kg
-	fuelWeight = string.format("%.1f", fuelWeight / 100)
+	fuelWeight = string.format("%.1f", fuelWeight / 1000)
+	if fuelWeight:len() < 5 then
+		fuelWeight = " "..fuelWeight
+	end
 
 	return {
 		"       PERF INIT        ",
 		"                        ",
-		getFMSData("grwt").."              *****",
+		getFMSData("grwt").."               ****",
 		"                        ",
-		" "..fuelWeight.."               ****",
+		fuelWeight.."               ****",
 		"                        ",
 		"***.*                 ` ",
 		"                        ",

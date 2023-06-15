@@ -802,7 +802,7 @@ function B777_spd_dn_cmdHandler(phase, duration)
 	end
 end
 
-function cduBrtIncr()
+function holdCduBrtIncr() -- runs @ 2hz if brightness up is held down. can't pass args thru timers hence loop
 	for i = 0, 3 do
 		if B777DR_show_cdu_brt[i] == 1 then
 			B777DR_cdu_brt[i] = math.min(B777DR_cdu_brt[i] + 1, 23)
@@ -810,7 +810,7 @@ function cduBrtIncr()
 	end
 end
 
-function cduBrtDecr()
+function holdCduBrtDecr() -- runs @ 2hz if brightness down is held down
 	for i = 0, 3 do
 		if B777DR_show_cdu_brt[i] == 1 then
 			B777DR_cdu_brt[i] = math.max(B777DR_cdu_brt[i] - 1, 0)
@@ -818,105 +818,94 @@ function cduBrtDecr()
 	end
 end
 
-function cduHideBrt()
+function releaseBrtButton() -- when any cdu brightness button is released
+	stop_timer(holdCduBrtIncr)
+	stop_timer(holdCduBrtDecr)
+	run_after_time(cduHideBrt, 2)
+end
+
+function cduHideBrt() -- hides brightness indicator after 2 sec
 	for i = 0, 3 do
 		B777DR_show_cdu_brt[i] = 0
 	end
 end
 
+function adjustCduBrt(cdu, dir)
+	stop_timer(cduHideBrt) -- cancel hiding indicator if not hidden yet
+	B777DR_show_cdu_brt[cdu] = 1 -- show indicator
+	B777DR_cdu_brt[cdu] = dir == 1 and math.min(B777DR_cdu_brt[cdu] + 1, 23) or math.max(B777DR_cdu_brt[cdu] - 1, 0) -- adjust depending on direction
+	B777DR_cdu_brt_dir[cdu] = dir -- brightness direction; 1 = up, -1 = down
+end
+
 function B777_fmsL_brt_up_cmdHandler(phase, duration)
 	if phase == 0 then
-		stop_timer(cduHideBrt)
-		B777DR_show_cdu_brt[0] = 1
-		B777DR_cdu_brt[0] = math.min(B777DR_cdu_brt[0] + 1, 23)
-		B777DR_cdu_brt_dir[0] = 1
+		adjustCduBrt(0, 1)
 	elseif phase == 1 then
-		if duration >= 0.5 and not is_timer_scheduled(cduBrtIncr) then
-			run_after_time(cduBrtIncr, 0.5)
+		if duration >= 0.5 and not is_timer_scheduled(holdCduBrtIncr) then
+			run_after_time(holdCduBrtIncr, 0.5)
 		end
 	else
-		run_after_time(cduHideBrt, 2)
-		stop_timer(cduBrtIncr)
+		releaseBrtButton()
 	end
 end
 
 function B777_fmsC_brt_up_cmdHandler(phase, duration)
 	if phase == 0 then
-		stop_timer(cduHideBrt)
-		B777DR_show_cdu_brt[1] = 1
-		B777DR_cdu_brt[1] = math.min(B777DR_cdu_brt[1] + 1, 23)
-		B777DR_cdu_brt_dir[1] = 1
+		adjustCduBrt(1, 1)
 	elseif phase == 1 then
-		if duration >= 0.5 and not is_timer_scheduled(cduBrtIncr) then
-			run_after_time(cduBrtIncr, 0.5)
+		if duration >= 0.5 and not is_timer_scheduled(holdCduBrtIncr) then
+			run_after_time(holdCduBrtIncr, 0.5)
 		end
 	else
-		run_after_time(cduHideBrt, 2)
-		stop_timer(cduBrtIncr)
+		releaseBrtButton()
 	end
 end
 
 function B777_fmsR_brt_up_cmdHandler(phase, duration)
 	if phase == 0 then
-		stop_timer(cduHideBrt)
-		B777DR_show_cdu_brt[2] = 1
-		B777DR_cdu_brt[2] = math.min(B777DR_cdu_brt[2] + 1, 23)
-		B777DR_cdu_brt_dir[2] = 1
+		adjustCduBrt(2, 1)
 	elseif phase == 1 then
-		if duration >= 0.5 and not is_timer_scheduled(cduBrtIncr) then
-			run_after_time(cduBrtIncr, 0.5)
+		if duration >= 0.5 and not is_timer_scheduled(holdCduBrtIncr) then
+			run_after_time(holdCduBrtIncr, 0.5)
 		end
 	else
-		run_after_time(cduHideBrt, 2)
-		stop_timer(cduBrtIncr)
+		releaseBrtButton()
 	end
 end
 
 function B777_fmsL_brt_dn_cmdHandler(phase, duration)
 	if phase == 0 then
-		stop_timer(cduHideBrt)
-		B777DR_show_cdu_brt[0] = 1
-		B777DR_cdu_brt[0] = math.max(B777DR_cdu_brt[0] - 1, 0)
-		B777DR_cdu_brt_dir[0] = -1
+		adjustCduBrt(0, -1)
 	elseif phase == 1 then
-		if duration >= 0.5 and not is_timer_scheduled(cduBrtDecr) then
-			run_after_time(cduBrtDecr, 0.5)
+		if duration >= 0.5 and not is_timer_scheduled(holdCduBrtDecr) then
+			run_after_time(holdCduBrtDecr, 0.5)
 		end
 	else
-		run_after_time(cduHideBrt, 2)
-		stop_timer(cduBrtDecr)
+		releaseBrtButton()
 	end
 end
 
 function B777_fmsC_brt_dn_cmdHandler(phase, duration)
 	if phase == 0 then
-		stop_timer(cduHideBrt)
-		B777DR_show_cdu_brt[1] = 1
-		B777DR_cdu_brt[1] = math.max(B777DR_cdu_brt[1] - 1, 0)
-		B777DR_cdu_brt_dir[1] = -1
+		adjustCduBrt(1, -1)
 	elseif phase == 1 then
-		if duration >= 0.5 and not is_timer_scheduled(cduBrtDecr) then
-			run_after_time(cduBrtDecr, 0.5)
+		if duration >= 0.5 and not is_timer_scheduled(holdCduBrtDecr) then
+			run_after_time(holdCduBrtDecr, 0.5)
 		end
 	else
-		run_after_time(cduHideBrt, 2)
-		stop_timer(cduBrtDecr)
+		releaseBrtButton()
 	end
 end
 
 function B777_fmsR_brt_dn_cmdHandler(phase, duration)
 	if phase == 0 then
-		stop_timer(cduHideBrt)
-		B777DR_show_cdu_brt[2] = 1
-		B777DR_cdu_brt[2] = math.max(B777DR_cdu_brt[2] - 1, 0)
-		B777DR_cdu_brt_dir[2] = -1
+		adjustCduBrt(2, -1)
 	elseif phase == 1 then
-		if duration >= 0.5 and not is_timer_scheduled(cduBrtDecr) then
-			run_after_time(cduBrtDecr, 0.5)
+		if duration >= 0.5 and not is_timer_scheduled(holdCduBrtDecr) then
+			run_after_time(holdCduBrtDecr, 0.5)
 		end
 	else
-		run_after_time(cduHideBrt, 2)
-		stop_timer(cduBrtDecr)
+		releaseBrtButton()
 	end
 end
 
@@ -1569,9 +1558,10 @@ function aircraft_load()
 	B777DR_minimums_mda[1] = 400
 	setMapSteps()
 
-	for i = 0, 3 do
-		B777DR_cdu_brt[i] = 23
-	end
+	B777DR_cdu_brt[0] = 23
+	B777DR_cdu_brt[1] = 23
+	B777DR_cdu_brt[2] = 23
+
 	print("flightIinstruments loaded")
 end
 
@@ -1675,9 +1665,10 @@ function after_physics()
 		simDR_ap_airspeed = math.max(simDR_ap_airspeed, 0.4)
 	end
 
-	simDR_instrument_brt[6] = B777DR_cdu_brt[0] / 23
-	simDR_instrument_brt[7] = B777DR_cdu_brt[1] / 23
-	simDR_instrument_brt[8] = B777DR_cdu_brt[2] / 23
+	-- brightness is 50% plus half of set brightness (min 50%, max 100%)
+	simDR_instrument_brt[6] = 0.5 + B777DR_cdu_brt[0] / 46
+	simDR_instrument_brt[7] = 0.5 + B777DR_cdu_brt[1] / 46
+	simDR_instrument_brt[8] = 0.5 + B777DR_cdu_brt[2] / 46
 
 	B777DR_rudder_trim_total = B777R_rudder_trim_man + B777R_rudder_trim_auto
 	B777DR_rudder_trim_total_abs = math.abs(B777DR_rudder_trim_total)

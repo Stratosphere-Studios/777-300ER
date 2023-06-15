@@ -3,12 +3,13 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
   if pgNo == 1 then
 
     fmsFunctionsDefs["POSINIT"]["R1"]={"getdata","lastpos"}
+    fmsFunctionsDefs["POSINIT"]["R2"]={"getdata","airportpos"}
     --fmsFunctionsDefs["POSINIT"]["R5"]={"setdata","irspos"}
     fmsFunctionsDefs["POSINIT"]["L2"]={"setdata","airportpos"}
     fmsFunctionsDefs["POSINIT"]["L3"]={"setdata","airportgate"}
     fmsFunctionsDefs["POSINIT"]["R6"]={"setpage", "RTE1"}
     fmsFunctionsDefs["POSINIT"]["R4"]={"getdata","gpspos"}
-    fmsFunctionsDefs["POSINIT"]["R2"]={"getdata","lastpos"}
+
 
     local hrs, mins = hh < 10 and "0"..hh or hh, mm < 10 and "0"..mm or mm
     -- position is updated in after_physics()

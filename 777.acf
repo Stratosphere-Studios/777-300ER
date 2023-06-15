@@ -36762,7 +36762,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 120503
+P acf/_file_writer_version 120504
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -43505,6 +43505,7 @@ GROUP Lower Eicas
   LOCKED
   HIDE
   CHAINED
+  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     LOCKED
@@ -44487,10 +44488,12 @@ GROUP Lower Eicas
   GROUP FCTL
     SHOW_EQUAL 5.000000 Strato/777/displays/eicas_mode
     LOCKED
+    HIDE
     CHAINED
     GROUP ACE fail
       SHOW_EQUAL 1.000000 Strato/777/displays/ace_fail_any
       LOCKED
+      HIDE
       CHAINED
       gen_rotary ACES
         POS 3875.000000 -150.000000
@@ -44498,6 +44501,7 @@ GROUP Lower Eicas
         DATAREF 
         SIZE 1.400000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44522,6 +44526,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44546,6 +44551,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44570,6 +44576,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44594,6 +44601,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 [0]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44618,6 +44626,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 [1]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44642,6 +44651,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 [2]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44666,6 +44676,7 @@ GROUP Lower Eicas
         SHOW_EQUAL 1.000000 Strato/777/failures/fctl/ace[2]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44690,6 +44701,7 @@ GROUP Lower Eicas
         SHOW_EQUAL 1.000000 Strato/777/failures/fctl/ace[3]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44714,6 +44726,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44731,6 +44744,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44748,6 +44762,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44765,6 +44780,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44782,6 +44798,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44799,6 +44816,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44816,6 +44834,7 @@ GROUP Lower Eicas
       SHOW_GREATER 65.000000 [0]
       SIZE 2.700000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44832,6 +44851,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/controls/elevator_trim[0]
       SIZE 2.100000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44850,6 +44870,7 @@ GROUP Lower Eicas
       SHOW_GREATER 0.010000 Strato/777/rudder_trim_total
       SIZE 2.200000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44874,6 +44895,7 @@ GROUP Lower Eicas
       SHOW_LESS -0.010000 Strato/777/rudder_trim_total
       SIZE 2.200000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -44897,6 +44919,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/rudder_trim_total_abs[0]
       SIZE 2.100000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -44914,6 +44937,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/speedbrake2_deg[0]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -44931,6 +44955,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/speedbrake1_deg[0]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -44948,6 +44973,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -44965,6 +44991,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler1_deg[2]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -44982,6 +45009,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -44999,6 +45027,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45016,6 +45045,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[2]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45033,6 +45063,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/speedbrake2_deg[1]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45050,6 +45081,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/speedbrake1_deg[1]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45067,6 +45099,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45084,6 +45117,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler1_deg[3]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45101,6 +45135,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45118,6 +45153,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45135,6 +45171,7 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel2/wing/spoiler2_deg[3]
       SIZE 0.500000
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -45149,6 +45186,7 @@ GROUP Lower Eicas
     GROUP Hydraulic Press Low
       SHOW_EQUAL 1.000000 Strato/777/displays/hyd_press_low_any
       LOCKED
+      HIDE
       CHAINED
       gen_rotary HYDRAULICS
         POS 2935.000000 -150.000000
@@ -45156,6 +45194,7 @@ GROUP Lower Eicas
         DATAREF 
         SIZE 1.400000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45179,6 +45218,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 Strato/777/hydraulics/press[0]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45202,6 +45242,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 Strato/777/hydraulics/press[1]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45225,6 +45266,7 @@ GROUP Lower Eicas
         SHOW_GREATER 1200.000000 Strato/777/hydraulics/press[2]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45248,6 +45290,7 @@ GROUP Lower Eicas
         SHOW_LESS 1199.989990 Strato/777/hydraulics/press[0]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45271,6 +45314,7 @@ GROUP Lower Eicas
         SHOW_LESS 1199.989990 Strato/777/hydraulics/press[1]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45294,6 +45338,7 @@ GROUP Lower Eicas
         SHOW_LESS 1199.989990 Strato/777/hydraulics/press[2]
         SIZE 1.300000
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -45318,6 +45363,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/fctl/pfc/mode
       SIZE 1.350000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -45341,6 +45387,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 2.000000 Strato/777/fctl/pfc/mode
       SIZE 1.370000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -45364,6 +45411,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 3.000000 Strato/777/fctl/pfc/mode
       SIZE 1.370000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -45386,6 +45434,7 @@ GROUP Lower Eicas
       DATAREF 
       SIZE 1.350000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45929,15 +45978,14 @@ GROUP Lower Eicas
   GROUP FUEL
     SHOW_EQUAL 6.000000 Strato/777/displays/eicas_mode
     LOCKED
-    HIDE
     CHAINED
+    GROUP_OPEN
     gen_rotary Background
       POS 3411.000000 413.000000
       IMAGE EICAS lower/FUEL/fuel_background
       DATAREF 
       SIZE 1.350000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45961,7 +46009,6 @@ GROUP Lower Eicas
       SHOW_EQUAL 0.000000 Strato/777/lbs_kgs
       SIZE 1.360000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45981,10 +46028,9 @@ GROUP Lower Eicas
     gen_LED fuel_total
       POS 3528.000000 1019.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF Strato/777/displays/fuel_lbs_total
+      DATAREF Strato/777/displays/fuel_lbs_kgs_total
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45999,10 +46045,9 @@ GROUP Lower Eicas
     gen_LED fuel_L
       POS 3000.000000 579.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF Strato/777/displays/fuel_lbs[0]
+      DATAREF Strato/777/displays/fuel_lbs_kgs[0]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -46017,10 +46062,9 @@ GROUP Lower Eicas
     gen_LED fuel_C
       POS 3454.000000 338.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF Strato/777/displays/fuel_lbs[1]
+      DATAREF Strato/777/displays/fuel_lbs_kgs[1]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -46035,10 +46079,9 @@ GROUP Lower Eicas
     gen_LED fuel_R
       POS 3906.000000 580.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF Strato/777/displays/fuel_lbs[2]
+      DATAREF Strato/777/displays/fuel_lbs_kgs[2]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -47057,7 +47100,7 @@ GROUP Upper Eicas
   gen_LED fuel
     POS 3983.000000 1212.000000
     IMAGE White_size23_stretched_vert_no_lead0
-    DATAREF Strato/777/displays/fuel_lbs_total
+    DATAREF Strato/777/displays/fuel_lbs_kgs_total
     SIZE 2.500000
     LOCKED
     LIGHT_MODE GLASS_AUTO

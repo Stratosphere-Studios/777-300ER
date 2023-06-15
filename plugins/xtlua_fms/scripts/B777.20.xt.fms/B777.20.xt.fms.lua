@@ -162,9 +162,6 @@ ss=find_dataref("sim/cockpit2/clock_timer/zulu_time_seconds")
 simDR_bus_volts                     = find_dataref("sim/cockpit2/electrical/bus_volts")
 simDR_startup_running               = find_dataref("sim/operation/prefs/startup_running")
 
-simDR_instrument_brightness_switch  = find_dataref("sim/cockpit2/switches/instrument_brightness_ratio")
-simDR_instrument_brightness_ratio   = find_dataref("sim/cockpit2/electrical/instrument_brightness_ratio_manual")
-
 simDR_radio_nav_freq_Mhz            = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_Mhz")
 simDR_radio_nav_freq_khz            = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_khz")
 simDR_radio_nav_freq_hz             = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_hz")
@@ -363,7 +360,7 @@ function defaultFMSData()
 	rpttimemm="**",
 	acarsAddress="*******",
 	atc="****",
-	grwt="***.*   ",
+	grwt="***.*",
 	crzalt = string.rep("*", 5),
 	clbspd="250",
 	transpd="272",
@@ -693,6 +690,7 @@ function waypoint_eta_display()
 	local fms_distance_to_next_waypoint = 0
 	if string.len(fmsJSON) > 2 then
 		fms = json.decode(fmsJSON)
+		print(fmsJSON)
 
 		if fms[table.getn(fms)][8] ~= "LATLON" then
 			B777DR_destination = string.format("%4s",fms[table.getn(fms)][8])
@@ -701,7 +699,6 @@ function waypoint_eta_display()
 		end
 
 		if simDR_onGround ~= 1 then
-			--print(fmsJSON)
 			fms_current_waypoint, fms_latitude, fms_longitude = getCurrentWayPoint(fms,false)
 			--print(string.match(fms_current_waypoint, "%("))
 			fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs = get_waypoint_estimate(simDR_latitude, simDR_longitude,fms_current_waypoint, fms_latitude, fms_longitude,0)
@@ -809,7 +806,8 @@ function loadLastPos()
 		file:close()
 		print("loaded lastpos: "..fmsModules["data"].lastpos)
 	else
-		print("lastpos file is nil")
+		print("lastpos file is nil, loaded "..fmsModules["data"].pos)
+		fmsModules["data"].lastpos = fmsModules["data"].pos
 	end
 end
 
@@ -960,13 +958,19 @@ function after_physics()
     fmsR:B777_fms_display()
 end
 
+function updateNavaids()
+	local temp = navAidsJSON
+end
+
 function aircraft_load()
 	simDR_cg_adjust = 0 --reset CG slider to begin current flight
-	loadLastPos()
+	run_after_time(loadLastPos, 2)
 	find_command("Strato/B777/fms1/ls_key/R6"):once()
 	find_command("Strato/B777/fms2/ls_key/R6"):once()
 	find_command("Strato/B777/fms3/ls_key/R6"):once()
 	os.execute("msg * Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!")
+	local temp = navAidsJSON -- load navaids
+	run_after_time(updateNavaids, 1)
 end
 
 function aircraft_unload()

@@ -212,7 +212,7 @@ end
 --function before_physics()
 
 function after_physics()
-   print("This window helps the developers find and fix bugs. Feel free to minimize it, but closing it will cause X-Plane to crash!!! This is not a bug or error. Just minimize this window and everything will be ok. IF YOU HAVE ANY ISSUES, PLEASE CHECK THE README BEFORE ASKING THE DEVELOPERS!!!")
+   print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.")
    gear()
 
    B777DR_rud_tab_pos = simDR_rud_tab[11] - simDR_rud[11];

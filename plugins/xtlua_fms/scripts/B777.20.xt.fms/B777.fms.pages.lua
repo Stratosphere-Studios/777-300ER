@@ -737,8 +737,10 @@ function fmsFunctions.getdata(fmsO,value) -- getdata
 	local data = ""
 	if value == "gpspos" then
 		data = fmsModules["data"].pos
+	elseif value == "airportpos" then
+		data = fmsModules["data"].aptLat..fmsModules["data"].aptLon
 	else
-		data = getFMSData(value)
+		data = fmsModules["data"][value]
 	end
 	fmsO["scratchpad"] = data
 end
@@ -806,6 +808,13 @@ function validateDragFF(entry)
     local inputSplit = split(input, "/")
     local results = {"", ""}
     for i = 1, 2 do
+		if inputSplit[i]:match('%.') and not inputSplit[i]:match('%d%.') then
+            if inputSplit[i]:find('%.') == 2 then
+                inputSplit[i] = inputSplit[i]:sub(1, 1).."0"..inputSplit[i]:sub(2, 3)
+            else
+                inputSplit[i] = "0"..inputSplit[i]
+            end
+		end
         local numInput = tonumber(inputSplit[i])
 		--print("numInput: "..numInput)
 		if numInput then
@@ -865,7 +874,7 @@ function calc_pax_cargo()
 	local freight_weightE		= 0
 	local freight_weight_tot	= 0
 
-	pax_total		= 	tonumber(fmsModules["data"].paxFirstClassA) + tonumber(fmsModules["data"].paxBusClassB)
+pax_total		= 	tonumber(fmsModules["data"].paxFirstClassA) + tonumber(fmsModules["data"].paxBusClassB)
 						+ tonumber(fmsModules["data"].paxEconClassC) + tonumber(fmsModules["data"].paxEconClassD)
 						+ tonumber(fmsModules["data"].paxEconClassE)
 	pax_weightA		=	tonumber(fmsModules["data"].paxFirstClassA) * simConfigData.SIM.std_pax_weight
@@ -1131,7 +1140,7 @@ function fmsFunctions.setdata(fmsO,value)
 			return
 		end
 
-		if string.len(navAidsJSON) > 1 then
+		if string.len(navAidsJSON) > 2 then
 			if string.match(fmsO["scratchpad"], '%a%a%a%a') and string.len(fmsO["scratchpad"]) == 4 then
 				local navAids=json.decode(navAidsJSON)
 				print(table.getn(navAids).." navaids")
@@ -1260,7 +1269,7 @@ function fmsFunctions.setdata(fmsO,value)
 		if validate_sethdg(fmsO["scratchpad"]) == false then
 			fmsO["notify"]="INVALID ENTRY"
 		else
-			if fmsModules["data"] ~= "---`" then
+			if fmsModules["data"] ~= "---`" then -- what?
 				if (fmsO["scratchpad"] == "0" or fmsO["scratchpad"] == "00" or fmsO["scratchpad"] == "000") then
 					fmsO["scratchpad"] = "360`"
 				end
@@ -1302,12 +1311,9 @@ function fmsFunctions.setdata(fmsO,value)
 			else
 				setFMSData("dragFF_armed", "ARM")
 			end
+			fmsO["scratchpad"] = ""
 			return
 		else
-			--TODO:
-			-- REF coords line up weirdly (others correct for spaces?) (line 1128)
-			-- REF AIRPORT should copy to scratchpad when clicked
-			-- see zibo, may need to edit toDMS()
 			if getFMSData("dragFF_armed") == "ARM" then
 				local result = validateDragFF(fmsO["scratchpad"])
 				print("1: "..tostring(result[1]))
