@@ -4,13 +4,11 @@
 * Program Script Name	:	B777.20.xt.simconfig
 * Author Name			:	Marauder28
 * Converted to 777 by remenkemi (crazytimtimtim)
-*
-*   Revisions:
-*   -- DATE --   --- REV NO ---   --- DESCRIPTION ---  
-*   2020-11-19	      0.01a          Start of Dev
-*	2022-12-13                  Convert 747 code to 777 
 *****************************************************************************************
 --]]
+
+-- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
+local version = 1
 
 --replace create_command
 function deferred_command(name,desc,realFunc)
@@ -32,14 +30,11 @@ math.randomseed(os.time())
 
 dofile("json/json.lua")
 
-simDR_livery_path			= find_dataref("sim/aircraft/view/acf_livery_path")
-simDR_acf_tailnum			= find_dataref("sim/aircraft/view/acf_tailnum")
+--simDR_livery_path			= find_dataref("sim/aircraft/view/acf_livery_path")
 
 --Baro Sync
 simDR_baro_capt				= find_dataref("sim/cockpit/misc/barometer_setting")
 simDR_baro_fo				= find_dataref("sim/cockpit/misc/barometer_setting2")
-
-B777DR_acf_is_pax           = find_dataref("Strato/777/acf_is_pax")
 
 --*************************************************************************************--
 --** 				              CREATE CUSTOM DATAREFS                             **--
@@ -54,27 +49,23 @@ B777DR_SNDoptions_volume    = deferred_dataref("Strato/777/fmod/options/volume",
 B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "array[16]")
 B777DR_readme_code          = deferred_dataref("Strato/777/readme_code", "string")
 
+B777DR_acf_is_freighter     = deferred_dataref("Strato/777/acf_is_freighter", "number")
+B777DR_lbs_kgs              = deferred_dataref("Strato/777/lbs_kgs", "number")
+B777DR_trs_bug_enabled      = deferred_dataref("Strato/777/displays/trs_bug_enabled", "number")
+B777DR_aoa_enabled          = deferred_dataref("Strato/777/displays/pfd_aoa_enabled", "number")
+B777DR_smart_knobs          = deferred_dataref("Strato/777/smart_knobs", "number")
+B777DR_pfd_mach_gs          = deferred_dataref("Strato/777/pfd_mach_gs", "number")
+
 --*************************************************************************************--
 --** 				        MAIN PROGRAM LOGIC                                       **--
 --*************************************************************************************--
-local file_location = "Output/preferences/Strato_777_config.dat"
-
-function saveSimconfig_CMDhandler(phase, duration)
-	if phase == 0 then
-		local file = io.open(file_location, "w")
-		file:write(B777DR_simconfig_data)
-		file:close()
-		print("finished saving simconfig file "..file_location)
-	end
-end
-
-B777CMD_save_simconfig = deferred_command("Strato/777/save_simconfig", "Save Configuration Options", saveSimconfig_CMDhandler)
+local fileLocation = "Output/preferences/Strato_777_config.json"
 
 simConfigData = {}
-dofile("version.lua")
 
-function simconfig_values()
+function defaultValues()
 	return {
+		VERSION = 1,
 		SOUND = {
 			paOption = 1,
 			musicOption = 1,
@@ -95,37 +86,33 @@ function simconfig_values()
 			GPWS20 = 1,
 			GPWS10 = 1
 		},
-		PLANE = {
-			aircraft_type = 0, -- 0 = pax, 1 = Freighter
-			airline = "",
-		},
 		FMC = {
 			drag_ff = "+0.0/+0.0",
 			unlocked = 0 -- 1 if readme code unlocked, 0 if locked
 		},
-		OPTIONS = {
-			weight_display_units = "LBS",
-			iru_align_real = 1,
-			real_park_brake = 1,
-			trs_bug = 1,
-			aoa_indicator = 1,
-			smart_knobs = 1,
-			baro_mins_sync = 0 -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
+		PLANE = {
+			aircraft_type = 0, -- 0 = pax, 1 = Freighter
+			weight_display_units = "LBS", --"LBS", "KGS"
+			iru_align_real = 1, -- 1 = real, else = time in seconds
+			real_park_brake = 1, -- 0 = real, 1 = simple
+			trs_bug = 1, -- 0 = disabled, 1 = enabled
+			aoa_indicator = 1, -- 0 = disabled, 1 = enabled
+			smart_knobs = 1, -- 0 = disabled, 1 = enabled
+			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
+			gs_mach_indicator = 1 -- 0 = disabled, 1 = enabled
 		}
 	}
 end
 
 function baro_sync()
-	if simConfigData["data"].OPTIONS.baro_mins_sync == 1 then
+	if getSimConfig("PLANE","baro_mins_sync") == 1 then
 		simDR_baro_fo = simDR_baro_capt
-	elseif simConfigData["data"].OPTIONS.baro_mins_sync == 2 then
+	elseif getSimConfig("PLANE","baro_mins_sync") == 2 then
 		simDR_baro_capt = simDR_baro_fo
 	end
 end
 
 function setSoundOption(key,value)
-	if key == "alarmsOption" then B777DR_SNDoptions[0] = value end
-	if key == "seatBeltOption" then B777DR_SNDoptions[1] = value end
 	if key == "paOption" then B777DR_SNDoptions[2] = value end
 	if key == "musicOption" then B777DR_SNDoptions[3] = value end
 	if key == "PM_toggle" then B777DR_SNDoptions[4] = value end
@@ -148,9 +135,9 @@ function setSoundOption(key,value)
 end
 
 function randomChar()
-	local num = math.random(1, 26)
-	local alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	return string.sub(alpha, num, num)
+	local chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	local num = math.random(1, chars:len())
+	return chars:sub(num, num)
 end
 
 function readmeCode()
@@ -161,67 +148,102 @@ function readmeCode()
 	--print("created readme code "..B777DR_readme_code)
 end
 
-function set_loaded_configs()
-	for key, value in pairs(simConfigData["data"].SOUND) do
-		setSoundOption(key,value)
+function getSimConfig(p1, p2)
+    if simConfigData[p1] then
+		if simConfigData[p1][p2] then
+			return simConfigData[p1][p2]
+		end
+    end
+    print("ERROR: Attempt to get invalid simconfig value in SIMCONFIG")
+	return "fail"
+end
+
+function setSimConfig(p1, p2, value)
+	if simConfigData[p1] then
+		if simConfigData[p1][p2] then
+			simConfigData[p1][p2] = value
+			B777DR_simconfig_data = json.encode(simConfigData["values"])
+			B777DR_newsimconfig_data = 1
+			return "success"
+		end
 	end
-	B777DR_acf_is_freighter = simConfigData["data"].PLANE.aircraft_type
-	--print("B777DR_is_passenger="..B777DR_acf_is_pax)
+	print("ERROR: Attempt to set invalid simconfig value in SIMCONFIG.")
+	return "fail"
+end
+
+function setLoadedConfigs()
+	if B777DR_simconfig_data:match("\"VERSION\":"..version) then
+		for key, value in pairs(simConfigData.SOUND) do
+			setSoundOption(key,value)
+		end
+		B777DR_lbs_kgs = getSimConfig("PLANE", "weight_display_units") == "LBS" and 1 or 0;
+		B777DR_realistic_prk_brk = getSimConfig("PLANE","real_park_brake")
+		B777DR_smart_knobs = getSimConfig("PLANE","smart_knobs")
+		B777DR_pfd_mach_gs = getSimConfig("PLANE","gs_mach_indicator")
+		B777DR_trs_bug_enabled = getSimConfig("PLANE","trs_bug")
+		B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
+		B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
+	else
+		print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
+		os.execute("msg * The 777's settings file is from an older version. Settings have been reset.")
+		os.remove(fileLocation)
+		loadSimConfig()
+	end
+end
+
+-- for possible performance improvement
+local open = io.open
+local close = io.close
+
+function loadSimConfig()
+	os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
+	print("File = "..fileLocation)
+	local file = open(fileLocation, "r")
+
+	if file then
+		local data = ""
+		data = file:read()
+		B777DR_simconfig_data = data
+		close(file)
+	else
+		local newFile = open(fileLocation, "w")
+		local data = {}
+		data = json.encode(defaultValues())
+		B777DR_simconfig_data = data
+		newFile:write(data)
+		close(newFile)
+	end
+
+	--print("simconfig: "..B777DR_simconfig_data)
+	B777DR_newsimconfig_data = 1
+	run_after_time(setLoadedConfigs, 0.5)
+end
+
+function flight_start()
+	readmeCode()
+	loadSimConfig()
+end
+
+--function aircraft_load()
+
+function noNewData()
 	B777DR_newsimconfig_data = 0
 end
 
-function aircraft_simConfig()
-	B777DR_newsimconfig_data = 1
-	print("File = "..file_location)
-	local file = io.open(file_location, "r")
-
-	if file ~= nil then
-		io.input(file)
-		local tmpDataS = io.read()
-		io.close(file)
-		--print("read "..tmpDataS)
-		local tmpData = json.decode(tmpDataS)
-		--tmpData.FMC.op_program = fmcVersion
-		--print("encoding "..tmpDataS)
-		B777DR_simconfig_data = json.encode(tmpData)
-		--print("done encoding "..B777DR_simconfig_data)
-		B777DR_newsimconfig_data = 1
-		run_after_time(set_loaded_configs, 3)  --Apply loaded configs.  Wait a few seconds to ensure they load correctly.
-	else
-		B777DR_simconfig_data = json.encode(simconfig_values())
-		saveSimconfig_CMDhandler(0, 0)
-		run_after_time(set_loaded_configs, 3)  --Apply loaded configs.  Wait a few seconds to ensure they load correctly.
-	end
-end
-
-simConfigData["data"] = simconfig_values()
-
---function flight_start()
-
-function aircraft_load()
-	readmeCode()
-	print("simconfig loaded")
-	run_after_time(aircraft_simConfig, 5)  --Load specific simConfig data for current livery
-end
-
-local setSimConfig=false
 function hasSimConfig()
-	if B777DR_newsimconfig_data == 1 then
-		if string.len(B777DR_simconfig_data) > 1 then
-			simConfigData["data"] = json.decode(B777DR_simconfig_data)
-			setSimConfig = true
-		else
-			return false
-		end
+	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
+		local file = open(fileLocation, "w")
+		local data = B777DR_simconfig_data
+		simConfigData = json.decode(data)
+		--print(data)
+		file:write(data)
+		close(file)
+		if not is_timer_scheduled(noNewData) then run_after_time(noNewData, 0.2) end
 	end
-	return setSimConfig
 end
 
 function after_physics()
-	--Keep the structure fresh
-	if hasSimConfig() == false then return end
-
-	--See if Baro's should be sync'd
+	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
+	hasSimConfig()
 	baro_sync()
-	--print("simconfig working")
 end

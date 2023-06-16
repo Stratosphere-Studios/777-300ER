@@ -58,7 +58,7 @@ A: Yes! Enable the freighter option on the EFB and the plane will become a 300ER
 
 **СDU Сode**
 
-Thanks for reading! The соde to unlock the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
+Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
 
 **Q: How can I contribute to this aircraft?**
 

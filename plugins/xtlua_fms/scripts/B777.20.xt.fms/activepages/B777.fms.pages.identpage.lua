@@ -1,5 +1,4 @@
 fmsPages["IDENT"]=createPage("IDENT")
---dofile("activepages/version.lua")
 
 fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be this way
 	local nav_data_from_month = string.sub(B777DR_srcfms[fmsID][5],3,5)
@@ -7,7 +6,6 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 	local nav_data_to_month = string.sub(B777DR_srcfms[fmsID][5],11,13)
 	local nav_data_to_day = string.sub(B777DR_srcfms[fmsID][5],9,10)
 	local nav_data_yr = string.sub(B777DR_srcfms[fmsID][5],14,15)
-	--simConfigData["data"].FMC.active = string.format("%s%s%s%s/%s", nav_data_from_month, nav_data_from_day, nav_data_to_month, nav_data_to_day, nav_data_yr)
 	local navdata = string.format("%s%s%s%s/%s", nav_data_from_month, nav_data_from_day, nav_data_to_month, nav_data_to_day, nav_data_yr)
 	local monthTable = {
 		JAN = "01",
@@ -24,7 +22,6 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 		DEC = "12"
 	}
 	local airac = "AIRAC-"..nav_data_yr..monthTable[nav_data_to_month]
-	--simConfigData["data"].FMC.op_program = fmcVersion
     return{
 
 		"          IDENT         ",
@@ -35,10 +32,9 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 		"                        ",
 		"                        ",
 		"                        ",
-		--simConfigData["data"].FMC.op_program.."       ",
 		"                        ",
 		"                        ",
-		"               "..simConfigData["data"].FMC.drag_ff,
+		"               "..getSimConfig("FMC", "drag_ff"),
 		"------------------------",
 		"<INDEX         POS INIT>"
 	}
@@ -68,4 +64,4 @@ end
 fmsFunctionsDefs["IDENT"]={}
 fmsFunctionsDefs["IDENT"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["IDENT"]["R6"]={"setpage","POSINIT"}
-fmsFunctionsDefs["IDENT"]["R5"]={"setdata", "drag_ff"} -- TODO: drag ff set
+fmsFunctionsDefs["IDENT"]["R5"]={"setdata", "drag_ff"}

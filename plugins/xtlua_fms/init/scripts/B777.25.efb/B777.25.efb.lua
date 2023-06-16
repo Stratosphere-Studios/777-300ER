@@ -38,6 +38,14 @@ B777CMD_efb_home                       = deferred_command("Strato/777/efb_home",
 B777CMD_efb_pwr                        = deferred_command("Strato/777/efb_pwr", "EFB Power Button", efb_pwr_CMDhandler)
 B777CMD_efb_back                       = deferred_command("Strato/777/efb_back", "EFB Back Button", efb_back_CMDhandler)
 
+B777CMD_toggle_weight_mode             = deferred_command("Strato/777/options/weight_mode_toggle", "Toggle Weight Mode", weight_mode_toggle_CMDHandler)
+B777CMD_toggle_prkBrk_mode             = deferred_command("Strato/777/options/prkBrk_mode_toggle", "Toggle Parking Brake Mode", prkBrk_mode_toggle_CMDHandler)
+B777CMD_toggle_smartKnobs              = deferred_command("Strato/777/options/smartKnobs_toggle", "Toggle Smart Knobs", smartKnobs_toggle_CMDHandler)
+B777CMD_toggle_gsInd                   = deferred_command("Strato/777/options/gsInd_mode_toggle", "Toggle GS/MACH Indicator", gsInd_toggle_CMDHandler)
+B777CMD_toggle_trsInd                  = deferred_command("Strato/777/options/trsInd_toggle", "Toggle TRS Indicator", trsInd_toggle_CMDHandler)
+B777CMD_toggle_aoaInd                  = deferred_command("Strato/777/options/aoaInd_toggle", "Toggle AOA Indicator", aoaInd_toggle_CMDHandler)
+B777CMD_toggle_acfType                 = deferred_command("Strato/777/options/acfType_toggle", "Toggle Aircraft Type", acfType_toggle_CMDHandler)
+
 --*************************************************************************************--
 --**                             CREATE CUSTOM DATAREFS                              **--
 --*************************************************************************************--

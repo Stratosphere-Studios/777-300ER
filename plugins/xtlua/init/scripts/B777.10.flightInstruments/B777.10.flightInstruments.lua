@@ -100,8 +100,8 @@ B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_tri
 B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
 B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "array[2]")
-B777DR_fuel_lbs                        = deferred_dataref("Strato/777/displays/fuel_lbs", "array[3]")
-B777DR_fuel_lbs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_total", "number")
+B777DR_fuel_lbs_kgs                        = deferred_dataref("Strato/777/displays/fuel_lbs_kgs", "array[3]")
+B777DR_fuel_lbs_kgs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_kgs_total", "number")
 B777DR_alt_mtrs                        = deferred_dataref("Strato/777/displays/alt_mtrs", "array[2]")
 B777DR_autopilot_alt_mtrs              = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what page the lower eicas is on
@@ -173,13 +173,6 @@ B777DR_txt_SHOW_TRS_BUG_ON_PFD         = deferred_dataref("Strato/777/displays/t
 B777DR_txt_PFD_AOA_INDICATOR           = deferred_dataref("Strato/777/displays/txt/PFD_AOA_INDICATOR", "string")
 B777DR_txt_SMART_MCP_KNOBS             = deferred_dataref("Strato/777/displays/txt/SMART_MCP_KNOBS", "string")
 B777DR_txt_MACH_GS_PFD                 = deferred_dataref("Strato/777/displays/txt/MACH_GS_PFD", "string")
-
-B777DR_acf_is_freighter                = deferred_dataref("Strato/777/acf_is_freighter", "number")
-B777DR_lbs_kgs                         = deferred_dataref("Strato/777/lbs_kgs", "number")
-B777DR_trs_bug_enabled                 = deferred_dataref("Strato/777/displays/trs_bug_enabled", "number")
-B777DR_aoa_enabled                     = deferred_dataref("Strato/777/displays/pfd_aoa_enabled", "number")
-B777DR_smart_knobs                     = deferred_dataref("Strato/777/smart_knobs", "number")
-B777DR_pfd_mach_gs                     = deferred_dataref("Strato/777/pfd_mach_gs", "number")
 
 B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")

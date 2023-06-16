@@ -7,9 +7,6 @@
 --Marauder28
 --V Speeds
 
---pushSimConfig(simConfigData["data"]["values"])
---B777CMD_save_simconfig:once()
-
 B777DR_airspeed_V1			= deferred_dataref("Strato/B777/airspeed/V1", "number")
 B777DR_airspeed_Vr			= deferred_dataref("Strato/B777/airspeed/Vr", "number")
 B777DR_airspeed_V2			= deferred_dataref("Strato/B777/airspeed/V2", "number")
@@ -740,8 +737,10 @@ function fmsFunctions.getdata(fmsO,value) -- getdata
 	local data = ""
 	if value == "gpspos" then
 		data = fmsModules["data"].pos
+	elseif value == "airportpos" then
+		data = fmsModules["data"].aptLat..fmsModules["data"].aptLon
 	else
-		data = getFMSData(value)
+		data = fmsModules["data"][value]
 	end
 	fmsO["scratchpad"] = data
 end
@@ -776,15 +775,6 @@ function validateMachSpeed(value)
 	if val<400 or val>870 then return nil end
 	return ""..val
 end
-function validate_weight_units(value)
-	--local val=tostring(value)
-	--print(value)
-	if value == "KGS" or value == "LBS" then
-		return true
-	else
-		return false
-	end
-end
 function validate_sethdg(value)
 	--print(value)
 	if tonumber(value) >= 0 and tonumber(value) <= 360 then
@@ -792,129 +782,6 @@ function validate_sethdg(value)
 	else
 		return false
 	end
-end
-
---[[function preselect_fuel() -- ss777 comment
-	-- DETERMINE FUEL WEIGHT DISPLAY UNITS
-	local fuel_calculation_factor = 1
-	
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		fuel_calculation_factor = simConfigData["data"].SIM.kgs_to_lbs
-	end
-	
-	B777DR_refuel=B777DR_fuel_add * 1000 / fuel_calculation_factor  --(always add fuel in KGS behind the scenes)
-	B777DR_fuel_preselect=simDR_fueL_tank_weight_total_kg + B777DR_refuel
-	
-	-- Used in calculation for displaying Preselect Fuel Qty in correct weight units (actual display done in B777.25.xt.fuel)
-	B777DR_fuel_preselect_temp = B777DR_fuel_preselect
-	B777DR_fuel_add=0
-	simDR_m_jettison=simDR_acf_m_jettison
-	
-	--Marauder28
-	--Set the totalizer to the current fuel amount before refueling
-	simDR_fuel_totalizer_kg = simDR_fueL_tank_weight_total_kg
-	--Marauder28
-end
-
---Marauder28
-function calc_pax_cargo()
-	local pax_total				= 0
-	local pax_weightA			= 0
-	local pax_weightB			= 0
-	local pax_weightC			= 0
-	local pax_weightD			= 0
-	local pax_weightE			= 0
-	local pax_weight_Tot		= 0
-	local cargo_weight_fwd		= 0
-	local cargo_weight_aft		= 0
-	local cargo_weight_bulk		= 0
-	local cargo_weight_tot		= 0
-	local freight_weightA		= 0
-	local freight_weightB		= 0
-	local freight_weightC		= 0
-	local freight_weightD		= 0
-	local freight_weightE		= 0
-	local freight_weight_tot	= 0
-
-	pax_total		= 	tonumber(fmsModules["data"].paxFirstClassA) + tonumber(fmsModules["data"].paxBusClassB)
-						+ tonumber(fmsModules["data"].paxEconClassC) + tonumber(fmsModules["data"].paxEconClassD)
-						+ tonumber(fmsModules["data"].paxEconClassE)
-	pax_weightA		=	tonumber(fmsModules["data"].paxFirstClassA) * simConfigData["data"].SIM.std_pax_weight
-	pax_weightB		= 	tonumber(fmsModules["data"].paxBusClassB) * simConfigData["data"].SIM.std_pax_weight
-	pax_weightC		=	tonumber(fmsModules["data"].paxEconClassC) * simConfigData["data"].SIM.std_pax_weight
-	pax_weightD		=	tonumber(fmsModules["data"].paxEconClassD) * simConfigData["data"].SIM.std_pax_weight
-	pax_weightE		=	tonumber(fmsModules["data"].paxEconClassE) * simConfigData["data"].SIM.std_pax_weight
-	pax_weight_Tot	=	pax_weightA + pax_weightB + pax_weightC + pax_weightD + pax_weightE
-
-	cargo_weight_fwd	= tonumber(fmsModules["data"].cargoFwd)
-	cargo_weight_aft	= tonumber(fmsModules["data"].cargoAft)
-	cargo_weight_bulk	= tonumber(fmsModules["data"].cargoBulk)
-	cargo_weight_tot	= cargo_weight_fwd + cargo_weight_aft + cargo_weight_bulk
-	
-	freight_weightA		= tonumber(fmsModules["data"].freightZoneA)
-	freight_weightB		= tonumber(fmsModules["data"].freightZoneB)
-	freight_weightC		= tonumber(fmsModules["data"].freightZoneC)
-	freight_weightD		= tonumber(fmsModules["data"].freightZoneD)
-	freight_weightE		= tonumber(fmsModules["data"].freightZoneE)
-	freight_weight_tot	= freight_weightA + freight_weightB + freight_weightC + freight_weightD + freight_weightE
-	
-	--Assign values to FMC
-	fmsModules["data"].paxTotal 		= pax_total
-	fmsModules["data"].paxWeightA		= pax_weightA
-	fmsModules["data"].paxWeightB		= pax_weightB
-	fmsModules["data"].paxWeightC		= pax_weightC
-	fmsModules["data"].paxWeightD		= pax_weightD
-	fmsModules["data"].paxWeightE		= pax_weightE
-	fmsModules["data"].paxWeightTotal	= pax_weight_Tot
-	fmsModules["data"].cargoTotal		= cargo_weight_tot
-	fmsModules["data"].freightTotal		= freight_weight_tot
-	
-	--Assign values to WB
-	wb.passenger_zoneA_weight		= pax_weightA	
-	wb.passenger_zoneB_weight		= pax_weightB
-	wb.passenger_zoneC_weight		= pax_weightC
-	wb.passenger_zoneD_weight		= pax_weightD
-	wb.passenger_zoneE_weight		= pax_weightE
-	wb.fwd_lower_cargo_weight		= cargo_weight_fwd
-	wb.aft_lower_cargo_weight		= cargo_weight_aft
-	wb.bulk_lower_cargo_weight		= cargo_weight_bulk
-	wb.freight_zoneA_weight			= freight_weightA
-	wb.freight_zoneB_weight			= freight_weightB
-	wb.freight_zoneC_weight			= freight_weightC
-	wb.freight_zoneD_weight			= freight_weightD
-	wb.freight_zoneE_weight			= freight_weightE
-	
-	--Update Sim Payload weight with PAX & Cargo entries
-	simDR_payload_weight = pax_weight_Tot + cargo_weight_tot + freight_weight_tot
-	
-	--print("PAX A Wgt = "..pax_weightA)
-	--print("PAX A = "..tonumber(fmsModules["data"].paxFirstClassA))
-	--print("PAX B Wgt = "..pax_weightB)
-	--print("PAX B = "..tonumber(fmsModules["data"].paxBusClassB))
-	--print("PAX C Wgt = "..pax_weightC)
-	--print("PAX C = "..tonumber(fmsModules["data"].paxEconClassC))
-	--print("PAX D Wgt = "..pax_weightD)
-	--print("PAX D = "..tonumber(fmsModules["data"].paxEconClassD))
-	--print("PAX E Wgt = "..pax_weightE)
-	--print("PAX E = "..tonumber(fmsModules["data"].paxEconClassE))
-	--print("PAX Tot = "..pax_weight_Tot)
-	--print("Cargo Fwd = "..cargo_weight_fwd)
-	--print("Cargo Aft = "..cargo_weight_aft)
-	--print("Cargo Bulk = "..cargo_weight_bulk)
-	--print("Cargo Tot = "..cargo_weight_tot)
-	--print("FREIGHT A = "..freight_weightA)
-	--print("FREIGHT B = "..freight_weightB)
-	--print("FREIGHT C = "..freight_weightC)
-	--print("FREIGHT D = "..freight_weightD)
-	--print("FREIGHT E = "..freight_weightE)
-	--print("Freight Tot = "..freight_weight_tot)
-end
---Marauder28
-]]
-
-function saveSimconfig()
-    pushSimConfig(simConfigData["data"]["values"])
-	B777CMD_save_simconfig:once()
 end
 
 function slashEntry(input, field)
@@ -927,12 +794,42 @@ function slashEntry(input, field)
             return fieldPreSlash..input
         elseif inputSlashPos == input:len() then
             return input..fieldPostSlash
-        elseif inputSlashPos > 1 and inputSlashPos < input:len() then
+        else
             return input
         end
     else
         return input.."/"..fieldPostSlash
     end
+end
+
+function validateDragFF(entry)
+    local input = slashEntry(entry, getSimConfig("FMC", "drag_ff"))
+	print("input: "..input)
+    local inputSplit = split(input, "/")
+    local results = {"", ""}
+    for i = 1, 2 do
+		if inputSplit[i]:match('%.') and not inputSplit[i]:match('%d%.') then
+            if inputSplit[i]:find('%.') == 2 then
+                inputSplit[i] = inputSplit[i]:sub(1, 1).."0"..inputSplit[i]:sub(2, 3)
+            else
+                inputSplit[i] = "0"..inputSplit[i]
+            end
+		end
+        local numInput = tonumber(inputSplit[i])
+		--print("numInput: "..numInput)
+		if numInput then
+            if numInput <= 9.9 and numInput >= -5.0 then
+                results[i] = string.format("%.1f", numInput)
+                results[i] = numInput >= 0.0 and "+"..results[i] or results[i]
+				--print("results "..i..": "..results[i])
+            else
+                return {false}
+            end
+        else
+            return {false}
+        end
+    end
+    return {true, results[1].."/"..results[2]}
 end
 
 timer_start = 0
@@ -1006,14 +903,13 @@ function fmsFunctions.setdata(fmsO,value)
 	end
 
 	if value == "readmeCode" then
-		if simConfigData["data"].FMC.unlocked == 0 then
+		if getSimConfig("FMC", "unlocked") == 0 then
 			setFMSData("readmeCodeInput", fmsO["scratchpad"])
 			if string.len(fmsO["scratchpad"]) == 5 then
 				if fmsO["scratchpad"] == B777DR_readme_code or fmsO["scratchpad"] == "BIRDS" then
 					fmsO["notify"] = "UNLOCKED"
 					fmsO["scratchpad"] = ""
-					simConfigData["data"].FMC.unlocked = 1
-					saveSimconfig();
+					setSimConfig("FMC", "unlocked", 1)
 				else
 					fmsO["notify"] = "INCORRECT CODE"
 				end
@@ -1121,7 +1017,12 @@ function fmsFunctions.setdata(fmsO,value)
 			end
 		end
 	elseif value=="airportpos" then --and string.len(fmsO["scratchpad"])>3 then
-		if string.len(navAidsJSON) > 1 then
+		if string.len(fmsO["scratchpad"]) == 0 and string.match(getFMSData("airportpos"), '%a%a%a%a') then
+			fmsO["scratchpad"] = getFMSData("airportpos")
+			return
+		end
+
+		if string.len(navAidsJSON) > 2 then
 			if string.match(fmsO["scratchpad"], '%a%a%a%a') and string.len(fmsO["scratchpad"]) == 4 then
 				local navAids=json.decode(navAidsJSON)
 				print(table.getn(navAids).." navaids")
@@ -1131,19 +1032,18 @@ function fmsFunctions.setdata(fmsO,value)
 					--if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
 					if navAids[n][2] == 1 and navAids[n][8]==fmsO["scratchpad"] then
 						print("navaid "..n.."->".. navAids[n][1].." ".. navAids[n][2].." ".. navAids[n][3].." ".. navAids[n][4].." ".. navAids[n][5].." ".. navAids[n][6].." ".. navAids[n][7].." ".. navAids[n][8])
-						print("airport pos1")
 						local lat=toDMS(navAids[n][5],true)
 						local lon=toDMS(navAids[n][6],false)
-						print("airport pos2: "..lat..", "..lon)
 						setFMSData("aptLat",lat)
 						setFMSData("aptLon",lon)
-						print("airport pos3: "..lat..", "..lon)
+						print("airport pos: "..lat..", "..lon)
 						found = true
 					end
 				end
 				if found then
 					setFMSData("airportpos",fmsO["scratchpad"])
 					setFMSData("airportgate","-----")
+					fmsO["scratchpad"] = ""
 				else
 					fmsO["notify"]="NOT IN DATABASE"
 				end
@@ -1158,6 +1058,7 @@ function fmsFunctions.setdata(fmsO,value)
 		else
 			print("ERROR: navAidsJSON is invalid: "..navAidsJSON)
 		end
+		return
 	elseif value=="flttime" then 
 		hhV=string.sub(fmsO["scratchpad"],1,2)
 		mmV=string.sub(fmsO["scratchpad"],-2)
@@ -1250,7 +1151,7 @@ function fmsFunctions.setdata(fmsO,value)
 		if validate_sethdg(fmsO["scratchpad"]) == false then
 			fmsO["notify"]="INVALID ENTRY"
 		else
-			if fmsModules["data"] ~= "---`" then
+			if fmsModules["data"] ~= "---`" then -- what?
 				if (fmsO["scratchpad"] == "0" or fmsO["scratchpad"] == "00" or fmsO["scratchpad"] == "000") then
 					fmsO["scratchpad"] = "360`"
 				end
@@ -1286,62 +1187,28 @@ function fmsFunctions.setdata(fmsO,value)
 		setFMSData(value,fmsO["scratchpad"])
 		return
 	elseif value == "drag_ff" then
-		local input = fmsO["scratchpad"]
-
-		if input == "ARM" then
+		if fmsO["scratchpad"] == "ARM" then
 			if getFMSData("dragFF_armed") == "ARM" then
 				setFMSData("dragFF_armed", "   ")
 			else
 				setFMSData("dragFF_armed", "ARM")
 			end
+			fmsO["scratchpad"] = ""
 			return
 		else
 			if getFMSData("dragFF_armed") == "ARM" then
-				local output = ""
-				if input:match("/") then
-					local inputSplit = split(input, "/")
-					for i = 1, 2 do
-						if inputSplit[i] then
-							if not tonumber(inputSplit[i]) then
-								fmsO["notify"]="INVALID ENTRY"
-								return
-							else
-								inputSplit[i] = string.format("%.1f", inputSplit[i])
-								if inputSplit[i]:sub(1, 1):match("%d") then
-									inputSplit[i] = "+"..inputSplit[i]
-								end
-								if tonumber(inputSplit[i]) < -5.0 then
-									inputSplit[i] = "-5.0"
-								elseif tonumber(inputSplit[i]) > 9.9 then
-									inputSplit[i] = "9.9"
-								end
-								output = output..inputSplit[i].."/"
-							end
-						end
-					end
-					output = output:sub(1, -2)
-				else
-					if not tonumber(input) then
-						fmsO["notify"]="INVALID ENTRY"
-						return
-					else
-						if tonumber(input) < -5.0 then
-							input = "-5.0"
-						elseif tonumber(input) > 9.9 then
-							input = "9.9"
-						end
-						if output:sub(1, 1):match("%d") then
-							output = "+"..string.format("%.1f", input)
-						else
-							output = string.format("%.1f", input)
-						end
-					end
+				local result = validateDragFF(fmsO["scratchpad"])
+				print("1: "..tostring(result[1]))
+				if result[1] then
+					print("result: "..result[2])
+					setSimConfig("FMC", "drag_ff", result[2])
+					fmsO["scratchpad"] = ""
+					return
 				end
-				output = slashEntry(output, simConfigData["data"].FMC.drag_ff)
-				simConfigData["data"].FMC.drag_ff = output
-				saveSimconfig();
 			end
 		end
+		fmsO["scratchpad"] = ""
+		fmsO["notify"]="INVALID ENTRY"
 		return
 	elseif value == "grwt" then
 		local grwt
@@ -1351,7 +1218,7 @@ function fmsFunctions.setdata(fmsO,value)
 			return
 			
 		elseif string.len(fmsO["scratchpad"]) > 0 and string.len(fmsO["scratchpad"]) <= 5 and string.match(fmsO["scratchpad"], "%d") then
-			if simConfigData["data"].OPTIONS.weight_display_units == "LBS" then
+			if getSimConfig("PLANE", "weight_display_units") == "LBS" then
 				grwt = fmsO["scratchpad"] / kgs_to_lbs
 			else
 				grwt = fmsO["scratchpad"]
@@ -1389,8 +1256,8 @@ function fmsFunctions.setdata(fmsO,value)
 	elseif value == "zfw" and not del then
 		local zfw;
 		if string.len(fmsO["scratchpad"]) > 0 and string.len(fmsO["scratchpad"]) <= 5 and string.match(fmsO["scratchpad"], "%d") then
-			if simConfigData["data"].SIM.weight_display_units == "LBS" then
-				zfw = fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs  --store LBS in KGS
+			if simConfigData.SIM.weight_display_units == "LBS" then
+				zfw = fmsO["scratchpad"] / simConfigData.SIM.kgs_to_lbs  --store LBS in KGS
 			else
 				zfw = fmsO["scratchpad"]
 			end
@@ -1421,8 +1288,8 @@ function fmsFunctions.setdata(fmsO,value)
 			fmsO["scratchpad"] = ""
 			return
 		else
-			if simConfigData["data"].SIM.weight_display_units == "LBS" then
-				rsv = string.format("%5.1f", fmsO["scratchpad"] / simConfigData["data"].SIM.kgs_to_lbs)  --store LBS in KGS
+			if simConfigData.SIM.weight_display_units == "LBS" then
+				rsv = string.format("%5.1f", fmsO["scratchpad"] / simConfigData.SIM.kgs_to_lbs)  --store LBS in KGS
 			else
 				rsv = string.format("%5.1f", fmsO["scratchpad"])
 			end
@@ -1454,943 +1321,7 @@ function fmsFunctions.setdata(fmsO,value)
 	else
 		calc_stab_trim(fmsModules["data"].grwt, fmsModules["data"].cg_mac)
 	end
-	
 	cg_lineLg = string.format("%2.0f%%", tonumber(fmsModules["data"].cg_mac))
---Marauder28
---PAX / CARGO page
-  elseif value == "paxFirstClassA" then
-	if string.match(fmsO["scratchpad"], "%d") and math.abs(tonumber(fmsO["scratchpad"])) <= 23 then
-		setFMSData(value, math.abs(string.format("%2d", fmsO["scratchpad"])))
-		calc_pax_cargo()
-	elseif fmsO["scratchpad"] == "F" then  --Add FULL PAX
-		setFMSData("paxFirstClassA", "23")
-		setFMSData("paxBusClassB", "80")
-		setFMSData("paxEconClassC", "77")
-		setFMSData("paxEconClassD", "104")
-		setFMSData("paxEconClassE", "132")
-		setFMSData("freightZoneA", "")
-		setFMSData("freightZoneB", "")
-		setFMSData("freightZoneC", "")
-		setFMSData("freightZoneD", "")
-		setFMSData("freightZoneE", "")
-		calc_pax_cargo()
-	elseif fmsO["scratchpad"] == "C" then  --Clear PAX / CARGO entries
-		setFMSData("paxFirstClassA", "")
-		setFMSData("paxBusClassB", "")
-		setFMSData("paxEconClassC", "")
-		setFMSData("paxEconClassD", "")
-		setFMSData("paxEconClassE", "")
-		setFMSData("cargoFwd", "")
-		setFMSData("cargoAft", "")
-		setFMSData("cargoBulk", "")
-		setFMSData("freightZoneA", "")
-		setFMSData("freightZoneB", "")
-		setFMSData("freightZoneC", "")
-		setFMSData("freightZoneD", "")
-		setFMSData("freightZoneE", "")
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData(value, "23")
-		calc_pax_cargo()
-	elseif string.match(fmsO["scratchpad"], "%d") and tonumber(fmsO["scratchpad"]) > 23 then  --Add set number of PAX by round-robin through all zones
-		setFMSData("paxFirstClassA", "")
-		setFMSData("paxBusClassB", "")
-		setFMSData("paxEconClassC", "")
-		setFMSData("paxEconClassD", "")
-		setFMSData("paxEconClassE", "")
-
-		local x = tonumber(fmsO["scratchpad"])
-		local paxA = 0
-		local paxB = 0
-		local paxC = 0
-		local paxD = 0
-		local paxE = 0
-		
-		if x > 416 then
-			x = 416
-		end
-		repeat
-			if x > 0 and paxA < 23 then
-				paxA = paxA + 1
-				x = x - 1
-			end
-			if x > 0 and paxB < 80 then
-				paxB = paxB + 1
-				x = x - 1
-			end
-			if x > 0 and paxC < 77 then
-				paxC = paxC + 1
-				x = x - 1
-			end
-			if x > 0 and paxD < 104 then
-				paxD = paxD + 1
-				x = x - 1
-			end
-			if x > 0 and paxE < 132 then
-				paxE = paxE + 1
-				x = x - 1
-			end
-		until (x == 0)
-		
-		fmsModules["data"].paxFirstClassA = string.format("%2d", paxA)
-		fmsModules["data"].paxBusClassB = string.format("%2d", paxB)
-		fmsModules["data"].paxEconClassC = string.format("%2d", paxC)
-		fmsModules["data"].paxEconClassD = string.format("%3d", paxD)
-		fmsModules["data"].paxEconClassE = string.format("%3d", paxE)
-		
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "paxBusClassB" then
-	if string.match(fmsO["scratchpad"], "%d") then
-		local pax = math.abs(tonumber(fmsO["scratchpad"]))
-		if pax > 80 then
-			pax = 80
-		end
-		setFMSData(value, string.format("%2d", pax))
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData(value, "80")
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "paxEconClassC" then
-	if string.match(fmsO["scratchpad"], "%d") then
-		local pax = math.abs(tonumber(fmsO["scratchpad"]))
-		if pax > 77 then
-			pax = 77
-		end
-		setFMSData(value, string.format("%2d", pax))
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData(value, "77")
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "paxEconClassD" then
-	if string.match(fmsO["scratchpad"], "%d") then
-		local pax = math.abs(tonumber(fmsO["scratchpad"]))
-		if pax > 104 then
-			pax = 104
-		end
-		setFMSData(value, string.format("%3d", pax))
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData(value, "104")
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "paxEconClassE" then
-	if string.match(fmsO["scratchpad"], "%d") then
-		local pax = math.abs(tonumber(fmsO["scratchpad"]))
-		if pax > 132 then
-			pax = 132
-		end
-		setFMSData(value, string.format("%3d", pax))
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData(value, "132")
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "paxPayload" then
-	if string.match(fmsO["scratchpad"], "%d") then
-		local weight_factor = 1
-
-		if simConfigData["data"].SIM.weight_display_units == "LBS" then
-			weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-		else
-			weight_factor = 1
-		end
-
-		local pax_weight = math.abs(tonumber(fmsO["scratchpad"])) * 1000
-		local pax = 0
-		local paxA = 0
-		local paxB = 0
-		local paxC = 0
-		local paxD = 0
-		local paxE = 0
-	
-		pax = math.ceil(pax_weight / (simConfigData["data"].SIM.std_pax_weight * weight_factor))
-		if pax > 416 then
-			pax = 416
-		end
-
-		setFMSData("paxFirstClassA", "")
-		setFMSData("paxBusClassB", "")
-		setFMSData("paxEconClassC", "")
-		setFMSData("paxEconClassD", "")
-		setFMSData("paxEconClassE", "")
-		setFMSData("freightZoneA", "")
-		setFMSData("freightZoneB", "")
-		setFMSData("freightZoneC", "")
-		setFMSData("freightZoneD", "")
-		setFMSData("freightZoneE", "")
-
-		repeat
-			if pax > 0 and paxA < 23 then
-				paxA = paxA + 1
-				pax = pax - 1
-			end
-			if pax > 0 and paxB < 80 then
-				paxB = paxB + 1
-				pax = pax - 1
-			end
-			if pax > 0 and paxC < 77 then
-				paxC = paxC + 1
-				pax = pax - 1
-			end
-			if pax > 0 and paxD < 104 then
-				paxD = paxD + 1
-				pax = pax - 1
-			end
-			if pax > 0 and paxE < 132 then
-				paxE = paxE + 1
-				pax = pax - 1
-			end
-		until (pax == 0)
-		
-		fmsModules["data"].paxFirstClassA = string.format("%2d", paxA)
-		fmsModules["data"].paxBusClassB = string.format("%2d", paxB)
-		fmsModules["data"].paxEconClassC = string.format("%2d", paxC)
-		fmsModules["data"].paxEconClassD = string.format("%3d", paxD)
-		fmsModules["data"].paxEconClassE = string.format("%3d", paxE)
-
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData("paxFirstClassA", "0")
-		setFMSData("paxBusClassB", "0")
-		setFMSData("paxEconClassC", "0")
-		setFMSData("paxEconClassD", "0")
-		setFMSData("paxEconClassE", "0")
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "cargoFwd" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and (string.match(fmsO["scratchpad"], "P") or string.match(fmsO["scratchpad"], "C")) then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-
-		if chars == "P" then
-			weight_per_unit = 5035 * weight_factor
-			if digits > 5 then
-				digits = 5
-			end
-		elseif chars == "C" then
-			weight_per_unit = 1588 * weight_factor
-			if digits > 16 then
-				digits = 16
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%6d", digits * weight_per_unit)
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local cwt = 0
-
-		cwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-		
-		if cwt > 26490 then
-			cwt = 26490
-		end
-		
-		setFMSData(value, string.format("%6d", cwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "cargoAft" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and (string.match(fmsO["scratchpad"], "P") or string.match(fmsO["scratchpad"], "C")) then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-		
-		if chars == "P" then
-			weight_per_unit = 5035 * weight_factor
-			if digits > 4 then
-				digits = 4
-			end
-		elseif chars == "C" then
-			weight_per_unit = 1588 * weight_factor
-			if digits > 14 then
-				digits = 14
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%6d", digits * weight_per_unit)
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local cwt = 0
-
-		cwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-
-		if cwt > 22938 then
-			cwt = 22938
-		end
-
-		setFMSData(value, string.format("%6d", cwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "cargoBulk" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local cwt = 0
-
-		cwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-
-		if cwt > 6749 then
-			cwt = 6749
-		end
-
-		setFMSData(value, string.format("%5d", cwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
---FREIGHT Page
-  elseif value == "freightZoneA" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") and math.abs(tonumber(fmsO["scratchpad"])) <= (11160 * weight_factor) then
-		setFMSData(value, math.abs(string.format("%5d", fmsO["scratchpad"])) / weight_factor)
-		calc_pax_cargo()
-	elseif fmsO["scratchpad"] == "F" then  --Add FULL FREIGHT
-		setFMSData("freightZoneA", "11289")
-		setFMSData("freightZoneB", "30104")
-		setFMSData("freightZoneC", "22578")
-		setFMSData("freightZoneD", "45156")
-		setFMSData("freightZoneE", "3763")
-		setFMSData("paxFirstClassA", "")
-		setFMSData("paxBusClassB", "")
-		setFMSData("paxEconClassC", "")
-		setFMSData("paxEconClassD", "")
-		setFMSData("paxEconClassE", "")
-		calc_pax_cargo()
-	elseif fmsO["scratchpad"] == "C" then  --Clear FREIGHT entries
-		setFMSData("freightZoneA", "")
-		setFMSData("freightZoneB", "")
-		setFMSData("freightZoneC", "")
-		setFMSData("freightZoneD", "")
-		setFMSData("freightZoneE", "")
-		setFMSData("cargoFwd", "")
-		setFMSData("cargoAft", "")
-		setFMSData("cargoBulk", "")
-		setFMSData("paxFirstClassA", "")
-		setFMSData("paxBusClassB", "")
-		setFMSData("paxEconClassC", "")
-		setFMSData("paxEconClassD", "")
-		setFMSData("paxEconClassE", "")
-		calc_pax_cargo()
-	elseif string.len(fmsO["scratchpad"]) < 1 then
-		setFMSData(value, "11160")
-		calc_pax_cargo()
-	elseif string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") and tonumber(fmsO["scratchpad"]) > (11289 * weight_factor) then  --Add FREIGHT by round-robin through all zones
-		setFMSData("freightZoneA", "")
-		setFMSData("freightZoneB", "")
-		setFMSData("freightZoneC", "")
-		setFMSData("freightZoneD", "")
-		setFMSData("freightZoneE", "")
-
-		local x = tonumber(string.format("%6d", fmsO["scratchpad"] / weight_factor)) --convert to base units of KGS
-		local zoneA = 0
-		local zoneB = 0
-		local zoneC = 0
-		local zoneD = 0
-		local zoneE = 0
-		
-		if x > 112890 then  --112,900 KGS is the MAX Revenue Payload.  112,890 KGS is the defined average pallet weight (3763) * 30 pallets
-			x = 112890
-		end
-		repeat
-			if x > 0 and zoneA < 11289 then
-				zoneA = zoneA + 1
-				x = x - 1
-			end
-			if x > 0 and zoneB < 30104 then
-				zoneB = zoneB + 1
-				x = x - 1
-			end
-			if x > 0 and zoneC < 22578 then
-				zoneC = zoneC + 1
-				x = x - 1
-			end
-			if x > 0 and zoneD < 45156 then
-				zoneD = zoneD + 1
-				x = x - 1
-			end
-			if x > 0 and zoneE < 3763 then
-				zoneE = zoneE + 1
-				x = x - 1
-			end
-			--print("X = "..x.." ZoneA = "..zoneA.." ZoneB = "..zoneB.." ZoneC = "..zoneC.." ZoneD = "..zoneD.." ZoneE = "..zoneE)
-		until (x == 0)
-		
-		fmsModules["data"].freightZoneA = string.format("%5d", zoneA)
-		fmsModules["data"].freightZoneB = string.format("%5d", zoneB)
-		fmsModules["data"].freightZoneC = string.format("%5d", zoneC)
-		fmsModules["data"].freightZoneD = string.format("%5d", zoneD)
-		fmsModules["data"].freightZoneE = string.format("%4d", zoneE)
-		
-		fmsO["scratchpad"] = ""
-		
-		calc_pax_cargo()
-	elseif string.match(fmsO["scratchpad"], "%d") and string.match(fmsO["scratchpad"], "P") then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-
-		if chars == "P" then
-			weight_per_unit = 3763 * weight_factor
-			if digits > 3 then
-				digits = 3
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%5d", digits * weight_per_unit)
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local fwt = 0
-
-		fwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-		
-		if fwt > 11289 then
-			fwt = 11289
-		end
-		
-		setFMSData(value, string.format("%5d", fwt))
-		calc_pax_cargo()
-	end
-  elseif value == "freightZoneB" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and string.match(fmsO["scratchpad"], "P") then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-
-		if chars == "P" then
-			weight_per_unit = 3763 * weight_factor
-			if digits > 8 then
-				digits = 8
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%5d", digits * weight_per_unit)
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local fwt = 0
-
-		fwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-		
-		if fwt > 30104 then
-			fwt = 30104
-		end
-		
-		setFMSData(value, string.format("%5d", fwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "freightZoneC" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and string.match(fmsO["scratchpad"], "P") then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-
-		if chars == "P" then
-			weight_per_unit = 3763 * weight_factor
-			if digits > 6 then
-				digits = 6
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%5d", digits * weight_per_unit)
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local fwt = 0
-
-		fwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-		
-		if fwt > 22578 then
-			fwt = 22578
-		end
-		
-		setFMSData(value, string.format("%5d", fwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "freightZoneD" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and string.match(fmsO["scratchpad"], "P") then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-
-		if chars == "P" then
-			weight_per_unit = 3763 * weight_factor
-			if digits > 12 then
-				digits = 12
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%6d", digits * weight_per_unit)
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local fwt = 0
-
-		fwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-		
-		if fwt > 45156 then
-			fwt = 45156
-		end
-		
-		setFMSData(value, string.format("%6d", fwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-  elseif value == "freightZoneE" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and string.match(fmsO["scratchpad"], "P") then
-		local digits = math.abs(tonumber(string.match(fmsO["scratchpad"], "%d+")))
-		local chars = string.match(fmsO["scratchpad"], "%u")
-		local weight_per_unit = 0
-
-		if chars == "P" then
-			weight_per_unit = 3763 * weight_factor
-			if digits > 1 then
-				digits = 1
-			end
-		end
-		
-		fmsO["scratchpad"] = string.format("%4d", digits * weight_per_unit)
-	end
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") then
-		local fwt = 0
-
-		fwt = math.abs(tonumber(fmsO["scratchpad"])) / weight_factor  --store LBS in KGS
-		
-		if fwt > 3763 then
-			fwt = 3763
-		end
-		
-		setFMSData(value, string.format("%4d", fwt))
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-   elseif value == "freightPayload" then
-	if string.match(fmsO["scratchpad"], "%d") then --and not string.match(fmsO["scratchpad"], "%u") then
-		local weight_factor = 1
-
-		if simConfigData["data"].SIM.weight_display_units == "LBS" then
-			weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-		else
-			weight_factor = 1
-		end
-
-		setFMSData("paxFirstClassA", "")
-		setFMSData("paxBusClassB", "")
-		setFMSData("paxEconClassC", "")
-		setFMSData("paxEconClassD", "")
-		setFMSData("paxEconClassE", "")
-		setFMSData("freightZoneA", "")
-		setFMSData("freightZoneB", "")
-		setFMSData("freightZoneC", "")
-		setFMSData("freightZoneD", "")
-		setFMSData("freightZoneE", "")
-
-		local x = math.abs(tonumber(fmsO["scratchpad"]) / weight_factor) * 1000  --convert to base units of KGS
-		local zoneA = 0
-		local zoneB = 0
-		local zoneC = 0
-		local zoneD = 0
-		local zoneE = 0
-		
-		if x > 112890 then  --112,900 KGS is the MAX Revenue Payload.  112,890 KGS is the defined average pallet weight (3763) * 30 pallets
-			x = 112890
-		end
-		
-		repeat
-			if x > 0 and zoneA < 11289 then
-				zoneA = zoneA + 1
-				x = x - 1
-			end
-			if x > 0 and zoneB < 30104 then
-				zoneB = zoneB + 1
-				x = x - 1
-			end
-			if x > 0 and zoneC < 22578 then
-				zoneC = zoneC + 1
-				x = x - 1
-			end
-			if x > 0 and zoneD < 45156 then
-				zoneD = zoneD + 1
-				x = x - 1
-			end
-			if x > 0 and zoneE < 3763 then
-				zoneE = zoneE + 1
-				x = x - 1
-			end
-			--print("X = "..x.." ZoneA = "..zoneA.." ZoneB = "..zoneB.." ZoneC = "..zoneC.." ZoneD = "..zoneD.." ZoneE = "..zoneE)
-		until (x <= 0)
-		
-		fmsModules["data"].freightZoneA = string.format("%5d", zoneA)
-		fmsModules["data"].freightZoneB = string.format("%5d", zoneB)
-		fmsModules["data"].freightZoneC = string.format("%5d", zoneC)
-		fmsModules["data"].freightZoneD = string.format("%5d", zoneD)
-		fmsModules["data"].freightZoneE = string.format("%4d", zoneE)
-		
-		fmsO["scratchpad"] = ""
-		
-		calc_pax_cargo()
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
---Marauder28
---SimConfig Page
-   elseif value=="weightUnits" then
-	if string.len(fmsO["scratchpad"])>0 and validate_weight_units(fmsO["scratchpad"]) == false then 
-      fmsO["notify"]="INVALID ENTRY"
-	elseif is_timer_scheduled(preselect_fuel) == true then
-	  fmsO["notify"]="NA - WAITING FOR FUEL TRUCK"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.weight_display_units = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.weight_display_units == "KGS" then
-			fmsO["scratchpad"] = "LBS"
-		else
-			fmsO["scratchpad"] = "KGS"
-		end
-		simConfigData["data"].SIM.weight_display_units = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-  elseif value == "irsAlignTime" then
-	if not string.match(fmsO["scratchpad"], "%d") or string.len(fmsO["scratchpad"]) > 2 then
-		fmsO["notify"] = "INVALID ENTRY"
-	else
-		--setFMSData(value, tonumber(fmsO["scratchpad"]) * 60)
-		simConfigData["data"].SIM.irs_align_time = tonumber(fmsO["scratchpad"]) * 60
-		pushSimConfig(simConfigData["data"]["values"])
-		--print("FMC IRS = "..fmsO["scratchpad"] * 60)
-	end
-   elseif value=="autoFuelMgmt" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "YES" or fmsO["scratchpad"] == "NO") then 
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.auto_fuel_mgmt = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.auto_fuel_mgmt == "NO" then
-			fmsO["scratchpad"] = "YES"
-		else
-			fmsO["scratchpad"] = "NO"
-		end
-		simConfigData["data"].SIM.auto_fuel_mgmt = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="baroIndicator" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "IN" or fmsO["scratchpad"] == "HPA") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.baro_indicator = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.baro_indicator == "IN" then
-			fmsO["scratchpad"] = "HPA"
-		else
-			fmsO["scratchpad"] = "IN"
-		end
-		simConfigData["data"].SIM.baro_indicator = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="baroSync" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "YES" or fmsO["scratchpad"] == "NO") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.baro_sync = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.baro_sync == "NO" then
-			fmsO["scratchpad"] = "YES"
-		else
-			fmsO["scratchpad"] = "NO"
-		end
-		simConfigData["data"].SIM.baro_sync = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-  elseif value == "stdPaxWeight" then
-	local weight_factor = 1
-
-	if simConfigData["data"].SIM.weight_display_units == "LBS" then
-		weight_factor = simConfigData["data"].SIM.kgs_to_lbs
-	else
-		weight_factor = 1
-	end
-
-	if string.match(fmsO["scratchpad"], "%d") and not string.match(fmsO["scratchpad"], "%u") and tonumber(fmsO["scratchpad"]) < 500.0 then
-		local pax_weight = 0
-
-		pax_weight = string.format("%5.1f", math.abs(tonumber(fmsO["scratchpad"]) / weight_factor))  --store weight in KGS
-
-		simConfigData["data"].SIM.std_pax_weight = pax_weight
-		pushSimConfig(simConfigData["data"]["values"])		
-	else
-		fmsO["notify"] = "INVALID ENTRY"
-	end
-   elseif value=="captInbd" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "EICAS" or fmsO["scratchpad"] == "NORM" or fmsO["scratchpad"] == "PFD") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.capt_inbd = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.capt_inbd == "EICAS" then
-			fmsO["scratchpad"] = "NORM"
-		elseif simConfigData["data"].SIM.capt_inbd == "NORM" then
-			fmsO["scratchpad"] = "PFD"
-		else
-			fmsO["scratchpad"] = "EICAS"
-		end
-		simConfigData["data"].SIM.capt_inbd = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="captLwr" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "EICAS PRI" or fmsO["scratchpad"] == "NORM" or fmsO["scratchpad"] == "ND") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.capt_inbd = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.capt_lwr == "EICAS PRI" then
-			fmsO["scratchpad"] = "NORM"
-		elseif simConfigData["data"].SIM.capt_lwr == "NORM" then
-			fmsO["scratchpad"] = "ND"
-		else
-			fmsO["scratchpad"] = "EICAS PRI"
-		end
-		simConfigData["data"].SIM.capt_lwr = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="foInbd" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "PFD" or fmsO["scratchpad"] == "NORM" or fmsO["scratchpad"] == "EICAS") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.fo_inbd = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.fo_inbd == "PFD" then
-			fmsO["scratchpad"] = "NORM"
-		elseif simConfigData["data"].SIM.fo_inbd == "NORM" then
-			fmsO["scratchpad"] = "EICAS"
-		else
-			fmsO["scratchpad"] = "PFD"
-		end
-		simConfigData["data"].SIM.fo_inbd = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="foLwr" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "ND" or fmsO["scratchpad"] == "NORM" or fmsO["scratchpad"] == "EICAS PRI") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].SIM.fo_inbd = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].SIM.fo_lwr == "ND" then
-			fmsO["scratchpad"] = "NORM"
-		elseif simConfigData["data"].SIM.fo_lwr == "NORM" then
-			fmsO["scratchpad"] = "EICAS PRI"
-		else
-			fmsO["scratchpad"] = "ND"
-		end
-		simConfigData["data"].SIM.fo_lwr = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
---Plane Config Page
-	elseif value=="model" then
-		simConfigData["data"].PLANE.model = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-   elseif value=="aircraftType" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "PASSENGER" or fmsO["scratchpad"] == "FREIGHTER") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].PLANE.aircraft_type = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].PLANE.aircraft_type == "PASSENGER" then
-			fmsO["scratchpad"] = "FREIGHTER"
-		else
-			fmsO["scratchpad"] = "PASSENGER"
-		end
-		simConfigData["data"].PLANE.aircraft_type = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="engines" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "CF6-80C2-B1F" or fmsO["scratchpad"] == "CF6-80C2-B5F" or fmsO["scratchpad"] == "CF6-80C2-B1F1"
-		or fmsO["scratchpad"] == "PW4056" or fmsO["scratchpad"] == "PW4060" or fmsO["scratchpad"] == "PW4062"
-		or fmsO["scratchpad"] == "RB211-524G" or fmsO["scratchpad"] == "RB211-524H") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].PLANE.engines = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].PLANE.engines == "CF6-80C2-B1F" then
-			fmsO["scratchpad"] = "CF6-80C2-B5F"
-			simConfigData["data"].PLANE.thrust_ref = "N1"
-		elseif simConfigData["data"].PLANE.engines == "CF6-80C2-B5F" then
-			fmsO["scratchpad"] = "CF6-80C2-B1F1"
-			simConfigData["data"].PLANE.thrust_ref = "N1"
-		elseif simConfigData["data"].PLANE.engines == "CF6-80C2-B1F1" then
-			fmsO["scratchpad"] = "PW4056"
-			simConfigData["data"].PLANE.thrust_ref = "EPR"
-		elseif simConfigData["data"].PLANE.engines == "PW4056" then
-			fmsO["scratchpad"] = "PW4060"
-			simConfigData["data"].PLANE.thrust_ref = "EPR"
-		elseif simConfigData["data"].PLANE.engines == "PW4060" then
-			fmsO["scratchpad"] = "PW4062"
-			simConfigData["data"].PLANE.thrust_ref = "EPR"
-		elseif simConfigData["data"].PLANE.engines == "PW4062" then
-			fmsO["scratchpad"] = "RB211-524G"
-			simConfigData["data"].PLANE.thrust_ref = "EPR"
-		elseif simConfigData["data"].PLANE.engines == "RB211-524G" then
-			fmsO["scratchpad"] = "RB211-524H"
-			simConfigData["data"].PLANE.thrust_ref = "EPR"
-		elseif simConfigData["data"].PLANE.engines == "RB211-524H" then
-			fmsO["scratchpad"] = "RB211-524H8T"
-			simConfigData["data"].PLANE.thrust_ref = "EPR"
-		else
-			fmsO["scratchpad"] = "CF6-80C2-B1F"
-			simConfigData["data"].PLANE.thrust_ref = "N1"
-		end
-		simConfigData["data"].PLANE.engines = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   --Removed to allow engine code above to forcibly set the thrust_ref mode (i.e. don't let users select and mess things up)
---[[   elseif value=="thrustRef" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "EPR" or fmsO["scratchpad"] == "N1") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].PLANE.thrust_ref = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].PLANE.thrust_ref == "EPR" then
-			fmsO["scratchpad"] = "N1"
-		else
-			fmsO["scratchpad"] = "EPR"
-		end
-		simConfigData["data"].PLANE.thrust_ref = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end]]
-   elseif value=="airline" then
-		simConfigData["data"].PLANE.airline = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-   elseif value=="civilRegistration" then
-		simConfigData["data"].PLANE.civil_registration = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-   elseif value=="finNbr" then
-		simConfigData["data"].PLANE.fin_nbr = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-   elseif value=="pfdStyle" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "CRT" or fmsO["scratchpad"] == "LCD") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].PLANE.pfd_style = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].PLANE.pfd_style == "CRT" then
-			fmsO["scratchpad"] = "LCD"
-		else
-			fmsO["scratchpad"] = "CRT"
-		end
-		simConfigData["data"].PLANE.pfd_style = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
-   elseif value=="ndStyle" then
-	if string.len(fmsO["scratchpad"])>0 and not (fmsO["scratchpad"] == "LCD" or fmsO["scratchpad"] == "CRT") then
-      fmsO["notify"]="INVALID ENTRY"
-	elseif string.len(fmsO["scratchpad"]) > 0 then
-		simConfigData["data"].PLANE.nd_style = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-    else
-		if simConfigData["data"].PLANE.nd_style == "CRT" then
-			fmsO["scratchpad"] = "LCD"
-		else
-			fmsO["scratchpad"] = "CRT"
-		end
-		simConfigData["data"].PLANE.nd_style = fmsO.scratchpad
-		pushSimConfig(simConfigData["data"]["values"])
-	end
---Marauder28
    elseif value=="atc" then
 		setFMSData(value,fmsO["scratchpad"])
 		
@@ -2729,60 +1660,21 @@ function fmsFunctions.setDisp(fmsO, value)
 		return
 	end
 end
---[[function fmsFunctions.setpage2(fmsO, value)
-	if value == "FMC" then
-		if fmsO.id == "fmsL" then
-			if B777DR_cdu_act[0] == 0 then
-				B777DR_cdu_act[0] = 1
-				fmsFunctions["setpage"](fmsO,"IDENT")
-			else
-				if not string.match(fmsModules["fmsL"]["prevPage"], "EIswS") and
-				not string.match(fmsModules["fmsL"]["prevPage"], "EFIS")
-				and fmsModules["fmsL"]["prevPage"] ~= "README" then
-
-					fmsFunctions["setpage"](fmsO,fmsModules["fmsL"]["prevPage"])
-
-				end
-			end
-		elseif fmsO.id == "fmsR" then
-			if B777DR_cdu_act[1] == 0 then
-				B777DR_cdu_act[1] = 1
-				fmsFunctions["setpage"](fmsO,"IDENT")
-			else
-				if not string.match(fmsModules["fmsR"]["prevPage"], "EICAS") and
-				not string.match(fmsModules["fmsR"]["prevPage"], "EFIS")
-				and fmsModules["fmsR"]["prevPage"] ~= "README" then
-
-					fmsFunctions["setpage"](fmsO,fmsModules["fmsR"]["prevPage"])
-
-				end
-			end
-]]
-function fmcPageButton(fmsO)
-	local idNum = fmsO.id == "fmsL" and 0 or 1
-	if B777DR_cdu_act[idNum] == 0 then
-
-		B777DR_cdu_act[idNum] = 1
-		fmsFunctions["setpage"](fmsO,"IDENT")
-
-	else
-		if not string.match(fmsModules[fmsO.id]["prevPage"], "EICAS")
-		and not string.match(fmsModules[fmsO.id]["prevPage"], "EFIS")
-		and fmsModules[fmsO.id]["prevPage"] ~= "README" then
-
-			fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
-
-		end
-	end
-end
 
 function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id ~= "fmsC" then
-			--fmcPageButton(fmsO);
-		else
-			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+			local excludedPages = "EFISCTL152, EFISOPTIONS152, EICASMODES, EICASSYN, README, INDEX"
+			local idNum = fmsO.id == "fmsL" and 0 or 1
+			if excludedPages:match(fmsModules[fmsO.id]["prevPage"]) then
+				B777DR_cdu_act[idNum] = 1
+				fmsFunctions["setpage"](fmsO,"IDENT")
+			else
+				fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
+			end
+			return
 		end
+		fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
 		return
 	end
 
@@ -2829,7 +1721,7 @@ function fmsFunctions.setpage2(fmsO, value)
 	end
 
 	if value == "MENU" then
-		if simConfigData["data"].FMC.unlocked == 1 then
+		if getSimConfig("FMC", "unlocked") == 1 then
 			fmsFunctions["setpage"](fmsO,"INDEX")
 		else
 			fmsModules[fmsO.id].notify="CDU LOCKED"

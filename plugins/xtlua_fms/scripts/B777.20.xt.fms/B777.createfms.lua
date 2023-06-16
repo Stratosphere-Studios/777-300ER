@@ -8,7 +8,6 @@
 fms={
   id,
   page1=false,
-  swipeOut=1,
   prevPage = "README",
   currentPage = "README",
   targetPage = "README",
@@ -39,8 +38,8 @@ fmsKeyFunc={}
 
 function keyDown(fmsModule,key)
 
-  if simConfigData["data"].FMC.unlocked == 1 then
-
+  if getSimConfig("FMC", "unlocked") == 1 then
+  --if false then
     run_after_time(switchCustomMode, 0.5)
     print(fmsModule.. " do " .. key)
 
@@ -619,21 +618,19 @@ function fms:B777_fms_display()
   local thisID = self.id
   if self.inCustomFMC ~= self.targetCustomFMC or self.currentPage ~= self.targetPage or self.pgNo ~= self.targetpgNo then
     --[[for i=1, 14, 1 do
-      print("func 2")
       B777DR_fms[thisID][i] = "                        "
       B777DR_fms_s[thisID][i] = "                        "
     end]]
     return
   end
-  --self.swipeOut=1
 
   local inCustomFMC=self.inCustomFMC
   local page=self.currentPage
   if not inCustomFMC then
-    --[[for i=1,13,1 do
+    for i=1,13,1 do
       B777DR_fms[thisID][i]=cleanFMSLine(B777DR_srcfms[thisID][i])
       B777DR_fms_s[thisID][i] = "                        "
-    end]]
+    end
 
     if string.len(self.notify)>0 then 
       B777DR_fms[thisID][14]=self.notify
