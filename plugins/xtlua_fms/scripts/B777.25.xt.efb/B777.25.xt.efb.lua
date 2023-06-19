@@ -78,6 +78,8 @@ B777DR_realistic_prk_brk               = find_dataref("Strato/777/gear/park_brak
 
 B777DR_efb_page                        = deferred_dataref("Strato/777/displays/efb_page", "number")
 B777DR_efb_page_type                   = deferred_dataref("Strato/777/displays/efb_page_type", "number")
+B777DR_maint_covers                    = deferred_dataref("Strato/777/maint/covers", "array[3]")
+B777DR_maint_doors                     = deferred_dataref("Strato/777/maint/doors", "array[6]")
 --B777DR_efb_keypad                      = deferred_dataref("Strato/777/displays/efb_keypad", "number")
 --B777DR_efb_keypad_scratchpad           = deferred_dataref("Strato/777/displays/efb_keypad_scratchpad", "string")
 

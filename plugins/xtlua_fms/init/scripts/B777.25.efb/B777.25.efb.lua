@@ -52,3 +52,5 @@ B777CMD_toggle_acfType                 = deferred_command("Strato/777/options/ac
 
 B777DR_efb_page                        = deferred_dataref("Strato/777/displays/efb_page", "number")
 B777DR_efb_page_type                   = deferred_dataref("Strato/777/displays/efb_page_type", "number")
+B777DR_maint_covers                    = deferred_dataref("Strato/777/maint/covers", "array[3]")
+B777DR_maint_doors                     = deferred_dataref("Strato/777/maint/doors", "array[6]")
