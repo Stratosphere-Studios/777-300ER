@@ -1,4 +1,4 @@
-# Stratosphere Studios 777-300ER
+# **Stratosphere Studios 777-300ER**
 Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere Studios.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
@@ -6,7 +6,7 @@ Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere St
 [![Discord](https://img.shields.io/discord/806746926854176789.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/eU2vWCtmFX)
 <br> [Our Discord Server](https://discord.gg/eU2vWCtmFX)
 
-## FAQ
+## **FAQ**
 
 **Q: Why is the aircraft not showing up in the aircraft menu?**
 
@@ -36,7 +36,7 @@ A: We have no release date at this time, however, you can still download the air
 
 A: You can download liveries from us and various third parties from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries)
 
-**Livery Painters**
+### **Livery Painters**
 
 If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
 
@@ -70,37 +70,46 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft.
 
-## INSTALLATION
+## **INSTALLATION**
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
-If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). Note this version lags behind the Github one it terms of updates.
-
-If you're on Windows, you'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft (your computer probably already has this, but if the aircraft is broken, this is why).
+If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
 
 We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
 
-## CREDITS
-[Nathroxer (Owner)](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
+### **Windows**
+You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
 
-[BRUHegg](https://github.com/BRUHegg): SASL code for various systems, flight model.
+### **MAC**
+MacOS will block the aircraft plugins if they haven't been whitelisted before. To whitelist them, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk).
 
-kudosi#2916(Discord): references, testing
+### **Linux**
+No further steps are required.
 
-[remenkemi (crazytimtimtim)](https://github.com/crazytimtimtim): XTLua code, flight model + other aircraft data, manipulators, readme, Github management.
+## **CREDITS**
+[**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[Matt726](https://github.com/Matt726-S): Sounds, Documentation, display textures.
+[**BRUHegg**](https://github.com/BRUHegg): SASL system code, flight model.
 
-Laminar Research: Default 737 display textures.
+[**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
 
-[Cactus2456 (IASXP)](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
+[**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
-[zeta976](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
+**kudosi**: references, testing.
 
-[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors: [XTLua](https://github.com/mSparks43/XTLua), help, and some borrowed code (within license restrictions)
+**y4nn**: Mac installation video.
 
-Potatohead123: Cockpit help.
+**Laminar Research**: Default 737 display textures.
 
-Phil Paysse: Fuselage.
+[**Cactus2456 (IASXP)**](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
 
-[Spherrrical](https://github.com/Spherrrical/): Logo design.
+[**zeta976**](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
+
+**[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors**: [XTLua](https://github.com/mSparks43/XTLua), help, and some borrowed code.
+
+**Potatohead123**: Cockpit help.
+
+**Phil Paysse**: Fuselage.
+
+[**Spherrrical**](https://github.com/Spherrrical/): Logo design.
