@@ -134,6 +134,7 @@ fmsFunctionsDefs["TAKEOFF"]["L1"]={"setDref","flapsRef"}]]
 fmsPages["TAKEOFF"]=createPage("TAKEOFF")
 fmsPages["TAKEOFF"].getPage=function(self,pgNo,fmsID)
   if pgNo == 1 then
+    fmsFunctionsDefs["TAKEOFF"]["R6"]={"setpage","THRUSTLIM"}
     return{
       "      TAKEOFF REF       ",
       "                        ",
@@ -147,27 +148,62 @@ fmsPages["TAKEOFF"].getPage=function(self,pgNo,fmsID)
       "                        ",
       "                     ON;g2>",
       "                        ",
-      "<INDEX         POS INIT>"
+      "<INDEX       THRUST LIM>"
+    }
+  elseif pgNo == 2 then
+    fmsFunctionsDefs["TAKEOFF"]["R6"]=nil
+    return{
+      "      TAKEOFF REF       ",
+      "                        ",
+      "                        ",
+      "                        ",
+      "                        ",
+      "                        ",
+      "              CLB       ",
+      "                        ",
+      "                        ",
+      "                        ",
+      "                        ",
+      "                        ",
+      "<INDEX                  "
     }
   end
 end
 
 fmsPages["TAKEOFF"].getSmallPage=function(self,pgNo,fmsID)
-  return{
-    "                    1/2 ",
-    " FLAPS                V1",
-    "                        ",
-    " THRUST               VR",
-    "                        ",
-    " CG                   V2",
-    "                        ",
-    " RWY/POS    GR WT   TOGW",
-    "                        ",
-    " TAKEOFF DATA   REF SPDS",
-    "               OFF<->   ",
-    "------------------------",
-    "                        "
-  }
+  if pgNo == 1 then
+    return{
+      "                    1/2 ",
+      " FLAPS                V1",
+      "                        ",
+      " THRUST               VR",
+      "                        ",
+      " CG                   V2",
+      "                        ",
+      " RWY/POS    GR WT   TOGW",
+      "                        ",
+      " TAKEOFF DATA   REF SPDS",
+      "               OFF<->   ",
+      "------------------------",
+      "                        "
+    }
+  elseif pgNo == 2 then
+    return{
+      "                    2/2 ",
+      "             EO ACCEL HT",
+      "                  1000FT",
+      "                ACCEL HT",
+      "                  1000FT",
+      " WIND      THR REDUCTION",
+      "---`/---KT        1000FT",
+      " RWY WIND       LIM TOGW",
+      "---KT                   ",
+      " SLOPE/COND      REF OAT",
+      "U0.0/DRY            --`C",
+      "------------------------",
+      "                        "
+    }
+  end
 end
 
 fmsPages["TAKEOFF"].getNumPages=function(self)
@@ -176,4 +212,3 @@ end
 
 fmsFunctionsDefs["TAKEOFF"]={}
 fmsFunctionsDefs["TAKEOFF"]["L6"]={"setpage","INITREF"}
-fmsFunctionsDefs["TAKEOFF"]["R6"]={"setpage","POSINIT"}

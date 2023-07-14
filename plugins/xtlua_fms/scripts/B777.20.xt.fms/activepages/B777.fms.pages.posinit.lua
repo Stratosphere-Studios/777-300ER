@@ -80,8 +80,8 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
       "                        ", --irsSystem.getLine("gpsL"),
       "                        ",
       "                        ", --irsSystem.getLine("gpsR"),
-      "                        ",
-      "<INDEX         BRG/DIST>"
+      "                     ON;gr2>",
+      "<INDEX          LAT/LON>"
     }
   end
 end
@@ -137,7 +137,7 @@ fmsPages["POSINIT"].getSmallPage=function(self,pgNo,fmsID)
       " FMC R                  ",
       "                        ",
       "                 GPS NAV",
-      "                        ",
+      "               OFF<->   ",
       "------------------------",
       "                        "
     }
