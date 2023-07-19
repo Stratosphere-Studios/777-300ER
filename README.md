@@ -1,7 +1,7 @@
 # **Stratosphere Studios 777-300ER**
 Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere Studios.
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
+<a rel="license" href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img alt="GNU GPLv3" style="border-width:0" src="https://www.gnu.org/graphics/gplv3-127x51.png" /></a><br />This work is licensed under a <a rel="license" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GENERAL PUBLIC LICENSE V3</a>
 
 [![Discord](https://img.shields.io/discord/806746926854176789.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/eU2vWCtmFX)
 <br> [Our Discord Server](https://discord.gg/eU2vWCtmFX)
