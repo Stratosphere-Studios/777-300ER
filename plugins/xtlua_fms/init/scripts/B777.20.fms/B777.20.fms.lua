@@ -11,6 +11,7 @@ function deferred_dataref(name,type,notifier)
 	return wrap_dref_any(dref,type) 
 end
 
+B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
 debug_fms                       = deferred_dataref("Strato/B777/debug/fms", "number")
 B777DR_ap_vnav_pause            = deferred_dataref("Strato/B777/autopilot/vnav_pause","number")
 B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")

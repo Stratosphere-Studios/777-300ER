@@ -9511,7 +9511,7 @@ P _engn/0/_part_x -30.020000458
 P _engn/0/_part_y -7.699999809
 P _engn/0/_part_z 90.599998474
 P _engn/0/_power_max_limit 0.000000000
-P _engn/0/_thrust_max_limit 1.1554E5
+P _engn/0/_thrust_max_limit 1E5
 P _engn/0/_type JET_2SPOOL
 P _engn/1/_RSC_max_pwr_ENGN 1.000000000
 P _engn/1/_RSC_redline_ENGN 1.000000000
@@ -9529,7 +9529,7 @@ P _engn/1/_part_x 30.020000458
 P _engn/1/_part_y -7.699999809
 P _engn/1/_part_z 90.599998474
 P _engn/1/_power_max_limit 0.000000000
-P _engn/1/_thrust_max_limit 1.1554E5
+P _engn/1/_thrust_max_limit 1E5
 P _engn/1/_type JET_2SPOOL
 P _engn/count 16
 P _gear/0/_axiE 0.000000000
@@ -37194,8 +37194,8 @@ P acf/_lock_n2 30.000000000
 P acf/_lock_with_elev_EQ 0
 P acf/_m_displaced 0.000000000
 P acf/_m_displaced_Y 0.000000000
-P acf/_m_empty 3.536E5
-P acf/_m_fuel_max_tot 3.207726E5
+P acf/_m_empty 3.6694E5
+P acf/_m_fuel_max_tot 3.27565E5
 P acf/_m_jett 0.000000000
 P acf/_m_max 7.77E5
 P acf/_m_shift 0.000000000

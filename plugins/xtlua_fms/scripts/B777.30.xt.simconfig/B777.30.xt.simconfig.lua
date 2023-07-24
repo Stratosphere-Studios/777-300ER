@@ -203,6 +203,7 @@ function loadSimConfig()
 		else
 			print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
 			os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
+			os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
 			B777DR_simconfig_data = json.encode(defaultValues())
 		end
 	else

@@ -184,6 +184,9 @@ simDR_map_hsi                          = {find_dataref("sim/cockpit2/EFIS/map_mo
 simDR_map_mode                         = {find_dataref("sim/cockpit2/EFIS/map_mode"), find_dataref("sim/cockpit2/EFIS/map_mode_copilot")}
 simDR_map_range                        = {find_dataref("sim/cockpit2/EFIS/map_range"), find_dataref("sim/cockpit2/EFIS/map_range_copilot")}
 simDR_map_steps                        = find_dataref("sim/cockpit2/EFIS/map_range_steps")
+simDR_total_fuel_kgs                   = find_dataref("sim/flightmodel/weight/m_fuel_total")
+simDR_gross_wt_kgs                     = find_dataref("sim/flightmodel/weight/m_total")
+simDR_payload_wt_kgs                   = find_dataref("sim/flightmodel/weight/m_fixed")
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
@@ -307,6 +310,9 @@ B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta",
 B777DR_map_zoom_knob                   = deferred_dataref("Strato/777/map_zoom_knob", "array[2]")
 B777DR_mins_mode_knob                  = deferred_dataref("Strato/777/mins_mode_knob", "array[2]")
 B777DR_rudder_trim_pos                 = deferred_dataref("Strato/777/cockpit/rudder_trim_knob_pos", "number")
+
+B777DR_gross_wt_lbs_kgs                          = deferred_dataref("Strato/777/displays/grwt_lbs_kgs", "number")
+B777DR_payload_lbs_kgs                           = deferred_dataref("Strato/777/displays/payload_lbs_kgs", "number")
 --*************************************************************************************--
 --**                             X-PLANE COMMAND HANDLERS                            **--
 --*************************************************************************************--
@@ -1362,17 +1368,21 @@ end
 --- WEIGHT CONVERSIONS ----------
 function weightConv()
 	if B777DR_lbs_kgs == 1 then
-		B777DR_fuel_lbs_kgs_total = (simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]) * kgs_to_lbs
+		B777DR_fuel_lbs_kgs_total = simDR_total_fuel_kgs * kgs_to_lbs
 		for i = 0, 2 do
 			B777DR_fuel_lbs_kgs[i] = simDR_fuel_kgs[i] * kgs_to_lbs
 		end
 		B777DR_lbs_kgs_status = "LBS"
+		B777DR_gross_wt_lbs_kgs = simDR_gross_wt_kgs * kgs_to_lbs
+		B777DR_payload_lbs_kgs = simDR_payload_wt_kgs * kgs_to_lbs
 	else
-		B777DR_fuel_lbs_kgs_total = simDR_fuel_kgs[0] + simDR_fuel_kgs[1] + simDR_fuel_kgs[2]
+		B777DR_fuel_lbs_kgs_total = simDR_total_fuel_kgs
 		for i = 0, 2 do
 			B777DR_fuel_lbs_kgs[i] = simDR_fuel_kgs[i]
 		end
 		B777DR_lbs_kgs_status = "KGS"
+		B777DR_gross_wt_lbs_kgs = simDR_gross_wt_kgs
+		B777DR_payload_lbs_kgs = simDR_payload_wt_kgs
 	end
 end
 
