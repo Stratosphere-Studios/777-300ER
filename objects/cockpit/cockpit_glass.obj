@@ -13952,7 +13952,7 @@ IDX	12572
 	ANIM_end
 	ANIM_begin
 	ANIM_trans	0.24236	0.23601	-32.966599	0.24236	0.23601	-32.966599
-	ANIM_rotate_begin	1	0	-0	l stab trim cutout Strato/777/cockpit/ctr/button_cover/position[2]
+	ANIM_rotate_begin	1	0	-0	Strato/777/cockpit/ctr/button_cover/position[2]
 	ANIM_rotate_key	0	-172.8035
 	ANIM_rotate_key	1	-262.80371
 	ANIM_rotate_end

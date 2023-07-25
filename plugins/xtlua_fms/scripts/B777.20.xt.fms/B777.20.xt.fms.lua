@@ -600,8 +600,6 @@ function calcFuel2()
 end
 
 function calcFuel()
-	print("init "..totalizerInitkgs)
-	print("sum "..totalizerSumkgs)
     if fmsModules["data"].fmcFuel.mode == "CALC" then
         if simDR_fuel_flow_kg_sec[0] > 5 or simDR_fuel_flow_kg_sec[1] > 5 then -- if abnormal fuel flow switch to sensed mode
             fmsModules["data"].fmcFuel.mode = "SENSED"
