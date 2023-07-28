@@ -51,12 +51,10 @@ end
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setpage","PAGE_pgNo"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setDref","DREF"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"doCMD","CMD"}
---fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setDrefNum","dataref_val"}
---fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"toggleDref","dataref"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"getdata","data"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"showmessage","message"}
---
--- you can also create custom fmsFunctions
+
+-- you can also create custom fmsFunctions in the fms.pages.lua file
 
 fmsPages["PAGE_NAME"].getNumPages = function(self)
     return 1

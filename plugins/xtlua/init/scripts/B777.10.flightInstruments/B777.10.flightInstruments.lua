@@ -187,3 +187,6 @@ B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta",
 B777DR_map_zoom_knob                   = deferred_dataref("Strato/777/map_zoom_knob", "array[2]")
 B777DR_mins_mode_knob                  = deferred_dataref("Strato/777/mins_mode_knob", "array[2]")
 B777DR_rudder_trim_pos                 = deferred_dataref("Strato/777/cockpit/rudder_trim_knob_pos", "number")
+
+B777DR_gross_wt_lbs_kgs                          = deferred_dataref("Strato/777/displays/grwt_lbs_kgs", "number")
+B777DR_payload_lbs_kgs                           = deferred_dataref("Strato/777/displays/payload_lbs_kgs", "number")

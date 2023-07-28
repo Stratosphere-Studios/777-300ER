@@ -50,14 +50,14 @@ B777DR_gear_door_pos                      = find_dataref("Strato/777/gear/doors"
 simDR_whichOnGround                       = find_dataref("sim/flightmodel2/gear/on_ground")
 simDR_gear_handle                         = find_dataref("sim/cockpit2/controls/gear_handle_down")]]
 
-simDR_spoiler_handle                      = find_dataref("sim/cockpit2/controls/speedbrake_ratio")
-simDR_trottle_pos                         = find_dataref("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
-simDR_onground                            = find_dataref("sim/flightmodel/failures/onground_any")
+--simDR_spoiler_handle                      = find_dataref("sim/cockpit2/controls/speedbrake_ratio")
+--simDR_trottle_pos                         = find_dataref("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
+--simDR_onGround                            = find_dataref("sim/flightmodel/failures/onground_any")
 
 --simDR_camera_fov                          = find_dataref("sim/cockpit2/camera/camera_field_of_view")
 
 simDR_N1                                  = find_dataref("sim/flightmodel2/engines/N1_percent")
-simDR_oil_pressure_psi                    = find_dataref("sim/flightmodel/engine/ENGN_oil_press_psi")
+--simDR_oil_pressure_psi                    = find_dataref("sim/flightmodel/engine/ENGN_oil_press_psi")
 simDR_oil_press_fail_0                    = find_dataref("sim/operation/failures/rel_oilp_ind_0")
 simDR_oil_press_fail_1                    = find_dataref("sim/operation/failures/rel_oilp_ind_1")
 
@@ -77,8 +77,8 @@ simDR_rud                                 = find_dataref("sim/flightmodel2/wing/
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
 
-B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
-B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
+--B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
+--B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
 B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
 
 B777DR_oil_press_psi                    = deferred_dataref("Strato/777/oil_press_psi", "array[2]")
@@ -197,6 +197,7 @@ end
 function aircraft_load()
    print("misc loaded")
    os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
+   os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
 end
 
 --function aircraft_unload()

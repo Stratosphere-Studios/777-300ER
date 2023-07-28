@@ -8,7 +8,7 @@
 --]]
 
 -- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
-local version = 1
+local version = 2
 
 --replace create_command
 function deferred_command(name,desc,realFunc)
@@ -65,7 +65,7 @@ simConfigData = {}
 
 function defaultValues()
 	return {
-		VERSION = 1,
+		VERSION = version,
 		SOUND = {
 			paOption = 1,
 			musicOption = 1,
@@ -88,7 +88,8 @@ function defaultValues()
 		},
 		FMC = {
 			drag_ff = "+0.0/+0.0",
-			unlocked = 0 -- 1 if readme code unlocked, 0 if locked
+			unlocked = 0, -- 1 if readme code unlocked, 0 if locked
+			min_fuel_temp = -37 -- options are -37 (Jet A), -44 (Jet A1), and -60 (Jet B), in addition to other
 		},
 		PLANE = {
 			aircraft_type = 0, -- 0 = pax, 1 = Freighter
@@ -172,23 +173,16 @@ function setSimConfig(p1, p2, value)
 end
 
 function setLoadedConfigs()
-	if B777DR_simconfig_data:match("\"VERSION\":"..version) then
-		for key, value in pairs(simConfigData.SOUND) do
-			setSoundOption(key,value)
-		end
-		B777DR_lbs_kgs = getSimConfig("PLANE", "weight_display_units") == "LBS" and 1 or 0;
-		B777DR_realistic_prk_brk = getSimConfig("PLANE","real_park_brake")
-		B777DR_smart_knobs = getSimConfig("PLANE","smart_knobs")
-		B777DR_pfd_mach_gs = getSimConfig("PLANE","gs_mach_indicator")
-		B777DR_trs_bug_enabled = getSimConfig("PLANE","trs_bug")
-		B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
-		B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
-	else
-		print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
-		os.execute("msg * The 777's settings file is from an older version. Settings have been reset.")
-		os.remove(fileLocation)
-		loadSimConfig()
+	for key, value in pairs(simConfigData.SOUND) do
+		setSoundOption(key,value)
 	end
+	B777DR_lbs_kgs = getSimConfig("PLANE", "weight_display_units") == "LBS" and 1 or 0;
+	B777DR_realistic_prk_brk = getSimConfig("PLANE","real_park_brake")
+	B777DR_smart_knobs = getSimConfig("PLANE","smart_knobs")
+	B777DR_pfd_mach_gs = getSimConfig("PLANE","gs_mach_indicator")
+	B777DR_trs_bug_enabled = getSimConfig("PLANE","trs_bug")
+	B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
+	B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
 end
 
 -- for possible performance improvement
@@ -203,8 +197,15 @@ function loadSimConfig()
 	if file then
 		local data = ""
 		data = file:read()
-		B777DR_simconfig_data = data
 		close(file)
+		if data:match("\"VERSION\":"..version) then
+			B777DR_simconfig_data = data
+		else
+			print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
+			os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
+			os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
+			B777DR_simconfig_data = json.encode(defaultValues())
+		end
 	else
 		local newFile = open(fileLocation, "w")
 		local data = {}
@@ -216,7 +217,7 @@ function loadSimConfig()
 
 	--print("simconfig: "..B777DR_simconfig_data)
 	B777DR_newsimconfig_data = 1
-	run_after_time(setLoadedConfigs, 0.5)
+	run_after_time(setLoadedConfigs, 1)
 end
 
 function flight_start()

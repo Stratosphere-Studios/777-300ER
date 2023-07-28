@@ -177,15 +177,15 @@ fmsPages["THRUSTLIM"].getPage=function(self,pgNo,fmsID)
 	return {
 		"       THRUST LIM       ",
 		"                        ",
-		"---                    %",
+		"---                    %", -- should there be a '%' here?
 		"                        ",
-		"<TO   <SEL><ARM>    CLB>",
+		"<TO   <SEL><ARM>    CLB>", -- do sel and arm change in the air?
 		"                        ",
 		"<-10%             CLB 1>",
 		"                        ",
 		"<-20%             CLB 2>",
 		"                        ",
-		"                        ",
+		"<TO-B                   ", -- takeoff bump: https://www.avsim.com/forums/topic/447080-takeoff-bump/
 		"                        ",
 		"<INDEX          TAKEOFF>"
 	}
@@ -194,8 +194,8 @@ end
 fmsPages["THRUSTLIM"].getSmallPage=function(self,pgNo,fmsID)
 	return {
 		"                        ",
-		" SEL      OAT    TO  N1 ",
-		"            `C          ",
+		" SEL      OAT     TO  N1", -- or 'TO 1/2/-B N1'
+		"          XX`C          ",
 		"                        ",
 		"                        ",
 		" TO 1                   ",

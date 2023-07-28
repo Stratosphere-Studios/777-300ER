@@ -17,6 +17,14 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
+totalizerInitkgs = 0.0
+totalizerSumkgs = 0.0
+local totalizerInited = false
+
+simDR_engines_running = find_dataref("sim/flightmodel/engine/ENGN_running")
+simDR_fuel_flow_kg_sec = find_dataref("sim/cockpit2/engine/indicators/fuel_flow_kg_sec")
+
+B777DR_fuel_lbs_kgs_total   = find_dataref("Strato/777/displays/fuel_lbs_kgs_total")
 B777DR_cdu_efis_ctl         = find_dataref("Strato/777/cdu_efis_ctl")
 B777DR_cdu_eicas_ctl        = find_dataref("Strato/777/cdu_eicas_ctl")
 vor_adf = {0, 0}
@@ -36,31 +44,16 @@ simDRTime=find_dataref("sim/time/total_running_time_sec")
 simDR_onGround=find_dataref("sim/flightmodel/failures/onground_any")
 
 B777DR_acfType                      = find_dataref("Strato/B777/acfType")
-B777DR_payload_weight               = find_dataref("sim/flightmodel/weight/m_fixed")
 simDR_acf_m_jettison  	            = find_dataref("sim/aircraft/weight/acf_m_jettison")
 simDR_m_jettison  		            = find_dataref("sim/flightmodel/weight/m_jettison")
-B777DR_CAS_advisory_status          = find_dataref("Strato/B777/CAS/advisory_status") -- no 
-B777DR_ap_vnav_system               = find_dataref("Strato/B777/autopilot/vnav_system")
-B777DR_ap_vnav_pause                = find_dataref("Strato/B777/autopilot/vnav_pause")
 simDR_nav1Freq                      = find_dataref("sim/cockpit/radios/nav1_freq_hz")
 simDR_nav2Freq                      = find_dataref("sim/cockpit/radios/nav2_freq_hz")
 B777DR_iru_status                   = find_dataref("Strato/B777/flt_mgmt/iru/status")
 B777DR_iru_mode_sel_pos             = find_dataref("Strato/B777/flt_mgmt/iru/mode_sel_dial_pos")
 
-B777DR_rtp_C_off                    = find_dataref("Strato/B777/comm/rtp_C/off_status") -- no 
-B777DR_pfd_mode_capt                = find_dataref("Strato/B777/pfd/capt/irs")
-B777DR_pfd_mode_fo                  = find_dataref("Strato/B777/pfd/fo/irs")
-B777DR_irs_src_fo	                = find_dataref("Strato/B777/flt_inst/irs_src/fo/sel_dial_pos")
-B777DR_irs_src_capt	                = find_dataref("Strato/B777/flt_inst/irs_src/capt/sel_dial_pos")
-B777DR_ap_fpa                       = find_dataref("Strato/B777/autopilot/navadata/fpa")
-B777DR_ap_vb                        = find_dataref("Strato/B777/autopilot/navadata/vb")
-simDR_autopilot_vs_fpm              = find_dataref("sim/cockpit2/autopilot/vvi_dial_fpm")
-B777DR_fmc_notifications            = deferred_dataref("Strato/B777/fms/notification","array[53]")
 B777DR_airspeed_Vref                = find_dataref("Strato/B777/airspeed/Vref")
 B777DR_airspeed_VrefFlap            = find_dataref("Strato/B777/airspeed/VrefFlap")
 B777DR_altimter_ft_adjusted         = find_dataref("Strato/B777/altimeter/ft_adjusted")
-B777BR_eod_index                    = find_dataref("Strato/B777/autopilot/dist/eod_index")
-B777DR_TAS_pilot                    = find_dataref("Strato/B777/nd/TAS_pilot") -- no*
 B777DR_engine_used_fuel             = find_dataref("Strato/B777/fuel/totaliser")
 simDR_autopilot_airspeed_is_mac     = find_dataref("sim/cockpit2/autopilot/airspeed_is_mach")
 simDR_autopilot_airspeed_kts_mach   = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts_mach")
@@ -81,6 +74,10 @@ simDR_efis_arpt_fo                     = find_dataref("sim/cockpit2/EFIS/EFIS_ai
 simDR_efis_fix_fo                      = find_dataref("sim/cockpit2/EFIS/EFIS_fix_on_copilot")
 B777DR_nd_sta                          = find_dataref("Strato/777/EFIS/sta")
 B777DR_pfd_mtrs                        = find_dataref("Strato/777/displays/mtrs")
+
+simDR_total_fuel_kgs                   = find_dataref("sim/flightmodel/weight/m_fuel_total")
+simDR_gross_wt_kgs                     = find_dataref("sim/flightmodel/weight/m_total")
+simDR_payload_wt_kgs                   = find_dataref("sim/flightmodel/weight/m_fixed")
 
 function replace_char(pos, str, r)
     return str:sub(1, pos-1) .. r .. str:sub(pos+1)
@@ -172,7 +169,7 @@ simDR_radio_nav1_obs_deg            = find_dataref("sim/cockpit/radios/nav1_obs_
 simDR_radio_nav2_obs_deg            = find_dataref("sim/cockpit/radios/nav2_obs_degt")
 simDR_radio_nav_horizontal          = find_dataref("sim/cockpit2/radios/indicators/nav_display_horizontal")
 simDR_radio_nav_hasDME              = find_dataref("sim/cockpit2/radios/indicators/nav_has_dme")
-simDR_radio_nav_radial		        = find_dataref("sim/cockpit2/radios/indicators/nav_bearing_deg_mag")
+simDR_radio_nav_radial		       = find_dataref("sim/cockpit2/radios/indicators/nav_bearing_deg_mag")
 simDR_radio_nav01_ID                = find_dataref("sim/cockpit2/radios/indicators/nav1_nav_id")
 simDR_radio_nav02_ID                = find_dataref("sim/cockpit2/radios/indicators/nav2_nav_id")
 simDR_radio_nav03_ID                = find_dataref("sim/cockpit2/radios/indicators/nav3_nav_id")
@@ -181,29 +178,10 @@ simDR_radio_nav04_ID                = find_dataref("sim/cockpit2/radios/indicato
 simDR_radio_adf1_freq_hz            = find_dataref("sim/cockpit2/radios/actuators/adf1_frequency_hz")
 simDR_radio_adf2_freq_hz            = find_dataref("sim/cockpit2/radios/actuators/adf2_frequency_hz")
 
-simDR_fueL_tank_weight_total_kg     = find_dataref("sim/flightmodel/weight/m_fuel_total")
-
 navAidsJSON                         = find_dataref("xtlua/navaids")
 fmsJSON                             = find_dataref("xtlua/fms")
 
 B777DR_fms1_display_mode            = find_dataref("Strato/B777/fms1/display_mode")
-
-B777DR_init_fmsL_CD                 = find_dataref("Strato/B777/fmsL/init_CD")
-ilsData                             = deferred_dataref("Strato/B777/radio/ilsData", "string")
-acars                               = deferred_dataref("Strato/B777/comm/acars","number")  
-toderate                            = deferred_dataref("Strato/B777/engine/derate/TO","number") 
-clbderate                           = deferred_dataref("Strato/B777/engine/derate/CLB","number")
-B777DR_radioModes                   = deferred_dataref("Strato/B777/radio/tuningmodes", "string")
-B777DR_ap_vnav_state                = find_dataref("Strato/B777/autopilot/vnav_state")
-simDR_autopilot_vs_status           = find_dataref("sim/cockpit2/autopilot/vvi_status")
-B777BR_totalDistance                = find_dataref("Strato/B777/autopilot/dist/remaining_distance")
-B777BR_nextDistanceInFeet           = find_dataref("Strato/B777/autopilot/dist/next_distance_feet")
-B777BR_cruiseAlt                    = find_dataref("Strato/B777/autopilot/dist/cruise_alt")
-B777BR_tod                          = find_dataref("Strato/B777/autopilot/dist/top_of_descent")
-B777DR__gear_chocked                = find_dataref("Strato/B777/gear/chocked")
-B777DR_fuel_preselect               = find_dataref("Strato/B777/fuel/preselect")
-B777DR_refuel		                = find_dataref("Strato/B777/fuel/refuel")
-B777DR_fuel_add		                = find_dataref("Strato/B777/fuel/add_fuel" )
 
 B777DR_efis_min_ref_alt_capt_sel_dial_pos       = find_dataref("Strato/B777/efis/min_ref_alt/capt/sel_dial_pos")
 B777DR_efis_ref_alt_capt_set_dial_pos           = find_dataref("Strato/B777/efis/ref_alt/capt/set_dial_pos")
@@ -228,6 +206,7 @@ simDR_radio_alt_DH_fo               = find_dataref("sim/cockpit2/gauges/actuator
 
 simDR_altimeter_baro_inHg           = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
 simDR_altimeter_baro_inHg_fo        = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")
+simDR_altitude_pilot                = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 
 --Marauder28
 --Used in ND DISPLAY
@@ -251,44 +230,19 @@ simDR_mach_pilot			= find_dataref("sim/cockpit2/gauges/indicators/mach_pilot")
 simDR_mach_copilot			= find_dataref("sim/cockpit2/gauges/indicators/mach_copilot")
 simDR_total_air_temp		= find_dataref("sim/cockpit2/temperature/outside_air_LE_temp_degc")
 simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
-simDR_aircraft_hdg		 	= find_dataref("sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot")
 
-simDR_cgZ_ref_point			= find_dataref("sim/aircraft/weight/acf_cgZ_original")
-simDR_cgz_ref_to_default	= find_dataref("sim/flightmodel/misc/cgz_ref_to_default")
 simDR_empty_weight			= find_dataref("sim/aircraft/weight/acf_m_empty")
-simDR_fuel_qty				= find_dataref("sim/flightmodel/weight/m_fuel")
-simDR_cg_adjust				= find_dataref("sim/flightmodel/misc/cgz_ref_to_default")
-simDR_livery_path			= find_dataref("sim/aircraft/view/acf_livery_path")
-simDR_onground				= find_dataref("sim/flightmodel/failures/onground_any")
-simDR_payload_weight		= find_dataref("sim/flightmodel/weight/m_fixed")
-simDR_fuel_totalizer_kg		= find_dataref("sim/cockpit2/fuel/fuel_totalizer_init_kg")
 --Marauder28
-
 
 --*************************************************************************************--
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
 B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
+B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
 --Marauder28
 -- Holds all SimConfig options
 B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
 B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
--- Temp location for fuel preselect for displaying in correct units
-B777DR_fuel_preselect_temp				= deferred_dataref("Strato/B777/fuel/fuel_preselect_temp", "number")
-
---pos data
-B777DR_waypoint_ata					= deferred_dataref("Strato/B777/nd/waypoint_ata", "string")
-B777DR_last_waypoint				= deferred_dataref("Strato/B777/nd/last_waypoint", "string")
-B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
-B777DR_destination					= deferred_dataref("Strato/B777/nd/dest", "string")
-B777DR_next_waypoint_eta					= deferred_dataref("Strato/B777/nd/next_waypoint_eta", "string")
-B777DR_next_waypoint_dist					= deferred_dataref("Strato/B777/nd/next_waypoint_dist", "number")
-B777DR_next_waypoint				= deferred_dataref("Strato/B777/nd/next_waypoint", "string")
-
---Waypoint info for ND DISPLAY
-B777DR_ND_waypoint_eta					= deferred_dataref("Strato/B777/nd/waypoint_eta", "string")
-B777DR_ND_current_waypoint				= deferred_dataref("Strato/B777/nd/current_waypoint", "string")
-B777DR_ND_waypoint_distance				= deferred_dataref("Strato/B777/nd/waypoint_distance", "string")
 
 --ND Range DISPLAY
 B777DR_ND_range_display_capt			= deferred_dataref("Strato/B777/nd/range_display_capt", "number")
@@ -298,12 +252,7 @@ B777DR_ND_range_display_fo				= deferred_dataref("Strato/B777/nd/range_display_f
 B777DR_ND_GPS_Line						= deferred_dataref("Strato/B777/irs/gps_display_line", "string")
 B777DR_ND_IRS_Line						= deferred_dataref("Strato/B777/irs/irs_display_line", "string")
 
---SPEED ND DISPLAY
-B777DR_ND_GS_TAS_Line					= deferred_dataref("Strato/B777/nd/gs_tas_line", "string")
-B777DR_ND_GS_TAS_Line_Pilot				= deferred_dataref("Strato/B777/nd/gs_tas_line_pilot", "string")
-B777DR_ND_GS_TAS_Line_CoPilot			= deferred_dataref("Strato/B777/nd/gs_tas_line_copilot", "string")
-B777DR_ND_Wind_Line						= deferred_dataref("Strato/B777/nd/wind_line", "string")
-B777DR_ND_Wind_Bearing					= deferred_dataref("Strato/B777/nd/wind_bearing", "number")
+B777DR_fmc_notifications            = deferred_dataref("Strato/B777/fms/notification","array[53]")
 
 --STAB TRIM setting
 B777DR_elevator_trim				    = deferred_dataref("Strato/B777/fmc/elevator_trim", "number")
@@ -360,8 +309,8 @@ function defaultFMSData()
 	rpttimemm="**",
 	acarsAddress="*******",
 	atc="****",
-	grwt="***.*",
-	crzalt = string.rep("*", 5),
+	grwt="***.*", -- always in kgs
+	crzalt = "*****",
 	clbspd="250",
 	transpd="272",
 	spdtransalt="10000",
@@ -380,11 +329,11 @@ function defaultFMSData()
 	fpa="*.*",
 	vb="*.*",
 	vs="****",
-	fuel="***.*",
-	zfw="***.*   ",
+	fuel = {"CALC  ", 000.0, 000.0, 000.0}, -- [1]: mode, [2]: calc, [3]: totalizer, [4]: manual
+	zfw="***.*", -- always in kgs
 	reserves="***.*",
 	costindex="****",
-	crzcg="20.0",
+	crzcg="20.0%",
 	thrustsel=string.rep(" ", 2), --"26",  --Initally "blank" per FCOM FMC Preflight 2B - Thrust Limit Page
 	thrustn1="**.*",
 	toflap="**",
@@ -411,35 +360,12 @@ function defaultFMSData()
 	lastpos = string.rep(" ", 18),
 	sethdg = string.rep(" ", 4),
 	stepsize = "ICAO",
-	--[[cg_mac = string.rep("-", 2),
-	stab_trim = string.rep(" ", 4),
-	paxFirstClassA = string.rep("0", 2),
-	paxBusClassB = string.rep("0", 2),
-	paxEconClassC = string.rep("0", 2),
-	paxEconClassD = string.rep("0", 3),
-	paxEconClassE = string.rep("0", 3),
-	paxTotal = string.rep("0", 3),
-	paxWeightA = string.rep("0", 4),
-	paxWeightB = string.rep("0", 5),
-	paxWeightC = string.rep("0", 5),
-	paxWeightD = string.rep("0", 5),
-	paxWeightE = string.rep("0", 5),
-	paxWeightTotal = string.rep("0", 6),
-	cargoFwd = string.rep("0", 6),
-	cargoAft = string.rep("0", 6),
-	cargoBulk = string.rep("0", 5),
-	cargoTotal = string.rep("0", 6),
-	freightZoneA = string.rep("0", 6),
-	freightZoneB = string.rep("0", 6),
-	freightZoneC = string.rep("0", 6),
-	freightZoneD = string.rep("0", 6),
-	freightZoneE = string.rep("0", 6),
-	freightTotal = string.rep("0", 7),]]
 	irsAlignTime = string.rep("0", 3),
 	fmcUnlocked = false,
 	readmeCodeInput = "*****",
 	pos = string.rep(" ", 18),
-	dragFF_armed = "   "
+	dragFF_armed = "   ",
+	fmcFuel = {mode = "CALC", value = 0.0}
 }
 end
 
@@ -474,9 +400,9 @@ function setFMSData(id,value)
 end
 
 function getFMSData(id)
-	print("getting getFMSData:"..id)
+	--print("getting getFMSData:"..id)
 	if hasChild(fmsModules["data"],id) then
-		print("  curently "..fmsModules["data"][id])
+		--print("  curently "..fmsModules["data"][id])
 		return fmsModules["data"][id]
 	end
 	print("  ERROR: FMS data not found")
@@ -596,204 +522,7 @@ fmsModules.fmsR=fmsR;
 B777DR_CAS_memo_status          = find_dataref("Strato/B777/CAS/memo_status") -- no
 
 --Marauder28
-function getCurrentWayPoint(fms,usenext)
 
-	for i=1,table.getn(fms),1 do
-		--print("FMS j="..fmsJSON)
-
-		if fms[i][10] == true then
-			--print("Found TRUE = "..fms[i][1].." "..fms[i][2].." "..fms[i][8])
-			if usenext == false then
-				if fms[i][8] == "latlon" then
-					return simDR_navID, fms[i][5], fms[i][6]
-				else
-					return fms[i][8], fms[i][5], fms[i][6]
-				end
-			elseif i+1 < table.getn(fms) then
-				if fms[i+1][8] == "latlon" then
-					return "-----", fms[i+1][5], fms[i+1][6]
-				else
-					return fms[i+1][8], fms[i+1][5], fms[i+1][6]
-				end
-			end
-		end
-	end
-	return ""  --NOT FOUND
-end
-function get_ETA_for_Distance(distance,additionalTime)
-	local meters_per_second_to_kts = 1.94384449
-	local hours = 0
-	local mins = 0
-	local secs = 0
-	local time_to_waypoint = 0
-	local default_speed = 275 * meters_per_second_to_kts
-	local actual_speed = simDR_groundspeed * meters_per_second_to_kts
-	time_to_waypoint = additionalTime + (distance / math.max(default_speed, actual_speed)) * 3600
-
-	hours = math.floor((time_to_waypoint % 86400) / 3600)
-	mins = math.floor((time_to_waypoint % 3600) / 60)
-	secs = (time_to_waypoint % 60) / 60
-	--Add to current Zulu time
-	hours = hours + hh
-	mins = mins + mm
-	secs = secs + (ss / 60)
-
-	if hours >= 24 then
-		hours = hours - 24
-	end
-
-	if mins >= 60 then
-		mins = mins - 60
-		hours = hours + 1
-	end
-
-	if secs >= 1 then
-		secs = secs - 1
-		mins = mins + 1
-	end
-
-	return time_to_waypoint,hours,mins,secs
-end
-
-function get_waypoint_estimate(latitude,longitude,fms_waypoint, fms_latitude, fms_longitude,additionalTime)
-	local hours = 0
-	local mins = 0
-	local secs = 0
-	local time_to_waypoint = 0
-	local fms_distance_to_waypoint = 0
-
-	if fms_waypoint ~= "" and fms_waypoint ~= "VECTOR" and not string.match(fms_waypoint, "%(") then
-		--print("Checking distance for waypoint = "..fms_current_waypoint)
-		ms_distance_to_waypoint = getDistance(latitude, longitude, fms_latitude, fms_longitude)
-		ime_to_waypoint,hours,mins,secs = get_ETA_for_Distance(fms_distance_to_waypoint,additionalTime)
-	end
-
-	return fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs
-end
-
-function waypoint_eta_display()
-	local hours = 0
-	local mins = 0
-	local secs = 0
-	local nhours = 0
-	local nmins = 0
-	local nsecs = 0
-	local fms = {}
-	local fms_current_waypoint = ""
-	local fms_next_waypoint = ""
-	local fms_latitude = ""
-	local fms_longitude = ""
-	local fms_next_latitude = ""
-	local fms_next_longitude = ""
-	local time_to_waypoint = 0
-	local fms_distance_to_waypoint = 0
-	local fms_distance_to_next_waypoint = 0
-	if string.len(fmsJSON) > 2 then
-		fms = json.decode(fmsJSON)
-		print(fmsJSON)
-
-		if fms[table.getn(fms)][8] ~= "LATLON" then
-			B777DR_destination = string.format("%4s",fms[table.getn(fms)][8])
-		else
-			B777DR_destination="----"
-		end
-
-		if simDR_onGround ~= 1 then
-			fms_current_waypoint, fms_latitude, fms_longitude = getCurrentWayPoint(fms,false)
-			--print(string.match(fms_current_waypoint, "%("))
-			fms_distance_to_waypoint,time_to_waypoint,hours,mins,secs = get_waypoint_estimate(simDR_latitude, simDR_longitude,fms_current_waypoint, fms_latitude, fms_longitude,0)
-			fms_next_waypoint, fms_next_latitude, fms_next_longitude = getCurrentWayPoint(fms,true)
-			--print(string.match(fms_current_waypoint, "%("))
-			fms_distance_to_next_waypoint,time_to_waypoint,nhours,nmins,nsecs = get_waypoint_estimate(fms_latitude, fms_longitude,fms_next_waypoint, fms_next_latitude, fms_next_longitude,time_to_waypoint)
-		end
-	else
-		B777DR_destination="----"
-	end
-
-	if fms_current_waypoint == "" or string.match(fms_current_waypoint, "%(") then
-		B777DR_ND_current_waypoint = "-----"
-		B777DR_ND_waypoint_distance = "------NM"
-		B777DR_ND_waypoint_eta = "------Z"
-	elseif fms_current_waypoint == "VECTOR" then
-		B777DR_ND_current_waypoint = fms_current_waypoint
-		B777DR_ND_waypoint_distance = "------NM"
-		B777DR_ND_waypoint_eta = "------Z"
-	else
-		if B777DR_ND_current_waypoint ~= fms_current_waypoint then
-			B777DR_waypoint_ata = B777DR_ND_waypoint_eta
-			B777DR_last_waypoint = B777DR_ND_current_waypoint
-			B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
-		end
-		B777DR_ND_current_waypoint = fms_current_waypoint
-		B777DR_ND_waypoint_distance = string.format("%5.1f".."nm", fms_distance_to_waypoint)
-		B777DR_ND_waypoint_eta = string.format("%02d%02d.%d".."z", hours, mins, secs * 10)			
-	end
-
-	if B777DR_last_waypoint=="" then
-		B777DR_last_waypoint="-----"
-		B777DR_waypoint_ata="------Z"
-	end
-
-	if fms_next_waypoint == "" or string.match(fms_next_waypoint, "%(") then
-		B777DR_next_waypoint = "-----"
-		B777DR_next_waypoint_eta = "------Z"
-		B777DR_next_waypoint_dist=0	
-	elseif fms_next_waypoint == "VECTOR" then
-		B777DR_next_waypoint = fms_next_waypoint
-		B777DR_next_waypoint_dist=fms_distance_to_next_waypoint
-		B777DR_next_waypoint_eta = "------Z"
-	else
-		B777DR_next_waypoint = fms_next_waypoint
-		B777DR_next_waypoint_dist=fms_distance_to_next_waypoint
-		B777DR_next_waypoint_eta = string.format("%02d%02d.%d".."z", nhours, nmins, nsecs * 10)			
-	end
-end
-
-function nd_range_display ()
-	local range = {5, 10, 20, 40, 80, 160, 320}
-	B777DR_ND_range_display_capt	= range[simDR_range_dial_capt + 1]
-	B777DR_ND_range_display_fo		= range[simDR_range_dial_fo + 1]
-end
-
-function nd_speed_wind_display()
-	local meters_per_second_to_kts = 1.94384449  --Convert meters per second to KTS
-	local a0 = 661.47  --Speed of sound at sea level
-	local K0 = 273.15  --Kelvin temperature at sea level
-	local M_pilot = simDR_mach_pilot  --Current Mach number
-	local M_copilot = simDR_mach_copilot  --Current Mach number
-	local T0 = 288.15  --Standard air temperature at sea level in Kelvin
-	local Tt = K0 + simDR_total_air_temp  --Total air temperature in Kelvin
-	local T_pilot = Tt / (1 + (0.2 * math.pow(M_pilot, 2)))  --Static air temperature in Kelvin	
-	local T_copilot = Tt / (1 + (0.2 * math.pow(M_copilot, 2)))  --Static air temperature in Kelvin	
-
-	local TAS_pilot = round(a0 * M_pilot * math.sqrt(T_pilot/T0))
-	B777DR_TAS_pilot = TAS_pilot
-	local TAS_copilot = round(a0 * M_copilot * math.sqrt(T_copilot/T0))
-
-	local groundspeed = simDR_groundspeed * meters_per_second_to_kts
-	local wind_hdg = round(simDR_wind_degrees)
-	local wind_hdg_deviation = 360 - wind_hdg + simDR_aircraft_hdg
-	local wind_bearing = 360 - wind_hdg_deviation
-	local wind_spd = tostring(round(simDR_wind_speed))
-	local wind_line_tmp = string.format("%03.0f`/%s", wind_hdg, wind_spd)
-
-	if simDR_ias_pilot < 100 then
-		B777DR_ND_GS_TAS_Line = "GS"
-		B777DR_ND_GS_TAS_Line_Pilot = string.format("%d", groundspeed)
-		B777DR_ND_GS_TAS_Line_CoPilot = string.format("%d", groundspeed)
-		B777DR_ND_Wind_Line = ""
-	else
-		B777DR_ND_GS_TAS_Line = "GS     TAS"
-		B777DR_ND_GS_TAS_Line_Pilot = string.format("%3.0f    %3.0f", groundspeed, TAS_pilot)
-		B777DR_ND_GS_TAS_Line_CoPilot = string.format("%3.0f    %3.0f", groundspeed, TAS_copilot)
-		B777DR_ND_Wind_Line = wind_line_tmp:gsub("°", "`")
-		if wind_bearing < 0 then
-			B777DR_ND_Wind_Bearing = wind_bearing + 180
-		else
-			B777DR_ND_Wind_Bearing = wind_bearing - 180
-		end
-	end
-end
 debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 
 local fileLocation = "Output/preferences/Strato_777_lastpos.dat"
@@ -824,19 +553,6 @@ end
 --Marauder28
 
 function flight_start()
-	B777DR_last_waypoint_fuel=simDR_fueL_tank_weight_total_kg
-	--[[if simDR_startup_running == 0 then commented out for ss777
-		irsSystem["irsL"]["aligned"]=false
-		irsSystem["irsC"]["aligned"]=false
-		irsSystem["irsR"]["aligned"]=false
-	elseif simDR_startup_running == 1 then -- ENGINES RUNNING
-		irsSystem["setPos"]=true
-		irsSystem.align("irsL",true)
-		irsSystem.align("irsC",true)
-		irsSystem.align("irsR",true)
-    end
-
-	simDR_cg_adjust = 0  --reset CG slider to begin current flight
 
 	--Ensure that CG location gets updated periodically so that the CG slider repositions automatically as fuel is burned during flight
 	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
@@ -874,8 +590,46 @@ function setNotifications()
 	end]]
 end
 
+function calcFuel1()
+	totalizerSumkgs = totalizerSumkgs + simDR_fuel_flow_kg_sec[0] + simDR_fuel_flow_kg_sec[1]
+	run_after_time(calcFuel2, 1)
+end
+function calcFuel2()
+	totalizerSumkgs = totalizerSumkgs + simDR_fuel_flow_kg_sec[0] + simDR_fuel_flow_kg_sec[1]
+	run_after_time(calcFuel1, 1)
+end
+
+function calcFuel()
+    if fmsModules["data"].fmcFuel.mode == "CALC" then
+        if simDR_fuel_flow_kg_sec[0] > 5 or simDR_fuel_flow_kg_sec[1] > 5 then -- if abnormal fuel flow switch to sensed mode
+            fmsModules["data"].fmcFuel.mode = "SENSED"
+            return
+        end
+        if simDR_engines_running[0] == 0 and simDR_engines_running[1] == 0 then -- when engines off show totalizer fuel
+            fmsModules["data"].fmcFuel.value = simDR_total_fuel_kgs
+            return
+        elseif not totalizerInited then -- if engine(s) started initialize totalizer once
+            totalizerInitkgs = simDR_total_fuel_kgs
+			totalizerSumkgs = 0.0
+            totalizerInited = true
+        end
+        fmsModules["data"].fmcFuel.value = totalizerInitkgs - totalizerSumkgs -- calc
+    elseif fmsModules["data"].fmcFuel.mode == "SENSED" then
+        fmsModules["data"].fmcFuel.value = simDR_total_fuel_kgs
+    elseif fmsModules["data"].fmcFuel.mode == "MANUAL" then
+        -- setdata func sets stuff
+		fmsModules["data"].fmcFuel.value = totalizerInitkgs - totalizerSumkgs
+    end
+end
+
 function after_physics()
 	if debug_fms > 0 then return end
+
+	calcFuel()
+
+	B777DR_cdu_notification[0] = fmsModules["fmsL"]["notify"] ~= "" and 1 or 0
+	B777DR_cdu_notification[1] = fmsModules["fmsC"]["notify"] ~= "" and 1 or 0
+	B777DR_cdu_notification[2] = fmsModules["fmsR"]["notify"] ~= "" and 1 or 0
 
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
@@ -919,18 +673,6 @@ function after_physics()
 		acars = 0 --for radio
     end
 ]]
-	--Display Waypoint ETA on ND
-	--waypoint_eta_display()
-
-	--Display range NM on ND
-	--nd_range_display()
-
-	--Display speed and wind info on ND
-	--nd_speed_wind_display()
-
-	--Ensure DR's are updated in time for use in calc_CGMAC()
-	--[[local payload_weight = B777DR_payload_weight s777 comment
-	local fuel_qty = simDR_fuel_qty]]
 
 	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
 	B777DR_readme_unlocked = getSimConfig("FMC", "unlocked")
@@ -963,15 +705,14 @@ function updateNavaids()
 end
 
 function aircraft_load()
-	simDR_cg_adjust = 0 --reset CG slider to begin current flight
 	run_after_time(loadLastPos, 2)
 	find_command("Strato/B777/fms1/ls_key/R6"):once()
 	find_command("Strato/B777/fms2/ls_key/R6"):once()
 	find_command("Strato/B777/fms3/ls_key/R6"):once()
 	local temp = navAidsJSON -- load navaids
 	run_after_time(updateNavaids, 1)
+	calcFuel1()
 end
 
 function aircraft_unload()
-	simDR_cg_adjust = 0 --reset CG slider to neutral for future flights
 end
