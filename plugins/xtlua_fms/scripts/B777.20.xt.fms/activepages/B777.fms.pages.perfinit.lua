@@ -1,5 +1,3 @@
-local kgs_to_lbs = 2.204623
-
 fmsPages["PERFINIT"]=createPage("PERFINIT")
 fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 

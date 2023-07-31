@@ -22,334 +22,25 @@ B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
-local efisCTL = 0
-local dspCTL = 0
-local efisOptS, dspOptS = "", ""
-fmsPages["INDEX"]=createPage("INDEX")
-fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 
-	local fmcACT, satACT, intACT = "     ", "     ", "     "
-
-	--fmsFunctionsDefs,["INDEX"]["L5"]={"setpage","ACMS"}
-	--fmsFunctionsDefs["INDEX"]["L6"]={"setpage","CMC"}
-	fmsFunctionsDefs["INDEX"]={}
-	fmsFunctionsDefs["INDEX"]["L1"]={"setpage2","FMC"}
-	fmsFunctionsDefs["INDEX"]["R1"]={"setDref", "efisCtrl"}
-	fmsFunctionsDefs["INDEX"]["R3"]={"setDref", "dspCtrl"}
-	fmsFunctionsDefs["INDEX"]["R4"]={"setpage2","EICASMODES"}
-	fmsFunctionsDefs["INDEX"]["R2"]={"setpage2","EFISOPTIONS152"}
-
-	if fmsID == "fmsL" then
-		efisCTL = B777DR_cdu_efis_ctl[0]
-		dspCTL = B777DR_cdu_eicas_ctl[0]
-		if B777DR_cdu_act[0] == 1 then
-			fmcACT = "<ACT>"
-		elseif B777DR_cdu_act[0] == 2 then
-			satACT = "<ACT>"
-		end
-	elseif fmsID == "fmsR" then
-		efisCTL = B777DR_cdu_efis_ctl[1]
-		dspCTL = B777DR_cdu_eicas_ctl[2]
-		if B777DR_cdu_act[1] == 1 then
-			fmcACT = "<ACT>"
-		elseif B777DR_cdu_act[1] == 2 then
-			satACT = "<ACT>"
-		end
-	else -- fmsC
-		dspCTL = B777DR_cdu_eicas_ctl[1]
-		if B777DR_cdu_act[2] == 2 then
-			satACT = "<ACT>"
-		elseif B777DR_cdu_act[2] == 3 then
-			intACT = "<ACT>"
-		end
-	end
-
-	local efisln = "     "
-	local dspln = "    "
-	local efisOptL = "OFF;g3     "
-	local dspOptL = "OFF;g3     "
-	efisOptS, dspOptS  = "   <->ON", "   <->ON"
-
-	if efisCTL == 1 then
-		efisOptL = "      ON;g2"
-		efisOptS = "OFF<->  "
-		efisln = "EFIS>"
-	end
-
-	if dspCTL == 1 then
-		dspOptL = "      ON;g2"
-		dspOptS = "OFF<->     "
-		dspln = "DSP>"
-	end
-
-	--[[  local acarsS="             "
-
-	if acars==1 and B777DR_rtp_C_off==0 then 
-		acarsS="<ACARS  <REQ>" 
-		fmsFunctionsDefs["INDEX"]["L2"]={"setpage","ACARS"}
-	else
-		fmsFunctionsDefs["INDEX"]["L2"]=nil
-	end]]
-
-	local page = {
-		"         MENU           ",
-		"                        ",
-		"<FMC    "..fmcACT.."  "..efisOptL..">",
-		"                        ",
-		"<SAT;r4    "..satACT.."      "..efisln,
-		"                        ",
-		"               "..dspOptL..">",
-		"                        ",
-		"                    "..dspln,
-		"                        ",
-		"                DISPLAY>;r8",
-		"                        ",
-		"                 MEMORY>;r7"
-	}
-
-	if fmsID == "fmsC" then
-		page[3] = "                       "
-		page[5] = "<SAT;r4                "
-		page[9] = "<CAB INT;r8 "..intACT.."       "..dspln
-		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
-			B777DR_cdu_eicas_ctl[1] = 0
-			page[7] = "                        "
-		end
-
-	elseif fmsID == "fmsL" then
-		if B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
-			B777DR_cdu_eicas_ctl[0] = 0
-			page[7] = "                        "
-		end
-
-	else
-		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 then
-			B777DR_cdu_eicas_ctl[2] = 0
-			page[7] = "                        "
-		end
-	end
-
-	return page
-end
-
-
-fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
-	local page = {
-		"                        ",
-		"                EFIS CTL",
-		"               "..efisOptS,
-		"                        ",
-		"                        ",
-		"                 DSP CTL",
-		"               "..dspOptS,
-		"                        ",
-		"                        ",
-		"              MAINT INFO",
-		"                        ",
-		"                        ",
-		"                        ",
-	}
-
-	if fmsID == "fmsC" then
-		page[2] = "                        "
-		page[3] = "                        "
-		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
-			page[6] = "                        "
-			page[7] = "                        "
-		else
-		end
-	elseif fmsID == "fmsL" then
-		if B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
-			page[6] = "                        "
-			page[7] = "                        "
-		else
-		end
-	else
-		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 then
-			page[6] = "                        "
-			page[7] = "                        "
-		else
-		end
-	end
-
-	return page
-end
-
---[[fmsPages["RTE1"]=createPage("RTE1")
-fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
-  local l1=cleanFMSLine(B777DR_srcfms[fmsID][1])
-  local pageNo=tonumber(string.sub(l1,21,22))
-
-  local lastLine="<RTE 2             PERF>"
-  if simDR_onGround ==1 then
-    fmsFunctionsDefs["RTE1"]["L6"]=nil
-    lastLine="                   PERF>"
-  else
-    --fmsFunctionsDefs["RTE1"]["L6"]={"setpage","RTE2"}
-    fmsFunctionsDefs["RTE1"]["L6"]={"setpage","LEGS"}
-  end
-
-  if pageNo~=1 then
-	fmsFunctionsDefs["RTE1"]["L2"]={"custom2fmc","L2"}
-	fmsFunctionsDefs["RTE1"]["R2"]={"custom2fmc","R2"}
-	fmsFunctionsDefs["RTE1"]["R3"]={"custom2fmc","R3"}
-	return {
-		"      ACT RTE 1     " .. string.sub(cleanFMSLine(B777DR_srcfms[fmsID][1]),-4,-1) ,
-		cleanFMSLine(B777DR_srcfms[fmsID][2]),
-		cleanFMSLine(B777DR_srcfms[fmsID][3]),
-		cleanFMSLine(B777DR_srcfms[fmsID][4]),
-		cleanFMSLine(B777DR_srcfms[fmsID][5]),
-		cleanFMSLine(B777DR_srcfms[fmsID][6]),
-		cleanFMSLine(B777DR_srcfms[fmsID][7]),
-		cleanFMSLine(B777DR_srcfms[fmsID][8]),
-		cleanFMSLine(B777DR_srcfms[fmsID][9]),
-		cleanFMSLine(B777DR_srcfms[fmsID][10]),
-		cleanFMSLine(B777DR_srcfms[fmsID][11]),
-		cleanFMSLine(B777DR_srcfms[fmsID][12]),
-		lastLine,
-		}
-  end
-  fmsFunctionsDefs["RTE1"]["L2"]={"setdata","runway"}
-  fmsFunctionsDefs["RTE1"]["R2"]={"custom2fmc","R3"}
-  
-  fmsFunctionsDefs["RTE1"]["R3"]={"setpage","FMC"}
-  
-  local line5="                "..string.sub(cleanFMSLine(B777DR_srcfms[fmsID][5]),1,8)
-  --if acarsSystem.provider.online() then line5=" <SEND          "..string.sub(cleanFMSLine(B777DR_srcfms[fmsID][5]),1,8) end
-  local page={
-  "      ACT RTE 1     " .. string.sub(cleanFMSLine(B777DR_srcfms[fmsID][1]),-4,-1) ,
-  "                        ",
-  cleanFMSLine(B777DR_srcfms[fmsID][3]),
-  "                        ",
-  fmsModules["data"]["runway"] .."            ".. string.sub(cleanFMSLine(B777DR_srcfms[fmsID][7]),-7,-1), 
-  "                        ",
-  line5,
-  cleanFMSLine(B777DR_srcfms[fmsID][8]),
-  cleanFMSLine(B777DR_srcfms[fmsID][9]),
-  cleanFMSLine(B777DR_srcfms[fmsID][10]),
-  cleanFMSLine(B777DR_srcfms[fmsID][11]),
-  cleanFMSLine(B777DR_srcfms[fmsID][12]),
-  lastLine,
-  }
-  return page
-  
-end]]
-
-route1 = {
-
-}
-
-fmsPages["RTE1"]=createPage("RTE1")
-fmsPages["RTE1"].getPage=function(self,pgNo,fmsID)
-	if pgNo == 1 then
-		return {
-			"      RTE 1;c5             ",
-			"                        ",
-			"****                ****",
-			"                        ",
-			"-----         ----------",
-			"                        ",
-			"<REQUEST      ----------",
-			"                        ",
-			"                        ",
-			"                        ",
-			"<PRINT             ALTN>",
-			"                        ",
-			"<RTE 2         ACTIVATE>",
-		}
-	else
-		return {
-			"      RTE 1;c5             ",
-			"                        ",
-			"-----              -----",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"<RTE 2         ACTIVATE>"
-		}
-	end
-end
-
-fmsPages["RTE1"].getSmallPage=function(self,pgNo,fmsID)
-	if pgNo == 1 then
-		return {
-			"                    1/2 ",
-			" ORIGIN             DEST",
-			"                        ",
-			" RUNWAY           FLT NO",
-			"                        ",
-			" ROUTE          CO ROUTE",
-			"                        ",
-			"                        ",
-			"                        ",
-			" ROUTE -----------------",
-			"                        ",
-			"                        ",
-			"                        ",
-		}
-	else
-		return {
-			"                    2/2 ",
-			" VIA                  TO",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"                        ",
-			"------------------------",
-			"                        "
-		}
-	end
-end
-
-fmsPages["RTE1"].getNumPages=function(self)
-	return 2
-end
-
---[[fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
---fmsFunctionsDefs["RTE1"]["L1"]={"setdata","origin"}
-fmsFunctionsDefs["RTE1"]["L2"]={"setdata","runway"}
-
-fmsFunctionsDefs["RTE1"]["L3"]={"custom2fmc","L3"}
-fmsFunctionsDefs["RTE1"]["L4"]={"custom2fmc","L4"}
-fmsFunctionsDefs["RTE1"]["L5"]={"custom2fmc","L5"}
-
-fmsFunctionsDefs["RTE1"]["R1"]={"custom2fmc","R1"}
-fmsFunctionsDefs["RTE1"]["R2"]={"custom2fmc","R3"}
-fmsFunctionsDefs["RTE1"]["R3"]={"custom2fmc","L2"}
-fmsFunctionsDefs["RTE1"]["R4"]={"custom2fmc","R4"}
-fmsFunctionsDefs["RTE1"]["R5"]={"custom2fmc","R5"}
-fmsFunctionsDefs["RTE1"]["R6"]={"setpage","PERFINIT"}
-
-fmsFunctionsDefs["RTE1"]["next"]={"custom2fmc","next"}
-fmsFunctionsDefs["RTE1"]["prev"]={"custom2fmc","prev"}
-fmsFunctionsDefs["RTE1"]["exec"]={"custom2fmc","exec"}]]
-
-dofile("activepages/B777.fms.pages.legs.lua")
-dofile("activepages/B777.fms.pages.maint.lua")
-dofile("activepages/B777.fms.pages.maintbite.lua")
-dofile("activepages/B777.fms.pages.maintcrossload.lua")
-dofile("activepages/B777.fms.pages.maintperffactor.lua")
-dofile("activepages/B777.fms.pages.fmccomm.lua")
-dofile("activepages/B777.fms.pages.cmc.lua")
-dofile("activepages/B777.fms.pages.acms.lua")
-dofile("activepages/atc/B777.fms.pages.atcindex.lua")
-dofile("activepages/atc/B777.fms.pages.atclogonstatus.lua")
-dofile("activepages/atc/B777.fms.pages.atcreport.lua")
-dofile("activepages/atc/B777.fms.pages.request.lua")
-dofile("activepages/atc/B777.fms.pages.whencanwe.lua")
-dofile("activepages/B777.fms.pages.actrte1.lua")
+--dofile("activepages/B777.fms.pages.legs.lua")
+--dofile("activepages/B777.fms.pages.maint.lua")
+--dofile("activepages/B777.fms.pages.maintbite.lua")
+--dofile("activepages/B777.fms.pages.maintcrossload.lua")
+--dofile("activepages/B777.fms.pages.maintperffactor.lua")
+--dofile("activepages/B777.fms.pages.fmccomm.lua")
+--dofile("activepages/B777.fms.pages.cmc.lua")
+--dofile("activepages/B777.fms.pages.acms.lua")
+--dofile("activepages/atc/B777.fms.pages.atcindex.lua")
+--dofile("activepages/atc/B777.fms.pages.atclogonstatus.lua")
+--dofile("activepages/atc/B777.fms.pages.atcreport.lua")
+--dofile("activepages/atc/B777.fms.pages.request.lua")
+--dofile("activepages/atc/B777.fms.pages.whencanwe.lua")
+--dofile("activepages/B777.fms.pages.navrad.lua")
+dofile("activepages/B777.fms.pages.rte1.lua")
 dofile("activepages/B777.fms.pages.identpage.lua")
+dofile("activepages/B777.fms.pages.initref.lua")
+dofile("activepages/B777.fms.pages.index.lua")
 dofile("activepages/B777.fms.pages.eicasctl.lua")
 dofile("activepages/B777.fms.pages.readme.lua")
 dofile("activepages/B777.fms.pages.posinit.lua")
@@ -397,44 +88,6 @@ dofile("B777.fms.pages.refnavdata1.lua")
 dofile("B777.fms.pages.satcom.lua")
 dofile("B777.fms.pages.waypointwinds.lua")
 ]]
-
-fmsPages["INITREF"]=createPage("INITREF")
-fmsPages["INITREF"].getPage=function(self,pgNo,fmsID)
-	local lineA="                        "
-	local lineB="<APPROACH               "
---  if simDR_onGround ==1 then
-    fmsFunctionsDefs["INITREF"]["L5"]={"setpage","TAKEOFF"}
-    fmsFunctionsDefs["INITREF"]["R6"]={"setpage","MAINT"}
-    lineA="<TAKEOFF                "
-    lineB="<APPROACH         MAINT>;r6"
---  else
---    fmsFunctionsDefs["INITREF"]["L5"]=nil
---    fmsFunctionsDefs["INITREF"]["R6"]=nil
---  end
-	return {
-	"     INIT/REF INDEX     ",
-	"                        ",
-	"<IDENT         NAV DATA>",
-	"                        ",
-	"<POS               ALTN>;r5",
-	"                        ",
-	"<PERF                   ",
-	"                        ",
-	"<THRUST LIM             ",
-	"                        ",
-	lineA,
-	"                        ",
-	lineB
-	}
-end
-
-fmsFunctionsDefs["INITREF"]={}
-fmsFunctionsDefs["INITREF"]["L1"]={"setpage","IDENT"}
-fmsFunctionsDefs["INITREF"]["L2"]={"setpage","POSINIT"}
-fmsFunctionsDefs["INITREF"]["L3"]={"setpage","PERFINIT"}
-fmsFunctionsDefs["INITREF"]["L4"]={"setpage","THRUSTLIM"}
-fmsFunctionsDefs["INITREF"]["L6"]={"setpage","APPROACH"}
-fmsFunctionsDefs["INITREF"]["R1"]={"setpage","REFNAVDATA"}
 
 local navAids
 simDR_variation=find_dataref("sim/flightmodel/position/magnetic_variation")
@@ -502,110 +155,7 @@ function findILS(value)
    return found
 end
 
-
-
-fmsPages["NAVRAD"]=createPage("NAVRAD")
-
-ils_line1 = ""
-ils_line2 = ""
-park = "PARK"
-original_distance = -1
-
-fmsPages["NAVRAD"].getPage=function(self,pgNo,fmsID)
-  local ils1="                        "
-  local ils2="                        "
-  local modes=B777DR_radioModes
-  local dist_to_TOD = B777BR_totalDistance - B777BR_tod
-  if string.len(ilsData)>1 then
-    local ilsNav=json.decode(ilsData)
-    ils2= ilsNav[7]
-	ils_line2 = "   "..ils2
-    if original_distance == -1 then
-		original_distance = B777BR_totalDistance  --capture original flightplan distance
-	end
-  --print("Dist to TOD = "..dist_to_tod)	
-	local course = ilsNav[4]+simDR_variation
-	if course<0 then
-		course=course+360
-	end
-
-		if (dist_to_TOD >= 50 and dist_to_TOD < 200) then
-			--ils2= string.format("%6.2f/%03d%s %4s          .", ilsNav[3]*0.01,(ilsNav[4]+simDR_variation), "˚", park)
-			ils1 = "            "..park
-			ils_line1 = string.format("<%6.2f/%03d%s           ", ilsNav[3]*0.01,((simDR_radio_nav_obs_deg[0])), "˚")
-		elseif (dist_to_TOD < 50) then
-			ils1= string.format("%6.2f/%03d%s          ", ilsNav[3]*0.01,((simDR_radio_nav_obs_deg[0])), "`"..modes:sub(1, 1))
-			ils_line1 = ""
-		end
-  else
-    ils1 = park
-	ils_line1 = ""
-	ils_line2 = ""
-  end
-  local modes=B777DR_radioModes
-  local vorL_radial="---"
-  local vorR_radial="---"
-  local vorL_obs="---"
-  local vorR_obs="---"
-  if simDR_radio_nav_horizontal[2]==1 then vorL_radial=string.format("%03d",simDR_radio_nav_radial[2]) end
-  if simDR_radio_nav_horizontal[3]==1 then vorR_radial=string.format("%03d",simDR_radio_nav_radial[3]) end
-  if modes:sub(2, 2)=="M" then vorL_obs=string.format("%03d",simDR_radio_nav_obs_deg[2]) end
-  if modes:sub(3, 3)=="M" then vorR_obs=string.format("%03d",simDR_radio_nav_obs_deg[3]) end
-  local page={
-    "        NAV RADIO       ",
-    "                        ",
-    string.format("%6.2f %4s  %4s %6.2f", simDR_radio_nav_freq_hz[2]*0.01, simDR_radio_nav03_ID, simDR_radio_nav04_ID, simDR_radio_nav_freq_hz[3]*0.01),
-    string.format("                        ", ""),
-    string.format("%3s      %3s  %3s    %3s", vorL_obs, vorL_radial,vorR_radial, vorR_obs),
-    "                        ",
-    string.format("%06.1f           %06.1f ", simDR_radio_adf1_freq_hz, simDR_radio_adf2_freq_hz),
-    "                        ",
-    ils1,
---    ils2,
-    "                        ",	
-    "                        ", 
---    "--------         -------",
-    "                        ", 
-    fmsModules["data"]["preselectLeft"].."            "..fmsModules["data"]["preselectRight"],
-    }
-  return page
-end
-fmsPages["NAVRAD"].getSmallPage=function(self,pgNo,fmsID)
-  local modes=B777DR_radioModes
-  return{
-  "                        ",
-  " VOR L             VOR R",
-  "      ".. modes:sub(2, 2) .."          ".. modes:sub(3, 3) .."      ",
-  " CRS      RADIAL     CRS",
-  "                        ",
-  " ADF L             ADF R",
-  "      M                M",
---  " ILS ".. modes:sub(1, 1) .."                  ",
-  " ILS - MLS              ",  
---  "                        ",
-  ils_line1,
-  ils_line2,
---  ,
---  "                        ",
-  "                        ",
-  "        PRESELECT       ",
-  "                        ",
-  }
-end
-fmsFunctionsDefs["NAVRAD"]["L1"]={"setDref","VORL"}
-fmsFunctionsDefs["NAVRAD"]["L2"]={"setDref","CRSL"}
-fmsFunctionsDefs["NAVRAD"]["L3"]={"setDref","ADFL"}
-fmsFunctionsDefs["NAVRAD"]["R1"]={"setDref","VORR"}
-fmsFunctionsDefs["NAVRAD"]["R2"]={"setDref","CRSR"}
-fmsFunctionsDefs["NAVRAD"]["R3"]={"setDref","ADFR"}
-fmsFunctionsDefs["NAVRAD"]["L4"]={"setDref","ILS"}
-fmsFunctionsDefs["NAVRAD"]["L6"]={"setdata","preselectLeft"}
-fmsFunctionsDefs["NAVRAD"]["R6"]={"setdata","preselectRight"}
---fmsFunctionsDefs["NAVRAD"]["L6"]={"setpage","ACARS"}
-
-
 ----- FMS FUNCTIONS ---------------
-
 
 function fmsFunctions.setpage_no(fmsO,valueA) -- set page with target page number
 	print("setpage_no="..valueA)
@@ -835,8 +385,6 @@ function validateDragFF(entry)
     return {true, results[1].."/"..results[2]}
 end
 
-timer_start = 0
-local kgs_to_lbs = 2.204623
 function fmsFunctions.setdata(fmsO,value)
 	local del=false
 	if fmsO["scratchpad"]=="DELETE" then fmsO["scratchpad"]="" del=true end
@@ -1131,7 +679,6 @@ function fmsFunctions.setdata(fmsO,value)
 			irsSystem["setPos"]=true
 			fmsModules["data"]["initIRSLat"]=lat
 			fmsModules["data"]["initIRSLon"]=lon
-			B777DR_fmc_notifications[12]=0
 		else
 			fmsO["notify"]="INVALID ENTRY"
 		end
@@ -1166,7 +713,7 @@ function fmsFunctions.setdata(fmsO,value)
 					fmsO["scratchpad"] = "360`"
 				end
 				setFMSData(value, fmsO["scratchpad"].."`")
-				timer_start = simDRTime
+				--timer_start = simDRTime
 			end
 		end
 		return
@@ -1518,7 +1065,7 @@ end
 
 function fmsFunctions.showmessage(fmsO,value)
   acarsSystem.currentMessage=value
-  fmsO["inCustomFMC"]=true
+  --fmsO["inCustomFMC"]=true
   fmsO["targetPage"]="VIEWACARSMSG"
   run_after_time(switchCustomMode, 0.5)
 end

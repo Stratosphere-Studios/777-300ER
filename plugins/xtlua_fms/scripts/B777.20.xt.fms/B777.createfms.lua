@@ -5,33 +5,41 @@
 *****************************************************************************************
 ]]
 
+-- NOTICE: there have been changes made to the notification system that won't work with default fms messages other than nav data out of date
+
+local outOfDateNotified = {fmsL = false, fmsC = false, fmsR = false}
+
 fms={
-  id,
+  id = "",
   page1=false,
   prevPage = "README",
   currentPage = "README",
   targetPage = "README",
   targetpgNo = 1,
-  targetCustomFMC = false,
-  inCustomFMC = false,
+  targetCustomFMC = true,
+  inCustomFMC = true,
   scratchpad="",
   notify="",
+  dispMSG = {},
   pgNo = 1
 }
 
 simCMD_FMS_key={}
-function fmsClearNotify(notification)
-  for i =1,53,1 do
-    print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
-    if B777_FMCAlertMsg[i].name==notification then
-      fmsModules["fmsL"]["notify"] = ""
-      fmsModules["fmsC"]["notify"] = ""
-      fmsModules["fmsR"]["notify"] = ""
-      B777DR_fmc_notifications[i]=0
-      print("do clear FMS notify"..B777_FMCAlertMsg[i].name)
-      break
-    end
-  end
+
+function fmsNotify(t, fmsID, message)
+	local typeNum = t == "alert" and 1 or t == "com" and 2 or t == "advs" and 3 or 4 -- beautiful one-liner
+	if fmsModules[fmsID].dispMSG[1] then -- if there are already messages
+		for i = 1, #fmsModules[fmsID].dispMSG do
+			if typeNum <= fmsModules[fmsID].dispMSG[i].type then -- iterate and find spot according to priority
+				print("insert "..message.." at "..i)
+				table.insert(fmsModules[fmsID].dispMSG, i, {type = typeNum, msg = message})
+				return
+			end
+		end
+		table.insert(fmsModules[fmsID].dispMSG,  #fmsModules[fmsID].dispMSG + 1, {type = typeNum, msg = message})
+	else
+		table.insert(fmsModules[fmsID].dispMSG, 1, {type = typeNum, msg = message}) -- if no messages, insert at beginning
+	end
 end
 
 fmsKeyFunc={}
@@ -142,33 +150,33 @@ function keyDown(fmsModule,key)
       print(fmsModule.. " did " .. key)
     end
 
-    if key=="clear" then
-      if string.len(fmsModules[fmsModule].notify) > 0 then
-        fmsClearNotify(fmsModules[fmsModule].notify)
-        fmsModules[fmsModule].notify = ""
+    --[[if key=="clear" then
+      print("before: "..dump(fmsModules[fmsModule].dispMSG))
+      if fmsModules[fmsID].dispMSG[1] then
+        table.remove( fmsModules[fmsModule].dispMSG, 1)
       else
         fmsModules[fmsModule].scratchpad = ""
       end
-    end
+      print("after: "..dump(fmsModules[fmsModule].dispMSG))
+    end]]
 
   else
     page = fmsModules[fmsModule].targetPage
     if key=="clear" then
-      simCMD_FMS_key[fmsModule]["clear"]:once()
-      if string.len(fmsModules[fmsModule].notify) >0 then
-        fmsClearNotify(fmsModules[fmsModule].notify)
-        fmsModules[fmsModule].notify=""
+      print(fmsModule.." before: "..dump(fmsModules[fmsModule]))
+      if fmsModules[fmsModule].dispMSG[1] then
+        table.remove( fmsModules[fmsModule].dispMSG, 1)
       else
-        fmsModules[fmsModule].scratchpad="" 
+        fmsModules[fmsModule].scratchpad = ""
       end
-      return
+      print("after: "..dump(fmsModules[fmsModule]))
     end
 
     --if string.len(fmsModules[fmsModule].notify)>0 and (hasChild(fmsFunctionsDefs[page],key)==false or fmsFunctionsDefs[page][key][1]~="key2fmc") then print("reject "..fmsFunctionsDefs[page][key][1].. " for "..key) return end -- require notification clear
 
     if hasChild(fmsFunctionsDefs[page],key) then
       print(fmsModule.. " found " .. fmsFunctionsDefs[page][key][1] .. " for " .. key)
-      fmsFunctions[ fmsFunctionsDefs[page][key][1] ](fmsModules[fmsModule],fmsFunctionsDefs[page][key][2])
+      fmsFunctions[ fmsFunctionsDefs[page][key][1]](fmsModules[fmsModule],fmsFunctionsDefs[page][key][2])
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
     elseif string.len(key)==1 then
@@ -641,13 +649,12 @@ function fms:B777_fms_display()
     end
   else
     if self.pgNo > fmsPages[page]:getNumPages() then self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end
-    if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
+    if self.pgNo < 1 then self.pgNo = 1 self.targetpgNo = 1 end
     local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
     local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
-    local tmpSRC
 
     for i=1,13,1 do
-      tmpSRC=B777DR_srcfms[thisID][i] -- make sure src is always fresh
+      local tmpSRC = B777DR_srcfms[thisID][i] -- make sure src is always fresh
 
       local input = ""
       local greenText = ""
@@ -734,12 +741,16 @@ function fms:B777_fms_display()
       B777DR_fms_s_hl[thisID][i]=highlightText
     end
 
-    if string.len(string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]",""))>0 then
-      B777DR_fms[thisID][14]=B777DR_srcfms[thisID][14]
-      self.notify=B777DR_srcfms[thisID][14]--string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]","")
+    if B777DR_srcfms[thisID][14]:match('DATA OUT OF DATE') and not outOfDateNotified[thisID] then
+      --self.notify=B777DR_srcfms[thisID][14]--string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]","")
       --print("notify["..self.notify.."]") ss777 note
-    elseif string.len(self.notify)>0 then
-      B777DR_fms[thisID][14] = self.notify
+      simCMD_FMS_key[thisID]["clear"]:once()
+      outOfDateNotified[thisID] = true
+      print("this should happen 3 times "..thisID)
+      --fmsNotify("alert", thisID, alertMsgs[16])-- NAV DATA OUT OF DATE notification
+      table.insert(self.dispMSG, 1, {type = 1, msg = alertMsgs[16]})
+    elseif self.dispMSG[1] then
+      B777DR_fms[thisID][14] = self.dispMSG[1].msg
     else
       B777DR_fms[thisID][14] = self.scratchpad;
     end

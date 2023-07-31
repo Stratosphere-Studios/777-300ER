@@ -1,77 +1,91 @@
-B777_FMCAlertMsg = {}
-B777_FMCAlertMsg = {
-    {DRindex = 0, name = "ATC COMM ESTABLISHED",data="", status = 0},        --
-    {DRindex = 1, name = "ATC MSG NOT ACKNOWLEDGED",data="", status = 0},
-    {DRindex = 2, name = "ATC REPORT LIST FULL",data="", status = 0},
-    {DRindex = 3, name = "CHECK ALT TGT",data="", status = 0},
-    {DRindex = 4, name = "CYCLE IRS OFF-NAV",data="", status = 0},
-    {DRindex = 5, name = "DESCENT PATH DELETED",data="", status = 0},
-    {DRindex = 6, name = "DES FORECST UPLINK READY",data="", status = 0},
-    {DRindex = 7, name = "DISCONTINUITY - LNAV",data="", status = 0},
-    {DRindex = 8, name = "DRAG REQUIRED",data="", status = 0},
-    {DRindex = 9, name = "END OF OFFSET",data="", status = 0},
-    {DRindex = 10, name = "END OF ROUTE",data="", status = 0},
-    {DRindex = 11, name = "ENTER IRS POSITION",data="", status = 0},
-    {DRindex = 12, name = "FLT NUMBER UPLINK",data="", status = 0},
-    {DRindex = 13, name = "FMC L/R OUTPUT DATA LOSS",data="", status = 0},
-    {DRindex = 14, name = "FUEL DISAGREE",data="", status = 0},
-    {DRindex = 15, name = "ILS TUNE INHIBITED",data="", status = 0},
-    {DRindex = 16, name = "INSUFFICIENT FUEL",data="", status = 0},
-    {DRindex = 17, name = "INVALID ATC UPLINK",data="", status = 0},
-    {DRindex = 18, name = "INVALID FLT NO UPLINK",data="", status = 0},
-    {DRindex = 19, name = "INVALID FORECAST UPLINK",data="", status = 0},
-    {DRindex = 20, name = "INVALID ROUTE UPLINK",data="", status = 0},
-    {DRindex = 21, name = "INVALID WIND DATA UPLINK",data="", status = 0},
-    {DRindex = 22, name = "IRS POS/ORIGIN DISAGREE",data="", status = 0},
-    {DRindex = 23, name = "LIMIT ALT FL___",data="XXX", status = 0},
-    {DRindex = 24, name = "MESSAGE LIMIT EXCEEDED",data="", status = 0},
-    {DRindex = 25, name = "NAV INVALID-TUNE ___",data="AAA", status = 0},
-    {DRindex = 26, name = "NO ACTIVE ROUTE",data="", status = 0},
-    {DRindex = 27, name = "PARTIAL CLEARANCE LOADED",data="", status = 0},
-    {DRindex = 28, name = "PARTIAL ROUTE UPLINK",data="", status = 0},
-    {DRindex = 29, name = "PERF/VNAV UNAVAILABLE",data="", status = 0},
-    {DRindex = 30, name = "PURGE UPDATES",data="", status = 0},
-    {DRindex = 31, name = "RE-LOGON TO ATC COMM",data="", status = 0},
-    {DRindex = 32, name = "RESET MCP ALT",data="", status = 0},
-    {DRindex = 33, name = "RESPOND TO ATC UPLINKS",data="", status = 0},
-    {DRindex = 34, name = "RESYNC FAIL",data="", status = 0},
-    {DRindex = 35, name = "RESYNCING OTHER FMC",data="", status = 0},
-    {DRindex = 36, name = "ROUTE UPLINK LOADING",data="", status = 0},
-    {DRindex = 37, name = "ROUTE UPLINK READY",data="", status = 0},
-    {DRindex = 38, name = "RTA FIX DELETED",data="", status = 0},
-    {DRindex = 39, name = "RW/ILS CRS ERROR",data="", status = 0},
-    {DRindex = 40, name = "SET CLOCK TO UTC TIME",data="", status = 0},
-    {DRindex = 41, name = "SINGLE FMC OPERATION",data="", status = 0},
-    {DRindex = 42, name = "SPLIT IRS OPERATION",data="", status = 0},
-    {DRindex = 43, name = "TAKEOFF SPEEDS DELETED",data="", status = 0},
-    {DRindex = 44, name = "THRUST REQUIRED",data="", status = 0},
-    {DRindex = 45, name = "UNABLE FL___ AT RTA FIX",data="XXX", status = 0},
-    {DRindex = 46, name = "UNABLE NEXT ALT",data="", status = 0},
-    {DRindex = 47, name = "UNABLE RTA",data="", status = 0},
-    {DRindex = 48, name = "UNABLE TO LOAD CLEARANCE",data="", status = 0},
-    {DRindex = 49, name = "UNABLE TO SEND MESSAGE",data="", status = 0},
-    {DRindex = 50, name = "VERIFY POSITION",data="", status = 0},
-    {DRindex = 51, name = "VERIFY RNP",data="", status = 0},
-    {DRindex = 52, name = "WIND DATA UPLINK READY",data="", status = 0}
+alertMsgs = {
+  "ALIGNMENT REINITIATED",
+  "CHECK ALT TGT",
+  "CHECK AIRLINE POLICY",
+  "DESCENT PATH DELETED",
+  "DISCONTINUITY",
+  "DRAG REQUIRED",
+  "END OF OFFSET",
+  "END OF ROUTE",
+  "ENTER INERTIAL POSITION",
+  "FUEL DISAGREE - PROG 2/3",
+  "ILS TUNE INHIBIT MCP", -- doc 2: "ILS TUNE INHIBIT" - MCP (STILL DIFFERENT FROM THE "INHIBITED - MCP" ONE)
+  "INERTIAL/ORIGIN DISAGREE",
+  "INSUFFICIENT FUEL",
+  "LIMIT ALT FL", --..ALT, different from "MAX ALT FL"
+  "LNAV BANK ANGLE LIMITED",
+  "NAV DATA OUT OF DATE",
+  "NAV INVALID - TUNE ", --..XXXX
+  "NO ACTIVE ROUTE",
+  "NO ROUTE DATA",
+  "PERF/VNAV NOT AVAILABLE",
+  "RESET MCP ALT",
+  "RW/ILS CRS ERROR",
+  "RTA FIX DELETED",
+  "RW/ILS FREQ ERROR",
+  "SINGLE FMC L OPERATION",
+  "SINGLE FMC R OPERATION",
+  "TAKEOFF SPEEDS DELETED",
+  "THRUST REQUIRED",
+  "UNABLE FLXXX AT RTA FIX", -- XXX = ALTITUDE
+  "UNABLE HOLD AIRSPACE",
+  "UNABLE RTA",
+  "UNABLE NEXT ALT",
+  "VERIFY POSITION",
+  "VERIFY RNP - POS REF 2/3", -- doc 2 doesn't include " - POS REF 2/3"
+  "VIA OFFSET INVALID",
+  "KEY/FUNCTION INOP"
 }
-function getAdvisoryMessages()
-  B777_FMCAdvisoryMsg = {}
-  B777_FMCAdvisoryMsg   = {
-    {DRindex = 0, name = "ARR N/A FOR RUNWAY", status = 0},        --
-    {DRindex = 1, name = "CRS REVERSAL AT FA FIX", status = 0},
-    {DRindex = 2, name = "DELETE", status = 0},
-    {DRindex = 3, name = "INVALID DELETE", status = 0},
-    {DRindex = 4, name = "INVALID ENTRY", status = 0},
-    {DRindex = 5, name = "KEY/FUNCTION INOP", status = 0},
-    {DRindex = 6, name = "MAX ALT FL", status = 0},
-    {DRindex = 7, name = "NOT IN DATA BASE", status = 0},
-    {DRindex = 8, name = "NOT ON INTERCEPT HEADING", status = 0},
-    {DRindex = 9, name = "ROUTE FULL", status = 0},
-    {DRindex = 10, name = "RUNWAY N/A FOR SID", status = 0},
-    {DRindex = 11, name = "STANDBY ONE", status = 0},
-    {DRindex = 12, name = "TIME OUT - RESELECT", status = 0},
-    {DRindex = 13, name = "UNABLE CRZ ALT", status = 0},
-    {DRindex = 14, name = "VERIFY RNP ENTRY", status = 0}
-  }
-  return B777_FMCAdvisoryMsg
-end
+
+commMsgs = {
+  "ALTN UPLINK",
+  "ALTN INHIBIT UPLINK",
+  "ALTN LIST UPLINK",
+  "DES FORECAST UPLINK READY",
+  "FLT NUMBER UPLINK",
+  "INVALID TAKEOFF ", --..XXX/YYY (RUNWAYS)
+  "PARTIAL ROUTE 1 UPLINK",
+  "PARTIAL ROUTE 2 UPLINK",
+  "PERF INIT UPLINK",
+  "ROUTE 1 UPLINK READY",
+  "ROUTE 2 UPLINK READY",
+  "TAKEOFF DATA LOADED",
+  "TAKEOFF DATA UPLINK",
+  "WIND DATA UPLINK READY"
+}
+
+advsMsgs = {
+  "DELETE",
+  "HOLD AT ", --..XXXX (WPT)
+  "INVALID ALTN UPLINK",
+  "INVALID ALTN LIST UPLINK",
+  "INVALID FLT NO UPLINK",
+  "INVALID FORECAST UPLINK",
+  "INVALID PERF INIT UPLINK",
+  "INVALID ROUTE UPLINK",
+  "INVALID TAKEOFF UPLINK",
+  "INVALID WIND DATA UPLINK",
+  "MAX ALT FL", --..XXX (ALT), different from "LMIT ALT FL"
+  "NOT ON INTERCEPT HEADING",
+  "ROUTE 1 UPLINK LOADING", -- entry error in doc 1
+  "ROUTE 2 UPLINK LOADING", -- entry error in doc 1
+  "STANDBY ONE", -- both docs have duplicate entry error of this
+  "TIMEOUT - RESELECT",
+  "UNABLE CRZ ALT"
+}
+
+entryMsgs = {
+  "ARR N/A FOR RUNWAY",
+  "CRS REVERSAL AT FA FIX",
+  "ENG OUT SID MOD",
+  "ILS TUNE INHIBITED - MCP",
+  "INVALID DELETE",
+  "INVALID ENTRY",
+  "NOT IN DATABASE",
+  "ROUTE FULL",
+  "RUNWAY N/A FOR SID",
+  "TAKEOFF FLAPS DELETED",
+  "UNABLE TO SEND MSG",
+  "V-SPEEDS UNAVAILABLE",
+  "VERIFY RNP ENTRY"
+}
