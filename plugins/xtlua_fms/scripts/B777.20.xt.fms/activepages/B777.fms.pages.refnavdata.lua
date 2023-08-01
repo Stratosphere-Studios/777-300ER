@@ -114,9 +114,10 @@ B777DR_backend_msg_clear = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find
 
 --[[if value == "radNavInhibit" then
     radNavInhibit = radNavInhibit == 3 and 0 or radNavInhibit + 1
-end
-
-if value == "refnavdata_poi" then
+    return
+elseif value == "refnavdata_poi" then
     local idNum = fmsO.id == "fmsL" and 1 or fmsO.id == "fmsR" and 2 or 3
     B777DR_backend_inIcao[idNum] = fmsO["scratchpad"]
+    fmsO["scratchpad"] = "" -- only clear if valid, if invalid notify without clearing
+    return
 end]]
