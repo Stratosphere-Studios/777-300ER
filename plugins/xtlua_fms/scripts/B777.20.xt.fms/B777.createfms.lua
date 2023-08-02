@@ -22,12 +22,12 @@ fms={
 simCMD_FMS_key={}
 function fmsClearNotify(notification)
   for i =1,53,1 do
-    print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
+    --print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
     if B777_FMCAlertMsg[i].name==notification then
       fmsModules["fmsL"]["notify"] = ""
       fmsModules["fmsC"]["notify"] = ""
       fmsModules["fmsR"]["notify"] = ""
-      B777DR_fmc_notifications[i]=0
+      --B777DR_fmc_notifications[i]=0
       print("do clear FMS notify"..B777_FMCAlertMsg[i].name)
       break
     end

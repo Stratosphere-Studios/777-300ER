@@ -11,32 +11,12 @@ function deferred_dataref(name,type,notifier)
 	return wrap_dref_any(dref,type) 
 end
 
+B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")
 B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
-debug_fms                       = deferred_dataref("Strato/B777/debug/fms", "number")
-B777DR_ap_vnav_pause            = deferred_dataref("Strato/B777/autopilot/vnav_pause","number")
-B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
-ilsData                         = deferred_dataref("Strato/B777/radio/ilsData", "string")
 acars                           = create_dataref("Strato/B777/comm/acars","number")  
-toderate                        = deferred_dataref("Strato/B777/engine/derate/TO","number") 
-clbderate                       = deferred_dataref("Strato/B777/engine/derate/CLB","number")
-
-radioModes                      = deferred_dataref("Strato/B777/radio/tuningmodes", "string")
 B777DR_cdu_act              = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
 B777DR_TAS_pilot                = deferred_dataref("Strato/B777/nd/TAS_pilot", "number")
-radioModes                      = "AAAMM" --ils,vor l/r,adf l/r (ADF is manual only
-irs_line1                       = deferred_dataref("Strato/B777/irs/line1", "string")
-irs_line2                       = deferred_dataref("Strato/B777/irs/line2", "string") 
-irs_line3                       = deferred_dataref("Strato/B777/irs/line3", "string") 
-irs_line4                       = deferred_dataref("Strato/B777/irs/line4", "string") 
 B777DR_readme_unlocked          = deferred_dataref("Strato/777/readme_unlocked", "number")
---[[irs_line1="TIME TO ALIGN"
-irs_line2="L OFF"
-irs_line3="C OFF"
-irs_line4="R OFF"]]
-irs_line1=" "
-irs_line2=" "
-irs_line3=" "
-irs_line4=" "
 
 function createFMSDatarefs(fmsid)
 	-- white
@@ -170,37 +150,6 @@ createFMSDatarefs("fms3")
 --*************************************************************************************--
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
-
---pos data
-B777DR_waypoint_ata					= deferred_dataref("Strato/B777/nd/waypoint_ata", "string")
-B777DR_last_waypoint				= deferred_dataref("Strato/B777/nd/last_waypoint", "string")
-B777DR_destination					= deferred_dataref("Strato/B777/nd/dest", "string")
-B777DR_next_waypoint_eta            = deferred_dataref("Strato/B777/nd/next_waypoint_eta", "string")
-B777DR_next_waypoint_dist           = deferred_dataref("Strato/B777/nd/next_waypoint_dist", "number")
-B777DR_next_waypoint				= deferred_dataref("Strato/B777/nd/next_waypoint", "string")
-
---Waypoint info for ND DISP
-B777DR_ND_waypoint_eta		        = deferred_dataref("Strato/B777/nd/waypoint_eta", "string")
-B777DR_ND_current_waypoint	        = deferred_dataref("Strato/B777/nd/current_waypoint", "string")
-B777DR_ND_waypoint_distance	        = deferred_dataref("Strato/B777/nd/waypoint_distance", "string")
-
---ND Range DISPLAY
-B777DR_ND_range_display_capt        = deferred_dataref("Strato/B777/nd/range_display_capt", "number")
-B777DR_ND_range_display_fo	        = deferred_dataref("Strato/B777/nd/range_display_fo", "number")
-
---IRS ND DISPLAY
-B777DR_ND_GPS_Line	                = deferred_dataref("Strato/B777/irs/gps_display_line", "string")
-B777DR_ND_IRS_Line	                = deferred_dataref("Strato/B777/irs/irs_display_line", "string")
-
---SPEED ND DISPLAY
-B777DR_ND_GS_TAS_Line		        = deferred_dataref("Strato/B777/nd/gs_tas_line", "string")
-B777DR_ND_GS_TAS_Line_Pilot	        = deferred_dataref("Strato/B777/nd/gs_tas_line_pilot", "string")
-B777DR_ND_GS_TAS_Line_CoPilot       = deferred_dataref("Strato/B777/nd/gs_tas_line_copilot", "string")
-B777DR_ND_Wind_Line			        = deferred_dataref("Strato/B777/nd/wind_line", "string")
-B777DR_ND_Wind_Bearing		        = deferred_dataref("Strato/B777/nd/wind_bearing", "number")
-
---STAB TRIM setting
-B777DR_elevator_trim                = deferred_dataref("Strato/B777/fmc/elevator_trim", "number")
 
 function createFMSCommands(fmsO,cduid,fmsid,keyid,fmskeyid)
 
