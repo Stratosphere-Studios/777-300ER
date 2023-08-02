@@ -152,11 +152,25 @@ function toDMS(value,isLat)
 	return retVal
 end
 
+-- handy function that dumps contents of table
+function dump(o)
+	if type(o) == 'table' then
+		local s = '{ '
+		for k,v in pairs(o) do
+			if type(k) ~= 'number' then k = '"'..k..'"' end
+			s = s .. '['..k..'] = ' .. dump(v) .. ','
+		end
+		return s .. '} '
+	else
+		return tostring(o)
+	end
+end
+
 dofile("json/json.lua")
 hh=find_dataref("sim/cockpit2/clock_timer/zulu_time_hours")
 mm=find_dataref("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss=find_dataref("sim/cockpit2/clock_timer/zulu_time_seconds")
-simDR_bus_volts                     = find_dataref("sim/cockpit2/electrical/bus_volts")
+--[[simDR_bus_volts                     = find_dataref("sim/cockpit2/electrical/bus_volts")
 simDR_startup_running               = find_dataref("sim/operation/prefs/startup_running")
 
 simDR_radio_nav_freq_Mhz            = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_Mhz")
@@ -177,11 +191,11 @@ simDR_radio_nav04_ID                = find_dataref("sim/cockpit2/radios/indicato
 
 simDR_radio_adf1_freq_hz            = find_dataref("sim/cockpit2/radios/actuators/adf1_frequency_hz")
 simDR_radio_adf2_freq_hz            = find_dataref("sim/cockpit2/radios/actuators/adf2_frequency_hz")
-
+]]
 navAidsJSON                         = find_dataref("xtlua/navaids")
 fmsJSON                             = find_dataref("xtlua/fms")
 
-B777DR_fms1_display_mode            = find_dataref("Strato/B777/fms1/display_mode")
+--[[B777DR_fms1_display_mode            = find_dataref("Strato/B777/fms1/display_mode")
 
 B777DR_efis_min_ref_alt_capt_sel_dial_pos       = find_dataref("Strato/B777/efis/min_ref_alt/capt/sel_dial_pos")
 B777DR_efis_ref_alt_capt_set_dial_pos           = find_dataref("Strato/B777/efis/ref_alt/capt/set_dial_pos")
@@ -207,12 +221,12 @@ simDR_radio_alt_DH_fo               = find_dataref("sim/cockpit2/gauges/actuator
 simDR_altimeter_baro_inHg           = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
 simDR_altimeter_baro_inHg_fo        = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")
 simDR_altitude_pilot                = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
-
+]]
 --Marauder28
 --Used in ND DISPLAY
 simDR_latitude				= find_dataref("sim/flightmodel/position/latitude")
 simDR_longitude				= find_dataref("sim/flightmodel/position/longitude")
-simDR_navID					= find_dataref("sim/cockpit2/radios/indicators/gps_nav_id")
+--[[simDR_navID					= find_dataref("sim/cockpit2/radios/indicators/gps_nav_id")
 simDR_range_dial_capt		= find_dataref("Strato/B777/nd/range/capt/sel_dial_pos") -- no*
 simDR_range_dial_fo			= find_dataref("Strato/B777/nd/range/fo/sel_dial_pos") -- no*
 simDR_nd_mode_dial_capt		= find_dataref("Strato/B777/nd/mode/capt/sel_dial_pos")
@@ -220,9 +234,9 @@ simDR_nd_mode_dial_fo       = find_dataref("Strato/B777/nd/mode/fo/sel_dial_pos"
 simDR_nd_center_dial_capt   = find_dataref("Strato/B777/nd/map_center/capt")
 simDR_nd_center_dial_fo	    = find_dataref("Strato/B777/nd/map_center/fo")
 simDR_EFIS_map_mode         = find_dataref("sim/cockpit2/EFIS/map_mode")
-simDR_EFIS_map_range        = find_dataref("sim/cockpit2/EFIS/map_range")
+simDR_EFIS_map_range        = find_dataref("sim/cockpit2/EFIS/map_range")]]
 
-simDR_groundspeed			= find_dataref("sim/flightmodel2/position/groundspeed")
+--[[simDR_groundspeed			= find_dataref("sim/flightmodel2/position/groundspeed")
 simDR_ias_pilot				= find_dataref("Strato/777/displays/ias_capt")
 simDR_wind_degrees			= find_dataref("sim/cockpit2/gauges/indicators/wind_heading_deg_mag")
 simDR_wind_speed			= find_dataref("sim/cockpit2/gauges/indicators/wind_speed_kts")
@@ -230,21 +244,21 @@ simDR_mach_pilot			= find_dataref("sim/cockpit2/gauges/indicators/mach_pilot")
 simDR_mach_copilot			= find_dataref("sim/cockpit2/gauges/indicators/mach_copilot")
 simDR_total_air_temp		= find_dataref("sim/cockpit2/temperature/outside_air_LE_temp_degc")
 simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
-
-simDR_empty_weight			= find_dataref("sim/aircraft/weight/acf_m_empty")
+]]
+--simDR_empty_weight			= find_dataref("sim/aircraft/weight/acf_m_empty")
 --Marauder28
 
 --*************************************************************************************--
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
-B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
+--B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
 B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
 --Marauder28
 -- Holds all SimConfig options
 B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
 B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
 
---ND Range DISPLAY
+--[[ND Range DISPLAY
 B777DR_ND_range_display_capt			= deferred_dataref("Strato/B777/nd/range_display_capt", "number")
 B777DR_ND_range_display_fo				= deferred_dataref("Strato/B777/nd/range_display_fo", "number")
 
@@ -256,7 +270,7 @@ B777DR_fmc_notifications            = deferred_dataref("Strato/B777/fms/notifica
 
 --STAB TRIM setting
 B777DR_elevator_trim				    = deferred_dataref("Strato/B777/fmc/elevator_trim", "number")
-
+]]
 --Sound Options (crazytimtimtim + Matt726)
 B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
 B777DR_SNDoptions_volume    = find_dataref("Strato/777/fmod/options/volume") --TODO
@@ -558,7 +572,6 @@ function flight_start()
 	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
 end
 
-fms_style = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_style_line2")
 lastNotify = 0
 
 function setNotifications()
@@ -646,12 +659,7 @@ function after_physics()
 	local cM = hh
 	cM = mm
 	cM = ss
-    setNotifications()
-
-	--[[if simDR_bus_volts[0]>24 then ss777 comment
-		irsSystem.update()
-		B777_setNAVRAD()
-    end]]
+    --setNotifications()
 
 --[[    if acarsSystem.provider.online() then
 		-- B777DR_CAS_memo_status[40]=0
