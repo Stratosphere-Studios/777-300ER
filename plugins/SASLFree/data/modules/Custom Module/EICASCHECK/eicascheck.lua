@@ -101,10 +101,10 @@ end
 function surroun2(U)
     xs12 = 0
     xs22 = 990 + U
-    drawRectangle(get(xs12), get(xs22), 1200, 3, white)
+    drawRectangle(get(xs12), get(xs22), 1135, 3, white)
     drawRectangle(get(xs12), get(xs22), 3, 55, white)
-    drawRectangle(get(xs12), get(xs22) + 55, 1200, 3, white)
-    drawRectangle(get(xs12) + 1200 - 3, get(xs22), 3, 55, white)
+    drawRectangle(get(xs12), get(xs22) + 55, 1135, 3, white)
+    drawRectangle(get(xs12) + 1135 - 3, get(xs22), 3, 55, white)
 end
 
 function chklDraw(tbl, valtbl)
@@ -224,7 +224,7 @@ function update()
             veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(4)
         end,
         [2] = function()
-            veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(7)
+            veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(8)
         end,
         [3] = function()
             veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(5)
@@ -245,10 +245,10 @@ function update()
             veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(3)
         end,
         [9] = function()
-            veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(6)
+            veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(5)
         end,
         [10] = function()
-            veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(4)
+            veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(3)
         end
 
     }
@@ -279,7 +279,7 @@ function draw()
         if page >= 1 and page < 10 then
             if not isFirstPageClick then
                 if checklistAllDone(get(page)) then
-                    page = get(page) + 1
+                    --TODO: checklist complete
                 end
             end
         end

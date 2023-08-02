@@ -25,17 +25,18 @@ preflightchecklist = {
 }
 
 bfrstartchecklist = {
-    [1] = 'Supernumerary signs..................___',
-    [2] = 'MCP.......V2___, HDG/TRK___, ALTITUDE___',
-    [3] = 'Takeoff speeds.......V1___, VR___, V2___',
-    [4] = 'CDU preflight...................completed',
-    [5] = 'Trim......................___Units, 0, 0',
-    [6] = 'Taxi and takeoff breifing......completed',
-    [7] = 'Beacon................................on',
+    [1] = 'Flight deck door.......Closed and locked',
+    [2] = 'Passenger signs...................... __',
+    [3] = 'MCP.......V2___, HDG/TRK___, ALTITUDE___',
+    [4] = 'Takeoff speeds.......V1___, VR___, V2___',
+    [5] = 'CDU preflight..................Completed',
+    [6] = 'Trim......................___Units, 0, 0',
+    [7] = 'Taxi and takeoff breifing......completed',
+    [8] = 'Beacon................................on'
 }
 
 bfrtaxichecklist = {
-    [1] = 'Anti-Ice.............................___',
+    [1] = 'Anti-Ice............................. __',
     [2] = 'Recall...........................Checked',
     [3] = 'Autobrake............................RTO',
     [4] = 'Flight controls..................Checked',
@@ -43,40 +44,39 @@ bfrtaxichecklist = {
 }
 
 bfrtakeoffchecklist = {
-    [1] = 'Flaps................................___'
+    [1] = 'Flaps................................ __'
 }
 
 aftertakeoffchecklist = {
     [1] = 'Landing gear..........................UP',
+    [2] = 'Flaps.................................UP',
 }
 decentchecklist = {
     [1] = 'Recall...........................Checked',
     [2] = 'Notes............................Checked',
-    [3] = 'Autobrake............................___',
+    [3] = 'Autobrake............................ __',
     [4] = 'Landing data........VREF___, Minimums___',
     [5] = 'Approach breifing..............Completed'
 }
 approachecklist = {
-    [1] = 'Altimeters..........................___'
+    [1] = 'Altimeters.......................... __'
 }
 landingchecklist = {
     [1] = 'Speedbrake........................ARMED',
     [2] = 'Landing gear.......................DOWN',
-    [3] = 'Flaps...............................___'
+    [3] = 'Flaps............................... __'
 }
 shutdownchecklist = {
-    [1] = 'Hydraulic panel.....................SET',
-    [2] = 'Fuel pumps..........................Off',
-    [3] = 'Flaps................................UP',
-    [4] = 'Parking brake.......................___',
-    [5] = 'Fuel Control Switches............CUTOFF',
-    [6] = 'Weather radar.......................OFF'
+    [1] = 'Fuel pumps..........................Off',
+    [2] = 'Flaps................................UP',
+    [3] = 'Parking brake....................... __',
+    [4] = 'Fuel control switches............CUTOFF',
+    [5] = 'Weather radar.......................Off'
 }
 securechecklist = {
     [1] = 'ADIRU.................................OFF',
     [2] = 'Emergency lights......................OFF',
-    [3] = 'Packs.................................OFF',
-    [4] = 'BATTERY switch........................OFF'
+    [3] = 'Packs.................................OFF'
 }
 
 --[[
@@ -87,12 +87,12 @@ VALUES MEANINGS:
     3 = no check available
 --]]
 preflightchecklistvalues = { 0, 0, 3, 3 }
-bfrstartchecklistvalues = { 0, 0, 0, 0, 0, 0, 3 }
+bfrstartchecklistvalues = { 0, 0, 0, 0, 0, 0, 0, 3 }
 bfrtaxichecklistvalues = { 0, 0, 3, 0, 0 }
 bfrtakeoffchecklistvalues = { 3 }
-aftertakeoffchecklistvalues = { [1] = 3 }
+aftertakeoffchecklistvalues = { 3, 0 }
 decentchecklistvalues = { 0, 0, 0, 0, 0 }
 approachecklistvalues = { 0 }
 landingchecklistvalues = { 3, 0, 3 }
-shutdownchecklistvalues = { 3, 3, 0, 0, 3, 0 }
-securechecklistvalues = { 0, 0, 0, 0 }
+shutdownchecklistvalues = { 3, 0, 0, 3, 0 }
+securechecklistvalues = { 0, 0, 0 }
