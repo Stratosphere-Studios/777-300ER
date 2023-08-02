@@ -62,21 +62,21 @@ approachecklist = {
     [1] = 'Altimeters.......................... __'
 }
 landingchecklist = {
-    [1] = 'Speedbrake........................ARMED',
-    [2] = 'Landing gear.......................DOWN',
-    [3] = 'Flaps............................... __'
+    [1] = 'Speedbrake.........................ARMED',
+    [2] = 'Landing gear........................DOWN',
+    [3] = 'Flaps................................ __'
 }
 shutdownchecklist = {
-    [1] = 'Fuel pumps..........................Off',
-    [2] = 'Flaps................................UP',
-    [3] = 'Parking brake....................... __',
-    [4] = 'Fuel control switches............CUTOFF',
-    [5] = 'Weather radar.......................Off'
+    [1] = 'Fuel pumps...........................Off',
+    [2] = 'Flaps.................................UP',
+    [3] = 'Parking brake........................ __',
+    [4] = 'Fuel control switches.............CUTOFF',
+    [5] = 'Weather radar........................Off'
 }
 securechecklist = {
-    [1] = 'ADIRU.................................OFF',
-    [2] = 'Emergency lights......................OFF',
-    [3] = 'Packs.................................OFF'
+    [1] = 'ADIRU................................OFF',
+    [2] = 'Emergency lights.....................OFF',
+    [3] = 'Packs................................OFF'
 }
 
 --[[
