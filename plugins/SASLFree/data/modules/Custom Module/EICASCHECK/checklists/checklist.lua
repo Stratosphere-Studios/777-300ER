@@ -18,65 +18,65 @@ checklisthome = {
 }
 
 preflightchecklist = {
-    [1] = 'Oxygen......................Tested, 100%',
-    [2] = 'Flight Inst...Heading ___, Altimeter ___',
-    [3] = 'Parking brake........................Set',
-    [4] = 'Fuel Control Switches.............CUTOFF'
+    [1] = 'Oxygen.....................Tested, 100%',
+    [2] = 'Flight Inst..Heading ___, Altimeter ___',
+    [3] = 'Parking brake.......................Set',
+    [4] = 'Fuel Control Switches............CUTOFF'
 }
 
 bfrstartchecklist = {
-    [1] = 'Flight deck door.......Closed and locked',
-    [2] = 'Passenger signs...................... __',
-    [3] = 'MCP.......V2___, HDG/TRK___, ALTITUDE___',
-    [4] = 'Takeoff speeds.......V1___, VR___, V2___',
-    [5] = 'CDU preflight..................Completed',
-    [6] = 'Trim......................___Units, 0, 0',
-    [7] = 'Taxi and takeoff breifing......completed',
-    [8] = 'Beacon................................on'
+    [1] = 'Flight deck door......Closed and locked',
+    [2] = 'Passenger signs..................... __',
+    [3] = 'MCP......V2___, HDG/TRK___, ALTITUDE___',
+    [4] = 'Takeoff speeds......V1___, VR___, V2___',
+    [5] = 'CDU preflight.................Completed',
+    [6] = 'Trim.....................___Units, 0, 0',
+    [7] = 'Taxi and takeoff breifing.....completed',
+    [8] = 'Beacon...............................on'
 }
 
 bfrtaxichecklist = {
-    [1] = 'Anti-Ice............................. __',
-    [2] = 'Recall...........................Checked',
-    [3] = 'Autobrake............................RTO',
-    [4] = 'Flight controls..................Checked',
-    [5] = 'Ground equipment...................Clear'
+    [1] = 'Anti-Ice............................ __',
+    [2] = 'Recall..........................Checked',
+    [3] = 'Autobrake...........................RTO',
+    [4] = 'Flight controls.................Checked',
+    [5] = 'Ground equipment..................Clear'
 }
 
 bfrtakeoffchecklist = {
-    [1] = 'Flaps................................ __'
+    [1] = 'Flaps............................... __'
 }
 
 aftertakeoffchecklist = {
-    [1] = 'Landing gear..........................UP',
-    [2] = 'Flaps.................................UP',
+    [1] = 'Landing gear.........................UP',
+    [2] = 'Flaps................................UP'
 }
 decentchecklist = {
-    [1] = 'Recall...........................Checked',
-    [2] = 'Notes............................Checked',
-    [3] = 'Autobrake............................ __',
-    [4] = 'Landing data........VREF___, Minimums___',
-    [5] = 'Approach breifing..............Completed'
+    [1] = 'Recall..........................Checked',
+    [2] = 'Notes...........................Checked',
+    [3] = 'Autobrake........................... __',
+    [4] = 'Landing data.......VREF___, Minimums___',
+    [5] = 'Approach breifing.............Completed'
 }
 approachecklist = {
     [1] = 'Altimeters.......................... __'
 }
 landingchecklist = {
-    [1] = 'Speedbrake.........................ARMED',
-    [2] = 'Landing gear........................DOWN',
-    [3] = 'Flaps................................ __'
+    [1] = 'Speedbrake........................ARMED',
+    [2] = 'Landing gear.......................DOWN',
+    [3] = 'Flaps............................... __'
 }
 shutdownchecklist = {
-    [1] = 'Fuel pumps...........................Off',
-    [2] = 'Flaps.................................UP',
-    [3] = 'Parking brake........................ __',
-    [4] = 'Fuel control switches.............CUTOFF',
-    [5] = 'Weather radar........................Off'
+    [1] = 'Fuel pumps..........................Off',
+    [2] = 'Flaps................................UP',
+    [3] = 'Parking brake....................... __',
+    [4] = 'Fuel control switches............CUTOFF',
+    [5] = 'Weather radar.......................Off'
 }
 securechecklist = {
-    [1] = 'ADIRU................................OFF',
-    [2] = 'Emergency lights.....................OFF',
-    [3] = 'Packs................................OFF'
+    [1] = 'ADIRU...............................OFF',
+    [2] = 'Emergency lights....................OFF',
+    [3] = 'Packs...............................OFF'
 }
 
 --[[

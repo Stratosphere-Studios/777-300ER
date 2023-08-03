@@ -99,12 +99,21 @@ function surroun(U)
 end
 
 function surroun2(U)
-    xs12 = 0
+    xs12 = 15
     xs22 = 990 + U
-    drawRectangle(get(xs12), get(xs22), 1135, 3, white)
-    drawRectangle(get(xs12), get(xs22), 3, 55, white)
-    drawRectangle(get(xs12), get(xs22) + 55, 1135, 3, white)
-    drawRectangle(get(xs12) + 1135 - 3, get(xs22), 3, 55, white)
+    drawRectangle(get(xs12), get(xs22) - 5, 1095, 7, white)
+    drawRectangle(get(xs12), get(xs22), 7, 60, white)
+    drawRectangle(get(xs12), get(xs22) + 60, 1095, 7, white)
+    drawRectangle(get(xs12) + 1095 - 7, get(xs22), 7, 60, white)
+end
+
+function surroun3(U)
+    xs12 = 113
+    xs22 = 987 + U
+    drawRectangle(get(xs12), get(xs22) + 6, 987, 5, white)
+    drawRectangle(get(xs12), get(xs22) + 6, 5, 56, white)
+    drawRectangle(get(xs12), get(xs22) + 57, 987, 5, white)
+    drawRectangle(get(xs12) + 987 - 3, get(xs22) + 6, 5, 56, white)
 end
 
 function chklDraw(tbl, valtbl)
@@ -113,17 +122,17 @@ function chklDraw(tbl, valtbl)
     for i, v in pairs(tbl) do
         if (valtbl[i] == 1) then
             ChklDrawCol = { 0, 1, 0, 1 }
-            drawTexture(checkMark, 10, 990 - 61 + yVal, 50, 50, white)
+            drawTexture(checkMark, 35, 990 - 61 + yVal, 50, 50, white)
         elseif (valtbl[i] == 2) then
             ChklDrawCol = { 0, 1, 0, 1 }
-            drawTexture(checkMark, 10, 990 - 61 + yVal, 50, 50, white)
+            drawTexture(checkMark, 35, 990 - 61 + yVal, 50, 50, white)
         elseif (valtbl[i] == 3) then
             ChklDrawCol = { 1, 1, 1, 1 }
         else
             ChklDrawCol = { 1, 1, 1, 1 }
-            drawRectangle(10, 990 - 61 + yVal, 50, 50, grey)
+            drawRectangle(35, 990 - 61 + yVal, 50, 50, grey)
         end
-        yVal = yVal - 65
+        yVal = yVal - 66
         drawText(opensans, 120, 1000 + yVal, tbl[i], 50, false, false, TEXT_ALIGN_LEFT, ChklDrawCol)
     end
 end
@@ -174,7 +183,7 @@ function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMad
             end
         }
         tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM =
-            tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM - 65
+            tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM - 66
     end
 
     components[#components + 1] = interactive {
@@ -337,7 +346,8 @@ function draw()
             drawTexture(triLeft, 375 + 63 + 295 + 30, 1200 - 145, 25, 32.6, white)
             chklDraw(currentChecklistname, currentChecklistvalues)
             if (get(otherpagesurr) ~= 0) then
-                surroun2(-65 * (get(otherpagesurr)))
+                surroun2(-66 * (get(otherpagesurr)))
+                surroun3(-66 * (get(otherpagesurr)))
             end
         end
 
@@ -362,7 +372,7 @@ function draw()
             drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
                 false, TEXT_ALIGN_LEFT, green)                                                                          --9
             drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
-                false, TEXT_ALIGN_LEFT, green)                                                                          --10
+                false, TEXT_ALIGN_LEFT, green)                                                                 --10
         end
     end
 end
