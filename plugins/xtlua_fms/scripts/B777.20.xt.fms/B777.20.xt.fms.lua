@@ -152,20 +152,6 @@ function toDMS(value,isLat)
 	return retVal
 end
 
--- handy function that dumps contents of table
-function dump(o)
-	if type(o) == 'table' then
-		local s = '{ '
-		for k,v in pairs(o) do
-			if type(k) ~= 'number' then k = '"'..k..'"' end
-			s = s .. '['..k..'] = ' .. dump(v) .. ','
-		end
-		return s .. '} '
-	else
-		return tostring(o)
-	end
-end
-
 dofile("json/json.lua")
 hh=find_dataref("sim/cockpit2/clock_timer/zulu_time_hours")
 mm=find_dataref("sim/cockpit2/clock_timer/zulu_time_minutes")
@@ -251,8 +237,10 @@ simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air
 --*************************************************************************************--
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
---B777DR_fmc_notifications        = deferred_dataref("Strato/B777/fms/notification","array[53]")
 B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
+--B777DR_backend_notInDatabase{find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}
+B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")
+
 --Marauder28
 -- Holds all SimConfig options
 B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
@@ -437,9 +425,9 @@ function switchCustomMode()
 	fmsModules["fmsL"]["prevPage"] = fmsModules["fmsL"]["currentPage"]
 	fmsModules["fmsC"]["prevPage"] = fmsModules["fmsC"]["currentPage"]
 	fmsModules["fmsR"]["prevPage"] = fmsModules["fmsR"]["currentPage"]
-	fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
-	fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
-	fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
+	--fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
+	--fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
+	--fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
 	fmsModules["fmsL"]["currentPage"]=fmsModules["fmsL"]["targetPage"]
 	fmsModules["fmsC"]["currentPage"]=fmsModules["fmsC"]["targetPage"]
 	fmsModules["fmsR"]["currentPage"]=fmsModules["fmsR"]["targetPage"]
@@ -450,7 +438,7 @@ function switchCustomMode()
 end
 
 function createPage(page)
-	retVal={}
+	local retVal={}
 	retVal.name=page
 	retVal.template={
 		"    " .. page,
@@ -480,54 +468,61 @@ function createPage(page)
 		"                        ",
 		"                        ",
 		"                        ",
-		"                        ", 
+		"                        ",
 		"                        "
 	}
 
 	retVal.getPage=function(self,pgNo) return self.template end
 	retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
-	print("createPage")
 	retVal.getNumPages=function(self) return 1 end
 	fmsFunctionsDefs[page]={}
-	print("createDone")
 	return retVal
 end
 
-dofile("B777.createfms.lua")
 dofile("B777.notifications.lua")
+dofile("B777.createfms.lua")
 --dofile("irs/irs_system.lua")
 dofile("B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
 
+function fmsNotify(self, t, message)
+    local typeNum = t == "alert" and 1 or t == "com" and 2 or t == "advs" and 3 or 4 -- beautiful one-liner
+    if self.dispMSG[1] then -- if there are already messages
+		for i = 1, #self.dispMSG do
+			if typeNum <= self.dispMSG[i].type then -- iterate and find spot according to priority
+				print("insert "..message.." at "..i)
+				table.insert(self.dispMSG, i, {type = typeNum, msg = message})
+				return
+			end
+		end
+		table.insert(self.dispMSG,  #self.dispMSG + 1, {type = typeNum, msg = message})
+    else
+		table.insert(self.dispMSG, 1, {type = typeNum, msg = message}) -- if no messages, insert at beginning
+    end
+end
+
 fmsC = {}
 setmetatable(fmsC, {__index = fms})
 fmsC.id="fmsC"
+fmsC.dispMSG = {}
+fmsC.notify = fmsNotify
 setDREFs(fmsC,"cdu1","fms1","sim/FMS/","fms3")
-fmsC.inCustomFMC=true
-fmsC.targetCustomFMC=true
-fmsC.prevPage="README"
-fmsC.currentPage="README"
-fmsC.targetPage="README"
 
 fmsL = {}
 setmetatable(fmsL, {__index = fms})
 fmsL.id="fmsL"
+fmsL.dispMSG = {}
+fmsL.notify = fmsNotify
 setDREFs(fmsL,"cdu1","fms3","sim/FMS/","fms1")
-fmsL.inCustomFMC=true
-fmsL.targetCustomFMC=true
-fmsL.prevPage = "README"
-fmsL.currentPage ="README"
-fmsL.targetPage="README"
 
 fmsR = {}
 setmetatable(fmsR, {__index = fms})
 fmsR.id="fmsR"
-setDREFs(fmsR,"cdu1","fms2","sim/FMS/","fms2")
-fmsR.inCustomFMC=true
-fmsR.targetCustomFMC=true
-fmsR.prevPage = "README"
-fmsR.currentPage = "README"
-fmsR.targetPage = "README"
+fmsR.dispMSG = {}
+fmsR.notify = fmsNotify
+setDREFs(fmsR,"cdu2","fms2","sim/FMS2/","fms2")
+
+--       fmsObject | xp dr id | custom dr id | xp cmd id | custom cmd id
 
 fmsModules.fmsL=fmsL;
 fmsModules.fmsC=fmsC;
@@ -572,47 +567,62 @@ function flight_start()
 	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
 end
 
-lastNotify = 0
+local outOfDateNotified = false
+local databaseNotified = {false, false}
+function doNotifications()
 
-function setNotifications()
-	local diff=simDRTime-lastNotify
-	if diff<10 then return end
-	--print("FMS notify")
-	local hasNotify=false
-	lastNotify=simDRTime
-	for i =1,53,1 do
-		--print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
-		if B777DR_fmc_notifications[i]>0 then
-			fmsModules["fmsL"]["notify"]=B777_FMCAlertMsg[i].name
-			fmsModules["fmsC"]["notify"]=B777_FMCAlertMsg[i].name
-			fmsModules["fmsR"]["notify"]=B777_FMCAlertMsg[i].name
-			--print("do FMS notify "..B777_FMCAlertMsg[i].name)
-			hasNotify=true
-			break
+	-- Notifications from other modules
+
+	-- EICAS Messages & Notification Lights
+	local isError = {false, false}
+	for i = 0, 2 do
+		local fmsID = i == 0 and "fmsL" or i == 1 and "fmsR" or "fmsC"
+		if fmsModules[fmsID].dispMSG[1] ~= nil then
+			B777DR_cdu_notification[i] = 1 -- CDU Notification Lights
+			for j = 1, #fmsModules[fmsID].dispMSG do -- EICAS Messages
+				if fmsModules[fmsID].dispMSG[j].type == 1 then
+					B777DR_eicas_fmc_messages[0] = 1
+					isError[1] = true
+					return
+				elseif fmsModules[fmsID].dispMSG[j].type == 2 then
+					B777DR_eicas_fmc_messages[1] = 1
+					isError[2] = true
+					return
+				end
+			end
 		else
-			if fmsModules["fmsL"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsL"]["notify"]="" end
-			if fmsModules["fmsC"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsC"]["notify"]="" end
-			if fmsModules["fmsR"]["notify"]==B777_FMCAlertMsg[i].name then fmsModules["fmsR"]["notify"]="" end
+			B777DR_cdu_notification[i] = 0
 		end
 	end
 
-	--[[if hasNotify==true then ss777 comment
-		B777DR_CAS_advisory_status[145] = 1
-	else
-		B777DR_CAS_advisory_status[145] = 0
+	if not isError[1] then B777DR_eicas_fmc_messages[0] = 0 end
+	if not isError[2] then B777DR_eicas_fmc_messages[1] = 0 end
+
+	-- NAV DATA OUT OF DATE
+	if simDR_fmsL_line13:match("DATA OUT OF DATE") and not outOfDateNotified then
+		outOfDateNotified = true
+		fmsModules.fmsL:notify("alert", alertMsgs[16])
+		fmsModules.fmsC:notify("alert", alertMsgs[16])
+		fmsModules.fmsR:notify("alert", alertMsgs[16])
+	end
+
+	-- NOT IN DATABASE
+	--[[for i = 1, 2 do
+		local id = i == 1 and "fmsL" or "fmsR"
+		if B777DR_backend_notInDatabase[i] == 1 and not databaseNotified[i] then
+			databaseNotified[i] = true
+			fmsModules[id]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
+		elseif B777DR_backend_notInDatabase[i] == 0 then
+			databaseNotified[i] = false
+		end
 	end]]
 end
 
-function calcFuel1()
+function calcFuel()
 	totalizerSumkgs = totalizerSumkgs + simDR_fuel_flow_kg_sec[0] + simDR_fuel_flow_kg_sec[1]
-	run_after_time(calcFuel2, 1)
-end
-function calcFuel2()
-	totalizerSumkgs = totalizerSumkgs + simDR_fuel_flow_kg_sec[0] + simDR_fuel_flow_kg_sec[1]
-	run_after_time(calcFuel1, 1)
 end
 
-function calcFuel()
+function fuel()
     if fmsModules["data"].fmcFuel.mode == "CALC" then
         if simDR_fuel_flow_kg_sec[0] > 5 or simDR_fuel_flow_kg_sec[1] > 5 then -- if abnormal fuel flow switch to sensed mode
             fmsModules["data"].fmcFuel.mode = "SENSED"
@@ -630,7 +640,6 @@ function calcFuel()
     elseif fmsModules["data"].fmcFuel.mode == "SENSED" then
         fmsModules["data"].fmcFuel.value = simDR_total_fuel_kgs
     elseif fmsModules["data"].fmcFuel.mode == "MANUAL" then
-        -- setdata func sets stuff
 		fmsModules["data"].fmcFuel.value = totalizerInitkgs - totalizerSumkgs
     end
 end
@@ -638,11 +647,7 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 
-	calcFuel()
-
-	B777DR_cdu_notification[0] = fmsModules["fmsL"]["notify"] ~= "" and 1 or 0
-	B777DR_cdu_notification[1] = fmsModules["fmsC"]["notify"] ~= "" and 1 or 0
-	B777DR_cdu_notification[2] = fmsModules["fmsR"]["notify"] ~= "" and 1 or 0
+	fuel()
 
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
@@ -659,7 +664,7 @@ function after_physics()
 	local cM = hh
 	cM = mm
 	cM = ss
-    --setNotifications()
+    doNotifications()
 
 --[[    if acarsSystem.provider.online() then
 		-- B777DR_CAS_memo_status[40]=0
@@ -719,8 +724,7 @@ function aircraft_load()
 	find_command("Strato/B777/fms3/ls_key/R6"):once()
 	local temp = navAidsJSON -- load navaids
 	run_after_time(updateNavaids, 1)
-	calcFuel1()
+	run_at_interval(calcFuel, 1)
 end
 
-function aircraft_unload()
-end
+--function aircraft_unload() end

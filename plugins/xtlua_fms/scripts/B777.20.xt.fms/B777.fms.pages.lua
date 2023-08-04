@@ -119,9 +119,14 @@ function fmsFunctions.setpage_no(fmsO,valueA) -- set page with target page numbe
     print(valueO[1].." "..valueO[2])
 	--fmsO["pgNo"]=tonumber(valueO[2])
 	fmsO["targetpgNo"]=tonumber(valueO[2])
-	value=valueO[1]
+	local value=valueO[1]
 
-	if value=="FMC" then
+	if value=="IDENT" then
+		simCMD_fmsL_key_index:once()
+		simCMD_fmsL_key_l1:once()
+	end
+
+	--[[if value=="FMC" then
 		fmsO["targetCustomFMC"]=false
 		fmsO["targetPage"]="FMC"
 		simCMD_FMS_key[fmsO.id]["fpln"]:once()
@@ -159,13 +164,14 @@ function fmsFunctions.setpage_no(fmsO,valueA) -- set page with target page numbe
 		fmsModules[fmsO.id].targetPage="LEGS"
 		simCMD_FMS_key[fmsO.id]["legs"]:once()
 		fmsModules[fmsO.id].targetpgNo=1
-	else
-		fmsO["targetCustomFMC"]=true
+	else]]
+		--fmsO["targetCustomFMC"]=true
 		fmsO["targetPage"]=value
-	end
+	--end
 
 	print("setpage " .. value)
-	run_after_time(switchCustomMode, 0.5)
+	--run_after_time(switchCustomMode, 0.5)
+	switchCustomMode() -- moved delay
 end
 
 function fmsFunctions.setpage(fmsO,value) -- set page
@@ -175,47 +181,48 @@ function fmsFunctions.setpage(fmsO,value) -- set page
 	--sim/FMS2/navrad
 end
 
-function fmsFunctions.custom2fmc(fmsO,value)
-	print("custom2fmc" .. value)
-	simCMD_FMS_key[fmsO["id"]]["del"]:once()
-	simCMD_FMS_key[fmsO["id"]]["clear"]:once()
-	if value~="next" and value~="prev" and string.len(fmsO["scratchpad"])>0 then
-		for c in string.gmatch(fmsO["scratchpad"],".") do
-			local v = c
-			if v == "/" then v = "slash" end
-			simCMD_FMS_key[fmsO["id"]][v]:once()
-		end
-	elseif value=="next" then
-		fmsO["targetpgNo"]=fmsO["pgNo"]+1
-		run_after_time(switchCustomMode, 0.5)
-	elseif value=="prev" then 
-		fmsO["targetpgNo"]=fmsO["pgNo"]-1	run_after_time(switchCustomMode, 0.5)
-	end
-	simCMD_FMS_key[fmsO["id"]][value]:once()
-	fmsO["scratchpad"]=""
-end
+--function fmsFunctions.custom2fmc(fmsO,value)
+--	print("custom2fmc" .. value)
+--	simCMD_FMS_key[fmsO["id"]]["del"]:once()
+--	simCMD_FMS_key[fmsO["id"]]["clear"]:once()
+--	if value~="next" and value~="prev" and string.len(fmsO["scratchpad"])>0 then
+--		for c in string.gmatch(fmsO["scratchpad"],".") do
+--			local v = c
+--			if v == "/" then v = "slash" end
+--			simCMD_FMS_key[fmsO["id"]][v]:once()
+--		end
+--	elseif value=="next" then
+--		fmsO["targetpgNo"]=fmsO["pgNo"]+1
+--		run_after_time(switchCustomMode, 0.5)
+--	elseif value=="prev" then 
+--		fmsO["targetpgNo"]=fmsO["pgNo"]-1	run_after_time(switchCustomMode, 0.5)
+--	end
+--	simCMD_FMS_key[fmsO["id"]][value]:once()
+--	fmsO["scratchpad"]=""
+--end
+--
+--function fmsFunctions.key2fmc(fmsO,value)
+--	print("key2fmc" .. value)
+--	if string.len(fmsO["scratchpad"])>0 then
+--		simCMD_FMS_key[fmsO["id"]]["del"]:once()
+--		simCMD_FMS_key[fmsO["id"]]["clear"]:once()
+--		if value~="next" and value~="prev" then
+--			for c in string.gmatch(fmsO["scratchpad"],".") do
+--			local v=c
+--			if v=="/" then v="slash" end
+--				simCMD_FMS_key[fmsO["id"]][v]:once()
+--			end
+--		end
+--	end
+--	simCMD_FMS_key[fmsO["id"]][value]:once()
+--	fmsO["scratchpad"]=""
+--	fmsModules[fmsO.id].dispMSG = {} -- clear notifications
 
-function fmsFunctions.key2fmc(fmsO,value)
-	print("key2fmc" .. value)
-	if string.len(fmsO["scratchpad"])>0 then
-		simCMD_FMS_key[fmsO["id"]]["del"]:once()
-		simCMD_FMS_key[fmsO["id"]]["clear"]:once()
-		if value~="next" and value~="prev" then
-			for c in string.gmatch(fmsO["scratchpad"],".") do
-			local v=c
-			if v=="/" then v="slash" end
-				simCMD_FMS_key[fmsO["id"]][v]:once()
-			end
-		end
-	end
-	simCMD_FMS_key[fmsO["id"]][value]:once()
-	fmsO["scratchpad"]=""
-	fmsO["notify"]=""
-end
+--end
 
-local updateFrom="fmsL"
+--[[local updateFrom="fmsL"
 local lastCrz=0
---[[function checkCRZ()
+function checkCRZ()
 	if lastCrz==B777BR_cruiseAlt then return end
 	if is_timer_scheduled(updateCRZ)==true then return end
 	simCMD_FMS_key[fmsL.id]["fpln"]:once()--make sure we arent on the vnav page
@@ -363,7 +370,8 @@ function fmsFunctions.setdata(fmsO,value)
 		local baro = tonumber(fmsO["scratchpad"])
 
 		if baro == nil then
-			fmsO["notify"] = "INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[06])
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			if baro % 1 == 0 then
 				if baro >= 950 and baro <= 1050 then
@@ -372,7 +380,7 @@ function fmsFunctions.setdata(fmsO,value)
 					simDR_altimiter_setting[id+1] = baro / 33.863892
 					fmsO["scratchpad"] = ""
 				else
-					fmsO["notify"] = "INVALID ENTRY"
+					fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 				end
 			else
 				if baro <= 31 and baro >= 29 then
@@ -381,7 +389,7 @@ function fmsFunctions.setdata(fmsO,value)
 					simDR_altimiter_setting[id+1] = baro
 					fmsO["scratchpad"] = ""
 				else
-					fmsO["notify"] = "INVALID ENTRY"
+					fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 				end
 			end
 		end
@@ -398,7 +406,7 @@ function fmsFunctions.setdata(fmsO,value)
 					fmsO["scratchpad"] = ""
 					B777DR_minimums_visible[id] = 1
 				else
-					fmsO["notify"] = "INVALID ENTRY"
+					fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 				end
 			else
 				if mins >= -1000 and mins <= 15000 then
@@ -406,11 +414,11 @@ function fmsFunctions.setdata(fmsO,value)
 					fmsO["scratchpad"] = ""
 					B777DR_minimums_visible[id] = 1
 				else
-					fmsO["notify"] = "INVALID ENTRY"
+					fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 				end
 			end
 		else
-			fmsO["notify"] = "INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		end
 		return
 	end
@@ -420,17 +428,18 @@ function fmsFunctions.setdata(fmsO,value)
 			setFMSData("readmeCodeInput", fmsO["scratchpad"])
 			if string.len(fmsO["scratchpad"]) == 5 then
 				if fmsO["scratchpad"] == B777DR_readme_code or fmsO["scratchpad"] == "BIRDS" then
-					fmsO["notify"] = "UNLOCKED"
+					fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
+					fmsModules[fmsO.id]:notify("alert", "UNLOCKED")
 					fmsO["scratchpad"] = ""
 					setSimConfig("FMC", "unlocked", 1)
 				else
-					fmsO["notify"] = "INCORRECT CODE"
+					fmsModules[fmsO.id]:notify("alert", "INCORRECT CODE")
 				end
 			else
-				fmsO["notify"] = "INVALID ENTRY"
+				fmsModules[fmsO.id]:notify("alert", "INVALID ENTRY")
 			end
 		else
-			fmsO["notify"] = "ALREADY UNLOCKED"
+			fmsModules[fmsO.id]:notify("alert", "ALREADY UNLOCKED")
 		end
 		return
 	end
@@ -446,7 +455,7 @@ function fmsFunctions.setdata(fmsO,value)
 		setFMSData("fltdst",dst)
 	elseif value=="clbspd" then
 		if validateSpeed(fmsO["scratchpad"]) ==false then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("clbspd",fmsO["scratchpad"])
 		end
@@ -454,7 +463,7 @@ function fmsFunctions.setdata(fmsO,value)
 		spd=string.sub(fmsO["scratchpad"],1,3)
 		alt=string.sub(fmsO["scratchpad"],5)
 		if validateSpeed(spd) ==false then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("transpd",spd)
 			if validAlt(alt) ~=nil then
@@ -465,13 +474,13 @@ function fmsFunctions.setdata(fmsO,value)
 		if validAlt(fmsO["scratchpad"]) ~=nil then
 			setFMSData("transalt",validAlt(fmsO["scratchpad"]))
 		else
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		end
 	elseif value=="clbrest" then
 		spd=string.sub(fmsO["scratchpad"],1,3)
 		alt=string.sub(fmsO["scratchpad"],5)
 		if validateSpeed(spd) ==false then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("clbrestspd",spd)
 			if validAlt(alt) ~=nil then
@@ -480,7 +489,7 @@ function fmsFunctions.setdata(fmsO,value)
 		end
 	elseif value=="crzspd" then
 		if validateMachSpeed(fmsO["scratchpad"]) ==nil then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("crzspd",validateMachSpeed(fmsO["scratchpad"]))
 		end
@@ -488,7 +497,7 @@ function fmsFunctions.setdata(fmsO,value)
 		if validFL(fmsO["scratchpad"]) ~=nil then 
 			setFMSData("stepalt",validFL(fmsO["scratchpad"]))
 		else
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		end
 	elseif value=="desspds" then
 		div = string.find(fmsO["scratchpad"], "%/")
@@ -502,7 +511,7 @@ function fmsFunctions.setdata(fmsO,value)
 		-- print(spd)
 		machspd=string.sub(fmsO["scratchpad"],1,div-1)
 		if validateMachSpeed(machspd) ==nil or validateSpeed(spd) ==false then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("desspd",spd)
 			setFMSData("desspdmach",validateMachSpeed(machspd))
@@ -511,7 +520,7 @@ function fmsFunctions.setdata(fmsO,value)
 		spd=string.sub(fmsO["scratchpad"],1,3)
 		alt=string.sub(fmsO["scratchpad"],5)
 		if validateSpeed(spd) ==false then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("destranspd",spd)
 			if validAlt(alt) ~=nil then 
@@ -522,7 +531,7 @@ function fmsFunctions.setdata(fmsO,value)
 		spd=string.sub(fmsO["scratchpad"],1,3)
 		alt=string.sub(fmsO["scratchpad"],5)
 		if validateSpeed(spd) ==false then 
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			setFMSData("desrestspd",spd)
 			if validAlt(alt) ~=nil then 
@@ -558,7 +567,7 @@ function fmsFunctions.setdata(fmsO,value)
 					setFMSData("airportgate","-----")
 					fmsO["scratchpad"] = ""
 				else
-					fmsO["notify"]="NOT IN DATABASE"
+					fmsModules[fmsO.id]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
 				end
 			elseif del == true then
 				setFMSData("airportpos",defaultFMSData().airportpos)
@@ -566,7 +575,7 @@ function fmsFunctions.setdata(fmsO,value)
 				setFMSData("irsLat",defaultFMSData().irsLat)
 				setFMSData("irsLon",defaultFMSData().irsLon)
 			else
-				fmsO["notify"]="INVALID ENTRY"
+				fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 			end
 		else
 			print("ERROR: navAidsJSON is invalid: "..navAidsJSON)
@@ -592,7 +601,7 @@ function fmsFunctions.setdata(fmsO,value)
 			numInput = tonumber(input)
 			if numInput then
 				if numInput < 180 then -- trans alt
-					fmsO["notify"] = "INVALID ENTRY"
+					fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 					return
 				end
 			end
@@ -620,7 +629,7 @@ function fmsFunctions.setdata(fmsO,value)
 				--end
 			end
 		end
-		fmsO["notify"] = "INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		return
 	elseif value=="irspos" then
 		if string.len(fmsO["scratchpad"])>10 then
@@ -640,7 +649,7 @@ function fmsFunctions.setdata(fmsO,value)
 			fmsModules["data"]["initIRSLon"]=lon
 			B777DR_fmc_notifications[12]=0
 		else
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		end
 --      if fmsModules["fmsL"].notify=="ENTER IRS POSITION" then fmsModules["fmsL"].notify="" end
 --      if fmsModules["fmsC"].notify=="ENTER IRS POSITION" then fmsModules["fmsC"].notify="" end
@@ -651,7 +660,7 @@ function fmsFunctions.setdata(fmsO,value)
      fmsFunctions["custom2fmc"](fmsO,"L1")
      fmsModules:setData("crzalt","*****") -- clear cruise alt /crzalt when entering a new source airport (this is broken and currently disabled)
 	else
-		fmsO["notify"]="INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 	end
 	elseif value=="airportgate" then
 		if string.len(fmsO["scratchpad"]) <= 5 then
@@ -661,12 +670,12 @@ function fmsFunctions.setdata(fmsO,value)
 			setFMSData("irsLon",lon)]]
 			fmsModules["data"].airportgate = fmsO["scratchpad"]
 		else
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		end
 		return
 	elseif value == "sethdg" then
 		if validate_sethdg(fmsO["scratchpad"]) == false then
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		else
 			if fmsModules["data"] ~= "---`" then -- what?
 				if (fmsO["scratchpad"] == "0" or fmsO["scratchpad"] == "00" or fmsO["scratchpad"] == "000") then
@@ -691,7 +700,7 @@ function fmsFunctions.setdata(fmsO,value)
 		end
 		local vref=tonumber(string.sub(fmsO["scratchpad"],4))
 		if vref==nil or vref<110 or vref>180 then
-			fmsO["notify"]="INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 			return
 		end
 		B777DR_airspeed_Vref=vref
@@ -724,7 +733,7 @@ function fmsFunctions.setdata(fmsO,value)
 				end
 			end
 		end
-		fmsO["notify"]="INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		return
 	elseif value == "costindex" then -- invalid within 10 miles of td
 		local numInput = tonumber(fmsO["scratchpad"])
@@ -735,7 +744,7 @@ function fmsFunctions.setdata(fmsO,value)
 				return
 			end
 		end
-		fmsO["notify"] = "INVALID ENTRY" -- should also be invalid within 10nm of t/d
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY -- should also be invalid within 10nm of t/d
 		return
 	elseif value == "minfueltemp" then
 		local numInput = tonumber(fmsO["scratchpad"])
@@ -746,7 +755,7 @@ function fmsFunctions.setdata(fmsO,value)
 				return
 			end
 		end
-		fmsO["notify"] = "INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		return
 	elseif value == "perfinitfuel" then
         local input = fmsO["scratchpad"]
@@ -762,7 +771,7 @@ function fmsFunctions.setdata(fmsO,value)
                 return
             end
         end
-        fmsO["notify"] = "INVALID ENTRY"
+        fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
         return
 	elseif value == "grwt" then
 
@@ -775,7 +784,7 @@ function fmsFunctions.setdata(fmsO,value)
 				numInput = numInput / kgs_to_lbs
 			end
 			if numInput > 352.4 or numInput - (simDR_total_fuel_kgs / 1000) < 166.4 then
-				fmsO["notify"] = "INVALID ENTRY"
+				fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 				return
 			end
 		elseif fmsO["scratchpad"] == "" then -- blank entry, autofill
@@ -783,14 +792,14 @@ function fmsFunctions.setdata(fmsO,value)
 			fmsModules["data"].zfw = string.format("%3.1f", (simDR_gross_wt_kgs - simDR_total_fuel_kgs) / 1000)
 			return
 		else
-			fmsO["notify"] = "INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 			return
 		end
 
 		fmsO["scratchpad"] = ""
 		fmsModules["data"].grwt = string.format("%3.1f", numInput)
 		fmsModules["data"].zfw = string.format("%3.1f", numInput - (simDR_total_fuel_kgs / 1000))
-		--fmsO["notify"] = "TAKEOFF SPEEDS DELETED" --TODO: vspds
+		fmsModules[fmsO.id]:notify("alert", alertMsgs[27]) -- TAKEOFF SPEEDS DELETED --TODO: vspds
 		return
 	elseif value == "zfw" then
 		local numInput
@@ -802,7 +811,7 @@ function fmsFunctions.setdata(fmsO,value)
 				numInput = numInput / kgs_to_lbs
 			end
 			if (simDR_total_fuel_kgs / 1000) + numInput > 352.4 or numInput < 166.4 then
-				fmsO["notify"] = "INVALID ENTRY"
+				fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 				return
 			end
 		elseif fmsO["scratchpad"] == "" then -- blank entry, autofill
@@ -810,14 +819,14 @@ function fmsFunctions.setdata(fmsO,value)
 			sfmsModules["data"].zfw = string.format("%3.1f", (simDR_gross_wt_kgs - simDR_total_fuel_kgs) / 1000)
 			return
 		else
-			fmsO["notify"] = "INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 			return
 		end
 
 		fmsO["scratchpad"] = ""
 		fmsModules["data"].grwt = string.format("%3.1f", (simDR_total_fuel_kgs / 1000) + numInput)
 		fmsModules["data"].zfw = string.format("%3.1f", numInput)
-		--fmsO["notify"] = "TAKEOFF SPEEDS DELETED"
+		fmsModules[fmsO.id]:notify("alert", alertMsgs[27]) -- TAKEOFF SPEEDS DELETED --TODO: vspds
 		return
 	elseif value == "reserves" then
 		local numInput = tonumber(fmsO["scratchpad"])
@@ -831,7 +840,7 @@ function fmsFunctions.setdata(fmsO,value)
 			return
 			end
 		end
-		fmsO["notify"] = "INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		return
 	elseif value == "crzcg" then
 		local numInput = tonumber(fmsO["scratchpad"])
@@ -842,7 +851,7 @@ function fmsFunctions.setdata(fmsO,value)
 				return
 			end
 		end
-		fmsO["notify"] = "INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		return
 	elseif value == "stepsize" then
 		local numInput = tonumber(fmsO["scratchpad"])
@@ -852,11 +861,11 @@ function fmsFunctions.setdata(fmsO,value)
 			return
 		end
 		if not numInput then
-			fmsO["notify"] = "INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 			return
 		end
 		if numInput < 0 or numInput > 9000 or numInput % 1000 ~= 0 then  --ensure increments of 1000
-			fmsO["notify"] = "INVALID ENTRY"
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 			return
 		end
 		fmsModules["data"].stepsize = fmsO["scratchpad"]
@@ -864,7 +873,7 @@ function fmsFunctions.setdata(fmsO,value)
 		return
   elseif value == "cg_mac" then
 	if string.match(fmsO["scratchpad"], "%a") or string.match(fmsO["scratchpad"], "%s") or fmsModules["data"].cg_mac == "--" then
-		fmsO["notify"] = "INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		return
 	elseif string.len(fmsO["scratchpad"]) > 0 then 
 		calc_stab_trim(fmsModules["data"].grwt, fmsO["scratchpad"])
@@ -903,19 +912,19 @@ function fmsFunctions.setDref(fmsO,value)
 			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
 			else
-				fmsModules["fmsL"].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		elseif fmsO.id == "fmsC" then
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[1] = 1 - B777DR_cdu_eicas_ctl[1]
 			else
-				fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		else
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[1] == 0 then
 				B777DR_cdu_eicas_ctl[2] = 1 - B777DR_cdu_eicas_ctl[2]
 			else
-				fmsModules["fmsR"].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		end
 		return
@@ -927,7 +936,7 @@ function fmsFunctions.setDref(fmsO,value)
 		elseif fmsO.id == "fmsR" then
 			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
 		else
-			fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -956,7 +965,7 @@ function fmsFunctions.setDref(fmsO,value)
   if value=="PAUSEVAL" then
 	local numVal=tonumber(fmsO["scratchpad"])
 	fmsO["scratchpad"]="" 
-	if numVal==nil then fmsO["notify"]="INVALID ENTRY" return end
+	if numVal==nil then fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) return end -- INVALID ENTRY
 	if numVal>999 then numVal=999 end
 	if numVal<=1 then numVal=1 end
 	B777DR_ap_vnav_pause=numVal
@@ -972,7 +981,7 @@ function fmsFunctions.setDref(fmsO,value)
   if value=="CLB1" then clbderate=1 return  end
   if value=="CLB2" then clbderate=2  return end
   if value=="ILS" then 
-    if findILS(fmsO["scratchpad"])==false then fmsO["notify"]="INVALID ENTRY" end
+    if findILS(fmsO["scratchpad"])==false then fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) end -- INVALID ENTRY
     fmsO["scratchpad"]="" 
     return 
   end
@@ -980,7 +989,7 @@ function fmsFunctions.setDref(fmsO,value)
   if value=="VORL" and val==nil then B777DR_radioModes=replace_char(2,modes,"A") fmsO["scratchpad"]="" return end
   if value=="VORR" and val==nil then B777DR_radioModes=replace_char(3,modes,"A") fmsO["scratchpad"]="" return end
    if val==nil or (value=="CRSL" and modes:sub(2, 2)=="A") or (value=="CRSR" and modes:sub(3, 3)=="A") then
-     fmsO["notify"]="INVALID ENTRY"
+     fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
      return 
    end
  --print(val)
@@ -992,14 +1001,14 @@ function fmsFunctions.setDref(fmsO,value)
   if value=="ADFR" then simDR_radio_adf2_freq_hz=val end
   if value=="V1" then
 	if val<100 or val>200 then
-		fmsO["notify"]="INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
      	return 
 	end
 	B777DR_airspeed_V1=val 
   end
   if value=="VR" then
 	if val<100 or val>200 then
-		fmsOsetsound["notify"]="INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
      	return 
 	end
 	
@@ -1007,14 +1016,14 @@ function fmsFunctions.setDref(fmsO,value)
   end
   if value=="V2" then
 	if val<100 or val>200 then
-		fmsO["notify"]="INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
      	return 
 	end
 	B777DR_airspeed_V2=val 
   end
   if value=="flapsRef" then 
 	if val~=10 and val~=20 then
-		fmsO["notify"]="INVALID ENTRY"
+		fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
      	return 
 	end
 	B777DR_airspeed_flapsRef=val 
@@ -1025,7 +1034,7 @@ end
 
 function fmsFunctions.showmessage(fmsO,value)
   acarsSystem.currentMessage=value
-  fmsO["inCustomFMC"]=true
+  --fmsO["inCustomFMC"]=true
   fmsO["targetPage"]="VIEWACARSMSG"
   run_after_time(switchCustomMode, 0.5)
 end
@@ -1202,7 +1211,7 @@ function fmsFunctions.setpage2(fmsO, value)
 			end
 			return
 		end
-		fmsModules["fmsC"].notify="KEY/FUNCTION INOP"
+		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 		return
 	end
 
@@ -1211,19 +1220,19 @@ function fmsFunctions.setpage2(fmsO, value)
 			if B777DR_cdu_eicas_ctl[0] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		elseif fmdO.id == "fmsC" then
 			if B777DR_cdu_eicas_ctl[1] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		else
 			if B777DR_cdu_eicas_ctl[2] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		end
 		return
@@ -1234,16 +1243,16 @@ function fmsFunctions.setpage2(fmsO, value)
 			if B777DR_cdu_efis_ctl[0] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		elseif fmsO.id == "fmsR" then
 			if B777DR_cdu_efis_ctl[1] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 			end
 		else
-			fmsModules[fmsO.id].notify="KEY/FUNCTION INOP"
+			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -1252,7 +1261,7 @@ function fmsFunctions.setpage2(fmsO, value)
 		if getSimConfig("FMC", "unlocked") == 1 then
 			fmsFunctions["setpage"](fmsO,"INDEX")
 		else
-			fmsModules[fmsO.id].notify="CDU LOCKED"
+			fmsModules[fmsO.id]:notify("alert", "CDU LOCKED")
 		end
 	end
 end
