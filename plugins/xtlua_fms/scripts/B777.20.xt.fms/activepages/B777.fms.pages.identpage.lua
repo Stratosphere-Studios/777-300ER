@@ -1,11 +1,11 @@
 fmsPages["IDENT"]=createPage("IDENT")
 
 fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be this way
-	local nav_data_from_month = string.sub(B777DR_srcfms[fmsID][5],3,5)
-	local nav_data_from_day = string.sub(B777DR_srcfms[fmsID][5],1,2)
-	local nav_data_to_month = string.sub(B777DR_srcfms[fmsID][5],11,13)
-	local nav_data_to_day = string.sub(B777DR_srcfms[fmsID][5],9,10)
-	local nav_data_yr = string.sub(B777DR_srcfms[fmsID][5],14,15)
+	local nav_data_from_month = string.sub(simDR_fmsL_line4,3,5)
+	local nav_data_from_day = string.sub(simDR_fmsL_line4,1,2)
+	local nav_data_to_month = string.sub(simDR_fmsL_line4,11,13)
+	local nav_data_to_day = string.sub(simDR_fmsL_line4,9,10)
+	local nav_data_yr = string.sub(simDR_fmsL_line4,14,15)
 	local navdata = string.format("%s%s%s%s/%s", nav_data_from_month, nav_data_from_day, nav_data_to_month, nav_data_to_day, nav_data_yr)
 	local monthTable = {
 		JAN = "01",
@@ -26,7 +26,7 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 
 		"          IDENT         ",
 		"                        ",
-		"777.300.1     GE90-115BL",
+		"777.300.2    GE90-115BL1",
 		"                        ",
 		airac.." "..navdata,
 		"                        ",
@@ -59,6 +59,10 @@ fmsPages["IDENT"].getSmallPage=function(self,pgNo,fmsID)
 		"                        ",
 		"                        "
 	}
+end
+
+fmsPages["IDENT"].getNumPages = function(Self)
+	return 1
 end
 
 fmsFunctionsDefs["IDENT"]={}

@@ -5,137 +5,129 @@
 *****************************************************************************************
 ]]
 
+simCMD_fmsL_key_index = find_command("sim/FMS/index")
+simCMD_fmsL_key_l1 = find_command("sim/FMS/ls_1l")
+simDR_fmsL_line13 = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line13")
+simDR_fmsL_line4 = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line4")
+
 fms={
-  id,
+  id = "",
   page1=false,
   prevPage = "README",
   currentPage = "README",
   targetPage = "README",
   targetpgNo = 1,
-  targetCustomFMC = false,
-  inCustomFMC = false,
+  --targetCustomFMC = true,
+  --inCustomFMC = true,
   scratchpad="",
-  notify="",
-  pgNo = 1
+  notify,
+  dispMSG = {},
+  pgNo = 1,
 }
 
+local outOfDateNotified = false
+
 simCMD_FMS_key={}
-function fmsClearNotify(notification)
-  for i =1,53,1 do
-    print("do FMS notify".." ".. i .." " ..B777DR_fmc_notifications[i])
-    if B777_FMCAlertMsg[i].name==notification then
-      fmsModules["fmsL"]["notify"] = ""
-      fmsModules["fmsC"]["notify"] = ""
-      fmsModules["fmsR"]["notify"] = ""
-      B777DR_fmc_notifications[i]=0
-      print("do clear FMS notify"..B777_FMCAlertMsg[i].name)
-      break
-    end
-  end
-end
 
 fmsKeyFunc={}
 
-function keyDown(fmsModule,key)
+local kdModule
+local kdKey
+
+function delayKeyDown(fmsModule, key) -- simulated realistic input lag. if more than 1 key pressed during delay only one will work (may need to fix in the future)
+  kdModule = fmsModule
+  kdKey = key
+  run_after_time(keyDown, 0.2)
+end
+
+function keyDown() -- only page keys have delay, not entry ones
+
+  local fmsModule = kdModule
+  local key = kdKey
 
   if getSimConfig("FMC", "unlocked") == 1 then
   --if false then
-    run_after_time(switchCustomMode, 0.5)
+    --run_after_time(switchCustomMode, 0.5)
+    --switchCustomMode() -- moved delay
     print(fmsModule.. " do " .. key)
 
     if key=="fix" then --menu
-      fmsModules[fmsModule].targetCustomFMC = true
+      --fmsModules[fmsModule].targetcustomFMC = true
       fmsModules[fmsModule].targetPage = "INDEX"
       fmsModules[fmsModule].targetpgNo = 1
+      switchCustomMode()
       return
     end
 
-    local i = 0
-    if fmsModule == "fmsL" then
-      i = 0
-    elseif fmsModule == "fmsR" then
-      i = 1
-    else
-      i = 2
-    end
+    local i = fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2
 
     if B777DR_cdu_act[i] == 1 and fmsModule ~= "fmsC" then
       if key=="index" then
-        fmsModules[fmsModule].targetCustomFMC = true
+        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "INITREF"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="fpln" then --RTE
-        fmsModules[fmsModule].targetCustomFMC = true
-        simCMD_FMS_key[fmsModule]["fpln"]:once()
+        --fmsModules[fmsModule].targetcustomFMC = true
+        --simCMD_FMS_key[fmsModule]["fpln"]:once()
         fmsModules[fmsModule].targetPage = "RTE1"
         fmsModules[fmsModule].targetpgNo = 1
         --[[fmsModules[fmsModule].inCustomFMC = false
         simCMD_FMS_key[fmsModule]["fpln"]:once()]]
-        return
       elseif key=="clb" then
-        fmsModules[fmsModule].targetCustomFMC = false
+        --fmsModules[fmsModule].targetcustomFMC = false
         simCMD_FMS_key[fmsModule]["dep_arr"]:once()
         fmsModules[fmsModule].targetPage = "DEPARR"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="crz" then
-        fmsModules[fmsModule].targetCustomFMC = true
+        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "ATCINDEX"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="des" then
-        fmsModules[fmsModule].targetCustomFMC = true
+        --fmsModules[fmsModule].targetcustomFMC = true
         --simCMD_FMS_key[fmsModule]["clb"]:once()
         fmsModules[fmsModule].targetPage = "VNAV"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="dir_intc" then
-        fmsModules[fmsModule].targetCustomFMC = false
+        --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "FIX"
         simCMD_FMS_key[fmsModule]["fix"]:once()
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="legs" then
         --if simDR_onGround ==1 then
-        fmsModules[fmsModule].targetCustomFMC = true
+        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "LEGS"
         simCMD_FMS_key[fmsModule]["legs"]:once()
         fmsModules[fmsModule].targetpgNo = 1
         --[[else
-        fmsModules[fmsModule].targetCustomFMC = false
+        --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "RTE2"
         simCMD_FMS_key[fmsModule]["dir_intc"]:once()
         fmsModules[fmsModule].targetpgNo = 1
         end]]
-        return
       elseif key=="dep_arr" then
-        fmsModules[fmsModule].targetCustomFMC = false
+        --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "HOLD"
         simCMD_FMS_key[fmsModule]["hold"]:once()
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="hold" then --FMC COMM
-        fmsModules[fmsModule].targetCustomFMC = true 
+        --fmsModules[fmsModule].targetcustomFMC = true 
         fmsModules[fmsModule].targetPage = "FMCCOMM"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="navrad" then
-        fmsModules[fmsModule].targetCustomFMC = true
+        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "NAVRAD"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       elseif key=="prog" then
-        fmsModules[fmsModule].targetCustomFMC = true
+        --fmsModules[fmsModule].targetcustomFMC = true
         simCMD_FMS_key[fmsModule][key]:once()
         fmsModules[fmsModule].targetPage = "PROGRESS"
         fmsModules[fmsModule].targetpgNo = 1
-        return
       end
+      switchCustomMode()
     end
   end
 
-  if not fmsModules[fmsModule].targetCustomFMC then
+  --[[if not fmsModules[fmsModule].targetCustomFMC then
 
     if simCMD_FMS_key[fmsModule][key] ~= nil then
       simCMD_FMS_key[fmsModule][key]:once()
@@ -151,20 +143,16 @@ function keyDown(fmsModule,key)
       end
     end
 
-  else
-    page = fmsModules[fmsModule].targetPage
+  else]]
+    local page = fmsModules[fmsModule].targetPage
     if key=="clear" then
-      simCMD_FMS_key[fmsModule]["clear"]:once()
-      if string.len(fmsModules[fmsModule].notify) >0 then
-        fmsClearNotify(fmsModules[fmsModule].notify)
-        fmsModules[fmsModule].notify=""
+      if fmsModules[fmsModule].dispMSG[1] then
+        table.remove(fmsModules[fmsModule].dispMSG, 1)
       else
-        fmsModules[fmsModule].scratchpad="" 
+        fmsModules[fmsModule].scratchpad=""
       end
       return
     end
-
-    --if string.len(fmsModules[fmsModule].notify)>0 and (hasChild(fmsFunctionsDefs[page],key)==false or fmsFunctionsDefs[page][key][1]~="key2fmc") then print("reject "..fmsFunctionsDefs[page][key][1].. " for "..key) return end -- require notification clear
 
     if hasChild(fmsFunctionsDefs[page],key) then
       print(fmsModule.. " found " .. fmsFunctionsDefs[page][key][1] .. " for " .. key)
@@ -187,101 +175,109 @@ function keyDown(fmsModule,key)
       end
       return
     elseif key=="next" then
-      fmsModules[fmsModule].targetpgNo=fmsModules[fmsModule].pgNo + 1
+      if fmsModules[fmsModule].pgNo < fmsPages[page]:getNumPages() then
+        fmsModules[fmsModule].targetpgNo=fmsModules[fmsModule].pgNo + 1
+      else
+        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+      end
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
-    elseif key=="prev" and fmsModules[fmsModule].pgNo > 1 then
-      fmsModules[fmsModule].targetpgNo=fmsModules[fmsModule].pgNo - 1
+    elseif key=="prev" then
+      if fmsModules[fmsModule].pgNo > 1 then
+        fmsModules[fmsModule].targetpgNo=fmsModules[fmsModule].pgNo - 1
+      else
+        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+      end
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
     elseif key=="exec" then
       simCMD_FMS_key[fmsModule][key]:once()
       return
     else
-      fmsModules[fmsModule].notify="KEY/FUNCTION INOP"
+      fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
     end
-  end
+  --end
 end
 
 function create_keypad(fms)
   fmsKeyFunc[fms]={};
 
   fmsKeyFunc[fms].funcs={
-    key_L1_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"],"L1") end end,
-    key_L2_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L2") end end,
-    key_L3_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L3") end end,
-    key_L4_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L4") end end,
-    key_L5_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L5") end end,
-    key_L6_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L6") end end,
+    key_L1_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"],"L1") end end,
+    key_L2_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L2") end end,
+    key_L3_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L3") end end,
+    key_L4_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L4") end end,
+    key_L5_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L5") end end,
+    key_L6_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L6") end end,
 
-    key_R1_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R1") end end,
-    key_R2_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R2") end end,
-    key_R3_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R3") end end,
-    key_R4_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R4") end end,
-    key_R5_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R5") end end,
-    key_R6_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R6") end end,
+    key_R1_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R1") end end,
+    key_R2_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R2") end end,
+    key_R3_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R3") end end,
+    key_R4_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R4") end end,
+    key_R5_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R5") end end,
+    key_R6_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R6") end end,
 
-    key_index_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "index") end end,
-    key_fpln_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "fpln") end end,
-    key_navrad_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "navrad") end end,
-    key_clb_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clb") end end,
-    key_crz_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "crz") end end,
-    key_des_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "des") end end,
-    key_dir_intc_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "dir_intc") end end,
-    key_legs_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "legs") end end,
-    key_dep_arr_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "dep_arr") end end,
-    key_hold_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "hold") end end,
-    key_prog_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "prog") end end,
-    key_execute_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "exec") end end,
-    key_fix_CMDhandler		=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "fix") end end,
-    key_prev_pg_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "prev") end end,
-    key_next_pg_CMDhandler	=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "next") end end,   
+    key_index_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "index") end end,
+    key_fpln_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "fpln") end end,
+    key_navrad_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "navrad") end end,
+    key_clb_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clb") end end,
+    key_crz_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "crz") end end,
+    key_des_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "des") end end,
+    key_dir_intc_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "dir_intc") end end,
+    key_legs_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "legs") end end,
+    key_dep_arr_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "dep_arr") end end,
+    key_hold_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "hold") end end,
+    key_prog_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "prog") end end,
+    key_execute_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "exec") end end,
+    key_fix_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "fix") end end,
+    key_prev_pg_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "prev") end end,
+    key_next_pg_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "next") end end,   
       
-    key_0_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "0") end end,
-    key_1_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "1") end end,
-    key_2_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "2") end end,
-    key_3_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "3") end end,
-    key_4_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "4") end end,
-    key_5_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "5") end end,
-    key_6_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "6") end end,
-    key_7_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "7") end end,
-    key_8_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "8") end end,
-    key_9_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "9") end end,
+    key_0_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "0") end end,
+    key_1_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "1") end end,
+    key_2_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "2") end end,
+    key_3_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "3") end end,
+    key_4_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "4") end end,
+    key_5_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "5") end end,
+    key_6_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "6") end end,
+    key_7_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "7") end end,
+    key_8_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "8") end end,
+    key_9_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "9") end end,
 
-    key_period_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], ".") end end,
-    key_minus_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "-") end end, 
+    key_period_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], ".") end end,
+    key_minus_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "-") end end, 
 
-    key_A_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "A") end end,
-    key_B_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "B") end end,
-    key_C_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "C") end end,
-    key_D_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "D") end end,
-    key_E_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "E") end end,
-    key_F_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "F") end end,
-    key_G_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "G") end end,
-    key_H_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "H") end end,
-    key_I_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "I") end end,
-    key_J_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "J") end end,
-    key_K_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "K") end end,
-    key_L_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L") end end,
-    key_M_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "M") end end,
-    key_N_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "N") end end,
-    key_O_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "O") end end,
-    key_P_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "P") end end,
-    key_Q_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Q") end end,
-    key_R_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R") end end,
-    key_S_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "S") end end,
-    key_T_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "T") end end,
-    key_U_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "U") end end,
-    key_V_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "V") end end,
-    key_W_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "W") end end,
-    key_X_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "X") end end,
-    key_Y_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Y") end end,
-    key_Z_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Z") end end,
+    key_A_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "A") end end,
+    key_B_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "B") end end,
+    key_C_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "C") end end,
+    key_D_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "D") end end,
+    key_E_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "E") end end,
+    key_F_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "F") end end,
+    key_G_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "G") end end,
+    key_H_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "H") end end,
+    key_I_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "I") end end,
+    key_J_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "J") end end,
+    key_K_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "K") end end,
+    key_L_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "L") end end,
+    key_M_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "M") end end,
+    key_N_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "N") end end,
+    key_O_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "O") end end,
+    key_P_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "P") end end,
+    key_Q_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Q") end end,
+    key_R_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "R") end end,
+    key_S_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "S") end end,
+    key_T_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "T") end end,
+    key_U_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "U") end end,
+    key_V_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "V") end end,
+    key_W_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "W") end end,
+    key_X_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "X") end end,
+    key_Y_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Y") end end,
+    key_Z_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Z") end end,
 
-    key_space_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "space") end end,
-    key_del_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "del") end end,
-    key_slash_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "slash") end end,
-    key_clear_CMDhandler=function (phase, duration) if phase ==0 then keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear") end end
+    key_space_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "space") end end,
+    key_del_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "del") end end,
+    key_slash_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "slash") end end,
+    key_clear_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear") end end
   }
   fmsKeyFunc[fms].funcs.parent=fms
 end
@@ -294,9 +290,9 @@ B777DR_fms_m={}
 B777DR_fms={}
 B777DR_fms_s={}
 B777DR_fms_s_hl={}
-B777DR_srcfms={}
+--B777DR_srcfms={}
 
-function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
+function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid) -- fmsObject |  xp cdu   |id for datarefs|xp cmd prefix | id for cmds
   B777DR_fms[fmsO.id]={}
   B777DR_fms[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L")
   B777DR_fms[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L")
@@ -430,12 +426,11 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
 	B777DR_fms_m[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L_m")
 	B777DR_fms_m[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L_m")
 
-  B777DR_srcfms[fmsO.id]={}
+  --[[B777DR_srcfms[fmsO.id]={}
   B777DR_srcfms[fmsO.id][1]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line0")
   B777DR_srcfms[fmsO.id][2]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line1")
   B777DR_srcfms[fmsO.id][3]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line2")
   B777DR_srcfms[fmsO.id][4]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line3")
-  B777DR_srcfms[fmsO.id][5]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line4")
   B777DR_srcfms[fmsO.id][6]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line5")
   B777DR_srcfms[fmsO.id][7]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line6")
   B777DR_srcfms[fmsO.id][8]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line7")
@@ -444,13 +439,14 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
   B777DR_srcfms[fmsO.id][11]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line10")
   B777DR_srcfms[fmsO.id][12]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line11")
   B777DR_srcfms[fmsO.id][13]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line12")
-  B777DR_srcfms[fmsO.id][14]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line13")
-  B777DR_srcfms[fmsO.id][15]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line14")
   B777DR_srcfms[fmsO.id][16]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line15")
-
+  B777DR_srcfms[fmsO.id][15]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line14")
+  B777DR_srcfms[fmsO.id][14]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line13")
+  B777DR_srcfms[fmsO.id][5]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line4")
   if keyid~=nil then
     simCMD_FMS_key[fmsO.id]={}
     simCMD_FMS_key[fmsO.id]["L1"]           = find_command(keyid.."ls_1l")
+    simCMD_FMS_key[fmsO.id]["index"]        = find_command(keyid.."index")
     simCMD_FMS_key[fmsO.id]["L2"]           = find_command(keyid.."ls_2l")
     simCMD_FMS_key[fmsO.id]["L3"]           = find_command(keyid.."ls_3l")
     simCMD_FMS_key[fmsO.id]["L4"]           = find_command(keyid.."ls_4l")
@@ -464,7 +460,7 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
     simCMD_FMS_key[fmsO.id]["R5"]           = find_command(keyid.."ls_5r")
     simCMD_FMS_key[fmsO.id]["R6"]           = find_command(keyid.."ls_6r")
 
-    simCMD_FMS_key[fmsO.id]["index"]        = find_command(keyid.."index")
+   
     simCMD_FMS_key[fmsO.id]["fpln"]         = find_command(keyid.."fpln")
     simCMD_FMS_key[fmsO.id]["clb"]          = find_command(keyid.."clb")
     simCMD_FMS_key[fmsO.id]["crz"]          = find_command(keyid.."crz")
@@ -532,7 +528,7 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid)
     simCMD_FMS_key[fmsO.id]["del"]       = find_command(keyid.."key_delete")
     simCMD_FMS_key[fmsO.id]["slash"]        = find_command(keyid.."key_slash")
     simCMD_FMS_key[fmsO.id]["clear"]        = find_command(keyid.."key_clear")
-  end
+  end]]
 
   create_keypad(fmsO.id)
   B777CMD_fms1_ls_key_L1              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L1", "FMS1 Line Select Key 1-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L1_CMDhandler"])
@@ -616,17 +612,10 @@ end
 
 function fms:B777_fms_display()
   local thisID = self.id
-  if self.inCustomFMC ~= self.targetCustomFMC or self.currentPage ~= self.targetPage or self.pgNo ~= self.targetpgNo then
-    --[[for i=1, 14, 1 do
-      B777DR_fms[thisID][i] = "                        "
-      B777DR_fms_s[thisID][i] = "                        "
-    end]]
-    return
-  end
 
-  local inCustomFMC=self.inCustomFMC
+  --local inCustomFMC=self.inCustomFMC
   local page=self.currentPage
-  if not inCustomFMC then
+  --[[if not inCustomFMC then
     for i=1,13,1 do
       B777DR_fms[thisID][i]=cleanFMSLine(B777DR_srcfms[thisID][i])
       B777DR_fms_s[thisID][i] = "                        "
@@ -639,15 +628,15 @@ function fms:B777_fms_display()
       B777DR_fms[thisID][14]=cleanFMSLine(B777DR_srcfms[thisID][14])
       B777DR_fms_s[thisID][14] = "                        "
     end
-  else
-    if self.pgNo > fmsPages[page]:getNumPages() then self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end
-    if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
+  else]]
+    --if self.pgNo > fmsPages[page]:getNumPages() then self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end
+    --if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
     local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
     local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
-    local tmpSRC
+ --   local tmpSRC
 
     for i=1,13,1 do
-      tmpSRC=B777DR_srcfms[thisID][i] -- make sure src is always fresh
+--      tmpSRC=B777DR_srcfms[thisID][i] -- make sure src is always fresh
 
       local input = ""
       local greenText = ""
@@ -734,14 +723,11 @@ function fms:B777_fms_display()
       B777DR_fms_s_hl[thisID][i]=highlightText
     end
 
-    if string.len(string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]",""))>0 then
-      B777DR_fms[thisID][14]=B777DR_srcfms[thisID][14]
-      self.notify=B777DR_srcfms[thisID][14]--string.gsub(B777DR_srcfms[thisID][14],"[ %[%]]","")
-      --print("notify["..self.notify.."]") ss777 note
-    elseif string.len(self.notify)>0 then
-      B777DR_fms[thisID][14] = self.notify
+    if self.dispMSG[1] then
+      B777DR_fms[thisID][14] = self.dispMSG[1].msg
     else
+      --print(thisID.." "..dump(fmsModules[thisID].dispMSG))
       B777DR_fms[thisID][14] = self.scratchpad;
     end
-  end
+  --end
 end

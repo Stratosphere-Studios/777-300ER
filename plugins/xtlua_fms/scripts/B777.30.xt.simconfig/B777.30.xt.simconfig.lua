@@ -61,7 +61,7 @@ B777DR_pfd_mach_gs          = deferred_dataref("Strato/777/pfd_mach_gs", "number
 --*************************************************************************************--
 local fileLocation = "Output/preferences/Strato_777_config.json"
 
-simConfigData = {}
+local simConfigData = {}
 
 function defaultValues()
 	return {
