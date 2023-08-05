@@ -22,6 +22,7 @@ local positionImage = loadImage("zYX5E.png")
 local triRight = loadImage("tri.png")
 local triLeft = loadImage("tri2.png")
 local checkMark = loadImage("check.png")
+local ChecklistComplete = loadImage("ChecklistComplete.png")
 
 
 local lowEicasMode = globalPropertyf("Strato/777/displays/eicas_mode")
@@ -122,10 +123,12 @@ function chklDraw(tbl, valtbl)
     for i, v in pairs(tbl) do
         if (valtbl[i] == 1) then
             ChklDrawCol = { 0, 1, 0, 1 }
-            drawTexture(checkMark, 35, 990 - 61 + yVal, 50, 50, white)
+            drawRectangle(35, 990 - 61 + yVal, 50, 50, grey)
+            drawTexture(checkMark, 37, 990 - 59 + yVal, 45, 45, white)
         elseif (valtbl[i] == 2) then
             ChklDrawCol = { 0, 1, 0, 1 }
-            drawTexture(checkMark, 35, 990 - 61 + yVal, 50, 50, white)
+            drawRectangle(35, 990 - 61 + yVal, 50, 50, grey)
+            drawTexture(checkMark, 37, 990 - 59 + yVal, 45, 45, white)
         elseif (valtbl[i] == 3) then
             ChklDrawCol = { 1, 1, 1, 1 }
         else
@@ -285,46 +288,73 @@ function draw()
     if get(lowEicasMode) == 10 then
         drawRectangle(0, 0, 4096, 4096, black)
 
-        if page >= 1 and page < 10 then
-            if not isFirstPageClick then
+        if page >= 1 and page <= 10 then
                 if checklistAllDone(get(page)) then
-                    --TODO: checklist complete
-                end
+                    drawTexture(ChecklistComplete, 725 / 2, 110, 475, 55, white)
+                    drawText(opensans, 1200 / 2 - 10, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
+                    drawRectangle(10 + 225, 10, 215, 92,black)
+                else
+                    drawRectangle(10 + 225, 10, 215, 92,grey)
+                    drawText(opensans, 120 + 225 - 5, 57,"ITEM", 45, false, false, TEXT_ALIGN_CENTER, white)
+                    drawText(opensans, 120 + 225 - 5, 17,"OVRD", 45, false, false, TEXT_ALIGN_CENTER, white)
             end
         end
 
 
 
-        if get(page == 0) then
+        if get(page) == 0 then
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, green)
-            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 76, "NORMAL MENU",
-                38, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "NORMAL MENU",
+                45, false, false, TEXT_ALIGN_CENTER, white)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
-            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 76,
-                "RESETS", 38, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75,
+                "RESETS", 45, false, false, TEXT_ALIGN_CENTER, white)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92,
                 grey)
-            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 76,
-                "NON-NORMAL MENU", 38, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75,
+                "NON-NORMAL MENU", 45, false, false, TEXT_ALIGN_CENTER, white)
         else
             get(page ~= 1)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
-            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 76, "NORMAL MENU",
-                38, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "NORMAL MENU",
+                45, false, false, TEXT_ALIGN_CENTER, white)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
-            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 76,
-                "RESETS", 38, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75,
+                "RESETS", 45, false, false, TEXT_ALIGN_CENTER, white)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92,
                 grey)
-            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 76,
-                "NON-NORMAL MENU", 38, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75,
+                "NON-NORMAL MENU", 45, false, false, TEXT_ALIGN_CENTER, white)
+            --bottom
+            drawRectangle(10, 10, 200, 92,grey)
+            drawText(opensans, 110, 37,"NORMAL", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawRectangle(1200 / 2 , 10, 200, 92,grey)- 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false, false,
+                TEXT_ALIGN_LEFT, green)                                                                                 --8
+            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
+                false, TEXT_ALIGN_LEFT, green)                                                                          --9
+            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
+                false, TEXT_ALIGN_LEFT, green)                                                                          --10
+            elseif get(page) == 1 then
+                    drawTexture(triRight, 475, 1200 - 145, 25, 32.6, white)
+                    drawTexture(triLeft, 375 - 3 + 295 + 30, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 2 then
+                   drawTexture(triRight, 440, 1200 - 145, 25, 32.6, white)
+                   drawTexture(triLeft, 375 + 30 + 295 + 30, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 6 then
+                    drawTexture(triRight, 505, 1200 - 145, 25, 32.6, white)
+                    drawTexture(triLeft, 665, 1200
+            drawText(opensans, 1200 / 2 + 100, 57,"CHKL", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1200 / 2 + 100, 17,"OVRD", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawRectangle(1200 / 2 + 225, 10, 200, 92,grey)
+            drawText(opensans, 1200 / 2 + 225 + 100, 57,"CHKL", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawText(opensans, 1200 / 2 + 225 + 100, 17,"RESET", 45, false, false, TEXT_ALIGN_CENTER, white)
         end
 
 
 
 
         if get(page) == 0 then
-            parseHome(checklisthome, -655, -76)
+            parseHome(checklisthome, -655, -75)
             if get(homepagesurr ~= 0) then
                 surroun(-95 * (get(homepagesurr)))
             end
@@ -335,23 +365,21 @@ function draw()
             local currentChecklistvalues
             local checklistTitle = checklistnames[page]
 
-
             currentChecklistname = mainchecklists[page]
             currentChecklistvalues = valueschecklist[page]
 
-
-
-            drawTexture(triRight, 375 + 70 - 50, 1200 - 145, 25, 32.6, white)
             drawText(opensans, 1200 / 2, 1200 - 145, checklistTitle, 45, false, false, TEXT_ALIGN_CENTER, white)
-            drawTexture(triLeft, 375 + 63 + 295 + 30, 1200 - 145, 25, 32.6, white)
             chklDraw(currentChecklistname, currentChecklistvalues)
             if (get(otherpagesurr) ~= 0) then
-                surroun2(-66 * (get(otherpagesurr)))
+                for i, value in ipairs(currentChecklistvalues) do
+                    if value ~= 3 then
+                        surroun2(-66 * (get(otherpagesurr)))
+                        break
+                    end
+                end
                 surroun3(-66 * (get(otherpagesurr)))
             end
         end
-
-
 
         --commiat
 
@@ -367,12 +395,7 @@ function draw()
                 TEXT_ALIGN_LEFT, green)                                                                                 --6
             drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false, false,
                 TEXT_ALIGN_LEFT, green)                                                                                 --7
-            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false, false,
-                TEXT_ALIGN_LEFT, green)                                                                                 --8
-            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
-                false, TEXT_ALIGN_LEFT, green)                                                                          --9
-            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
-                false, TEXT_ALIGN_LEFT, green)                                                                 --10
+            drawText(opensans, 450, 1035 - 95  - 145, 25, 32.6, white)
         end
     end
 end
