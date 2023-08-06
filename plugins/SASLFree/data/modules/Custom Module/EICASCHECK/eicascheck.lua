@@ -1,3 +1,4 @@
+
 -- eicascheck.lua
 -- Language: lua
 -- Path: Custom Module\EICASCHECK\eicascheck.lua
@@ -40,7 +41,7 @@ local mainchecklists = {
     bfrtaxichecklist,
     bfrtakeoffchecklist,
     aftertakeoffchecklist,
-    decentchecklist,
+    descentchecklist,
     approachecklist,
     landingchecklist,
     shutdownchecklist,
@@ -53,7 +54,7 @@ local valueschecklist = {
     bfrtaxichecklistvalues,
     bfrtakeoffchecklistvalues,
     aftertakeoffchecklistvalues,
-    decentchecklistvalues,
+    descentchecklistvalues,
     approachecklistvalues,
     landingchecklistvalues,
     shutdownchecklistvalues,
@@ -66,7 +67,7 @@ local checklistnames = {
     'BEFORE TAXI',
     'BEFORE TAKEOFF',
     'AFTER TAKEOFF',
-    'DECENT',
+    'DESCENT',
     'APPROACH',
     'LANDING',
     'SHUTDOWN',
@@ -168,7 +169,6 @@ function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMad
                     currentChecklistvalues[i] = 0
                 end
 
-                isFirstPageClick = false
             end,
 
 
@@ -195,7 +195,6 @@ function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMad
 
         onMouseDown = function()
             page = 0
-            isFirstPageClick = true
         end
 
     }
@@ -287,11 +286,10 @@ end
 function draw()
     if get(lowEicasMode) == 10 then
         drawRectangle(0, 0, 4096, 4096, black)
-
         if page >= 1 and page <= 10 then
                 if checklistAllDone(get(page)) then
                     drawTexture(ChecklistComplete, 725 / 2, 110, 475, 55, white)
-                    drawText(opensans, 1200 / 2 - 10, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
+                    drawText(opensans, 1200 / 2 - 5, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
                     drawRectangle(10 + 225, 10, 215, 92,black)
                 else
                     drawRectangle(10 + 225, 10, 215, 92,grey)
@@ -328,21 +326,7 @@ function draw()
             --bottom
             drawRectangle(10, 10, 200, 92,grey)
             drawText(opensans, 110, 37,"NORMAL", 45, false, false, TEXT_ALIGN_CENTER, white)
-            drawRectangle(1200 / 2 , 10, 200, 92,grey)- 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false, false,
-                TEXT_ALIGN_LEFT, green)                                                                                 --8
-            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
-                false, TEXT_ALIGN_LEFT, green)                                                                          --9
-            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
-                false, TEXT_ALIGN_LEFT, green)                                                                          --10
-            elseif get(page) == 1 then
-                    drawTexture(triRight, 475, 1200 - 145, 25, 32.6, white)
-                    drawTexture(triLeft, 375 - 3 + 295 + 30, 1200 - 145, 25, 32.6, white)
-            elseif get(page) == 2 then
-                   drawTexture(triRight, 440, 1200 - 145, 25, 32.6, white)
-                   drawTexture(triLeft, 375 + 30 + 295 + 30, 1200 - 145, 25, 32.6, white)
-            elseif get(page) == 6 then
-                    drawTexture(triRight, 505, 1200 - 145, 25, 32.6, white)
-                    drawTexture(triLeft, 665, 1200
+            drawRectangle(1200 / 2 , 10, 200, 92,grey)
             drawText(opensans, 1200 / 2 + 100, 57,"CHKL", 45, false, false, TEXT_ALIGN_CENTER, white)
             drawText(opensans, 1200 / 2 + 100, 17,"OVRD", 45, false, false, TEXT_ALIGN_CENTER, white)
             drawRectangle(1200 / 2 + 225, 10, 200, 92,grey)
@@ -395,7 +379,139 @@ function draw()
                 TEXT_ALIGN_LEFT, green)                                                                                 --6
             drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false, false,
                 TEXT_ALIGN_LEFT, green)                                                                                 --7
-            drawText(opensans, 450, 1035 - 95  - 145, 25, 32.6, white)
+            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false, false,
+                TEXT_ALIGN_LEFT, green)                                                                                 --8
+            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
+                false, TEXT_ALIGN_LEFT, green)                                                                          --9
+            drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
+                false, TEXT_ALIGN_LEFT, green)                                                                          --10
+            elseif get(page) == 1 then
+                    drawTexture(triRight, 475, 1200 - 145, 25, 32.6, white)
+                    drawTexture(triLeft, 375 - 3 + 295 + 30, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 2 then
+                   drawTexture(triRight, 440, 1200 - 145, 25, 32.6, white)
+                   drawTexture(triLeft, 375 + 30 + 295 + 30, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 6 then
+                    drawTexture(triRight, 505, 1200 - 145, 25, 32.6, white)
+                    drawTexture(triLeft, 665, 1200 - 145, 25, 32.6, white)
         end
     end
+end
+
+function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(num)
+    local tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM = 0
+
+
+
+    for i = 0, num, 1 do
+        components[#components + 1] = interactive {
+            position = { 0,
+                990 +
+                tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM,
+                1200, 50 },
+
+            onMouseDown = function()
+                local currentChecklistname
+                local currentChecklistvalues
+
+                if page >= 1 and page <= 10 then
+                    currentChecklistname = mainchecklists[page]
+                    currentChecklistvalues = valueschecklist[page]
+                end
+
+
+                if (currentChecklistvalues[i] == 0) then
+                    currentChecklistvalues[i] = 1
+                elseif (currentChecklistvalues[i] == 1) then
+                    currentChecklistvalues[i] = 0
+                end
+
+            end,
+
+
+
+
+            onMouseMove = function()
+                otherpagesurr = i
+                return true
+            end,
+
+            onMouseLeave = function()
+                --otherpagesurr = 0
+                --exhibit A.
+                return true
+            end
+        }
+        tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM =
+            tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM - 66
+    end
+
+    components[#components + 1] = interactive {
+
+        position = { 1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92 },
+
+        onMouseDown = function()
+            page = 0
+        end
+
+    }
+end
+
+function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(num)
+    local tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM = 0
+
+
+
+    for i = 0, num, 1 do
+        components[#components + 1] = interactive {
+            position = { 0,
+                990 +
+                tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM,
+                1200, 50 },
+
+            onMouseDown = function()
+                local currentChecklistname
+                local currentChecklistvalues
+
+                if page >= 1 and page <= 10 then
+                    currentChecklistname = mainchecklists[page]
+                    currentChecklistvalues = valueschecklist[page]
+                end
+
+
+                if (currentChecklistvalues[i] == 0) then
+                    currentChecklistvalues[i] = 1
+                elseif (currentChecklistvalues[i] == 1) then
+                    currentChecklistvalues[i] = 0
+                end
+
+            end,
+
+
+
+
+            onMouseMove = function()
+                otherpagesurr = i
+                return true
+            end,
+
+            onMouseLeave = function()
+                --otherpagesurr = 0
+                --exhibit A.
+                return true
+            end
+        }
+        tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM =
+            tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM - 66
+    end
+
+    components[#components + 1] = interactive {
+
+        position = { 1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92 },
+
+        onMouseDown = function()
+            page = 0
+        end
+
+    }
 end
