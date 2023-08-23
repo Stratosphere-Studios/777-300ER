@@ -12,7 +12,7 @@ checklisthome = {
     [6] = "DECENT",
     [7] = "APPROACH",
     [8] = "LANDING",
-    [9] = "SHUT DOWN",
+    [9] = "SHUTDOWN",
     [10] = 'SECURE'
 
 }
@@ -51,7 +51,7 @@ aftertakeoffchecklist = {
     [1] = 'Landing gear.........................UP',
     [2] = 'Flaps................................UP'
 }
-decentchecklist = {
+descentchecklist = {
     [1] = 'Recall..........................Checked',
     [2] = 'Notes...........................Checked',
     [3] = 'Autobrake........................... __',
@@ -91,7 +91,7 @@ bfrstartchecklistvalues = { 0, 0, 0, 0, 0, 0, 0, 3 }
 bfrtaxichecklistvalues = { 0, 0, 3, 0, 0 }
 bfrtakeoffchecklistvalues = { 3 }
 aftertakeoffchecklistvalues = { 3, 3 }
-decentchecklistvalues = { 0, 0, 0, 0, 0 }
+descentchecklistvalues = { 0, 0, 0, 0, 0 }
 approachecklistvalues = { 0 }
 landingchecklistvalues = { 3, 3, 3 }
 shutdownchecklistvalues = { 3, 0, 0, 3, 0 }

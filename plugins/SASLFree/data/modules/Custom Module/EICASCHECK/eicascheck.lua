@@ -289,7 +289,7 @@ function draw()
         if page >= 1 and page <= 10 then
                 if checklistAllDone(get(page)) then
                     drawTexture(ChecklistComplete, 725 / 2, 110, 475, 55, white)
-                    drawText(opensans, 1200 / 2 - 5, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
+                    drawText(opensans, 1200 / 2, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
                     drawRectangle(10 + 225, 10, 215, 92,black)
                 else
                     drawRectangle(10 + 225, 10, 215, 92,grey)
@@ -386,63 +386,35 @@ function draw()
             drawText(opensans, 450, 1035 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95 - 95, "<-PAGE FUNCTIONAL", 35, false,
                 false, TEXT_ALIGN_LEFT, green)                                                                          --10
             elseif get(page) == 1 then
-                    drawTexture(triRight, 475, 1200 - 145, 25, 32.6, white)
-                    drawTexture(triLeft, 375 - 3 + 295 + 30, 1200 - 145, 25, 32.6, white)
+                drawTexture(triRight, 475, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 375 - 5 + 295 + 30, 1200 - 145, 25, 32.6, white)
             elseif get(page) == 2 then
-                   drawTexture(triRight, 440, 1200 - 145, 25, 32.6, white)
-                   drawTexture(triLeft, 375 + 30 + 295 + 30, 1200 - 145, 25, 32.6, white)
+                drawTexture(triRight, 440, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 375 + 30 + 295 + 30, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 3 then
+                drawTexture(triRight, 450, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 720, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 4 then
+                drawTexture(triRight, 415, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 755, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 5 then
+                drawTexture(triRight, 430, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 745, 1200 - 145, 25, 32.6, white)
             elseif get(page) == 6 then
-                    drawTexture(triRight, 505, 1200 - 145, 25, 32.6, white)
-                    drawTexture(triLeft, 665, 1200 - 145, 25, 32.6, white)
+                drawTexture(triRight, 495, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 675, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 7 then
+                drawTexture(triRight, 490, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 690, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 8 then
+                drawTexture(triRight, 495, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 680, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 9 then
+                drawTexture(triRight, 485, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 690, 1200 - 145, 25, 32.6, white)
+            elseif get(page) == 10 then
+                drawTexture(triRight, 510, 1200 - 145, 25, 32.6, white)
+                drawTexture(triLeft, 665, 1200 - 145, 25, 32.6, white)
         end
-    end
-end
-
-function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM(num)
-    local tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM = 0
-
-
-
-    for i = 0, num, 1 do
-        components[#components + 1] = interactive {
-            position = { 0,
-                990 +
-                tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM,
-                1200, 50 },
-
-            onMouseDown = function()
-                local currentChecklistname
-                local currentChecklistvalues
-
-                if page >= 1 and page <= 10 then
-                    currentChecklistname = mainchecklists[page]
-                    currentChecklistvalues = valueschecklist[page]
-                end
-
-
-                if (currentChecklistvalues[i] == 0) then
-                    currentChecklistvalues[i] = 1
-                elseif (currentChecklistvalues[i] == 1) then
-                    currentChecklistvalues[i] = 0
-                end
-
-            end,
-
-
-
-
-            onMouseMove = function()
-                otherpagesurr = i
-                return true
-            end,
-
-            onMouseLeave = function()
-                --otherpagesurr = 0
-                --exhibit A.
-                return true
-            end
-        }
-        tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM =
-            tempYveryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMadeByProfessionalProgrammerTM - 66
     end
 end
