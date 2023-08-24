@@ -31,7 +31,7 @@ bfrstartchecklist = {
     [4] = 'Takeoff speeds......V1___, VR___, V2___',
     [5] = 'CDU preflight.................Completed',
     [6] = 'Trim.....................___Units, 0, 0',
-    [7] = 'Taxi and takeoff breifing.....completed',
+    [7] = 'Taxi and takeoff briefing.....Completed',
     [8] = 'Beacon...............................on'
 }
 
