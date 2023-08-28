@@ -1,7 +1,7 @@
 fmsPages["ACTRTE1"]=createPage("ACTRTE1")
 fmsPages["ACTRTE1"].getPage=function(self,pgNo,fmsID)
   if pgNo==1 then return {
-    "      RTE 1;c5             ",
+    "      RTE 1;c05             ",
     "                        ",
     ""..fmsModules["data"]["fltdep"] .."                "..fmsModules["data"]["fltdst"] ,
     "                        ",
@@ -11,7 +11,7 @@ fmsPages["ACTRTE1"].getPage=function(self,pgNo,fmsID)
     "                        ",
     "                        ",
     "------------------------",
-    "<PRINT;r6             ALTN>",
+    "<PRINT;r06             ALTN>",
     "                        ",
     "<RTE 2        PERF INIT>"
     }

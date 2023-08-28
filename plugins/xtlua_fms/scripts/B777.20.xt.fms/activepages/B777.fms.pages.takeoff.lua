@@ -146,7 +146,7 @@ fmsPages["TAKEOFF"].getPage=function(self,pgNo,fmsID)
       "                        ",
       "                        ",
       "                        ",
-      "                     ON;g2>",
+      "                     ON;g02>",
       "                        ",
       "<INDEX       THRUST LIM>"
     }

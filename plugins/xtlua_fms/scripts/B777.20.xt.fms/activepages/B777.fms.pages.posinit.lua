@@ -16,13 +16,13 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
     return {
       "      POS INIT          ",
       "                        ",
-      "      "..fmsModules["data"].lastpos,
+      "       "..fmsModules["data"].lastpos,
       "                        ",
       fmsModules["data"].airportpos.."  "..fmsModules["data"].aptLat..fmsModules["data"].aptLon,
       "                        ",
       fmsModules["data"].airportgate.."                    ",
       "                        ",
-      hrs..mins.."  "..fmsModules["data"].pos,
+      hrs..mins.."   "..fmsModules["data"].pos,
       "                        ",
       "      ***`**.* ****`**.*",
       "                        ",
@@ -80,7 +80,7 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
       "                        ", --irsSystem.getLine("gpsL"),
       "                        ",
       "                        ", --irsSystem.getLine("gpsR"),
-      "                     ON;gr2>",
+      "                     ON;g0r2>",
       "<INDEX          LAT/LON>"
     }
   end

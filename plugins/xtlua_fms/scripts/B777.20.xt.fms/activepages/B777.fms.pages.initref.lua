@@ -6,7 +6,7 @@ fmsPages["INITREF"].getPage=function(self,pgNo,fmsID)
     fmsFunctionsDefs["INITREF"]["L5"]={"setpage","TAKEOFF"}
     fmsFunctionsDefs["INITREF"]["R6"]={"setpage","MAINT"}
     lineA="<TAKEOFF                "
-    lineB="<APPROACH         MAINT>;r6"
+    lineB="<APPROACH         MAINT>;r06"
 --  else
 --    fmsFunctionsDefs["INITREF"]["L5"]=nil
 --    fmsFunctionsDefs["INITREF"]["R6"]=nil
@@ -16,7 +16,7 @@ fmsPages["INITREF"].getPage=function(self,pgNo,fmsID)
 	"                        ",
 	"<IDENT         NAV DATA>",
 	"                        ",
-	"<POS               ALTN>;r5",
+	"<POS               ALTN>;r05",
 	"                        ",
 	"<PERF                   ",
 	"                        ",

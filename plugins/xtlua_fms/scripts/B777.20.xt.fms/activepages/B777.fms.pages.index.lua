@@ -42,18 +42,18 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 
 	local efisln = "     "
 	local dspln = "    "
-	local efisOptL = "OFF;g3     "
-	local dspOptL = "OFF;g3     "
+	local efisOptL = "OFF;g03     "
+	local dspOptL = "OFF;g03     "
 	efisOptS, dspOptS  = "   <->ON", "   <->ON"
 
 	if efisCTL == 1 then
-		efisOptL = "      ON;g2"
+		efisOptL = "      ON;g02"
 		efisOptS = "OFF<->  "
 		efisln = "EFIS>"
 	end
 
 	if dspCTL == 1 then
-		dspOptL = "      ON;g2"
+		dspOptL = "      ON;g02"
 		dspOptS = "OFF<->     "
 		dspln = "DSP>"
 	end
@@ -72,21 +72,21 @@ fmsPages["INDEX"].getPage=function(self,pgNo,fmsID)
 		"                        ",
 		"<FMC    "..fmcACT.."  "..efisOptL..">",
 		"                        ",
-		"<SAT;r4    "..satACT.."      "..efisln,
+		"<SAT;r04    "..satACT.."      "..efisln,
 		"                        ",
 		"               "..dspOptL..">",
 		"                        ",
 		"                    "..dspln,
 		"                        ",
-		"                DISPLAY>;r8",
+		"                DISPLAY>;r08",
 		"                        ",
-		"                 MEMORY>;r7"
+		"                 MEMORY>;r07"
 	}
 
 	if fmsID == "fmsC" then
 		page[3] = "                       "
-		page[5] = "<SAT;r4                "
-		page[9] = "<CAB INT;r8 "..intACT.."       "..dspln
+		page[5] = "<SAT;r04                "
+		page[9] = "<CAB INT;r08 "..intACT.."      "..dspln
 		if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 			B777DR_cdu_eicas_ctl[1] = 0
 			page[7] = "                        "

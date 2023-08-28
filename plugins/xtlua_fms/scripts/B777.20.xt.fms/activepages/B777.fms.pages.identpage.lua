@@ -21,7 +21,7 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 		NOV = "11",
 		DEC = "12"
 	}
-	local airac = "AIRAC-"..nav_data_yr..monthTable[nav_data_to_month]
+	local airac = "AIRAC-"..nav_data_yr..monthTable[nav_data_to_month] -- may crash on linux; needs testing; try using assert(pcall()) or something
     return{
 
 		"          IDENT         ",

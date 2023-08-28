@@ -7,8 +7,9 @@
 
 simCMD_fmsL_key_index = find_command("sim/FMS/index")
 simCMD_fmsL_key_l1 = find_command("sim/FMS/ls_1l")
-simDR_fmsL_line13 = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line13")
 simDR_fmsL_line4 = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line4")
+simDR_fms_line13 = {fmsL = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line13"), fmsR = find_dataref("sim/cockpit2/radios/indicators/fms_cdu2_text_line13")}
+simCMD_fms_key_clr = {fmsL = find_command("sim/FMS/key_clear"), fmsR = find_command("sim/FMS2/key_clear")}
 
 fms={
   id = "",
@@ -34,10 +35,14 @@ fmsKeyFunc={}
 local kdModule
 local kdKey
 
-function delayKeyDown(fmsModule, key) -- simulated realistic input lag. if more than 1 key pressed during delay only one will work (may need to fix in the future)
+function delayKeyDown(fmsModule, key, ovrd) -- simulated realistic input lag. if more than 1 key pressed during delay only one will work (may need to fix in the future)
   kdModule = fmsModule
   kdKey = key
-  run_after_time(keyDown, 0.2)
+  if ovrd then
+    keyDown()
+  else
+    run_after_time(keyDown, 0.2)
+  end
 end
 
 function keyDown() -- only page keys have delay, not entry ones
@@ -66,38 +71,49 @@ function keyDown() -- only page keys have delay, not entry ones
         --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "INITREF"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="fpln" then --RTE
         --fmsModules[fmsModule].targetcustomFMC = true
         --simCMD_FMS_key[fmsModule]["fpln"]:once()
         fmsModules[fmsModule].targetPage = "RTE1"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
         --[[fmsModules[fmsModule].inCustomFMC = false
         simCMD_FMS_key[fmsModule]["fpln"]:once()]]
       elseif key=="clb" then
         --fmsModules[fmsModule].targetcustomFMC = false
-        simCMD_FMS_key[fmsModule]["dep_arr"]:once()
         fmsModules[fmsModule].targetPage = "DEPARR"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="crz" then
         --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "ATCINDEX"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="des" then
         --fmsModules[fmsModule].targetcustomFMC = true
         --simCMD_FMS_key[fmsModule]["clb"]:once()
         fmsModules[fmsModule].targetPage = "VNAV"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="dir_intc" then
         --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "FIX"
-        simCMD_FMS_key[fmsModule]["fix"]:once()
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="legs" then
         --if simDR_onGround ==1 then
         --fmsModules[fmsModule].targetcustomFMC = true
-        fmsModules[fmsModule].targetPage = "LEGS"
-        simCMD_FMS_key[fmsModule]["legs"]:once()
+        fmsModules[fmsModule].targetPage = "SELWPT"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
         --[[else
         --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "RTE2"
@@ -107,23 +123,29 @@ function keyDown() -- only page keys have delay, not entry ones
       elseif key=="dep_arr" then
         --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "HOLD"
-        simCMD_FMS_key[fmsModule]["hold"]:once()
+        --simCMD_FMS_key[fmsModule]["hold"]:once()
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="hold" then --FMC COMM
         --fmsModules[fmsModule].targetcustomFMC = true 
         fmsModules[fmsModule].targetPage = "FMCCOMM"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="navrad" then
         --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "NAVRAD"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       elseif key=="prog" then
         --fmsModules[fmsModule].targetcustomFMC = true
-        simCMD_FMS_key[fmsModule][key]:once()
         fmsModules[fmsModule].targetPage = "PROGRESS"
         fmsModules[fmsModule].targetpgNo = 1
+        switchCustomMode()
+        return
       end
-      switchCustomMode()
     end
   end
 
@@ -145,57 +167,87 @@ function keyDown() -- only page keys have delay, not entry ones
 
   else]]
     local page = fmsModules[fmsModule].targetPage
-    if key=="clear" then
-      if fmsModules[fmsModule].dispMSG[1] then
-        table.remove(fmsModules[fmsModule].dispMSG, 1)
+
+    if key == "clear" then
+      if next(fmsModules[fmsModule].dispMSG) then
+        if fmsModules[fmsModule].dispMSG[1].msg == alertMsgs[16] then -- NAV DATA OUT OF DATE
+          print("yep")
+          table.remove(fmsModules[fmsModule].dispMSG, 1)
+          local otherModule = fmsModule == "fmsL" and "fmsR" or "fmsL"
+          print("other: "..otherModule)
+          for k, v in fmsModules[otherModule].dispMSG do
+            print("v: "..v.msg)
+            if v.msg == alertMsgs[16] then -- NAV DATA OUT OF DATE
+              print("found")
+              table.remove(fmsModules[otherModule].dispMSG, k)
+            end
+          end
+        else
+          table.remove(fmsModules[fmsModule].dispMSG, 1)
+        end
       else
-        fmsModules[fmsModule].scratchpad=""
+        fmsModules[fmsModule].scratchpad = fmsModules[fmsModule].scratchpad:sub(1, -2)
       end
+      return
+    end
+
+    if key == "holdClear" then
+      fmsModules[fmsModule].scratchpad = ""
       return
     end
 
     if hasChild(fmsFunctionsDefs[page],key) then
       print(fmsModule.. " found " .. fmsFunctionsDefs[page][key][1] .. " for " .. key)
-      fmsFunctions[ fmsFunctionsDefs[page][key][1] ](fmsModules[fmsModule],fmsFunctionsDefs[page][key][2])
+      fmsFunctions[ fmsFunctionsDefs[page][key][1]](fmsModules[fmsModule],fmsFunctionsDefs[page][key][2])
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
     elseif string.len(key)==1 then
+      if next(fmsModules[fmsModule].dispMSG) then
+        if fmsModules[fmsModule].dispMSG[1].msg ~= alertMsgs[16] then return end -- can type when nav data out of date. otherwise can't type over notification. possibly affects all alert msgs
+        table.remove(fmsModules[fmsModule].dispMSG, 1)
+      end
       fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad .. key
+      return
     elseif key=="slash" then
+      if next(fmsModules[fmsModule].dispMSG) then
+        if fmsModules[fmsModule].dispMSG[1].msg ~= alertMsgs[16] then return end -- can type when nav data out of date. otherwise can't type over notification. possibly affects all alert msgs
+        table.remove(fmsModules[fmsModule].dispMSG, 1)
+      end
       fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.."/"
       return
     elseif key=="space" then
+      if next(fmsModules[fmsModule].dispMSG) then
+        if fmsModules[fmsModule].dispMSG[1].msg ~= alertMsgs[16] then return end -- can type when nav data out of date. otherwise can't type over notification. possibly affects all alert msgs
+        table.remove(fmsModules[fmsModule].dispMSG, 1)
+      end
       fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.." "
       return
     elseif key=="del" then
-      if fmsModules[fmsModule].scratchpad == "" then
-        fmsModules[fmsModule].scratchpad="DELETE"
-      elseif fmsModules[fmsModule].scratchpad~="DELETE" then
-        fmsModules[fmsModule].scratchpad=string.sub(fmsModules[fmsModule].scratchpad,1,-2)
+      if fmsModules[fmsModule].scratchpad == "" then -- apparently this isn't accurate, need to do some researc
+        fmsModules[fmsModule]:notify("advs", advsMsgs[1])
       end
       return
     elseif key=="next" then
       if fmsModules[fmsModule].pgNo < fmsPages[page]:getNumPages() then
-        fmsModules[fmsModule].targetpgNo=fmsModules[fmsModule].pgNo + 1
+        fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo + 1
       else
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule].targetpgNo = 1
       end
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
     elseif key=="prev" then
       if fmsModules[fmsModule].pgNo > 1 then
-        fmsModules[fmsModule].targetpgNo=fmsModules[fmsModule].pgNo - 1
+        fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo - 1
       else
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule].targetpgNo = fmsPages[page]:getNumPages()
       end
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
     elseif key=="exec" then
       simCMD_FMS_key[fmsModule][key]:once()
       return
-    else
-      fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
     end
+    fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
   --end
 end
 
@@ -273,11 +325,19 @@ function create_keypad(fms)
     key_X_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "X") end end,
     key_Y_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Y") end end,
     key_Z_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "Z") end end,
-
     key_space_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "space") end end,
     key_del_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "del") end end,
     key_slash_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "slash") end end,
-    key_clear_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear") end end
+    key_clear_CMDhandler = function (phase, duration)
+      if phase == 0 then
+        print("2")
+        delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear")
+      end
+      if duration >= 2 then
+        print("3")
+        delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "holdClear", true)
+      end
+    end
   }
   fmsKeyFunc[fms].funcs.parent=fms
 end
@@ -292,7 +352,7 @@ B777DR_fms_s={}
 B777DR_fms_s_hl={}
 --B777DR_srcfms={}
 
-function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid) -- fmsObject |  xp cdu   |id for datarefs|xp cmd prefix | id for cmds
+function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid) -- fmsObject | xp cdu | id for datarefs | xp cmd prefix | id for cmds
   B777DR_fms[fmsO.id]={}
   B777DR_fms[fmsO.id][1]                = find_dataref("Strato/B777/"..fmsid.."/Line01_L")
   B777DR_fms[fmsO.id][2]                = find_dataref("Strato/B777/"..fmsid.."/Line02_L")
@@ -653,13 +713,13 @@ function fms:B777_fms_display()
       local colorOutput = ""
 
       input = fmsPage[i] -- read the line
-      code = string.match(input, ';..') 
-      -- check if there's a color command. constructed like this: ;[color][num chars to color] so ;m5 means make the last 5 characters magenta
+      code = string.match(input, ';...')
+      -- check if there's a color command. constructed like this: ;[color][num chars to color] so ;m05 means make the previous 5 characters magenta
 
       if code ~= nil then -- if there is a color code
           codePos = string.find(input, code) -- find where the code is located
           color = string.sub(code, 2, 2) -- find the commanded color
-          numChars = string.sub(code, 3, 3) -- find the number of chars to color
+          numChars = string.sub(code, 3, 4) -- find the number of chars to color
           result = string.sub(input, codePos - numChars, codePos - 1) -- find the chars to be colored
           colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
           -- generate blank spaces where white text would have been to make colored text line up with white text
@@ -703,12 +763,12 @@ function fms:B777_fms_display()
       local colorOutput = ""
 
       input = fmsPagesmall[i]
-      code = string.match(input, ';..')
+      code = string.match(input, ';...')
 
       if code ~= nil then
           codePos = string.find(input, code)
           color = string.sub(code, 2, 2)
-          numChars = string.sub(code, 3, 3)
+          numChars = string.sub(code, 3, 4)
           result = string.sub(input, codePos - numChars, codePos - 1)
           colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
           whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
@@ -723,7 +783,7 @@ function fms:B777_fms_display()
       B777DR_fms_s_hl[thisID][i]=highlightText
     end
 
-    if self.dispMSG[1] then
+    if next(self.dispMSG) then
       B777DR_fms[thisID][14] = self.dispMSG[1].msg
     else
       --print(thisID.." "..dump(fmsModules[thisID].dispMSG))

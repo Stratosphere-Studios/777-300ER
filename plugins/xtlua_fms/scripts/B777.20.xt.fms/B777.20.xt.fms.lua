@@ -21,6 +21,8 @@ totalizerInitkgs = 0.0
 totalizerSumkgs = 0.0
 local totalizerInited = false
 
+B777CMD_backend_clr = {find_command("Strato/777/FMC/FMC_L/clear_msg"), find_command("Strato/777/FMC/FMC_R/clear_msg")}
+
 simDR_engines_running = find_dataref("sim/flightmodel/engine/ENGN_running")
 simDR_fuel_flow_kg_sec = find_dataref("sim/cockpit2/engine/indicators/fuel_flow_kg_sec")
 
@@ -148,8 +150,11 @@ function toDMS(value,isLat)
 	else
 		prefix = value > 0 and "E" or "W"
 	end
-	local retVal = isLat and string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds * 10) or string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
-	return retVal
+	if isLat then
+		return string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds * 10) 
+	else
+		return string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
+	end
 end
 
 dofile("json/json.lua")
@@ -238,7 +243,7 @@ simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air
 --** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
 --*************************************************************************************--
 B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
---B777DR_backend_notInDatabase{find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}
+B777DR_backend_notInDatabase = {find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}
 B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")
 
 --Marauder28
@@ -536,19 +541,6 @@ debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 
 local fileLocation = "Output/preferences/Strato_777_lastpos.dat"
 
-function loadLastPos()
-	print("lastpos file = "..fileLocation)
-	local file = io.open(fileLocation, "r")
-	if file then
-		fmsModules["data"].lastpos = file:read()
-		file:close()
-		print("loaded lastpos: "..fmsModules["data"].lastpos)
-	else
-		print("lastpos file is nil, loaded "..fmsModules["data"].pos)
-		fmsModules["data"].lastpos = fmsModules["data"].pos
-	end
-end
-
 function unloadLastPos()
 	print("lastpos file = "..fileLocation)
 	local file = io.open(fileLocation, "w")
@@ -567,8 +559,6 @@ function flight_start()
 	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
 end
 
-local outOfDateNotified = false
-local databaseNotified = {false, false}
 function doNotifications()
 
 	-- Notifications from other modules
@@ -577,45 +567,36 @@ function doNotifications()
 	local isError = {false, false}
 	for i = 0, 2 do
 		local fmsID = i == 0 and "fmsL" or i == 1 and "fmsR" or "fmsC"
-		if fmsModules[fmsID].dispMSG[1] ~= nil then
-			B777DR_cdu_notification[i] = 1 -- CDU Notification Lights
-			for j = 1, #fmsModules[fmsID].dispMSG do -- EICAS Messages
-				if fmsModules[fmsID].dispMSG[j].type == 1 then
-					B777DR_eicas_fmc_messages[0] = 1
-					isError[1] = true
-					return
-				elseif fmsModules[fmsID].dispMSG[j].type == 2 then
-					B777DR_eicas_fmc_messages[1] = 1
-					isError[2] = true
-					return
-				end
+		B777DR_cdu_notification[i] = next(fmsModules[fmsID].dispMSG) ~= nil and 1 or 0
+
+		if #fmsModules[fmsID].dispMSG > 1 then
+			fmsModules[fmsID].scratchpad = ""
+		end
+
+		for k, v in ipairs(fmsModules[fmsID].dispMSG) do
+			if v.type == 1 then
+				B777DR_eicas_fmc_messages[0] = 1
+				isError[1] = true
+				return
+			elseif v.type == 2 then
+				B777DR_eicas_fmc_messages[1] = 1
+				isError[2] = true
+				return
 			end
-		else
-			B777DR_cdu_notification[i] = 0
 		end
 	end
 
 	if not isError[1] then B777DR_eicas_fmc_messages[0] = 0 end
 	if not isError[2] then B777DR_eicas_fmc_messages[1] = 0 end
 
-	-- NAV DATA OUT OF DATE
-	if simDR_fmsL_line13:match("DATA OUT OF DATE") and not outOfDateNotified then
-		outOfDateNotified = true
-		fmsModules.fmsL:notify("alert", alertMsgs[16])
-		fmsModules.fmsC:notify("alert", alertMsgs[16])
-		fmsModules.fmsR:notify("alert", alertMsgs[16])
-	end
-
 	-- NOT IN DATABASE
-	--[[for i = 1, 2 do
+	for i = 1, 2 do
 		local id = i == 1 and "fmsL" or "fmsR"
-		if B777DR_backend_notInDatabase[i] == 1 and not databaseNotified[i] then
-			databaseNotified[i] = true
+		if B777DR_backend_notInDatabase[i] == 1 then
 			fmsModules[id]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
-		elseif B777DR_backend_notInDatabase[i] == 0 then
-			databaseNotified[i] = false
+			B777CMD_backend_clr[i]:once()
 		end
-	end]]
+	end
 end
 
 function calcFuel()
@@ -655,7 +636,7 @@ function after_physics()
 		simConfigData = json.decode(B777DR_simconfig_data)
 	end
 
-	fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
+	fmsModules["data"].pos = toDMS(simDR_latitude, true)..toDMS(simDR_longitude, false)
 	
 --     for i =1,24,1 do
 --       print(string.byte(fms_style,i))
@@ -705,26 +686,40 @@ function after_physics()
 		simDR_vor_adf[4] = B777DR_efis_vor_adf[2]
 		simDR_vor_adf[4] = B777DR_efis_vor_adf[3]
 	end
-	if not is_timer_scheduled(unloadLastPos) then
-		run_after_time(unloadLastPos, 30)
-	end
 	fmsL:B777_fms_display()
     fmsC:B777_fms_display()
     fmsR:B777_fms_display()
 end
 
-function updateNavaids()
+function fmsStartup()
+	-- load nearby POIs
 	local temp = navAidsJSON
+
+	-- open IDENT page to load navdata data
+	simCMD_fmsL_key_index:once()
+	simCMD_fmsL_key_l1:once()
+
+	-- Load lastpos
+	print("lastpos file = "..fileLocation)
+	local file = io.open(fileLocation, "r")
+	if file then
+		fmsModules["data"].lastpos = file:read()
+		file:close()
+		print("loaded lastpos: "..fmsModules["data"].lastpos)
+	else
+		print("lastpos file is nil, loaded "..fmsModules["data"].pos)
+		fmsModules["data"].lastpos = fmsModules["data"].pos
+	end
 end
 
 function aircraft_load()
-	run_after_time(loadLastPos, 2)
 	find_command("Strato/B777/fms1/ls_key/R6"):once()
-	find_command("Strato/B777/fms2/ls_key/R6"):once()
-	find_command("Strato/B777/fms3/ls_key/R6"):once()
+	--find_command("Strato/B777/fms2/ls_key/R6"):once()
+	--find_command("Strato/B777/fms3/ls_key/R6"):once()
 	local temp = navAidsJSON -- load navaids
-	run_after_time(updateNavaids, 1)
+	run_after_time(fmsStartup, 1)
 	run_at_interval(calcFuel, 1)
+	run_at_interval(unloadLastPos, 30)
 end
 
 --function aircraft_unload() end
