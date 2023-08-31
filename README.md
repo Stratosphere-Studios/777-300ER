@@ -90,9 +90,9 @@ No further steps are required.
 ## **CREDITS**
 [**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[**BRUHegg**](https://github.com/BRUHegg): Core systems, flight model.
+[**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, elec, gear), C++ systems (ND, nav database, IRS), flight controls
 
-[**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
+[**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua systems (mostly cockpit stuff and flight instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
@@ -100,9 +100,13 @@ No further steps are required.
 
 **y4nn**: Mac installation video.
 
-**Laminar Research**: Default 737 display textures.
+**VII.Aero**: EFB user interface
 
-[**Cactus2456 (IASXP)**](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
+**Ker_1010**: MFD Checklists
+
+**Laminar Research**: Some display textures and fonts.
+
+[**Cactus2456 (IASXP)**](https://github.com/IASXP): MFD Checklists, SASL integration.
 
 [**zeta976**](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
