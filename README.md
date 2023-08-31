@@ -90,7 +90,7 @@ No further steps are required.
 ## **CREDITS**
 [**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[**BRUHegg**](https://github.com/BRUHegg): SASL system code, flight model.
+[**BRUHegg**](https://github.com/BRUHegg): Core systems, flight model.
 
 [**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
 
