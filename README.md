@@ -90,9 +90,9 @@ No further steps are required.
 ## **CREDITS**
 [**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, elec, gear), C++ systems (ND, nav database, IRS), flight controls
+[**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear), C++ systems (FMC plugin), flight model improvements
 
-[**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua systems (mostly cockpit stuff and flight instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
+[**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua systems (mostly cockpit stuff and flight instruments), flight model + other aircraft data, manipulators, readme, GitHub management, animation improvements.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
@@ -102,13 +102,13 @@ No further steps are required.
 
 **VII.Aero**: EFB user interface
 
-[**Ker_1010**](https://github.com/Ker1010): MFD Checklists
+[**Ker_1010**](https://github.com/Ker1010): MFD Checklist improvements
 
 **Laminar Research**: Some display textures and fonts.
 
 [**Cactus2456 (IASXP)**](https://github.com/IASXP): MFD Checklists, SASL integration.
 
-[**zeta976**](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
+[**zeta976**](https://github.com/zeta976): Modeling improvements, animation, airfoils, flight model, documentation.
 
 **[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors**: [XTLua](https://github.com/mSparks43/XTLua), help, and some borrowed code.
 
