@@ -102,7 +102,7 @@ No further steps are required.
 
 **VII.Aero**: EFB user interface
 
-**Ker_1010**: MFD Checklists
+[**Ker_1010**](https://github.com/Ker1010): MFD Checklists
 
 **Laminar Research**: Some display textures and fonts.
 
