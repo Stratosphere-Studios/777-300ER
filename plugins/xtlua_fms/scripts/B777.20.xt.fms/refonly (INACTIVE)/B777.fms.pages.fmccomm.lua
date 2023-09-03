@@ -75,7 +75,7 @@ elseif pgNo==2 then
     } 
 end
 end
-fmsPages["FMCCOMM"].getNumPages=function(self)
+fmsPages["FMCCOMM"].getNumPages=function(self, fmsID)
   return 2 
 end
   

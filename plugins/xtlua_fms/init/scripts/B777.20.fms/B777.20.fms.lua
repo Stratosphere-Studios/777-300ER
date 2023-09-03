@@ -5,10 +5,18 @@
 *****************************************************************************************
 ]]
 
+function deferred_command(name,desc,nilFunc)
+	c = XLuaCreateCommand(name,desc)
+	--print("Deferred command: "..name)
+	--XLuaReplaceCommand(c,null_command)
+	return nil --make_command_obj(c)
+end
+
+--replace create_dataref
 function deferred_dataref(name,type,notifier)
-	print("Deffered dataref: "..name)
+	--print("Deferred dataref: "..name)
 	dref=XLuaCreateDataRef(name, type,"yes",notifier)
-	return wrap_dref_any(dref,type) 
+	return wrap_dref_any(dref,type)
 end
 
 B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")

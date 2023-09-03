@@ -498,7 +498,7 @@ fmsPages["VNAV"].getSmallPage=function(self,pgNo,fmsID)
     end
 end
 
-fmsPages["VNAV"].getNumPages=function(self)
+fmsPages["VNAV"].getNumPages=function(self, fmsID)
   return 3
 end
 

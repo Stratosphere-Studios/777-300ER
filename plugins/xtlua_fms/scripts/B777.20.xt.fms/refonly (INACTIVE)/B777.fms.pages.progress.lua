@@ -260,7 +260,7 @@ elseif pgNo==2 then
     }
 end
 end
-fmsPages["PROGRESS"].getNumPages=function(self)
+fmsPages["PROGRESS"].getNumPages=function(self, fmsID)
 
   return 3
 end

@@ -124,6 +124,6 @@ fmsPages["LRC"].getSmallPage=function(self,pgNo,fmsID)
 
 end
 
-fmsPages["LRC"].getNumPages=function(self)
+fmsPages["LRC"].getNumPages=function(self, fmsID)
   return 1
 end

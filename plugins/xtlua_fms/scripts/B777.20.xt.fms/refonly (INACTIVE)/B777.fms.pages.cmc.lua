@@ -46,7 +46,7 @@ fmsPages["CMC"].getPage=function(self,pgNo,fmsID)
     }
 end
 end
-fmsPages["CMC"].getNumPages=function(self)
+fmsPages["CMC"].getNumPages=function(self, fmsID)
   return 2
 end
 simDR_stalled_elements= find_dataref("sim/flightmodel2/wing/elements/element_is_stalled")
@@ -168,7 +168,7 @@ fmsPages["EMANP"].getPage=function(self,pgNo,fmsID)
   end
 end
 
-fmsPages["EMANP"].getNumPages=function(self)
+fmsPages["EMANP"].getNumPages=function(self, fmsID)
   return 3
 end
 
@@ -320,6 +320,6 @@ elseif pgNo==6 then
   end
 end
 
-fmsPages["GRDTEST"].getNumPages=function(self)
+fmsPages["GRDTEST"].getNumPages=function(self, fmsID)
   return 6
 end
