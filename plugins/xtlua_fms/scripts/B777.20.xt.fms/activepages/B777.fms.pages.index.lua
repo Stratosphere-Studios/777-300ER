@@ -151,6 +151,6 @@ fmsPages["INDEX"].getSmallPage=function(self,pgNo,fmsID)
 	return page
 end
 
-fmsPages["INDEX"].getNumPages=function(self)
+fmsPages["INDEX"].getNumPages=function(self, fmsID)
 	return 1
 end

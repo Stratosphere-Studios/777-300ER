@@ -144,7 +144,7 @@ fmsPages["POSINIT"].getSmallPage=function(self,pgNo,fmsID)
   end
 end
 
-fmsPages["POSINIT"].getNumPages=function(self)
+fmsPages["POSINIT"].getNumPages=function(self, fmsID)
   return 3
 end
 

@@ -47,7 +47,7 @@ fmsPages["APPROACH"].getSmallPage=function(self,pgNo,fmsID)
     }
 end
 
-fmsPages["APPROACH"].getNumPages=function(self)
+fmsPages["APPROACH"].getNumPages=function(self, fmsID)
 	return 1
 end
 

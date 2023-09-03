@@ -36,6 +36,6 @@ fmsFunctionsDefs["INITREF"]["L4"]={"setpage","THRUSTLIM"}
 fmsFunctionsDefs["INITREF"]["L6"]={"setpage","APPROACH"}
 fmsFunctionsDefs["INITREF"]["R1"]={"setpage","REFNAVDATA"}
 
-fmsPages["INITREF"].getNumPages=function(self)
+fmsPages["INITREF"].getNumPages=function(self, fmsID)
 	return 1
 end

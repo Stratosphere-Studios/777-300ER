@@ -35,6 +35,6 @@ fmsPages["NAVRAD"].getSmallPage=function(self,pgNo,fmsID)
     }
 end
 
-fmsPages["NAVRAD"].getNumPages=function(self)
+fmsPages["NAVRAD"].getNumPages=function(self, fmsID)
     return 1
 end
