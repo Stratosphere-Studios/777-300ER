@@ -73,6 +73,6 @@ fmsFunctionsDefs["README"]={}
 fmsFunctionsDefs["README"]["R6"]={"setpage2","MENU"}
 fmsFunctionsDefs["README"]["L6"]={"setdata","readmeCode"}
 
-fmsPages["README"].getNumPages = function(self)
+fmsPages["README"].getNumPages = function(self, fmsID)
     return 1
 end
