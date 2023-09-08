@@ -72,6 +72,8 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 
 ## **INSTALLATION**
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
+![image](https://github.com/Stratosphere-Studios/777-300ER/assets/64425497/71b75b74-5c6e-446e-8c3b-b18c6b60df0b)
+
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
 If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
