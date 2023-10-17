@@ -18,7 +18,7 @@ A: We have removed X-Plane 11 support to make it easier for us to focus on X-Pla
 
 **Q: Why do I get an error when loading the aircraft? What do I do with it?**
 
-A: This error is a known FMOD bug. As our sound developer hasn't responded in a while, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
+A: This error is a known FMOD bug. Just click "Understood" and the popup will close. We don't have a sound dev to fix this anymore, so if you have FMOD experience and want to help out, let us know!
 
 **Q: Why are my liveries broken?**
 
