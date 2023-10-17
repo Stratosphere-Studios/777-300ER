@@ -16,7 +16,7 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
 
-**Q: Why do I get an error whenever I load the aircraft? What do I do with it?**
+**Q: Why do I get an error when loading the aircraft? What do I do with it?**
 
 A: This error is a known FMOD bug. As our sound developer hasn't responded in a while, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
 
@@ -24,7 +24,7 @@ A: This error is a known FMOD bug. As our sound developer hasn't responded in a 
 
 A: You are using a freighter livery with a passenger aircraft or vice versa. Make sure the livery you are using is correct for the type of aircraft you're flying. You can toggle the aircraft type on the EFB.
 
-**Q: Why does the CDU say "KEY/FUNCTION INOP" which I try to do stuff on it?**
+**Q: Why does the CDU say "KEY/FUNCTION INOP" when I try to do stuff on it?**
 
 A: That notification means that key doesn't do anything. If it's supposed to, then we just haven't written the code for that functionality yet.
 
@@ -56,6 +56,10 @@ A: Currently, you can't start from cold and dark because not all required system
 
 A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERF. Note that not all cockpit changes are modeled yet.
 
+**Q: Why can't I see the cabin through the windows from outside?**
+
+A: In order to improve performance, we hide all cabin objects when the cockpit door is closed. If you want to take some exterior screenshots, just open the cockpit door!
+
 **СDU Сode**
 
 Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
@@ -76,9 +80,9 @@ Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER)
 
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
-If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
+If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the GitHub one.
 
-We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
+We suggest using GitHub Desktop to keep the aircraft updated without needing to redownload it every time.
 
 ### **Windows**
 You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
