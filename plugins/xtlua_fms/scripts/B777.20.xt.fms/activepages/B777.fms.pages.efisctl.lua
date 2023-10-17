@@ -7,7 +7,7 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
     local appSelected = "     "
     local vorSelected = "     "
     local ctrSelected = "     "
-    local radBaro = "<      BARO;g4"
+    local radBaro = "<      BARO;g04"
     local altimeter = 0
 
     local stringMins;
@@ -15,7 +15,7 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
         mins = B777DR_minimums_mda[id]
     else
         mins = B777DR_minimums_dh[id]
-        radBaro = "<RAD;g3       "
+        radBaro = "<RAD;g03       "
     end
 
     stringMins = mins..string.rep(" ", 5 - tostring(mins):len()) -- make sure minimums always takes up 5 spaces on the display
@@ -120,13 +120,13 @@ fmsPages["EFISOPTIONS152"].getPage=function(self,pgNo,fmsID)
     local efisModeBig   = "OFF   ADF   VOR>"
 
     if vor_adf[id+1] == 0 then
-        efisModeBig   = "      ADF;g3      >"
+        efisModeBig   = "      ADF;g03      >"
         efisModeSmall = "OFF<->   <->VOR "
     elseif vor_adf[id+1] == 1 then
-        efisModeBig   = "OFF;g3            >"
+        efisModeBig   = "OFF;g03            >"
         efisModeSmall = "   <->ADF<->VOR "
     else
-        efisModeBig   = "            VOR;g3>"
+        efisModeBig   = "            VOR;g03>"
         efisModeSmall = "OFF<->ADF<->    "
     end
 
@@ -150,9 +150,9 @@ fmsPages["EFISOPTIONS152"].getPage=function(self,pgNo,fmsID)
     return {
         "      EFIS OPTIONS      ",
         "                        ",
-        "<WXR  ".. wxrSelected .."         FPV>;r4",
+        "<WXR  ".. wxrSelected .."         FPV>;r04",
         "                        ",
-        "<STA  "..staSelected.." ".. terrSelected .."  TERR>;r5",
+        "<STA  "..staSelected.." ".. terrSelected .."  TERR>;r05",
         "                        ",
         "<WPT  "..wptSelected.." "..mtrsSelected.."  MTRS>",
         "                        ",
@@ -160,7 +160,7 @@ fmsPages["EFISOPTIONS152"].getPage=function(self,pgNo,fmsID)
         "                        ",
         "<DATA   "..efisModeBig,
         "             -----------",
-        "<POS;r4            CONTROL>"
+        "<POS;r04            CONTROL>"
     }
 
 end

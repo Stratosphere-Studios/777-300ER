@@ -66,9 +66,10 @@ dofile("activepages/B777.fms.pages.perfinit.lua")
 dofile("activepages/B777.fms.pages.efisctl.lua")
 dofile("activepages/B777.fms.pages.thrustlim.lua")
 dofile("activepages/B777.fms.pages.refnavdata.lua")
+dofile("activepages/B777.fms.pages.selwpt.lua")
 dofile("activepages/B777.fms.pages.index.lua")
 dofile("activepages/B777.fms.pages.initref.lua")
---dofile("activepages/B777.fms.pages.navrad.lua")
+dofile("activepages/B777.fms.pages.navrad.lua")
 dofile("activepages/B777.fms.pages.rte1.lua")
 
 --[[
@@ -112,18 +113,22 @@ dofile("B777.fms.pages.waypointwinds.lua")
 
 ----- FMS FUNCTIONS ---------------
 
+function fmsFunctions.setpage_no(fmsO,valueIn) -- set page with target page number
+	print("setpage_no="..valueIn)
+    local valueSplit=split(valueIn,"_")
+    print(valueSplit[1].." "..valueSplit[2])
+	fmsO["targetpgNo"]=tonumber(valueSplit[2])
+	local value=valueSplit[1]
 
-function fmsFunctions.setpage_no(fmsO,valueA) -- set page with target page number
-	print("setpage_no="..valueA)
-    local valueO=split(valueA,"_")
-    print(valueO[1].." "..valueO[2])
-	--fmsO["pgNo"]=tonumber(valueO[2])
-	fmsO["targetpgNo"]=tonumber(valueO[2])
-	local value=valueO[1]
-
-	if value=="IDENT" then
+	if value == "IDENT" then -- this may crash on linux
 		simCMD_fmsL_key_index:once()
 		simCMD_fmsL_key_l1:once()
+	elseif value == "MENU" then
+		for k, v in fmsModules[fmsO.id].dispMSG do -- should this apply to both cdus?
+			if v.msg == alertMsgs[16] then -- NAV DATA OUT OF DATE
+				table.remove(fmsModules[fmsO.id].dispMSG, k)
+			end
+		end
 	end
 
 	--[[if value=="FMC" then
@@ -169,7 +174,7 @@ function fmsFunctions.setpage_no(fmsO,valueA) -- set page with target page numbe
 		fmsO["targetPage"]=value
 	--end
 
-	print("setpage " .. value)
+	print("setpage "..value)
 	--run_after_time(switchCustomMode, 0.5)
 	switchCustomMode() -- moved delay
 end
@@ -177,8 +182,6 @@ end
 function fmsFunctions.setpage(fmsO,value) -- set page
 	value=value.."_1"
 	fmsFunctions["setpage_no"](fmsO,value)
-	--sim/FMS/navrad
-	--sim/FMS2/navrad
 end
 
 --function fmsFunctions.custom2fmc(fmsO,value)
@@ -1209,6 +1212,10 @@ function fmsFunctions.setpage2(fmsO, value)
 			else
 				fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
 			end
+			if simDR_fms_line13[fmsO.id]:match("DATA OUT OF DATE")then
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[16]) -- NAV DATA OUT OF DATE
+				simCMD_fms_key_clr[fmsO.id]:once()
+			end
 			return
 		end
 		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
@@ -1216,24 +1223,11 @@ function fmsFunctions.setpage2(fmsO, value)
 	end
 
 	if value == "EICASMODES" then
-		if fmsO.id == "fmsL" then
-			if B777DR_cdu_eicas_ctl[0] == 1 then
-				fmsFunctions["setpage"](fmsO,value)
-			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-			end
-		elseif fmdO.id == "fmsC" then
-			if B777DR_cdu_eicas_ctl[1] == 1 then
-				fmsFunctions["setpage"](fmsO,value)
-			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-			end
+		local idNum = fmsO.id == "fmsL" and 1 or fmsO.id == "fmsC" and 2 or 3
+		if B777DR_cdu_eicas_ctl[idNum] == 1 then
+			fmsFunctions["setpage"](fmsO,value)
 		else
-			if B777DR_cdu_eicas_ctl[2] == 1 then
-				fmsFunctions["setpage"](fmsO,value)
-			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-			end
+			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 		end
 		return
 	end

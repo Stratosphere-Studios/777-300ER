@@ -44,7 +44,7 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 		"                        ",
 		rsv.."                   ",
 		"                        ",
-		"<REQUEST;r8            "..getFMSData("stepsize"),
+		"<REQUEST;r08            "..getFMSData("stepsize"),
 		"                        ",
 		"<INDEX       THRUST LIM>"
 	}

@@ -161,7 +161,7 @@ fmsPages["ATCVERIFYREQUEST"].getSmallPage=function(self,pgNo,fmsID)--dynamic pag
     }
     end
 end
-fmsPages["ATCVERIFYREQUEST"].getNumPages=function(self)
+fmsPages["ATCVERIFYREQUEST"].getNumPages=function(self, fmsID)
   return 2 
 end
 

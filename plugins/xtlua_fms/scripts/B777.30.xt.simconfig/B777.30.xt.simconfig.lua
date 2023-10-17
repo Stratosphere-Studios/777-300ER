@@ -183,6 +183,10 @@ function setLoadedConfigs()
 	B777DR_trs_bug_enabled = getSimConfig("PLANE","trs_bug")
 	B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
 	B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
+	if getSimConfig("FMC", "unlocked") == 0 then
+		os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
+		os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
+	end
 end
 
 -- for possible performance improvement

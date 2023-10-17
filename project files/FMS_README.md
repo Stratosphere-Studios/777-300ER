@@ -76,7 +76,7 @@ end
 ```
 Next, you need to define the number of pages you have. Do this by using this function at the end of your script:
 ```lua
-fmsPages["PAGE_NAME"].getNumPages=function(self)
+fmsPages["PAGE_NAME"].getNumPages=function(self, fmsID)
   return number_of_pages
 end
 ```
