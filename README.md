@@ -56,19 +56,14 @@ A: Currently, you can't start from cold and dark because not all required system
 
 A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERF. Note that not all cockpit changes are modeled yet.
 
-**СDU Сode**
-
-Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
-
-**Q: How can I contribute to this aircraft?**
-
-A: Please use the [GitHub issue page](https://github.com/Stratosphere-Studios/777/issues) to report any problems you find. This will greatly help us fix issues.
-
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
 **Q: Even after following the above instructions, why my is aircraft still broken?**
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft.
+
+**СDU Сode**
+Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in X-Plane's Output folder once the aircraft is loaded.
 
 ## **INSTALLATION**
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
