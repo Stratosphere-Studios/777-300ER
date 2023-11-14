@@ -81,8 +81,8 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 ### **Windows**
 You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
 
-### **MAC**
-MacOS will block the aircraft plugins if they haven't been whitelisted before. To whitelist them, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk).
+### **Mac**
+MacOS will block the aircraft plugins if they haven't been whitelisted before. To whitelist them, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.
 
 ### **Linux**
 No further steps are required.
@@ -92,7 +92,7 @@ No further steps are required.
 
 [**BRUHegg**](https://github.com/BRUHegg): SASL system code, flight model.
 
-[**remenkemi (crazytimtimtim)**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
+[**remenkemi**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 

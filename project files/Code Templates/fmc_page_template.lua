@@ -52,7 +52,6 @@ end
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"setDref","DREF"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"doCMD","CMD"}
 --fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"getdata","data"}
---fmsFunctionsDefs["PAGE_NAME"]["KEY"]={"showmessage","message"}
 
 -- you can also create custom fmsFunctions in the fms.pages.lua file
 

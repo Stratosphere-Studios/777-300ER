@@ -5,35 +5,35 @@
 *****************************************************************************************
 ]]
 
-simCMD_fmsL_key_index = find_command("sim/FMS/index")
-simCMD_fmsL_key_l1 = find_command("sim/FMS/ls_1l")
-simDR_fmsL_line4 = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line4")
-simDR_fms_line13 = {fmsL = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line13"), fmsR = find_dataref("sim/cockpit2/radios/indicators/fms_cdu2_text_line13")}
-simCMD_fms_key_clr = {fmsL = find_command("sim/FMS/key_clear"), fmsR = find_command("sim/FMS2/key_clear")}
-
 fms={
   id = "",
   page1=false,
-  prevPage = "README",
+  prevPage = "README_1",
   currentPage = "README",
   targetPage = "README",
   targetpgNo = 1,
-  --targetCustomFMC = true,
-  --inCustomFMC = true,
   scratchpad="",
   notify,
   dispMSG = {},
-  pgNo = 1,
+  pgNo = 1
 }
 
-local outOfDateNotified = false
+_G.alertStack = {}
+_G.commStack = {}
+_G.outofdateNotified = {fmsL = false, fmsR = false}
 
-simCMD_FMS_key={}
+_G.simCMD_FMS_key={}
 
-fmsKeyFunc={}
+_G.fmsKeyFunc={}
+
+local oodModule
+function outofdateClear()
+  outofdateNotified[oodModule] = false
+end
 
 local kdModule
 local kdKey
+local newText = {fmsL = false, fmsC = false, fmsR = false}
 
 function delayKeyDown(fmsModule, key, ovrd) -- simulated realistic input lag. if more than 1 key pressed during delay only one will work (may need to fix in the future)
   kdModule = fmsModule
@@ -49,142 +49,82 @@ function keyDown() -- only page keys have delay, not entry ones
 
   local fmsModule = kdModule
   local key = kdKey
+  local page = ""
 
   if getSimConfig("FMC", "unlocked") == 1 then
-  --if false then
-    --run_after_time(switchCustomMode, 0.5)
-    --switchCustomMode() -- moved delay
     print(fmsModule.. " do " .. key)
 
     if key=="fix" then --menu
-      --fmsModules[fmsModule].targetcustomFMC = true
       fmsModules[fmsModule].targetPage = "INDEX"
       fmsModules[fmsModule].targetpgNo = 1
-      switchCustomMode()
-      return
+      goto REFRESH
     end
 
     local i = fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2
 
     if B777DR_cdu_act[i] == 1 and fmsModule ~= "fmsC" then
       if key=="index" then
-        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "INITREF"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="fpln" then --RTE
-        --fmsModules[fmsModule].targetcustomFMC = true
-        --simCMD_FMS_key[fmsModule]["fpln"]:once()
         fmsModules[fmsModule].targetPage = "RTE1"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
-        --[[fmsModules[fmsModule].inCustomFMC = false
-        simCMD_FMS_key[fmsModule]["fpln"]:once()]]
+        goto REFRESH
       elseif key=="clb" then
-        --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "DEPARR"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="crz" then
-        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "ATCINDEX"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="des" then
-        --fmsModules[fmsModule].targetcustomFMC = true
-        --simCMD_FMS_key[fmsModule]["clb"]:once()
         fmsModules[fmsModule].targetPage = "VNAV"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="dir_intc" then
-        --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "FIX"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="legs" then
-        --if simDR_onGround ==1 then
-        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "SELWPT"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
-        --[[else
-        --fmsModules[fmsModule].targetcustomFMC = false
-        fmsModules[fmsModule].targetPage = "RTE2"
-        simCMD_FMS_key[fmsModule]["dir_intc"]:once()
-        fmsModules[fmsModule].targetpgNo = 1
-        end]]
+        goto REFRESH
       elseif key=="dep_arr" then
-        --fmsModules[fmsModule].targetcustomFMC = false
         fmsModules[fmsModule].targetPage = "HOLD"
-        --simCMD_FMS_key[fmsModule]["hold"]:once()
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
-      elseif key=="hold" then --FMC COMM
-        --fmsModules[fmsModule].targetcustomFMC = true 
+        goto REFRESH
+      elseif key=="hold" then
         fmsModules[fmsModule].targetPage = "FMCCOMM"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="navrad" then
-        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "NAVRAD"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       elseif key=="prog" then
-        --fmsModules[fmsModule].targetcustomFMC = true
         fmsModules[fmsModule].targetPage = "PROGRESS"
         fmsModules[fmsModule].targetpgNo = 1
-        switchCustomMode()
-        return
+        goto REFRESH
       end
     end
   end
 
-  --[[if not fmsModules[fmsModule].targetCustomFMC then
-
-    if simCMD_FMS_key[fmsModule][key] ~= nil then
-      simCMD_FMS_key[fmsModule][key]:once()
-      print(fmsModule.. " did " .. key)
-    end
-
-    if key=="clear" then
-      if string.len(fmsModules[fmsModule].notify) > 0 then
-        fmsClearNotify(fmsModules[fmsModule].notify)
-        fmsModules[fmsModule].notify = ""
-      else
-        fmsModules[fmsModule].scratchpad = ""
-      end
-    end
-
-  else]]
-    local page = fmsModules[fmsModule].targetPage
+    page = fmsModules[fmsModule].targetPage
 
     if key == "clear" then
-      if next(fmsModules[fmsModule].dispMSG) then
-        if fmsModules[fmsModule].dispMSG[1].msg == alertMsgs[16] then -- NAV DATA OUT OF DATE
-          print("yep")
-          table.remove(fmsModules[fmsModule].dispMSG, 1)
-          local otherModule = fmsModule == "fmsL" and "fmsR" or "fmsL"
-          print("other: "..otherModule)
-          for k, v in fmsModules[otherModule].dispMSG do
-            print("v: "..v.msg)
-            if v.msg == alertMsgs[16] then -- NAV DATA OUT OF DATE
-              print("found")
-              table.remove(fmsModules[otherModule].dispMSG, k)
-            end
-          end
-        else
-          table.remove(fmsModules[fmsModule].dispMSG, 1)
+      if next(alertStack) then
+        table.remove(alertStack, 1)
+      elseif next(commStack) then
+        table.remove(commStack, 1)
+      elseif next(fmsModules[fmsModule].dispMSG) then
+        if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
+          B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
+          oodModule = fmsModule
+          run_after_time(outofdateClear, 1)
         end
+        table.remove(fmsModules[fmsModule].dispMSG, 1)
       else
         fmsModules[fmsModule].scratchpad = fmsModules[fmsModule].scratchpad:sub(1, -2)
       end
@@ -202,33 +142,35 @@ function keyDown() -- only page keys have delay, not entry ones
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
     elseif string.len(key)==1 then
-      if next(fmsModules[fmsModule].dispMSG) then
-        if fmsModules[fmsModule].dispMSG[1].msg ~= alertMsgs[16] then return end -- can type when nav data out of date. otherwise can't type over notification. possibly affects all alert msgs
-        table.remove(fmsModules[fmsModule].dispMSG, 1)
+      if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
+        newText[fmsModule] = true
       end
       fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad .. key
       return
     elseif key=="slash" then
-      if next(fmsModules[fmsModule].dispMSG) then
-        if fmsModules[fmsModule].dispMSG[1].msg ~= alertMsgs[16] then return end -- can type when nav data out of date. otherwise can't type over notification. possibly affects all alert msgs
-        table.remove(fmsModules[fmsModule].dispMSG, 1)
+      if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
+        newText[fmsModule] = true
       end
       fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.."/"
       return
     elseif key=="space" then
-      if next(fmsModules[fmsModule].dispMSG) then
-        if fmsModules[fmsModule].dispMSG[1].msg ~= alertMsgs[16] then return end -- can type when nav data out of date. otherwise can't type over notification. possibly affects all alert msgs
-        table.remove(fmsModules[fmsModule].dispMSG, 1)
+      if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
+        newText[fmsModule] = true
       end
       fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.." "
       return
     elseif key=="del" then
-      if fmsModules[fmsModule].scratchpad == "" then -- apparently this isn't accurate, need to do some researc
-        fmsModules[fmsModule]:notify("advs", advsMsgs[1])
+      fmsModules[fmsModule].scratchpad = ""
+      for k, v in ipairs(fmsModules[fmsModule].dispMSG) do
+        if v.msg == "DELETE" then
+          table.remove(fmsModules[fmsModule].dispMSG, k)
+          return
+        end
       end
+      fmsModules[fmsModule]:notify("advs", advsMsgs[1])
       return
     elseif key=="next" then
-      if fmsModules[fmsModule].pgNo < fmsPages[page]:getNumPages() then
+      if fmsModules[fmsModule].pgNo < fmsPages[page]:getNumPages(fmsModule) then
         fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo + 1
       else
         fmsModules[fmsModule].targetpgNo = 1
@@ -239,7 +181,7 @@ function keyDown() -- only page keys have delay, not entry ones
       if fmsModules[fmsModule].pgNo > 1 then
         fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo - 1
       else
-        fmsModules[fmsModule].targetpgNo = fmsPages[page]:getNumPages()
+        fmsModules[fmsModule].targetpgNo = fmsPages[page]:getNumPages(fmsModule)
       end
       print(fmsModule.. " did " .. key .. " for " .. page)
       return
@@ -248,7 +190,9 @@ function keyDown() -- only page keys have delay, not entry ones
       return
     end
     fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-  --end
+
+    ::REFRESH::
+    switchCustomMode()
 end
 
 function create_keypad(fms)
@@ -330,11 +274,9 @@ function create_keypad(fms)
     key_slash_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "slash") end end,
     key_clear_CMDhandler = function (phase, duration)
       if phase == 0 then
-        print("2")
         delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear")
       end
       if duration >= 2 then
-        print("3")
         delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "holdClear", true)
       end
     end
@@ -350,7 +292,6 @@ B777DR_fms_m={}
 B777DR_fms={}
 B777DR_fms_s={}
 B777DR_fms_s_hl={}
---B777DR_srcfms={}
 
 function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid) -- fmsObject | xp cdu | id for datarefs | xp cmd prefix | id for cmds
   B777DR_fms[fmsO.id]={}
@@ -486,110 +427,6 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid) -- fmsObject | xp cdu | id fo
 	B777DR_fms_m[fmsO.id][13]               = find_dataref("Strato/B777/"..fmsid.."/Line13_L_m")
 	B777DR_fms_m[fmsO.id][14]               = find_dataref("Strato/B777/"..fmsid.."/Line14_L_m")
 
-  --[[B777DR_srcfms[fmsO.id]={}
-  B777DR_srcfms[fmsO.id][1]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line0")
-  B777DR_srcfms[fmsO.id][2]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line1")
-  B777DR_srcfms[fmsO.id][3]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line2")
-  B777DR_srcfms[fmsO.id][4]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line3")
-  B777DR_srcfms[fmsO.id][6]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line5")
-  B777DR_srcfms[fmsO.id][7]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line6")
-  B777DR_srcfms[fmsO.id][8]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line7")
-  B777DR_srcfms[fmsO.id][9]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line8")
-  B777DR_srcfms[fmsO.id][10]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line9")
-  B777DR_srcfms[fmsO.id][11]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line10")
-  B777DR_srcfms[fmsO.id][12]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line11")
-  B777DR_srcfms[fmsO.id][13]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line12")
-  B777DR_srcfms[fmsO.id][16]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line15")
-  B777DR_srcfms[fmsO.id][15]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line14")
-  B777DR_srcfms[fmsO.id][14]              =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line13")
-  B777DR_srcfms[fmsO.id][5]               =find_dataref("sim/cockpit2/radios/indicators/fms_".. cduid .."_text_line4")
-  if keyid~=nil then
-    simCMD_FMS_key[fmsO.id]={}
-    simCMD_FMS_key[fmsO.id]["L1"]           = find_command(keyid.."ls_1l")
-    simCMD_FMS_key[fmsO.id]["index"]        = find_command(keyid.."index")
-    simCMD_FMS_key[fmsO.id]["L2"]           = find_command(keyid.."ls_2l")
-    simCMD_FMS_key[fmsO.id]["L3"]           = find_command(keyid.."ls_3l")
-    simCMD_FMS_key[fmsO.id]["L4"]           = find_command(keyid.."ls_4l")
-    simCMD_FMS_key[fmsO.id]["L5"]           = find_command(keyid.."ls_5l")
-    simCMD_FMS_key[fmsO.id]["L6"]           = find_command(keyid.."ls_6l")
-
-    simCMD_FMS_key[fmsO.id]["R1"]           = find_command(keyid.."ls_1r")
-    simCMD_FMS_key[fmsO.id]["R2"]           = find_command(keyid.."ls_2r")
-    simCMD_FMS_key[fmsO.id]["R3"]           = find_command(keyid.."ls_3r")
-    simCMD_FMS_key[fmsO.id]["R4"]           = find_command(keyid.."ls_4r")
-    simCMD_FMS_key[fmsO.id]["R5"]           = find_command(keyid.."ls_5r")
-    simCMD_FMS_key[fmsO.id]["R6"]           = find_command(keyid.."ls_6r")
-
-   
-    simCMD_FMS_key[fmsO.id]["fpln"]         = find_command(keyid.."fpln")
-    simCMD_FMS_key[fmsO.id]["clb"]          = find_command(keyid.."clb")
-    simCMD_FMS_key[fmsO.id]["crz"]          = find_command(keyid.."crz")
-    simCMD_FMS_key[fmsO.id]["des"]          = find_command(keyid.."des")
-
-    simCMD_FMS_key[fmsO.id]["dir_intc"]     = find_command(keyid.."dir_intc")
-    simCMD_FMS_key[fmsO.id]["legs"]         = find_command(keyid.."legs")
-    simCMD_FMS_key[fmsO.id]["dep_arr"]      = find_command(keyid.."dep_arr")
-    simCMD_FMS_key[fmsO.id]["hold"]         = find_command(keyid.."hold")
-    simCMD_FMS_key[fmsO.id]["prog"]         = find_command(keyid.."prog")
-    simCMD_FMS_key[fmsO.id]["exec"]         = find_command(keyid.."exec")
-
-    simCMD_FMS_key[fmsO.id]["fix"]          = find_command(keyid.."fix")
-
-    simCMD_FMS_key[fmsO.id]["prev"]         = find_command(keyid.."prev")
-    simCMD_FMS_key[fmsO.id]["next"]         = find_command(keyid.."next")
-
-    simCMD_FMS_key[fmsO.id]["0"]            = find_command(keyid.."key_0")
-    simCMD_FMS_key[fmsO.id]["1"]            = find_command(keyid.."key_1")
-    simCMD_FMS_key[fmsO.id]["2"]            = find_command(keyid.."key_2")
-    simCMD_FMS_key[fmsO.id]["3"]            = find_command(keyid.."key_3")
-    simCMD_FMS_key[fmsO.id]["4"]            = find_command(keyid.."key_4")
-    simCMD_FMS_key[fmsO.id]["5"]            = find_command(keyid.."key_5")
-    simCMD_FMS_key[fmsO.id]["6"]            = find_command(keyid.."key_6")
-    simCMD_FMS_key[fmsO.id]["7"]            = find_command(keyid.."key_7")
-    simCMD_FMS_key[fmsO.id]["8"]            = find_command(keyid.."key_8")
-    simCMD_FMS_key[fmsO.id]["9"]            = find_command(keyid.."key_9")
-
-    simCMD_FMS_key[fmsO.id]["."]            = find_command(keyid.."key_period")
-    simCMD_FMS_key[fmsO.id]["-"]            = find_command(keyid.."key_minus")
-    simCMD_FMS_key[fmsO.id]["A"]            = find_command(keyid.."key_A")
-    simCMD_FMS_key[fmsO.id]["B"]            = find_command(keyid.."key_B")
-    simCMD_FMS_key[fmsO.id]["C"]            = find_command(keyid.."key_C")
-    simCMD_FMS_key[fmsO.id]["D"]            = find_command(keyid.."key_D")
-    simCMD_FMS_key[fmsO.id]["E"]            = find_command(keyid.."key_E")
-    simCMD_FMS_key[fmsO.id]["F"]            = find_command(keyid.."key_F")
-    simCMD_FMS_key[fmsO.id]["G"]            = find_command(keyid.."key_G")
-    simCMD_FMS_key[fmsO.id]["H"]            = find_command(keyid.."key_H")
-    simCMD_FMS_key[fmsO.id]["I"]            = find_command(keyid.."key_I")
-    simCMD_FMS_key[fmsO.id]["J"]            = find_command(keyid.."key_J")
-    simCMD_FMS_key[fmsO.id]["K"]            = find_command(keyid.."key_K")
-    simCMD_FMS_key[fmsO.id]["L"]            = find_command(keyid.."key_L")
-    simCMD_FMS_key[fmsO.id]["M"]            = find_command(keyid.."key_M")
-    simCMD_FMS_key[fmsO.id]["N"]            = find_command(keyid.."key_N")
-    simCMD_FMS_key[fmsO.id]["O"]            = find_command(keyid.."key_O")	
-    simCMD_FMS_key[fmsO.id]["P"]            = find_command(keyid.."key_P")
-    simCMD_FMS_key[fmsO.id]["Q"]            = find_command(keyid.."key_Q")
-    simCMD_FMS_key[fmsO.id]["R"]            = find_command(keyid.."key_R")
-    simCMD_FMS_key[fmsO.id]["S"]            = find_command(keyid.."key_S")
-    simCMD_FMS_key[fmsO.id]["T"]            = find_command(keyid.."key_T")
-    simCMD_FMS_key[fmsO.id]["U"]            = find_command(keyid.."key_U")
-    simCMD_FMS_key[fmsO.id]["V"]            = find_command(keyid.."key_V")
-    simCMD_FMS_key[fmsO.id]["W"]            = find_command(keyid.."key_W")
-    simCMD_FMS_key[fmsO.id]["X"]            = find_command(keyid.."key_X")
-    simCMD_FMS_key[fmsO.id]["Y"]            = find_command(keyid.."key_Y")
-    simCMD_FMS_key[fmsO.id]["Z"]            = find_command(keyid.."key_Z")
-    simCMD_FMS_key[fmsO.id]["space"]        = find_command(keyid.."key_space")
-
-    if fmsO.id=="fmsR" then
-      simCMD_FMS_key[fmsO.id]["navrad"]     = find_command("sim/FMS2/navrad")
-    else
-      simCMD_FMS_key[fmsO.id]["navrad"]     = find_command("sim/FMS/navrad")
-    end
-
-    simCMD_FMS_key[fmsO.id]["del"]       = find_command(keyid.."key_delete")
-    simCMD_FMS_key[fmsO.id]["slash"]        = find_command(keyid.."key_slash")
-    simCMD_FMS_key[fmsO.id]["clear"]        = find_command(keyid.."key_clear")
-  end]]
-
   create_keypad(fmsO.id)
   B777CMD_fms1_ls_key_L1              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L1", "FMS1 Line Select Key 1-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L1_CMDhandler"])
   B777CMD_fms1_ls_key_L2              = deferred_command("Strato/B777/".. fmskeyid .. "/ls_key/L2", "FMS1 Line Select Key 2-Left", fmsKeyFunc[fmsO.id]["funcs"]["key_L2_CMDhandler"])
@@ -670,124 +507,120 @@ function setDREFs(fmsO,cduid,fmsid,keyid,fmskeyid) -- fmsObject | xp cdu | id fo
   B777CMD_fms1_key_clear              = deferred_command("Strato/B777/".. fmskeyid .. "/key/clear", "FMS1 KEY CLR", fmsKeyFunc[fmsO.id]["funcs"]["key_clear_CMDhandler"])
 end
 
+B777DR_backend_showSelWpt = {fmsL = find_dataref("Strato/777/FMC/FMC_L/SEL_WPT/is_active"), fmsR = find_dataref("Strato/777/FMC/FMC_L/SEL_WPT/is_active")}
+
 function fms:B777_fms_display()
   local thisID = self.id
 
-  --local inCustomFMC=self.inCustomFMC
+  if thisID ~= "fmsC" then
+    if B777DR_backend_showSelWpt[thisID] == 1 and fmsModules[thisID].currentPage ~= "SELWPT" then
+      fmsModules[thisID].targetPage = "SELWPT"
+      fmsModules[thisID].targetpgNo = 1
+      switchCustomMode()
+    end
+  end
+
   local page=self.currentPage
-  --[[if not inCustomFMC then
-    for i=1,13,1 do
-      B777DR_fms[thisID][i]=cleanFMSLine(B777DR_srcfms[thisID][i])
-      B777DR_fms_s[thisID][i] = "                        "
-    end
+  local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
+  local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
 
-    if string.len(self.notify)>0 then 
-      B777DR_fms[thisID][14]=self.notify
-      B777DR_fms_s[thisID][14] = "                        "
+  for i= 1, #fmsPage do
+    local input = ""
+    local greenText = ""
+    local highlightText = ""
+    local magentaText = ""
+    local greyText = ""
+    local cyanText = ""
+    local whiteText = ""
+    local code = ""
+    local color = ""
+    local codePos = 0
+    local numChars = ""
+    local result = ""
+    local colorOutput = ""
+
+    input = fmsPage[i] -- read the line
+    code = string.match(input, ';...')
+    -- check if there's a color command. constructed like this: ;[color][num chars to color] so ;m05 means make the previous 5 characters magenta
+
+    if code ~= nil then -- if there is a color code
+        codePos = string.find(input, code) -- find where the code is located
+        color = string.sub(code, 2, 2) -- find the commanded color
+        numChars = string.sub(code, 3, 4) -- find the number of chars to color
+        result = string.sub(input, codePos - numChars, codePos - 1) -- find the chars to be colored
+        colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
+        -- generate blank spaces where white text would have been to make colored text line up with white text
+        whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
+        -- generate blanks where colored text and color command were
+
+        -- save colors to respective datarefs
+        if color == "g" then
+          greenText = colorOutput
+        elseif color == "h" then
+          highlightText = colorOutput
+        elseif color == "r" then
+          greyText = colorOutput
+        elseif color == "m" then
+          magentaText = colorOutput
+        elseif color == "c" then
+          cyanText = colorOutput
+        end
     else
-      B777DR_fms[thisID][14]=cleanFMSLine(B777DR_srcfms[thisID][14])
-      B777DR_fms_s[thisID][14] = "                        "
+      whiteText = input
     end
-  else]]
-    --if self.pgNo > fmsPages[page]:getNumPages() then self.pgNo=fmsPages[page]:getNumPages() self.targetpgNo=fmsPages[page]:getNumPages() end
-    --if self.pgNo<1 then self.pgNo = 1 self.targetpgNo = 1 end
-    local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
-    local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
- --   local tmpSRC
+    B777DR_fms[thisID][i]=whiteText
+    B777DR_fms_hl[thisID][i]=highlightText
+    B777DR_fms_m[thisID][i]=magentaText
+    B777DR_fms_gn[thisID][i]=greenText
+    B777DR_fms_c[thisID][i]=cyanText
+    B777DR_fms_gy[thisID][i]=greyText
+  end
 
-    for i=1,13,1 do
---      tmpSRC=B777DR_srcfms[thisID][i] -- make sure src is always fresh
+  for i=1, #fmsPagesmall do
+    local input = ""
+    local highlightText = ""
+    local whiteText = ""
+    local code = ""
+    local color = ""
+    local codePos = 0
+    local numChars = ""
+    local result = ""
+    local colorOutput = ""
 
-      local input = ""
-      local greenText = ""
-      local highlightText = ""
-      local magentaText = ""
-      local greyText = ""
-      local cyanText = ""
-      local whiteText = ""
-      local code = ""
-      local color = ""
-      local codePos = 0
-      local numChars = ""
-      local result = ""
-      local colorOutput = ""
+    input = fmsPagesmall[i]
+    code = string.match(input, ';...')
 
-      input = fmsPage[i] -- read the line
-      code = string.match(input, ';...')
-      -- check if there's a color command. constructed like this: ;[color][num chars to color] so ;m05 means make the previous 5 characters magenta
-
-      if code ~= nil then -- if there is a color code
-          codePos = string.find(input, code) -- find where the code is located
-          color = string.sub(code, 2, 2) -- find the commanded color
-          numChars = string.sub(code, 3, 4) -- find the number of chars to color
-          result = string.sub(input, codePos - numChars, codePos - 1) -- find the chars to be colored
-          colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
-          -- generate blank spaces where white text would have been to make colored text line up with white text
-          whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
-          -- generate blanks where colored text and color command were
-
-          -- save colors to respective datarefs
-          if color == "g" then
-            greenText = colorOutput
-          elseif color == "h" then
-            highlightText = colorOutput
-          elseif color == "r" then
-            greyText = colorOutput
-          elseif color == "m" then
-            magentaText = colorOutput
-          elseif color == "c" then
-            cyanText = colorOutput
-          end
-      else
-        whiteText = input
-      end
-
-      B777DR_fms[thisID][i]=whiteText
-      B777DR_fms_hl[thisID][i]=highlightText
-      B777DR_fms_m[thisID][i]=magentaText
-      B777DR_fms_gn[thisID][i]=greenText
-      B777DR_fms_c[thisID][i]=cyanText
-      B777DR_fms_gy[thisID][i]=greyText
-    end
-
-    for i=1,13,1 do
-
-      local input = ""
-      local highlightText = ""
-      local whiteText = ""
-      local code = ""
-      local color = ""
-      local codePos = 0
-      local numChars = ""
-      local result = ""
-      local colorOutput = ""
-
-      input = fmsPagesmall[i]
-      code = string.match(input, ';...')
-
-      if code ~= nil then
-          codePos = string.find(input, code)
-          color = string.sub(code, 2, 2)
-          numChars = string.sub(code, 3, 4)
-          result = string.sub(input, codePos - numChars, codePos - 1)
-          colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
-          whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
-
-          if color == "h" then
-            highlightText = colorOutput
-          end
-      else
-        whiteText = input
-      end
-      B777DR_fms_s[thisID][i]=whiteText
-      B777DR_fms_s_hl[thisID][i]=highlightText
-    end
-
-    if next(self.dispMSG) then
-      B777DR_fms[thisID][14] = self.dispMSG[1].msg
+    if code ~= nil then
+        codePos = string.find(input, code)
+        color = string.sub(code, 2, 2)
+        numChars = string.sub(code, 3, 4)
+        result = string.sub(input, codePos - numChars, codePos - 1)
+        colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", string.len(input) - codePos + 1)
+        whiteText = string.gsub(input, result..code, string.rep(" ", string.len(result)))
+        if color == "h" then
+          highlightText = colorOutput
+        end
     else
-      --print(thisID.." "..dump(fmsModules[thisID].dispMSG))
-      B777DR_fms[thisID][14] = self.scratchpad;
+      whiteText = input
     end
-  --end
+    B777DR_fms_s[thisID][i]=whiteText
+    B777DR_fms_s_hl[thisID][i]=highlightText
+  end
+
+  if newText[thisID] and (self.scratchpad == "" or not next(alertStack) or B777DR_cdu_act[thisID == "fmsL" and 0 or thisID == "fmsR" and 1 or 2] ~= 1) then
+    newText[thisID] = false
+  end
+
+  -- since com and alert messages display on all cdus, they have separate stacks
+  if newText[thisID] then -- if typed while alert message
+    B777DR_fms[thisID][14] = self.scratchpad;
+  elseif next(alertStack) and B777DR_cdu_act[thisID == "fmsL" and 0 or thisID == "fmsR" and 1 or 2] == 1 then -- if alert message
+    B777DR_fms[thisID][14] = alertStack[1]
+  elseif next(commStack) then -- if comm message
+    B777DR_fms[thisID][14] = commStack[1]
+  elseif next(self.dispMSG) then -- if other messages
+    B777DR_fms[thisID][14] = self.dispMSG[1].msg
+  else
+    B777DR_fms[thisID][14] = self.scratchpad;
+  end
 end

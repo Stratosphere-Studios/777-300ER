@@ -8,7 +8,7 @@
 --]]
 
 -- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
-local version = 2
+local version = 3
 
 --replace create_command
 function deferred_command(name,desc,realFunc)
@@ -100,7 +100,8 @@ function defaultValues()
 			aoa_indicator = 1, -- 0 = disabled, 1 = enabled
 			smart_knobs = 1, -- 0 = disabled, 1 = enabled
 			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
-			gs_mach_indicator = 1 -- 0 = disabled, 1 = enabled
+			gs_mach_indicator = 1, -- 0 = disabled, 1 = enabled
+			transponder_type = 0 -- 0, 1
 		}
 	}
 end
@@ -136,7 +137,7 @@ function setSoundOption(key,value)
 end
 
 function randomChar()
-	local chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	local chars = "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ"
 	local num = math.random(1, chars:len())
 	return chars:sub(num, num)
 end
@@ -184,8 +185,13 @@ function setLoadedConfigs()
 	B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
 	B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
 	if getSimConfig("FMC", "unlocked") == 0 then
-		os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
-		os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
+		if jit.os == "Windows" then
+			os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
+		elseif jit.os == "Linux" then
+			os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
+		else
+			os.execute("osascript -e 'display alert \"Read 777 Readme\" message \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
+		end
 	end
 end
 
@@ -205,9 +211,13 @@ function loadSimConfig()
 		if data:match("\"VERSION\":"..version) then
 			B777DR_simconfig_data = data
 		else
-			print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
-			os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
-			os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
+			if jit.os == "Windows" then
+				os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
+			elseif jit.os == "Linux" then
+				os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
+			else
+				os.execute("osascript -e 'display alert \"Old 777 Settings\" message \"The 777's settings file is from an older version. Settings have been reset.\"")
+			end
 			B777DR_simconfig_data = json.encode(defaultValues())
 		end
 	else

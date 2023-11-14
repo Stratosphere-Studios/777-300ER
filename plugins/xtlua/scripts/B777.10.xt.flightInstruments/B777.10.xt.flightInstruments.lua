@@ -187,6 +187,7 @@ simDR_map_steps                        = find_dataref("sim/cockpit2/EFIS/map_ran
 simDR_total_fuel_kgs                   = find_dataref("sim/flightmodel/weight/m_fuel_total")
 simDR_gross_wt_kgs                     = find_dataref("sim/flightmodel/weight/m_total")
 simDR_payload_wt_kgs                   = find_dataref("sim/flightmodel/weight/m_fixed")
+simDR_viewIsExternal                   = find_dataref("sim/graphics/view/view_is_external")
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
@@ -1585,6 +1586,46 @@ end
 
 --function before_physics()
 
+function murderer()
+
+	-- if view external
+	if simDR_viewIsExternal == 1 then
+		B777DR_kill_pax = 0
+		B777DR_kill_cargo = 0
+		if B777DR_acf_is_freighter == 1 then
+			B777DR_kill_pax = 1
+			B777DR_kill_pax_interior = 1
+			B777DR_kill_cargo = 0
+			B777DR_kill_cargo_interior = 0
+		else
+			B777DR_kill_pax = 0
+			B777DR_kill_pax_interior = 0
+			B777DR_kill_cargo = 1
+			B777DR_kill_cargo_interior = 1
+		end
+		return
+	end
+
+	-- if view internal
+	B777DR_kill_pax = 1
+	B777DR_kill_cargo = 1
+	if B777DR_acf_is_freighter == 1 then
+		B777DR_kill_pax_interior = 1
+		if B777DR_cockpit_door_pos > 0 then
+			B777DR_kill_cargo_interior = 0
+		else
+			B777DR_kill_cargo_interior = 1
+		end
+	else
+		B777DR_kill_cargo_interior = 1
+		if B777DR_cockpit_door_pos > 0 then
+			B777DR_kill_pax_interior = 0
+		else
+			B777DR_kill_pax_interior = 1
+		end
+	end
+end
+
 function after_physics()
 	B777DR_displayed_com1_act_khz = simDR_com1_act_khz / 1000
 	B777DR_displayed_com1_stby_khz = simDR_com1_stby_khz / 1000
@@ -1623,6 +1664,7 @@ function after_physics()
 	spdTrend()
 	altimiter()
 	efis()
+	murderer()
 
 	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
 		B777DR_hyd_press_low_any = 1
@@ -1638,26 +1680,6 @@ function after_physics()
 
 	if B777DR_alt_is_fast_ovrd == 1 then
 		alt_is_fast = 10
-	end
-
-	if B777DR_acf_is_freighter == 1 then
-		B777DR_kill_pax = 1
-		B777DR_kill_pax_interior = 1
-		B777DR_kill_cargo = 0
-		if B777DR_cockpit_door_pos > 0 then
-			B777DR_kill_cargo_interior = 0
-		else
-			B777DR_kill_cargo_interior = 1
-		end
-	else
-		B777DR_kill_cargo = 1
-		B777DR_kill_cargo_interior = 1
-		B777DR_kill_pax = 0
-		if B777DR_cockpit_door_pos > 0 then
-			B777DR_kill_pax_interior = 0
-		else
-			B777DR_kill_pax_interior = 1
-		end
 	end
 
 	if B777DR_ace_fail[0] == 1 or B777DR_ace_fail[1] == 1 or B777DR_ace_fail[2] == 1 or B777DR_ace_fail[3] == 1 then

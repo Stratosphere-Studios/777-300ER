@@ -1,18 +1,3 @@
---TODO: ADD REMAINING PAGES
---[[registerFMCCommand("Strato/B777/button_switch/efis/lEicas/eng","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/stat","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/rcl","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/fuel","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/gear","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/elec","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/air","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/hyd","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/door","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/fctl","")
-registerFMCCommand("Strato/B777/button_switch/efis/lEicas/cam","")
-Strato/B777/button_switch/efis/lEicas/chkl
-]]
-
 fmsPages["EICASMODES"]=createPage("EICASMODES")
 fmsPages["EICASMODES"].getPage=function(self,pgNo,fmsID)
     return {
@@ -51,9 +36,9 @@ fmsPages["EICASMODES"].getSmallPage=function(self,pgNo,fmsID)
 end
 
 fmsFunctionsDefs["EICASMODES"]={}
-fmsFunctionsDefs["EICASMODES"]["L4"]={"setDisp","eicasEng"}
-fmsFunctionsDefs["EICASMODES"]["L5"]={"setDisp","eicasStat"}
-fmsFunctionsDefs["EICASMODES"]["R1"]={"setDisp","eicasChkl"}
+fmsFunctionsDefs["EICASMODES"]["L4"]={"setEicasPage",4}
+fmsFunctionsDefs["EICASMODES"]["L5"]={"setDisetEicasPagesp",9}
+fmsFunctionsDefs["EICASMODES"]["R1"]={"ssetEicasPageetDisp",10}
 fmsFunctionsDefs["EICASMODES"]["R5"]={"doCMD","Strato/777/commands/glareshield/recall"}
 fmsFunctionsDefs["EICASMODES"]["R6"]={"setpage","EICASSYN"}
 
@@ -95,11 +80,11 @@ fmsPages["EICASSYN"].getSmallPage=function(self,pgNo,fmsID)
 end
 
 fmsFunctionsDefs["EICASSYN"]={}
-fmsFunctionsDefs["EICASSYN"]["L4"]={"setDisp","eicasDoor"}
-fmsFunctionsDefs["EICASSYN"]["L5"]={"setDisp","eicasGear"}
-fmsFunctionsDefs["EICASSYN"]["R1"]={"setDisp","eicasElec"}
-fmsFunctionsDefs["EICASSYN"]["R2"]={"setDisp","eicasHyd"}
-fmsFunctionsDefs["EICASSYN"]["R3"]={"setDisp","eicasFuel"}
-fmsFunctionsDefs["EICASSYN"]["R4"]={"setDisp","eicasAir"}
-fmsFunctionsDefs["EICASSYN"]["R5"]={"setDisp","eicasFctl"}
-fmsFunctionsDefs["EICASSYN"]["R6"]={"setpage","EICASMODES"}
+fmsFunctionsDefs["EICASSYN"]["L4"]={"setEicasPage",2}
+fmsFunctionsDefs["EICASSYN"]["L5"]={"setEicasPage",7}
+fmsFunctionsDefs["EICASSYN"]["R1"]={"setEicasPage",3}
+fmsFunctionsDefs["EICASSYN"]["R2"]={"setEicasPage",8}
+fmsFunctionsDefs["EICASSYN"]["R3"]={"setEicasPage",6}
+fmsFunctionsDefs["EICASSYN"]["R4"]={"setEicasPage",1}
+fmsFunctionsDefs["EICASSYN"]["R5"]={"setEicasPage",5}
+fmsFunctionsDefs["EICASSYN"]["R6"]={"setEicasPage",4}

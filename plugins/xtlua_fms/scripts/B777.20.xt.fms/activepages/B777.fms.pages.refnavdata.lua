@@ -1,20 +1,15 @@
-B777DR_backend_page = {fmsL = find_dataref("Strato/777/FMC/FMC_L/page"), fmsR = find_dataref("Strato/777/FMC/FMC_R/page")}
-
 -- Navaid inhibit
-B777DR_something = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/navaid_1_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/navaid_1_in")}
---B777DR_something = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/navaid_2_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/navaid_2_in")}
-
+B777DR_backend_navaidInhibit1_in = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/navaid_1_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/navaid_1_in")}
+B777DR_backend_navaidInhibit2_in = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/navaid_2_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/navaid_2_in")}
 B777DR_backend_navaidInhibit_out = {find_dataref("Strato/777/FMC/REF_NAV/navaid_1_out"), find_dataref("Strato/777/FMC/REF_NAV/navaid_2_out")}
-B777DR_backend_vorInIhibit_out = {find_dataref("Strato/777/FMC/REF_NAV/vor_1_out"), find_dataref("Strato/777/FMC/REF_NAV/vor_2_out")}
 
 --VOR only inhibit:
---B777DR_something = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/vor_1_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/vor_1_in")}
---B777DR_something = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/vor_2_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/vor_2_in")}
-
+B777DR_backend_vorInhibit1_in = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/vor_1_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/vor_1_in")}
+B777DR_backend_vorInhibit2_in = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/vor_2_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/vor_2_in")}
+B777DR_backend_vorInhibit_out = {find_dataref("Strato/777/FMC/REF_NAV/vor_1_out"), find_dataref("Strato/777/FMC/REF_NAV/vor_2_out")}
 
 B777DR_backend_inIcao = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/input_icao"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/input_icao")}-- 5 characters
 B777DR_backend_outIcao = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/out_icao"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/out_icao")}
-
 
 B777DR_backend_poi_type = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/poi_type"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/poi_type")}
 B777DR_backend_poi_lat = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/poi_lat"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/poi_lat")} -- double. Need to convert to DMS format before outputting
@@ -36,19 +31,26 @@ local radNavInhibitS = "OFF<->VOR<->  >"
 fmsPages["REFNAVDATA"] = createPage("REFNAVDATA")
 fmsPages["REFNAVDATA"].getPage = function(self,pgNo,fmsID)
     local idNum = fmsID == "fmsL" and 1 or "fmsR" and 2 or 3
-    print(B777DR_something[idNum].."end")
+    local navaidInhibit = {"    ", "    "}
+    local vorInhibit = {"    ", "    "}
 
     B777DR_backend_page[fmsID] = 2 -- set page to ref nav data mode
+
+    navaidInhibit[1] = B777DR_backend_navaidInhibit_out[1]:match('%a') and B777DR_backend_navaidInhibit_out[1] or "----"
+    navaidInhibit[2] = B777DR_backend_navaidInhibit_out[2]:match('%a') and B777DR_backend_navaidInhibit_out[2] or "----"
+
+    vorInhibit[1] = B777DR_backend_vorInhibit_out[1]:match('%a') and B777DR_backend_vorInhibit_out[1] or "----"
+    vorInhibit[2] = B777DR_backend_vorInhibit_out[2]:match('%a') and B777DR_backend_vorInhibit_out[2] or "----"
 
     if B777DR_backend_radNavInhibit == 2 then
         radNavInhibitL = "OFF;g03<->   <->  >"
         radNavInhibitS = "      VOR   ON "
-        rndS[3] = B777DR_backend_radNavInhibit"----                ----"
-        rndS[4] = "----                ----"
+        rndS[3] = navaidInhibit[1].."                "..navaidInhibit[2]
+        rndS[4] = vorInhibit[1].."                "..vorInhibit[2]
     elseif B777DR_backend_radNavInhibit == 1 then
         radNavInhibitL = "   <->VOR;g03<->  >"
         radNavInhibitS = "OFF         ON "
-        rndS[3] = "----                ----"
+        rndS[3] = navaidInhibit[1].."                "..navaidInhibit[2]
         rndS[4] = "ALL                  ALL"
     elseif B777DR_backend_radNavInhibit == 0 then
         radNavInhibitL = "   <->   <->ON;g02>"
@@ -119,23 +121,11 @@ fmsPages["REFNAVDATA"].getSmallPage = function(self,pgNo,fmsID)
 end
 
 fmsFunctionsDefs["REFNAVDATA"]={}
-fmsFunctionsDefs["REFNAVDATA"]["L1"]={"setdata","refnavdata_poi"} -- need merge notif branch
+fmsFunctionsDefs["REFNAVDATA"]["L1"]={"setdata","refnavdata_poi"}
 fmsFunctionsDefs["REFNAVDATA"]["L6"]={"setpage","INITREF"}
-fmsFunctionsDefs["REFNAVDATA"]["R6"]={"setdata","radNavInhibit"} -- need merge notif branch
+fmsFunctionsDefs["REFNAVDATA"]["R6"]={"setdata","radNavInhibit"}
 
 fmsPages["REFNAVDATA"].getNumPages = function(self)
     return 1
 end
 
-B777DR_backend_msg_notInDatabase = {find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}  -- need merge notif branch
-B777DR_backend_msg_clear = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find_dataref("Strato/777/FMC/FMC_R/clear_msg")} -- need merge notif branch
-
---[[if value == "radNavInhibit" then
-    radNavInhibit = radNavInhibit == 3 and 0 or radNavInhibit + 1
-    return
-elseif value == "refnavdata_poi" then
-    local idNum = fmsO.id == "fmsL" and 1 or fmsO.id == "fmsR" and 2 or 3
-    B777DR_backend_inIcao[idNum] = fmsO["scratchpad"]
-    fmsO["scratchpad"] = "" -- only clear if valid, if invalid notify without clearing
-    return
-end]]

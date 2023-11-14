@@ -1,7 +1,21 @@
 local kgs_to_lbs = 2.204623
+local minFuelSmall = ""
+local fuelWeightSmall = ""
 
 fmsPages["PERFINIT"]=createPage("PERFINIT")
 fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
+
+	local minFuelBig = ""
+	local minFuelTempNum = getSimConfig("FMC", "min_fuel_temp")
+	local minFuelTempStr = (minFuelTempNum > -10 and " "..minFuelTempNum or tostring(minFuelTempNum))
+
+	if fmsModules["data"].customMinFuelTemp then
+		minFuelBig = minFuelTempStr.."`"
+		minFuelSmall = string.rep(" ", minFuelTempStr:len()).." C"
+	else
+		minFuelBig = string.rep(" ", minFuelTempStr:len())
+		minFuelSmall = minFuelTempStr.."`C"
+	end
 
 	local costIndex = fmsModules["data"].costindex
 	costIndex = string.rep(" ", 4 - costIndex:len())..costIndex
@@ -33,14 +47,23 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 	rsv = string.rep(" ", 5 - rsv:len())..rsv
 	fuelWeight = string.rep(" ", 5 - fuelWeight:len())..fuelWeight
 
+	local fuelWeightBig = ""
+	if fmsModules["data"].fmcFuel.mode == "MANUAL" then
+		fuelWeightBig = fuelWeight
+		fuelWeightSmall = string.rep(" ", fuelWeight:len())
+	else
+		fuelWeightBig = string.rep(" ", fuelWeight:len())
+		fuelWeightSmall = fuelWeight
+	end
+
 	return {
 		"       PERF INIT        ",
 		"                         ",
 		grwt.."              "..crzAlt,
 		"                        ",
-		fuelWeight.."               "..costIndex,
+		fuelWeightBig.."               "..costIndex,
 		"                        ",
-		zfw.."                   ",
+		zfw.."              "..minFuelBig,
 		"                        ",
 		rsv.."                   ",
 		"                        ",
@@ -51,8 +74,6 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 end
 
 fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
-	local minFuelTemp = getSimConfig("FMC", "min_fuel_temp")
-	minFuelTemp = (minFuelTemp > -10 and " "..minFuelTemp or minFuelTemp).."`C"
 
 	local crzCG = fmsModules["data"].crzcg
 	crzCG = string.rep(" ", 5 - crzCG:len())..crzCG
@@ -64,9 +85,9 @@ fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
 		" GR WT           CRZ ALT",
 		"                        ",
 		" FUEL         COST INDEX",
-		"     "..weightUnits.." "..fmsModules["data"].fmcFuel.mode,
+		fuelWeightSmall..weightUnits.." "..fmsModules["data"].fmcFuel.mode,
 		" ZFW       MIN FUEL TEMP",
-		"                   "..minFuelTemp,
+		"                   "..minFuelSmall,
 		" RESERVES         CRZ CG",
 		"                   "..crzCG,
 		"PERF INIT      STEP SIZE",
@@ -89,6 +110,6 @@ fmsFunctionsDefs["PERFINIT"]["R5"]={"setdata","stepsize"}
 fmsFunctionsDefs["PERFINIT"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["PERFINIT"]["R6"]={"setpage","THRUSTLIM"}
 
-fmsPages["PERFINIT"].getNumPages=function(self)
+fmsPages["PERFINIT"].getNumPages=function(self, fmsID)
 	return 1
 end
