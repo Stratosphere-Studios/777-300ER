@@ -29,7 +29,7 @@ end
 
 fmsPages["SELWPT"]=createPage("SELWPT")
 fmsPages["SELWPT"].getPage=function(self,pgNo,fmsID)
-    --[[local idNum = fmsID == "fmsL" and 1 or "fmsR" and 2 or 3
+    local idNum = fmsID == "fmsL" and 1 or "fmsR" and 2 or 3
     B777DR_backend_selwpt_currPage[idNum] = pgNo - 1
     return {
         " SELECT DESIRED WPT     ",
@@ -45,30 +45,14 @@ fmsPages["SELWPT"].getPage=function(self,pgNo,fmsID)
         getPOIdata(idNum, 5),
         "                        ",
         getPOIdata(idNum, 6)
-    }]]
-    return {
-        "WHATEVER IS ON SECOND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                   ND PA",
-        "                        "
     }
 end
---[[
+
 fmsPages["SELWPT"].getSmallPage=function(self,pgNo,fmsID)
     local idNum = fmsID == "fmsL" and 1 or "fmsR" and 2 or 3
-    print(B777DR_backend_selwpt_poi1[idNum])
 
     return {
-        "                    "..pgNo.."/"..B777DR_backend_selwpt_numPages[idNum],
+        "                    "..pgNo.."/"..B777DR_backend_selwpt_numPages[fmsID],
         B777DR_backend_selwpt_poi1[idNum],
         "                        ",
         B777DR_backend_selwpt_poi2[idNum],
@@ -83,7 +67,7 @@ fmsPages["SELWPT"].getSmallPage=function(self,pgNo,fmsID)
         "                        ",
     }
 end
-]]
+
 fmsFunctionsDefs["SELWPT"]={}
 fmsFunctionsDefs["SELWPT"]["L1"]={"selectWPT","0"}
 fmsFunctionsDefs["SELWPT"]["L2"]={"selectWPT","1"}

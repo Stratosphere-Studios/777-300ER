@@ -68,7 +68,7 @@ fmsPages["REFNAVDATA"].getPage = function(self,pgNo,fmsID)
     else
         rndL[1] = B777DR_backend_outIcao[idNum].."                   "
         rndS[1] = " LATITUDE      LONGITUDE"
-        rndL[2] = toDMS(B777DR_backend_poi_lat[idNum], true).."        "..toDMS(B777DR_backend_poi_lon[idNum], false)
+        rndL[2] = toDMS(B777DR_backend_poi_lat[idNum], true).."       "..toDMS(B777DR_backend_poi_lon[idNum], false)
         if B777DR_backend_poi_type[idNum] == 2 then -- poi is waypoint
             rndS[2] = "                        "
             rndL[3] = "                        "
@@ -77,11 +77,13 @@ fmsPages["REFNAVDATA"].getPage = function(self,pgNo,fmsID)
             rndL[3] = B777DR_backend_poi_magVar[idNum].."                     "
         elseif B777DR_backend_poi_type[idNum] == 5 then -- poi is an airport
             rndS[2] = "               ELEVATION"
-            rndL[3] = "                     "..string.format("%d", B777DR_backend_poi_elev[idNum])
+            rndL[3] = "                   "..csl(string.format("%d", B777DR_backend_poi_elev[idNum]), 5, true)
         elseif B777DR_backend_poi_type[idNum] == 7 then -- poi is a runway
             rndS[2] = " LENGTH        ELEVATION"
-            rndL[3] = B777DR_backend_poi_len_ft[idNum].."  "..B777DR_backend_poi_len_m[idNum].."                      "
-            rndS[5] = "     FT    M            " -- line7, same as rndL[3] above
+            rndL[3] = string.format("%d", B777DR_backend_poi_len_ft[idNum]).."  "..string.format("%d", B777DR_backend_poi_len_ft[idNum])
+            rndL[3] = csl(rndL[3], 19, false)..csl(string.format("%d", B777DR_backend_poi_elev[idNum]), 5, true)
+            rndS[5] = string.rep(" ", string.format("%d", B777DR_backend_poi_len_ft[idNum]):len()).."FT"..string.rep(" ", string.format("%d", B777DR_backend_poi_len_ft[idNum]):len()).."M"
+            -- line7, same as rndL[3] above, puts correct number of spaces before FT and M
         end
     end
 

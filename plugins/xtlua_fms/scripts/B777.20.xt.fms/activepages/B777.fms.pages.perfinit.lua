@@ -18,7 +18,7 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 	end
 
 	local costIndex = fmsModules["data"].costindex
-	costIndex = string.rep(" ", 4 - costIndex:len())..costIndex
+	costIndex = csl(costIndex, 4, true)
 
 	local crzAlt = fmsModules["data"].crzalt
 	local crzAltNum = tonumber(crzAlt)
@@ -27,7 +27,7 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 			crzAlt = "FL"..math.floor(crzAltNum / 100)
 		end
 	end
-	crzAlt = string.rep(" ", 5 - crzAlt:len())..crzAlt
+	crzAlt = csl(crzAlt, 5, true)
 
 	local grwt = fmsModules["data"].grwt
 	local zfw = fmsModules["data"].zfw
@@ -42,10 +42,10 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 		fuelWeight = string.format("%3.1f", fuelWeight * kgs_to_lbs)
 	end
 
-	grwt = string.rep(" ", 5 - grwt:len())..grwt
-	zfw = string.rep(" ", 5 - zfw:len())..zfw
-	rsv = string.rep(" ", 5 - rsv:len())..rsv
-	fuelWeight = string.rep(" ", 5 - fuelWeight:len())..fuelWeight
+	grwt = csl(grwt, 5, true)
+	zfw = csl(zfw, 5, true)
+	rsv = csl(rsv, 5, true)
+	fuelWeight = csl(fuelWeight, 5, true)
 
 	local fuelWeightBig = ""
 	if fmsModules["data"].fmcFuel.mode == "MANUAL" then
@@ -76,7 +76,7 @@ end
 fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
 
 	local crzCG = fmsModules["data"].crzcg
-	crzCG = string.rep(" ", 5 - crzCG:len())..crzCG
+	crzCG = csl(crzCG, 5, true)
 
 	local weightUnits = getSimConfig("PLANE", "weight_display_units"):sub(1, 2)
 

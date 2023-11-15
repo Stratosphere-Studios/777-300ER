@@ -20,7 +20,7 @@ end
 totalizerInitkgs = 0.0
 totalizerSumkgs = 0.0
 local totalizerInited = false
-
+simDR_altitude_pilot 		= find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
 B777DR_backend_clr = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find_dataref("Strato/777/FMC/FMC_R/clear_msg")}
 B777DR_backend_page = {fmsL = find_dataref("Strato/777/FMC/FMC_L/page"), fmsR = find_dataref("Strato/777/FMC/FMC_R/page")}
 B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
@@ -130,6 +130,14 @@ function getHeadingDifference(desireddirection,current_heading)
 	if (error >  180) then error = error- 360 end
 	if (error < -180) then error = error+ 360 end
 	return error
+end
+
+function csl(str, len, indent) -- constant string length
+    if indent then
+        return string.rep(" ", len - str:len())..str
+    else
+        return str..string.rep(" ", len - str:len())
+    end
 end
 
 function getHeadingDifferenceM(desireddirection,current_heading)

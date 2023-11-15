@@ -26,9 +26,9 @@ _G.simCMD_FMS_key={}
 
 _G.fmsKeyFunc={}
 
-local oodModule
-function outofdateClear()
-  outofdateNotified[oodModule] = false
+local nidModule
+function notindatabaseClear()
+  outofdateNotified[nidModule] = false
 end
 
 local kdModule
@@ -88,7 +88,7 @@ function keyDown() -- only page keys have delay, not entry ones
         fmsModules[fmsModule].targetpgNo = 1
         goto REFRESH
       elseif key=="legs" then
-        fmsModules[fmsModule].targetPage = "SELWPT"
+        fmsModules[fmsModule].targetPage = "LEGS"
         fmsModules[fmsModule].targetpgNo = 1
         goto REFRESH
       elseif key=="dep_arr" then
@@ -121,8 +121,8 @@ function keyDown() -- only page keys have delay, not entry ones
       elseif next(fmsModules[fmsModule].dispMSG) then
         if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
           B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
-          oodModule = fmsModule
-          run_after_time(outofdateClear, 1)
+          nidModule = fmsModule
+          run_after_time(notindatabaseClear, 1)
         end
         table.remove(fmsModules[fmsModule].dispMSG, 1)
       else
@@ -192,6 +192,7 @@ function keyDown() -- only page keys have delay, not entry ones
     fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 
     ::REFRESH::
+    if fmsModules[fmsModule].currentPage == "SELWPT" then B777DR_backend_showSelWpt[fmsModule] = 0 end
     switchCustomMode()
 end
 
@@ -228,7 +229,7 @@ function create_keypad(fms)
     key_fix_CMDhandler		=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "fix") end end,
     key_prev_pg_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "prev") end end,
     key_next_pg_CMDhandler	=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "next") end end,   
-      
+
     key_0_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "0") end end,
     key_1_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "1") end end,
     key_2_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "2") end end,
@@ -509,14 +510,21 @@ end
 
 B777DR_backend_showSelWpt = {fmsL = find_dataref("Strato/777/FMC/FMC_L/SEL_WPT/is_active"), fmsR = find_dataref("Strato/777/FMC/FMC_L/SEL_WPT/is_active")}
 
+local setsel = false
+function rst()
+  setsel = false
+end
+
 function fms:B777_fms_display()
   local thisID = self.id
 
   if thisID ~= "fmsC" then
-    if B777DR_backend_showSelWpt[thisID] == 1 and fmsModules[thisID].currentPage ~= "SELWPT" then
+    if B777DR_backend_showSelWpt[thisID] == 1 and fmsModules[thisID].currentPage ~= "SELWPT" and not setsel then
       fmsModules[thisID].targetPage = "SELWPT"
       fmsModules[thisID].targetpgNo = 1
+      setsel = true
       switchCustomMode()
+      run_after_time(rst, 1)
     end
   end
 

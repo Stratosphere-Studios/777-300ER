@@ -108,6 +108,7 @@ function fmsFunctions.setpage_no(fmsO,valueIn) -- set page with target page numb
 	--end
 
 	print("setpage "..value)
+	print("setpage?")
 	switchCustomMode()
 end
 
@@ -360,7 +361,7 @@ function fmsFunctions.setdata(fmsO,value)
 	elseif value == "flightNum" then
 		local input = fmsO["scratchpad"]
 		if input:len() <= 10 and input >= "" then
-			fmsModules["data"].fltno = string.rep(" ", 10 - input:len())..input
+			fmsModules["data"].fltno = csl(input, 10, true)
 			fmsO["scratchpad"] = ""
 		elseif input == "" and fmsModules["data"].fltno ~= "----------" then
 			fmsO["scratchpad"] = fmsModules["data"].fltno
@@ -1014,12 +1015,13 @@ function fmsFunctions.setDataref(fmsO, input)
 end
 
 function fmsFunctions.selectWPT(fmsO, wpt)
-	if string.match(fmsPages["SELWPT"]:getPage(self.pgNo,fmsO.id)[wpt+23], '%d%d%d') then
+	--print(fmsPages["SELWPT"]:getPage(fmsModules[fmsO.id]["pgNo"], fmsO.id)[wpt*2+3])
+	if string.match(fmsPages["SELWPT"]:getPage(fmsModules[fmsO.id]["pgNo"], fmsO.id)[wpt*2+3], '%d%d%d') then
 		B777DR_backend_selwpt_pickedWpt[fmsO.id] = wpt
 		B777DR_backend_showSelWpt[fmsO.id] = 0
 		fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
 	else
-		fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 	end
 end
 
@@ -1033,51 +1035,6 @@ function fmsFunctions.setEicasPage(fmsO, id)
 end
 
 function fmsFunctions.setDisp(fmsO, value)
-
-	--[[if value == "eicasEng" then
-		setEicasPage(4)
-		return
-	end
-	if value == "eicasStat" then
-		setEicasPage(9)
-		return
-	end
-	if value == "eicasChkl" then
-		setEicasPage(10)
-		return
-	end
-	if value == "eicasDoor" then
-		setEicasPage(2)
-		return
-	end
-	if value == "eicasGear" then
-		setEicasPage(7)
-		return
-	end
-	if value == "eicasElec" then
-		setEicasPage(3)
-		return
-	end
-	if value == "eicasHyd" then
-		setEicasPage(8)
-		return
-	end
-	if value == "eicasFuel" then
-		setEicasPage(6)
-		return
-	end
-	if value == "eicasAir" then
-		setEicasPage(1)
-		return
-	end
-	if value == "eicasFctl" then
-		setEicasPage(5)
-		return
-	end
-	if value == "eicasEng" then
-		setEicasPage(4)
-		return
-	end]]
 
 	if value=="adfvor" then
 		if fmsO.id=="fmsL" then
@@ -1176,7 +1133,7 @@ end
 function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id ~= "fmsC" then
-			local excludedPages = "EFISCTL152, EFISOPTIONS152, EICASMODES, EICASSYN, README, INDEX"
+			local excludedPages = "EFISCTL152, EFISOPTIONS152, EICASMODES, EICASSYN, README, INDEX, SELWPT"
 			local idNum = fmsO.id == "fmsL" and 0 or 1
 			if excludedPages:match(fmsModules[fmsO.id]["prevPage"]:sub(1, -3)) then
 				B777DR_cdu_act[idNum] = 1
@@ -1195,7 +1152,7 @@ function fmsFunctions.setpage2(fmsO, value)
 	end
 
 	if value == "EICASMODES" then
-		local idNum = fmsO.id == "fmsL" and 1 or fmsO.id == "fmsC" and 2 or 3
+		local idNum = fmsO.id == "fmsL" and 0 or fmsO.id == "fmsC" and 1 or 2
 		if B777DR_cdu_eicas_ctl[idNum] == 1 then
 			fmsFunctions["setpage"](fmsO,value)
 		else

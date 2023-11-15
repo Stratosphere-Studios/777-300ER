@@ -87,4 +87,4 @@ fmsFunctionsDefs["EICASSYN"]["R2"]={"setEicasPage",8}
 fmsFunctionsDefs["EICASSYN"]["R3"]={"setEicasPage",6}
 fmsFunctionsDefs["EICASSYN"]["R4"]={"setEicasPage",1}
 fmsFunctionsDefs["EICASSYN"]["R5"]={"setEicasPage",5}
-fmsFunctionsDefs["EICASSYN"]["R6"]={"setEicasPage",4}
+fmsFunctionsDefs["EICASSYN"]["R6"]={"setpage","EICASMODES"}
