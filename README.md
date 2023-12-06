@@ -62,7 +62,7 @@ A: In order to improve performance, we hide all cabin objects when the cockpit d
 
 **СDU Сode**
 
-Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded.
+Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in the X-Plane's Output folder once the aircraft is loaded. (...\X-Plane\Output\777 Readme Code.txt)
 
 **Q: How can I contribute to this aircraft?**
 
