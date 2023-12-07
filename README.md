@@ -67,7 +67,7 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in X-Plane's Output folder once the aircraft is loaded. (`...\X-Plane\Output\777 Readme Сode.txt`)
 
 ## **INSTALLATION**
-Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Code" button, then click "Download Zip". This version gets updated frequently.
+Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
 If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
