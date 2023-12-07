@@ -113,16 +113,12 @@ end
 
 function ParkBrakeHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
+		set(park_brake_valve, 1 - get(park_brake_valve))
 		if get(realistic_prk_brk) == 0 then
 			set(brake_qty_L, 0.02 * get(park_brake_valve))
 			set(brake_qty_R, 0.02 * get(park_brake_valve))
 			set(brake_press_L, 3000 * get(park_brake_valve))
 			set(brake_press_R, 3000 * get(park_brake_valve))
-			set(park_brake_valve, 1)
-		else
-			if get(man_brakes_L) == 1 and get(man_brakes_R) == 1 then
-				set(park_brake_valve, 1 - get(park_brake_valve))
-			end
 		end
 	elseif phase == SASL_COMMAND_END then
 		park_brake_past = 1 - park_brake_past
