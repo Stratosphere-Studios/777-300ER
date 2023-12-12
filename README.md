@@ -44,9 +44,13 @@ If you are a livery painter and want us to add your livery to the repository, pl
 
 A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwMRt) You can also see a detailed changelog [here](https://github.com/Stratosphere-Studios/777/commits/main).
 
-**Q: What is the black console window that appears when I start the aircraft?**
+**Q: What is the black console window that appears when I load the aircraft?**
 
 A: Don't close it. It helps the developers find bugs and fix them. Closing this window WILL crash X-Plane. Along with the log.txt, this is one of the primary tools for investigating issues. This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's `plugins/xtlua/64/` and `plugins/xtlua_fms/64/` folders.
+
+**Q: Why is my antivirus triggered on Windows?**
+
+A: Some antivirus software may flag [this line of code]() as malware. This is a false positive and you should it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes.
 
 **Q: How do I start the aircraft?**
 
