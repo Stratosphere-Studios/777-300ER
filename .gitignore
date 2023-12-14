@@ -1,5 +1,5 @@
-777.acf~
+*.acf~
 777_prefs.txt
-plugins/SASLFree/data/output/SASLLog.txt
-**/*state.txt
-plugins/SASLFree/data/modules/state.txt
+*SASLog.txt
+*state.txt
+*.DS_Store
