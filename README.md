@@ -14,7 +14,7 @@ If you want to continue contributing on a longer term or are working on a big sy
 
 Anyone can also help by reporting issues you find in the issues tab.
 
-If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it! The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. While the modeling is mostly complete, it's still subject to some changes.
+If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it! The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
 
 ## **FAQ**
 
