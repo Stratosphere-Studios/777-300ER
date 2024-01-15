@@ -48,10 +48,6 @@ A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwM
 
 A: Don't close it. It helps the developers find bugs and fix them. Closing this window WILL crash X-Plane. Along with the log.txt, this is one of the primary tools for investigating issues. This can be disabled by deleting the "xtlua_debugging.txt" file from the aircraft's `plugins/xtlua/64/` and `plugins/xtlua_fms/64/` folders.
 
-**Q: Why is my antivirus triggered on Windows?**
-
-A: Some antivirus software may flag [this line of code]() as malware. This is a false positive and you should it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes.
-
 **Q: How do I start the aircraft?**
 
 A: Currently, you can't start from cold and dark because not all required systems have been implemented yet. For now, enable "Start with engines running" in X-Plane's aircraft menu.
@@ -62,7 +58,7 @@ A: Yes! Enable the freighter option on the EFB and the plane will become a 300ER
 
 If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
-**Q: Even after following the above instructions, why my is aircraft still broken?**
+**Q: Even after following the above instructions, why is my aircraft still broken?**
 
 A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft.
 
@@ -80,6 +76,8 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 ### **Windows**
 You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
+
+Some Windows antivirus software may flag [this line of code]() as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
 ### **Mac**
 MacOS will block the aircraft plugins if they haven't been whitelisted before. To whitelist them, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.
