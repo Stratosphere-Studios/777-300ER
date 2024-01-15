@@ -72,7 +72,7 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 
 Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in X-Plane's Output folder once the aircraft is loaded. (`...\X-Plane\Output\777 Readme Сode.txt`)
 
-## **INSTALLATION**
+## **Installation**
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
 
@@ -91,7 +91,7 @@ MacOS will block the aircraft plugins if they haven't been whitelisted before. T
 ### **Linux**
 No further steps are required.
 
-## **CREDITS**
+## **Credits**
 [**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
 [**BRUHegg**](https://github.com/BRUHegg): SASL system code, flight model.
