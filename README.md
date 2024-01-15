@@ -6,6 +6,16 @@ Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere St
 [![Discord](https://img.shields.io/discord/806746926854176789.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/eU2vWCtmFX)
 <br> [Our Discord Server](https://discord.gg/eU2vWCtmFX)
 
+## **Contributing**
+
+Feel free to fork, modify, and make a pull request if you want to make any changes, fixes, or new features to the aircraft.
+
+If you want to continue contributing on a longer term or are working on a big system and need to collaborate, join our Discord server for easier communication. We're especially looking for FMOD soundpack developers!
+
+Anyone can also help by reporting issues you find in the issues tab.
+
+If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it! The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. While the modeling is mostly complete, it's still subject to some changes.
+
 ## **FAQ**
 
 **Q: Why is the aircraft not showing up in the aircraft menu?**
@@ -14,7 +24,7 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 **Sim Compatibility**
 
-A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished.
+A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. We may publish an X-Plane 11 backport once we release version 1.
 
 **Q: Why do I get an error whenever I load the aircraft? What do I do with it?**
 
@@ -35,10 +45,6 @@ A: We have no release date at this time, however, you can still download the air
 **Q: Where can I download liveries?**
 
 A: You can download liveries from us and various third parties from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries)
-
-**Livery Painters**
-
-If you are a livery painter and want us to add your livery to the repository, please create a pull request to the livery repo above and we'll add it if it meets our standards. The paintkit is located in the "!Stratosphere 777-300ER" folder in the livery repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
@@ -77,7 +83,7 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 ### **Windows**
 You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
 
-Some Windows antivirus software may flag [this line of code]() as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
+Some Windows antivirus software may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
 ### **Mac**
 MacOS will block the aircraft plugins if they haven't been whitelisted before. To whitelist them, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.
