@@ -23,4 +23,6 @@ end
 
 trs_pid = PID:new{kp = -0.19, ki = -0.023, kd = 0, errtotal = 0, errlast = 0, lim_out = 25,  lim_et = 1000}
 p_delta_pid = PID:new{kp = 4.1, ki = 0, kd = 0.01, errtotal = 0, errlast = 0, lim_out = 33,  lim_et = 100}
-gust_supr_pid = PID:new{kp = 0.02, ki = 0.01, kd = 0, errtotal = 0, errlast = 0, lim_out = 5,  lim_et = 10}
+roll_maintain_pid = PID:new{kp = 0.013, ki = 0.0006, kd = 0, errtotal = 0, errlast = 0, lim_out = 1,  lim_et = 100}
+gust_supr_pid = PID:new{kp = 0.4, ki = 0.1, kd = 0.2, errtotal = 0, errlast = 0, lim_out = 5,  lim_et = 10}
+yaw_damp_pid = PID:new{kp = 0.4, ki = 0.1, kd = 0.2, errtotal = 0, errlast = 0, lim_out = 6,  lim_et = 50}
