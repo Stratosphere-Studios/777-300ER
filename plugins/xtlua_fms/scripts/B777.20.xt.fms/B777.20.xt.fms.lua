@@ -543,7 +543,7 @@ function after_physics()
 
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
-		print("fms: "..B777DR_simconfig_data)
+		--print("fms: "..B777DR_simconfig_data)
 		simConfigData = json.decode(B777DR_simconfig_data)
 	end
 

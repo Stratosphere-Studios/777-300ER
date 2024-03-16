@@ -8,7 +8,7 @@
 --]]
 
 -- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
-local version = 3
+local version = 4
 
 --replace create_command
 function deferred_command(name,desc,realFunc)
@@ -101,7 +101,8 @@ function defaultValues()
 			smart_knobs = 1, -- 0 = disabled, 1 = enabled
 			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
 			gs_mach_indicator = 1, -- 0 = disabled, 1 = enabled
-			transponder_type = 0 -- 0, 1
+			transponder_type = 0, -- 0, 1
+			nosewheel_ctrl = 0 -- 0 = independant, 1 = yaw, 2 = roll; will also link rudder to roll while on ground when in roll mode
 		}
 	}
 end
@@ -137,7 +138,7 @@ function setSoundOption(key,value)
 end
 
 function randomChar()
-	local chars = "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ"
+	local chars = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
 	local num = math.random(1, chars:len())
 	return chars:sub(num, num)
 end
@@ -200,8 +201,8 @@ local open = io.open
 local close = io.close
 
 function loadSimConfig()
-	os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
-	print("File = "..fileLocation)
+	--os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
+	--print("File = "..fileLocation)
 	local file = open(fileLocation, "r")
 
 	if file then
@@ -216,7 +217,7 @@ function loadSimConfig()
 			elseif jit.os == "Linux" then
 				os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
 			else
-				os.execute("osascript -e 'display alert \"Old 777 Settings\" message \"The 777's settings file is from an older version. Settings have been reset.\"")
+				os.execute("osascript -e 'display alert \"Out Of Date 777 Settings\" message \"The 777's settings file is from an older version. Settings have been reset.\"")
 			end
 			B777DR_simconfig_data = json.encode(defaultValues())
 		end

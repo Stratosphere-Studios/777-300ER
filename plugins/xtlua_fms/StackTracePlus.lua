@@ -102,7 +102,7 @@ local function safe_tostring (value)
 end
 
 -- Private:
--- Parses a line, looking for possible function definitions (in a very naïve way)
+-- Parses a line, looking for possible function definitions (in a very naï¿½ve way)
 -- Returns '(anonymous)' if no function name was found in the line
 local function ParseLine(line)
 	assert(type(line) == "string")
@@ -190,6 +190,7 @@ Dumper.new = function(thread)
 			end
 			return debug.getinfo(thread, level, what)
 		end
+---@diagnostic disable-next-line: redundant-parameter
 		t.getlocal = function(level, loc)
 			if t.dumping_same_thread then
 				level = level + 1
@@ -270,7 +271,7 @@ function Dumper:DumpLocals (level)
 			else
 				local source = info.short_src
 				if source:sub(2,7) == "string" then
-					source = source:sub(9)	-- uno más, por el espacio que viene (string "Baragent.Main", por ejemplo)
+					source = source:sub(9)	-- uno mï¿½s, por el espacio que viene (string "Baragent.Main", por ejemplo)
 				end
 				--for k,v in pairs(info) do print(k,v) end
 				fun_name = fun_name or GuessFunctionName(info)
