@@ -190,7 +190,7 @@ function setLoadedConfigs()
 			os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
 		elseif jit.os == "Linux" then
 			os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
-		else
+		elseif jit.os == "OSX" then
 			os.execute("osascript -e 'display alert \"Read 777 Readme\" message \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
 		end
 	end
@@ -216,7 +216,7 @@ function loadSimConfig()
 				os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
 			elseif jit.os == "Linux" then
 				os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
-			else
+			elseif jit.os == "OSX" then
 				os.execute("osascript -e 'display alert \"Out Of Date 777 Settings\" message \"The 777's settings file is from an older version. Settings have been reset.\"")
 			end
 			B777DR_simconfig_data = json.encode(defaultValues())

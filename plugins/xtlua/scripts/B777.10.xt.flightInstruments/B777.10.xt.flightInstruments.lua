@@ -149,6 +149,14 @@ local minsFlashed = {false, false}
 local iasFlashed = {false, false}
 
 local rudderTrimTarget = 1
+--[[ for eng fail
+sim/operation/failures/rel_engfai0
+sim/operation/failures/rel_engfai1
+sim/operation/failures/rel_engfir0
+sim/operation/failures/rel_engfir1
+sim/operation/failures/rel_engfla0
+sim/operation/failures/rel_engfla1
+]]
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--

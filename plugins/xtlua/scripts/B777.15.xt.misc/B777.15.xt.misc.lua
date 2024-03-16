@@ -212,7 +212,7 @@ end
 --function before_physics()
 
 function after_physics()
-   --print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.")
+   if jit.os == "Windows" then print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.") end
    gear()
 
    B777DR_rud_tab_pos = simDR_rud_tab[11] - simDR_rud[11];
