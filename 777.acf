@@ -37800,7 +37800,7 @@ P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
 P acf/_throt_max_fwd_emr 1.000000000
 P acf/_throt_max_fwd_nrm 1.000000000
-P acf/_throt_max_rev 1.000000000
+P acf/_throt_max_rev 0.800000012
 P acf/_throt_time_jet 5.000000000
 P acf/_throt_time_prop 1.000000000
 P acf/_throttle_drives_EPR 0
