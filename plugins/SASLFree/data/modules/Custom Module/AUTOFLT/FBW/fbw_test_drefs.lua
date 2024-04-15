@@ -7,15 +7,16 @@
 *****************************************************************************************
 --]]
 
-pt = createGlobalPropertyf("Strato/777/test/kp", 0.4)
-it = createGlobalPropertyf("Strato/777/test/ip", 0.1)
-dt = createGlobalPropertyf("Strato/777/test/dp", 0.2)
+dr_kp = createGlobalPropertyf("Strato/777/test/kp", -0.8)
+dr_ki = createGlobalPropertyf("Strato/777/test/ki", -0.2)
+dr_kd = createGlobalPropertyf("Strato/777/test/kd", 0)
+lp_alpha = createGlobalPropertyf("Strato/777/test/lp_alpha", 1)
 r_delta_curr = createGlobalPropertyf("Strato/777/test/rdc", 0)
 roll_maint = createGlobalPropertyf("Strato/777/test/rm", 0)
 fbw_r_past = createGlobalPropertyf("Strato/777/test/fbw_r_past", 0)
 fbw_pitch_cmd = createGlobalPropertyf("Strato/777/test/fbw_pitch_cmd", 0)
 pitch_ovrd = createGlobalPropertyf("Strato/777/test/povrd", 0) --NEVER LEAVE THIS AT 1
-errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
+dr_errtotal = createGlobalPropertyf("Strato/777/test/etotal", 0)
 iasln = createGlobalPropertyf("Strato/777/test/iasln", 0)
 yaw_resp = createGlobalPropertyf("Strato/777/test/ky", 2)
 thrust_c = createGlobalPropertyf("Strato/777/test/thrust_c", 17)
