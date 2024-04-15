@@ -42,6 +42,10 @@ fmsFunctionsDefs["EICASMODES"]["R1"]={"ssetEicasPageetDisp",10}
 fmsFunctionsDefs["EICASMODES"]["R5"]={"doCMD","Strato/777/commands/glareshield/recall"}
 fmsFunctionsDefs["EICASMODES"]["R6"]={"setpage","EICASSYN"}
 
+fmsPages["EICASMODES"].getNumPages=function(self, fmsID)
+	return 1
+end
+
 fmsPages["EICASSYN"]=createPage("EICASSYN")
 fmsPages["EICASSYN"].getPage=function(self,pgNo,fmsID)
     return {
@@ -88,3 +92,7 @@ fmsFunctionsDefs["EICASSYN"]["R3"]={"setEicasPage",6}
 fmsFunctionsDefs["EICASSYN"]["R4"]={"setEicasPage",1}
 fmsFunctionsDefs["EICASSYN"]["R5"]={"setEicasPage",5}
 fmsFunctionsDefs["EICASSYN"]["R6"]={"setpage","EICASMODES"}
+
+fmsPages["EICASSYN"].getNumPages=function(self, fmsID)
+	return 1
+end

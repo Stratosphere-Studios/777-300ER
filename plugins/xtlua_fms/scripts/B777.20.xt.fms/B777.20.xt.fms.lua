@@ -25,10 +25,9 @@ B777DR_backend_clr = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find_datar
 B777DR_backend_page = {fmsL = find_dataref("Strato/777/FMC/FMC_L/page"), fmsR = find_dataref("Strato/777/FMC/FMC_R/page")}
 B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
 B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")
-B777DR_backend_notInDatabase = {find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}
+B777DR_backend_notInDatabase = {find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database"), 0}
 B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
 B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
-B777DR_backend_msg_notInDatabase = {find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}
 B777DR_backend_msg_clear = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find_dataref("Strato/777/FMC/FMC_R/clear_msg")}
 simCMD_fmsL_key_index = find_command("sim/FMS/index")
 simCMD_fmsL_key_l1 = find_command("sim/FMS/ls_1l")
@@ -402,7 +401,7 @@ dofile("B777.createfms.lua")
 dofile("B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
 
-function fmsNotify(self, t, message)
+function fmsNotify(self, t, message) -- improvement: only input notification and automatically determine priority
 	if t == "alert" then
 		table.insert(alertStack, 1, message)
 		return
@@ -475,6 +474,8 @@ function flight_start()
 	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
 end
 
+local databaseOnce = {true, true}
+
 function doNotifications()
 	-- Notifications from other modules
 
@@ -484,13 +485,20 @@ function doNotifications()
 		local fmsID = i == 0 and "fmsL" or i == 1 and "fmsR" or "fmsC"
 		B777DR_cdu_notification[i] = next(fmsModules[fmsID].dispMSG) ~= nil and 1 or 0
 
+		if B777DR_backend_notInDatabase[i+1] == 1 and databaseOnce[i+1] then
+			databaseOnce[i+1] = false
+			fmsModules[fmsID]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
+		elseif B777DR_backend_notInDatabase[i+1] == 0 then
+			databaseOnce[i+1] = true
+		end
+
 		for k, v in ipairs(fmsModules[fmsID].dispMSG) do
 			if v.type == 1 then
 				B777DR_eicas_fmc_messages[0] = 1
 				isError[1] = true
 				return
 			elseif v.type == 2 then
-				B777DR_eicas_fmc_messages[1] = 1
+				B777DR_eicas_fmc_messages [1] = 1
 				isError[2] = true
 				return
 			end
@@ -499,15 +507,6 @@ function doNotifications()
 
 	if not isError[1] then B777DR_eicas_fmc_messages[0] = 0 end
 	if not isError[2] then B777DR_eicas_fmc_messages[1] = 0 end
-
-	-- NOT IN DATABASE
-	for i = 1, 2 do
-		local fmsID = i == 1 and "fmsL" or "fmsR"
-		if B777DR_backend_notInDatabase[i] == 1 and not outofdateNotified[fmsID] then
-			fmsModules[fmsID]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
-			outofdateNotified[fmsID] = true
-		end
-	end
 end
 
 function calcFuel()
@@ -536,8 +535,23 @@ function fuel()
     end
 end
 
+local selOnce = {true, true}
+function checkSelWPT(i)
+	if B777DR_backend_showSelWpt[i] == 1 and selOnce[i] then
+		selOnce[i] = false
+		fmsModules[i==1 and "fmsL" or "fmsR"].targetPage = "SELWPT"
+		fmsModules[i==1 and "fmsL" or "fmsR"].targetpgNo = 1
+		switchCustomMode()
+	elseif B777DR_backend_showSelWpt[i] == 0 then
+		selOnce[i] = true
+	end
+end
+
 function after_physics()
 	if debug_fms > 0 then return end
+
+	checkSelWPT(1)
+	checkSelWPT(2)
 
 	fuel()
 

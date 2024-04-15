@@ -36,11 +36,11 @@ fmsPages["REFNAVDATA"].getPage = function(self,pgNo,fmsID)
 
     B777DR_backend_page[fmsID] = 2 -- set page to ref nav data mode
 
-    navaidInhibit[1] = B777DR_backend_navaidInhibit_out[1]:match('%a') and B777DR_backend_navaidInhibit_out[1] or "----"
-    navaidInhibit[2] = B777DR_backend_navaidInhibit_out[2]:match('%a') and B777DR_backend_navaidInhibit_out[2] or "----"
+    navaidInhibit[1] = B777DR_backend_navaidInhibit_out[1]:match('%w') and B777DR_backend_navaidInhibit_out[1] or "----"
+    navaidInhibit[2] = B777DR_backend_navaidInhibit_out[2]:match('%w') and B777DR_backend_navaidInhibit_out[2] or "----"
 
-    vorInhibit[1] = B777DR_backend_vorInhibit_out[1]:match('%a') and B777DR_backend_vorInhibit_out[1] or "----"
-    vorInhibit[2] = B777DR_backend_vorInhibit_out[2]:match('%a') and B777DR_backend_vorInhibit_out[2] or "----"
+    vorInhibit[1] = B777DR_backend_vorInhibit_out[1]:match('%w') and B777DR_backend_vorInhibit_out[1] or "----"
+    vorInhibit[2] = B777DR_backend_vorInhibit_out[2]:match('%w') and B777DR_backend_vorInhibit_out[2] or "----"
 
     if B777DR_backend_radNavInhibit == 2 then
         radNavInhibitL = "OFF;g03<->   <->  >"
@@ -80,9 +80,9 @@ fmsPages["REFNAVDATA"].getPage = function(self,pgNo,fmsID)
             rndL[3] = "                   "..csl(string.format("%d", B777DR_backend_poi_elev[idNum]), 5, true)
         elseif B777DR_backend_poi_type[idNum] == 7 then -- poi is a runway
             rndS[2] = " LENGTH        ELEVATION"
-            rndL[3] = string.format("%d", B777DR_backend_poi_len_ft[idNum]).."  "..string.format("%d", B777DR_backend_poi_len_ft[idNum])
+            rndL[3] = string.format("%d", B777DR_backend_poi_len_ft[idNum]).."  "..string.format("%d", B777DR_backend_poi_len_ft[idNum]*0.3048)
             rndL[3] = csl(rndL[3], 19, false)..csl(string.format("%d", B777DR_backend_poi_elev[idNum]), 5, true)
-            rndS[5] = string.rep(" ", string.format("%d", B777DR_backend_poi_len_ft[idNum]):len()).."FT"..string.rep(" ", string.format("%d", B777DR_backend_poi_len_ft[idNum]):len()).."M"
+            rndS[5] = string.rep(" ", string.format("%d", B777DR_backend_poi_len_ft[idNum]):len()).."FT"..string.rep(" ", string.format("%d", B777DR_backend_poi_len_ft[idNum]*0.3048):len()).."M"
             -- line7, same as rndL[3] above, puts correct number of spaces before FT and M
         end
     end
@@ -127,7 +127,7 @@ fmsFunctionsDefs["REFNAVDATA"]["L1"]={"setdata","refnavdata_poi"}
 fmsFunctionsDefs["REFNAVDATA"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["REFNAVDATA"]["R6"]={"setdata","radNavInhibit"}
 
-fmsPages["REFNAVDATA"].getNumPages = function(self)
+fmsPages["REFNAVDATA"].getNumPages = function(self, fmsID)
     return 1
 end
 

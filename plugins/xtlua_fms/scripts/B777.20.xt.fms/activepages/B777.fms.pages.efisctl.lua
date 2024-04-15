@@ -103,6 +103,9 @@ fmsFunctionsDefs["EFISCTL152"]["R4"]={"setDisp", "mapMode_3"}
 fmsFunctionsDefs["EFISCTL152"]["R5"]={"setDisp", "mapMode_4"}
 fmsFunctionsDefs["EFISCTL152"]["R6"]={"setpage","EFISOPTIONS152"}
 
+fmsPages["EFISCTL152"].getNumPages=function(self, fmsID)
+	return 1
+end
 
 local efisModeSmall = "   <->   <->    "
 
@@ -195,3 +198,7 @@ fmsFunctionsDefs["EFISOPTIONS152"]["R3"]={"setDisp", "mtrs"}
 fmsFunctionsDefs["EFISOPTIONS152"]["R4"]={"setDisp", "tcas"}
 fmsFunctionsDefs["EFISOPTIONS152"]["R5"]={"setDisp","adfvor"}
 fmsFunctionsDefs["EFISOPTIONS152"]["R6"]={"setpage","EFISCTL152"}
+
+fmsPages["EFISOPTIONS152"].getNumPages=function(self, fmsID)
+	return 1
+end

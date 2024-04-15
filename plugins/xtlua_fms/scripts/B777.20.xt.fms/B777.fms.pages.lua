@@ -51,6 +51,9 @@ dofile("activepages/B777.fms.pages.index.lua")
 dofile("activepages/B777.fms.pages.initref.lua")
 dofile("activepages/B777.fms.pages.navrad.lua")
 dofile("activepages/B777.fms.pages.rte1.lua")
+dofile("activepages/B777.fms.pages.deparrindex.lua")
+dofile("activepages/B777.fms.pages.departures.lua")
+dofile("activepages/B777.fms.pages.arrivals.lua")
 
 --[[
 dofile("activepages/B777.fms.pages.maintirsmonitor.lua")
@@ -69,7 +72,6 @@ dofile("B777.fms.pages.actrte1hold.lua")
 dofile("B777.fms.pages.actrte1legs.lua")
 dofile("B777.fms.pages.altnnavradio.lua")
 dofile("B777.fms.pages.approach.lua")
-dofile("B777.fms.pages.arrivals.lua")
 
 
 dofile("B777.fms.pages.atcrejectdueto.lua")
@@ -77,8 +79,7 @@ dofile("B777.fms.pages.atcrejectdueto.lua")
 dofile("B777.fms.pages.atcreport2.lua")
 dofile("B777.fms.pages.atcuplink.lua")
 dofile("B777.fms.pages.atcverifyresponse.lua")
-dofile("B777.fms.pages.deparrindex.lua")
-dofile("B777.fms.pages.departures.lua")
+
 dofile("B777.fms.pages.fixinfo.lua")
 
 dofile("B777.fms.pages.identpage.lua")
@@ -218,7 +219,7 @@ end
 
 local valIN_fmsO
 
-function validate()
+function validate() -- this function kinda sucks tbh
 	if B777DR_backend_notInDatabase[valIN_fmsO.id == "fmsL" and 1 or 2] == 0 then
 		valIN_fmsO.scratchpad = ""
 	end
@@ -226,7 +227,7 @@ end
 
 function validatePOI(fmsO) -- there is lag from backend, so params must be variables and this must be run after some time
 	valIN_fmsO = fmsO
-	run_after_time(validate, 0.2)
+	run_after_time(validate, 0.1)
 end
 
 local kgs_to_lbs = 2.204623
@@ -834,8 +835,18 @@ function fmsFunctions.setdata(fmsO,value)
 		B777DR_backend_radNavInhibit = B777DR_backend_radNavInhibit == 2 and 0 or B777DR_backend_radNavInhibit + 1
 		return
 	elseif value == "refnavdata_poi" then
-		B777DR_backend_inIcao[idNum] = fmsO["scratchpad"]
-		fmsO["scratchpad"] = ""
+		-- garbage code
+		local input = fmsO.scratchpad
+		if B777DR_backend_arrIcao_out:match('%a') and (#input == 3 and input:match("%d%d%a") or (#input == 2 and input:match("%d%d"))) -- RWY
+		or #input == 2 and input:match("%a%a") -- NDB
+		or #input == 3 and input:match("%a%a%a") -- VOR
+		or #input == 4 and input:match("%a%a%a%a") -- APT
+		or #input == 5 and input:match("%a%a%a%a%a") then -- FIX
+			B777DR_backend_inIcao[idNum] = fmsO["scratchpad"]
+			validatePOI(fmsO)
+		else
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6])
+		end
 		return
 	elseif value == "inhibitNavaid1" then
 		if B777DR_backend_radNavInhibit > 1 then
@@ -1018,7 +1029,7 @@ function fmsFunctions.selectWPT(fmsO, wpt)
 	--print(fmsPages["SELWPT"]:getPage(fmsModules[fmsO.id]["pgNo"], fmsO.id)[wpt*2+3])
 	if string.match(fmsPages["SELWPT"]:getPage(fmsModules[fmsO.id]["pgNo"], fmsO.id)[wpt*2+3], '%d%d%d') then
 		B777DR_backend_selwpt_pickedWpt[fmsO.id] = wpt
-		B777DR_backend_showSelWpt[fmsO.id] = 0
+		print("selected. returning to previous: "..fmsModules[fmsO.id]["prevPage"])
 		fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
 	else
 		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP

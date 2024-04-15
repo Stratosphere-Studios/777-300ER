@@ -73,11 +73,11 @@ fmsPages["IDENT"].getSmallPage=function(self,pgNo,fmsID)
 	}
 end
 
-fmsPages["IDENT"].getNumPages = function(Self)
-	return 1
-end
-
 fmsFunctionsDefs["IDENT"]={}
 fmsFunctionsDefs["IDENT"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["IDENT"]["R6"]={"setpage","POSINIT"}
 fmsFunctionsDefs["IDENT"]["R5"]={"setdata", "drag_ff"}
+
+fmsPages["IDENT"].getNumPages=function(self, fmsID)
+	return 1
+end
