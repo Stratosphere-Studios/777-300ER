@@ -53,7 +53,7 @@ function utils.split(s, delimiter)
     return result
 end
 
-function utils.csl(str, len, indent) -- constant string length
+function utils.pad(str, len, indent) -- constant string length
     if indent then
         return string.rep(" ", len - str:len())..str
     else

@@ -81,7 +81,7 @@ _G.entryMsgs = {
   "ILS TUNE INHIBITED - MCP",
   "INVALID DELETE",
   "INVALID ENTRY",
-  "NOT IN DATABASE",
+  "NOT IN DATABASE", -- May be NOT IN DATA BASE according to PMDG and sometimes in doc
   "ROUTE FULL",
   "RUNWAY N/A FOR SID",
   "TAKEOFF FLAPS DELETED",

@@ -12,14 +12,13 @@ B777DR_backend_selwpt_pickedWpt = {fmsL = find_dataref("Strato/777/FMC/FMC_L/SEL
 
 function getPOIdata(idNum, poiNum)
     local num = (poiNum - 1) * 3 -- 3 vals (indeces) per poi
-    local freqString = tostring(B777DR_POItable[idNum][num])
     local numPOIs = B777DR_backend_selwpt_numPOIs[idNum] <= 6 and B777DR_backend_selwpt_numPOIs[idNum] or B777DR_backend_selwpt_numPOIs[idNum] - 6
-    if #freqString == 3 then
-        freqString = freqString..".0  "
-    elseif #freqString == 4 then
-        freqString = freqString..".0 "
-    else
+
+    local freqString = tostring(B777DR_POItable[idNum][num])
+    if #freqString == 5 then
         freqString = string.format("%3.2f ", B777DR_POItable[idNum][num] / 100)
+    else
+        freqString = pad(freqString..".0", 7)
     end
 
     if poiNum <= numPOIs then
@@ -54,17 +53,17 @@ fmsPages["SELWPT"].getSmallPage=function(self,pgNo,fmsID)
     local idNum = fmsID == "fmsL" and 1 or "fmsR" and 2 or 3
     return {
         "                    "..pgNo.."/"..B777DR_backend_selwpt_numPages[fmsID],
-        B777DR_backend_selwpt_poi1[idNum],
+        " "..B777DR_backend_selwpt_poi1[idNum],
         "                        ",
-        B777DR_backend_selwpt_poi2[idNum],
+        " "..B777DR_backend_selwpt_poi2[idNum],
         "                        ",
-        B777DR_backend_selwpt_poi3[idNum],
+        " "..B777DR_backend_selwpt_poi3[idNum],
         "                        ",
-        B777DR_backend_selwpt_poi4[idNum],
+        " "..B777DR_backend_selwpt_poi4[idNum],
         "                        ",
-        B777DR_backend_selwpt_poi5[idNum],
+        " "..B777DR_backend_selwpt_poi5[idNum],
         "                        ",
-        B777DR_backend_selwpt_poi6[idNum],
+        " "..B777DR_backend_selwpt_poi6[idNum],
         "                        ",
     }
 end

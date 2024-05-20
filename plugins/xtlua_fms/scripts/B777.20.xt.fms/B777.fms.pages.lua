@@ -362,7 +362,7 @@ function fmsFunctions.setdata(fmsO,value)
 	elseif value == "flightNum" then
 		local input = fmsO["scratchpad"]
 		if input:len() <= 10 and input >= "" then
-			fmsModules["data"].fltno = csl(input, 10, true)
+			fmsModules["data"].fltno = pad(input, 10, true)
 			fmsO["scratchpad"] = ""
 		elseif input == "" and fmsModules["data"].fltno ~= "----------" then
 			fmsO["scratchpad"] = fmsModules["data"].fltno

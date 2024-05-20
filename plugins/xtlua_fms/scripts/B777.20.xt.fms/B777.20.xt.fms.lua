@@ -131,7 +131,7 @@ function getHeadingDifference(desireddirection,current_heading)
 	return error
 end
 
-function csl(str, len, indent) -- constant string length
+function pad(str, len, indent) -- constant string length
     if indent then
         return string.rep(" ", len - str:len())..str
     else
@@ -161,19 +161,18 @@ function getDistance(lat1,lon1,lat2,lon2)
 end
 
 function toDMS(value,isLat)
-	local degrees = math.abs(value)
-	local minutes = (value-math.floor(value))*60
-	local seconds = minutes - math.floor(minutes)
-	local prefix="E"
+    local absIn = math.abs(value)
+	local degrees = math.floor(absIn)
+	local minutes = math.floor((absIn-degrees)*60)
+	local seconds = round(((absIn-degrees)*60-(minutes))*6)
+	local prefix=" "
+	--print(value.."d: "..degrees..", m: "..minutes..", s: "..seconds)
 	if isLat then
 		prefix = value > 0 and "N" or "S"
+        return string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds)
 	else
 		prefix = value > 0 and "E" or "W"
-	end
-	if isLat then
-		return string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds * 10) 
-	else
-		return string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
+        return string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds)
 	end
 end
 

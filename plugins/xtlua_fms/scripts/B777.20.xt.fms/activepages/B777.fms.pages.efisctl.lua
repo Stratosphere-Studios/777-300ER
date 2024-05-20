@@ -18,7 +18,7 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
         radBaro = "<RAD;g03       "
     end
 
-    stringMins = csl(tostring(mins), 5, false) -- make sure minimums always takes up 5 spaces on the display
+    stringMins = pad(tostring(mins), 5) -- make sure minimums always takes up 5 spaces on the display
 
     if B777DR_baro_mode[id] == 0 then
         altimeter = string.format("%.02f", simDR_altimiter_setting[id+1])

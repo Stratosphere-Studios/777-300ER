@@ -634,3 +634,5 @@ function fms:B777_fms_display()
     B777DR_fms[thisID][14] = self.scratchpad;
   end
 end
+
+-- test vors not showing frequency
