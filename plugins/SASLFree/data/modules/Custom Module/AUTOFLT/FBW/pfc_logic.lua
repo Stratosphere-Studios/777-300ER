@@ -22,7 +22,12 @@ fbw_iasln = globalProperty("Strato/777/fctl/iasln_table")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace")
 pfc_disc = globalPropertyi("Strato/777/fctl/pfc/disc")
 --Autopilot
+ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 ap_disc = globalPropertyi("Strato/777/autopilot/disc")
+flt_dir_pilot_pfd = globalPropertyi("Strato/777/pfd/flt_dir_pilot")
+flt_dir_copilot_pfd = globalPropertyi("Strato/777/pfd/flt_dir_copilot")
+flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
+flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
 --Data bus
 pfc_calc = globalPropertyi("Strato/777/fctl/databus/calc")
 pfc_pilot_input = globalProperty("Strato/777/fctl/databus/pilot_input")
@@ -423,7 +428,13 @@ function UpdateMode()
 	end
 end
 
+function updateFltDir()
+	set(flt_dir_pilot_pfd, get(flt_dir_pilot) * (1 - get(ap_engaged)))
+	set(flt_dir_copilot_pfd, get(flt_dir_copilot) * (1 - get(ap_engaged)))
+end
+
 function update()
+	updateFltDir()
 	UpdateMode()
 	if get(pfc_calc) == 1 and get(f_time) ~= 0 then
 		if get(fbw_mode) == 1 then

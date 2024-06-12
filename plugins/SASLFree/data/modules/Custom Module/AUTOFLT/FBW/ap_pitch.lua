@@ -11,16 +11,19 @@ alt_cmd = createGlobalPropertyf("Strato/777/pitch_dbg/altcmd", 0)
 tgt_ias = globalPropertyf("sim/cockpit2/autopilot/airspeed_dial_kts")
 ap_pitch_eng = createGlobalPropertyi("Strato/777/pitch_dbg/eng", 0)
 
+tgt_fpa = createGlobalPropertyf("Strato/777/mcp/tgt_fpa", 0)
+vs_fpa = createGlobalPropertyi("Strato/777/mcp/vs_fpa", 0)
+
 pitch_fltdir_pilot = createGlobalPropertyi("Strato/777/pfd/pitch_fltdir_pilot", 0)
 pitch_fltdir_copilot = createGlobalPropertyi("Strato/777/pfd/pitch_fltdir_copilot", 0)
 
-flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
-flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
+flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
+flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
 
-vshold_eng = createGlobalPropertyi("Strato/777/mcp/vshold", 1)
+vshold_eng = createGlobalPropertyi("Strato/777/mcp/vshold", 0)
 flch_eng = globalPropertyi("Strato/777/mcp/flch")
 alt_hold_eng = createGlobalPropertyi("Strato/777/mcp/althold", 0)
-curr_vert_mode = globalPropertyi("Strato/777/fma/active_vert_mode", 0)
+curr_vert_mode = globalPropertyi("Strato/777/fma/active_vert_mode")
 alt_acq = globalPropertyi("Strato/777/fma/alt_acq")
 
 mcp_alt_val = globalPropertyf("sim/cockpit/autopilot/altitude")
@@ -39,7 +42,7 @@ pitch_tgt = createGlobalPropertyf("Strato/777/autopilot/pitch_tgt_deg", 0)
 ap_pitch_on = createGlobalPropertyi("Strato/777/autopilot/ap_pitch_on", 0)
 
 vs_tgt = globalPropertyf("sim/cockpit2/autopilot/vvi_dial_fpm")
-ap_engaged = globalPropertyi("Strato/777/mcp/ap_on", 0)
+ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 
 -- Sim sensor datarefs
 alt_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
@@ -359,6 +362,23 @@ function updateMode()
     set(vs_cmd, vs_hold_vs_tgt)
 end
 
+function updateVsFpa()
+    local curr_gs = get(gs_dref)
+    local vs_avg_fpm = (get(vs_pilot_fpm) + get(vs_copilot_fpm)) / 2
+
+    if get(vs_fpa) == 1 then
+        local fpa_rad = math.rad(get(tgt_fpa))
+        set(vs_tgt, math.tan(fpa_rad) * curr_gs)
+    else
+        if curr_gs == 0 then
+            set(tgt_fpa, 0)
+        else
+            local fpa_rad = math.atan(get(vs_tgt)/curr_gs)
+            set(tgt_fpa, math.deg(fpa_rad))
+        end
+    end
+end
+
 function updatePitchFltDirCmd()
     if vert_mode ~= VERT_MODE_OFF then
         local avg_pitch_deg = (get(pitch_pilot) + get(pitch_copilot)) / 2
@@ -384,6 +404,7 @@ function updatePitchFltDir() -- Updates pitch flight directors
 end
 
 function getAutopilotPitchCmd()
+    updateVsFpa()
     updateMode()
     local pitch_cmd_deg = 0
     if vert_mode ~= VERT_MODE_ALTHOLD then

@@ -11,7 +11,7 @@ addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
 addSearchPath(moduleDirectory.."/Custom Module/FCTL")
 addSearchPath(moduleDirectory.."/Custom Module/ELEC")
---addSearchPath(moduleDirectory.."/Custom Module/ND")
+addSearchPath(moduleDirectory.."/Custom Module/ND")
 addSearchPath(moduleDirectory.."/Custom Module/TCAS")
 addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
 addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/")
@@ -31,10 +31,12 @@ pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
-ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 1)
+ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
+
+show_fpv = createGlobalPropertyi("Strato/777/EFIS/fpv_on", 0)
 
 autothr_arm = createGlobalPropertyi("Strato/777/mcp/at_arm", 1)
-spd_hold = createGlobalPropertyi("Strato/777/mcp/spd_hold", 1)
+spd_hold = createGlobalPropertyi("Strato/777/mcp/spd_hold", 0)
 flch = createGlobalPropertyi("Strato/777/mcp/flch", 0)
 toga = createGlobalPropertyi("Strato/777/mcp/toga", 0)
 at_disc = createGlobalPropertyi("Strato/777/mcp/at_disc", 0)
@@ -63,6 +65,12 @@ stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
 
 ap_disc = createGlobalPropertyi("Strato/777/autopilot/disc", 0)
 alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
+
+fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
+fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
+
+flt_dir_pilot_pfd = createGlobalPropertyi("Strato/777/pfd/flt_dir_pilot", 0)
+flt_dir_copilot_pfd = createGlobalPropertyi("Strato/777/pfd/flt_dir_copilot", 0)
 
 --Failure datarefs
 
