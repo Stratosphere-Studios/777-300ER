@@ -8,6 +8,7 @@
 
 ac_heading = globalPropertyf("sim/flightmodel/position/magpsi")
 wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
+f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 
 --Generic utilities
 
@@ -92,6 +93,15 @@ function EvenChange(val, tgt, step)
 	else
 		return val + (bool2num(val < tgt) - bool2num(val > tgt)) * tmp_step
 	end
+end
+
+function rotate(px, py, cx, cy, theta)
+	local rad_ang = math.rad(theta)
+	local vec_x = px - cx
+	local vec_y = py - cy
+	local tmp_x = vec_x * math.cos(rad_ang) - vec_y * math.sin(rad_ang)
+	local tmp_y = vec_x * math.sin(rad_ang) + vec_y * math.cos(rad_ang)
+	return {tmp_x + cx, tmp_y + cy}
 end
 
 --Sim only utilities

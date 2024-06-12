@@ -70,6 +70,9 @@ function update()
         local amber_band_conv = (toCAS(amber_band_si) + correction) * 1.944
         set(max_allowable, curr_max)
         set(stall_speed, red_band_conv)
-        set(manuever_speed, amber_band_conv)
+        if amber_band_conv-10 > red_band_conv then
+            amber_band_conv = amber_band_conv - 10
+        end
+        set(manuever_speed, amber_band_conv-10)
     end
 end

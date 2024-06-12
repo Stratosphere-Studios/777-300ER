@@ -10,6 +10,10 @@ include("misc_tools.lua")
 
 --Light datarefs:
 
+--ND
+
+--mag_hdg_light = createGlobalPropertyi("Strato/777/cockpit/lights/mag_hdg", 0)
+
 --FBW:
 
 pfc_disc_light = globalPropertyi("Strato/777/cockpit/lights/pfc_disc")
@@ -20,6 +24,9 @@ light_primary = globalProperty("Strato/777/hydraulics/pump/primary/fault")
 light_demand = globalProperty("Strato/777/hydraulics/pump/demand/fault")
 
 --System datarefs:
+
+--ND
+--mag_hdg = globalPropertyi("Strato/777/cockpit/switches/mag_hdg")
 
 --FBW:
 
@@ -106,6 +113,7 @@ function UpdateHydLights()
 end
 
 function update()
+	--set(mag_hdg_light, 1 - get(mag_hdg))
     set(pfc_disc_light, get(pfc_disc))
     UpdateHydLights()
 end

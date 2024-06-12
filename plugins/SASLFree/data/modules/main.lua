@@ -11,19 +11,41 @@ addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
 addSearchPath(moduleDirectory.."/Custom Module/FCTL")
 addSearchPath(moduleDirectory.."/Custom Module/ELEC")
+--addSearchPath(moduleDirectory.."/Custom Module/ND")
+addSearchPath(moduleDirectory.."/Custom Module/TCAS")
 addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/FBW")
+addSearchPath(moduleDirectory.."/Custom Module/AUTOFLT/")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/UPPER")
 addSearchPath(moduleDirectory.."/Custom Module/EICAS/LOWER")
+
+time_elapsed = createGlobalPropertyf("Strato/777/time/current", 0)
+
 
 --Data Ref registering/finding:
 
 --Switches
 
 gear_lever = createGlobalPropertyi("Strato/777/cockpit/switches/gear_tgt", 0)
+speedbrake_handle = createGlobalPropertyf("Strato/777/cockpit/switches/sb_handle", 0)
 pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
+ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 1)
+
+autothr_arm = createGlobalPropertyi("Strato/777/mcp/at_arm", 1)
+spd_hold = createGlobalPropertyi("Strato/777/mcp/spd_hold", 1)
+flch = createGlobalPropertyi("Strato/777/mcp/flch", 0)
+toga = createGlobalPropertyi("Strato/777/mcp/toga", 0)
+at_disc = createGlobalPropertyi("Strato/777/mcp/at_disc", 0)
+ap_disc_bar = createGlobalPropertyi("Strato/777/mcp/ap_disc_bar", 0)
+
+flt_dir_pilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
+flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
+
+--Annunciators
+curr_vert_mode = createGlobalPropertyi("Strato/777/fma/active_vert_mode", 0)
+alt_acq = createGlobalPropertyi("Strato/777/fma/alt_acq", 0)
 
 --Systems datarefs
 
@@ -39,15 +61,28 @@ brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R", 0)
 stab_cutout_C = createGlobalPropertyi("Strato/777/fctl/stab_cutout_C", 0)
 stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
 
+ap_disc = createGlobalPropertyi("Strato/777/autopilot/disc", 0)
+alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
+
 --Failure datarefs
 
 fbw_secondary_fail = createGlobalPropertyi("Strato/777/failures/fctl/secondary", 0)
 fbw_direct_fail = createGlobalPropertyi("Strato/777/failures/fctl/direct", 0)
 goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
 
+--test
+
+input_icao = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/input_icao")
+
+apt_lat = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_lat")
+apt_lon = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_lon")
+apt_elev = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_elev")
+
+ui_1 = globalProperty("Strato/777/UI/messages/creating_databases")
+
 --Overrides
 
-fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp11 flight controls
+fctl_ovrd = globalPropertyf("sim/operation/override/override_control_surfaces") --for overriding default xp flight controls
 brk_ovrd = globalPropertyi("sim/operation/override/override_gearbrake")
 steer_ovrd = globalPropertyi("sim/operation/override/override_wheel_steer")
 throttle_ovrd = globalProperty("sim/operation/override/override_throttles")
@@ -61,6 +96,7 @@ components = {
 
 	timers {},
 	elec_main {},
+	tcas_main {},
 	speed_calc {},
 	hydraulics {},
 	fbw_drefs {},
@@ -68,6 +104,7 @@ components = {
 	pfc_logic {},
 	auto_calib {},
 	fctl {},
+	auto_thr {},
 	eec {},
 	gear {},
 	eicascheck {
@@ -81,7 +118,7 @@ components = {
 		fpsLimit = 50
 	},
 	eicas_graphics{
-		position = {2730 , 0, 1365, 1365},
+		position = {2730 , 0, 1337, 1337},
 		visible = true,
 		fpsLimit = 50
 	},
@@ -90,6 +127,11 @@ components = {
 		visible = true,
 		fpsLimit = 50
 	},
+	--nd_fo {
+	--	position = {1380 , 15, 1337, 1337},
+	--	visible = true,
+	--	fpsLimit = 50
+	--},
 	lights {},
 	custom_commands {},
 	failures {}

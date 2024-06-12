@@ -1,4 +1,4 @@
-time_elapsed = createGlobalPropertyf("Strato/777/time/current", 0)
+time_elapsed = globalPropertyf("Strato/777/time/current")
 
 timer = sasl.createTimer()
 sasl.startTimer(timer)

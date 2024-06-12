@@ -7,6 +7,7 @@
 --]]
 
 include("misc_tools.lua")
+include("constants.lua")
 include("thrust_asym_comp.lua")
 include("fbw_bite.lua")
 
@@ -16,7 +17,8 @@ yoke_roll_ratio = globalPropertyf("sim/cockpit2/controls/yoke_roll_ratio")
 yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
 rud_pedals = globalPropertyf("Strato/777/cockpit/switches/rud_pedals")
 stab_trim = globalPropertyf("sim/cockpit2/controls/elevator_trim")
-spoiler_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
+spoiler_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
+sim_spoiler_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_ratio_all")
 --Control surfaces
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
@@ -28,6 +30,10 @@ spoiler_L1_act = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 3) --#4
 spoiler_L2_act = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 3)
 spoiler_R1_act = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 4) --#11
 spoiler_R2_act = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 4)
+spoiler_6_act = globalPropertyfae("sim/flightmodel2/wing/speedbrake1_deg", 1)
+spoiler_7_act = globalPropertyfae("sim/flightmodel2/wing/speedbrake2_deg", 1)
+spoiler_8_act = globalPropertyfae("sim/flightmodel2/wing/speedbrake2_deg", 2)
+spoiler_9_act = globalPropertyfae("sim/flightmodel2/wing/speedbrake1_deg", 2)
 elevator_L_act = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",9)
 elevator_R_act = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",10)
 rudder_act = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 12)
@@ -102,6 +108,7 @@ pfc_stab_trim_operative = globalPropertyi("Strato/777/fctl/databus/stab_trim_op"
 --PFC input
 fbw_trim_speed = globalPropertyf("Strato/777/fctl/trs")
 --PFC output
+ap_engaged = globalPropertyi("Strato/777/mcp/ap_on", 0)
 fbw_mode = globalProperty("Strato/777/fctl/pfc/mode")
 pfc_roll_command = globalPropertyf("Strato/777/fctl/pfc/roll")
 pfc_elevator_command = globalPropertyf("Strato/777/fctl/pfc/elevator")
@@ -125,6 +132,10 @@ ace_spoiler_fail_2 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_2")
 ace_spoiler_fail_36 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_36")
 ace_spoiler_fail_4 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_4")
 ace_spoiler_fail_5 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_5")
+ace_spoiler_fail_6 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_6")
+ace_spoiler_fail_7 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_7")
+ace_spoiler_fail_8 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_8")
+ace_spoiler_fail_9 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_9")
 ace_elevator_fail_L = globalPropertyi("Strato/777/fctl/ace/elevator_fail_L")
 ace_elevator_fail_R = globalPropertyi("Strato/777/fctl/ace/elevator_fail_R")
 ace_rudder_fail = globalPropertyi("Strato/777/fctl/ace/rudder_fail")
@@ -135,6 +146,9 @@ pcu_elevator = globalProperty("Strato/777/fctl/pcu/elev")
 pcu_rudder = globalProperty("Strato/777/fctl/pcu/rudder")
 pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
 
+--Test
+gear_untilted = createGlobalPropertyi("Strato/777/test/spoiler_arm_test", 0)
+
 --PCU modes:
 --0 - bypass
 --1 - normal
@@ -143,6 +157,9 @@ pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
 Ail_neutral = {0, 0, 5, 5, 5, 0, 0}
 Flprn_neutral = {0, 0, 5, 14, 16, 29, 29}
 rud_trim_auto_past = 0
+lmw_onground_past = 1
+rmw_onground_past = 1
+spoiler_special_cmd = 0
 Control_surface = {aces = {0, 0}, hyd_sys = {0, 0}, full_up = 18, full_dn = 18, mode = 0}
 
 function Control_surface:new(tmp)
@@ -250,20 +267,25 @@ function sendFLTdata()
     end
 end
 
-function SetSpeedbrkHandle() --this is just some code for the speedbrake handle
+function SetSpeedbrkHandle(ext_cmd, hyd_sys_C_press, fctl_mode, lmw_past, rmw_past) --this is just some code for the speedbrake handle
     local all_onground = get(nw_onground) == 1 and get(lmw_onground) == 1 and get(rmw_onground) == 1
     local rev_deployed = (get(L_reverser_deployed) or get(R_reverser_deployed)) == 1
-    if all_onground then
-	    if rev_deployed and get(hyd_pressure, 2) > 1200 and get(fbw_mode) == 1 then --conditions for deployment
-	    	set(spoiler_handle, 1)
-	    elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 then --automatic retraction when too much thrust is applied
-	    	set(spoiler_handle, 0)
-	    end
-    elseif get(lmw_onground) == 1 and get(rmw_onground) == 1 and get(nw_onground) == 0 then
-        if rev_deployed and get(hyd_pressure, 2) > 1200 and get(fbw_mode) == 1 and get(spoiler_handle) < 0 then
-            set(spoiler_handle, 1)
+    local arm_mode_ext_cmd = ext_cmd
+    if get(lmw_onground) * get(rmw_onground) == 1 and lmw_past * rmw_past == 0 then
+        if get(spoiler_handle) < 0 then
+            arm_mode_ext_cmd = 1
         end
     end
+    if all_onground or get(lmw_onground) * get(rmw_onground) == 1 then
+	    if rev_deployed and hyd_sys_C_press > 1200 and fctl_mode == 1 then --conditions for deployment
+	    	set(spoiler_handle, 1)
+            arm_mode_ext_cmd = 0
+	    elseif get(throttle_pos) > 0.5 and get(spoiler_handle) > 0.3 then --automatic retraction when too much thrust is applied
+	    	set(spoiler_handle, 0)
+            arm_mode_ext_cmd = 0
+	    end
+    end
+    return {get(lmw_onground), get(rmw_onground), arm_mode_ext_cmd}
 end
 
 function GetFBWAilRatio(fctl_mode, avg_alt, avg_cas, flap_pos)
@@ -386,13 +408,44 @@ function GetRollNeutral(flap_pos, neutral)
     return neutral[1]
 end
 
-function UpdateSpoilers(avg_cas, spoilers, sp_fail_drefs, sp_cmd_dref, activation_limit)
-    sp_main_avail = false
-    sp_sec_avail = false
-    local pri_spoiler_command_L = lim(get(spoiler_handle), 1, 0)
+function SetSpoilerCmd(is_avail, cmd_dr, pcu_dr, cmd1, cmd2, i1, i2)
+    if is_avail then
+        set(cmd_dr, cmd1, i1)
+        set(cmd_dr, cmd2, i2)
+        set(pcu_dr, PCU_NML, i1)
+        set(pcu_dr, PCU_NML, i2)
+    else
+        set(cmd_dr, 0, i1)
+        set(cmd_dr, 0, i2)
+        set(pcu_sp, PCU_BYPASS, i1)
+        set(pcu_sp, PCU_BYPASS, i2)
+    end
+end
+
+function UpdateSpoilers(avg_cas, spoilers, sp_fail_drefs, sp_cmd_dref, special_cmd, activation_limit)
+    local sp_main_avail = false
+    local sp_69_avail = false
+    local sp_78_avail = false
+    local sp_sec_avail = false
+    local k_L = 1
+    local k_R = 1
+    local sp_sec_handle_cmd = 0
+    local k_special_cmd = 0.4
+    if get(spoiler_handle) >= SEC_SPOILER_ACTIVATION or 
+       (special_cmd == 1 and get(spoiler_L2_act) >= spoilers[1].full_up * k_special_cmd 
+        and get(spoiler_R2_act) >= spoilers[1].full_up * k_special_cmd) then
+        sp_sec_handle_cmd = 1
+    end
+    local sp_cmd = lim(get(spoiler_handle), 1, 0)
+    if special_cmd == 1 then
+        sp_cmd = special_cmd * k_special_cmd
+    end
+    local pri_spoiler_command_L = sp_cmd
     local pri_spoiler_command_R = pri_spoiler_command_L
-    local sec_spoiler_command_L = pri_spoiler_command_L
-    local sec_spoiler_command_R = pri_spoiler_command_L
+    local spoiler_67_cmd = pri_spoiler_command_L
+    local spoiler_89_cmd = pri_spoiler_command_L
+    local sec_spoiler_command_L = sp_sec_handle_cmd
+    local sec_spoiler_command_R = sp_sec_handle_cmd
     --Getting states of the spoilers
     for i=1,5 do
         local state = spoilers[i]:isOperational() and not spoilers[i]:isHydLow()
@@ -403,6 +456,12 @@ function UpdateSpoilers(avg_cas, spoilers, sp_fail_drefs, sp_cmd_dref, activatio
             sp_sec_avail = true
         end
     end
+    sp_69_avail = spoilers[6]:isOperational() and not spoilers[6]:isHydLow()
+    set(sp_fail_drefs[6], bool2num(not sp_69_avail))
+    set(sp_fail_drefs[9], bool2num(not sp_69_avail))
+    sp_78_avail = spoilers[7]:isOperational() and not spoilers[7]:isHydLow()
+    set(sp_fail_drefs[7], bool2num(not sp_78_avail))
+    set(sp_fail_drefs[8], bool2num(not sp_78_avail))
     --Checking control wheel
     if math.abs(get(yoke_roll_ratio)) >= activation_limit then
         local tmp = -0.3
@@ -413,41 +472,42 @@ function UpdateSpoilers(avg_cas, spoilers, sp_fail_drefs, sp_cmd_dref, activatio
         if get(yoke_roll_ratio) < 0 then
             tmp = tmp * -1
         end
-        local cw_component = (get(yoke_roll_ratio) + tmp) / 0.7
+        if get(yoke_roll_ratio) > 0.05 then
+            k_L = 0
+        elseif get(yoke_roll_ratio) < 0.05 then
+            k_R = 0
+        end
+        local cw_component = (get(yoke_roll_ratio) + tmp) / (1 - math.abs(tmp)) * (1 - get(ap_engaged))
         pri_spoiler_command_L = pri_spoiler_command_L - getPosition(cw_component * pri_coeff, 0, 1 - pri_spoiler_command_L, pri_spoiler_command_L)
         pri_spoiler_command_R = pri_spoiler_command_R - getPosition(-cw_component * pri_coeff, 0, 1 - pri_spoiler_command_R, pri_spoiler_command_R)
+        spoiler_67_cmd = spoiler_67_cmd - getPosition(cw_component * 0.5, 0, 1 - spoiler_67_cmd, spoiler_67_cmd)
+        spoiler_89_cmd = spoiler_89_cmd - getPosition(-cw_component * 0.5, 0, 1 - spoiler_89_cmd, spoiler_89_cmd)
         sec_spoiler_command_L = sec_spoiler_command_L - getPosition(cw_component, 0, 1 - sec_spoiler_command_L, sec_spoiler_command_L)
         sec_spoiler_command_R = sec_spoiler_command_R - getPosition(-cw_component, 0, 1 - sec_spoiler_command_R, sec_spoiler_command_R)
     end
     --Setting Commands
-    if sp_main_avail then
-        set(sp_cmd_dref, pri_spoiler_command_L * spoilers[1].full_up - (1 / 16) * avg_cas, 2)
-        set(sp_cmd_dref, pri_spoiler_command_R * spoilers[1].full_up - (1 / 16) * avg_cas, 4)
-        set(pcu_sp, 1, 2)
-        set(pcu_sp, 1, 4)
-    else
-        set(sp_cmd_dref, 0, 2)
-        set(sp_cmd_dref, 0, 4)
-        set(pcu_sp, 0, 2)
-        set(pcu_sp, 0, 4)
+    local k_spd_downgrad = 1
+    local downgrad_limit = 200
+    if avg_cas > downgrad_limit then
+        k_spd_downgrad = downgrad_limit / avg_cas
     end
-    if sp_sec_avail then
-        set(sp_cmd_dref, sec_spoiler_command_L * spoilers[4].full_up, 1)
-        set(sp_cmd_dref, sec_spoiler_command_R * spoilers[4].full_up, 3)
-        set(pcu_sp, 1, 1)
-        set(pcu_sp, 1, 3)
-    else
-        set(sp_cmd_dref, 0, 1)
-        set(sp_cmd_dref, 0, 3)
-        set(pcu_sp, 0, 1)
-        set(pcu_sp, 0, 3)
-    end
+    local cmd_main_L = (pri_spoiler_command_L * spoilers[1].full_up * k_spd_downgrad) * k_L
+    local cmd_main_R = (pri_spoiler_command_R * spoilers[1].full_up * k_spd_downgrad) * k_R
+    local cmd_67 = (spoiler_67_cmd * spoilers[6].full_up * k_spd_downgrad) * k_L
+    local cmd_89 = (spoiler_89_cmd * spoilers[6].full_up * k_spd_downgrad) * k_R
+    local cmd_sec_L = (sec_spoiler_command_L * spoilers[4].full_up) * k_L
+    local cmd_sec_R = (sec_spoiler_command_R * spoilers[4].full_up) * k_R
+    SetSpoilerCmd(sp_main_avail, sp_cmd_dref, pcu_sp, cmd_main_L, cmd_main_R, SPOILER_1_5, SPOILER_10_14)
+    SetSpoilerCmd(sp_69_avail, sp_cmd_dref, pcu_sp, cmd_67, cmd_89, SPOILER_6, SPOILER_9)
+    SetSpoilerCmd(sp_78_avail, sp_cmd_dref, pcu_sp, cmd_67, cmd_89, SPOILER_7, SPOILER_8)
+    SetSpoilerCmd(sp_sec_avail, sp_cmd_dref, pcu_sp, cmd_sec_L, cmd_sec_R, SPOILER_4, SPOILER_11)
 end
 
-function UpdateRoll(avg_cas, avg_alt, ail_L, ail_R, flp_L, flp_R)
+function UpdateRoll(avg_cas, avg_alt, ail_L, ail_R, flp_L, flp_R, special_cmd)
     local ail_ratio = GetFBWAilRatio(get(fbw_mode), avg_alt, avg_cas, get(flaps))
     local ail_neutral = GetRollNeutral(get(flaps), Ail_neutral)
-    local flprn_neutral = GetRollNeutral(get(flaps), Flprn_neutral) * (1 - lim(get(spoiler_handle), 1, 0))
+    local flprn_neutral = GetRollNeutral(get(flaps), Flprn_neutral) * 
+                                        (1 - lim(get(spoiler_handle) * (1 - special_cmd) + special_cmd, 1, 0))
     local roll_command = 0
     local flprn_command = 0
     if get(fbw_mode) == 1 and get(on_ground) == 0 then
@@ -571,22 +631,31 @@ sp_2 = Control_surface:new{aces = {1}, hyd_sys = {1}, full_up = 60, full_dn = 0,
 sp_3 = Control_surface:new{aces = {4}, hyd_sys = {3}, full_up = 60, full_dn = 0, mode = pcu_sp}
 sp_4 = Control_surface:new{aces = {2}, hyd_sys = {1}, full_up = 45, full_dn = 0, mode = pcu_sp}
 sp_5 = Control_surface:new{aces = {2}, hyd_sys = {2}, full_up = 60, full_dn = 0, mode = pcu_sp}
+sp_6 = Control_surface:new{aces = {4}, hyd_sys = {3}, full_up = 60, full_dn = 0, mode = pcu_sp}
+sp_7 = Control_surface:new{aces = {3}, hyd_sys = {2}, full_up = 60, full_dn = 0, mode = pcu_sp}
 elev_L = Control_surface:new{aces = {1, 3}, hyd_sys = {1, 2}, full_up = 33, full_dn = 27, mode = pcu_elevator}
 elev_R = Control_surface:new{aces = {2, 4}, hyd_sys = {1, 3}, full_up = 33, full_dn = 27, mode = pcu_elevator}
 rudder = Control_surface:new{aces = {1, 3, 4}, hyd_sys = {1, 2, 3}, full_up = 27, full_dn = 27, mode = pcu_rudder}
 
-spoilers = {sp_1, sp_2, sp_3, sp_4, sp_5}
-spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ace_spoiler_fail_4, ace_spoiler_fail_5}
+spoilers = {sp_1, sp_2, sp_3, sp_4, sp_5, sp_6, sp_7}
+spoiler_fail = {
+    ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ace_spoiler_fail_4, ace_spoiler_fail_5,
+    ace_spoiler_fail_6, ace_spoiler_fail_7, ace_spoiler_fail_8, ace_spoiler_fail_9
+}
 
 function update()
+    set(sim_spoiler_handle, 1)
     local avg_alt_baro = (get(altitude_pilot) + get(altitude_stdby) + get(altitude_copilot)) / 3
     local avg_cas = lim((get(cas_pilot) + get(cas_copilot)) / 2, 1000, 0)
-    SetSpeedbrkHandle()
+    tmp = SetSpeedbrkHandle(spoiler_special_cmd, get(hyd_pressure, 2), get(fbw_mode), lmw_onground_past, rmw_onground_past)
+    lmw_onground_past = tmp[1]
+    rmw_onground_past = tmp[2]
+    spoiler_special_cmd = tmp[3]
     UpdateSelfTest()
 	DoSelfTest()
     sendFLTdata()
-    UpdateSpoilers(avg_cas, spoilers, spoiler_fail, ace_spoiler, 0.32)
-    UpdateRoll(avg_cas, avg_alt_baro, ail_L, ail_R, flp_L, flp_R)
+    UpdateSpoilers(avg_cas, spoilers, spoiler_fail, ace_spoiler, spoiler_special_cmd, 0.32)
+    UpdateRoll(avg_cas, avg_alt_baro, ail_L, ail_R, flp_L, flp_R, spoiler_special_cmd)
     UpdateYaw(rudder)
     UpdatePitch(elev_L, elev_R)
     UpdateRudderTrim()
