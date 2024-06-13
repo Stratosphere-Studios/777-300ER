@@ -159,7 +159,7 @@ function getAutopilotVSHoldCmd(pitch_cmd_prev, vs_cmd_fpm)
         --vshold_pid:update{kp=tgt_kp, tgt=vs_cmd_fpm, curr=vs_pred}
         --set(pitch_et, vshold_pid.errtotal)
         local vs_err = vs_cmd_fpm - vs_pred
-        local vshold_out = vs_err * get(pitch_kp) - vs_accel * get(pitch_kd)
+        local vshold_out = lim(vs_err * get(pitch_kp) - vs_accel * get(pitch_kd), 6, -6)
 
         local tgt_cmd = pitch_cmd_prev+ (vshold_out * get(f_time))
 
@@ -170,7 +170,7 @@ function getAutopilotVSHoldCmd(pitch_cmd_prev, vs_cmd_fpm)
         return vshold_cmd 
     end
 
-    return 0
+    return pitch_cmd_prev
 end
 
 function getAutopilotFlcCmd(pitch_cmd_prev)
@@ -201,7 +201,7 @@ function getAutopilotFlcCmd(pitch_cmd_prev)
         ias_last = ias_avg_kts
         return flch_cmd 
     end
-    return 0
+    return pitch_cmd_prev
 end
 
 function getAutopilotVSHoldCmdFull()
@@ -364,16 +364,17 @@ end
 
 function updateVsFpa()
     local curr_gs = get(gs_dref)
+    local gs_fpm = (curr_gs * 6076.12) / 60
     local vs_avg_fpm = (get(vs_pilot_fpm) + get(vs_copilot_fpm)) / 2
 
     if get(vs_fpa) == 1 then
         local fpa_rad = math.rad(get(tgt_fpa))
-        set(vs_tgt, math.tan(fpa_rad) * curr_gs)
+        set(vs_tgt, math.tan(fpa_rad) * gs_fpm)
     else
-        if curr_gs == 0 then
+        if gs_fpm == 0 then
             set(tgt_fpa, 0)
         else
-            local fpa_rad = math.atan(get(vs_tgt)/curr_gs)
+            local fpa_rad = math.atan(get(vs_tgt)/gs_fpm)
             set(tgt_fpa, math.deg(fpa_rad))
         end
     end
