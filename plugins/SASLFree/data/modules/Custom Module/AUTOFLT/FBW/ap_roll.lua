@@ -1,20 +1,29 @@
+--[[
+*****************************************************************************************
+* Script Name: ap_roll
+* Author Name: discord/bruh4096#4512(Tim G.)
+* Script Description: Code for autopilot roll modes
+*****************************************************************************************
+--]]
+
 roll_kp = createGlobalPropertyf("Strato/777/roll_dbg/kp", 0)
 roll_ki = createGlobalPropertyf("Strato/777/roll_dbg/ki", 0)
 roll_kd = createGlobalPropertyf("Strato/777/roll_dbg/kd", 0)
 roll_et = createGlobalPropertyf("Strato/777/roll_dbg/et", 0)
+roll_spd = createGlobalPropertyf("Strato/777/roll_dbg/roll_spd", 0)
 ap_roll_eng = createGlobalPropertyi("Strato/777/roll_dbg/eng", 0)
 roll_tgt = createGlobalPropertyf("Strato/777/autopilot/roll_tgt_deg", 0)
 hdg_sel_eng = createGlobalPropertyi("Strato/777/mcp/hdg_sel_eng", 0)
-hdg_hold_eng = createGlobalPropertyi("Strato/777/mcp/hdg_hold_eng", 1)
+hdg_hold_eng = createGlobalPropertyi("Strato/777/mcp/hdg_hold_eng", 0)
 hdg_to_trk = createGlobalPropertyi("Strato/777/mcp/hdg_to_trk", 0)
 
-curr_roll_mode = createGlobalPropertyi("Strato/777/fma/active_roll_mode", 0)
+curr_roll_mode = globalPropertyi("Strato/777/fma/active_roll_mode")
 
 roll_fltdir_pilot = createGlobalPropertyi("Strato/777/pfd/roll_fltdir_pilot", 0)
 roll_fltdir_copilot = createGlobalPropertyi("Strato/777/pfd/roll_fltdir_copilot", 0)
 
-flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
-flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
+flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
+flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
 
 ap_engaged = globalPropertyi("Strato/777/mcp/ap_on", 0)
 ap_roll_on = createGlobalPropertyi("Strato/777/autopilot/ap_roll_on", 0)
@@ -36,12 +45,7 @@ lat_cmd_pid = PID:new{kp = 1, ki = 0, kd = 0.5, errtotal = 0, errlast = 0, lim_o
 hdg_hold_to_select = false
 ap_roll_engaged = false
 hdg_hold_val = -1
-
-LAT_MODE_OFF = 0
-LAT_MODE_HDG_HOLD = 1
-LAT_MODE_HDG_SEL = 2
-LAT_MODE_TRK_HOLD = 3
-LAT_MODE_TRK_SEL = 4
+roll_last = 0
 
 curr_lat_mode = LAT_MODE_OFF
 
@@ -72,6 +76,11 @@ function getAutoPilotRollMaintainCmd(roll_maint)
     set(roll_tgt, get(roll_tgt) + (roll_dir_tgt - get(roll_tgt)) * 0.2 * get(f_time))
     
     roll_cmd_pid:update{tgt=roll_maint, curr=avg_roll}
+
+    if get(f_time) ~= 0 then
+        set(roll_spd, (avg_roll - roll_last) / get(f_time))
+    end
+    roll_last = avg_roll
     
     return roll_cmd_pid.output
 end
@@ -132,12 +141,14 @@ function updateRollMode()
         else
             curr_lat_mode = LAT_MODE_HDG_SEL
         end
-    else
+    elseif get(hdg_hold_eng) == 1 then
         if get(hdg_to_trk) == 1 then
             curr_lat_mode = LAT_MODE_TRK_HOLD
         else
             curr_lat_mode = LAT_MODE_HDG_HOLD
         end
+    else
+        curr_lat_mode = LAT_MODE_OFF
     end
     set(curr_roll_mode, curr_lat_mode)
 end

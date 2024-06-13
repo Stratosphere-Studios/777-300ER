@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: Hydraulic
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for Hydraulic systems.
 *****************************************************************************************
 --]]

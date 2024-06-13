@@ -1,7 +1,16 @@
+--[[
+*****************************************************************************************
+* Script Name: auto_thr
+* Author Name: discord/bruh4096#4512(Tim G.)
+* Script Description: Code for autothrottle
+*****************************************************************************************
+--]]
+
 addSearchPath(moduleDirectory .. "/Custom Module/AUTOFLT/FBW")
 
 include("fbw_controllers.lua")
 include("misc_tools.lua")
+include("constants.lua")
 
 
 tgt_ias = globalPropertyf("sim/cockpit2/autopilot/airspeed_dial_kts")
@@ -11,6 +20,11 @@ toga = globalPropertyi("Strato/777/mcp/toga")
 at_disc = globalPropertyi("Strato/777/mcp/at_disc")
 n1_lim = createGlobalPropertyf("Strato/777/autothr/n1_lim", 95)
 throt_res_rt = createGlobalPropertyf("Strato/777/autothr/throt_res_rt", 0.95)
+ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
+
+--Flight directors:
+flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
+flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
 
 mcp_alt_val = globalPropertyf("sim/cockpit/autopilot/altitude")
 
@@ -23,7 +37,7 @@ thr_resp = createGlobalPropertyf("Strato/777/autothr_dbg/resp", 0.04)
 pred_ias_kt = createGlobalPropertyf("Strato/777/autothr_dbg/pred_ias_kt", 0)
 pred_ias_sec = createGlobalPropertyf("Strato/777/autothr_dbg/pred_ias_sec", 10)
 
-autothr_mode_dr = createGlobalPropertyi("Strato/777/fma/at_mode", 0)
+autothr_mode_dr = globalPropertyi("Strato/777/fma/at_mode")
 curr_vert_mode = globalPropertyi("Strato/777/fma/active_vert_mode")
 alt_acq = globalPropertyi("Strato/777/fma/alt_acq")
 
@@ -68,13 +82,6 @@ THR_MAX_N1_DEV = 4
 at_flare_begin_ft = 0
 spd_flc_start_kts = 0
 
-AT_MODE_OFF = 0
-AT_MODE_IAS_HOLD = 1
-AT_MODE_RETARD = 2
-AT_MODE_HOLD = 3
-AT_MODE_THR_REF = 4
-AT_MODE_FLC_RETARD = 5
-AT_MODE_FLC_REF = 6
 
 curr_at_mode = AT_MODE_OFF
 at_engaged = false
@@ -101,7 +108,7 @@ function setThrottleIASHoldCmd(ias_tgt_kts, thr_ratio)
         local curr_gs = get(gs_dref)
 
         avg_pitch = lim(avg_pitch, PITCH_MAX, PITCH_MIN)
-        local min_idle = get(thr_resp) * avg_pitch
+        local min_idle = 0.04 * avg_pitch
 
         local ias_accel = (avg_ias - ias_last) / get(f_time)
         local gs_accel = (curr_gs - gs_last) / get(f_time)
@@ -109,13 +116,16 @@ function setThrottleIASHoldCmd(ias_tgt_kts, thr_ratio)
         local ias_err = ias_tgt_kts - avg_ias
         local at_out = AT_KP * ias_err - AT_KD * (gs_accel - (avg_vs / 16000))
         set(thr_cmd, at_out)
-        local autothr_cmd = lim(get(throttle_cmd)+at_out, 1, min_idle)
+        local autothr_cmd = lim(get(throttle_cmd)+at_out, thr_ratio, min_idle)
         if autothr_cmd > get(throttle_cmd) and 
             (math.abs(avg_n1 - get(n1_lim)) <= THR_MAX_N1_DEV or avg_n1 > get(n1_lim)) then
             local n1_hold_cmd = getThrottleN1HoldCmd()
-            autothr_cmd = lim(get(throttle_cmd)+n1_hold_cmd, 1, min_idle)
+            autothr_cmd = lim(get(throttle_cmd)+n1_hold_cmd, thr_ratio, min_idle)
         end
-        local thr_lvr_cmd = EvenChange(get(throttle_cmd), autothr_cmd * thr_ratio, THR_SERVO_RESPONSE)
+        local thr_lvr_cmd = EvenChange(get(throttle_cmd), autothr_cmd, THR_SERVO_RESPONSE)
+        if math.abs(get(throttle_cmd)-min_idle) < 0.001 and curr_at_mode == AT_MODE_FLC_RETARD then
+            curr_at_mode = AT_MODE_HOLD
+        end
         set(throttle_cmd, thr_lvr_cmd)
         ias_last = avg_ias
         gs_last = curr_gs
@@ -135,7 +145,7 @@ function setThrottleRefCmd()
 end
 
 function setThrottleFlcCmd(v_mode)
-    if v_mode == 3 then  -- Flc climb
+    if v_mode == VERT_MODE_FLC_CLB then
         local tgt_spd_kts = math.max(get(tgt_ias)+35, spd_flc_start_kts+35)
         local avg_alt = (get(alt_pilot) + get(alt_copilot)) / 2
         local alt_err = get(mcp_alt_val) - avg_alt
@@ -143,6 +153,7 @@ function setThrottleFlcCmd(v_mode)
         setThrottleIASHoldCmd(tgt_spd_kts, thr_ratio)
     else
         local tgt_spd_kts = math.min(get(tgt_ias)-12, spd_flc_start_kts-12)
+        local throt_prev = get(throttle_cmd)
         setThrottleIASHoldCmd(tgt_spd_kts, 1)
     end
 end
@@ -159,24 +170,36 @@ function updateMode(v_mode)
         ra_last = avg_ra
         return
     end
-    if (v_mode < 3 or get(alt_acq) == 1) and curr_at_mode >= AT_MODE_FLC_RETARD then
+
+    local flt_dir_off = get(flt_dir_pilot) == 1 and get(flt_dir_copilot) == 1
+
+    if (v_mode < VERT_MODE_FLC_CLB or get(alt_acq) == 1 or 
+        (get(ap_engaged) == 0 and flt_dir_off)) and 
+        (curr_at_mode >= AT_MODE_FLC_RETARD or (curr_at_mode == AT_MODE_HOLD 
+        and get(ap_engaged) == 1)) then
         set(spd_hold, 1)
     end
     if avg_ias <= 50 and get(autothr_arm) == 1 and get(toga) == 1 and 
         curr_at_mode ~= AT_MODE_HOLD then
         curr_at_mode = AT_MODE_THR_REF
         at_engaged = false
-    elseif avg_ias > 50 and curr_at_mode == AT_MODE_THR_REF and v_mode == 0 then
+    elseif avg_ias > 50 and curr_at_mode == AT_MODE_THR_REF and v_mode == VERT_MODE_OFF then
         curr_at_mode = AT_MODE_HOLD
         at_engaged = false
-    elseif (avg_ra > 400 or at_engaged) and v_mode >= 3 and get(alt_acq) == 0 then
-        if curr_at_mode < AT_MODE_FLC_REF then
-            spd_flc_start_kts = ias_last
-        end
-        if v_mode == 3 then
+    elseif (avg_ra > 400 or at_engaged) and v_mode >= VERT_MODE_FLC_CLB and 
+        get(alt_acq) == 0 then
+        if v_mode == VERT_MODE_FLC_CLB then
+            if curr_at_mode ~= AT_MODE_FLC_REF then
+                spd_flc_start_kts = ias_last
+            end
             curr_at_mode = AT_MODE_FLC_REF
         else
-            curr_at_mode = AT_MODE_FLC_RETARD
+            if curr_at_mode ~= AT_MODE_FLC_RETARD and curr_at_mode ~= AT_MODE_HOLD then
+                spd_flc_start_kts = ias_last
+            end
+            if curr_at_mode ~= AT_MODE_HOLD then
+                curr_at_mode = AT_MODE_FLC_RETARD
+            end
         end
         set(spd_hold, 0)
     elseif get(autothr_arm) == 1 and get(spd_hold) == 1 then

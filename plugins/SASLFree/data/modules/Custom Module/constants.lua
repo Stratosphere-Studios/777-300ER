@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: constants
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: constants that are used in other files
 *****************************************************************************************
 --]]
@@ -15,6 +15,31 @@ dark_green = {0.02, 0.91, 0.07}
 dark_blue = {0.01, 0.05, 0.15}
 light_blue = {0, 0.808, 1}
 magenta = {1, 0.451, 1}
+
+--Autopilot
+--Vertical
+VERT_MODE_OFF = 0
+VERT_MODE_VSHOLD = 1
+VERT_MODE_FPAHOLD = 2
+VERT_MODE_ALTHOLD = 3
+VERT_MODE_FLC_CLB = 4
+VERT_MODE_FLC_DES = 5
+
+--Lateral
+LAT_MODE_OFF = 0
+LAT_MODE_HDG_HOLD = 1
+LAT_MODE_HDG_SEL = 2
+LAT_MODE_TRK_HOLD = 3
+LAT_MODE_TRK_SEL = 4
+
+--Autothrottle
+AT_MODE_OFF = 0
+AT_MODE_IAS_HOLD = 1
+AT_MODE_RETARD = 2
+AT_MODE_HOLD = 3
+AT_MODE_THR_REF = 4
+AT_MODE_FLC_RETARD = 5
+AT_MODE_FLC_REF = 6
 
 --Cockpit
 

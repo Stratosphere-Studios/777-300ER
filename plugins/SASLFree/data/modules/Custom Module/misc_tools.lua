@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: misc_tools
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Functions that are used frequently
 *****************************************************************************************
 --]]
@@ -61,6 +61,16 @@ function indexOf(array, value, round_) --returns index of a value in an array.
         end
     end
     return nil
+end
+
+function getFPA(gs_kts, vs_fpm)
+	local fpv_pitch_rad = 0
+    if gs_kts ~= 0 then
+        local gs_fpm = (gs_kts * 6076.12) / 60
+        fpv_pitch_rad = math.atan(vs_fpm/gs_fpm)
+    end
+
+	return math.deg(fpv_pitch_rad)
 end
 
 function PID_Compute(kp, ki, kd, target, current, errtotal, errlast, lim1, lim2)

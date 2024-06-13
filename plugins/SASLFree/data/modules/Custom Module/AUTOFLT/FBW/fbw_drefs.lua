@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: fbw_main
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: All datarefs created for fbw go here
 *****************************************************************************************
 --]]
@@ -38,7 +38,20 @@ fbw_self_test = createGlobalPropertyi("Strato/777/fctl/pfc/selftest", 0)
 ace_fail = createGlobalPropertyia("Strato/777/failures/fctl/ace", {0, 0, 0, 0}) --L1, L2, C, R
 ace_aileron = createGlobalPropertyfa("Strato/777/fctl/ace/ailrn_cmd", {0, 0})
 ace_flaperon = createGlobalPropertyfa("Strato/777/fctl/ace/flprn_cmd", {0, 0})
-ace_spoiler = createGlobalPropertyfa("Strato/777/fctl/ace/spoiler_cmd", {0, 0, 0, 0})
+--[[
+    Spoiler indexation. Check this: 
+    https://cdn.discordapp.com/attachments/837461361578606592/1091762819290104028/image.png:
+    for reference
+    1 - spoiler 4,
+    2 - spoilers 1, 2, 3, 5
+    3 - spoiler 11
+    4 - spoilers 10, 12, 13, 14
+    5 - spoiler 6
+    6 - spoiler 7
+    7 - spoiler 8
+    8 - spoiler 9
+--]]
+ace_spoiler = createGlobalPropertyfa("Strato/777/fctl/ace/spoiler_cmd", {0, 0, 0, 0, 0, 0, 0, 0})
 ace_elevator = createGlobalPropertyfa("Strato/777/fctl/ace/elevator_cmd", {0, 0})
 ace_rudder = createGlobalPropertyf("Strato/777/fctl/ace/rudder_cmd", 0)
 ace_aileron_fail_L = createGlobalPropertyi("Strato/777/fctl/ace/ailrn_fail_L", 0)
@@ -50,6 +63,10 @@ ace_spoiler_fail_2 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail
 ace_spoiler_fail_36 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_36", 0)
 ace_spoiler_fail_4 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_4", 0)
 ace_spoiler_fail_5 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_5", 0)
+ace_spoiler_fail_6 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_6", 0)
+ace_spoiler_fail_7 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_7", 0)
+ace_spoiler_fail_8 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_8", 0)
+ace_spoiler_fail_9 = createGlobalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_9", 0)
 ace_elevator_fail_L = createGlobalPropertyi("Strato/777/fctl/ace/elevator_fail_L", 0)
 ace_elevator_fail_R = createGlobalPropertyi("Strato/777/fctl/ace/elevator_fail_R", 0)
 ace_rudder_fail = createGlobalPropertyi("Strato/777/fctl/ace/rudder_fail", 0)
@@ -58,7 +75,7 @@ pcu_aileron = createGlobalPropertyia("Strato/777/fctl/pcu/ail", {0, 0})
 pcu_flaperon = createGlobalPropertyia("Strato/777/fctl/pcu/flprn", {0, 0})
 pcu_elevator = createGlobalPropertyia("Strato/777/fctl/pcu/elev", {0, 0})
 pcu_rudder = createGlobalPropertyi("Strato/777/fctl/pcu/rudder", 0)
-pcu_sp = createGlobalPropertyia("Strato/777/fctl/pcu/sp", {0, 0, 0, 0})
+pcu_sp = createGlobalPropertyia("Strato/777/fctl/pcu/sp", {0, 0, 0, 0, 0, 0, 0, 0}) --See line 41 for indexing explanation
 --General fbw datarefs
 fbw_trim_speed = createGlobalPropertyf("Strato/777/fctl/trs", 0)
 fbw_pitch_dref = createGlobalPropertyf("Strato/777/fctl/pitch", 0)

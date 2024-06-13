@@ -1,3 +1,11 @@
+--[[
+*****************************************************************************************
+* Script Name: ap_pitch
+* Author Name: discord/bruh4096#4512(Tim G.)
+* Script Description: Code for autopilot pitch modes
+*****************************************************************************************
+--]]
+
 pitch_kp = createGlobalPropertyf("Strato/777/pitch_dbg/kp", 0.00037)
 pitch_ki = createGlobalPropertyf("Strato/777/pitch_dbg/ki", -1)
 pitch_kd = createGlobalPropertyf("Strato/777/pitch_dbg/kd", 0.0013)
@@ -94,12 +102,6 @@ alt_hold_alt_acq = false
 mcp_alt_acq = false
 mcp_alt_tgt_set = false
 
-VERT_MODE_OFF = 0
-VERT_MODE_VSHOLD = 1
-VERT_MODE_ALTHOLD = 2
-VERT_MODE_FLC_CLB = 3
-VERT_MODE_FLC_DES = 4
-
 FLC_CLB_KP = -0.04
 FLC_CLB_KD = -0.74
 FLC_DES_KP = -0.02
@@ -129,8 +131,8 @@ end
 
 function getAltIntcAlt(vs_avg_fpm)
     local vs_avg = math.abs(vs_avg_fpm)
-    local alt_intcpt_mrgn_ft = 500
-    local lim_vspeed = 1400
+    local alt_intcpt_mrgn_ft = 570
+    local lim_vspeed = 1200
     if vs_avg > lim_vspeed then
         alt_intcpt_mrgn_ft = alt_intcpt_mrgn_ft + (vs_avg - lim_vspeed) * (450/lim_vspeed)
     end
@@ -258,10 +260,12 @@ function updateMode()
             alt_intcpt_margin_ft = tmp_margin
         end
         set(pitch_resp, tmp_margin)
-    end
-
-    if get(vshold_eng) == 0 and mcp_alt_acq then
-        mcp_alt_acq = false
+    else
+        if ((get(flch_eng) == 1 and vert_mode == VERT_MODE_VSHOLD) or 
+            (get(vshold_eng) == 1 and vert_mode >= VERT_MODE_FLC_CLB)) and 
+            math.abs(alt_err) <= alt_intcpt_margin_ft then
+            mcp_alt_acq = false
+        end
     end
 
     if mcp_alt_acq then
@@ -272,10 +276,10 @@ function updateMode()
         alt_tgt_err = alt_hold_alt_tgt - alt_avg_ft
         if alt_tgt_err > 0 and alt_tgt_err <= alt_intcpt_margin_ft and 
             vs_hold_vs_tgt >= 0 and vert_mode < VERT_MODE_FLC_CLB then
-            vs_hold_vs_tgt = lim(vs_hold_vs_tgt, 700, 500)
+            vs_hold_vs_tgt = lim(vs_hold_vs_tgt, 300, 100)
         elseif alt_tgt_err < 0 and alt_tgt_err >= -alt_intcpt_margin_ft and 
             vs_hold_vs_tgt <= 0 and vert_mode < VERT_MODE_FLC_CLB then
-            vs_hold_vs_tgt = lim(vs_hold_vs_tgt, -500, -700)
+            vs_hold_vs_tgt = lim(vs_hold_vs_tgt, -100, -300)
         elseif vert_mode == VERT_MODE_FLC_CLB then
             vs_hold_vs_tgt = 700
         elseif vert_mode == VERT_MODE_FLC_DES then
@@ -430,7 +434,13 @@ function getAutopilotPitchCmd()
         ias_last = (get(cas_pilot) + get(cas_pilot)) / 2
     end
     gs_last = get(gs_dref)
-    set(curr_vert_mode, vert_mode)
+
+    if vert_mode == VERT_MODE_VSHOLD and get(vs_fpa) == 1 then
+        set(curr_vert_mode, VERT_MODE_FPAHOLD)
+    else
+        set(curr_vert_mode, vert_mode)
+    end
+    
     set(alt_acq, bool2num(mcp_alt_acq))
     updatePitchFltDirCmd()
     updatePitchFltDir()

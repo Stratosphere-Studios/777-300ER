@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: speed_calc
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for calculation of critical flight speeds
 *****************************************************************************************
 --]]
@@ -54,12 +54,9 @@ function toCAS(speed)
 end
 
 function updateFPV()
-    local fpv_pitch_rad = 0
-    if get(gs_dref) ~= 0 then
-        fpv_pitch_rad = math.atan(get(vspeed)/get(gs_dref))
-    end
+    local fpv_pitch_deg = getFPA(get(gs_dref), get(vspeed))
     local fpv_roll_deg = get(track_pilot) - get(mag_heading_pilot)
-    set(fpv_pitch, math.deg(fpv_pitch_rad))
+    set(fpv_pitch, fpv_pitch_deg)
     set(fpv_roll, fpv_roll_deg)
 end
 

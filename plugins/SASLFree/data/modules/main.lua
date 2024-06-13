@@ -31,7 +31,7 @@ pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
-ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
+--ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
 
 show_fpv = createGlobalPropertyi("Strato/777/EFIS/fpv_on", 0)
 

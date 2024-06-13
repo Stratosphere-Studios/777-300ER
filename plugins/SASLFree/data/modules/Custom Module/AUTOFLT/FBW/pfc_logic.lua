@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: pfc_logic
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for pfc logic
 *****************************************************************************************
 --]]
@@ -9,6 +9,7 @@
 include("misc_tools.lua")
 include("fbw_test_drefs.lua")
 include("fbw_controllers.lua")
+include("constants.lua")
 include("ap_roll.lua")
 include("ap_pitch.lua")
 
@@ -102,6 +103,8 @@ thrust_corrections =
 ra_last = 0
 gnd2air = false
 air2gnd = false
+ap_roll_set = false
+ap_pitch_set = false
 flare_aoa_change = 0
 k_fbw_pitch = 0
 k_fbw_flare = 0
@@ -260,7 +263,10 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 		end
 		
 		local commanded_pitch = 0
+		
 		local ap_pitch_cmd = getAutopilotPitchCmd()
+		ap_pitch_set = true
+
 		local tmp_int = d_int[m_i] + ((d_int[m_i] - d_int[m_i-1]) * (tmp_mass - 
 				no_pitch_speeds[m_i-1][1])) / (no_pitch_speeds[m_i][1] - no_pitch_speeds[m_i-1][1])
 		local k_fbw = 0.15
@@ -327,6 +333,7 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 		end
 
 		local ap_roll_cmd = getAutopilotRollCmd()
+		ap_roll_set = true
 
 		if ap_roll_engaged and get(ap_engaged) == 1 then
 			set(pfc_roll_command, get(pfc_roll_command) + (ap_roll_cmd - 
@@ -428,24 +435,44 @@ function UpdateMode()
 	end
 end
 
+function updateMCP()
+	if ((get(pitch_trim_A) ~= 0 and get(pitch_trim_B) ~= 0) or 
+		get(pitch_trim_altn) ~= 0)
+		and get(ap_engaged) == 1 then
+		local avg_spd = (get(cas_pilot) + get(cas_copilot)) / 2
+		set(fbw_trim_speed, avg_spd)
+		set(ap_engaged, 0)
+		set(ap_disc, 1)
+	end
+
+	if get(ap_engaged) == 1 and vert_mode == VERT_MODE_OFF then
+		set(vshold_eng, 1)
+	end
+
+	if get(ap_engaged) == 1 and curr_lat_mode == LAT_MODE_OFF then
+		set(hdg_hold_eng, 1)
+	end
+end
+
 function updateFltDir()
-	set(flt_dir_pilot_pfd, get(flt_dir_pilot) * (1 - get(ap_engaged)))
-	set(flt_dir_copilot_pfd, get(flt_dir_copilot) * (1 - get(ap_engaged)))
+	if get(fbw_mode) == 1 then
+		set(flt_dir_pilot_pfd, get(flt_dir_pilot) * (1 - get(ap_engaged)))
+		set(flt_dir_copilot_pfd, get(flt_dir_copilot) * (1 - get(ap_engaged)))
+	else
+		set(flt_dir_pilot_pfd, 0)
+		set(flt_dir_copilot_pfd, 0)
+	end
 end
 
 function update()
+	ap_roll_set = false
+	ap_pitch_set = false
+
 	updateFltDir()
 	UpdateMode()
 	if get(pfc_calc) == 1 and get(f_time) ~= 0 then
 		if get(fbw_mode) == 1 then
-			if ((get(pitch_trim_A) ~= 0 and get(pitch_trim_B) ~= 0) or 
-				get(pitch_trim_altn) ~= 0)
-				and get(ap_engaged) == 1 then
-				local avg_spd = (get(cas_pilot) + get(cas_copilot)) / 2
-				set(fbw_trim_speed, avg_spd)
-				set(ap_engaged, 0)
-				set(ap_disc, 1)
-			end
+			updateMCP()
 
 			local tmp = UpdatePFCElevatorCommand(pitch_input_last, aoa_last, 
 												k_fbw_pitch, k_fbw_flare, flare_aoa_change)
@@ -468,6 +495,10 @@ function update()
 		heading_input_last = tmp[2]
 		fbw_roll_past = tmp[3]
 	end
-	local ap_roll_cmd = getAutopilotRollCmd()
-	local ap_pitch_cmd = getAutopilotPitchCmd()
+	if not ap_roll_set then
+		local ap_roll_cmd = getAutopilotRollCmd()
+	end
+	if not ap_pitch_set then
+		local ap_pitch_cmd = getAutopilotPitchCmd()
+	end
 end

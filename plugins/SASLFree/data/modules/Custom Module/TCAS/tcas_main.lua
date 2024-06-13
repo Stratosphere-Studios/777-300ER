@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: tcas_main
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Main code for the TCAS system
 *****************************************************************************************
 --]]

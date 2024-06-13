@@ -1,3 +1,12 @@
+--[[
+*****************************************************************************************
+* Script Name: fbw_controllers
+* Author Name: discord/bruh4096#4512(Tim G.)
+* Script Description: structure for PID controller(used by flight control systems)
+*****************************************************************************************
+--]]
+
+
 PID = {kp = 0, ki = 0, kd = 0, errtotal = 0, errlast = 0, lim_out = 0,  lim_et = 0, output = 0}
 
 function PID:new(tmp)
