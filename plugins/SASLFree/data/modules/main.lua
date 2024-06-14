@@ -45,8 +45,6 @@ ap_disc_bar = createGlobalPropertyi("Strato/777/mcp/ap_disc_bar", 0)
 flt_dir_pilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
 flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
 
---Annunciators
-alt_acq = createGlobalPropertyi("Strato/777/fma/alt_acq", 0)
 
 --Systems datarefs
 
@@ -100,7 +98,11 @@ set(brk_ovrd, 1)
 set(throttle_ovrd, 1)
 
 components = {
-
+	test{
+		position = {20 , 1384, 1337, 1337},
+		visible = true,
+		fpsLimit = 50
+	},
 	timers {},
 	elec_main {},
 	tcas_main {},
