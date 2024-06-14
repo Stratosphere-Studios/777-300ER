@@ -19,6 +19,8 @@ hdg_to_trk = createGlobalPropertyi("Strato/777/mcp/hdg_to_trk", 0)
 
 curr_roll_mode = globalPropertyi("Strato/777/fma/active_roll_mode")
 
+yoke_roll = globalPropertyfae("Strato/777/autopilot/yoke_cmd", 1)
+
 roll_fltdir_pilot = createGlobalPropertyi("Strato/777/pfd/roll_fltdir_pilot", 0)
 roll_fltdir_copilot = createGlobalPropertyi("Strato/777/pfd/roll_fltdir_copilot", 0)
 
@@ -73,6 +75,10 @@ end
 function getAutoPilotRollMaintainCmd(roll_maint)
     local avg_roll = (get(roll_pilot) + get(roll_copilot)) / 2
     local roll_dir_tgt = roll_maint - avg_roll
+
+    local yoke_roll_cmd = lim(roll_dir_tgt/15, 1, -1)
+    set(yoke_roll, yoke_roll_cmd)
+
     set(roll_tgt, get(roll_tgt) + (roll_dir_tgt - get(roll_tgt)) * 0.2 * get(f_time))
     
     roll_cmd_pid:update{tgt=roll_maint, curr=avg_roll}

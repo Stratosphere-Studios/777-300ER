@@ -46,7 +46,6 @@ flt_dir_pilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
 flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
 
 --Annunciators
-curr_vert_mode = createGlobalPropertyi("Strato/777/fma/active_vert_mode", 0)
 alt_acq = createGlobalPropertyi("Strato/777/fma/alt_acq", 0)
 
 --Systems datarefs

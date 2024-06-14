@@ -19,6 +19,8 @@ alt_cmd = createGlobalPropertyf("Strato/777/pitch_dbg/altcmd", 0)
 tgt_ias = globalPropertyf("sim/cockpit2/autopilot/airspeed_dial_kts")
 ap_pitch_eng = createGlobalPropertyi("Strato/777/pitch_dbg/eng", 0)
 
+yoke_pitch = globalPropertyfae("Strato/777/autopilot/yoke_cmd", 2)
+
 tgt_fpa = createGlobalPropertyf("Strato/777/mcp/tgt_fpa", 0)
 vs_fpa = createGlobalPropertyi("Strato/777/mcp/vs_fpa", 0)
 
@@ -281,9 +283,9 @@ function updateMode()
             vs_hold_vs_tgt <= 0 and vert_mode < VERT_MODE_FLC_CLB then
             vs_hold_vs_tgt = lim(vs_hold_vs_tgt, -100, -300)
         elseif vert_mode == VERT_MODE_FLC_CLB then
-            vs_hold_vs_tgt = 700
+            vs_hold_vs_tgt = 300
         elseif vert_mode == VERT_MODE_FLC_DES then
-            vs_hold_vs_tgt = -700
+            vs_hold_vs_tgt = -300
         else
             mcp_alt_acq = false
             mcp_alt_tgt_set = false
@@ -388,8 +390,10 @@ function updatePitchFltDirCmd()
     if vert_mode ~= VERT_MODE_OFF then
         local avg_pitch_deg = (get(pitch_pilot) + get(pitch_copilot)) / 2
         local flt_dir_cmd = lim(vshold_pitch_deg - avg_pitch_deg, 20, -20)
+        set(yoke_pitch, flt_dir_cmd/20)
         set(pitch_tgt, flt_dir_cmd)
     else
+        set(yoke_pitch, 0)
         set(pitch_tgt, 0)
     end
 end
