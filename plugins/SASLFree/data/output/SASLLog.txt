@@ -3,36 +3,55 @@
 [STRATO777 INFO]: Path to module: /media/tizmataz77/Games/X-Plane 12/Aircraft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua
 [STRATO777 INFO]: Loading module...
 [STRATO777 INFO]: [LUA]: loading	module
-[STRATO777 WARN]: [STACK]:| findDataRef : DataRefsHandler::luaFindDataRef: <Strato/777/FMC/FMC_R/REF_NAV/apt_lat> not found
-[STRATO777 WARN]: [STACK]:| .../777-300ER/plugins/SASLFree/data/init/initProperties.lua:487 in function <globalPropertys>
-[STRATO777 WARN]: [STACK]:| ...aft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua:82 in function <f>
-[STRATO777 WARN]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:261 in function <c>
-[STRATO777 WARN]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:1131 in function <?>
-[STRATO777 WARN]: [STACK]:| findDataRef : DataRefsHandler::luaFindDataRef: <Strato/777/FMC/FMC_R/REF_NAV/apt_lon> not found
-[STRATO777 WARN]: [STACK]:| .../777-300ER/plugins/SASLFree/data/init/initProperties.lua:487 in function <globalPropertys>
-[STRATO777 WARN]: [STACK]:| ...aft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua:83 in function <f>
-[STRATO777 WARN]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:261 in function <c>
-[STRATO777 WARN]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:1131 in function <?>
-[STRATO777 WARN]: [STACK]:| findDataRef : DataRefsHandler::luaFindDataRef: <Strato/777/FMC/FMC_R/REF_NAV/apt_elev> not found
-[STRATO777 WARN]: [STACK]:| .../777-300ER/plugins/SASLFree/data/init/initProperties.lua:487 in function <globalPropertys>
-[STRATO777 WARN]: [STACK]:| ...aft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua:84 in function <f>
-[STRATO777 WARN]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:261 in function <c>
-[STRATO777 WARN]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:1131 in function <?>
-[STRATO777 INFO]: [LUA]: loading	test
-[STRATO777 ERROR]: [LUA]: can't load component	test
-[STRATO777 ERROR]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:222 in function <__index>
-[STRATO777 ERROR]: [STACK]:| ...aft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua:101 in function <f>
-[STRATO777 ERROR]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:261 in function <c>
-[STRATO777 ERROR]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:1131 in function <?>
-[STRATO777 ERROR]: Error loading module
-[STRATO777 ERROR]: [STACK]:| test : ...aft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua:101: attempt to call global 'test' (a nil value)
-[STRATO777 ERROR]: [STACK]:| ...aft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua:101 in function <f>
-[STRATO777 ERROR]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:261 in function <c>
-[STRATO777 ERROR]: [STACK]:| ...ft/Dev/777-300ER/plugins/SASLFree/data/init/initMain.lua:1131 in function <?>
-[STRATO777 ERROR]: Error on module shutdown (onModuleShutdown)
-[STRATO777 ERROR]: [STACK]:| ? : .../777-300ER/plugins/SASLFree/data/init/initProcessing.lua:129: bad argument #1 to 'rawget' (table expected, got nil)
-[STRATO777 ERROR]: [STACK]:| [C]:-1 in function <rawget>
-[STRATO777 ERROR]: [STACK]:| .../777-300ER/plugins/SASLFree/data/init/initProcessing.lua:129 in function <callCallback>
-[STRATO777 ERROR]: [STACK]:| .../777-300ER/plugins/SASLFree/data/init/initProcessing.lua:154 in function <callCallbackForAllLayers>
-[STRATO777 ERROR]: [STACK]:| .../777-300ER/plugins/SASLFree/data/init/initProcessing.lua:267 in function <?>
-[STRATO777 ERROR]: Can't load module
+[STRATO777 INFO]: [LUA]: loading	timers
+[STRATO777 INFO]: [LUA]: loading	elec_main
+[STRATO777 INFO]: [LUA]: loading	tcas_main
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: loading	speed_calc
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	hydraulics
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	fbw_drefs
+[STRATO777 INFO]: [LUA]: loading	ace_logic
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: including	thrust_asym_comp.lua
+[STRATO777 INFO]: [LUA]: including	fbw_bite.lua
+[STRATO777 INFO]: [LUA]: loading	pfc_logic
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	fbw_test_drefs.lua
+[STRATO777 INFO]: [LUA]: including	fbw_controllers.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: including	ap_roll.lua
+[STRATO777 INFO]: [LUA]: including	ap_pitch.lua
+[STRATO777 INFO]: [LUA]: loading	auto_calib
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	fctl
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: loading	auto_thr
+[STRATO777 INFO]: [LUA]: including	fbw_controllers.lua
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: loading	eec
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	gear
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	eicascheck
+[STRATO777 INFO]: [LUA]: including	checklist.lua
+[STRATO777 INFO]: [LUA]: loading	Cursor
+[STRATO777 INFO]: [LUA]: loading	eicas_graphics
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	eicas
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: loading	lights
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	custom_commands
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	constants.lua
+[STRATO777 INFO]: [LUA]: loading	failures
+[STRATO777 INFO]: Loading cursors...
+[STRATO777 INFO]: Module loaded
+[STRATO777 INFO]: [LUA]: loading	interactive
