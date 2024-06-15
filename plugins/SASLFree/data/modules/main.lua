@@ -77,13 +77,6 @@ goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
 
 --test
 
-input_icao = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/input_icao")
-
-apt_lat = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_lat")
-apt_lon = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_lon")
-apt_elev = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_elev")
-
-ui_1 = globalProperty("Strato/777/UI/messages/creating_databases")
 
 --Overrides
 
@@ -98,11 +91,6 @@ set(brk_ovrd, 1)
 set(throttle_ovrd, 1)
 
 components = {
-	test{
-		position = {20 , 1384, 1337, 1337},
-		visible = true,
-		fpsLimit = 50
-	},
 	timers {},
 	elec_main {},
 	tcas_main {},
