@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: failures
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for some basic faults. Don't blame me for writing this garbage.
 This is the only way to get the menu stuff working with sasl. There will be a proper GUI eventually. 
 *****************************************************************************************

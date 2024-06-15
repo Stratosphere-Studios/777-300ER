@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: Hydraulic
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for Hydraulic systems.
 *****************************************************************************************
 --]]
@@ -529,13 +529,16 @@ function UpdateQuantity()
 			hyd_qty_initial[i] = hyd_qty_initial[i] + increase
 			increase = increase - 0.03 * ((get(press) - 50) / press_max[i] + 3 * (get(system_load, i) - get(brake_load) * 0.3))
 		else
-			increase = - 0.03 * ((get(press) - 50) / press_max[i] + 4 * get(system_load, i))
+			--increase = - 0.03 * ((get(press) - 50) / press_max[i] + 4 * get(system_load, i))
 		end
 		if math.abs(h_temp - get(oat)) >= 20 then --the higher the temperature, the higher the oil density => qty will increase with temperature
 			increase = increase + math.floor((h_temp - get(oat)) / 20) * 0.03
 		end
 		if get(qty) ~= qty_initial + increase then
 			set(qty, get(qty) + (qty_initial + increase - get(qty)) * 0.01) --It takes time for the quantity to change
+		end
+		if get(qty) < 0.2 then
+			set(qty, 0.2)
 		end
 	end
 end

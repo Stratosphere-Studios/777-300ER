@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: gear
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for landing gear and brakes
 *****************************************************************************************
 --]]
@@ -74,6 +74,7 @@ altn_gear = globalPropertyi("Strato/777/gear/altn_extnsn")
 gear_lever = globalPropertyi("Strato/777/cockpit/switches/gear_tgt")
 normal_gear = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 act_press = globalPropertyi("Strato/777/gear/actuator_press")
+kill_gear = globalPropertyi("Strato/777/kill_gear")
 
 handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
 autobrk_pos = createGlobalPropertyi("Strato/777/gear/autobrake_pos", 0)
@@ -572,7 +573,6 @@ function UpdateActuatorPress()
 			nose_door_tgt = 1
 			UpdateGearDoors()
 			if IsNoseReady() == true then
-				print(nose_door_tgt, nose_gear_target)
 				ldg_extend = 1
 				nose_gear_locked = 0
 				if get(sys_C_press) >= 100 and get(altn_gear) == 0 then
@@ -608,6 +608,7 @@ function UpdateActuatorPress()
 				end
 			end
 		elseif mlg_target == 1 then
+			set(kill_gear, 0)
 			mlg_door_tgt = 1
 			if AreMlgReady() then
 				--Gear extension
@@ -624,6 +625,9 @@ function UpdateActuatorPress()
 	else
 		if mlg_target == 0 then
 			local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L)) / 2
+			if avg_gear_pos == 0 then
+				set(kill_gear, 1)
+			end
 		end
 		if get(sys_C_press) > 1000 and get(altn_gear) == 0 then --raise doors if pressure is normal and alternate extension is not used
 			mlg_door_tgt = 0
@@ -716,6 +720,7 @@ function onAirportLoaded()
 		set(brake_press_R, 3100)
 		set(brake_qty_L, 0.02)
 		set(brake_qty_R, 0.02)
+		set(kill_gear, 0)
 		set(gear_lever, 1)
 	end
 end
