@@ -35324,7 +35324,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Stratosphere Studios
-P acf/_auto_cowl_flaps_EQ 32767
+P acf/_auto_cowl_flaps_EQ 32764
 P acf/_auto_engage_BC_deg 0.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -36777,7 +36777,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 121007
+P acf/_file_writer_version 121014
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -37894,7 +37894,6 @@ P acf/_wheel_s2 0.002000000
 P acf/_wheel_t1 0.001000000
 P acf/_wheel_t2 0.002000000
 P acf/_windshield_eff_factor 1.000000000
-P acf/_windshield_scratchy 0
 P acf/_wing_damp_rat 0.800000012
 P acf/_wing_frac_fuel 0.500000000
 P acf/_wing_frac_mass 0.300000012
@@ -53719,7 +53718,7 @@ GROUP FO PFD
       gen_pointer AH_fd_roll
         POS 605.000000 446.500000
         IMAGE PFD/artificial_horizon/fd_roll
-        DATAREF sim/cockpit/autopilot/flight_director_roll
+        DATAREF Strato/777/autopilot/roll_tgt_deg
         SHOW_EQUAL 1.000000 Strato/777/pfd/roll_fltdir_copilot[13]
         SIZE 1.350000
         COPILOT
@@ -53737,7 +53736,7 @@ GROUP FO PFD
       gen_pointer AH_fd_pitch
         POS 604.500000 446.000000
         IMAGE PFD/artificial_horizon/fd_pitch
-        DATAREF sim/cockpit/autopilot/flight_director_pitch
+        DATAREF Strato/777/autopilot/pitch_tgt_deg
         SHOW_EQUAL 1.000000 Strato/777/pfd/pitch_fltdir_copilot[13]
         SIZE 1.350000
         COPILOT
