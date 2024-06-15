@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: misc
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Script Description: Misc system code for systems that don't have enough for their own module.
 *****************************************************************************************
 --]]

@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: flightInstruments
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Script Description: Code for cockpit instruments
 Plan:
 dataref for pilot and copilot inboard knob
@@ -670,7 +670,7 @@ function B777_alt_dn_CMDhandler(phase, duration)
 		if B777DR_alt_is_fast_ovrd == 0 then
 			simDR_autopilot_alt = smartKnobDn(100, 1000, 0, simDR_autopilot_alt)
 		else
-			simDR_autopilot_alt = simDR_autopilot_alt - 1000
+			simDR_autopilot_alt = math.min(simDR_autopilot_alt - 1000, 0)
 		end
 	end
 end

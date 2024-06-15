@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: flightInstruments
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Script Description: Inis script for cockpit instruments
 *****************************************************************************************
 --]]

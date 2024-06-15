@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Page Name: readme verification
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Page Description:
 *****************************************************************************************
 --]]

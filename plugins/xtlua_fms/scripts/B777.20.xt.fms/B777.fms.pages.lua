@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4
-*         Converted for 777 by remenkemi (crazytimtimtim)
+*         Converted for 777 by remenkemi 
 *****************************************************************************************
 ]]
 --Marauder28

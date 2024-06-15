@@ -3,7 +3,7 @@
 *****************************************************************************************
 * Program Script Name	:	B777.20.xt.simconfig
 * Author Name			:	Marauder28
-* Converted to 777 by remenkemi (crazytimtimtim)
+* Converted to 777 by remenkemi 
 *****************************************************************************************
 --]]
 
