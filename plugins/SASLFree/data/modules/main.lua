@@ -66,9 +66,6 @@ alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
 fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
 fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
 
-flt_dir_pilot_pfd = createGlobalPropertyi("Strato/777/pfd/flt_dir_pilot", 0)
-flt_dir_copilot_pfd = createGlobalPropertyi("Strato/777/pfd/flt_dir_copilot", 0)
-
 --Failure datarefs
 
 fbw_secondary_fail = createGlobalPropertyi("Strato/777/failures/fctl/secondary", 0)
