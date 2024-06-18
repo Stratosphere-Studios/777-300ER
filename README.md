@@ -94,7 +94,7 @@ No further steps are required.
 ## **Credits**
 [**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
 
-[**BRUHegg**](https://github.com/BRUHegg): SASL system code, flight model.
+[**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear, autopilot), C++ systems (FMC plugin), flight model improvements, cockpit instruments(pfd)
 
 [**remenkemi**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
 
