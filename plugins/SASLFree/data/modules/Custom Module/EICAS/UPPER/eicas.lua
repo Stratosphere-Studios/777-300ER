@@ -134,7 +134,7 @@ function UpdateWindows()
 	for i=1,2 do
 		local act = globalPropertyfae("Strato/777/windows", i)
 		local tgt = globalPropertyfae("Strato/777/windows_tgt", i)
-		if get(act) ~= get(tgt) then
+		if get(act) ~= get(tgt) and (get(on_ground) == 1 or get(act) == 0) then
 			if math.abs(get(act) - get(tgt)) < 0.05 then
 				set(act, get(tgt))
 			else
