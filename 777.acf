@@ -38036,6 +38036,7 @@ gen_rotary Layout
 
 GROUP LCD Backgrounds
   LOCKED
+  HIDE
   CHAINED
   gen_rotary LCD Background
     POS 712.500000 3157.000000
@@ -38043,6 +38044,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 2.020000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -38066,6 +38068,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 0.520000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -38089,6 +38092,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 2.030000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -38112,6 +38116,7 @@ GROUP LCD Backgrounds
     SHOW_LESS 1.000000 Strato/777/fltInst/adiru/status
     SIZE 2.020000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 1
     BUS_SRC 1
@@ -38134,6 +38139,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 2.000000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 3
     BUS_SRC 1
@@ -38156,6 +38162,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 0.900000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -38178,6 +38185,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 0.920000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 8
     BUS_SRC 1
@@ -38200,6 +38208,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 0.920000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 7
     BUS_SRC 1
@@ -38222,6 +38231,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 0.950000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 6
     BUS_SRC 1
@@ -38245,6 +38255,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 0.770000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -38267,6 +38278,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 1.020000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -38290,6 +38302,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 2.210000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 5
     BUS_SRC 1
@@ -38312,6 +38325,7 @@ GROUP LCD Backgrounds
     DATAREF 
     SIZE 2.000000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -38332,9 +38346,8 @@ END_GROUP
 GROUP Captain PFD
   LOCKED
   CHAINED
-  GROUP_OPEN
   gen_rotary template
-    POS 668.500000 1784.000000
+    POS 668.500000 1807.000000
     IMAGE PFD/_Diagram
     DATAREF 
     SHOW_EQUAL 1.000000 testNum
@@ -38357,7 +38370,7 @@ GROUP Captain PFD
     CLICK_DY 0
 
   gen_rotary template2
-    POS 666.000000 1776.000000
+    POS 666.000000 1799.000000
     IMAGE PFD/template+options
     DATAREF 
     SHOW_EQUAL 1.000000 testNum
@@ -38382,13 +38395,12 @@ GROUP Captain PFD
   GROUP Artificial Horizon
     LOCKED
     CHAINED
-    GROUP_OPEN
     GROUP Not while ADIRU ali
       SHOW_EQUAL 0.000000 Strato/777/temp/fltInst/adiru/aligning
       LOCKED
-      GROUP_OPEN
+      CHAINED
       gen_needle Horizon
-        POS 604.000000 1795.000000
+        POS 604.000000 1818.000000
         IMAGE PFD/artificial_horizon/horizon
         DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
         SIZE 2.590000
@@ -38407,7 +38419,7 @@ GROUP Captain PFD
         NEEDLE_OFFSET_Y -4.000000
 
       gen_pointer AH_fd_roll
-        POS 605.000000 1789.500000
+        POS 605.000000 1812.500000
         IMAGE PFD/artificial_horizon/fd_roll
         DATAREF Strato/777/autopilot/roll_tgt_deg
         SHOW_EQUAL 1.000000 Strato/777/pfd/roll_fltdir_pilot[13]
@@ -38424,7 +38436,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer AH_fd_pitch
-        POS 604.500000 1789.000000
+        POS 604.500000 1812.000000
         IMAGE PFD/artificial_horizon/fd_pitch
         DATAREF Strato/777/autopilot/pitch_tgt_deg
         SHOW_EQUAL 1.000000 Strato/777/pfd/pitch_fltdir_pilot[13]
@@ -38443,7 +38455,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_rotary AH_mask_blue
-        POS 604.500000 2066.500000
+        POS 604.500000 2089.500000
         IMAGE PFD/artificial_horizon/blue_mask
         DATAREF 
         SIZE 1.420000
@@ -38466,7 +38478,7 @@ GROUP Captain PFD
 
     END_GROUP
     gen_rotary AH_Mask
-      POS 687.000000 1774.000000
+      POS 687.000000 1797.000000
       IMAGE PFD/artificial_horizon/horizon_mask
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/fctl/pfc/overbank
@@ -38489,7 +38501,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary AH_Mask_amber
-      POS 687.000000 1774.000000
+      POS 687.000000 1797.000000
       IMAGE PFD/artificial_horizon/horizon_mask_amber
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/fctl/pfc/overbank
@@ -38514,19 +38526,18 @@ GROUP Captain PFD
     GROUP Bank Slip
       LOCKED
       CHAINED
-      GROUP_OPEN
       GROUP_ANIMATE_MODE ROTATE
       GROUP_WIDTH 242
       GROUP_HEIGHT 250
       DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
-      POS 602.000000 1825.000000
+      POS 602.000000 1848.000000
       CLIP
       KEY_FRAME -60.000000 60.000000 1.000000
       KEY_FRAME 60.000000 -60.000000
       ROTATE_OFFSET_X 0.000000
       ROTATE_OFFSET_Y 0.000000
       gen_needle Bank Angle Pointer
-        POS 602.000000 1825.000000
+        POS 602.000000 1848.000000
         IMAGE PFD/artificial_horizon/bank_diamond
         DATAREF 
         SIZE 2.500000
@@ -38540,7 +38551,7 @@ GROUP Captain PFD
         OFFSET 116.000000
 
       gen_needle Slip Angle Pointer
-        POS 602.000000 1825.000000
+        POS 602.000000 1848.000000
         IMAGE PFD/artificial_horizon/slip_rectangle
         DATAREF sim/cockpit2/gauges/indicators/slip_deg
         SHOW_EQUAL 1.000000 Strato/777/failures/737max
@@ -38556,7 +38567,7 @@ GROUP Captain PFD
 
     END_GROUP
     gen_rotary AH_dual_cue
-      POS 604.000000 1772.500000
+      POS 604.000000 1795.500000
       IMAGE PFD/artificial_horizon/dual_cue
       DATAREF 
       SIZE 1.350000
@@ -38578,7 +38589,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary Inner Marker
-      POS 859.000000 2095.000000
+      POS 859.000000 2118.000000
       IMAGE PFD/artificial_horizon/Inner_Marker
       DATAREF sim/cockpit2/radios/indicators/inner_marker_lit
       SIZE 3.000000
@@ -38600,7 +38611,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary Outer Marker
-      POS 859.000000 2095.000000
+      POS 859.000000 2118.000000
       IMAGE PFD/artificial_horizon/Outer_Marker
       DATAREF sim/cockpit2/radios/indicators/outer_marker_lit
       SIZE 3.000000
@@ -38622,7 +38633,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary Middle Marker
-      POS 859.000000 2095.000000
+      POS 859.000000 2118.000000
       IMAGE PFD/artificial_horizon/Middle_Marker
       DATAREF sim/cockpit2/radios/indicators/middle_marker_lit
       SIZE 3.000000
@@ -38648,7 +38659,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_LED VS_negative
-      POS 1360.000000 1435.000000
+      POS 1360.000000 1458.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/pfd/vspeed[0]
       SHOW_LESS -400.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
@@ -38666,7 +38677,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED VS_positive
-      POS 1360.000000 2144.000000
+      POS 1360.000000 2167.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/pfd/vspeed[0]
       SHOW_GREATER 400.000000 sim/cockpit2/gauges/indicators/vvi_fpm_pilot
@@ -38684,7 +38695,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_rotary VSI_background
-      POS 1282.500000 1789.500000
+      POS 1282.500000 1812.500000
       IMAGE PFD/vertical_speed_indicator/vsi_background
       DATAREF 
       SIZE 1.250000
@@ -38706,7 +38717,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary VSI_label
-      POS 1282.000000 1789.000000
+      POS 1282.000000 1812.000000
       IMAGE PFD/vertical_speed_indicator/VSIscale
       DATAREF 
       SIZE 1.960000
@@ -38728,7 +38739,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_needle VSI Needle
-      POS 1301.000000 1789.000000
+      POS 1301.000000 1812.000000
       IMAGE PFD/vertical_speed_indicator/VSIspdPtr
       DATAREF Strato/777/displays/vvi[0]
       SIZE 2.250000
@@ -38752,7 +38763,7 @@ GROUP Captain PFD
       NEEDLE_OFFSET_X 50.000000
 
     gen_pointer Selected VSI Ptr
-      POS 1290.000000 1789.000000
+      POS 1290.000000 1812.000000
       IMAGE PFD/vertical_speed_indicator/VSIselSpdPtr
       DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
       SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/vvi_status
@@ -38779,7 +38790,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_pointer vman min
-      POS 207.500000 1790.000000
+      POS 207.500000 1813.000000
       IMAGE PFD/airspeed_indicator/amber_tape_min
       DATAREF Strato/777/vmlo_tape_diff[0]
       SHOW_EQUAL 0.000000 sim/flightmodel/failures/onground_any
@@ -38797,7 +38808,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer stall band
-      POS 207.500000 1790.000000
+      POS 207.500000 1813.000000
       IMAGE PFD/airspeed_indicator/red_tape
       DATAREF Strato/777/stall_tape_diff[0]
       SHOW_EQUAL 0.000000 sim/flightmodel/failures/onground_any
@@ -38815,7 +38826,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer ovspd band
-      POS 207.500000 1790.000000
+      POS 207.500000 1813.000000
       IMAGE PFD/airspeed_indicator/red_tape
       DATAREF Strato/777/ovspd_tape_diff[0]
       SHOW_EQUAL 0.000000 sim/flightmodel/failures/onground_any
@@ -38833,7 +38844,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_rotary ASI_background
-      POS 107.500000 1775.500000
+      POS 107.500000 1798.500000
       IMAGE PFD/alt_spd_background
       DATAREF 
       SIZE 1.410000
@@ -38856,7 +38867,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_pointer Tape
-      POS 111.500000 1790.000000
+      POS 111.500000 1813.000000
       IMAGE PFD/airspeed_indicator/ASItape
       DATAREF Strato/777/displays/ias[0]
       SIZE 2.060000
@@ -38873,7 +38884,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer IAS TREND POS
-      POS 167.000000 2058.000000
+      POS 167.000000 2081.000000
       IMAGE PFD/airspeed_indicator/Trend_Vector_pos
       DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
       SHOW_EQUAL 1.000000 Strato/777/show_spd_trend_pos[0]
@@ -38891,7 +38902,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer IAS TREND NEG
-      POS 167.000000 1518.000000
+      POS 167.000000 1541.000000
       IMAGE PFD/airspeed_indicator/Trend_Vector_neg
       DATAREF sim/cockpit2/gauges/indicators/airspeed_acceleration_kts_sec_pilot
       SHOW_EQUAL 1.000000 Strato/777/show_spd_trend_neg[0]
@@ -38909,7 +38920,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer IAS Bug
-      POS 201.000000 1789.000000
+      POS 201.000000 1812.000000
       IMAGE PFD/airspeed_indicator/IAS_bug
       DATAREF Strato/777/airspeed_bug_diff[0]
       SIZE 2.350000
@@ -38927,7 +38938,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_rotary black
-      POS 159.000000 2374.000000
+      POS 159.000000 2397.000000
       IMAGE black
       DATAREF 
       SIZE 0.350000
@@ -38950,7 +38961,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary black
-      POS 159.000000 1219.000000
+      POS 159.000000 1242.000000
       IMAGE black
       DATAREF 
       SIZE 0.350000
@@ -38973,7 +38984,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_pointer trs pointer
-      POS 227.500000 1790.000000
+      POS 227.500000 1813.000000
       IMAGE PFD/airspeed_indicator/TRS
       DATAREF Strato/777/trimref_ovspd_diff[0]
       SHOW_EQUAL 1.000000 Strato/777/displays/trs_bug_enabled
@@ -38991,7 +39002,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_LED sel_mach
-      POS 186.000000 2349.000000
+      POS 186.000000 2372.000000
       IMAGE PFD/magenta_type_meters
       DATAREF sim/cockpit2/autopilot/airspeed_dial_kts_mach
       SHOW_EQUAL 1.000000 sim/cockpit/autopilot/airspeed_is_mach
@@ -39009,7 +39020,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED sel_kts
-      POS 196.000000 2349.000000
+      POS 196.000000 2372.000000
       IMAGE PFD/magenta_type_meters
       DATAREF sim/cockpit2/autopilot/airspeed_dial_kts_mach
       SHOW_EQUAL 0.000000 sim/cockpit/autopilot/airspeed_is_mach
@@ -39027,7 +39038,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_rotary spd window
-      POS 93.500000 1789.500000
+      POS 93.500000 1812.500000
       IMAGE PFD/spd_window
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/displays/ias_amber[0]
@@ -39050,7 +39061,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary spd window amber fl
-      POS 94.500000 1789.500000
+      POS 94.500000 1812.500000
       IMAGE PFD/airspeed_indicator/spd_box_amber_flash
       DATAREF Strato/777/displays/ias_flash[0]
       SHOW_EQUAL 1.000000 Strato/777/displays/ias_amber[0]
@@ -39073,7 +39084,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rolling Hundreds
-      POS 83.500000 1785.000000
+      POS 83.500000 1808.000000
       IMAGE PFD/airspeed_indicator/ASIcrntHndrds
       DATAREF Strato/777/displays/ias[0]
       SHOW_GREATER 100.000000 Strato/777/displays/ias[0]
@@ -39088,7 +39099,7 @@ GROUP Captain PFD
       DIGITS 3
 
     gen_rolling Tens
-      POS 81.500000 1785.000000
+      POS 81.500000 1808.000000
       IMAGE PFD/airspeed_indicator/ASIcrntTens
       DATAREF Strato/777/displays/ias[0]
       SIZE 1.950000
@@ -39103,7 +39114,7 @@ GROUP Captain PFD
       DIGITS 3
 
     gen_rolling Ones
-      POS 79.500000 1789.000000
+      POS 79.500000 1812.000000
       IMAGE PFD/airspeed_indicator/ASIcrntOnes
       DATAREF Strato/777/displays/ias[0]
       SIZE 2.000000
@@ -39121,7 +39132,7 @@ GROUP Captain PFD
       LOCKED
       CHAINED
       gen_rotary GS/MACH Outline
-        POS 113.000000 1240.500000
+        POS 113.000000 1263.500000
         IMAGE PFD/artificial_horizon/RA_highlight2
         DATAREF 
         SHOW_EQUAL 1.000000 Strato/777/displays/ias_outline[0]
@@ -39145,7 +39156,7 @@ GROUP Captain PFD
         CLICK_DY 0
 
       gen_LED Mach
-        POS 120.000000 1241.500000
+        POS 120.000000 1264.500000
         IMAGE LED_2.36R.xxxxx0.white
         DATAREF sim/cockpit2/gauges/indicators/mach_pilot
         SHOW_GREATER 0.400000 sim/cockpit2/gauges/indicators/mach_pilot
@@ -39163,7 +39174,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_LED Ground Speed 3 digi
-        POS 176.000000 1242.000000
+        POS 176.000000 1265.000000
         IMAGE White_size23_stretched_vert_no_lead0
         DATAREF sim/cockpit2/gauges/indicators/ground_speed_kt
         SHOW_LESS 0.400000 sim/cockpit2/gauges/indicators/mach_pilot
@@ -39181,7 +39192,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_rotary GS
-        POS 66.000000 1235.000000
+        POS 66.000000 1258.000000
         IMAGE ND/GS
         DATAREF 
         SHOW_LESS 0.400000 sim/cockpit2/gauges/indicators/mach_pilot
@@ -39209,7 +39220,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary alt_background
-      POS 1113.500000 1775.500000
+      POS 1113.500000 1798.500000
       IMAGE PFD/alt_spd_background
       DATAREF 
       SIZE 1.410000
@@ -39235,7 +39246,7 @@ GROUP Captain PFD
       LOCKED
       CHAINED
       gen_pointer Tape -1000-2000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape01
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39254,7 +39265,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 2100-5000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape02
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 5500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39272,7 +39283,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 5100-8000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape03
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 8500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39290,7 +39301,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 8100-11000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape04
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 11500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39308,7 +39319,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 11100-14000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape05
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 14500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39326,7 +39337,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 14100-17000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape06
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 17500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39344,7 +39355,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 17100-20000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape07
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 20500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39362,7 +39373,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 20100-23000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape08
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 23500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39380,7 +39391,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 23100-26000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape09
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 26500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39398,7 +39409,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 26100-29000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape10
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 29500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39416,7 +39427,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 29100-32000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape11
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 32500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39434,7 +39445,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 32100-35000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape12
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 35500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39452,7 +39463,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 35100-38000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape13
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 38500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39470,7 +39481,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 38100-41000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape14
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 41500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39488,7 +39499,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 44100-47000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape16
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 99999.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39507,7 +39518,7 @@ GROUP Captain PFD
         OFFSET 0.000000
 
       gen_pointer Tape 41100-44000
-        POS 1110.500000 1789.000000
+        POS 1110.500000 1812.000000
         IMAGE PFD/ALTtapes/ALTtape15
         DATAREF Strato/777/displays/displayed_alt[0]
         SHOW_LESS 44500.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39526,7 +39537,7 @@ GROUP Captain PFD
 
     END_GROUP
     gen_pointer ALT Bug
-      POS 1058.500000 1788.000000
+      POS 1058.500000 1811.000000
       IMAGE PFD/altimeter/SelAltPtr
       DATAREF Strato/777/displays/alt_bug_diff[0]
       SIZE 1.980000
@@ -39545,7 +39556,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer Ground Level
-      POS 1114.000000 1790.000000
+      POS 1114.000000 1813.000000
       IMAGE PFD/altimeter/ground_level
       DATAREF sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
       SIZE 2.750000
@@ -39566,7 +39577,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_rotary alt window
-      POS 1159.000000 1793.500000
+      POS 1159.000000 1816.500000
       IMAGE PFD/alt_window
       DATAREF 
       SIZE 1.350000
@@ -39588,7 +39599,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary ALT Negative
-      POS 1110.000000 1796.500000
+      POS 1110.000000 1819.500000
       IMAGE PFD/altimeter/alt_neg
       DATAREF 
       SHOW_LESS -1.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39611,7 +39622,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rolling Ten Thousands
-      POS 1187.000000 1793.000000
+      POS 1187.000000 1816.000000
       IMAGE PFD/altimeter/5_columnALT
       DATAREF Strato/777/displays/displayed_alt[0]
       SIZE 2.750000
@@ -39624,7 +39635,7 @@ GROUP Captain PFD
       DIGITS 5
 
     gen_pointer ALT 20s
-      POS 1226.000000 1793.000000
+      POS 1226.000000 1816.000000
       IMAGE PFD/altimeter/scrolling20s
       DATAREF Strato/777/displays/displayed_alt[0]
       SHOW_GREATER 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39643,7 +39654,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer ALT 20s trans
-      POS 1226.000000 1793.000000
+      POS 1226.000000 1816.000000
       IMAGE PFD/altimeter/scrolling20s_trans
       DATAREF Strato/777/displays/displayed_alt[0]
       SHOW_LESS 20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39663,7 +39674,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer ALT 20s BW
-      POS 1226.000000 1793.000000
+      POS 1226.000000 1816.000000
       IMAGE PFD/altimeter/scrolling20s_bw
       DATAREF Strato/777/displays/displayed_alt[0]
       SHOW_LESS -20.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39682,7 +39693,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_rotary Meter Box
-      POS 1173.000000 1888.000000
+      POS 1173.000000 1911.000000
       IMAGE PFD/altimeter/meters_box
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs[0]
@@ -39705,7 +39716,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_LED Alt Meters
-      POS 1213.000000 1884.000000
+      POS 1213.000000 1907.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/alt_mtrs[0]
       SHOW_EQUAL 1.000000 Strato/777/displays/mtrs[0]
@@ -39723,7 +39734,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED Alt Meters Neg
-      POS 1212.000000 1882.000000
+      POS 1212.000000 1905.000000
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/alt_mtrs[0]
       SHOW_LESS 0.000000 sim/cockpit2/gauges/indicators/altitude_ft_pilot
@@ -39743,7 +39754,7 @@ GROUP Captain PFD
 
   END_GROUP
   gen_rotary windshear
-    POS 604.000000 1359.500000
+    POS 604.000000 1382.500000
     IMAGE PFD/Warning/windshear
     DATAREF 
     SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/windshear_warning
@@ -39771,7 +39782,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_text LOC/VNAV
-      POS 337.000000 2184.000000
+      POS 337.000000 2207.000000
       IMAGE PFD/ILS Data/nav_text
       DATAREF 
       SHOW_EQUAL 2.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
@@ -39789,7 +39800,7 @@ GROUP Captain PFD
       SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
       LOCKED
       gen_text ILS1
-        POS 310.000000 2285.000000
+        POS 310.000000 2308.000000
         IMAGE PFD/ILS Data/nav_text
         DATAREF sim/cockpit2/radios/indicators/nav1_nav_id
         SIZE 2.000000
@@ -39803,7 +39814,7 @@ GROUP Captain PFD
         OFFSET_Y -8.000000
 
       gen_rotary slash degree
-        POS 387.000000 2285.000000
+        POS 387.000000 2308.000000
         IMAGE PFD/ILS Data/slash_degree
         DATAREF 
         SIZE 2.000000
@@ -39825,7 +39836,7 @@ GROUP Captain PFD
         CLICK_DY 0
 
       gen_LED Course DEG
-        POS 415.000000 2286.000000
+        POS 415.000000 2309.000000
         IMAGE PFD/ILS Data/nav_numbers_deg
         DATAREF sim/cockpit2/radios/actuators/nav1_obs_deg_mag_pilot
         SIZE 2.000000
@@ -39842,7 +39853,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_rotary DME---
-        POS 333.000000 2245.000000
+        POS 333.000000 2268.000000
         IMAGE PFD/ILS Data/dme
         DATAREF sim/cockpit/radios/nav1_has_dme
         SIZE 2.000000
@@ -39864,7 +39875,7 @@ GROUP Captain PFD
         CLICK_DY 0
 
       gen_LED DME miles
-        POS 391.000000 2246.000000
+        POS 391.000000 2269.000000
         IMAGE PFD/ILS Data/nav_numbers_deg
         DATAREF sim/cockpit/radios/nav1_dme_dist_m
         SHOW_EQUAL 1.000000 sim/cockpit/radios/nav1_has_dme
@@ -39882,7 +39893,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_rotary ILS
-        POS 308.000000 2184.000000
+        POS 308.000000 2207.000000
         IMAGE PFD/ILS Data/ils_marker
         DATAREF 
         SIZE 2.000000
@@ -39911,7 +39922,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_text LOC/VNAV
-      POS 337.000000 2184.000000
+      POS 337.000000 2207.000000
       IMAGE PFD/ILS Data/nav_text
       DATAREF 
       SHOW_EQUAL 2.000000 sim/cockpit2/radios/actuators/HSI_source_select_pilot
@@ -39930,7 +39941,7 @@ GROUP Captain PFD
       LOCKED
       GROUP_OPEN
       gen_text ILS2
-        POS 310.000000 2285.000000
+        POS 310.000000 2308.000000
         IMAGE PFD/ILS Data/nav_text
         DATAREF sim/cockpit2/radios/indicators/nav2_nav_id
         SIZE 2.000000
@@ -39944,7 +39955,7 @@ GROUP Captain PFD
         OFFSET_Y -8.000000
 
       gen_rotary slash degree
-        POS 387.000000 2285.000000
+        POS 387.000000 2308.000000
         IMAGE PFD/ILS Data/slash_degree
         DATAREF 
         SIZE 2.000000
@@ -39966,7 +39977,7 @@ GROUP Captain PFD
         CLICK_DY 0
 
       gen_LED Course DEG
-        POS 415.000000 2286.000000
+        POS 415.000000 2309.000000
         IMAGE PFD/ILS Data/nav_numbers_deg
         DATAREF sim/cockpit2/radios/actuators/nav2_obs_deg_mag_pilot
         SIZE 2.000000
@@ -39983,7 +39994,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_rotary DME---
-        POS 333.000000 2245.000000
+        POS 333.000000 2268.000000
         IMAGE PFD/ILS Data/dme
         DATAREF sim/cockpit/radios/nav2_has_dme
         SIZE 2.000000
@@ -40005,7 +40016,7 @@ GROUP Captain PFD
         CLICK_DY 0
 
       gen_LED DME miles
-        POS 391.000000 2246.000000
+        POS 391.000000 2269.000000
         IMAGE PFD/ILS Data/nav_numbers_deg
         DATAREF sim/cockpit/radios/nav2_dme_dist_m
         SHOW_EQUAL 1.000000 sim/cockpit/radios/nav1_has_dme
@@ -40023,7 +40034,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_rotary ILS
-        POS 308.000000 2184.000000
+        POS 308.000000 2207.000000
         IMAGE PFD/ILS Data/ils_marker
         DATAREF 
         SIZE 2.000000
@@ -40047,7 +40058,7 @@ GROUP Captain PFD
     END_GROUP
   END_GROUP
   gen_rotary pull up
-    POS 604.000000 1359.500000
+    POS 604.000000 1382.500000
     IMAGE PFD/Warning/pull_up
     DATAREF 
     SHOW_EQUAL 1.000000 sim/cockpit/warnings/annunciators/GPWS
@@ -40073,16 +40084,14 @@ GROUP Captain PFD
     SHOW_LESS 0.000000 Strato/777/minimums_mode[0]
     SHOW_EQUAL 1.000000 Strato/777/minimums_visible[0]
     LOCKED
-    HIDE
     CHAINED
     gen_pointer Radio Bug
-      POS 1097.000000 1791.000000
+      POS 1097.000000 1814.000000
       IMAGE PFD/altimeter/DH_needle
       DATAREF Strato/777/minimums_diff[0]
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums[0]
       SIZE 2.900000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40098,13 +40107,12 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer Radio Bug Amber
-      POS 1097.000000 1791.000000
+      POS 1097.000000 1814.000000
       IMAGE PFD/altimeter/DH_needle_amber
       DATAREF Strato/777/minimums_diff[0]
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums[0]
       SIZE 2.900000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40121,13 +40129,12 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_rotary RADIO Amber
-      POS 877.000000 1325.000000
+      POS 877.000000 1348.000000
       IMAGE PFD/radio_amber
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums[0]
       SIZE 3.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40145,13 +40152,12 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary RADIO
-      POS 877.000000 1325.000000
+      POS 877.000000 1348.000000
       IMAGE PFD/Radio
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums[0]
       SIZE 3.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40169,13 +40175,12 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_LED dh amber
-      POS 920.000000 1280.000000
+      POS 920.000000 1303.000000
       IMAGE PFD/amber_type
       DATAREF Strato/777/minimums_dh[0]
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40188,13 +40193,12 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED dh
-      POS 920.000000 1280.000000
+      POS 920.000000 1303.000000
       IMAGE PFD/green_type
       DATAREF Strato/777/minimums_dh[0]
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40211,16 +40215,14 @@ GROUP Captain PFD
     SHOW_EQUAL 1.000000 Strato/777/minimums_visible[0]
     SHOW_GREATER 1.000000 Strato/777/minimums_mode[0]
     LOCKED
-    HIDE
     CHAINED
     gen_pointer Baro Bug
-      POS 1097.000000 1791.000000
+      POS 1097.000000 1814.000000
       IMAGE PFD/altimeter/MDA_needle
       DATAREF Strato/777/minimums_diff[0]
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums[0]
       SIZE 2.900000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40236,13 +40238,12 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer Baro Bug Amber
-      POS 1097.000000 1791.000000
+      POS 1097.000000 1814.000000
       IMAGE PFD/altimeter/MDA_needle_amber
       DATAREF Strato/777/minimums_diff[0]
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums[0]
       SIZE 2.900000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40258,13 +40259,12 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_rotary BARO Amber
-      POS 877.000000 1325.000000
+      POS 877.000000 1348.000000
       IMAGE PFD/baro_amber
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums[0]
       SIZE 3.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40282,13 +40282,12 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary BARO
-      POS 877.000000 1325.000000
+      POS 877.000000 1348.000000
       IMAGE PFD/baro
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums[0]
       SIZE 3.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40306,13 +40305,12 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_LED mda amber
-      POS 920.000000 1280.000000
+      POS 920.000000 1303.000000
       IMAGE PFD/amber_type
       DATAREF Strato/777/minimums_mda[0]
       SHOW_EQUAL 1.000000 Strato/777/amber_minimums[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40325,13 +40323,12 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED mda
-      POS 920.000000 1280.000000
+      POS 920.000000 1303.000000
       IMAGE PFD/green_type
       DATAREF Strato/777/minimums_mda[0]
       SHOW_EQUAL 0.000000 Strato/777/amber_minimums[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40345,7 +40342,7 @@ GROUP Captain PFD
 
   END_GROUP
   gen_rotary black
-    POS 1067.000000 1167.000000
+    POS 1067.000000 1190.000000
     IMAGE black
     DATAREF 
     SIZE 0.350000
@@ -40368,7 +40365,7 @@ GROUP Captain PFD
     CLICK_DY 0
 
   gen_rotary black
-    POS 1071.000000 2379.000000
+    POS 1071.000000 2402.000000
     IMAGE black
     DATAREF 
     SIZE 0.350000
@@ -40391,7 +40388,7 @@ GROUP Captain PFD
     CLICK_DY 0
 
   gen_rotary M
-    POS 1184.500000 2389.500000
+    POS 1184.500000 2412.500000
     IMAGE PFD/altimeter/meters_m
     DATAREF 
     SHOW_EQUAL 1.000000 Strato/777/displays/mtrs[0]
@@ -40415,7 +40412,7 @@ GROUP Captain PFD
     CLICK_DY 0
 
   gen_LED sel_alt_mtrs
-    POS 1187.000000 2396.000000
+    POS 1187.000000 2419.000000
     IMAGE PFD/magenta_type_meters
     DATAREF Strato/777/displays/autopilot_alt_mtrs
     SHOW_EQUAL 1.000000 Strato/777/displays/mtrs[0]
@@ -40433,7 +40430,7 @@ GROUP Captain PFD
     ROUNDING ROUND_ROUND
 
   gen_LED sel_alt_ft
-    POS 1229.000000 2349.000000
+    POS 1229.000000 2372.000000
     IMAGE PFD/magenta_type_large
     DATAREF sim/cockpit/autopilot/altitude
     SIZE 2.200000
@@ -40450,7 +40447,7 @@ GROUP Captain PFD
     ROUNDING ROUND_ROUND
 
   gen_LED sel_alt_ft_hundreds
-    POS 1202.000000 2346.000000
+    POS 1202.000000 2369.000000
     IMAGE PFD/magenta_type
     DATAREF sim/cockpit/autopilot/altitude
     SIZE 2.200000
@@ -40467,7 +40464,7 @@ GROUP Captain PFD
     ROUNDING ROUND_ROUND
 
   gen_rotary FMA_background
-    POS 605.500000 2402.500000
+    POS 605.500000 2425.500000
     IMAGE PFD/AFDS_mode/afds_background
     DATAREF 
     SIZE 1.380000
@@ -40491,16 +40488,14 @@ GROUP Captain PFD
 
   GROUP Baro
     LOCKED
-    HIDE
     CHAINED
     gen_LED BARO IN
-      POS 1201.000000 1230.000000
+      POS 1201.000000 1253.000000
       IMAGE PFD/green_type
       DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
       SHOW_EQUAL 0.000000 Strato/777/baro_mode[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40513,13 +40508,12 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED BARO HPA
-      POS 1206.000000 1230.000000
+      POS 1206.000000 1253.000000
       IMAGE PFD/green_type
       DATAREF sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot
       SHOW_EQUAL 1.000000 Strato/777/baro_mode[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -40532,12 +40526,11 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_rotary IN_HPA
-      POS 1217.000000 1226.000000
+      POS 1217.000000 1249.000000
       IMAGE PFD/IN_HPA
       DATAREF Strato/777/baro_mode[0]
       SIZE 2.500000
       LOCKED
-      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -40556,510 +40549,11 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary STD
-      POS 1113.000000 1230.000000
+      POS 1113.000000 1253.000000
       IMAGE PFD/STD
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/displays/alt_std[0]
       SIZE 2.500000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-  END_GROUP
-  GROUP FMA
-    SHOW_EQUAL 1.000000 testNum
-    LOCKED
-    CHAINED
-    GROUP_OPEN
-    GROUP Pitch Modes
-      SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/altv_captured
-      LOCKED
-      CHAINED
-      gen_rotary PItch Modes
-        POS 875.000000 2420.000000
-        IMAGE PFD/AFDS_mode/default 737/AP_alt_mode
-        DATAREF sim/cockpit2/autopilot/altitude_mode
-        SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/alts_captured
-        SIZE 2.750000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 3.000000 -1.000000 1.000000
-        KEY_FRAME 10.000000 6.000000 1.000000
-        KEY_FRAME 11.000000 7.000000 1.000000
-        KEY_FRAME 17.000000 8.000000 1.000000
-        KEY_FRAME 18.000000 9.000000 1.000000
-        KEY_FRAME 20.000000 10.000000
-        DIGITS 11
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    gen_rotary VNAV PTH 2
-      POS 875.000000 2420.000000
-      IMAGE PFD/AFDS_mode/default 737/vnav_pth
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
-      SHOW_GREATER 1.000000 sim/cockpit2/autopilot/altv_captured
-      SIZE 2.750000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary VNAV ALT 2
-      POS 875.000000 2420.000000
-      IMAGE PFD/AFDS_mode/default 737/vnav_alt
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
-      SHOW_GREATER 1.000000 sim/cockpit2/autopilot/alts_captured
-      SIZE 2.750000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary HDG Modes
-      POS 620.000000 2420.000000
-      IMAGE PFD/AFDS_mode/default 737/HDGSEL
-      DATAREF sim/cockpit2/autopilot/heading_mode
-      SHOW_LESS 1.500000 sim/cockpit2/autopilot/rollout_status
-      SIZE 2.750000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 2.000000 1.000000 1.000000
-      KEY_FRAME 10.000000 2.000000 1.000000
-      KEY_FRAME 13.000000 3.000000
-      DIGITS 4
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Rollout
-      POS 620.000000 2422.500000
-      IMAGE PFD/AFDS_mode/default 737/rollout
-      DATAREF sim/cockpit2/autopilot/rollout_status
-      SIZE 2.750000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 2.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary MCP SPD
-      POS 356.000000 2420.000000
-      IMAGE PFD/AFDS_mode/default 737/MCP_SPD
-      DATAREF sim/cockpit2/autopilot/autothrottle_enabled
-      SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/fms_vnav
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 2.000000 1.000000 1.000000
-      KEY_FRAME 3.000000 2.000000
-      DIGITS 3
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary FMC SPD
-      POS 356.000000 2419.000000
-      IMAGE PFD/AFDS_mode/default 737/FMC_SPD
-      DATAREF sim/cockpit2/autopilot/autothrottle_enabled
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 2.000000 1.000000 1.000000
-      KEY_FRAME 3.000000 2.000000
-      DIGITS 3
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Autothrottle Armed
-      POS 356.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/autothrottle_arm
-      DATAREF sim/cockpit2/autopilot/autothrottle_arm
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_arm
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary GS armed
-      POS 875.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/gs_armed
-      DATAREF sim/cockpit2/autopilot/glideslope_armed
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Flare armed
-      POS 875.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/flare_armed
-      DATAREF sim/cockpit2/autopilot/flare_status
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary VS armed
-      POS 875.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/vs_armed
-      DATAREF sim/cockpit2/autopilot/vvi_status
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary VOR/LOC armed
-      POS 620.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/vorloc_arm
-      DATAREF sim/cockpit2/autopilot/hnav_armed
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary LNAV armed
-      POS 620.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/lnav_arm
-      DATAREF sim/cockpit2/autopilot/gpss_status
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Rollout armed
-      POS 620.000000 2380.000000
-      IMAGE PFD/AFDS_mode/default 737/rollout_arm
-      DATAREF sim/cockpit2/autopilot/rollout_status
-      SIZE 2.750000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary AP
-      POS 604.500000 2195.500000
-      IMAGE PFD/AFDS/ap
-      DATAREF 
-      SHOW_EQUAL 1.000000 Strato/777/mcp/ap_on
-      SIZE 1.350000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary idle
-      POS 357.000000 2423.500000
-      IMAGE PFD/AFDS_mode/autothrottle/idle
-      DATAREF 
-      SHOW_EQUAL 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
-      SIZE 1.350000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary flt dir
-      POS 604.500000 2195.500000
-      IMAGE PFD/AFDS/flt_dir
-      DATAREF 
-      SHOW_EQUAL 1.000000 Strato/777/pfd/flt_dir_pilot
-      SIZE 1.350000
-      LOCKED
-      HIDE
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary fpa
-      POS 622.000000 2423.500000
-      IMAGE PFD/AFDS_mode/pitch/fpa
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/trk_fpa
-      SHOW_GREATER 2.000000 sim/cockpit2/autopilot/fpa_status
-      SIZE 1.350000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary track sel
-      POS 622.000000 2423.500000
-      IMAGE PFD/AFDS_mode/roll/trk_sel
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_status
-      SHOW_GREATER 1.000000 Strato/777/displays/hdg_mode
-      SIZE 1.350000
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 0
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary track hold
-      POS 622.000000 2423.500000
-      IMAGE PFD/AFDS_mode/roll/trk_hold
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_hold_status
-      SHOW_GREATER 1.000000 Strato/777/displays/hdg_mode
-      SIZE 1.350000
       LOCKED
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
@@ -41083,7 +40577,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary RA Box
-      POS 605.000000 1494.500000
+      POS 605.000000 1517.500000
       IMAGE PFD/artificial_horizon/RA_box
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/outlined_RA[0]
@@ -41107,7 +40601,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary RA Outline
-      POS 605.000000 1494.500000
+      POS 605.000000 1517.500000
       IMAGE PFD/artificial_horizon/RA_highlight2
       DATAREF 
       SHOW_EQUAL 1.000000 Strato/777/outlined_RA[0]
@@ -41131,7 +40625,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_LED RA 4 Digits
-      POS 702.000000 1494.000000
+      POS 702.000000 1517.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displayed_ra[0]
       SHOW_GREATER 1000.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
@@ -41149,7 +40643,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED RA 3 Digits
-      POS 678.000000 1494.000000
+      POS 678.000000 1517.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displayed_ra[0]
       SHOW_LESS 999.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
@@ -41168,7 +40662,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED RA 2 Digits
-      POS 652.000000 1494.000000
+      POS 652.000000 1517.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displayed_ra[0]
       SHOW_LESS 99.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
@@ -41187,7 +40681,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED RA 1 Digit
-      POS 631.000000 1494.000000
+      POS 631.000000 1517.000000
       IMAGE white_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displayed_ra[0]
       SHOW_LESS 9.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot
@@ -41212,7 +40706,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary scalehoriz
-      POS 604.500000 1440.500000
+      POS 604.500000 1463.500000
       IMAGE PFD/artificial_horizon/HrznLOCscale
       DATAREF 
       SIZE 2.000000
@@ -41234,7 +40728,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_pointer loc_pointer_empty
-      POS 604.500000 1440.500000
+      POS 604.500000 1463.500000
       IMAGE PFD/artificial_horizon/HrznLOCpointer
       DATAREF sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
@@ -41253,7 +40747,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer loc_pointer_full
-      POS 604.500000 1440.500000
+      POS 604.500000 1463.500000
       IMAGE PFD/artificial_horizon/HrznLOCpointer2
       DATAREF sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
@@ -41279,7 +40773,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary black
-      POS 382.000000 1523.000000
+      POS 382.000000 1546.000000
       IMAGE black
       DATAREF 
       SIZE 0.500000
@@ -41302,7 +40796,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary scalehorizbox
-      POS 604.500000 1440.500000
+      POS 604.500000 1463.500000
       IMAGE PFD/artificial_horizon/HrznLOCscaleEx
       DATAREF 
       SIZE 2.000000
@@ -41324,7 +40818,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_pointer loc_pointer_empty
-      POS 604.500000 1440.500000
+      POS 604.500000 1463.500000
       IMAGE PFD/artificial_horizon/HrznLOCpointer
       DATAREF sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SHOW_LESS -0.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
@@ -41343,7 +40837,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer loc_pointer_full
-      POS 604.500000 1440.500000
+      POS 604.500000 1463.500000
       IMAGE PFD/artificial_horizon/HrznLOCpointer2
       DATAREF sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
       SHOW_LESS 0.500000 sim/cockpit2/radios/indicators/hsi_hdef_dots_pilot
@@ -41368,7 +40862,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary scalevert
-      POS 956.500000 1789.500000
+      POS 956.500000 1812.500000
       IMAGE PFD/artificial_horizon/HrznGSscale
       DATAREF 
       SIZE 2.000000
@@ -41390,7 +40884,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_pointer gs_pointer_empty
-      POS 956.500000 1789.500000
+      POS 956.500000 1812.500000
       IMAGE PFD/artificial_horizon/HrznGSpointer
       DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
       SHOW_LESS -2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
@@ -41409,7 +40903,7 @@ GROUP Captain PFD
       OFFSET 0.000000
 
     gen_pointer gs_pointer_full
-      POS 956.500000 1789.500000
+      POS 956.500000 1812.500000
       IMAGE PFD/artificial_horizon/HrznGSpointer2
       DATAREF sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
       SHOW_LESS 2.500000 sim/cockpit2/radios/indicators/hsi_vdef_dots_pilot
@@ -41432,7 +40926,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary Compass Background
-      POS 604.000000 1174.000000
+      POS 604.000000 1197.000000
       IMAGE PFD/Heading Track/HdgTrackBgnd
       DATAREF 
       SHOW_GREATER 1.000000 Strato/777/fltInst/adiru/status
@@ -41455,7 +40949,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_rotary Pointer
-      POS 604.000000 1285.500000
+      POS 604.000000 1308.500000
       IMAGE PFD/Heading Track/HdgTrackPtr
       DATAREF 
       SHOW_GREATER 1.000000 Strato/777/fltInst/adiru/status
@@ -41487,7 +40981,7 @@ GROUP Captain PFD
       LOCKED
       CHAINED
       gen_needle HDG Bug
-        POS 604.000000 821.000000
+        POS 604.000000 844.000000
         IMAGE PFD/Heading Track/heading_bug
         DATAREF Strato/777/heading_bug_diff[0]
         SIZE 2.750000
@@ -41504,7 +40998,7 @@ GROUP Captain PFD
         OFFSET 166.000000
 
       gen_needle Compass Rose
-        POS 604.000000 1174.000000
+        POS 604.000000 1197.000000
         IMAGE PFD/Heading Track/HdgTrackRose
         DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SIZE 2.060000
@@ -41520,7 +41014,7 @@ GROUP Captain PFD
         NEEDLE_OFFSET_Y -174.000000
 
       gen_rotary MAG
-        POS 751.500000 1132.000000
+        POS 751.500000 1155.000000
         IMAGE PFD/Heading Track/HdgTrackMagLabel
         DATAREF 
         SIZE 2.750000
@@ -41542,7 +41036,7 @@ GROUP Captain PFD
         CLICK_DY 0
 
       gen_LED HDG
-        POS 535.000000 1132.000000
+        POS 535.000000 1155.000000
         IMAGE PFD/magenta_type_meters
         DATAREF sim/cockpit/autopilot/heading_mag
         SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
@@ -41560,7 +41054,7 @@ GROUP Captain PFD
         ROUNDING ROUND_ROUND
 
       gen_text H
-        POS 505.500000 1101.500000
+        POS 505.500000 1124.500000
         IMAGE CDU/big/cdu_big_magenta
         DATAREF Strato/777/displays/txt/H
         SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
@@ -41580,7 +41074,7 @@ GROUP Captain PFD
       LOCKED
       CHAINED
       gen_rotary hdg_fail
-        POS 604.000000 1134.500000
+        POS 604.000000 1157.500000
         IMAGE PFD/failure_flags/hdg_fail
         DATAREF 
         SIZE 1.350000
@@ -41608,7 +41102,7 @@ GROUP Captain PFD
     LOCKED
     CHAINED
     gen_rotary AOA gauge
-      POS 911.000000 2255.000000
+      POS 911.000000 2278.000000
       IMAGE PFD/aoa_gauge
       DATAREF 
       SIZE 2.350000
@@ -41630,7 +41124,7 @@ GROUP Captain PFD
       CLICK_DY 0
 
     gen_needle AOA needle
-      POS 901.000000 2255.000000
+      POS 901.000000 2278.000000
       IMAGE PFD/aoa_needle
       DATAREF sim/flightmodel2/misc/AoA_angle_degrees
       SHOW_GREATER 80.000000 Strato/777/displays/ias[0]
@@ -41651,7 +41145,7 @@ GROUP Captain PFD
       OFFSET 14.000000
 
     gen_needle AOA needle_static
-      POS 901.000000 2255.000000
+      POS 901.000000 2278.000000
       IMAGE PFD/aoa_needle
       DATAREF 
       SHOW_LESS 79.989998 Strato/777/displays/ias[0]
@@ -41666,7 +41160,7 @@ GROUP Captain PFD
       OFFSET 14.000000
 
     gen_LED AOA numeration neg
-      POS 889.000000 2226.000000
+      POS 889.000000 2249.000000
       IMAGE PFD/angle_of_attack_type
       DATAREF Strato/777/displayed_aoa[0]
       SHOW_LESS 0.000000 Strato/777/displayed_aoa[0]
@@ -41686,7 +41180,7 @@ GROUP Captain PFD
       ROUNDING ROUND_ROUND
 
     gen_LED AOA numeration pos
-      POS 894.000000 2226.000000
+      POS 894.000000 2249.000000
       IMAGE PFD/angle_of_attack_type
       DATAREF Strato/777/displayed_aoa[0]
       SHOW_GREATER 0.000000 Strato/777/displayed_aoa[0]
@@ -41740,6 +41234,7 @@ GROUP Captain ND
   GROUP While ADIRU Alignin
     SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
     LOCKED
+    HIDE
     CHAINED
     gen_text TIME TO ALIGN
       POS 1497.500000 2358.000000
@@ -41747,6 +41242,7 @@ GROUP Captain ND
       DATAREF Strato/777/displays/txt/TIME_TO_ALIGN
       SIZE 2.000000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -41761,6 +41257,7 @@ GROUP Captain ND
       DATAREF Strato/777/fltInst/adiru/time_remaining_min
       SIZE 2.200000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -41778,6 +41275,7 @@ GROUP Captain ND
       DATAREF Strato/777/fltInst/adiru/time_remaining_sec
       SIZE 1.500000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -41795,6 +41293,7 @@ GROUP Captain ND
       DATAREF [0]
       SIZE 1.500000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -41812,6 +41311,7 @@ GROUP Captain ND
       DATAREF [0]
       SIZE 1.500000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -41829,6 +41329,7 @@ GROUP Captain ND
       DATAREF Strato/777/displays/txt/---
       SIZE 2.500000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -48140,7 +47641,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 1676.000000 3519.500000
+        POS 1676.500000 3519.500000
         IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms3/Line09_L
         SIZE 1.210000
@@ -49228,7 +48729,7 @@ GROUP FMSs
       SHOW_EQUAL 1.000000 Strato/777/show_cdu_brt[0]
       LOCKED
       gen_rotary Mask
-        POS 1682.357178 3629.000000
+        POS 1682.500000 3629.000000
         IMAGE LCD_Background
         DATAREF 
         SIZE 0.950000
@@ -49776,7 +49277,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2309.000000 3670.500000
+        POS 2309.500000 3670.500000
         IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line05_L
         SIZE 1.210000
@@ -49790,7 +49291,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2309.000000 3633.500000
+        POS 2309.500000 3633.500000
         IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line06_L
         SIZE 1.210000
@@ -49818,7 +49319,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2309.000000 3557.500000
+        POS 2309.500000 3557.500000
         IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line08_L
         SIZE 1.210000
@@ -49832,7 +49333,7 @@ GROUP FMSs
         OFFSET_Y -25.000000
 
       gen_text XXXXXXXXXXXXXXXXXXX
-        POS 2309.000000 3519.500000
+        POS 2309.500000 3519.500000
         IMAGE CDU/big/cdu_big_white
         DATAREF Strato/B777/fms1/Line09_L
         SIZE 1.210000
@@ -52778,7 +52279,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_pointer green_band_R
-    POS 1392.500000 2945.500000
+    POS 1392.500000 2945.000000
     IMAGE trims/green_band
     DATAREF 
     LOCKED
@@ -52827,7 +52328,7 @@ GROUP Trim
     CLICK_DY 0
 
   gen_pointer green_band_L
-    POS 1669.500000 2945.500000
+    POS 1669.500000 2945.000000
     IMAGE trims/green_band
     DATAREF 
     LOCKED
@@ -53637,8 +53138,8 @@ GROUP Heading Adjust Trac
 END_GROUP
 GROUP FO PFD
   LOCKED
+  HIDE
   CHAINED
-  GROUP_OPEN
   gen_rotary template
     POS 668.500000 441.000000
     IMAGE PFD/_Diagram
@@ -53647,6 +53148,7 @@ GROUP FO PFD
     SIZE 2.000000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -53671,6 +53173,7 @@ GROUP FO PFD
     SIZE 1.550000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -53689,11 +53192,12 @@ GROUP FO PFD
 
   GROUP Artificial Horizon
     LOCKED
+    HIDE
     CHAINED
-    GROUP_OPEN
     GROUP Not while ADIRU ali
       SHOW_EQUAL 0.000000 Strato/777/temp/fltInst/adiru/aligning
       LOCKED
+      HIDE
       GROUP_OPEN
       gen_needle Horizon
         POS 604.000000 452.000000
@@ -53702,6 +53206,7 @@ GROUP FO PFD
         SIZE 2.590000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -53723,6 +53228,7 @@ GROUP FO PFD
         SIZE 1.350000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -53741,6 +53247,7 @@ GROUP FO PFD
         SIZE 1.350000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -53760,6 +53267,7 @@ GROUP FO PFD
         SIZE 1.420000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -53785,6 +53293,7 @@ GROUP FO PFD
       SIZE 1.400000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53809,6 +53318,7 @@ GROUP FO PFD
       SIZE 1.400000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53827,6 +53337,7 @@ GROUP FO PFD
 
     GROUP Bank Slip
       LOCKED
+      HIDE
       CHAINED
       GROUP_ANIMATE_MODE ROTATE
       GROUP_WIDTH 242
@@ -53845,6 +53356,7 @@ GROUP FO PFD
         SIZE 2.500000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -53860,6 +53372,7 @@ GROUP FO PFD
         SIZE 2.500000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -53876,6 +53389,7 @@ GROUP FO PFD
       SIZE 1.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53899,6 +53413,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53922,6 +53437,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53945,6 +53461,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53964,6 +53481,7 @@ GROUP FO PFD
   END_GROUP
   GROUP VSI
     LOCKED
+    HIDE
     CHAINED
     gen_LED VS_negative
       POS 1360.000000 92.000000
@@ -53973,6 +53491,7 @@ GROUP FO PFD
       SIZE 2.200000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -53992,6 +53511,7 @@ GROUP FO PFD
       SIZE 2.200000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54010,6 +53530,7 @@ GROUP FO PFD
       SIZE 1.250000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54033,6 +53554,7 @@ GROUP FO PFD
       SIZE 1.960000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54056,6 +53578,7 @@ GROUP FO PFD
       SIZE 2.250000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54082,6 +53605,7 @@ GROUP FO PFD
       SIZE 1.960000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54101,6 +53625,7 @@ GROUP FO PFD
   END_GROUP
   GROUP ASI
     LOCKED
+    HIDE
     CHAINED
     gen_pointer vman min
       POS 207.500000 447.000000
@@ -54110,6 +53635,7 @@ GROUP FO PFD
       SIZE 0.990000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54129,6 +53655,7 @@ GROUP FO PFD
       SIZE 0.990000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54148,6 +53675,7 @@ GROUP FO PFD
       SIZE 0.990000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54166,6 +53694,7 @@ GROUP FO PFD
       SIZE 1.410000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54190,6 +53719,7 @@ GROUP FO PFD
       SIZE 2.060000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54209,6 +53739,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54228,6 +53759,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54246,6 +53778,7 @@ GROUP FO PFD
       SIZE 2.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54265,6 +53798,7 @@ GROUP FO PFD
       SIZE 0.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54289,6 +53823,7 @@ GROUP FO PFD
       SIZE 0.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54314,6 +53849,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54333,6 +53869,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54352,6 +53889,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54371,6 +53909,7 @@ GROUP FO PFD
       SIZE 1.360000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54395,6 +53934,7 @@ GROUP FO PFD
       SIZE 1.370000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54419,6 +53959,7 @@ GROUP FO PFD
       SIZE 1.950000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54434,6 +53975,7 @@ GROUP FO PFD
       SIZE 1.950000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54450,6 +53992,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54461,6 +54004,7 @@ GROUP FO PFD
     GROUP GS_MACH
       SHOW_EQUAL 1.000000 Strato/777/pfd_mach_gs
       LOCKED
+      HIDE
       CHAINED
       gen_rotary GS/MACH Outline
         POS 113.000000 -102.500000
@@ -54470,6 +54014,7 @@ GROUP FO PFD
         SIZE 0.500000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -54495,6 +54040,7 @@ GROUP FO PFD
         SIZE 1.500000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -54514,6 +54060,7 @@ GROUP FO PFD
         SIZE 2.200000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -54533,6 +54080,7 @@ GROUP FO PFD
         SIZE 2.200000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -54553,6 +54101,7 @@ GROUP FO PFD
   END_GROUP
   GROUP ALT
     LOCKED
+    HIDE
     CHAINED
     gen_rotary alt_background
       POS 1113.500000 432.500000
@@ -54561,6 +54110,7 @@ GROUP FO PFD
       SIZE 1.410000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54580,6 +54130,7 @@ GROUP FO PFD
 
     GROUP Tapes
       LOCKED
+      HIDE
       CHAINED
       gen_pointer Tape -1000-2000
         POS 1110.500000 446.000000
@@ -54589,6 +54140,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54610,6 +54162,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54629,6 +54182,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54648,6 +54202,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54667,6 +54222,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54686,6 +54242,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54705,6 +54262,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54724,6 +54282,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54743,6 +54302,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54762,6 +54322,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54781,6 +54342,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54800,6 +54362,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54819,6 +54382,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54838,6 +54402,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54857,6 +54422,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54877,6 +54443,7 @@ GROUP FO PFD
         SIZE 2.070000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -54895,6 +54462,7 @@ GROUP FO PFD
       SIZE 1.980000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54915,6 +54483,7 @@ GROUP FO PFD
       SIZE 2.750000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -54937,6 +54506,7 @@ GROUP FO PFD
       SIZE 1.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54961,6 +54531,7 @@ GROUP FO PFD
       SIZE 2.750000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54984,6 +54555,7 @@ GROUP FO PFD
       SIZE 2.750000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -54999,6 +54571,7 @@ GROUP FO PFD
       SIZE 2.750000
       COPILOT
       LOCKED
+      HIDE
       KF_WRAP_BOTTOM
       KF_WRAP_TOP
       CLIP
@@ -55020,6 +54593,7 @@ GROUP FO PFD
       SIZE 2.750000
       COPILOT
       LOCKED
+      HIDE
       KF_WRAP_BOTTOM
       KF_WRAP_TOP
       CLIP
@@ -55040,6 +54614,7 @@ GROUP FO PFD
       SIZE 2.750000
       COPILOT
       LOCKED
+      HIDE
       KF_WRAP_BOTTOM
       KF_WRAP_TOP
       CLIP
@@ -55060,6 +54635,7 @@ GROUP FO PFD
       SIZE 1.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55084,6 +54660,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55104,6 +54681,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55124,6 +54702,7 @@ GROUP FO PFD
     SIZE 2.100000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55144,6 +54723,7 @@ GROUP FO PFD
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav1_flag_from_to_copilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/nav1_display_vertical
     LOCKED
+    HIDE
     CHAINED
     gen_text LOC/VNAV
       POS 337.000000 841.000000
@@ -55153,6 +54733,7 @@ GROUP FO PFD
       SIZE 2.200000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55164,6 +54745,7 @@ GROUP FO PFD
     GROUP ACTIVE NAV1
       SHOW_EQUAL 0.000000 sim/cockpit2/radios/actuators/HSI_source_select_copilot
       LOCKED
+      HIDE
       gen_text ILS1
         POS 310.000000 942.000000
         IMAGE PFD/ILS Data/nav_text
@@ -55171,6 +54753,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55186,6 +54769,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55209,6 +54793,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55227,6 +54812,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55251,6 +54837,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55269,6 +54856,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55291,6 +54879,7 @@ GROUP FO PFD
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/nav2_flag_from_to_copilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/nav2_display_vertical
     LOCKED
+    HIDE
     CHAINED
     gen_text LOC/VNAV
       POS 337.000000 841.000000
@@ -55300,6 +54889,7 @@ GROUP FO PFD
       SIZE 2.200000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55311,6 +54901,7 @@ GROUP FO PFD
     GROUP ACTIVE NAV2
       SHOW_EQUAL 1.000000 sim/cockpit2/radios/actuators/HSI_source_select_copilot
       LOCKED
+      HIDE
       CHAINED
       gen_text ILS2
         POS 310.000000 942.000000
@@ -55319,6 +54910,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55334,6 +54926,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55357,6 +54950,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55375,6 +54969,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55399,6 +54994,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55417,6 +55013,7 @@ GROUP FO PFD
         SIZE 2.000000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -55443,6 +55040,7 @@ GROUP FO PFD
     SIZE 2.100000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55463,6 +55061,7 @@ GROUP FO PFD
     SHOW_LESS 0.000000 Strato/777/minimums_mode[1]
     SHOW_EQUAL 1.000000 Strato/777/minimums_visible[1]
     LOCKED
+    HIDE
     CHAINED
     gen_pointer Radio Bug
       POS 1097.000000 448.000000
@@ -55472,6 +55071,7 @@ GROUP FO PFD
       SIZE 2.900000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55494,6 +55094,7 @@ GROUP FO PFD
       SIZE 2.900000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55517,6 +55118,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55541,6 +55143,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55565,6 +55168,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55584,6 +55188,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55600,6 +55205,7 @@ GROUP FO PFD
     SHOW_EQUAL 1.000000 Strato/777/minimums_visible[1]
     SHOW_GREATER 1.000000 Strato/777/minimums_mode[1]
     LOCKED
+    HIDE
     CHAINED
     gen_pointer Baro Bug
       POS 1097.000000 448.000000
@@ -55609,6 +55215,7 @@ GROUP FO PFD
       SIZE 2.900000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55631,6 +55238,7 @@ GROUP FO PFD
       SIZE 2.900000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55653,6 +55261,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55677,6 +55286,7 @@ GROUP FO PFD
       SIZE 3.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55701,6 +55311,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55720,6 +55331,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55739,6 +55351,7 @@ GROUP FO PFD
     SIZE 0.350000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55763,6 +55376,7 @@ GROUP FO PFD
     SIZE 0.350000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55788,6 +55402,7 @@ GROUP FO PFD
     SIZE 1.200000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55813,6 +55428,7 @@ GROUP FO PFD
     SIZE 2.200000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55831,6 +55447,7 @@ GROUP FO PFD
     SIZE 2.200000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55849,6 +55466,7 @@ GROUP FO PFD
     SIZE 2.200000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55867,6 +55485,7 @@ GROUP FO PFD
     SIZE 1.380000
     COPILOT
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
@@ -55886,6 +55505,7 @@ GROUP FO PFD
 
   GROUP Baro
     LOCKED
+    HIDE
     CHAINED
     gen_LED BARO IN
       POS 1201.000000 -113.000000
@@ -55895,6 +55515,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55914,6 +55535,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -55932,6 +55554,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       CLIP
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
@@ -55957,514 +55580,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-  END_GROUP
-  GROUP FMA
-    SHOW_EQUAL 1.000000 testNum
-    LOCKED
-    CHAINED
-    GROUP_OPEN
-    GROUP Pitch Modes
-      SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/altv_captured
-      LOCKED
-      CHAINED
-      gen_rotary PItch Modes
-        POS 875.000000 1047.000000
-        IMAGE PFD/AFDS_mode/default 737/AP_alt_mode
-        DATAREF sim/cockpit2/autopilot/altitude_mode
-        SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/alts_captured
-        SIZE 2.750000
-        COPILOT
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 4
-        BUS_SRC 1
-        KEY_FRAME 3.000000 -1.000000 1.000000
-        KEY_FRAME 10.000000 6.000000 1.000000
-        KEY_FRAME 11.000000 7.000000 1.000000
-        KEY_FRAME 17.000000 8.000000 1.000000
-        KEY_FRAME 18.000000 9.000000 1.000000
-        KEY_FRAME 20.000000 10.000000
-        DIGITS 11
-        ROTARY_TYPE NO_CLICK
-        CLICK_RADIUS 10.000000
-        CLICK_RADIUS_DY 0.000000
-        OFFSET 0.000000
-        STEP1 1.000000
-        STEP2 1.000000
-        CURSOR DEFAULT
-        CLICK_DX 0
-        CLICK_DY 0
-
-    END_GROUP
-    gen_rotary VNAV PTH 2
-      POS 875.000000 1047.000000
-      IMAGE PFD/AFDS_mode/default 737/vnav_pth
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
-      SHOW_GREATER 1.000000 sim/cockpit2/autopilot/altv_captured
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary VNAV ALT 2
-      POS 875.000000 1047.000000
-      IMAGE PFD/AFDS_mode/default 737/vnav_alt
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
-      SHOW_GREATER 1.000000 sim/cockpit2/autopilot/alts_captured
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary HDG Modes
-      POS 620.000000 1047.000000
-      IMAGE PFD/AFDS_mode/default 737/HDGSEL
-      DATAREF sim/cockpit2/autopilot/heading_mode
-      SHOW_LESS 1.500000 sim/cockpit2/autopilot/rollout_status
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 2.000000 1.000000 1.000000
-      KEY_FRAME 10.000000 2.000000 1.000000
-      KEY_FRAME 13.000000 3.000000
-      DIGITS 4
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Rollout
-      POS 620.000000 1049.500000
-      IMAGE PFD/AFDS_mode/default 737/rollout
-      DATAREF sim/cockpit2/autopilot/rollout_status
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 2.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary MCP SPD
-      POS 356.000000 1047.000000
-      IMAGE PFD/AFDS_mode/default 737/MCP_SPD
-      DATAREF sim/cockpit2/autopilot/autothrottle_enabled
-      SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/fms_vnav
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 2.000000 1.000000 1.000000
-      KEY_FRAME 3.000000 2.000000
-      DIGITS 3
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary FMC SPD
-      POS 356.000000 1046.000000
-      IMAGE PFD/AFDS_mode/default 737/FMC_SPD
-      DATAREF sim/cockpit2/autopilot/autothrottle_enabled
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/fms_vnav
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 2.000000 1.000000 1.000000
-      KEY_FRAME 3.000000 2.000000
-      DIGITS 3
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Autothrottle Armed
-      POS 356.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/autothrottle_arm
-      DATAREF sim/cockpit2/autopilot/autothrottle_arm
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/autothrottle_arm
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary GS armed
-      POS 875.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/gs_armed
-      DATAREF sim/cockpit2/autopilot/glideslope_armed
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Flare armed
-      POS 875.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/flare_armed
-      DATAREF sim/cockpit2/autopilot/flare_status
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary VS armed
-      POS 875.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/vs_armed
-      DATAREF sim/cockpit2/autopilot/vvi_status
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary VOR/LOC armed
-      POS 620.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/vorloc_arm
-      DATAREF sim/cockpit2/autopilot/hnav_armed
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary LNAV armed
-      POS 620.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/lnav_arm
-      DATAREF sim/cockpit2/autopilot/gpss_status
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary Rollout armed
-      POS 620.000000 1007.000000
-      IMAGE PFD/AFDS_mode/default 737/rollout_arm
-      DATAREF sim/cockpit2/autopilot/rollout_status
-      SIZE 2.750000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 -1.000000 1.000000
-      KEY_FRAME 1.000000 0.000000 1.000000
-      KEY_FRAME 1.100000 0.000000 1.000000
-      KEY_FRAME 2.000000 -1.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary AP
-      POS 604.500000 854.500000
-      IMAGE PFD/AFDS/ap
-      DATAREF 
-      SHOW_EQUAL 1.000000 Strato/777/mcp/ap_on
-      SIZE 1.350000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary idle
-      POS 357.000000 1050.500000
-      IMAGE PFD/AFDS_mode/autothrottle/idle
-      DATAREF 
-      SHOW_EQUAL 3.000000 sim/cockpit2/autopilot/autothrottle_enabled
-      SIZE 1.350000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary flt dir
-      POS 604.500000 854.500000
-      IMAGE PFD/AFDS/flt_dir
-      DATAREF 
-      SHOW_EQUAL 1.000000 Strato/777/pfd/flt_dir_copilot
-      SIZE 1.350000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary fpa
-      POS 622.000000 1050.500000
-      IMAGE PFD/AFDS_mode/pitch/fpa
-      DATAREF 
-      SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/trk_fpa
-      SHOW_GREATER 2.000000 sim/cockpit2/autopilot/fpa_status
-      SIZE 1.350000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary track sel
-      POS 622.000000 1050.500000
-      IMAGE PFD/AFDS_mode/roll/trk_sel
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_status
-      SHOW_GREATER 1.000000 Strato/777/displays/hdg_mode
-      SIZE 1.350000
-      COPILOT
-      LOCKED
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 4
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary track hold
-      POS 622.000000 1050.500000
-      IMAGE PFD/AFDS_mode/roll/trk_hold
-      DATAREF 
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/heading_hold_status
-      SHOW_GREATER 1.000000 Strato/777/displays/hdg_mode
-      SIZE 1.350000
-      COPILOT
-      LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56485,6 +55601,7 @@ GROUP FO PFD
   GROUP RA
     SHOW_LESS 2500.000000 sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_copilot
     LOCKED
+    HIDE
     CHAINED
     gen_rotary RA Box
       POS 605.000000 151.500000
@@ -56494,6 +55611,7 @@ GROUP FO PFD
       SIZE 0.540000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56519,6 +55637,7 @@ GROUP FO PFD
       SIZE 0.540000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56544,6 +55663,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56564,6 +55684,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56584,6 +55705,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56604,6 +55726,7 @@ GROUP FO PFD
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56620,6 +55743,7 @@ GROUP FO PFD
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_copilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_copilot
     LOCKED
+    HIDE
     CHAINED
     gen_rotary scalehoriz
       POS 604.500000 97.500000
@@ -56628,6 +55752,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56653,6 +55778,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56673,6 +55799,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56690,6 +55817,7 @@ GROUP FO PFD
     SHOW_EQUAL 1.000000 sim/cockpit2/radios/indicators/hsi_display_horizontal_copilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_flag_from_to_copilot
     LOCKED
+    HIDE
     CHAINED
     gen_rotary black
       POS 382.000000 180.000000
@@ -56698,6 +55826,7 @@ GROUP FO PFD
       SIZE 0.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56722,6 +55851,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56747,6 +55877,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56767,6 +55898,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56783,6 +55915,7 @@ GROUP FO PFD
     SHOW_EQUAL 0.000000 sim/cockpit2/radios/indicators/hsi_flag_glideslope_copilot
     SHOW_GREATER 1.000000 sim/cockpit2/radios/indicators/hsi_display_vertical_copilot
     LOCKED
+    HIDE
     CHAINED
     gen_rotary scalevert
       POS 956.500000 446.500000
@@ -56791,6 +55924,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56816,6 +55950,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56836,6 +55971,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56850,6 +55986,7 @@ GROUP FO PFD
   END_GROUP
   GROUP Compass
     LOCKED
+    HIDE
     CHAINED
     gen_rotary Compass Background
       POS 604.000000 -169.000000
@@ -56859,6 +55996,7 @@ GROUP FO PFD
       SIZE 2.060000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56883,6 +56021,7 @@ GROUP FO PFD
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -56902,11 +56041,13 @@ GROUP FO PFD
     GROUP While ADIRU Alignin
       SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
       LOCKED
+      HIDE
       CHAINED
     END_GROUP
     GROUP ADIRU Aligned
       SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
       LOCKED
+      HIDE
       CHAINED
       gen_needle HDG Bug
         POS 604.000000 -522.000000
@@ -56915,6 +56056,7 @@ GROUP FO PFD
         SIZE 2.750000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -56933,6 +56075,7 @@ GROUP FO PFD
         SIZE 2.060000
         COPILOT
         LOCKED
+        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
@@ -56950,6 +56093,7 @@ GROUP FO PFD
         SIZE 2.750000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -56974,6 +56118,7 @@ GROUP FO PFD
         SIZE 2.750000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -56993,6 +56138,7 @@ GROUP FO PFD
         SIZE 1.150000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -57005,6 +56151,7 @@ GROUP FO PFD
     GROUP ADIRU Not Aligned
       SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
       LOCKED
+      HIDE
       CHAINED
       gen_rotary hdg_fail
         POS 604.000000 -208.500000
@@ -57013,6 +56160,7 @@ GROUP FO PFD
         SIZE 1.350000
         COPILOT
         LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 4
         BUS_SRC 1
@@ -57034,6 +56182,7 @@ GROUP FO PFD
   GROUP FO AOA
     SHOW_EQUAL 1.000000 Strato/777/displays/pfd_aoa_enabled
     LOCKED
+    HIDE
     CHAINED
     gen_rotary AOA gauge
       POS 911.000000 912.000000
@@ -57042,6 +56191,7 @@ GROUP FO PFD
       SIZE 2.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -57066,6 +56216,7 @@ GROUP FO PFD
       SIZE 2.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -57088,6 +56239,7 @@ GROUP FO PFD
       SIZE 2.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -57104,6 +56256,7 @@ GROUP FO PFD
       SIZE 2.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -57125,6 +56278,7 @@ GROUP FO PFD
       SIZE 2.350000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 4
       BUS_SRC 1
@@ -57142,7 +56296,6 @@ GROUP FO PFD
 END_GROUP
 GROUP First Officer ND
   LOCKED
-  CHAINED
   GROUP ADIRU Not Aligned
     SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
     LOCKED
@@ -57174,6 +56327,7 @@ GROUP First Officer ND
   GROUP While ADIRU Alignin
     SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
     LOCKED
+    HIDE
     CHAINED
     gen_text TIME TO ALIGN
       POS 1500.500000 996.000000
@@ -57182,6 +56336,7 @@ GROUP First Officer ND
       SIZE 2.000000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 3
       BUS_SRC 1
@@ -57197,6 +56352,7 @@ GROUP First Officer ND
       SIZE 2.200000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 3
       BUS_SRC 1
@@ -57215,6 +56371,7 @@ GROUP First Officer ND
       SIZE 1.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 3
       BUS_SRC 1
@@ -57233,6 +56390,7 @@ GROUP First Officer ND
       SIZE 1.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 3
       BUS_SRC 1
@@ -57251,6 +56409,7 @@ GROUP First Officer ND
       SIZE 1.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 3
       BUS_SRC 1
@@ -57269,6 +56428,7 @@ GROUP First Officer ND
       SIZE 2.500000
       COPILOT
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 3
       BUS_SRC 1

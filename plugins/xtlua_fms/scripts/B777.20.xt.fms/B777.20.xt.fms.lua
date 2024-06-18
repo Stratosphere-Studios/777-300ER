@@ -160,19 +160,27 @@ function getDistance(lat1,lon1,lat2,lon2)
 	return retVal
 end
 
-function toDMS(value,isLat)
+function roundFirst(num)
+	while (num >= 1) do
+		num = num/10
+	end
+	num = num * 10 -- bring it back up to >= 1 after loop
+	return round(num)
+end
+
+function toDMS(value,isLat) -- multiplies each remaining decimal by 60, the converts to boeing format
     local absIn = math.abs(value)
-	local degrees = math.floor(absIn)
-	local minutes = math.floor((absIn-degrees)*60)
-	local seconds = round(((absIn-degrees)*60-(minutes))*6)
+	local intDegrees = math.floor(absIn)
+	local minutes = (absIn-intDegrees)*60
+	local seconds = round((minutes - math.floor(minutes))*60)
 	local prefix=" "
 	--print(value.."d: "..degrees..", m: "..minutes..", s: "..seconds)
 	if isLat then
 		prefix = value > 0 and "N" or "S"
-        return string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds)
+        return string.format(prefix.."%02d`%02d.%1d", intDegrees, minutes, roundFirst(seconds))
 	else
 		prefix = value > 0 and "E" or "W"
-        return string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds)
+        return string.format(prefix.."%03d`%02d.%1d", intDegrees, minutes, roundFirst(seconds))
 	end
 end
 
