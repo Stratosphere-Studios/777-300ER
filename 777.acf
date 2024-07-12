@@ -9561,7 +9561,7 @@ P _gear/0/_strut_s1 0.000000000
 P _gear/0/_strut_s2 0.015625000
 P _gear/0/_strut_t1 0.128906250
 P _gear/0/_strut_t2 0.252929688
-P _gear/0/_tire_psi 213.337921143
+P _gear/0/_tire_psi 219.000000000
 P _gear/0/_tire_radius 1.500000000
 P _gear/0/_tire_swidth 0.519999981
 P _gear/1/_axiE 0.000000000
@@ -9593,7 +9593,7 @@ P _gear/1/_strut_s1 0.000000000
 P _gear/1/_strut_s2 0.015625000
 P _gear/1/_strut_t1 0.128906250
 P _gear/1/_strut_t2 0.252929688
-P _gear/1/_tire_psi 213.337921143
+P _gear/1/_tire_psi 219.000000000
 P _gear/1/_tire_radius 2.099999905
 P _gear/1/_tire_swidth 0.800000012
 P _gear/2/_axiE 0.000000000
@@ -9625,7 +9625,7 @@ P _gear/2/_strut_s1 0.000000000
 P _gear/2/_strut_s2 0.015625000
 P _gear/2/_strut_t1 0.128906250
 P _gear/2/_strut_t2 0.252929688
-P _gear/2/_tire_psi 213.337921143
+P _gear/2/_tire_psi 219.000000000
 P _gear/2/_tire_radius 2.099999905
 P _gear/2/_tire_swidth 0.800000012
 P _gear/3/_gear_type 0
@@ -35324,7 +35324,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Stratosphere Studios
-P acf/_auto_cowl_flaps_EQ 32764
+P acf/_auto_cowl_flaps_EQ 32766
 P acf/_auto_engage_BC_deg 0.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -36777,7 +36777,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 121014
+P acf/_file_writer_version 121017
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -37042,7 +37042,7 @@ P acf/_ground_pwr/2 160.000000000
 P acf/_ground_pwr/count 3
 P acf/_gyro_spooldown_time 60.000000000
 P acf/_gyro_spoolup_time 5.000000000
-P acf/_h_eqlbm 16.202451706
+P acf/_h_eqlbm 16.202259064
 P acf/_has_ADG 0
 P acf/_has_APU_bleed_air 1
 P acf/_has_APU_generator 1
@@ -37240,7 +37240,7 @@ P acf/_max_CHT 350.000000000
 P acf/_max_EGT 1000.000000000
 P acf/_max_ITT 1180.000000000
 P acf/_max_MP_limit 29.899999619
-P acf/_max_atc_alt_ft 0.000000000
+P acf/_max_atc_alt_ft 4.31E4
 P acf/_max_bat_amp 120.000000000
 P acf/_max_bat_temp 60.000000000
 P acf/_max_gen_amp0 1043.000000000
@@ -37812,7 +37812,7 @@ P acf/_tank_xyz_full/8,1 0.000000000
 P acf/_tank_xyz_full/8,2 0.000000000
 P acf/_tank_xyz_full/i_count 9
 P acf/_tank_xyz_full/j_count 3
-P acf/_the_eqlbm -1.134906769
+P acf/_the_eqlbm -1.134732604
 P acf/_thro_non_vect_props_at_sin_vect 0
 P acf/_thro_x_ctr 0.000000000
 P acf/_throt_max_fwd_emr 1.000000000
@@ -37843,7 +37843,7 @@ P acf/_tvec_ptch 0.000000000
 P acf/_tvec_roll 0.000000000
 P acf/_unfeather_accum_EQ 0
 P acf/_use_cus_gear_damping 0
-P acf/_use_cus_gear_defs 0
+P acf/_use_cus_gear_defs 1
 P acf/_use_manual_prop_inc 0
 P acf/_user_can_fly 1
 P acf/_using_new_v12_flying_stab_trim 1
@@ -41039,7 +41039,7 @@ GROUP Captain PFD
         POS 535.000000 1155.000000
         IMAGE PFD/magenta_type_meters
         DATAREF sim/cockpit/autopilot/heading_mag
-        SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
+        SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
         SIZE 2.750000
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -41057,7 +41057,7 @@ GROUP Captain PFD
         POS 505.500000 1124.500000
         IMAGE CDU/big/cdu_big_magenta
         DATAREF Strato/777/displays/txt/H
-        SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
+        SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
         SIZE 1.150000
         LOCKED
         LIGHT_MODE GLASS_AUTO
@@ -43087,6 +43087,7 @@ GROUP Lower Eicas
   LOCKED
   HIDE
   CHAINED
+  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     LOCKED
@@ -45559,14 +45560,15 @@ GROUP Lower Eicas
   GROUP FUEL
     SHOW_EQUAL 6.000000 Strato/777/displays/eicas_mode
     LOCKED
+    HIDE
     CHAINED
-    GROUP_OPEN
     gen_rotary Background
       POS 3411.000000 413.000000
       IMAGE EICAS lower/FUEL/fuel_background
       DATAREF 
       SIZE 1.350000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45590,6 +45592,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 0.000000 Strato/777/lbs_kgs
       SIZE 1.360000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -45612,6 +45615,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/displays/fuel_lbs_kgs_total
       SIZE 2.000000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45629,6 +45633,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/displays/fuel_lbs_kgs[0]
       SIZE 2.000000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45646,6 +45651,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/displays/fuel_lbs_kgs[1]
       SIZE 2.000000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45663,6 +45669,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/displays/fuel_lbs_kgs[2]
       SIZE 2.000000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45736,15 +45743,14 @@ GROUP Lower Eicas
   GROUP STAT
     SHOW_EQUAL 9.000000 Strato/777/displays/eicas_mode
     LOCKED
-    HIDE
     CHAINED
+    GROUP_OPEN
     gen_rotary Background
       POS 3412.000000 413.000000
       IMAGE EICAS lower/STAT/stat_background
       DATAREF 
       SIZE 1.350000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45767,7 +45773,6 @@ GROUP Lower Eicas
       DATAREF sim/flightmodel/misc/machno
       SIZE 1.750000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45785,7 +45790,6 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/electrical/APU_EGT_c
       SIZE 1.750000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45800,10 +45804,9 @@ GROUP Lower Eicas
     gen_LED hyd_R_qty
       POS 3830.000000 938.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit/misc/hydraulic_quantity2
+      DATAREF Strato/777/hydraulics/qty[2]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45818,10 +45821,10 @@ GROUP Lower Eicas
     gen_LED hyd_L_qty
       POS 3173.000000 938.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/cockpit/misc/hydraulic_quantity
+      DATAREF Strato/777/hydraulics/qty[0]
+      SHOW_EQUAL 1.000000 testNum
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45836,10 +45839,9 @@ GROUP Lower Eicas
     gen_LED Hydraulic L Press
       POS 3190.000000 880.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/flightmodel/misc/machno
+      DATAREF Strato/777/hydraulics/press[0]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45854,10 +45856,9 @@ GROUP Lower Eicas
     gen_LED Hydraulic R Press
       POS 3848.000000 880.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/flightmodel/misc/machno
+      DATAREF Strato/777/hydraulics/press[2]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45872,10 +45873,9 @@ GROUP Lower Eicas
     gen_LED Hydraulic C Qty
       POS 3517.000000 938.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/flightmodel/misc/machno
+      DATAREF Strato/777/hydraulics/qty[1]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45890,10 +45890,9 @@ GROUP Lower Eicas
     gen_LED Hydraulic C Press
       POS 3517.000000 880.000000
       IMAGE White_size23_stretched_vert_no_lead0
-      DATAREF sim/flightmodel/misc/machno
+      DATAREF Strato/777/hydraulics/press[1]
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -46862,15 +46861,13 @@ GROUP Radios
 
 END_GROUP
 GROUP MCP
-  LOCKED
-  CHAINED
+  GROUP_OPEN
   gen_rotary VS_label
     POS 3702.000000 2811.000000
     IMAGE MCP/VS
     DATAREF 
-    SHOW_EQUAL 0.000000 sim/cockpit2/autopilot/trk_fpa
+    SHOW_EQUAL 0.000000 Strato/777/mcp/vs_fpa
     SIZE 1.250000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -46891,9 +46888,8 @@ GROUP MCP
     POS 3701.000000 2769.000000
     IMAGE MCP/FPA
     DATAREF 
-    SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/trk_fpa
+    SHOW_EQUAL 1.000000 Strato/777/mcp/vs_fpa
     SIZE 1.250000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -46914,8 +46910,8 @@ GROUP MCP
     POS 3703.000000 2684.000000
     IMAGE MCP/HDG
     DATAREF 
+    SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
     SIZE 1.250000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -46936,9 +46932,8 @@ GROUP MCP
     POS 3703.000000 2643.000000
     IMAGE MCP/TRK
     DATAREF 
-    SHOW_EQUAL 1.000000 testNum
+    SHOW_EQUAL 1.000000 Strato/777/mcp/hdg_to_trk
     SIZE 1.250000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -46961,7 +46956,6 @@ GROUP MCP
     DATAREF 
     SHOW_EQUAL 0.000000 sim/cockpit/autopilot/airspeed_is_mach
     SIZE 1.250000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -46984,7 +46978,6 @@ GROUP MCP
     DATAREF 
     SHOW_EQUAL 1.000000 sim/cockpit/autopilot/airspeed_is_mach
     SIZE 1.250000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -47006,7 +46999,6 @@ GROUP MCP
     IMAGE Digital_Large
     DATAREF sim/cockpit/autopilot/altitude
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -47022,9 +47014,9 @@ GROUP MCP
     POS 4063.000000 2794.000000
     IMAGE Digital_Large
     DATAREF sim/cockpit/autopilot/vertical_velocity
+    SHOW_LESS 0.000000 Strato/777/mcp/vs_fpa
     SHOW_EQUAL 1.000000 Strato/777/mcp/vshold
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -47036,14 +47028,13 @@ GROUP MCP
     LED_ROWS 0
     ROUNDING ROUND_ROUND
 
-  gen_LED fpa
+  gen_LED FPA
     POS 4063.000000 2794.000000
     IMAGE Digital_Large
     DATAREF sim/cockpit2/autopilot/fpa
-    SHOW_EQUAL 1.000000 sim/cockpit2/autopilot/trk_fpa
-    SHOW_GREATER 2.000000 sim/cockpit2/autopilot/fpa_status
+    SHOW_EQUAL 1.000000 Strato/777/mcp/vshold
+    SHOW_GREATER 1.000000 Strato/777/mcp/vs_fpa
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -47059,8 +47050,25 @@ GROUP MCP
     POS 4060.000000 2667.000000
     IMAGE Digital_Large
     DATAREF sim/cockpit/autopilot/heading_mag
+    SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
     SIZE 2.000000
-    LOCKED
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 360.000000 360.000000
+    DIGITS 3
+    DECIMALS 0
+    PERIOD_WIDTH 0
+    LED_ROWS 0
+    ROUNDING ROUND_ROUND
+
+  gen_LED Track
+    POS 4060.000000 2667.000000
+    IMAGE Digital_Large
+    DATAREF sim/cockpit/autopilot/heading_mag
+    SHOW_EQUAL 1.000000 Strato/777/mcp/hdg_to_trk
+    SIZE 2.000000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -47078,7 +47086,6 @@ GROUP MCP
     DATAREF sim/cockpit/autopilot/airspeed
     SHOW_EQUAL 1.000000 sim/cockpit/autopilot/airspeed_is_mach
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -47096,7 +47103,6 @@ GROUP MCP
     DATAREF sim/cockpit/autopilot/airspeed
     SHOW_EQUAL 0.000000 sim/cockpit/autopilot/airspeed_is_mach
     SIZE 2.000000
-    LOCKED
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
@@ -56114,7 +56120,7 @@ GROUP FO PFD
         POS 535.000000 -211.000000
         IMAGE PFD/magenta_type_meters
         DATAREF sim/cockpit/autopilot/heading_mag
-        SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
+        SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
         SIZE 2.750000
         COPILOT
         LOCKED
@@ -56134,7 +56140,7 @@ GROUP FO PFD
         POS 505.500000 -241.500000
         IMAGE CDU/big/cdu_big_magenta
         DATAREF Strato/777/displays/txt/H
-        SHOW_EQUAL 0.000000 Strato/777/displays/hdg_mode
+        SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
         SIZE 1.150000
         COPILOT
         LOCKED

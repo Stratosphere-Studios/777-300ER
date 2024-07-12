@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4

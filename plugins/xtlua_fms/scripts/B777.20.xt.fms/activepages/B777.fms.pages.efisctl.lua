@@ -8,7 +8,7 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
     local vorSelected = "     "
     local ctrSelected = "     "
     local radBaro = "<      BARO;g04"
-    local altimeter = 0
+    local altimeter = ""
 
     local stringMins;
     if B777DR_minimums_mode[id] == 1 then
@@ -60,6 +60,7 @@ fmsPages["EFISCTL152"].getSmallPage=function(self,pgNo,fmsID)
     local radBaro = " RAD<->    "
     local ft = "   FT "
 
+---@diagnostic disable-next-line: cast-local-type
     range = simDR_nd_range[id+1]
 
     if B777DR_minimums_mode[id] == 0 then

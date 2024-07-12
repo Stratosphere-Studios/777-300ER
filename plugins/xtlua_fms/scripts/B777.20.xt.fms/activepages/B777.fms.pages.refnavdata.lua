@@ -1,3 +1,4 @@
+---@diagnostic disable: assign-type-mismatch
 -- Navaid inhibit
 B777DR_backend_navaidInhibit1_in = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/navaid_1_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/navaid_1_in")}
 B777DR_backend_navaidInhibit2_in = {find_dataref("Strato/777/FMC/FMC_L/REF_NAV/navaid_2_in"), find_dataref("Strato/777/FMC/FMC_R/REF_NAV/navaid_2_in")}

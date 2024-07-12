@@ -45,6 +45,12 @@ B777CMD_mcp_ap_hdgSel                     = deferred_command("Strato/B777/button
 B777CMD_mcp_ap_lnav                       = deferred_command("Strato/B777/button_switch/mcp/ap/lnav", "LNAV A/P Mode", B777_ap_lnav_switch_CMDhandler)
 B777CMD_mcp_ap_vnav                       = deferred_command("Strato/B777/button_switch/mcp/ap/vnav", "VNAV A/P Mode", B777_ap_vnav_switch_CMDhandler)
 B777CMD_mcp_ap_flch                       = deferred_command("Strato/B777/button_switch/mcp/ap/flch", "FLCH A/P Mode", B777_ap_flch_switch_CMDhandler)
+B777CMD_mcp_hdgMode = deferred_command("Strato/B777/button_switch/mcp/hdg_mode", "MCP Heading Mode HDG/TRK", B777_hdgMode_cmdHandler)
+B777CMD_mcp_vsMode = deferred_command("Strato/B777/button_switch/mcp/vs_mode", "MCP Vertical Speed Mode VS/FPA", B777_vsMode_cmdHandler)
+B777CMD_mcp_spdMode = deferred_command("Strato/B777/button_switch/mcp/spd_mode", "MCP Speed Mode KNOTS/MACH", B777_spdMode_cmdHandler)
+B777CMD_mcp_fd_capt = deferred_command("Strato/B777/button_switch/mcp/fd_capt", "Captain Flight Director Switch", B777_fd_capt_cmdHandler)
+B777CMD_mcp_fd_fo = deferred_command("Strato/B777/button_switch/mcp/fd_fo", "First Officer Flight Director Switch", B777_fd_fo_cmdHandler)
+B777CMD_mcp_at_arm = deferred_command("Strato/B777/button_switch/mcp/at_arm", "Autothrottle Arm Switch", B777_at_arm_cmdHandler)
 
 ---OVERHEAD----------
 
@@ -80,15 +86,16 @@ B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_s
 
 testNum                                   = deferred_dataref("testNum", "number")
 
-B777DR_mcp_button_pos                     = deferred_dataref("Strato/777/cockpit/mcp/buttons/position", "array[18]")
-B777DR_mcp_button_target                  = deferred_dataref("Strato/777/cockpit/mcp/buttons/target", "array[18]")
+B777DR_mcp_button_pos                     = deferred_dataref("Strato/777/cockpit/mcp/buttons/position", "array[20]")
+B777DR_mcp_button_target                  = deferred_dataref("Strato/777/cockpit/mcp/buttons/target", "array[20]")
 
 B777DR_ovhd_fwd_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/fwd/buttons/position", "array[20]")
 B777DR_ovhd_ctr_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/position", "array[20]")
 B777DR_ovhd_aft_button_positions          = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/position", "array[20]")
 
-B777DR_ovhd_ctr_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target", "array[46]")
-B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/target", "array[24]")
+B777DR_ovhd_fwd_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/fwd/buttons/target", "array[20]")
+B777DR_ovhd_ctr_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/ctr/buttons/target", "array[20]")
+B777DR_ovhd_aft_button_target             = deferred_dataref("Strato/777/cockpit/ovhd/aft/buttons/target", "array[20]")
 
 B777DR_ctr1_button_pos                    = deferred_dataref("Strato/777/cockpit/ctr/fwd/buttons/position", "array[8]")
 
