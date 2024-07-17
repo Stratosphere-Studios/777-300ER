@@ -24,11 +24,11 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 **Sim Compatibility**
 
-A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. We may publish an X-Plane 11 backport once we release version 1.
+A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. We may publish an X-Plane 11 backport once we release version 1 depending on demand.
 
 **Q: Why do I get an error whenever I load the aircraft? What do I do with it?**
 
-A: This error is a known FMOD bug. As our sound developer hasn't responded in a while, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
+A: This error is a known FMOD bug. As the sound developer is no longer contributing, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
 
 **Q: Why are my liveries broken?**
 
@@ -40,7 +40,7 @@ A: That notification means that key doesn't do anything. If it's supposed to, th
 
 **Q: When is the release date?**
 
-A: We have no release date at this time, however, you can still download the aircraft whenever you'd like.
+A: We have no release date at this time, however, you can still download the aircraft whenever you'd like. Remember that it is currently incomplete.
 
 **Q: Where can I download liveries?**
 
@@ -66,7 +66,7 @@ If you want to help out and you have some dev skills, feel free to fork, modify,
 
 **Q: Even after following the above instructions, why is my aircraft still broken?**
 
-A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft.
+A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and don't forger you can help out too!
 
 **СDU Сode**
 
@@ -86,17 +86,17 @@ You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.
 Some Windows antivirus software may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
 ### **Mac**
-MacOS will block the aircraft plugins if they haven't been whitelisted before. To whitelist them, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.
+MacOS will block the xtlua aircraft plugin (which is used by other add-ons too) if it hasn't been whitelisted before. To whitelist it, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.
 
 ### **Linux**
 No further steps are required.
 
 ## **Credits**
-[**Nathroxer (Founder)**](https://github.com/nathroxer): Cockpit, animations, textures, aircraft exterior.
+[**Nathroxer (Founder)**](https://github.com/nathroxer): Modeling, animations, textures, lights.
 
 [**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear, autopilot), C++ systems (FMC plugin), flight model improvements, cockpit instruments(pfd)
 
-[**remenkemi**](https://github.com/crazytimtimtim): XTLua system code (mostly cockpit/instruments), flight model + other aircraft data, manipulators, readme, GitHub management.
+[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, bleed air system), displays and efb, flight model + other aircraft data, readme, GitHub management.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
@@ -106,7 +106,7 @@ No further steps are required.
 
 **Laminar Research**: Default 737 display textures.
 
-[**Cactus2456 (IASXP)**](https://github.com/IASXP): Lower EICAS Checklists, SASL integration.
+[**Cactus2456 (IASXP)**](https://github.com/IASXP): MFD Checklists, SASL integration.
 
 [**zeta976**](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
