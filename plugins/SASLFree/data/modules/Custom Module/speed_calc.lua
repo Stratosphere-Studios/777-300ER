@@ -48,19 +48,29 @@ flap_settings = {0, 1, 5, 15, 20, 25, 30}
 cas_limits = {330, 265, 245, 230, 225, 200, 180}
 flap_drag_coeff = {1.18, 1.75, 2, 2.1, 2.23, 2.44, 2.56}
 
+
+FPV_PITCH_ABS_LIM_DEG = 20
+FPV_ROLL_ABS_LIM_DEG = 30
+
+
 function toCAS(speed)
     local speed_ms = get(sound_speed) * math.sqrt(5 * (((0.5 * get(air_density) * speed ^ 2) / get(curr_pressure) + 1) ^ (2/7) - 1))
     return speed_ms
 end
 
 function updateFPV()
-    local fpv_pitch_deg = getFPA(get(gs_dref), get(vspeed))
+    local fpv_pitch_deg = 0
+    if get(on_ground) == 0 then
+        fpv_pitch_deg = getFPA(get(gs_dref), get(vspeed))
+    end
     local fpv_roll_deg = get(track_pilot) - get(mag_heading_pilot)
-    set(fpv_pitch, fpv_pitch_deg)
-    set(fpv_roll, fpv_roll_deg)
+    set(fpv_pitch, lim(fpv_pitch_deg, FPV_PITCH_ABS_LIM_DEG, -FPV_PITCH_ABS_LIM_DEG))
+    set(fpv_roll, lim(fpv_roll_deg, FPV_ROLL_ABS_LIM_DEG, -FPV_ROLL_ABS_LIM_DEG))
 end
 
 function update()
+    updateFPV()
+
     local tmp = get(vspeed) % 50
     set(vs_indicated, get(vspeed) - tmp + 50 * round(tmp / 50))
     if get(on_ground) == 0 then
