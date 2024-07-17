@@ -8,13 +8,13 @@ Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere St
 
 ## **Contributing**
 
-Feel free to fork, modify, and make a pull request if you want to make any changes, fixes, or new features to the aircraft.
+Please feel free to fork, modify, and make a pull request if you want to make any changes, fixes, or new features to the aircraft.
 
-If you want to continue contributing on a longer term or are working on a big system and need to collaborate, join our Discord server for easier communication. We're especially looking for FMOD soundpack developers!
+If you want to continue contributing on a longer term or are working on a big task and need to collaborate, please join our Discord server for easier communication. We're especially looking for FMOD sound and flightmodel developers, but we'd appreciate any help!
 
-Anyone can also help by reporting issues you find in the issues tab.
+Anyone can also help by reporting issues, bugs, or improvements in the issues tab.
 
-If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it! The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the modeling is mostly complete, it's still subject to some changes.
+If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it. The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the exterior modeling is mostly complete, it's still subject to some changes.
 
 ## **FAQ**
 
@@ -42,6 +42,8 @@ A: That notification means that key doesn't do anything. If it's supposed to, th
 
 A: We have no release date at this time, however, you can still download the aircraft whenever you'd like. Remember that it is currently incomplete.
 
+If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
+
 **Q: Where can I download liveries?**
 
 A: You can download liveries from us and various third parties from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries)
@@ -62,11 +64,9 @@ A: Currently, you can't start from cold and dark because not all required system
 
 A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERF. Note that not all cockpit changes are modeled yet.
 
-If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
-
 **Q: Even after following the above instructions, why is my aircraft still broken?**
 
-A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and don't forger you can help out too!
+A: Please remember this aircraft is still in the works. By downloading from GitHub, you are downloading our experimental development version, so there will be plenty of bugs and things that don't work. Please be patient as we continue working on the aircraft, and don't forget you can help out too!
 
 **СDU Сode**
 
