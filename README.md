@@ -16,7 +16,17 @@ Anyone can also help by reporting issues, bugs, or improvements in the issues ta
 
 If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it. The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the exterior modeling is mostly complete, it's still subject to some changes.
 
+## Current development update (as of July 2024)
+
+The systems we're currently focusing are FMC routing and navigation, autopilot, and bleed air/pressurization systems, as well as a quick-n-dirty electrical system (this will be redone later). Modeling, textures, and animations are mostly complete but are still being improved. The hydraulic system and fly by wire are fully simulated. **THE AIRCRAFT IS NOT YET IFR READY AND YOU CANNOT FLY A ROUTE OR USE THE AUTOPILOT!!! Please don't download if you're expecting that. This GitHub repository is intended for developers to contribute and for anybody feeling curious to try out and is not intended for actual flying yet.**
+
 ## **FAQ**
+
+**Q: When is the release date?**
+
+A: We have no release date at this time, however, you can still download the aircraft whenever you'd like. Remember that it is currently incomplete.
+
+If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
 **Q: Why is the aircraft not showing up in the aircraft menu?**
 
@@ -37,12 +47,6 @@ A: You are using a freighter livery with a passenger aircraft or vice versa. Mak
 **Q: Why does the CDU say "KEY/FUNCTION INOP" which I try to do stuff on it?**
 
 A: That notification means that key doesn't do anything. If it's supposed to, then we just haven't written the code for that functionality yet.
-
-**Q: When is the release date?**
-
-A: We have no release date at this time, however, you can still download the aircraft whenever you'd like. Remember that it is currently incomplete.
-
-If you want to help out and you have some dev skills, feel free to fork, modify, and make a pull request!
 
 **Q: Where can I download liveries?**
 
@@ -70,7 +74,7 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 
 **СDU Сode**
 
-Thanks for reading! The соde to unlоck the flight instruments can be found in the "777 Readme Сode.txt" file in X-Plane's Output folder once the aircraft is loaded. (`...\X-Plane\Output\777 Readme Сode.txt`)
+Thanks for reading! The соde to unlоck the flight instruments is "BOEING".
 
 ## **Installation**
 Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.

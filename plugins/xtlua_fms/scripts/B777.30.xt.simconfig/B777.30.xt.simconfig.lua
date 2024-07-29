@@ -47,7 +47,6 @@ B777DR_newsimconfig_data    = deferred_dataref("Strato/777/newsimconfig", "numbe
 B777DR_SNDoptions           = deferred_dataref("Strato/777/fmod/options", "array[7]")
 B777DR_SNDoptions_volume    = deferred_dataref("Strato/777/fmod/options/volume", "array[8]") --TODO
 B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "array[16]")
-B777DR_readme_code          = deferred_dataref("Strato/777/readme_code", "string")
 
 B777DR_acf_is_freighter     = deferred_dataref("Strato/777/acf_is_freighter", "number")
 B777DR_lbs_kgs              = deferred_dataref("Strato/777/lbs_kgs", "number")
@@ -143,14 +142,6 @@ function randomChar()
 	return chars:sub(num, num)
 end
 
-function readmeCode()
-	local file = io.open("Output/777 Readme Code.txt", "w")
-	B777DR_readme_code = randomChar()..randomChar()..randomChar()..randomChar()..randomChar()
-	file:write("Enter this code into the FMS to unlock the flight instruments: \""..B777DR_readme_code.."\"")
-	file:close()
-	--print("created readme code "..B777DR_readme_code)
-end
-
 function getSimConfig(p1, p2)
     if simConfigData[p1] then
 		if simConfigData[p1][p2] then
@@ -236,7 +227,6 @@ function loadSimConfig()
 end
 
 function flight_start()
-	readmeCode()
 	loadSimConfig()
 end
 

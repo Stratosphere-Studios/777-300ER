@@ -309,7 +309,7 @@ function fmsFunctions.setdata(fmsO,value)
 		if getSimConfig("FMC", "unlocked") == 0 then
 			setFMSData("readmeCodeInput", fmsO["scratchpad"])
 			if string.len(fmsO["scratchpad"]) == 5 then
-				if fmsO["scratchpad"] == B777DR_readme_code or fmsO["scratchpad"] == "BIRDS" then
+				if fmsO["scratchpad"] == "BOEING" then
 					fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
 					fmsModules[fmsO.id]:notify("alert", "UNLOCKED")
 					fmsO["scratchpad"] = ""

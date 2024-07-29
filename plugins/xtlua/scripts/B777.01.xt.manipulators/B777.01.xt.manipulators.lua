@@ -535,7 +535,6 @@ function after_physics()
    B777DR_mcp_button_pos[13] = B777_animate(B777DR_ap_fltDir_sw_capt, B777DR_mcp_button_pos[13], 30)
    B777DR_mcp_button_pos[14] = B777_animate(B777DR_ap_fltDir_sw_fo, B777DR_mcp_button_pos[14], 30)
    B777DR_mcp_button_pos[15] = B777_animate(B777DR_at_arm_sw, B777DR_mcp_button_pos[15], 30)
-   print("sigma")
 
    for i = 1, 17 do
       if i < 13 or i > 15 then

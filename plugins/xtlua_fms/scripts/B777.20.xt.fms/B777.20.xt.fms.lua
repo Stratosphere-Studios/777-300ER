@@ -51,7 +51,6 @@ simDR_nd_mode                          = {find_dataref("sim/cockpit2/EFIS/map_mo
 simDR_nd_range                         = {find_dataref("sim/cockpit2/EFIS/map_range_nm"), find_dataref("sim/cockpit2/EFIS/map_range_nm_copilot")}
 B777DR_minimums_mode                   = find_dataref("Strato/777/minimums_mode")
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
-B777DR_readme_code                     = find_dataref("Strato/777/readme_code")
 B777DR_minimums_visible                = find_dataref("Strato/777/minimums_visible")
 
 simDRTime=find_dataref("sim/time/total_running_time_sec")
