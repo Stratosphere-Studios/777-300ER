@@ -183,7 +183,7 @@ function updateMode(v_mode)
         curr_at_mode ~= AT_MODE_HOLD then
         curr_at_mode = AT_MODE_THR_REF
         at_engaged = false
-    elseif avg_ias > 50 and curr_at_mode == AT_MODE_THR_REF and v_mode == VERT_MODE_OFF then
+    elseif avg_ias > 80 and curr_at_mode == AT_MODE_THR_REF then
         curr_at_mode = AT_MODE_HOLD
         at_engaged = false
     elseif (avg_ra > 400 or at_engaged) and v_mode >= VERT_MODE_FLC_CLB and 
