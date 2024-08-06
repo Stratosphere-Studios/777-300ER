@@ -96,6 +96,9 @@ B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn"
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
+B777DR_fpv_capt                        = deferred_dataref("Strato/777/displays/fpv_capt", "number")
+B777DR_fpv_fo                          = deferred_dataref("Strato/777/displays/fpv_fo", "number")
+
 B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
 B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")

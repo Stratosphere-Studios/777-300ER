@@ -226,6 +226,9 @@ B777DR_pfd_mach_gs                     = find_dataref("Strato/777/pfd_mach_gs")
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
+B777DR_fpv_capt                        = deferred_dataref("Strato/777/displays/fpv_capt", "number")
+B777DR_fpv_fo                          = deferred_dataref("Strato/777/displays/fpv_fo", "number")
+
 B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
 B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
