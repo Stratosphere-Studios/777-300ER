@@ -301,7 +301,7 @@ function defaultFMSData()
 	stepsize = "ICAO",
 	irsAlignTime = string.rep("0", 3),
 	fmcUnlocked = false,
-	readmeCodeInput = "*****",
+	readmeCodeInput = "******",
 	pos = string.rep(" ", 18),
 	dragFF_armed = "   ",
 	fmcFuel = {mode = "CALC", value = 0.0},

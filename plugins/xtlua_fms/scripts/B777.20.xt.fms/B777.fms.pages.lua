@@ -308,17 +308,13 @@ function fmsFunctions.setdata(fmsO,value)
 	if value == "readmeCode" then
 		if getSimConfig("FMC", "unlocked") == 0 then
 			setFMSData("readmeCodeInput", fmsO["scratchpad"])
-			if string.len(fmsO["scratchpad"]) == 5 then
-				if fmsO["scratchpad"] == "BOEING" then
-					fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
-					fmsModules[fmsO.id]:notify("alert", "UNLOCKED")
-					fmsO["scratchpad"] = ""
-					setSimConfig("FMC", "unlocked", 1)
-				else
-					fmsModules[fmsO.id]:notify("alert", "INCORRECT CODE")
-				end
+			if fmsO["scratchpad"] == "BOEING" then
+				fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
+				fmsModules[fmsO.id]:notify("alert", "UNLOCKED")
+				fmsO["scratchpad"] = ""
+				setSimConfig("FMC", "unlocked", 1)
 			else
-				fmsModules[fmsO.id]:notify("alert", "INVALID ENTRY")
+				fmsModules[fmsO.id]:notify("alert", "INCORRECT CODE")
 			end
 		else
 			fmsModules[fmsO.id]:notify("alert", "ALREADY UNLOCKED")

@@ -23,7 +23,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            "<"..fmsModules["data"].readmeCodeInput..";m05                  "
+            "<"..fmsModules["data"].readmeCodeInput..";m06                 "
         }
     else
         return {
@@ -39,7 +39,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            "<"..fmsModules["data"].readmeCodeInput..";g05             MENU>"
+            "<"..fmsModules["data"].readmeCodeInput..";g06            MENU>"
         }
     end
 end
