@@ -85,6 +85,8 @@ VALUES MEANINGS:
     1 = manually checked
     2 = already checked
     3 = no check available
+    4 = no check available checked
+    5, 6, 7 = do not perfrom step
 --]]
 preflightchecklistvalues = { 0, 0, 3, 3 }
 bfrstartchecklistvalues = { 0, 0, 0, 0, 0, 0, 0, 3 }
