@@ -1,0 +1,42 @@
+[STRATO777 INFO]: Initializing...
+[STRATO777 INFO]: [DISPLAY] Monitor 0: 0, 0, 1920, 1200
+[STRATO777 INFO]: Path to module: /media/tizmataz77/Games/X-Plane 12/Aircraft/Dev/777-300ER/plugins/SASLFree/data/modules/main.lua
+[STRATO777 INFO]: Loading module...
+[STRATO777 INFO]: [LUA]: loading	module
+[STRATO777 INFO]: [LUA]: loading	timers
+[STRATO777 INFO]: [LUA]: loading	elec_main
+[STRATO777 INFO]: [LUA]: loading	speed_calc
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	hydraulics
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	fbw_drefs
+[STRATO777 INFO]: [LUA]: loading	ace_logic
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	thrust_asym_comp.lua
+[STRATO777 INFO]: [LUA]: including	fbw_bite.lua
+[STRATO777 INFO]: [LUA]: loading	pfc_logic
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: including	fbw_test_drefs.lua
+[STRATO777 INFO]: [LUA]: including	fbw_controllers.lua
+[STRATO777 INFO]: [LUA]: loading	auto_calib
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	fctl
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	eec
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	gear
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	eicascheck
+[STRATO777 INFO]: [LUA]: including	checklist.lua
+[STRATO777 INFO]: [LUA]: loading	Cursor
+[STRATO777 INFO]: [LUA]: loading	eicas_graphics
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	eicas
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	lights
+[STRATO777 INFO]: [LUA]: including	misc_tools.lua
+[STRATO777 INFO]: [LUA]: loading	custom_commands
+[STRATO777 INFO]: [LUA]: loading	failures
+[STRATO777 INFO]: Loading cursors...
+[STRATO777 INFO]: Module loaded
+[STRATO777 INFO]: [LUA]: loading	interactive
