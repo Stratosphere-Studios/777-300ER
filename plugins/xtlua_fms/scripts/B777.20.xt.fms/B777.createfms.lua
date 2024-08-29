@@ -636,6 +636,8 @@ function fms:B777_fms_display()
     newText[thisID] = false
   end
 
+  self.scratchpad = self.scratchpad:len() > 24 and self.scratchpad:sub(1, 24) or self.scratchpad -- limit scratchpad length
+
   -- since com and alert messages display on all cdus, they have separate stacks
   if newText[thisID] then -- if typed while alert message
     B777DR_fms[thisID][14] = self.scratchpad;

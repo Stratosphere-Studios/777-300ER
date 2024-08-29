@@ -312,9 +312,9 @@ function closeIsoValve(valve) end
 --function before_physics()
 
 function after_physics()
-    print("after physics pog")
+    -- print("after physics pog")
     local press = calcPressure()
-    print("press: {"..press[1]..", "..press[2].."}")
+    -- print("press: {"..press[1]..", "..press[2].."}")
     B777DR_duct_press[0] = press[1]
     B777DR_duct_press[1] = press[2]
 end
