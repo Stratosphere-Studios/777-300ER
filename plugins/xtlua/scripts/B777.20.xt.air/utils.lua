@@ -1,4 +1,4 @@
-local utils = {}
+_G.utils = {}
 
 function utils.animate(target, variable, speed)
     if math.abs(target - variable) < 0.1 then return target end
@@ -60,5 +60,3 @@ function utils.pad(str, len, indent) -- constant string length
         return str..string.rep(" ", len - str:len())
     end
 end
-
-return utils;

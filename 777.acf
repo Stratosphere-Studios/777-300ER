@@ -35324,7 +35324,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Stratosphere Studios
-P acf/_auto_cowl_flaps_EQ 32767
+P acf/_auto_cowl_flaps_EQ 32764
 P acf/_auto_engage_BC_deg 0.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -36777,7 +36777,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 121204
+P acf/_file_writer_version 121205
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -43395,7 +43395,6 @@ GROUP Captain ND
 END_GROUP
 GROUP Lower Eicas
   HIDE
-  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     GROUP_OPEN
@@ -59949,12 +59948,11 @@ GROUP First Officer ND
 
 END_GROUP
 GROUP Open
-  GROUP_OPEN
   gen_rotary vlv
     POS 3064.500000 355.500000
     IMAGE EICAS lower/AIR/open_horizontal
     DATAREF 
-    SHOW_GREATER 0.000000 testNum
+    SHOW_GREATER 1.000000 testNum
     SIZE 1.350000
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 5

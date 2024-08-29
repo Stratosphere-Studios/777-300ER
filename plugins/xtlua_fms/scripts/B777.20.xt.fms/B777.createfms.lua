@@ -31,25 +31,28 @@ function notindatabaseClear()
   outofdateNotified[nidModule] = false
 end
 
-local kdModule
-local kdKey
 local newText = {fmsL = false, fmsC = false, fmsR = false}
 
-function delayKeyDown(fmsModule, key, ovrd) -- simulates realistic input lag. if more than 1 key pressed during delay only one will work (may need to fix in the future)
-  kdModule = fmsModule
-  kdKey = key
+local keyCallStack = {} -- actually a queue but whatever
+
+function delayKeyDown(fmsModule, key, ovrd) -- simulates realistic input lag
+  table.insert(keyCallStack, {fmsModule, key})
   if ovrd then
-    keyDown()
+    keyDown(fmsModule, key)
   else
-    run_after_time(keyDown, 0.1) -- got 0.2 from somwhere, 0.1 is less annoying
+    stop_timer(keyDowner)
+    run_after_time(keyDowner, 0.2) -- got 0.2 from somwhere, 0.1 is less annoying
   end
 end
 
-function keyDown() -- only page keys have delay, not entry ones
+function keyDowner()
+  for k, v in ipairs(keyCallStack) do
+    keyDown(v[1], v[2])
+  end
+  keyCallStack = {} -- reset call stack after all keys actuated
+end
 
-  local fmsModule = kdModule
-  local key = kdKey
-  local page = ""
+function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
 
   if getSimConfig("FMC", "unlocked") == 1 then
     print(fmsModule.. " do " .. key)
@@ -130,86 +133,90 @@ function keyDown() -- only page keys have delay, not entry ones
     end
   end
 
-    page = fmsModules[fmsModule].targetPage
+  local page = fmsModules[fmsModule].targetPage
 
-    if key == "clear" then
-      if next(alertStack) then
-        table.remove(alertStack, 1)
-      elseif next(commStack) then
-        table.remove(commStack, 1)
-      elseif next(fmsModules[fmsModule].dispMSG) then
-        if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
-          B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
-          --nidModule = fmsModule
-          --run_after_time(notindatabaseClear, 1) -- fix this nonsense
-        end
-        table.remove(fmsModules[fmsModule].dispMSG, 1)
-      else
-        fmsModules[fmsModule].scratchpad = fmsModules[fmsModule].scratchpad:sub(1, -2)
+  if key == "clear" then
+    if next(alertStack) then
+      table.remove(alertStack, 1)
+    elseif next(commStack) then
+      table.remove(commStack, 1)
+    elseif next(fmsModules[fmsModule].dispMSG) then
+      if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
+        B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
+        --nidModule = fmsModule
+        --run_after_time(notindatabaseClear, 1) -- fix this nonsense
       end
-      return
+      table.remove(fmsModules[fmsModule].dispMSG, 1)
+    else
+      fmsModules[fmsModule].scratchpad = fmsModules[fmsModule].scratchpad:sub(1, -2)
     end
+    return
+  end
 
-    if key == "holdClear" then
-      fmsModules[fmsModule].scratchpad = ""
-      return
-    end
+  if key == "holdClear" then
+    fmsModules[fmsModule].scratchpad = ""
+    return
+  end
 
-    if hasChild(fmsFunctionsDefs[page],key) then
-      print(fmsModule.. " found " .. fmsFunctionsDefs[page][key][1] .. " for " .. key)
-      fmsFunctions[ fmsFunctionsDefs[page][key][1]](fmsModules[fmsModule],fmsFunctionsDefs[page][key][2])
-      print(fmsModule.. " did " .. key .. " for " .. page)
-      return
-    elseif #key == 1 then
-      if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
-        newText[fmsModule] = true
-      end
-      fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad .. key
-      return
-    elseif key=="slash" then
-      if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
-        newText[fmsModule] = true
-      end
-      fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.."/"
-      return
-    elseif key=="space" then
-      if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
-        newText[fmsModule] = true
-      end
-      fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.." "
-      return
-    elseif key=="del" then
-      fmsModules[fmsModule].scratchpad = ""
-      for k, v in ipairs(fmsModules[fmsModule].dispMSG) do
-        if v.msg == "DELETE" then
-          table.remove(fmsModules[fmsModule].dispMSG, k)
-          return
-        end
-      end
-      fmsModules[fmsModule]:notify("advs", advsMsgs[1])
-      return
-    elseif key=="next" then
-      if fmsModules[fmsModule].pgNo < fmsPages[page]:getNumPages(fmsModule) then
-        fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo + 1
-      else
-        fmsModules[fmsModule].targetpgNo = 1
-      end
-      print(fmsModule.. " did " .. key .. " for " .. page)
-      return
-    elseif key=="prev" then
-      if fmsModules[fmsModule].pgNo > 1 then
-        fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo - 1
-      else
-        fmsModules[fmsModule].targetpgNo = fmsPages[page]:getNumPages(fmsModule)
-      end
-      print(fmsModule.. " did " .. key .. " for " .. page)
-      switchCustomMode()
-      return
-    elseif key=="exec" then
-      simCMD_FMS_key[fmsModule][key]:once()
-      return
+  if hasChild(fmsFunctionsDefs[page],key) then
+    print(fmsModule.. " found " .. fmsFunctionsDefs[page][key][1] .. " for " .. key)
+    fmsFunctions[ fmsFunctionsDefs[page][key][1]](fmsModules[fmsModule],fmsFunctionsDefs[page][key][2])
+    print(fmsModule.. " did " .. key .. " for " .. page)
+    return
+  elseif #key == 1 then
+    if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
+      newText[fmsModule] = true
     end
-    fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+    fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad .. key
+    return
+  elseif key=="slash" then
+    if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
+      newText[fmsModule] = true
+    end
+    fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.."/"
+    return
+  elseif key == "minus" then
+    fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad..'-'
+  elseif key == "plus" then
+    fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad..'+'
+  elseif key == "space" then
+    if next(alertStack) and B777DR_cdu_act[fmsModule == "fmsL" and 0 or fmsModule == "fmsR" and 1 or 2] == 1 then
+      newText[fmsModule] = true
+    end
+    fmsModules[fmsModule].scratchpad=fmsModules[fmsModule].scratchpad.." "
+    return
+  elseif key == "del" then
+    fmsModules[fmsModule].scratchpad = ""
+    for k, v in ipairs(fmsModules[fmsModule].dispMSG) do
+      if v.msg == "DELETE" then
+        table.remove(fmsModules[fmsModule].dispMSG, k)
+        return
+      end
+    end
+    fmsModules[fmsModule]:notify("advs", advsMsgs[1])
+    return
+  elseif key=="next" then
+    if fmsModules[fmsModule].pgNo < fmsPages[page]:getNumPages(fmsModule) then
+      fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo + 1
+    else
+      fmsModules[fmsModule].targetpgNo = 1
+    end
+    print(fmsModule.. " did " .. key .. " for " .. page)
+    return
+  elseif key=="prev" then
+    if fmsModules[fmsModule].pgNo > 1 then
+      fmsModules[fmsModule].targetpgNo = fmsModules[fmsModule].pgNo - 1
+    else
+      fmsModules[fmsModule].targetpgNo = fmsPages[page]:getNumPages(fmsModule)
+    end
+    print(fmsModule.. " did " .. key .. " for " .. page)
+    switchCustomMode()
+    return
+  elseif key=="exec" then
+    simCMD_FMS_key[fmsModule][key]:once()
+    return
+  end
+  fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
 end
 
 function create_keypad(fms)
@@ -258,7 +265,15 @@ function create_keypad(fms)
     key_9_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "9") end end,
 
     key_period_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], ".") end end,
-    key_minus_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "-") end end, 
+    key_minus_CMDhandler=function (phase, duration)
+      if phase == 2 then
+        if duration >= 1 then -- 2 sec?
+          keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "plus")
+        else
+          delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "minus")
+        end
+      end
+    end,
 
     key_A_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "A") end end,
     key_B_CMDhandler=function (phase, duration) if phase ==0 then delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "B") end end,
@@ -293,8 +308,8 @@ function create_keypad(fms)
       if phase == 0 then
         delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear")
       end
-      if duration >= 2 then
-        delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "holdClear", true)
+      if duration >= 1 and fmsModules[fms].scratchpad:len() > 1 then  -- 2 sec?
+        keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "holdClear")
       end
     end
   }

@@ -19,7 +19,7 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
-utils = require("utils.lua")
+dofile("utils.lua")
 
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--
