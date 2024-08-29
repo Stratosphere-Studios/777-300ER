@@ -541,6 +541,21 @@ function fuel()
     end
 end
 
+function printer(text)
+    if jit.os == "Windows" then
+        os.execute("powershell.exe -Command \"\""..text.."\" | out-printer\"")
+        os.execute("mshta javascript:alert(\"Stratosphere 777: check your printer!\");close();")
+    elseif jit.os == "Linux" then
+        print("Linux")
+        os.execute("lpr "..text)
+        os.execute("notify-send \"Stratosphere 777: check your printer!\"")
+    elseif jis.os == "OSX" then
+        os.execute("lpr "..text)
+        os.execute("osascript -e 'display alert \"Stratosphere 777\" message \"Check your printer!\"")
+    end
+    print("finished printing")
+end
+
 local selOnce = {true, true}
 function checkSelWPT(i)
 	if B777DR_backend_showSelWpt[i] == 1 and selOnce[i] then

@@ -19,6 +19,7 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
+utils = require("utils.lua")
 
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--
@@ -90,43 +91,43 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 --**                                      CODE                                       **--
 --*************************************************************************************--
 
--- Bleed Air
+-- Bleed Air (General)
+B777DR_bleed_valves_status = deferred_dataref("Strato/777/air/bleed_valves_status", "array[3]") -- eng 1, 2, apu
+B777DR_isolation_valves_status = deferred_dataref("Strato/777/air/isolation_valves_status", "array[3]") -- L, C, R
 
-B777DR_bleed_valves = deferred_dataref("Strato/777/air/bleed_valves", "array[3]") -- eng 1, 2, apu
-B777DR_isolation_valves = deferred_dataref("Strato/777/air/isolation_valves", "array[3]") -- L, C, R
-B777DR_trim_air_valves = deferred_dataref("Strato/777/air/trim_air_valves", "array[3]") -- L, R, cockpit?
-B777DR_pack_valves = deferred_dataref("Strato/777/air/pack_valves", "array[2]") -- L, R
-B777DR_engine_anti_ice_valves = deferred_dataref("Strato/777/air/engine_anti_ice_valves", "array[2]") -- L, R; Is this necessary?
-B777DR_wing_anti_ice_valves = deferred_dataref("Strato/777/air/wing_anti_ice_valves", "array[2]") -- L, R; is this necessary?
 
-B777CMD_engL_vlv = deferred_command("Strato/777/air/eng_bleed_L", "Left Engine Bleed Valve")
-B777CMD_engR_vlv = deferred_command("Strato/777/air/eng_bleed_R", "Right Engine Bleed Valve")
-B777CMD_apu_vlv = deferred_command("Strato/777/air/apu_bleed", "APU Bleed Valve")
+-- Anti Ice
+B777DR_engine_anti_ice_valves_status = deferred_dataref("Strato/777/air/engine_anti_ice_valves_status", "array[2]") -- L, R; Is this necessary?
+B777DR_wing_anti_ice_valves_status = deferred_dataref("Strato/777/air/wing_anti_ice_valves_status", "array[2]") -- L, R; is this necessary?
 
--- hyd pumps
-
+-- Hydraulic Pumps
 B777DR_duct_press = deferred_dataref("Strato/777/air/duct_press", "array[2]") -- L, R
 
--- Air Conditioning
+-- Starters
+B777DR_starter_valve_status = deferred_dataref("Strato/777/air/starter_valve_status", "array[3]") -- L, R, APU
 
-B777DR_zone_temps_target = deferred_dataref("Strato/777/air/zone_temps_target", "array[10]") -- cockpit, 6 zones, aft and bulkhead
-B777DR_zone_temps_actual = deferred_dataref("Strato/777/air/zone_temps_actual", "array[10]")  -- cockpit, 6 zones, aft and bulkhead
-B777DR_cockpit_trim_air = deferred_dataref("Strato/777/air/cdaockpit_trim_air", "number")
-B777DR_pack_valve = deferred_dataref("Strato/777/air/pack_valve", "array[2]") -- L, R
+-- Air Conditioning
+B777DR_zone_temps_status = deferred_dataref("Strato/777/air/zone_temps_status", "array[9]")  -- cockpit, 6 zones, aft, bulkhead, fwd
+B777DR_trim_air_valves_status = deferred_dataref("Strato/777/air/trim_air_valves_status", "array[3]") -- L, R, cockpit?
+B777DR_pack_valves_status = deferred_dataref("Strato/777/air/pack_valves_status", "array[2]") -- L, R
+B777DR_equip_cooling_status = deferred_dataref("Strato/777/air/equip_cooling_status", "number") -- not sure if necessary, maybe just switch needed
+B777DR_recirc_fan_status = deferred_dataref("Strato/777/air/recirc_fan_status", "number") -- not sure if necessary, maybe just switch needed
+
+
+B777DR_zone_temps_target = deferred_dataref("Strato/777/air/zone_temps_target", "array[10]") -- cockpit, 6 zones, aft, bulkhead, fwd, master
 
 -- Pressurization
-
-B777DR_outflow_valve_pos = deferred_dataref("Strato/777/air/outflow_valve_pos", "array[2]") -- foreward, aft
+B777DR_outflow_valve_pos_status = deferred_dataref("Strato/777/air/outflow_valve_pos_status", "array[2]") -- foreward, aft
 B777DR_landing_alt_val = deferred_dataref("Strato/777/air/landing_alt_val", "number")
-B777DR_landing_alt_man = deferred_dataref("Strato/777/air/landing_alt_man", "number") -- 0 = auto, 1 = manual
--- switch will be command, go up to 500 after certain duration
-
+B777DR_landing_alt_man = deferred_dataref("Strato/777/air/landing_alt_man", "number") -- 0 = auto, 1 = manual -- switch will be command, go up to 500 after certain duration
 B777DR_outflow_valve_auto = deferred_dataref("Strato/777/air/ouyflow_valve_auto", "array[2]")
-B777CMD_outflow_valve_open_fwd = deferred_command("Strato/777/air/outflow_fwd_open", "Forward Outflow Valve Open (Manual Mode)", outflow_fwd_open_CMDhandler)
-B777CMD_outflow_valve_close_fwd = deferred_command("Strato/777/air/outflow_fwd_close", "Forward Outflow Valve Close (Manual Mode)", outflow_fwd_close_CMDhandler)
-B777CMD_outflow_valve_open_aft = deferred_command("Strato/777/air/outflow_aft_open", "Aft Outflow Valve Open (Manual Mode)", outflow_aft_open_CMDhandler)
-B777CMD_outflow_valve_close_aft = deferred_command("Strato/777/air/outflow_aft_close", "Aft Outflow Valve Close (Manual Mode)", outflow_aft_close_CMDhandler)
-B777CMD_outflow_toggle = deferred_command("Strato/777/air/outflow_valve_sw")
+
+
+--B777CMD_outflow_valve_open_fwd = deferred_command("Strato/777/air/outflow_fwd_open", "Forward Outflow Valve Open (Manual Mode)", outflow_fwd_open_CMDhandler)
+--B777CMD_outflow_valve_close_fwd = deferred_command("Strato/777/air/outflow_fwd_close", "Forward Outflow Valve Close (Manual Mode)", outflow_fwd_close_CMDhandler)
+--B777CMD_outflow_valve_open_aft = deferred_command("Strato/777/air/outflow_aft_open", "Aft Outflow Valve Open (Manual Mode)", outflow_aft_open_CMDhandler)
+--B777CMD_outflow_valve_close_aft = deferred_command("Strato/777/air/outflow_aft_close", "Aft Outflow Valve Close (Manual Mode)", outflow_aft_close_CMDhandler)
+
 
 -- how will i do temp control switches?
     -- command up/down only, rest from CODE
@@ -135,23 +136,10 @@ B777CMD_outflow_toggle = deferred_command("Strato/777/air/outflow_valve_sw")
     -- put another manip in the middle and switch mode by clicking switch.
 
 
-airSystemClass = {
-    producers = {}, -- unnecessary?
-    consumers = {},
-    pressure = 0,
-    setProducer = function(name, state)
-        self.producers[name].state = state
-    end,
-    setConsumer = function(name, state)
-        self.consumers[name].state = state
-    end
-}
-
-
-producers = {
-    engine1 = {0, 40}, -- depends on throttle, up to 60 or 70
-    engine2 = {0, 60},
-    apu = {0, 25} -- boosts for engine start
+local producers = {
+    engine1 = {state = 0, prod = 40}, -- depends on throttle, up to 60 or 70
+    engine2 = {state = 0, prod = 60},
+    apu = {state = 0, prod = 25} -- boosts for engine start
 }
 
 local consumers = {
@@ -234,10 +222,67 @@ local consumers = {
     }
 }
 
--- no need for producer table?
+function setProducer(name, state)
+    producers[name].state = state
+end
+function setConsumer(name, state)
+    consumers[name].state = state
+end
 
--- with no load or source, pressure drops 10 psi in 25 sec
--- pressure doesn't average, just spreads?????
+local isoL = 0
+local isoR = 0
+local isoC = 0
+
+function calcPressure()
+    --TODO: with no load or source, pressure drops 10 psi in 25 sec
+    -- pressure doesn't average, just spreads?????
+
+    local available = {0, 0}
+    local consumption = {0, 0}
+
+    -- calculate total available
+    if isoL == 1 and isoR == 1 and isoC == 1 then -- all open
+        available[1] = producers.apu.prod + producers.engine1.prod + producers.engine2.prod -- total
+        available[2] = available[1]
+    else
+        if isoL == 0 then -- left closed (between eng1 and apu)
+            available[1] = producers.engine1.prod -- only engine
+        else -- left open (eng1 not isolated from apu)
+            available[1] = producers.engine1.prod + producers.apu.prod -- engine and apu
+        end
+
+        if isoR == 0 or isoC == 0 then -- center or right closed (between eng2 and apu)
+            available[2] = producers.engine2.prod
+        else -- eng2 not isolated from apu
+            available[2] = producers.engine2.prod + producers.apu.prod
+        end
+    end
+
+    -- calculate consumption
+    consumption[1] = consumers.packL.consumption + consumers.trimL.consumption + consumers.waiL.consumption + consumers.eng1Starter.consumption
+    consumption[2] = consumers.packR.consumption + consumers.trimR.consumption + consumers.waiR.consumption + consumers.eng2Starter.consumption
+    if isoL == 1 and isoR == 0 then
+        consumption[1] = consumption[1] + consumers.demandPumpL.consumption + consumers.apuStarter.consumption
+        if isoC == 1 then
+            consumption[1] = consumption[1] + consumers.demandPumpR.consumption
+        end
+    end
+
+    if isoR == 1 and isoL == 0 then
+        consumption[2] = consumption[1] + consumers.demandPumpR.consumption
+        if isoC == 1 then
+            consumption[2] = consumption[2] + consumers.demandPumpL.consumption + consumers.apuStarter.consumption
+        end
+    end
+
+    if isoR == 1 and isoL == 1 and isoC == 1 then
+        consumption[1] = consumption[1] + consumption[2] + consumers.demandPumpL.consumption + consumers.apuStarter.consumption + consumers.demandPumpR.consumption
+        consumption[2] = consumption[1]
+    end
+
+    return {math.max(utils.round(available[1]-consumption[1]), 0), math.max(utils.round(available[2]-consumption[2]), 0)}
+end
+
 
 function openIsoValve(valve) end
 function closeIsoValve(valve) end
@@ -266,7 +311,13 @@ function closeIsoValve(valve) end
 
 --function before_physics()
 
---function after_physics()
+function after_physics()
+    print("after physics pog")
+    local press = calcPressure()
+    print("press: {"..press[1]..", "..press[2].."}")
+    B777DR_duct_press[0] = press[1]
+    B777DR_duct_press[1] = press[2]
+end
 
 --function after_replay()
 

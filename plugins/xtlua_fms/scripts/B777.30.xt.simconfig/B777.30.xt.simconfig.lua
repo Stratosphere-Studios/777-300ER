@@ -3,7 +3,10 @@
 *****************************************************************************************
 * Program Script Name	:	B777.20.xt.simconfig
 * Author Name			:	Marauder28
-* Converted to 777 by remenkemi 
+* Converted to 777 by remenkemi
+
+-- wait... why am i using json between modules... I need to make datarefs for them anyway so might as well just do that directly
+
 *****************************************************************************************
 --]]
 
@@ -101,7 +104,9 @@ function defaultValues()
 			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
 			gs_mach_indicator = 1, -- 0 = disabled, 1 = enabled
 			transponder_type = 0, -- 0, 1
-			nosewheel_ctrl = 0 -- 0 = independant, 1 = yaw, 2 = roll; will also link rudder to roll while on ground when in roll mode
+			nosewheel_ctrl = 0, -- 0 = independant, 1 = yaw, 2 = roll; will also link rudder to roll while on ground when in roll mode
+			gasper_switch = 0, -- 0 = not installed, 1 = installed
+			takeoff_chk_btn = 0 -- 0 = not installed, 1 = installed
 		}
 	}
 end
