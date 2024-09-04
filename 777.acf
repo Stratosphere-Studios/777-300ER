@@ -35324,7 +35324,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Stratosphere Studios
-P acf/_auto_cowl_flaps_EQ 32764
+P acf/_auto_cowl_flaps_EQ 32767
 P acf/_auto_engage_BC_deg 0.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -38018,7 +38018,6 @@ gen_rotary Layout
   SHOW_EQUAL 1.000000 testNum
   SIZE 3.980000
   LOCKED
-  HIDE
   LIGHT_MODE GLASS_AUTO
   LIGHT_RHEOSTAT 0
   BUS_SRC 1
@@ -38348,6 +38347,7 @@ GROUP Captain PFD
   LOCKED
   HIDE
   CHAINED
+  GROUP_OPEN
   gen_rotary template
     POS 668.500000 1807.000000
     IMAGE PFD/_Diagram
@@ -38824,7 +38824,7 @@ GROUP Captain PFD
       POS 1290.000000 1812.000000
       IMAGE PFD/vertical_speed_indicator/VSIselSpdPtr
       DATAREF sim/cockpit2/autopilot/vvi_dial_fpm
-      SHOW_EQUAL 2.000000 sim/cockpit2/autopilot/vvi_status
+      SHOW_EQUAL 1.000000 Strato/777/mcp/vshold
       SIZE 1.960000
       LOCKED
       HIDE
@@ -41103,8 +41103,8 @@ GROUP Captain PFD
   END_GROUP
   GROUP Compass
     LOCKED
-    HIDE
     CHAINED
+    GROUP_OPEN
     gen_rotary Compass Background
       POS 604.000000 1197.000000
       IMAGE PFD/Heading Track/HdgTrackBgnd
@@ -41112,7 +41112,6 @@ GROUP Captain PFD
       SHOW_GREATER 1.000000 Strato/777/fltInst/adiru/status
       SIZE 2.060000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41136,7 +41135,6 @@ GROUP Captain PFD
       SHOW_GREATER 1.000000 Strato/777/fltInst/adiru/status
       SIZE 2.000000
       LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 0
       BUS_SRC 1
@@ -41156,13 +41154,12 @@ GROUP Captain PFD
     GROUP While ADIRU Alignin
       SHOW_EQUAL 1.000000 Strato/777/fltInst/adiru/status
       LOCKED
-      HIDE
       CHAINED
+      GROUP_OPEN
     END_GROUP
     GROUP ADIRU Aligned
       SHOW_EQUAL 2.000000 Strato/777/fltInst/adiru/status
       LOCKED
-      HIDE
       CHAINED
       gen_needle HDG Bug
         POS 604.000000 844.000000
@@ -41170,7 +41167,6 @@ GROUP Captain PFD
         DATAREF Strato/777/heading_bug_diff[0]
         SIZE 2.750000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -41188,7 +41184,6 @@ GROUP Captain PFD
         DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
         SIZE 2.060000
         LOCKED
-        HIDE
         CLIP
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
@@ -41205,7 +41200,6 @@ GROUP Captain PFD
         DATAREF 
         SIZE 2.750000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -41229,7 +41223,6 @@ GROUP Captain PFD
         SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
         SIZE 2.750000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -41248,7 +41241,6 @@ GROUP Captain PFD
         SHOW_EQUAL 0.000000 Strato/777/mcp/hdg_to_trk
         SIZE 1.150000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -41261,15 +41253,14 @@ GROUP Captain PFD
     GROUP ADIRU Not Aligned
       SHOW_EQUAL 0.000000 Strato/777/fltInst/adiru/status
       LOCKED
-      HIDE
       CHAINED
+      GROUP_OPEN
       gen_rotary hdg_fail
         POS 604.000000 1157.500000
         IMAGE PFD/failure_flags/hdg_fail
         DATAREF 
         SIZE 1.350000
         LOCKED
-        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43419,349 +43410,373 @@ GROUP Lower Eicas
       CLICK_DX 0
       CLICK_DY 0
 
-    GROUP actual temps
-      LOCKED
+    GROUP Open
       CHAINED
-      gen_LED fd temp act
-        POS 3016.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[0]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
+      gen_rotary ISO L OPEN
+        POS 3229.500000 337.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SHOW_GREATER 1.000000 testNum
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ISO C OPEN
+        POS 3412.500000 337.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ISO R OPEN
+        POS 3593.500000 337.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary TRIM R OPEN
+        POS 3559.500000 587.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary TRIM L OPEN
+        POS 3263.500000 587.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary PACK L OPEN
+        POS 3115.500000 587.500000
+        IMAGE EICAS lower/AIR/pack_on
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary PACK R OPEN
+        POS 3708.500000 587.500000
+        IMAGE EICAS lower/AIR/pack_on
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary WAI L OPEN
+        POS 3035.500000 229.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary WAI R OPEN
+        POS 3787.500000 229.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary EAI L OPEN
+        POS 2804.500000 0.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary EAI R OPEN
+        POS 4019.500000 0.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ENG L OPEN
+        POS 2926.500000 -19.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ENG R OPEN
+        POS 3896.500000 -19.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary APU OPEN
+        POS 3344.500000 135.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary APU START OPEN
+        POS 3479.500000 -25.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SHOW_GREATER 1.000000 testNum
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ENG START L OPEN
+        POS 3054.500000 -93.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
         LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
 
-      gen_LED a temp act
-        POS 3205.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[1]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
+      gen_rotary ENG START R OPEN
+        POS 3768.500000 -93.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
         KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED b temp act
-        POS 3369.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[2]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED c temp act
-        POS 3535.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[3]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED d temp act
-        POS 3699.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[4]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED e temp act
-        POS 3863.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[5]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED f temp act
-        POS 4028.000000 912.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[6]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED aft temp act
-        POS 3696.000000 812.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[7]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED bulk temp act
-        POS 3860.000000 813.000000
-        IMAGE White_size23_stretched_vert_no_lead0
-        DATAREF Strato/777/air/zone_temps_status[8]
-        SHOW_LESS 115.000000 [1]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 5
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-    END_GROUP
-    GROUP set temps
-      LOCKED
-      CHAINED
-      gen_LED fd temp target
-        POS 2914.000000 909.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[0]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED a temp target
-        POS 3099.000000 909.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[1]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED b temp target
-        POS 3262.000000 909.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[2]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED c temp target
-        POS 3430.000000 909.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[3]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED d temp target
-        POS 3593.000000 909.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[4]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED e temp target
-        POS 3761.000000 908.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[5]
-        SIZE 2.150000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED f temp target
-        POS 3924.000000 909.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[6]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED aft temp target
-        POS 3593.000000 809.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[7]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED bulk temp target
-        POS 3762.000000 809.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_target[8]
-        SIZE 2.050000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
-
-      gen_LED master target
-        POS 3497.000000 1008.000000
-        IMAGE PFD/magenta_type
-        DATAREF Strato/777/air/zone_temps_targe[10]
-        SIZE 2.600000
-        LOCKED
-        LIGHT_MODE GLASS_AUTO
-        LIGHT_RHEOSTAT 0
-        BUS_SRC 1
-        KEY_FRAME 0.000000 0.000000 1.000000
-        KEY_FRAME 360.000000 360.000000
-        DIGITS 2
-        DECIMALS 0
-        PERIOD_WIDTH 0
-        LED_ROWS 0
-        ROUNDING ROUND_ROUND
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
 
     END_GROUP
     GROUP flow
       LOCKED
       CHAINED
+      GROUP_OPEN
       gen_needle fd trim needle
         POS 2981.000000 765.000000
         IMAGE PFD/aoa_needle
@@ -43778,6 +43793,27 @@ GROUP Lower Eicas
         KEY_FRAME 5.000000 90.000000
         IS_DRAGGABLE 0
         OFFSET 14.000000
+
+      gen_rotary APU START from TIE
+        POS 3413.500000 116.500000
+        IMAGE EICAS lower/AIR/apustart
+        DATAREF 
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
 
       gen_rotary APU ON
         POS 3346.500000 -86.000000
@@ -44242,6 +44278,390 @@ GROUP Lower Eicas
         CLICK_DY 0
 
     END_GROUP
+    GROUP actual temps
+      LOCKED
+      CHAINED
+      gen_LED fd temp act
+        POS 3016.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[0]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED a temp act
+        POS 3205.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[1]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED b temp act
+        POS 3369.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[2]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED c temp act
+        POS 3535.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[3]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED d temp act
+        POS 3699.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[4]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED e temp act
+        POS 3863.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[5]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED f temp act
+        POS 4028.000000 912.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[6]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED aft temp act
+        POS 3696.000000 812.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[7]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED bulk temp act
+        POS 3860.000000 813.000000
+        IMAGE White_size23_stretched_vert_no_lead0
+        DATAREF Strato/777/air/zone_temps_status[8]
+        SHOW_LESS 115.000000 [1]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+    END_GROUP
+    GROUP set temps
+      LOCKED
+      CHAINED
+      gen_LED fd temp target
+        POS 2914.000000 909.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[0]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED a temp target
+        POS 3099.000000 909.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[1]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED b temp target
+        POS 3262.000000 909.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[2]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED c temp target
+        POS 3430.000000 909.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[3]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED d temp target
+        POS 3593.000000 909.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[4]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED e temp target
+        POS 3761.000000 908.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[5]
+        SIZE 2.150000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED f temp target
+        POS 3924.000000 909.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[6]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED aft temp target
+        POS 3593.000000 809.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[7]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED bulk temp target
+        POS 3762.000000 809.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_target[8]
+        SIZE 2.050000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+      gen_LED master target
+        POS 3497.000000 1008.000000
+        IMAGE PFD/magenta_type
+        DATAREF Strato/777/air/zone_temps_targe[10]
+        SIZE 2.600000
+        LOCKED
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 0
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 360.000000 360.000000
+        DIGITS 2
+        DECIMALS 0
+        PERIOD_WIDTH 0
+        LED_ROWS 0
+        ROUNDING ROUND_ROUND
+
+    END_GROUP
+    gen_rotary duct press amber L
+      POS 2927.500000 372.500000
+      IMAGE EICAS lower/AIR/press_amber
+      DATAREF 
+      SHOW_LESS 10.000000 Strato/777/air/duct_press[0]
+      SIZE 1.360000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary duct press amber R
+      POS 3898.500000 372.500000
+      IMAGE EICAS lower/AIR/press_amber
+      DATAREF 
+      SHOW_LESS 10.000000 Strato/777/air/duct_press[1]
+      SIZE 1.360000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
     gen_LED duct press L
       POS 2963.000000 373.000000
       IMAGE White_size23_stretched_vert_no_lead0
@@ -44275,50 +44695,6 @@ GROUP Lower Eicas
       PERIOD_WIDTH 0
       LED_ROWS 0
       ROUNDING ROUND_ROUND
-
-    gen_rotary duct press amber L
-      POS 2925.500000 373.500000
-      IMAGE EICAS lower/AIR/press_amber
-      DATAREF 
-      SHOW_LESS 10.000000 Strato/777/air/duct_press[0]
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 5
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
-
-    gen_rotary duct press amber R
-      POS 3897.500000 373.000000
-      IMAGE EICAS lower/AIR/press_amber
-      DATAREF 
-      SHOW_LESS 10.000000 Strato/777/air/duct_press[1]
-      SIZE 1.350000
-      LIGHT_MODE GLASS_AUTO
-      LIGHT_RHEOSTAT 5
-      BUS_SRC 1
-      KEY_FRAME 0.000000 0.000000 1.000000
-      KEY_FRAME 1.000000 6.000000
-      DIGITS 1
-      ROTARY_TYPE NO_CLICK
-      CLICK_RADIUS 10.000000
-      CLICK_RADIUS_DY 0.000000
-      OFFSET 0.000000
-      STEP1 1.000000
-      STEP2 1.000000
-      CURSOR DEFAULT
-      CLICK_DX 0
-      CLICK_DY 0
 
   END_GROUP
   GROUP DOOR
@@ -53712,11 +54088,6 @@ GROUP FMSs
     END_GROUP
   END_GROUP
 END_GROUP
-GROUP Isfd
-  LOCKED
-  HIDE
-  CHAINED
-END_GROUP
 GROUP Trim
   LOCKED
   HIDE
@@ -54301,28 +54672,6 @@ GROUP EFB
     OFFSET_Y -12.000000
 
 END_GROUP
-gen_rotary ISFD_background
-  POS 3836.000000 3564.000000
-  IMAGE isfd_2_not_alligned
-  DATAREF 
-  SIZE 0.520000
-  LOCKED
-  HIDE
-  LIGHT_MODE GLASS_AUTO
-  LIGHT_RHEOSTAT 10
-  KEY_FRAME 0.000000 0.000000 1.000000
-  KEY_FRAME 1.000000 6.000000
-  DIGITS 1
-  ROTARY_TYPE NO_CLICK
-  CLICK_RADIUS 10.000000
-  CLICK_RADIUS_DY 0.000000
-  OFFSET 0.000000
-  STEP1 1.000000
-  STEP2 1.000000
-  CURSOR DEFAULT
-  CLICK_DX 0
-  CLICK_DY 0
-
 GROUP Expanded Mode CAPT
   SHOW_LESS 1.000000 sim/cockpit2/EFIS/map_mode
   SHOW_EQUAL 0.000000 sim/cockpit2/EFIS/map_mode_is_HSI
@@ -59947,30 +60296,6 @@ GROUP First Officer ND
     CLICK_DY 0
 
 END_GROUP
-GROUP Open
-  gen_rotary vlv
-    POS 3064.500000 355.500000
-    IMAGE EICAS lower/AIR/open_horizontal
-    DATAREF 
-    SHOW_GREATER 1.000000 testNum
-    SIZE 1.350000
-    LIGHT_MODE GLASS_AUTO
-    LIGHT_RHEOSTAT 5
-    BUS_SRC 1
-    KEY_FRAME 0.000000 0.000000 1.000000
-    KEY_FRAME 1.000000 6.000000
-    DIGITS 1
-    ROTARY_TYPE NO_CLICK
-    CLICK_RADIUS 10.000000
-    CLICK_RADIUS_DY 0.000000
-    OFFSET 0.000000
-    STEP1 1.000000
-    STEP2 1.000000
-    CURSOR DEFAULT
-    CLICK_DX 0
-    CLICK_DY 0
-
-END_GROUP
 GROUP READ THE README
   SHOW_EQUAL 0.000000 Strato/777/readme_unlocked
   LOCKED
@@ -60107,6 +60432,105 @@ GROUP READ THE README
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 4
     BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+END_GROUP
+GROUP ISFD
+  HIDE
+  GROUP_OPEN
+  gen_needle Horizon
+    POS 3821.500000 3583.000000
+    IMAGE ISFD/horizon
+    DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
+    SIZE 1.950000
+    CLIP
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 3
+    KEY_FRAME 0.000000 90.000000 1.000000
+    KEY_FRAME -45.000000 135.000000
+    COMMENT 468
+    IS_DRAGGABLE 0
+    OFFSET 0.000000
+    DEFLECT_SRC PITCH_AHRS
+    DEFLECT_PIX 468.000000
+    NEEDLE_OFFSET_Y -4.000000
+
+  gen_rotary grey
+    POS 3834.000000 3574.000000
+    IMAGE ISFD/grey_backing
+    DATAREF 
+    SIZE 1.900000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary overlay
+    POS 3836.000000 3571.000000
+    IMAGE ISFD/overlay
+    DATAREF 
+    SIZE 1.950000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_needle Compass Rose
+    POS 3820.500000 3341.500000
+    IMAGE ISFD/rose
+    DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
+    SIZE 1.850000
+    CLIP
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 0
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 90.000000 -90.000000
+    IS_DRAGGABLE 0
+    OFFSET 0.000000
+    NEEDLE_OFFSET_Y -174.000000
+
+  gen_rotary ISFD_background
+    POS 3836.000000 3564.000000
+    IMAGE isfd_2_not_alligned
+    DATAREF 
+    SHOW_EQUAL 1.000000 testNum
+    SIZE 0.520000
+    HIDE
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 10
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 1.000000 6.000000
     DIGITS 1

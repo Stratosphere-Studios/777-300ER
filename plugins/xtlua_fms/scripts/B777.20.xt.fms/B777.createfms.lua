@@ -83,37 +83,37 @@ function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
         switchCustomMode()
         return
       elseif key=="crz" then -- ALTN
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "ATCINDEX"
         fmsModules[fmsModule].targetpgNo = 1
         switchCustomMode()]]
       elseif key=="des" then -- VNAV
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "VNAV"
         fmsModules[fmsModule].targetpgNo = 1
         switchCustomMode()]]
       elseif key=="dir_intc" then -- FIX
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "FIX"
         fmsModules[fmsModule].targetpgNo = 1
         switchCustomMode()]]
       elseif key=="legs" then -- LEGS
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "LEGS"
         fmsModules[fmsModule].targetpgNo = 1
         switchCustomMode()]]
       elseif key=="dep_arr" then -- HOLD
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "HOLD"
         fmsModules[fmsModule].targetpgNo = 1
         switchCustomMode()]]
       elseif key=="hold" then -- FMC COMM
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "FMCCOMM"
         fmsModules[fmsModule].targetpgNo = 1
@@ -124,7 +124,7 @@ function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
         switchCustomMode()
         return
       elseif key=="prog" then -- PROG
-        fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+        fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
         return
         --[[fmsModules[fmsModule].targetPage = "PROGRESS"
         fmsModules[fmsModule].targetpgNo = 1
@@ -142,7 +142,7 @@ function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
       table.remove(commStack, 1)
     elseif next(fmsModules[fmsModule].dispMSG) then
       if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
-        B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
+        --B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
         --nidModule = fmsModule
         --run_after_time(notindatabaseClear, 1) -- fix this nonsense
       end
@@ -216,7 +216,7 @@ function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
     simCMD_FMS_key[fmsModule][key]:once()
     return
   end
-  fmsModules[fmsModule]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+  fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 end
 
 function create_keypad(fms)
@@ -309,7 +309,8 @@ function create_keypad(fms)
         delayKeyDown(fmsKeyFunc[fms]["funcs"]["parent"], "clear")
       end
       if duration >= 1 and fmsModules[fms].scratchpad:len() > 1 then  -- 2 sec?
-        keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "holdClear")
+        --keyDown(fmsKeyFunc[fms]["funcs"]["parent"], "holdClear")
+        fmsModules[fms].scratchpad = ""
       end
     end
   }
@@ -637,7 +638,14 @@ function fms:B777_fms_display()
   end
 
   self.scratchpad = self.scratchpad:len() > 24 and self.scratchpad:sub(1, 24) or self.scratchpad -- limit scratchpad length
-
+  --[[for k, v in ipairs(alertStack) do
+    print("alert "..k.." "..v)
+  end
+  for k, v in ipairs(self.dispMSG) do
+    print("alert "..k.." "..v)
+  end]]
+  print(next(alertStack))
+  print(next(self.dispMSG))
   -- since com and alert messages display on all cdus, they have separate stacks
   if newText[thisID] then -- if typed while alert message
     B777DR_fms[thisID][14] = self.scratchpad;
@@ -653,3 +661,12 @@ function fms:B777_fms_display()
 end
 
 -- test vors not showing frequency
+
+--[[  overview
+clr needs extra click
+key not active and readme dont show up until fmc act (change category)
+
+
+
+
+]]

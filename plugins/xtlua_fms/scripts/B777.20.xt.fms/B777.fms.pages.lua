@@ -310,14 +310,14 @@ function fmsFunctions.setdata(fmsO,value)
 			setFMSData("readmeCodeInput", fmsO["scratchpad"])
 			if fmsO["scratchpad"] == "BOEING" then
 				--fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
-				fmsModules[fmsO.id]:notify("alert", "UNLOCKED")
+				fmsModules[fmsO.id]:notify("advs", "UNLOCKED")
 				fmsO["scratchpad"] = ""
 				setSimConfig("FMC", "unlocked", 1)
 			else
-				fmsModules[fmsO.id]:notify("alert", "INCORRECT CODE")
+				fmsModules[fmsO.id]:notify("advs", "INCORRECT CODE")
 			end
 		else
-			fmsModules[fmsO.id]:notify("alert", "ALREADY UNLOCKED")
+			fmsModules[fmsO.id]:notify("advs", "ALREADY UNLOCKED")
 		end
 		return
 	end
@@ -850,7 +850,7 @@ function fmsFunctions.setdata(fmsO,value)
 			B777DR_backend_navaidInhibit1_in[idNum] = fmsO["scratchpad"]
 			fmsO["scratchpad"] = ""
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	elseif value == "inhibitNavaid2" then
@@ -858,7 +858,7 @@ function fmsFunctions.setdata(fmsO,value)
 			B777DR_backend_navaidInhibit2_in[idNum] = fmsO["scratchpad"]
 			fmsO["scratchpad"] = ""
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	elseif value == "inhibitVor1" then
@@ -866,7 +866,7 @@ function fmsFunctions.setdata(fmsO,value)
 			B777DR_backend_vorInhibit1_in[idNum] = fmsO["scratchpad"]
 			fmsO["scratchpad"] = ""
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	elseif value == "inhibitVor2" then
@@ -874,7 +874,7 @@ function fmsFunctions.setdata(fmsO,value)
 			B777DR_backend_vorInhibit2_in[idNum] = fmsO["scratchpad"]
 			fmsO["scratchpad"] = ""
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -891,19 +891,19 @@ function fmsFunctions.setDref(fmsO,value)
 			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		elseif fmsO.id == "fmsC" then
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[1] = 1 - B777DR_cdu_eicas_ctl[1]
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		else
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[1] == 0 then
 				B777DR_cdu_eicas_ctl[2] = 1 - B777DR_cdu_eicas_ctl[2]
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		end
 		return
@@ -915,7 +915,7 @@ function fmsFunctions.setDref(fmsO,value)
 		elseif fmsO.id == "fmsR" then
 			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -1029,7 +1029,7 @@ function fmsFunctions.selectWPT(fmsO, wpt)
 		print("selected. returning to previous: "..fmsModules[fmsO.id]["prevPage"])
 		fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
 	else
-		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+		fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 	end
 end
 
@@ -1155,7 +1155,7 @@ function fmsFunctions.setpage2(fmsO, value)
 			end
 			return
 		end
-		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+		fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		return
 	end
 
@@ -1164,7 +1164,7 @@ function fmsFunctions.setpage2(fmsO, value)
 		if B777DR_cdu_eicas_ctl[idNum] == 1 then
 			fmsFunctions["setpage"](fmsO,value)
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -1174,16 +1174,16 @@ function fmsFunctions.setpage2(fmsO, value)
 			if B777DR_cdu_efis_ctl[0] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		elseif fmsO.id == "fmsR" then
 			if B777DR_cdu_efis_ctl[1] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end

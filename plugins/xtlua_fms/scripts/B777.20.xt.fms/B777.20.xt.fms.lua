@@ -408,6 +408,7 @@ dofile("B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
 
 function fmsNotify(self, t, message) -- improvement: only input notification and automatically determine priority
+print("should notify ".. message.. " "..t)
 	if t == "alert" then
 		table.insert(alertStack, 1, message)
 		return
