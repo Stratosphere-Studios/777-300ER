@@ -14,7 +14,6 @@ checklisthome = {
     [8] = "LANDING",
     [9] = "SHUTDOWN",
     [10] = 'SECURE'
-
 }
 
 preflightchecklist = {
@@ -98,3 +97,5 @@ approachecklistvalues = { 0 }
 landingchecklistvalues = { 3, 3, 3 }
 shutdownchecklistvalues = { 3, 0, 0, 3, 0 }
 securechecklistvalues = { 0, 0, 0 }
+
+
