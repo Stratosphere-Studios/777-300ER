@@ -126,6 +126,7 @@ B777DR_outflow_valve_pos_status = deferred_dataref("Strato/777/air/outflow_valve
 B777DR_landing_alt_val = deferred_dataref("Strato/777/air/landing_alt_val", "number")
 
 
+B777DR_pack_sw_pos = deferred_dataref("Strato/777/air/pack_sw_pos", "array[3]")
 
 
 -- how will i do temp control switches?
@@ -143,110 +144,140 @@ local producers = {
 
 B777DR_air_hyd_pump_state = find_dataref("Strato/777/hydraulics/pump/primary/actual")
 
-B777DR_landing_alt_man = deferred_dataref("Strato/777/air/landing_alt_man", "number") -- 0 = auto, 1 = manual -- switch will be command, go up to 500 after certain duration
-B777DR_outflow_valve_auto_sw = deferred_dataref("Strato/777/air/outflow_valve_auto", "array[2]")
-B777CMD_outflow_valve_open_fwd = deferred_command("Strato/777/air/outflow_fwd_open", "Forward Outflow Valve Open (Manual Mode)", outflow_fwd_open_CMDhandler)
-B777CMD_outflow_valve_close_fwd = deferred_command("Strato/777/air/outflow_fwd_close", "Forward Outflow Valve Close (Manual Mode)", outflow_fwd_close_CMDhandler)
-B777CMD_outflow_valve_open_aft = deferred_command("Strato/777/air/outflow_aft_open", "Aft Outflow Valve Open (Manual Mode)", outflow_aft_open_CMDhandler)
-B777CMD_outflow_valve_close_aft = deferred_command("Strato/777/air/outflow_aft_close", "Aft Outflow Valve Close (Manual Mode)", outflow_aft_close_CMDhandler)
-B777CMD_landing_alt_up = deferred_command("Strato/777/air/landing_alt_up", "Landing Altitude Up")
-B777CMD_landing_alt_dn = deferred_command("Strato/777/air/landing_alt_dn", "Landing Altitude Down")
+-- B777DR_landing_alt_man = deferred_dataref("Strato/777/air/landing_alt_man", "number") -- 0 = auto, 1 = manual -- switch will be command, go up to 500 after certain duration
+-- B777DR_outflow_valve_auto_sw = deferred_dataref("Strato/777/air/outflow_valve_auto", "array[2]")
+-- B777CMD_outflow_valve_open_fwd = deferred_command("Strato/777/air/outflow_fwd_open", "Forward Outflow Valve Open (Manual Mode)", outflow_fwd_open_CMDhandler)
+-- B777CMD_outflow_valve_close_fwd = deferred_command("Strato/777/air/outflow_fwd_close", "Forward Outflow Valve Close (Manual Mode)", outflow_fwd_close_CMDhandler)
+-- B777CMD_outflow_valve_open_aft = deferred_command("Strato/777/air/outflow_aft_open", "Aft Outflow Valve Open (Manual Mode)", outflow_aft_open_CMDhandler)
+-- B777CMD_outflow_valve_close_aft = deferred_command("Strato/777/air/outflow_aft_close", "Aft Outflow Valve Close (Manual Mode)", outflow_aft_close_CMDhandler)
+-- B777CMD_landing_alt_up = deferred_command("Strato/777/air/landing_alt_up", "Landing Altitude Up")
+-- B777CMD_landing_alt_dn = deferred_command("Strato/777/air/landing_alt_dn", "Landing Altitude Down")
 
 
-B777CMD_btn_isoL = deferred_command("Strato/777/air/isln_L_sw", "Left Isolation Valve Switch")
-B777CMD_btn_isoC = deferred_command("Strato/777/air/isln_C_sw", "Center Isolation Valve Switch")
-B777CMD_btn_isoR = deferred_command("Strato/777/air/isln_R_sw", "Right Isolation Valve Switch")
-B777CMD_btn_engL = deferred_command("Strato/777/air/eng_L_sw", "Left Engine Bleed Switch")
-B777CMD_btn_apu = deferred_command("Strato/777/air/apu_sw", "APU Bleed Switch")
-B777CMD_btn_engR = deferred_command("Strato/777/air/eng_R_sw", "Right Engine Bleed Switch")
+-- B777CMD_btn_isoL = deferred_command("Strato/777/air/isln_L_sw", "Left Isolation Valve Switch")
+-- B777CMD_btn_isoC = deferred_command("Strato/777/air/isln_C_sw", "Center Isolation Valve Switch")
+-- B777CMD_btn_isoR = deferred_command("Strato/777/air/isln_R_sw", "Right Isolation Valve Switch")
+-- B777CMD_btn_engL = deferred_command("Strato/777/air/eng_L_sw", "Left Engine Bleed Switch")
+-- B777CMD_btn_apu = deferred_command("Strato/777/air/apu_sw", "APU Bleed Switch")
+-- B777CMD_btn_engR = deferred_command("Strato/777/air/eng_R_sw", "Right Engine Bleed Switch")
 
-B777CMD_btn_packL = deferred_command("Strato/777/air/pack_L_sw", "Left Pack Valve Switch")
-B777CMD_btn_packR = deferred_command("Strato/777/air/pack_R_sw", "Right Pack Valve Switch")
-B777CMD_btn_trimL = deferred_command("Strato/777/air/trim_L_sw", "Left Trim Valve Switch")
-B777CMD_btn_trimR = deferred_command("Strato/777/air/trim_R_sw", "Right Trim Valve Switch")
-
+-- B777CMD_btn_packR = deferred_command("Strato/777/air/pack_R_sw", "Right Pack Valve Switch")
+-- B777CMD_btn_trimL = deferred_command("Strato/777/air/trim_L_sw", "Left Trim Valve Switch")
+-- B777CMD_btn_trimR = deferred_command("Strato/777/air/trim_R_sw", "Right Trim Valve Switch")
 
 
 
+
+-- change button state
+-- set animation drops
+-- trigger events to happen afte run_after_time
+
+-- CMD!
+
+-- how?
+
+--[[
+1. call method inside each object
+2. method toggles switch state, which is animated in flight loop
+3. method calls another func after time, which decides what to do now
+
+
+use real objs btw
+
+]]
+
+local consumer = {
+    packL = {
+        consumption = 6,
+        state = 0,
+        switch_state = 0,
+        sourceListener = function(src) end,
+        switchListener = function(phase, duration)
+            self.switch_state = 1 - self.switch_state
+        end
+    },
+}
 
 
 local consumers = {
     packL = {
         consumption = 6,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration)
+            self.switch_state = 1 - self.switch_state
+        end
     },
     packR = {
         consumption = 6,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     trimL = {
         consumption = 1,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     trimR= {
         consumption = 1,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     waiL = {
         consumption = 3,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     waiR = {
         consumption = 3,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     eng1Starter = {
         consumption = 7,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     }, -- not sure, engines seem to boost
     eng2Starter = {
         consumption = 11,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     apuStarter = {
         consumption = 6,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     demandPumpL = {
         consumption = 4,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     },
     demandPumpR = {
         consumption = 4,
         state = 0,
-        switch_state = 0;
+        switch_state = 0,
         sourceListener = function(src) end,
-        switchListener = function() end
+        switchListener = function(phase, duration) end
     }
 }
 
@@ -260,6 +291,8 @@ end
 local isoL = 0
 local isoR = 0
 local isoC = 0
+
+B777CMD_btn_packL = deferred_command("Strato/777/air/pack_L_sw", "Left Pack Valve Switch", consumers.packL.switchListener)
 
 function calcPressure()
     --TODO: with no load or source, pressure drops 10 psi in 25 sec
@@ -345,6 +378,10 @@ function after_physics()
     -- print("press: {"..press[1]..", "..press[2].."}")
     B777DR_duct_press[0] = press[1]
     B777DR_duct_press[1] = press[2]
+
+    B777DR_pack_sw_pos[0] = utils.animate(consumers.packL.switch_state, B777DR_pack_sw_pos[0], 20)
+
+
 end
 
 --function after_replay()

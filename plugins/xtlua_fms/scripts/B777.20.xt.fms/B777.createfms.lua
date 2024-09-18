@@ -644,8 +644,6 @@ function fms:B777_fms_display()
   for k, v in ipairs(self.dispMSG) do
     print("alert "..k.." "..v)
   end]]
-  print(next(alertStack))
-  print(next(self.dispMSG))
   -- since com and alert messages display on all cdus, they have separate stacks
   if newText[thisID] then -- if typed while alert message
     B777DR_fms[thisID][14] = self.scratchpad;
