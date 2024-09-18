@@ -241,6 +241,13 @@ function veryEfficientAndShortAndSmartAndNiceFunctionThatIGuessGetsTheJobDoneMad
     }
 
     components[#components + 1] = interactive {
+        position = { 1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92 },
+        onMouseDown = function()
+            page = 12
+        end
+    }
+
+    components[#components + 1] = interactive {
         position = { 10, 10, 180, 92 },
         onMouseDown = function()
             if checklistAllDone(get(page)) == 1 or checklistAllDone(get(page)) == 2 then
@@ -532,34 +539,34 @@ function ResetNormal()
     }
 end
 
--- function ResetAll()
---     components[#components + 1] = interactive {
---         position = { 7, 990 - 20 - 10 - 92 - 45 - 92 - 10 - 92 - 10, 1200 / 2 - 7 - 7, 92 },
---         onMouseDown = function()
---             for i = 0, 10, 1 do
---                 ChecklistReset(i)
---             end
---         end
---         --TODO: reset non-normal
---     }
--- end
+function ResetAll()
+    components[#components + 1] = interactive {
+        position = { 7, 990 - 20 - 10 - 92 - 45 - 92 - 10 - 92 - 10, 1200 / 2 - 7 - 7, 92 },
+        onMouseDown = function()
+            for i = 0, 10, 1 do
+                ChecklistReset(i)
+            end
+        end
+        --TODO: reset non-normal
+    }
+end
 
 function draw()
     if get(lowEicasMode) == 10 then
         drawRectangle(0, 0, 4096, 4096, black)
         if page >= 1 and page <= 10 then
-                if checklistAllDone(get(page)) == 1 then
-                    drawTexture(ChecklistComplete, 725 / 2, 110, 475, 55, white)
-                    drawText(opensans, 1200 / 2, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
-                    drawRectangle(10 + 225, 10, 215, 92,black)
-                elseif checklistAllDone(get(page)) == 2 then
-                    drawTexture(CheckOverridden, 725 / 2, 110, 475, 55, white)
-                    drawText(opensans, 1200 / 2, 120, "Checklist Overridden", 45, false, false, TEXT_ALIGN_CENTER, white)
-                    drawRectangle(10 + 225, 10, 215, 92,black)
-                else
-                    drawRectangle(210, 10, 180, 92,grey)
-                    drawText(opensans, 210 + 90, 57,"ITEM", 45, false, false, TEXT_ALIGN_CENTER, white)
-                    drawText(opensans, 210 + 90, 17,"OVRD", 45, false, false, TEXT_ALIGN_CENTER, white)
+            if checklistAllDone(get(page)) == 1 then
+                drawTexture(ChecklistComplete, 725 / 2, 110, 475, 55, white)
+                drawText(opensans, 1200 / 2, 120, "Checklist Complete", 45, false, false, TEXT_ALIGN_CENTER, white)
+                drawRectangle(10 + 225, 10, 215, 92,black)
+            elseif checklistAllDone(get(page)) == 2 then
+                drawTexture(CheckOverridden, 725 / 2, 110, 475, 55, white)
+                drawText(opensans, 1200 / 2, 120, "Checklist Overridden", 45, false, false, TEXT_ALIGN_CENTER, white)
+                drawRectangle(10 + 225, 10, 215, 92,black)
+            else
+                drawRectangle(210, 10, 180, 92,grey)
+                drawText(opensans, 210 + 90, 57,"ITEM", 45, false, false, TEXT_ALIGN_CENTER, white)
+                drawText(opensans, 210 + 90, 17,"OVRD", 45, false, false, TEXT_ALIGN_CENTER, white)
             end
         end
         if get(page) == 0 then
@@ -578,6 +585,14 @@ function draw()
             drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "RESETS", 45, false, false, TEXT_ALIGN_CENTER, white)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
             drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "NON-NORMAL MENU", 45, false, false, TEXT_ALIGN_CENTER, white)
+        elseif get(page) == 12 then
+            drawText(opensans, 1200 / 2, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75 - 90, "NON-NORMAL", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "NORMAL MENU", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "RESETS", 45, false, false, TEXT_ALIGN_CENTER, white)
+            drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, green)
+            drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75, "NON-NORMAL MENU", 45, false, false, TEXT_ALIGN_CENTER, white)
         else
             get(page ~= 1)
             drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92, grey)
@@ -595,13 +610,6 @@ function draw()
             drawRectangle(800 + 10, 10, 180, 92,grey)
             drawText(opensans, 1200 / 2 + 210 + 90, 57,"CHKL", 45, false, false, TEXT_ALIGN_CENTER, white)
             drawText(opensans, 1200 / 2 + 210 + 90, 17,"RESET", 45, false, false, TEXT_ALIGN_CENTER, white)
-
-            --TODO: non-normal page
-            --drawRectangle(410, 10, 180, 92,grey)
-            --drawText(opensans, 410 + 90, 37,"NOTES", 45, false, false, TEXT_ALIGN_CENTER, white)
-            --drawRectangle(1000 + 10, 10, 180, 92,grey)
-            --drawText(opensans, 1000 + 10 + 90, 57,"NON-", 45, false, false, TEXT_ALIGN_CENTER, white)
-            --drawText(opensans, 1000 + 10 + 90, 17,"NORMAL", 45, false, false, TEXT_ALIGN_CENTER, white)
         end
         --normal function
         if get(page) == 0 then
@@ -615,7 +623,7 @@ function draw()
             local currentChecklistname
             local currentChecklistvalues
             local checklistTitle = checklistnames[page]
-            local num = 1 --startup change
+            local foundZero = false
             
             currentChecklistname = mainchecklists[page]
             currentChecklistvalues = valueschecklist[page]
@@ -633,10 +641,19 @@ function draw()
             else
                 for i, value in ipairs(currentChecklistvalues) do
                     if value == 0 then
-                        surroun3(-66 * (get(num)))
-                        break
-                    else
-                        num = num + 1
+                        surroun3(-66 * i)  -- Execute when `0` is found
+                        foundZero = true
+                        break  -- Stop loop once `0` is found
+                    end
+                end
+
+                -- If no `0` was found, check for `3`
+                if not foundZero then
+                    for i, value in ipairs(currentChecklistvalues) do
+                        if value == 3 then
+                            surroun3(-66 * i)  -- Execute when `3` is found
+                            break
+                        end
                     end
                 end
             end
@@ -653,6 +670,13 @@ function draw()
             position = { 397 , 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92 },
             onMouseDown = function()
                 page = 11
+            end
+        }
+
+        components[#components + 1] = interactive {
+            position = { 1100 - 450 + 70 - 90 + 17 + 15 - 655 + 393 + 393, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92 },
+            onMouseDown = function()
+                page = 12
             end
         }
         
@@ -703,7 +727,7 @@ function draw()
                 drawText(opensans, 7 + 20, 990 - 20 - 4 - 90 - 92 - 10 - 92 - 10 - 45 / 2, "RESET ALL", 45, false, false, TEXT_ALIGN_LEFT, white)
                 ResetBeforeTakeoff()
                 ResetNormal()
-                -- ResetAll()
+                ResetAll()
             end
         end
     end
