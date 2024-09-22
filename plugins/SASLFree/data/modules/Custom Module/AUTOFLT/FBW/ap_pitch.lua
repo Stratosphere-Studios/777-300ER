@@ -225,8 +225,11 @@ end
 function getAutopilotAltHoldCmd()
     local alt_avg_ft = (get(alt_pilot) + get(alt_copilot)) / 2
     local alt_err = alt_hold_alt_tgt - alt_avg_ft
-    vs_hold_vs_tgt = alt_err * 3
-    if alt_err > 200 then
+    vs_hold_vs_tgt = math.sqrt(math.abs(alt_err)) * 12
+    if alt_err < 0 then
+        vs_hold_vs_tgt = -vs_hold_vs_tgt
+    end
+    if math.abs(alt_err) > 200 then
         set(alt_alert, 1)  --EICAS ALTITUDE ALERT
     else
         set(alt_alert, 0)
