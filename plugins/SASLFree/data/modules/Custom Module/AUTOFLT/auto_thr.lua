@@ -85,6 +85,8 @@ spd_flc_start_kts = 0
 
 curr_at_mode = AT_MODE_OFF
 at_engaged = false
+flc_thr_ratio = 1
+mcp_alt_last = 0
 
 function getThrottleIdleAltitudeFt(vs_entry)
     local curr_vs = lim(vs_entry, 0, -1500)
@@ -144,13 +146,16 @@ function setThrottleRefCmd()
     set(throttle_cmd, thr_lvr_cmd)
 end
 
+function setThrottleFlcRatio()
+    local avg_alt = (get(alt_pilot) + get(alt_copilot)) / 2
+    local alt_err = mcp_alt_last - avg_alt
+    flc_thr_ratio = lim(alt_err/4000, 1, 0.85)
+end
+
 function setThrottleFlcCmd(v_mode)
     if v_mode == VERT_MODE_FLC_CLB then
         local tgt_spd_kts = math.max(get(tgt_ias)+35, spd_flc_start_kts+35)
-        local avg_alt = (get(alt_pilot) + get(alt_copilot)) / 2
-        local alt_err = get(mcp_alt_val) - avg_alt
-        local thr_ratio = lim(alt_err/4000, 1, 0.85)
-        setThrottleIASHoldCmd(tgt_spd_kts, thr_ratio)
+        setThrottleIASHoldCmd(tgt_spd_kts, flc_thr_ratio)
     else
         local tgt_spd_kts = math.min(get(tgt_ias)-12, spd_flc_start_kts-12)
         local throt_prev = get(throttle_cmd)
@@ -225,6 +230,11 @@ end
 
 function update()
     local v_mode = get(curr_vert_mode)
+    local mcp_alt = get(mcp_alt_val)
+    if mcp_alt ~= mcp_alt_last then
+        mcp_alt_last = mcp_alt
+        setThrottleFlcRatio()
+    end
     updateMode(v_mode)
     if curr_at_mode ~= AT_MODE_IAS_HOLD then
         ias_last = (get(cas_pilot) + get(cas_copilot)) / 2

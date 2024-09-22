@@ -90,6 +90,8 @@ ALT_HOLD_ALT_REACH_SEC = 10
 ALT_HOLD_DECEL = 10
 ALT_HOLD_CAPTURE_ALT_FT = 150
 ALT_HOLD_VS_CMD_MAX_FPM = 1000
+ALT_HOLD_ALT_MRGN_FT = 350
+ALT_ACQ_ALT_PENALTY_FT = 250 -- Alt penalty per 1000 fpm
 
 vs_last_ft = 0
 ias_last = 0
@@ -104,6 +106,8 @@ alt_hold_alt_acq = false
 mcp_alt_acq = false
 mcp_alt_tgt_set = false
 
+VS_HOLD_KP = 0.00037
+VS_HOLD_KD = 0.0013
 FLC_CLB_KP = -0.04
 FLC_CLB_KD = -0.74
 FLC_DES_KP = -0.02
@@ -133,10 +137,10 @@ end
 
 function getAltIntcAlt(vs_avg_fpm)
     local vs_avg = math.abs(vs_avg_fpm)
-    local alt_intcpt_mrgn_ft = 570
-    local lim_vspeed = 1200
+    local alt_intcpt_mrgn_ft = ALT_HOLD_ALT_MRGN_FT
+    local lim_vspeed = ALT_HOLD_VS_CMD_MAX_FPM
     if vs_avg > lim_vspeed then
-        alt_intcpt_mrgn_ft = alt_intcpt_mrgn_ft + (vs_avg - lim_vspeed) * (450/lim_vspeed)
+        alt_intcpt_mrgn_ft = alt_intcpt_mrgn_ft + (vs_avg - lim_vspeed) * (ALT_ACQ_ALT_PENALTY_FT/lim_vspeed)
     end
 
     return alt_intcpt_mrgn_ft
@@ -163,7 +167,7 @@ function getAutopilotVSHoldCmd(pitch_cmd_prev, vs_cmd_fpm)
         --vshold_pid:update{kp=tgt_kp, tgt=vs_cmd_fpm, curr=vs_pred}
         --set(pitch_et, vshold_pid.errtotal)
         local vs_err = vs_cmd_fpm - vs_pred
-        local vshold_out = lim(vs_err * get(pitch_kp) - vs_accel * get(pitch_kd), 6, -6)
+        local vshold_out = lim(vs_err * VS_HOLD_KP - vs_accel * VS_HOLD_KD, 6, -6)
 
         local tgt_cmd = pitch_cmd_prev+ (vshold_out * get(f_time))
 
