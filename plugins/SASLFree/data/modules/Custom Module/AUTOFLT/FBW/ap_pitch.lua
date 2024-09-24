@@ -10,7 +10,7 @@ pitch_kp = createGlobalPropertyf("Strato/777/pitch_dbg/kp", 0.00037)
 pitch_ki = createGlobalPropertyf("Strato/777/pitch_dbg/ki", -1)
 pitch_kd = createGlobalPropertyf("Strato/777/pitch_dbg/kd", 0.0013)
 pitch_et = createGlobalPropertyf("Strato/777/pitch_dbg/et", 0)
-pitch_resp = createGlobalPropertyf("Strato/777/pitch_dbg/resp", -0.11)
+pitch_resp = createGlobalPropertyf("Strato/777/pitch_dbg/resp", 1/20)
 ias_pred_sec = createGlobalPropertyf("Strato/777/pitch_dbg/ias_pred_sec", 8)
 ias_pred_kt = createGlobalPropertyf("Strato/777/pitch_dbg/ias_pred_kt", 0)
 vs_cmd = createGlobalPropertyf("Strato/777/pitch_dbg/vscmd", 0)
@@ -122,7 +122,7 @@ function getIASCorrection()
 
         ias_last = ias_avg_kts
 
-        return ias_accel * get(pitch_ki)
+        return ias_accel * -1
     else
         return 0
     end
@@ -224,11 +224,9 @@ end
 
 function getAutopilotAltHoldCmd()
     local alt_avg_ft = (get(alt_pilot) + get(alt_copilot)) / 2
+    local vs_avg_fpm = (get(vs_pilot_fpm) + get(vs_copilot_fpm)) / 2
     local alt_err = alt_hold_alt_tgt - alt_avg_ft
-    vs_hold_vs_tgt = math.sqrt(math.abs(alt_err)) * 12
-    if alt_err < 0 then
-        vs_hold_vs_tgt = -vs_hold_vs_tgt
-    end
+    vs_hold_vs_tgt = (alt_err - vs_avg_fpm / 20) * 2
     if math.abs(alt_err) > 200 then
         set(alt_alert, 1)  --EICAS ALTITUDE ALERT
     else
@@ -268,7 +266,6 @@ function updateMode()
             mcp_alt_acq = true
             alt_intcpt_margin_ft = tmp_margin
         end
-        set(pitch_resp, tmp_margin)
     else
         if ((get(flch_eng) == 1 and vert_mode == VERT_MODE_VSHOLD) or 
             (get(vshold_eng) == 1 and vert_mode >= VERT_MODE_FLC_CLB)) and 

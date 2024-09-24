@@ -51,6 +51,10 @@ cas_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_pilot")
 cas_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/airspeed_kts_copilot")
 gs_dref = globalPropertyf("sim/cockpit2/gauges/indicators/ground_speed_kt")
 
+--Critical speeds:
+max_allowable = globalPropertyi("Strato/777/fctl/vmax")
+stall_speed = globalPropertyi("Strato/777/fctl/vstall")
+
 -- We use pitch here to limit idle thrust
 pitch_pilot = globalPropertyf("sim/cockpit/gyros/the_ind_ahars_pilot_deg")
 pitch_copilot = globalPropertyf("sim/cockpit/gyros/the_ind_ahars_copilot_deg")
@@ -174,6 +178,13 @@ function updateMode(v_mode)
         set(toga, 0)
         ra_last = avg_ra
         return
+    end
+
+    if get(autothr_arm) == 1 and (avg_ias < get(stall_speed) or avg_ias > get(max_allowable)) then
+        if curr_at_mode == AT_MODE_OFF and avg_ra > 200 then
+            curr_at_mode = AT_MODE_IAS_HOLD
+            return
+        end
     end
 
     local flt_dir_off = get(flt_dir_pilot) == 1 and get(flt_dir_copilot) == 1
