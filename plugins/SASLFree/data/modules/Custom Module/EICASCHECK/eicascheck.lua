@@ -71,6 +71,7 @@ local mainchecklists = {
     securechecklist
 }
 
+
 local valueschecklist = {
     preflightchecklistvalues,
     bfrstartchecklistvalues,
@@ -178,6 +179,32 @@ function chklDraw(tbl, valtbl)
         end
         yVal = yVal - 66
         drawText(opensans, 120, 1000 + yVal, tbl[i], 50, false, false, TEXT_ALIGN_LEFT, ChklDrawCol)
+    end
+end
+
+function NonCheckparseHome(list, x, y)
+    loc1 = 1
+    loc2 = 1
+    col = "cel"
+    pos = 95
+    for i, v in pairs(list) do
+        extra = 0
+        pos = pos + 50
+        col = get(col) .. (tostring(get(pos)))
+        if v:find("\n") then
+            extra = 45 / 2
+        end
+        if i <= 10 then
+            loc1 = loc1 + 95
+            drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 + x, 1188 + 17 - 4 - 25 + 2 +- get(loc1) + y, 600 - 10, 85, grey)
+            drawText(opensans, 25, 1100 - 150 + 475 - 200 + 10 - 30 - get(loc1) + y + extra, v, 38, false,
+                false, TEXT_ALIGN_LEFT, white)
+        else
+            loc2 = loc2 + 95
+            drawRectangle(1100 - 450 + 70 - 90 + 17 + 15 + 600 + x, 1188 + 17 - 4 - 25 + 2 +- get(loc2) + y, 600 - 10, 85, grey)
+            drawText(opensans, 25 + 600, 1100 - 150 + 475 - 200 + 10 - 30 - get(loc2) + y + extra, v, 38, false,
+                false, TEXT_ALIGN_LEFT, white)
+        end
     end
 end
 
@@ -298,6 +325,7 @@ function NoCheckAvail()
     local current_speedbrake_handle = get(speedbrake_handle)
     local current_gear_deploy_ratio1 = get(gear_deploy_ratio1)
     local current_gear_deploy_ratio2 = get(gear_deploy_ratio2)
+    
 
     --methods(current value, previous value, enable value, checklist page, item in list) i'm so smart
     --preflightchecklist
@@ -361,6 +389,48 @@ function update()
 
                 onMouseMove = function()
                     homepagesurr = i
+                    return true
+                end,
+
+                onMouseLeave = function()
+                    --  homepagesurr = 0
+                    return true
+                end
+            }
+        end
+    end
+
+    if (get(page) == 12) then
+        for i = 0, 10, 1 do
+            components[#components + 1] = interactive {
+                position = { 1100 - 450 + 70 - 90 - 150 + 17 + 15 - 655, 1188 + 17 - 75 - 4 - 25 + 2 - 1 - 76 - (97 * i), 390, 92 },
+
+                onMouseDown = function()
+                    -- page = i
+                end,
+
+                onMouseMove = function()
+                    homepagesurr = i
+                    return true
+                end,
+
+                onMouseLeave = function()
+                    --  homepagesurr = 0
+                    return true
+                end
+            }
+        end
+
+        for i = 0, 6, 1 do
+            components[#components + 1] = interactive {
+                position = { 1100 - 450 + 70 - 90 - 150 + 17 + 15 - 655 + 600, 1188 + 17 - 75 - 4 - 25 + 2 - 1 - 76 - (97 * i), 390, 92 },
+
+                onMouseDown = function()
+                    -- page = i
+                end,
+
+                onMouseMove = function()
+                    NonNormalhomepagesurr = i
                     return true
                 end,
 
@@ -617,6 +687,9 @@ function draw()
             if get(homepagesurr ~= 0) then
                 surroun(-95 * (get(homepagesurr)))
             end
+        elseif get(page) == 12 then
+            NonCheckparseHome(NonNormal, -655, -150)
+            --i just lazy to do surron 
         end
         
         if page >= 1 and page <= 10 then
@@ -631,11 +704,8 @@ function draw()
             drawText(opensans, 1200 / 2, 1200 - 145, checklistTitle, 45, false, false, TEXT_ALIGN_CENTER, white)
             chklDraw(currentChecklistname, currentChecklistvalues)
             if (get(otherpagesurr) ~= 0) then
-                for i, value in ipairs(currentChecklistvalues) do
-                    if value ~= 3 then
-                        surroun2(-66 * (get(otherpagesurr)))
-                        break
-                    end
+                if currentChecklistvalues[otherpagesurr] ~= 3 and currentChecklistvalues[otherpagesurr] ~= 6 then
+                    surroun2(-66 * (get(otherpagesurr)))
                 end
                 surroun3(-66 * (get(otherpagesurr)))
             else
