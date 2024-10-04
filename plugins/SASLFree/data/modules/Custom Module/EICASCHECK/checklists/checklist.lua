@@ -14,7 +14,6 @@ checklisthome = {
     [8] = "LANDING",
     [9] = "SHUTDOWN",
     [10] = 'SECURE'
-
 }
 
 preflightchecklist = {
@@ -79,12 +78,33 @@ securechecklist = {
     [3] = 'Packs...............................OFF'
 }
 
+NonNormal = {
+    [1] = 'UNANNUNCIATED\nCHECKLISTS...',
+    [2] = "APLN GENRL, EMER EOPT,\nDOORS, WINDOWS...",
+    [3] = 'AIR SYSTEMS...',
+    [4] = 'ANTI-ICE, RAIN...',
+    [5] = 'AUTOMATIC FLIGHT...',
+    [6] = 'COMMUNICATIONS,\nDATALINK...',
+    [7] = 'ELECTRICAL...',
+    [8] = 'ENGINES, APU...',
+    [9] = 'FIRE PROTECTION...',
+    [10] = 'FLIGHT CONTROLS...',
+    [11] = 'FLIGHT INSTRUMENTS,\nDISPLAYS...',
+    [12] = 'FLIGHT MANAGEMENT\nNAVIGATION...',
+    [13] = 'FUEL...',
+    [14] = 'HYDRAULICS, RAT...',
+    [15] = 'LANDING GEAR...',
+    [16] = 'WARNING SYSTEMS,\nTAIL STRIKE...',
+}
+
 --[[
 VALUES MEANINGS:
     0 = not checked
     1 = manually checked
     2 = already checked
     3 = no check available
+    4 = no check available checked
+    5, 6, 7 = do not perfrom step
 --]]
 preflightchecklistvalues = { 0, 0, 3, 3 }
 bfrstartchecklistvalues = { 0, 0, 0, 0, 0, 0, 0, 3 }
@@ -96,3 +116,5 @@ approachecklistvalues = { 0 }
 landingchecklistvalues = { 3, 3, 3 }
 shutdownchecklistvalues = { 3, 0, 0, 3, 0 }
 securechecklistvalues = { 0, 0, 0 }
+
+
