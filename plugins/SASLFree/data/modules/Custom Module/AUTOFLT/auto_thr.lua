@@ -172,7 +172,7 @@ function updateMode(v_mode)
     local avg_ias = (get(cas_pilot) + get(cas_copilot)) / 2
 
     if get(L_reverser_deployed) == 1 or get(R_reverser_deployed) == 1 or 
-        get(at_disc) == 1 then
+        get(at_disc) == 1 or get(autothr_arm) == 0 then
         curr_at_mode = AT_MODE_OFF
         set(spd_hold, 0)
         set(toga, 0)

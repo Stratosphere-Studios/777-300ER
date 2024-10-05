@@ -434,7 +434,7 @@ function UpdateEicasWarnings(messages, conf_warn)
 	local ths_max_val_conv = THS_greenband_max_val * (2/15)-1
 	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
 	local avg_ra = (get(ra_pilot) + get(ra_copilot)) / 2
-	local to_flaps = {5, 15, 20}
+	local to_flaps = {9, 15, 20}
 	local tmp_warns = {}
 	local n_config_warnings = 0
 	if get(on_ground) == 0 then
