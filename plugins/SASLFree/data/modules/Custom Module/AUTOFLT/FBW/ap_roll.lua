@@ -6,10 +6,11 @@
 *****************************************************************************************
 --]]
 
-roll_kp = createGlobalPropertyf("Strato/777/roll_dbg/kp", 0)
+roll_kp = createGlobalPropertyf("Strato/777/roll_dbg/kp", 1)
 roll_ki = createGlobalPropertyf("Strato/777/roll_dbg/ki", 0)
 roll_kd = createGlobalPropertyf("Strato/777/roll_dbg/kd", 0)
 roll_et = createGlobalPropertyf("Strato/777/roll_dbg/et", 0)
+roll_max = createGlobalPropertyf("Strato/777/roll_dbg/roll_max", 0)
 roll_spd = createGlobalPropertyf("Strato/777/roll_dbg/roll_spd", 0)
 ap_roll_eng = createGlobalPropertyi("Strato/777/roll_dbg/eng", 0)
 roll_tgt = createGlobalPropertyf("Strato/777/autopilot/roll_tgt_deg", 0)
@@ -27,7 +28,7 @@ roll_fltdir_copilot = createGlobalPropertyi("Strato/777/pfd/roll_fltdir_copilot"
 flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
 flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
 
-ap_engaged = globalPropertyi("Strato/777/mcp/ap_on", 0)
+ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 ap_roll_on = createGlobalPropertyi("Strato/777/autopilot/ap_roll_on", 0)
 
 
@@ -110,9 +111,11 @@ function getAutopilotHdgTrkSelCmd(hdg_tgt)
 
     local avg_ias = (get(cas_pilot) + get(cas_copilot)) / 2
     local bank_limit = getAutoBankLimit(avg_ias)
+    set(roll_max, bank_limit)
+    lat_cmd_pid.lim_out = bank_limit
 
-    lat_cmd_pid:update{ki=tgt_ki, tgt=hdg_mcp, curr=curr_lat, lim_out=bank_limit}
-    set(roll_et, lat_cmd_pid.errtotal)
+    lat_cmd_pid:update{ki=tgt_ki, tgt=hdg_mcp, curr=curr_lat}
+    set(roll_et, lat_cmd_pid.output)
     
     return getAutoPilotRollMaintainCmd(lat_cmd_pid.output)
 end
@@ -134,28 +137,36 @@ function getAutopilotHdgTrkHoldCmd()
 end
 
 function updateRollMode()
-    if get(hdg_sel_eng) == 1 and (curr_lat_mode == LAT_MODE_TRK_HOLD or 
-        curr_lat_mode == LAT_MODE_HDG_HOLD) then
-        set(hdg_hold_eng, 0)
-    elseif get(hdg_hold_eng) == 1 and (curr_lat_mode == LAT_MODE_TRK_SEL or 
-        curr_lat_mode == LAT_MODE_HDG_SEL) then
-        set(hdg_sel_eng, 0)
-    end
-    if get(hdg_sel_eng) == 1 then
-        if get(hdg_to_trk) == 1 then
-            curr_lat_mode = LAT_MODE_TRK_SEL
-        else
-            curr_lat_mode = LAT_MODE_HDG_SEL
-        end
-    elseif get(hdg_hold_eng) == 1 then
-        if get(hdg_to_trk) == 1 then
-            curr_lat_mode = LAT_MODE_TRK_HOLD
-        else
-            curr_lat_mode = LAT_MODE_HDG_HOLD
-        end
-    else
+    local auto_level = get(ap_engaged) + get(flt_dir_pilot) + get(flt_dir_copilot)
+    if auto_level == 0 then
         curr_lat_mode = LAT_MODE_OFF
+        set(hdg_hold_eng, 0)
+        set(hdg_sel_eng, 0)
+    else
+        if get(hdg_sel_eng) == 1 and (curr_lat_mode == LAT_MODE_TRK_HOLD or 
+            curr_lat_mode == LAT_MODE_HDG_HOLD) then
+            set(hdg_hold_eng, 0)
+        elseif get(hdg_hold_eng) == 1 and (curr_lat_mode == LAT_MODE_TRK_SEL or 
+            curr_lat_mode == LAT_MODE_HDG_SEL) then
+            set(hdg_sel_eng, 0)
+        end
+        if get(hdg_sel_eng) == 1 then
+            if get(hdg_to_trk) == 1 then
+                curr_lat_mode = LAT_MODE_TRK_SEL
+            else
+                curr_lat_mode = LAT_MODE_HDG_SEL
+            end
+        elseif get(hdg_hold_eng) == 1 then
+            if get(hdg_to_trk) == 1 then
+                curr_lat_mode = LAT_MODE_TRK_HOLD
+            else
+                curr_lat_mode = LAT_MODE_HDG_HOLD
+            end
+        else
+            curr_lat_mode = LAT_MODE_OFF
+        end
     end
+    
     set(curr_roll_mode, curr_lat_mode)
 end
 

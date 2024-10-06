@@ -416,9 +416,25 @@ function updatePitchFltDir() -- Updates pitch flight directors
     end
 end
 
+function clearPitchMode()
+    vert_mode = VERT_MODE_OFF
+    mcp_alt_acq = false
+    alt_hold_alt_acq = false
+    set(ap_pitch_on, 0)
+    set(vshold_eng, 0)
+    set(flch_eng, 0)
+    set(alt_hold_eng, 0)
+end
+
 function getAutopilotPitchCmd()
     updateVsFpa()
-    updateMode()
+    local auto_level = get(ap_engaged) + get(flt_dir_pilot) + get(flt_dir_copilot)
+    if auto_level == 0 then
+        clearPitchMode()
+    else
+        updateMode()
+    end
+    
     local pitch_cmd_deg = 0
     if vert_mode ~= VERT_MODE_ALTHOLD then
         set(alt_alert, 0)
