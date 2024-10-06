@@ -35324,7 +35324,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Stratosphere Studios
-P acf/_auto_cowl_flaps_EQ 32767
+P acf/_auto_cowl_flaps_EQ 32766
 P acf/_auto_engage_BC_deg 0.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -36777,7 +36777,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 121205
+P acf/_file_writer_version 121211
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -38347,7 +38347,6 @@ GROUP Captain PFD
   LOCKED
   HIDE
   CHAINED
-  GROUP_OPEN
   gen_rotary template
     POS 668.500000 1807.000000
     IMAGE PFD/_Diagram
@@ -48326,6 +48325,7 @@ GROUP MCP
   LOCKED
   HIDE
   CHAINED
+  GROUP_OPEN
   gen_rotary VS_label
     POS 3702.000000 2811.000000
     IMAGE MCP/VS
@@ -48509,21 +48509,20 @@ GROUP MCP
     ROUNDING ROUND_ROUND
 
   gen_LED FPA
-    POS 4063.000000 2794.000000
+    POS 4007.000000 2794.000000
     IMAGE Digital_Large
-    DATAREF sim/cockpit2/autopilot/fpa
+    DATAREF Strato/777/mcp/tgt_fpa
     SHOW_EQUAL 1.000000 Strato/777/mcp/vshold
     SHOW_GREATER 1.000000 Strato/777/mcp/vs_fpa
     SIZE 2.000000
     LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
     BUS_SRC 1
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 360.000000 360.000000
-    DIGITS 3
-    DECIMALS 0
+    DIGITS 2
+    DECIMALS 1
     PERIOD_WIDTH 0
     LED_ROWS 0
     ROUNDING ROUND_ROUND

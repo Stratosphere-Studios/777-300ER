@@ -160,6 +160,7 @@ sim/operation/failures/rel_engfla1
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
+simDR_autopilot_vs                     = find_dataref("sim/cockpit2/autopilot/vvi_dial_fpm")
 simDR_autopilot_alt                    = find_dataref("sim/cockpit2/autopilot/altitude_dial_ft")
 simDR_startup_running                  = find_dataref("sim/operation/prefs/startup_running")
 simDR_com1_stby_khz                    = find_dataref("sim/cockpit2/radios/actuators/com1_standby_frequency_khz")
@@ -173,8 +174,8 @@ simDR_latitude                         = find_dataref("sim/flightmodel/position/
 simDR_groundSpeed                      = find_dataref("sim/cockpit2/gauges/indicators/ground_speed_kt")
 simDR_bus_voltage                      = find_dataref("sim/cockpit2/electrical/bus_volts")
 simDR_ap_airspeed                      = find_dataref("sim/cockpit/autopilot/airspeed")
+simDR_ap_airspeed_kts                  = find_dataref("sim/cockpit2/autopilot/airspeed_dial_kts")
 simDR_alt_ft                           = {find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot"), find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_copilot")}
-simDR_autopilot_alt                    = find_dataref("sim/cockpit/autopilot/altitude")
 simDR_aoa                              = {find_dataref("sim/cockpit2/gauges/indicators/AoA_pilot"), find_dataref("sim/cockpit2/gauges/indicators/AoA_copilot")}
 simDR_radio_alt                        = {find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot"), find_dataref("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_copilot")}
 simDR_onGround                         = find_dataref("sim/flightmodel/failures/onground_any")
@@ -199,6 +200,10 @@ simDR_viewIsExternal                   = find_dataref("sim/graphics/view/view_is
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
+
+B777DR_autopilot_fpa                   = find_dataref("Strato/777/mcp/tgt_fpa")
+B777DR_ap_vsFPA_sw                     = find_dataref("Strato/777/mcp/vs_fpa")
+
 B777DR_hyd_press                       = find_dataref("Strato/777/hydraulics/press")
 B777DR_ovhd_aft_button_target          = find_dataref("Strato/777/cockpit/ovhd/aft/buttons/target")
 B777DR_vstall                          = find_dataref("Strato/777/fctl/vstall")
@@ -673,7 +678,31 @@ function B777_alt_dn_CMDhandler(phase, duration)
 		if B777DR_alt_is_fast_ovrd == 0 then
 			simDR_autopilot_alt = smartKnobDn(100, 1000, 0, simDR_autopilot_alt)
 		else
-			simDR_autopilot_alt = math.min(simDR_autopilot_alt - 1000, 0)
+			simDR_autopilot_alt = math.max(simDR_autopilot_alt - 1000, 0)
+		end
+	end
+end
+
+--TODO: Should I switch these? (or find a way to adjust the manip)
+
+function B777_vs_up_CMDhandler(phase, duration)
+	if phase == 0 then
+		if B777DR_ap_vsFPA_sw == 1 then
+			B777DR_autopilot_fpa = smartKnobUp(.1, 1, 9.9, B777DR_autopilot_fpa)
+		else
+			local vs = math.floor(simDR_autopilot_vs/100) * 100 -- since it autofills the current vs, we need to remove last 2 zeroes
+			simDR_autopilot_vs = smartKnobUp(100, 500, 6000, vs)
+		end
+	end
+end
+
+function B777_vs_dn_CMDhandler(phase, duration)
+	if phase == 0 then
+		if B777DR_ap_vsFPA_sw == 1 then
+			B777DR_autopilot_fpa = smartKnobDn(.1, 1, -9.9, B777DR_autopilot_fpa)
+		else
+			local vs = math.ceil(simDR_autopilot_vs/100) * 100 -- since it autofills the current vs, we need to remove last 2 zeroes
+			simDR_autopilot_vs = smartKnobDn(100, 500, -8000, vs)
 		end
 	end
 end
@@ -1023,6 +1052,8 @@ B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/777/adiru_align_
 
 B777CMD_ap_alt_up                    = deferred_command("Strato/777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
 B777CMD_ap_alt_dn                    = deferred_command("Strato/777/autopilot/alt_dn", "Autopilot Altitude Down", B777_alt_dn_CMDhandler)
+B777CMD_ap_vs_up                     = deferred_command("Strato/777/autopilot/vs_up", "Autopilot Vertical Speed Up", B777_vs_up_CMDhandler)
+B777CMD_ap_vs_dn                     = deferred_command("Strato/777/autopilot/vs_dn", "Autopilot Vertical Speed Down", B777_vs_dn_CMDhandler)
 B777CMD_minimums_up                  = deferred_command("Strato/777/minimums_up_capt", "Captain Minimums Up", B777_minimums_up_capt_CMDhandler)
 B777CMD_minimums_dn                  = deferred_command("Strato/777/minimums_dn_capt", "Captain Minimums Down", B777_minimums_dn_capt_CMDhandler)
 B777CMD_minimums_up_fo               = deferred_command("Strato/777/minimums_up_fo", "F/O Minimums Up", B777_minimums_up_fo_CMDhandler)
@@ -1233,7 +1264,7 @@ function setDiffs()
 	for i = 0, 1 do
 		B777DR_stall_tape_diff[i] = B777DR_vstall - B777DR_ias_indicator[i]
 		B777DR_ovspd_tape_diff[i] = B777DR_vmax - B777DR_ias_indicator[i]
-		B777DR_airspeed_bug_diff[i] = simDR_ap_airspeed - B777DR_ias_indicator[i]
+		B777DR_airspeed_bug_diff[i] = simDR_ap_airspeed_kts - B777DR_ias_indicator[i]
 		B777DR_alt_bug_diff[i] = simDR_autopilot_alt - B777DR_displayed_alt[i]
 		B777DR_heading_bug_diff[i] = getHeadingDifference(simDR_hdg_bug, simDR_hdg[i+1])
 		B777DR_trimref_tape_diff[i] = B777DR_trimref - B777DR_ias_indicator[i]
@@ -1261,6 +1292,8 @@ function smartKnobDn(slow, fast, min, dataref)
 		return math.max(dataref - slow, min)
 	end
 end
+
+-- TODO: Make this better
 
 function checkKnobSpd()
 	if press_counter >= 4 then
@@ -1597,7 +1630,8 @@ end
 
 --function before_physics()
 
-function murderer()
+-- TODO: make this better
+function killer()
 
 	-- if view external
 	if simDR_viewIsExternal == 1 then
@@ -1675,7 +1709,7 @@ function after_physics()
 	spdTrend()
 	altimiter()
 	efis()
-	murderer()
+	killer()
 
 	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
 		B777DR_hyd_press_low_any = 1

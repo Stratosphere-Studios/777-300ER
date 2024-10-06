@@ -290,19 +290,25 @@ function B777_ap_vs_switch_CMDhandler(phase, duration)         -- A/P VERTICAL S
 end
 
 function B777_ap_hdgHold_switch_CMDhandler(phase, duration)    -- A/P HEADING HOLD BUTTON
-   if phase == 0 then
+    if phase == 0 then
       B777DR_mcp_button_target[7] = 1
-      B777DR_ap_hdgHld_sw = 1
+      print("hldA "..B777DR_ap_hdgHld_sw)
+      B777DR_ap_hdgHld_sw = B777DR_ap_hdgHld_sw
+      print("hldB "..B777DR_ap_hdgHld_sw)
    elseif phase == 2 then
       B777DR_mcp_button_target[7] = 0
+      B777DR_ap_hdgHld_sw = 1
    end
 end
 
 function B777_ap_hdgSel_switch_CMDhandler(phase, duration)     -- A/P HEADING SELECT BUTTON
-   if phase == 0 then
+    if phase == 0 then
       B777DR_mcp_button_target[8] = 1
-      B777DR_ap_hdgSel_sw = 1
+      print("selA "..B777DR_ap_hdgSel_sw)
+      B777DR_ap_hdgSel_sw = B777DR_ap_hdgSel_sw
+      print("selB "..B777DR_ap_hdgSel_sw)
    elseif phase == 2 then
+      B777DR_ap_hdgSel_sw = 1
       B777DR_mcp_button_target[8] = 0
    end
 end
@@ -505,6 +511,25 @@ function coverPhysics() -- moves switches under switch covers when switch covers
    end
 end
 
+function refreshDrs() -- read drs to make sure they're up to date
+   local temp = B777CMD_ap_on
+   temp = B777CMD_disco_bar
+   temp = B777CMD_ap_disengage
+   temp = B777DR_ap_spdHld_sw
+   temp = B777DR_ap_flch_sw
+   temp = B777DR_ap_altHld_sw
+   temp = B777DR_ap_vsHld_sw
+   temp = B777DR_ap_hdgSel_sw
+   temp = B777DR_ap_hdgHld_sw
+   temp = B777DR_ap_toga_sw
+   temp = B777DR_at_arm_sw
+   temp = B777DR_at_disco_sw
+   temp = B777DR_ap_vsFPA_sw
+   temp = B777DR_ap_fltDir_sw_capt
+   temp = B777DR_ap_fltDir_sw_fo
+   temp = B777DR_ap_hdgTrk_sw
+end
+
 --*************************************************************************************--
 --**                                    EVENT CALLBACKS                              **--
 --*************************************************************************************--
@@ -530,6 +555,7 @@ end
 --function before_physics()
 
 function after_physics()
+   refreshDrs()
    B777DR_cockpit_door_pos = B777_animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 3)
 
    B777DR_mcp_button_pos[13] = B777_animate(B777DR_ap_fltDir_sw_capt, B777DR_mcp_button_pos[13], 30)

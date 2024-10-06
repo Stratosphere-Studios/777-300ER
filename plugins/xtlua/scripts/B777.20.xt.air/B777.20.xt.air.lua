@@ -126,7 +126,7 @@ B777DR_outflow_valve_pos_status = deferred_dataref("Strato/777/air/outflow_valve
 B777DR_landing_alt_val = deferred_dataref("Strato/777/air/landing_alt_val", "number")
 
 
-B777DR_pack_sw_pos = deferred_dataref("Strato/777/air/pack_sw_pos", "array[3]")
+B777DR_pack_trim_sw_pos = deferred_dataref("Strato/777/air/pack_trim_sw_pos", "array[4]")
 
 
 -- how will i do temp control switches?
@@ -137,9 +137,9 @@ B777DR_pack_sw_pos = deferred_dataref("Strato/777/air/pack_sw_pos", "array[3]")
 
 
 local producers = {
-    engine1 = {state = 0, prod = 40}, -- depends on throttle, up to 60 or 70
-    engine2 = {state = 0, prod = 60},
-    apu = {state = 0, prod = 25} -- boosts for engine start
+    engine1 = {switchState = 0, state = 0, prod = 40}, -- depends on throttle, up to 60 or 70
+    engine2 = {switchState = 0, state = 0, prod = 60},
+    apu = {switchState = 0, state = 0, prod = 25} -- boosts for engine start
 }
 
 B777DR_air_hyd_pump_state = find_dataref("Strato/777/hydraulics/pump/primary/actual")
@@ -161,12 +161,6 @@ B777DR_air_hyd_pump_state = find_dataref("Strato/777/hydraulics/pump/primary/act
 -- B777CMD_btn_apu = deferred_command("Strato/777/air/apu_sw", "APU Bleed Switch")
 -- B777CMD_btn_engR = deferred_command("Strato/777/air/eng_R_sw", "Right Engine Bleed Switch")
 
--- B777CMD_btn_packR = deferred_command("Strato/777/air/pack_R_sw", "Right Pack Valve Switch")
--- B777CMD_btn_trimL = deferred_command("Strato/777/air/trim_L_sw", "Left Trim Valve Switch")
--- B777CMD_btn_trimR = deferred_command("Strato/777/air/trim_R_sw", "Right Trim Valve Switch")
-
-
-
 
 -- change button state
 -- set animation drops
@@ -186,113 +180,87 @@ use real objs btw
 
 ]]
 
-local consumer = {
-    packL = {
-        consumption = 6,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration)
-            self.switch_state = 1 - self.switch_state
+-- ik this code is messy, i'm using it to learn lua oop
+
+function announceSourceUpdate()
+    packL:sourceListener()
+    packR:sourceListener()
+    trimL:sourceListener()
+    trimR:sourceListener()
+    waiL:sourceListener()
+    waiR:sourceListener()
+    eng1Starter:sourceListener()
+    eng2Starter:sourceListener()
+    apuStarter:sourceListener()
+    demandPumpR:sourceListener()
+    demandPumpL:sourceListener()
+end
+
+-- consumer class
+local Consumer = {
+    consumption = 6,
+    state = 0,
+    switchState = 0,
+    switchListener = function(self, phase)
+        if phase == 0 then
+            self.state = self.state == 0 and 1 or 0
+            self.switchState = 1 - self.switchState
+            announceSourceUpdate()
+            --run_after_time(switchAction, 1)
         end
-    },
+    end,
+    sourceBoolExp = false, -- when instantiated, a boolean expression will be passed that will determine whether the device has air
+    sourceListener = function(self, sourceBoolExp)
+        if self.state == 1 and sourceBoolExp then
+            self.state = 2
+        elseif self.state == 2 and not sourceBoolExp then
+            self.state = 1
+        end
+    end
 }
 
-
-local consumers = {
-    packL = {
-        consumption = 6,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration)
-            self.switch_state = 1 - self.switch_state
-        end
-    },
-    packR = {
-        consumption = 6,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    trimL = {
-        consumption = 1,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    trimR= {
-        consumption = 1,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    waiL = {
-        consumption = 3,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    waiR = {
-        consumption = 3,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    eng1Starter = {
-        consumption = 7,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    }, -- not sure, engines seem to boost
-    eng2Starter = {
-        consumption = 11,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    apuStarter = {
-        consumption = 6,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    demandPumpL = {
-        consumption = 4,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    },
-    demandPumpR = {
-        consumption = 4,
-        state = 0,
-        switch_state = 0,
-        sourceListener = function(src) end,
-        switchListener = function(phase, duration) end
-    }
-}
-
-function setProducer(name, state)
-    producers[name].state = state
+function Consumer:new(cons, swAction, sources)
+    local t = {consumption = cons, switchAction = swAction, sourceBoolExp = sources}
+    setmetatable(t, self)
+    self.__index = self
+    return t
 end
-function setConsumer(name, state)
-    consumers[name].state = state
-end
+
+local packL = Consumer:new(6, function(self) print("sigma") end)
+local packR = Consumer:new(6, function(self) print("sigma") end)
+local trimL = Consumer:new(1, function(self) print("sigma") end)
+local trimR = Consumer:new(1, function(self) print("sigma") end)
+local waiL = Consumer:new(3, function(self) print("sigma") end)
+local waiR = Consumer:new(3, function(self) print("sigma") end)
+local eng1Starter = Consumer:new(7, function(self) print("sigma") end)
+local eng2Starter = Consumer:new(11, function(self) print("sigma") end)
+local apuStarter = Consumer:new(3, function(self) print("sigma") end)
+local demandPumpR = Consumer:new(4, function(self) print("sigma") end)
+local demandPumpL = Consumer:new(4, function(self) print("sigma") end)
+
+--[[
+local consumerList = { -- this is for notifying all consumers. maybe there is a way I can make a static method that does this or something idk
+    packL = packL,
+    packR = packR,
+    trimL = trimL,
+    trimR = trimR,
+    waiL = waiL,
+    waiR = waiR,
+    eng1Starter = eng1Starter,
+    eng2Starter = eng2Starter,
+    apuStarter = apuStarter,
+    demandPumpR = demandPumpR,
+    demandPumpL = demandPumpL
+}]]
 
 local isoL = 0
 local isoR = 0
 local isoC = 0
 
-B777CMD_btn_packL = deferred_command("Strato/777/air/pack_L_sw", "Left Pack Valve Switch", consumers.packL.switchListener)
+B777CMD_btn_packL = deferred_command("Strato/777/air/pack_L_sw", "Left Pack Valve Switch", function(p,d)packL:switchListener(p)end)
+B777CMD_btn_packR = deferred_command("Strato/777/air/pack_R_sw", "Right Pack Valve Switch", function(p,d)packR:switchListener(p)end)
+B777CMD_btn_trimL = deferred_command("Strato/777/air/trim_L_sw", "Left Trim Valve Switch", function(p,d)trimL:switchListener(p)end)
+B777CMD_btn_trimR = deferred_command("Strato/777/air/trim_R_sw", "Right Trim Valve Switch", function(p,d)trimR:switchListener(p)end)
 
 function calcPressure()
     --TODO: with no load or source, pressure drops 10 psi in 25 sec
@@ -320,24 +288,24 @@ function calcPressure()
     end
 
     -- calculate consumption
-    consumption[1] = consumers.packL.consumption + consumers.trimL.consumption + consumers.waiL.consumption + consumers.eng1Starter.consumption
-    consumption[2] = consumers.packR.consumption + consumers.trimR.consumption + consumers.waiR.consumption + consumers.eng2Starter.consumption
+    consumption[1] = packL.consumption + trimL.consumption + waiL.consumption + eng1Starter.consumption
+    consumption[2] = packR.consumption + trimR.consumption + waiR.consumption + eng2Starter.consumption
     if isoL == 1 and isoR == 0 then
-        consumption[1] = consumption[1] + consumers.demandPumpL.consumption + consumers.apuStarter.consumption
+        consumption[1] = consumption[1] + demandPumpL.consumption + apuStarter.consumption
         if isoC == 1 then
-            consumption[1] = consumption[1] + consumers.demandPumpR.consumption
+            consumption[1] = consumption[1] + demandPumpR.consumption
         end
     end
 
     if isoR == 1 and isoL == 0 then
-        consumption[2] = consumption[1] + consumers.demandPumpR.consumption
+        consumption[2] = consumption[1] + demandPumpR.consumption
         if isoC == 1 then
-            consumption[2] = consumption[2] + consumers.demandPumpL.consumption + consumers.apuStarter.consumption
+            consumption[2] = consumption[2] + demandPumpL.consumption + apuStarter.consumption
         end
     end
 
     if isoR == 1 and isoL == 1 and isoC == 1 then
-        consumption[1] = consumption[1] + consumption[2] + consumers.demandPumpL.consumption + consumers.apuStarter.consumption + consumers.demandPumpR.consumption
+        consumption[1] = consumption[1] + consumption[2] + demandPumpL.consumption + apuStarter.consumption + demandPumpR.consumption
         consumption[2] = consumption[1]
     end
 
@@ -379,9 +347,10 @@ function after_physics()
     B777DR_duct_press[0] = press[1]
     B777DR_duct_press[1] = press[2]
 
-    B777DR_pack_sw_pos[0] = utils.animate(consumers.packL.switch_state, B777DR_pack_sw_pos[0], 20)
-
-
+    B777DR_pack_trim_sw_pos[0] = utils.animate(packL.switchState, B777DR_pack_trim_sw_pos[0], 20)
+    B777DR_pack_trim_sw_pos[1] = utils.animate(packR.switchState, B777DR_pack_trim_sw_pos[1], 20)
+    B777DR_pack_trim_sw_pos[2] = utils.animate(trimL.switchState, B777DR_pack_trim_sw_pos[2], 20)
+    B777DR_pack_trim_sw_pos[3] = utils.animate(trimR.switchState, B777DR_pack_trim_sw_pos[3], 20)
 end
 
 --function after_replay()

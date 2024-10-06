@@ -33,6 +33,8 @@ B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/777/adiru_align_
 
 B777CMD_ap_alt_up                    = deferred_command("Strato/777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
 B777CMD_ap_alt_dn                    = deferred_command("Strato/777/autopilot/alt_dn", "Autopilot Altitude Down", B777_alt_dn_CMDhandler)
+B777CMD_ap_vs_up                     = deferred_command("Strato/777/autopilot/vs_up", "Autopilot Vertical Speed Up", B777_vs_up_CMDhandler)
+B777CMD_ap_vs_dn                     = deferred_command("Strato/777/autopilot/vs_dn", "Autopilot Vertical Speed Down", B777_vs_dn_CMDhandler)
 B777CMD_minimums_up                  = deferred_command("Strato/777/minimums_up_capt", "Captain Minimums Up", B777_minimums_up_capt_CMDhandler)
 B777CMD_minimums_dn                  = deferred_command("Strato/777/minimums_dn_capt", "Captain Minimums Down", B777_minimums_dn_capt_CMDhandler)
 B777CMD_minimums_up_fo               = deferred_command("Strato/777/minimums_up_fo", "F/O Minimums Up", B777_minimums_up_fo_CMDhandler)

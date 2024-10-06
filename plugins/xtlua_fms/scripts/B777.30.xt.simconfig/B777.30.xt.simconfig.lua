@@ -100,7 +100,7 @@ function defaultValues()
 			real_park_brake = 1, -- 0 = real, 1 = simple
 			trs_bug = 1, -- 0 = disabled, 1 = enabled
 			aoa_indicator = 1, -- 0 = disabled, 1 = enabled
-			smart_knobs = 1, -- 0 = disabled, 1 = enabled
+			smart_knobs = 0, -- 0 = disabled, 1 = enabled
 			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
 			gs_mach_indicator = 1, -- 0 = disabled, 1 = enabled
 			transponder_type = 0, -- 0, 1
