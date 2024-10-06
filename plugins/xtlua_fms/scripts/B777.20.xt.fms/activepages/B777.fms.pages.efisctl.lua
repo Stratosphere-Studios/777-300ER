@@ -7,18 +7,18 @@ fmsPages["EFISCTL152"].getPage=function(self,pgNo,fmsID)
     local appSelected = "     "
     local vorSelected = "     "
     local ctrSelected = "     "
-    local radBaro = "<      BARO;g4"
-    local altimeter = 0
+    local radBaro = "<      BARO;g04"
+    local altimeter = ""
 
     local stringMins;
     if B777DR_minimums_mode[id] == 1 then
         mins = B777DR_minimums_mda[id]
     else
         mins = B777DR_minimums_dh[id]
-        radBaro = "<RAD;g3       "
+        radBaro = "<RAD;g03       "
     end
 
-    stringMins = mins..string.rep(" ", 5 - tostring(mins):len()) -- make sure minimums always takes up 5 spaces on the display
+    stringMins = pad(tostring(mins), 5) -- make sure minimums always takes up 5 spaces on the display
 
     if B777DR_baro_mode[id] == 0 then
         altimeter = string.format("%.02f", simDR_altimiter_setting[id+1])
@@ -60,6 +60,7 @@ fmsPages["EFISCTL152"].getSmallPage=function(self,pgNo,fmsID)
     local radBaro = " RAD<->    "
     local ft = "   FT "
 
+---@diagnostic disable-next-line: cast-local-type
     range = simDR_nd_range[id+1]
 
     if B777DR_minimums_mode[id] == 0 then
@@ -103,6 +104,9 @@ fmsFunctionsDefs["EFISCTL152"]["R4"]={"setDisp", "mapMode_3"}
 fmsFunctionsDefs["EFISCTL152"]["R5"]={"setDisp", "mapMode_4"}
 fmsFunctionsDefs["EFISCTL152"]["R6"]={"setpage","EFISOPTIONS152"}
 
+fmsPages["EFISCTL152"].getNumPages=function(self, fmsID)
+	return 1
+end
 
 local efisModeSmall = "   <->   <->    "
 
@@ -120,13 +124,13 @@ fmsPages["EFISOPTIONS152"].getPage=function(self,pgNo,fmsID)
     local efisModeBig   = "OFF   ADF   VOR>"
 
     if vor_adf[id+1] == 0 then
-        efisModeBig   = "      ADF;g3      >"
+        efisModeBig   = "      ADF;g03      >"
         efisModeSmall = "OFF<->   <->VOR "
     elseif vor_adf[id+1] == 1 then
-        efisModeBig   = "OFF;g3            >"
+        efisModeBig   = "OFF;g03            >"
         efisModeSmall = "   <->ADF<->VOR "
     else
-        efisModeBig   = "            VOR;g3>"
+        efisModeBig   = "            VOR;g03>"
         efisModeSmall = "OFF<->ADF<->    "
     end
 
@@ -150,9 +154,9 @@ fmsPages["EFISOPTIONS152"].getPage=function(self,pgNo,fmsID)
     return {
         "      EFIS OPTIONS      ",
         "                        ",
-        "<WXR  ".. wxrSelected .."         FPV>;r4",
+        "<WXR  ".. wxrSelected .."         FPV>;r04",
         "                        ",
-        "<STA  "..staSelected.." ".. terrSelected .."  TERR>;r5",
+        "<STA  "..staSelected.." ".. terrSelected .."  TERR>;r05",
         "                        ",
         "<WPT  "..wptSelected.." "..mtrsSelected.."  MTRS>",
         "                        ",
@@ -160,7 +164,7 @@ fmsPages["EFISOPTIONS152"].getPage=function(self,pgNo,fmsID)
         "                        ",
         "<DATA   "..efisModeBig,
         "             -----------",
-        "<POS;r4            CONTROL>"
+        "<POS;r04            CONTROL>"
     }
 
 end
@@ -195,3 +199,7 @@ fmsFunctionsDefs["EFISOPTIONS152"]["R3"]={"setDisp", "mtrs"}
 fmsFunctionsDefs["EFISOPTIONS152"]["R4"]={"setDisp", "tcas"}
 fmsFunctionsDefs["EFISOPTIONS152"]["R5"]={"setDisp","adfvor"}
 fmsFunctionsDefs["EFISOPTIONS152"]["R6"]={"setpage","EFISCTL152"}
+
+fmsPages["EFISOPTIONS152"].getNumPages=function(self, fmsID)
+	return 1
+end

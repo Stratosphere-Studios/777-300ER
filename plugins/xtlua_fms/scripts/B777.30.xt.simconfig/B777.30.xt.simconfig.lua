@@ -3,12 +3,15 @@
 *****************************************************************************************
 * Program Script Name	:	B777.20.xt.simconfig
 * Author Name			:	Marauder28
-* Converted to 777 by remenkemi (crazytimtimtim)
+* Converted to 777 by remenkemi
+
+-- wait... why am i using json between modules... I need to make datarefs for them anyway so might as well just do that directly
+
 *****************************************************************************************
 --]]
 
 -- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
-local version = 2
+local version = 4
 
 --replace create_command
 function deferred_command(name,desc,realFunc)
@@ -47,7 +50,6 @@ B777DR_newsimconfig_data    = deferred_dataref("Strato/777/newsimconfig", "numbe
 B777DR_SNDoptions           = deferred_dataref("Strato/777/fmod/options", "array[7]")
 B777DR_SNDoptions_volume    = deferred_dataref("Strato/777/fmod/options/volume", "array[8]") --TODO
 B777DR_SNDoptions_gpws      = deferred_dataref("Strato/777/fmod/options/gpws", "array[16]")
-B777DR_readme_code          = deferred_dataref("Strato/777/readme_code", "string")
 
 B777DR_acf_is_freighter     = deferred_dataref("Strato/777/acf_is_freighter", "number")
 B777DR_lbs_kgs              = deferred_dataref("Strato/777/lbs_kgs", "number")
@@ -98,9 +100,13 @@ function defaultValues()
 			real_park_brake = 1, -- 0 = real, 1 = simple
 			trs_bug = 1, -- 0 = disabled, 1 = enabled
 			aoa_indicator = 1, -- 0 = disabled, 1 = enabled
-			smart_knobs = 1, -- 0 = disabled, 1 = enabled
+			smart_knobs = 0, -- 0 = disabled, 1 = enabled
 			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
-			gs_mach_indicator = 1 -- 0 = disabled, 1 = enabled
+			gs_mach_indicator = 1, -- 0 = disabled, 1 = enabled
+			transponder_type = 0, -- 0, 1
+			nosewheel_ctrl = 0, -- 0 = independant, 1 = yaw, 2 = roll; will also link rudder to roll while on ground when in roll mode
+			gasper_switch = 0, -- 0 = not installed, 1 = installed
+			takeoff_chk_btn = 0 -- 0 = not installed, 1 = installed
 		}
 	}
 end
@@ -136,17 +142,9 @@ function setSoundOption(key,value)
 end
 
 function randomChar()
-	local chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	local chars = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
 	local num = math.random(1, chars:len())
 	return chars:sub(num, num)
-end
-
-function readmeCode()
-	local file = io.open("Output/777 Readme Code.txt", "w")
-	B777DR_readme_code = randomChar()..randomChar()..randomChar()..randomChar()..randomChar()
-	file:write("Enter this code into the FMS to unlock the flight instruments: \""..B777DR_readme_code.."\"")
-	file:close()
-	--print("created readme code "..B777DR_readme_code)
 end
 
 function getSimConfig(p1, p2)
@@ -183,6 +181,15 @@ function setLoadedConfigs()
 	B777DR_trs_bug_enabled = getSimConfig("PLANE","trs_bug")
 	B777DR_aoa_enabled = getSimConfig("PLANE","aoa_indicator")
 	B777DR_acf_is_freighter = getSimConfig("PLANE","aircraft_type")
+	if getSimConfig("FMC", "unlocked") == 0 then
+		if jit.os == "Windows" then
+			os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
+		elseif jit.os == "Linux" then
+			os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
+		elseif jit.os == "OSX" then
+			os.execute("osascript -e 'display alert \"Read 777 Readme\" message \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
+		end
+	end
 end
 
 -- for possible performance improvement
@@ -190,8 +197,8 @@ local open = io.open
 local close = io.close
 
 function loadSimConfig()
-	os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
-	print("File = "..fileLocation)
+	--os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
+	--print("File = "..fileLocation)
 	local file = open(fileLocation, "r")
 
 	if file then
@@ -201,9 +208,13 @@ function loadSimConfig()
 		if data:match("\"VERSION\":"..version) then
 			B777DR_simconfig_data = data
 		else
-			print("WARNING: 777 SETTINGS FILE IS FROM AN OLDER VERSION. SETTINGS RESET.")
-			os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
-			os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
+			if jit.os == "Windows" then
+				os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
+			elseif jit.os == "Linux" then
+				os.execute("notify-send \"The 777's settings file is from an older version. Settings have been reset.\"")
+			elseif jit.os == "OSX" then
+				os.execute("osascript -e 'display alert \"Out Of Date 777 Settings\" message \"The 777's settings file is from an older version. Settings have been reset.\"")
+			end
 			B777DR_simconfig_data = json.encode(defaultValues())
 		end
 	else
@@ -221,7 +232,6 @@ function loadSimConfig()
 end
 
 function flight_start()
-	readmeCode()
 	loadSimConfig()
 end
 

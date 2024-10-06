@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4
-*     Converted from Sparky744 to Stratosphere 777 by remenkemi (crazytimtimtim)
+*     Converted from Sparky744 to Stratosphere 777 by remenkemi 
 *****************************************************************************************
 ]]
 
@@ -20,6 +20,20 @@ end
 totalizerInitkgs = 0.0
 totalizerSumkgs = 0.0
 local totalizerInited = false
+simDR_altitude_pilot 		= find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
+B777DR_backend_clr = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find_dataref("Strato/777/FMC/FMC_R/clear_msg")}
+B777DR_backend_page = {fmsL = find_dataref("Strato/777/FMC/FMC_L/page"), fmsR = find_dataref("Strato/777/FMC/FMC_R/page")}
+B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
+B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")
+B777DR_backend_notInDatabase = {find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database"), 0}
+B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
+B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
+B777DR_backend_msg_clear = {find_dataref("Strato/777/FMC/FMC_L/clear_msg"), find_dataref("Strato/777/FMC/FMC_R/clear_msg")}
+simCMD_fmsL_key_index = find_command("sim/FMS/index")
+simCMD_fmsL_key_l1 = find_command("sim/FMS/ls_1l")
+simDR_fmsL_line4 = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line4")
+simDR_fms_line13 = {fmsL = find_dataref("sim/cockpit2/radios/indicators/fms_cdu1_text_line13"), fmsR = find_dataref("sim/cockpit2/radios/indicators/fms_cdu2_text_line13")}
+simCMD_fms_key_clr = {fmsL = find_command("sim/FMS/key_clear"), fmsR = find_command("sim/FMS2/key_clear")}
 
 simDR_engines_running = find_dataref("sim/flightmodel/engine/ENGN_running")
 simDR_fuel_flow_kg_sec = find_dataref("sim/cockpit2/engine/indicators/fuel_flow_kg_sec")
@@ -37,7 +51,6 @@ simDR_nd_mode                          = {find_dataref("sim/cockpit2/EFIS/map_mo
 simDR_nd_range                         = {find_dataref("sim/cockpit2/EFIS/map_range_nm"), find_dataref("sim/cockpit2/EFIS/map_range_nm_copilot")}
 B777DR_minimums_mode                   = find_dataref("Strato/777/minimums_mode")
 simDR_altimiter_setting                = {find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot"), find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")}
-B777DR_readme_code                     = find_dataref("Strato/777/readme_code")
 B777DR_minimums_visible                = find_dataref("Strato/777/minimums_visible")
 
 simDRTime=find_dataref("sim/time/total_running_time_sec")
@@ -101,7 +114,7 @@ function split(s, delimiter)
 end
 
 function round(x)
-	return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
+	return math.floor(x + 0.5)
 end
 
 function cleanFMSLine(line)
@@ -115,6 +128,14 @@ function getHeadingDifference(desireddirection,current_heading)
 	if (error >  180) then error = error- 360 end
 	if (error < -180) then error = error+ 360 end
 	return error
+end
+
+function pad(str, len, indent) -- constant string length
+    if indent then
+        return string.rep(" ", len - str:len())..str
+    else
+        return str..string.rep(" ", len - str:len())
+    end
 end
 
 function getHeadingDifferenceM(desireddirection,current_heading)
@@ -138,127 +159,43 @@ function getDistance(lat1,lon1,lat2,lon2)
 	return retVal
 end
 
-function toDMS(value,isLat)
-	local degrees = math.abs(value)
-	local minutes = (value-math.floor(value))*60
-	local seconds = minutes - math.floor(minutes)
-	local prefix="E"
+function roundFirst(num)
+	while (num >= 1) do
+		num = num/10
+	end
+	num = num * 10 -- bring it back up to >= 1 after loop
+	return round(num)
+end
+
+function toDMS(value,isLat) -- multiplies each remaining decimal by 60, the converts to boeing format
+    local absIn = math.abs(value)
+	local intDegrees = math.floor(absIn)
+	local minutes = (absIn-intDegrees)*60
+	local seconds = round((minutes - math.floor(minutes))*60)
+	local prefix=" "
+	--print(value.."d: "..degrees..", m: "..minutes..", s: "..seconds)
 	if isLat then
 		prefix = value > 0 and "N" or "S"
+        return string.format(prefix.."%02d`%02d.%1d", intDegrees, minutes, roundFirst(seconds))
 	else
 		prefix = value > 0 and "E" or "W"
+        return string.format(prefix.."%03d`%02d.%1d", intDegrees, minutes, roundFirst(seconds))
 	end
-	local retVal = isLat and string.format(prefix.."%02d`%02d.%1d", degrees, minutes, seconds * 10) or string.format(prefix.."%03d`%02d.%1d", degrees, minutes, seconds * 10)
-	return retVal
 end
 
 dofile("json/json.lua")
 hh=find_dataref("sim/cockpit2/clock_timer/zulu_time_hours")
 mm=find_dataref("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss=find_dataref("sim/cockpit2/clock_timer/zulu_time_seconds")
---[[simDR_bus_volts                     = find_dataref("sim/cockpit2/electrical/bus_volts")
-simDR_startup_running               = find_dataref("sim/operation/prefs/startup_running")
 
-simDR_radio_nav_freq_Mhz            = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_Mhz")
-simDR_radio_nav_freq_khz            = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_khz")
-simDR_radio_nav_freq_hz             = find_dataref("sim/cockpit2/radios/actuators/nav_frequency_hz")
-
-simDR_radio_nav_course_deg          = find_dataref("sim/cockpit2/radios/actuators/nav_course_deg_mag_pilot")
-simDR_radio_nav_obs_deg             = find_dataref("sim/cockpit2/radios/actuators/nav_obs_deg_mag_pilot")
-simDR_radio_nav1_obs_deg            = find_dataref("sim/cockpit/radios/nav1_obs_degt")
-simDR_radio_nav2_obs_deg            = find_dataref("sim/cockpit/radios/nav2_obs_degt")
-simDR_radio_nav_horizontal          = find_dataref("sim/cockpit2/radios/indicators/nav_display_horizontal")
-simDR_radio_nav_hasDME              = find_dataref("sim/cockpit2/radios/indicators/nav_has_dme")
-simDR_radio_nav_radial		       = find_dataref("sim/cockpit2/radios/indicators/nav_bearing_deg_mag")
-simDR_radio_nav01_ID                = find_dataref("sim/cockpit2/radios/indicators/nav1_nav_id")
-simDR_radio_nav02_ID                = find_dataref("sim/cockpit2/radios/indicators/nav2_nav_id")
-simDR_radio_nav03_ID                = find_dataref("sim/cockpit2/radios/indicators/nav3_nav_id")
-simDR_radio_nav04_ID                = find_dataref("sim/cockpit2/radios/indicators/nav4_nav_id")
-
-simDR_radio_adf1_freq_hz            = find_dataref("sim/cockpit2/radios/actuators/adf1_frequency_hz")
-simDR_radio_adf2_freq_hz            = find_dataref("sim/cockpit2/radios/actuators/adf2_frequency_hz")
-]]
 navAidsJSON                         = find_dataref("xtlua/navaids")
 fmsJSON                             = find_dataref("xtlua/fms")
 
---[[B777DR_fms1_display_mode            = find_dataref("Strato/B777/fms1/display_mode")
-
-B777DR_efis_min_ref_alt_capt_sel_dial_pos       = find_dataref("Strato/B777/efis/min_ref_alt/capt/sel_dial_pos")
-B777DR_efis_ref_alt_capt_set_dial_pos           = find_dataref("Strato/B777/efis/ref_alt/capt/set_dial_pos")
-B777DR_efis_dh_reset_capt_switch_pos            = find_dataref("Strato/B777/efis/dh_reset/capt/switch_pos")
-B777DR_efis_baro_ref_capt_sel_dial_pos          = find_dataref("Strato/B777/efis/baro_ref/capt/sel_dial_pos")
-B777DR_efis_baro_std_capt_switch_pos            = find_dataref("Strato/B777/efis/baro_std/capt/switch_pos")
-B777DR_efis_baro_capt_set_dial_pos              = find_dataref("Strato/B777/efis/baro/capt/set_dial_pos")
-B777DR_efis_baro_capt_preselect                 = find_dataref("Strato/B777/efis/baro/capt/preselect")
-B777DR_efis_baro_alt_ref_capt                   = find_dataref("Strato/B777/efis/baro_ref/capt")
-
-B777DR_efis_min_ref_alt_fo_sel_dial_pos         = find_dataref("Strato/B777/efis/min_ref_alt/fo/sel_dial_pos")
-B777DR_efis_ref_alt_fo_set_dial_pos             = find_dataref("Strato/B777/efis/ref_alt/fo/set_dial_pos")
-B777DR_efis_dh_reset_fo_switch_pos              = find_dataref("Strato/B777/efis/dh_reset/fo/switch_pos")
-B777DR_efis_baro_ref_fo_sel_dial_pos            = find_dataref("Strato/B777/efis/baro_ref/fo/sel_dial_pos")
-B777DR_efis_baro_std_fo_switch_pos              = find_dataref("Strato/B777/efis/baro_std/fo/switch_pos")
-B777DR_efis_baro_fo_set_dial_pos                = find_dataref("Strato/B777/efis/baro/fo/set_dial_pos")
-B777DR_efis_baro_fo_preselect                   = find_dataref("Strato/B777/efis/baro/fo/preselect")
-B777DR_efis_baro_alt_ref_fo                     = find_dataref("Strato/B777/efis/baro_ref/fo")
-
-simDR_radio_alt_DH_capt             = find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_pilot")
-simDR_radio_alt_DH_fo               = find_dataref("sim/cockpit2/gauges/actuators/radio_altimeter_bug_ft_copilot")
-
-simDR_altimeter_baro_inHg           = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot")
-simDR_altimeter_baro_inHg_fo        = find_dataref("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_copilot")
-simDR_altitude_pilot                = find_dataref("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
-]]
 --Marauder28
 --Used in ND DISPLAY
 simDR_latitude				= find_dataref("sim/flightmodel/position/latitude")
 simDR_longitude				= find_dataref("sim/flightmodel/position/longitude")
---[[simDR_navID					= find_dataref("sim/cockpit2/radios/indicators/gps_nav_id")
-simDR_range_dial_capt		= find_dataref("Strato/B777/nd/range/capt/sel_dial_pos") -- no*
-simDR_range_dial_fo			= find_dataref("Strato/B777/nd/range/fo/sel_dial_pos") -- no*
-simDR_nd_mode_dial_capt		= find_dataref("Strato/B777/nd/mode/capt/sel_dial_pos")
-simDR_nd_mode_dial_fo       = find_dataref("Strato/B777/nd/mode/fo/sel_dial_pos")
-simDR_nd_center_dial_capt   = find_dataref("Strato/B777/nd/map_center/capt")
-simDR_nd_center_dial_fo	    = find_dataref("Strato/B777/nd/map_center/fo")
-simDR_EFIS_map_mode         = find_dataref("sim/cockpit2/EFIS/map_mode")
-simDR_EFIS_map_range        = find_dataref("sim/cockpit2/EFIS/map_range")]]
 
---[[simDR_groundspeed			= find_dataref("sim/flightmodel2/position/groundspeed")
-simDR_ias_pilot				= find_dataref("Strato/777/displays/ias_capt")
-simDR_wind_degrees			= find_dataref("sim/cockpit2/gauges/indicators/wind_heading_deg_mag")
-simDR_wind_speed			= find_dataref("sim/cockpit2/gauges/indicators/wind_speed_kts")
-simDR_mach_pilot			= find_dataref("sim/cockpit2/gauges/indicators/mach_pilot")
-simDR_mach_copilot			= find_dataref("sim/cockpit2/gauges/indicators/mach_copilot")
-simDR_total_air_temp		= find_dataref("sim/cockpit2/temperature/outside_air_LE_temp_degc")
-simDR_air_temp              = find_dataref("sim/cockpit2/temperature/outside_air_temp_degc")
-]]
---simDR_empty_weight			= find_dataref("sim/aircraft/weight/acf_m_empty")
---Marauder28
-
---*************************************************************************************--
---** 				        CREATE READ-WRITE CUSTOM DATAREFS                        **--
---*************************************************************************************--
-B777DR_cdu_notification     = deferred_dataref("Strato/777/fmc/notification", "array[3]")
---B777DR_backend_notInDatabase{find_dataref("Strato/777/FMC/FMC_L/scratchpad/not_in_database"), find_dataref("Strato/777/FMC/FMC_R/scratchpad/not_in_database")}
-B777DR_eicas_fmc_messages = deferred_dataref("B777DR/eicas/fmc_messages", "array[2]")
-
---Marauder28
--- Holds all SimConfig options
-B777DR_simconfig_data       = find_dataref("Strato/777/simconfig")
-B777DR_newsimconfig_data    = find_dataref("Strato/777/newsimconfig")
-
---[[ND Range DISPLAY
-B777DR_ND_range_display_capt			= deferred_dataref("Strato/B777/nd/range_display_capt", "number")
-B777DR_ND_range_display_fo				= deferred_dataref("Strato/B777/nd/range_display_fo", "number")
-
---IRS ND DISPLAY
-B777DR_ND_GPS_Line						= deferred_dataref("Strato/B777/irs/gps_display_line", "string")
-B777DR_ND_IRS_Line						= deferred_dataref("Strato/B777/irs/irs_display_line", "string")
-
-B777DR_fmc_notifications            = deferred_dataref("Strato/B777/fms/notification","array[53]")
-
---STAB TRIM setting
-B777DR_elevator_trim				    = deferred_dataref("Strato/B777/fmc/elevator_trim", "number")
-]]
 --Sound Options (crazytimtimtim + Matt726)
 B777DR_SNDoptions           = find_dataref("Strato/777/fmod/options")
 B777DR_SNDoptions_volume    = find_dataref("Strato/777/fmod/options/volume") --TODO
@@ -301,7 +238,7 @@ fmsModules={} --set later
 function defaultFMSData()
 	return {
 	acarsInitString="{}",
-	fltno=string.rep("-", 8),
+	fltno="----------",
 	fltdate="********",
 	fltdep="****",
 	fltdst="****",
@@ -364,10 +301,11 @@ function defaultFMSData()
 	stepsize = "ICAO",
 	irsAlignTime = string.rep("0", 3),
 	fmcUnlocked = false,
-	readmeCodeInput = "*****",
+	readmeCodeInput = "******",
 	pos = string.rep(" ", 18),
 	dragFF_armed = "   ",
-	fmcFuel = {mode = "CALC", value = 0.0}
+	fmcFuel = {mode = "CALC", value = 0.0},
+	customMinFuelTemp = false
 }
 end
 
@@ -411,30 +349,14 @@ function getFMSData(id)
 	return "fail"
 end
 
-fmsModules["lastcmd"]=" "
-fmsModules["cmds"]={}
-fmsModules["cmdstrings"]={}
-
-function registerFMCCommand(commandID,dataString) -- here to avoid breaking existing pages; inop
-	--[[fmsModules["cmds"][commandID]=find_command(commandID)
-	fmsModules["cmdstrings"][commandID]=dataString]]
-	return
-end
-
 function switchCustomMode()
-	fmsModules["fmsL"]["prevPage"] = fmsModules["fmsL"]["currentPage"]
-	fmsModules["fmsC"]["prevPage"] = fmsModules["fmsC"]["currentPage"]
-	fmsModules["fmsR"]["prevPage"] = fmsModules["fmsR"]["currentPage"]
-	--fmsModules["fmsL"]["inCustomFMC"]=fmsModules["fmsL"]["targetCustomFMC"]
-	--fmsModules["fmsC"]["inCustomFMC"]=fmsModules["fmsC"]["targetCustomFMC"]
-	--fmsModules["fmsR"]["inCustomFMC"]=fmsModules["fmsR"]["targetCustomFMC"]
-	fmsModules["fmsL"]["currentPage"]=fmsModules["fmsL"]["targetPage"]
-	fmsModules["fmsC"]["currentPage"]=fmsModules["fmsC"]["targetPage"]
-	fmsModules["fmsR"]["currentPage"]=fmsModules["fmsR"]["targetPage"]
-	fmsModules["fmsL"]["pgNo"]=fmsModules["fmsL"]["targetpgNo"]
-	fmsModules["fmsC"]["pgNo"]=fmsModules["fmsC"]["targetpgNo"]
-	fmsModules["fmsR"]["pgNo"]=fmsModules["fmsR"]["targetpgNo"]
-	print("cdu blanking")
+	for i = 1, 3 do
+		local fms = i == 1 and "fmsL" or i == 2 and "fmsC" or "fmsR"
+		fmsModules[fms]["prevPage"] = fmsModules[fms]["currentPage"].."_"..fmsModules[fms]["pgNo"]
+		fmsModules[fms]["currentPage"] = fmsModules[fms]["targetPage"]
+		fmsModules[fms]["pgNo"] = fmsModules[fms]["targetpgNo"]
+	end
+	print("updated display")
 end
 
 function createPage(page)
@@ -474,7 +396,7 @@ function createPage(page)
 
 	retVal.getPage=function(self,pgNo) return self.template end
 	retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
-	retVal.getNumPages=function(self) return 1 end
+	retVal.getNumPages=function(self, fmsID) return 1 end
 	fmsFunctionsDefs[page]={}
 	return retVal
 end
@@ -485,20 +407,25 @@ dofile("B777.createfms.lua")
 dofile("B777.fms.pages.lua")
 --dofile("irs/rnav_system.lua")
 
-function fmsNotify(self, t, message)
-    local typeNum = t == "alert" and 1 or t == "com" and 2 or t == "advs" and 3 or 4 -- beautiful one-liner
-    if self.dispMSG[1] then -- if there are already messages
-		for i = 1, #self.dispMSG do
-			if typeNum <= self.dispMSG[i].type then -- iterate and find spot according to priority
-				print("insert "..message.." at "..i)
-				table.insert(self.dispMSG, i, {type = typeNum, msg = message})
-				return
-			end
+function fmsNotify(self, t, message) -- improvement: only input notification and automatically determine priority
+print("should notify ".. message.. " "..t)
+	if t == "alert" then
+		table.insert(alertStack, 1, message)
+		return
+	elseif t == "com" then
+		table.insert(commStack, 1, message)
+		return
+	end
+    local type = t == "advs" and 1 or 2
+	for k, v in ipairs(self.dispMSG) do
+		if type <= v.type then
+			print("insert "..message.." at "..k)
+			table.insert(self.dispMSG, k, {type = type, msg = message})
+			return
 		end
-		table.insert(self.dispMSG,  #self.dispMSG + 1, {type = typeNum, msg = message})
-    else
-		table.insert(self.dispMSG, 1, {type = typeNum, msg = message}) -- if no messages, insert at beginning
-    end
+		table.insert(self.dispMSG,  #self.dispMSG + 1, {type = type, msg = message})
+	end
+	table.insert(self.dispMSG, 1, {type = type, msg = message}) -- if no messages, insert at beginning
 end
 
 fmsC = {}
@@ -536,19 +463,6 @@ debug_fms     = deferred_dataref("Strato/B777/debug/fms", "number")
 
 local fileLocation = "Output/preferences/Strato_777_lastpos.dat"
 
-function loadLastPos()
-	print("lastpos file = "..fileLocation)
-	local file = io.open(fileLocation, "r")
-	if file then
-		fmsModules["data"].lastpos = file:read()
-		file:close()
-		print("loaded lastpos: "..fmsModules["data"].lastpos)
-	else
-		print("lastpos file is nil, loaded "..fmsModules["data"].pos)
-		fmsModules["data"].lastpos = fmsModules["data"].pos
-	end
-end
-
 function unloadLastPos()
 	print("lastpos file = "..fileLocation)
 	local file = io.open(fileLocation, "w")
@@ -567,55 +481,39 @@ function flight_start()
 	--run_at_interval(inflight_update_CG, 60) commented out for ss777]]
 end
 
-local outOfDateNotified = false
-local databaseNotified = {false, false}
-function doNotifications()
+local databaseOnce = {true, true}
 
+function doNotifications()
 	-- Notifications from other modules
 
 	-- EICAS Messages & Notification Lights
 	local isError = {false, false}
 	for i = 0, 2 do
 		local fmsID = i == 0 and "fmsL" or i == 1 and "fmsR" or "fmsC"
-		if fmsModules[fmsID].dispMSG[1] ~= nil then
-			B777DR_cdu_notification[i] = 1 -- CDU Notification Lights
-			for j = 1, #fmsModules[fmsID].dispMSG do -- EICAS Messages
-				if fmsModules[fmsID].dispMSG[j].type == 1 then
-					B777DR_eicas_fmc_messages[0] = 1
-					isError[1] = true
-					return
-				elseif fmsModules[fmsID].dispMSG[j].type == 2 then
-					B777DR_eicas_fmc_messages[1] = 1
-					isError[2] = true
-					return
-				end
+		B777DR_cdu_notification[i] = next(fmsModules[fmsID].dispMSG) ~= nil and 1 or 0
+
+		if B777DR_backend_notInDatabase[i+1] == 1 and databaseOnce[i+1] then
+			databaseOnce[i+1] = false
+			fmsModules[fmsID]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
+		elseif B777DR_backend_notInDatabase[i+1] == 0 then
+			databaseOnce[i+1] = true
+		end
+
+		for k, v in ipairs(fmsModules[fmsID].dispMSG) do
+			if v.type == 1 then
+				B777DR_eicas_fmc_messages[0] = 1
+				isError[1] = true
+				return
+			elseif v.type == 2 then
+				B777DR_eicas_fmc_messages [1] = 1
+				isError[2] = true
+				return
 			end
-		else
-			B777DR_cdu_notification[i] = 0
 		end
 	end
 
 	if not isError[1] then B777DR_eicas_fmc_messages[0] = 0 end
 	if not isError[2] then B777DR_eicas_fmc_messages[1] = 0 end
-
-	-- NAV DATA OUT OF DATE
-	if simDR_fmsL_line13:match("DATA OUT OF DATE") and not outOfDateNotified then
-		outOfDateNotified = true
-		fmsModules.fmsL:notify("alert", alertMsgs[16])
-		fmsModules.fmsC:notify("alert", alertMsgs[16])
-		fmsModules.fmsR:notify("alert", alertMsgs[16])
-	end
-
-	-- NOT IN DATABASE
-	--[[for i = 1, 2 do
-		local id = i == 1 and "fmsL" or "fmsR"
-		if B777DR_backend_notInDatabase[i] == 1 and not databaseNotified[i] then
-			databaseNotified[i] = true
-			fmsModules[id]:notify("entry", entryMsgs[7]) -- NOT IN DATABASE
-		elseif B777DR_backend_notInDatabase[i] == 0 then
-			databaseNotified[i] = false
-		end
-	end]]
 end
 
 function calcFuel()
@@ -644,19 +542,49 @@ function fuel()
     end
 end
 
+function printer(text)
+    if jit.os == "Windows" then
+        os.execute("powershell.exe -Command \"\""..text.."\" | out-printer\"")
+        os.execute("mshta javascript:alert(\"Stratosphere 777: check your printer!\");close();")
+    elseif jit.os == "Linux" then
+        print("Linux")
+        os.execute("lpr "..text)
+        os.execute("notify-send \"Stratosphere 777: check your printer!\"")
+    elseif jis.os == "OSX" then
+        os.execute("lpr "..text)
+        os.execute("osascript -e 'display alert \"Stratosphere 777\" message \"Check your printer!\"")
+    end
+    print("finished printing")
+end
+
+local selOnce = {true, true}
+function checkSelWPT(i)
+	if B777DR_backend_showSelWpt[i] == 1 and selOnce[i] then
+		selOnce[i] = false
+		fmsModules[i==1 and "fmsL" or "fmsR"].targetPage = "SELWPT"
+		fmsModules[i==1 and "fmsL" or "fmsR"].targetpgNo = 1
+		switchCustomMode()
+	elseif B777DR_backend_showSelWpt[i] == 0 then
+		selOnce[i] = true
+	end
+end
+
 function after_physics()
 	if debug_fms > 0 then return end
+
+	checkSelWPT(1)
+	checkSelWPT(2)
 
 	fuel()
 
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
-		print("fms: "..B777DR_simconfig_data)
+		--print("fms: "..B777DR_simconfig_data)
 		simConfigData = json.decode(B777DR_simconfig_data)
 	end
 
-	fmsModules["data"].pos = toDMS(simDR_latitude, true).." "..toDMS(simDR_longitude, false)
-	
+	fmsModules["data"].pos = toDMS(simDR_latitude, true)..toDMS(simDR_longitude, false)
+
 --     for i =1,24,1 do
 --       print(string.byte(fms_style,i))
 --     end
@@ -664,6 +592,7 @@ function after_physics()
 	local cM = hh
 	cM = mm
 	cM = ss
+
     doNotifications()
 
 --[[    if acarsSystem.provider.online() then
@@ -705,26 +634,38 @@ function after_physics()
 		simDR_vor_adf[4] = B777DR_efis_vor_adf[2]
 		simDR_vor_adf[4] = B777DR_efis_vor_adf[3]
 	end
-	if not is_timer_scheduled(unloadLastPos) then
-		run_after_time(unloadLastPos, 30)
-	end
 	fmsL:B777_fms_display()
     fmsC:B777_fms_display()
     fmsR:B777_fms_display()
 end
 
-function updateNavaids()
+function fmsStartup()
+	-- load nearby POIs
 	local temp = navAidsJSON
+
+	-- exit readme page
+	find_command("Strato/B777/fms1/ls_key/R6"):once()
+	--find_command("Strato/B777/fms2/ls_key/R6"):once()
+	--find_command("Strato/B777/fms3/ls_key/R6"):once()
+
+	-- Load lastpos
+	print("lastpos file = "..fileLocation)
+	local file = io.open(fileLocation, "r")
+	if file then
+		fmsModules["data"].lastpos = file:read()
+		file:close()
+		print("loaded lastpos: "..fmsModules["data"].lastpos)
+	else
+		print("lastpos file is nil, loaded "..fmsModules["data"].pos)
+		fmsModules["data"].lastpos = fmsModules["data"].pos
+	end
 end
 
 function aircraft_load()
-	run_after_time(loadLastPos, 2)
-	find_command("Strato/B777/fms1/ls_key/R6"):once()
-	find_command("Strato/B777/fms2/ls_key/R6"):once()
-	find_command("Strato/B777/fms3/ls_key/R6"):once()
 	local temp = navAidsJSON -- load navaids
-	run_after_time(updateNavaids, 1)
+	run_after_time(fmsStartup, 1)
 	run_at_interval(calcFuel, 1)
+	run_at_interval(unloadLastPos, 30)
 end
 
 --function aircraft_unload() end

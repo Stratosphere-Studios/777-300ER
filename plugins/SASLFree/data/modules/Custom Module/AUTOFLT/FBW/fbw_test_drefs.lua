@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: fbw_test_drefs
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Datarefs that are used FOR CALIBRATION ONLY. 
                       Include this in the pfc logic for testing
 *****************************************************************************************

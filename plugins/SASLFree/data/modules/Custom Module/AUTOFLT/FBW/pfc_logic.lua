@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: pfc_logic
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for pfc logic
 *****************************************************************************************
 --]]
@@ -9,10 +9,26 @@
 include("misc_tools.lua")
 include("fbw_test_drefs.lua")
 include("fbw_controllers.lua")
+include("constants.lua")
+include("ap_roll.lua")
+include("ap_pitch.lua")
+
+--Switches
+pitch_trim_A = globalPropertyi("Strato/777/cockpit/switches/strim_A")
+pitch_trim_B = globalPropertyi("Strato/777/cockpit/switches/strim_B")
+pitch_trim_altn = globalPropertyi("Strato/777/cockpit/switches/strim_altn")
+ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
 
 fbw_iasln = globalProperty("Strato/777/fctl/iasln_table")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace")
 pfc_disc = globalPropertyi("Strato/777/fctl/pfc/disc")
+--Autopilot
+ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
+ap_disc = globalPropertyi("Strato/777/autopilot/disc")
+flt_dir_pilot_pfd = globalPropertyi("Strato/777/pfd/flt_dir_pilot")
+flt_dir_copilot_pfd = globalPropertyi("Strato/777/pfd/flt_dir_copilot")
+flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
+flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
 --Data bus
 pfc_calc = globalPropertyi("Strato/777/fctl/databus/calc")
 pfc_pilot_input = globalProperty("Strato/777/fctl/databus/pilot_input")
@@ -53,7 +69,7 @@ d_int = {2.8, 2.9, 2.9, 3.1, 3.1, 3.9, 3.5, 3.3, 3.3}
 pid_trs_maintain = {-0.19, -0.023, 0}
 pid_gust_supr = {0.12, 0.03, 0}
 pid_coefficients_rudder = {0.38, 0.08, 0}
-flap_settings = {0, 1, 5, 15, 20, 25, 30}
+flap_settings = {0, 1, 9, 15, 20, 25, 30}
 --Fly by wire pitch gains
 linear_corrections = {0.075, 0.095, 0.135, 0.19, 0.21, 0.225, 0.225}
 --Zero pitch speeds per total mass in kg / 10000
@@ -87,6 +103,8 @@ thrust_corrections =
 ra_last = 0
 gnd2air = false
 air2gnd = false
+ap_roll_set = false
+ap_pitch_set = false
 flare_aoa_change = 0
 k_fbw_pitch = 0
 k_fbw_flare = 0
@@ -119,6 +137,14 @@ r_error_total = 0
 --Yaw damper
 yaw_def_max = 8
 bank_prot_active = false
+
+
+trs_pid = PID:new{kp = -0.19, ki = -0.023, kd = 0, errtotal = 0, errlast = 0, lim_out = 25,  lim_et = 1000}
+p_delta_pid = PID:new{kp = 4.1, ki = 0, kd = 0.01, errtotal = 0, errlast = 0, lim_out = 33,  lim_et = 100}
+roll_maintain_pid = PID:new{kp = 0.013, ki = 0.0006, kd = 0, errtotal = 0, errlast = 0, lim_out = 1,  lim_et = 100}
+gust_supr_pid = PID:new{kp = 0.4, ki = 0.1, kd = 0.2, errtotal = 0, errlast = 0, lim_out = 5,  lim_et = 10}
+yaw_damp_pid = PID:new{kp = -0.8, ki = -0.2, kd = -0.15, errtotal = 0, errlast = 0, lim_out = 6,  lim_et = 50}
+
 
 function GetGearStatus()
 	local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L) + get(mlg_actual_R)) / 3
@@ -185,6 +211,9 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 		local thrust_fac_R = (get(pfc_thrust, 2) - 16000) / 334000
 		local thrust_fac_total = (thrust_fac_L + thrust_fac_R) / 2
 		fbw_pitch = GetPitchCorrection(tmp_mass, m_i, thrust_fac_total, get(fbw_trim_speed))
+
+		local ap_pitch_is_on = ap_pitch_engaged and get(ap_engaged) == 1
+
 		if avg_ra > 100 then
 			if not air2gnd and not gnd2air then
 				if math.abs(get(pfc_pilot_input, 3)) >= 0.4 and abs_p_delta >= 0 then
@@ -207,16 +236,19 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 				local tmp = lim(get(fbw_trim_speed), get(pfc_maneuver_speeds, 1), get(pfc_maneuver_speeds, 2))
 				set(fbw_trim_speed, tmp)
 			end
-			--Calculating the pitch angle
-			trs_pid:update{tgt = round(get(fbw_trim_speed)), curr = avg_cas}
-            fbw_pitch = fbw_pitch + trs_pid.output
 
-			--pitch_ovrd dataref is for testing ONLY!
-
-			if get(pitch_ovrd) == 0 then
+			if not ap_pitch_is_on then
+				--Calculating the pitch angle
+				trs_pid:update{tgt = round(get(fbw_trim_speed)), curr = avg_cas}
 				fbw_pitch = fbw_pitch + trs_pid.output
-			else
-				fbw_pitch = 0
+
+				--pitch_ovrd dataref is for testing ONLY!
+
+				if get(pitch_ovrd) == 0 then
+					fbw_pitch = fbw_pitch + trs_pid.output
+				else
+					fbw_pitch = 0
+				end
 			end
 		else
 			if air2gnd and avg_ra < ra_last and k_flare < 1 then
@@ -229,27 +261,41 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 				air2gnd = false
 			end
 		end
-		set(fbw_pitch_cmd, fbw_pitch)
-		if get(f_time) ~= 0 then
-			local commanded_pitch = 0
-			local tmp_int = d_int[m_i] + ((d_int[m_i] - d_int[m_i-1]) * (tmp_mass - 
+		
+		local commanded_pitch = 0
+		
+		local ap_pitch_cmd = getAutopilotPitchCmd()
+		ap_pitch_set = true
+
+		local tmp_int = d_int[m_i] + ((d_int[m_i] - d_int[m_i-1]) * (tmp_mass - 
 				no_pitch_speeds[m_i-1][1])) / (no_pitch_speeds[m_i][1] - no_pitch_speeds[m_i-1][1])
+		local k_fbw = 0.15
+		if not ap_pitch_is_on then
+			k_fbw = 0.05
 			if math.abs(get(pfc_pilot_input, 3)) > 0.08 then
-				commanded_pitch = get(pfc_pilot_input, 3) * 5.7
+				local k_man = 3.7 + 2 * math.abs(get(pfc_pilot_input, 3))
+				commanded_pitch = get(pfc_pilot_input, 3) * k_man
 			end
-			--Maintain a certain pitch speed
-			local fbw_delta = (fbw_pitch - avg_pitch) * 0.3
-			local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
-			p_delta_pid:update{tgt = fbw_delta * k_pitch 
-								+ flare_pitch_change * k_flare
-								 + commanded_pitch, 
-								curr = curr_delta, ki = tmp_int}
-			set(pitch_delta, curr_delta)
-			local elevator_cmd_last = get(pfc_elevator_command)
-			set(pfc_elevator_command,elevator_cmd_last + (p_delta_pid.output - 
-				elevator_cmd_last) * 0.04)
-			pitch_last = avg_pitch
+		else
+			fbw_pitch = ap_pitch_cmd
+			air2gnd = false
+			gnd2air = false
+			k_flare = 0
+			k_pitch = 1
 		end
+		set(fbw_pitch_cmd, fbw_pitch)
+		--Maintain a certain pitch speed
+		local fbw_delta = (fbw_pitch - avg_pitch) * k_fbw
+		local curr_delta = (avg_pitch - pitch_last) * (1 / get(f_time))
+		p_delta_pid:update{tgt = fbw_delta * k_pitch 
+							+ flare_pitch_change * k_flare
+							 + commanded_pitch, 
+							curr = curr_delta, ki = tmp_int}
+		set(pitch_delta, curr_delta)
+		local elevator_cmd_last = get(pfc_elevator_command)
+		set(pfc_elevator_command,elevator_cmd_last + (p_delta_pid.output - 
+			elevator_cmd_last) * 0.04)
+		pitch_last = avg_pitch
 		fbw_elevator_past = get(pfc_elevator_command)
 		p_delta_last = p_delta
 		ra_last = avg_ra
@@ -276,16 +322,26 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 		elseif fbw_roll_past < -35 then
 			fbw_roll_past = -30
 		end
-		if math.abs(avg_roll) > 35 then
+		if math.abs(avg_roll) > 35 and get(ap_disc_bar) == 0 then
 			bank_prot_active = true
 			set(pfc_overbank, 1)
 		else
-			if math.abs(avg_roll) <= 30 then
+			if math.abs(avg_roll) <= 30 or get(ap_disc_bar) == 1 then
 				bank_prot_active = false
 			end
 			set(pfc_overbank, 0)
 		end
-		set(pfc_roll_command, get(pfc_pilot_input, 1))
+
+		local ap_roll_cmd = getAutopilotRollCmd()
+		ap_roll_set = true
+
+		if ap_roll_engaged and get(ap_engaged) == 1 then
+			set(pfc_roll_command, get(pfc_roll_command) + (ap_roll_cmd - 
+				get(pfc_roll_command)) * 0.7 * get(f_time))
+		else
+			set(pfc_roll_command, get(pfc_pilot_input, 1))
+		end
+		
 		--Rudder logic
 		if avg_cas <= 210 and get(fbw_mode) == 1 and math.abs(get(pfc_pilot_input, 1)) > 0.4 then
 			local sign_term = bool2num(get(pfc_pilot_input, 1) > 0) - bool2num(get(pfc_pilot_input, 1) < 0)
@@ -294,10 +350,10 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 	end
 	--Rudder logic
     local rud_engage_nml = math.abs(get(pfc_pilot_input, 2)) <= 0.14 and h_delta <= 0.07
-	if get(f_time) ~= 0 then
-		local rud_out = get(pfc_pilot_input, 2) * 27
-		if not bank_prot_active then
-			rud_out = rud_out + ail_component * 8
+	local rud_out = get(pfc_pilot_input, 2) * 27
+	if not bank_prot_active then
+		rud_out = rud_out + ail_component * 8
+		if ail_component < 2 then
 			--[[local supr_out = 0
 			if Round(math.abs(get(pfc_pilot_input, 1)), 2) <= 0.07 and get(fbw_mode) == 1 then
 				gust_supr_pid:update{tgt = ((avg_roll - fbw_roll_past) * 0.6), curr = avg_roll - fbw_roll_past}
@@ -307,20 +363,18 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 			local sign_term = bool2num(avg_roll > 0) - bool2num(avg_roll < 0)
 			local yaw_term = 0.011 * avg_roll^2 * sign_term
 			local tgt_yaw = lim((yaw_term - get(pfc_flt_axes, 3)) * 0.17 + supr_out, yaw_def_max, -yaw_def_max) + ail_component * 8]]--
-
-			yaw_damp_pid:update{kp=get(dr_kp), ki=get(dr_ki), kd=get(dr_kd), tgt=0, 
-				curr=get(yaw_rate_accel)}
+			yaw_damp_pid:update{tgt=0, curr=get(yaw_rate_accel)}
 			set(dr_errtotal, yaw_damp_pid.errtotal)
 			
 			local tgt_yaw = yaw_damp_pid.output
-			rud_out = rud_out + tgt_yaw
-		else
-			roll_maintain_pid:update{tgt = avg_roll * 0.55,  curr = fbw_roll_past - avg_roll}
-			rud_out = rud_out - roll_maintain_pid.output * 27
+			rud_out = rud_out + tgt_yaw * 0.7 * get(f_time)
 		end
-		rud_out = lim(rud_out, 27, -27)
-		set(pfc_rudder_command, rud_out / 27)
+	else
+		roll_maintain_pid:update{tgt = avg_roll * 0.55,  curr = fbw_roll_past - avg_roll}
+		rud_out = rud_out - roll_maintain_pid.output * 27
 	end
+	rud_out = lim(rud_out, 27, -27)
+	set(pfc_rudder_command, rud_out / 27)
 	local fbw_roll_past = avg_roll
 	return {roll_input_last, heading_input_last, fbw_roll_past}
 end
@@ -336,8 +390,8 @@ function UpdateStabTrim()
 			end
 			if stab_trim_engage == 1 and pitch_time_no_delta + 2 < get(c_time) then
 				local s_ = 0.0002
-				if get(pfc_flaps) > 5 then
-					s_ = 0.0001
+				if get(pfc_flaps) > 4 then
+					s_ = 0.00045
 				end
 				local step = (-bool2num(get(pfc_elevator_command) < 0) + bool2num(get(pfc_elevator_command) >= 0)) * s_
 				if math.abs(get(pfc_ths_current) + step) < 1 then
@@ -381,10 +435,45 @@ function UpdateMode()
 	end
 end
 
+function updateMCP()
+	if ((get(pitch_trim_A) ~= 0 and get(pitch_trim_B) ~= 0) or 
+		get(pitch_trim_altn) ~= 0)
+		and get(ap_engaged) == 1 then
+		local avg_spd = (get(cas_pilot) + get(cas_copilot)) / 2
+		set(fbw_trim_speed, avg_spd)
+		set(ap_engaged, 0)
+		set(ap_disc, 1)
+	end
+
+	if get(ap_engaged) == 1 and vert_mode == VERT_MODE_OFF then
+		set(vshold_eng, 1)
+	end
+
+	if get(ap_engaged) == 1 and curr_lat_mode == LAT_MODE_OFF then
+		set(hdg_hold_eng, 1)
+	end
+end
+
+function updateFltDir()
+	if get(fbw_mode) == 1 then
+		set(flt_dir_pilot_pfd, get(flt_dir_pilot) * (1 - get(ap_engaged)))
+		set(flt_dir_copilot_pfd, get(flt_dir_copilot) * (1 - get(ap_engaged)))
+	else
+		set(flt_dir_pilot_pfd, 0)
+		set(flt_dir_copilot_pfd, 0)
+	end
+end
+
 function update()
+	ap_roll_set = false
+	ap_pitch_set = false
+
+	updateFltDir()
 	UpdateMode()
-	if get(pfc_calc) == 1 then
+	if get(pfc_calc) == 1 and get(f_time) ~= 0 then
 		if get(fbw_mode) == 1 then
+			updateMCP()
+
 			local tmp = UpdatePFCElevatorCommand(pitch_input_last, aoa_last, 
 												k_fbw_pitch, k_fbw_flare, flare_aoa_change)
 			pitch_input_last = tmp[1]
@@ -393,10 +482,23 @@ function update()
 			k_fbw_flare = tmp[4]
 			flare_aoa_change = tmp[5]
 			UpdateStabTrim()
+
+			if get(ap_engaged) == 1 then
+				set(ap_disc, 0)
+			end
+		elseif get(ap_engaged) == 1 then
+			set(ap_engaged, 0)
+			set(ap_disc, 1)
 		end
 		local tmp = UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past)
 		roll_input_last = tmp[1]
 		heading_input_last = tmp[2]
 		fbw_roll_past = tmp[3]
+	end
+	if not ap_roll_set then
+		local ap_roll_cmd = getAutopilotRollCmd()
+	end
+	if not ap_pitch_set then
+		local ap_pitch_cmd = getAutopilotPitchCmd()
 	end
 end

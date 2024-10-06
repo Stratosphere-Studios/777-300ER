@@ -209,7 +209,7 @@ fmsPages["THRUSTLIM"].getSmallPage=function(self,pgNo,fmsID)
 	}
 end
 
-fmsPages["THRUSTLIM"].getNumPages=function(self)
+fmsPages["THRUSTLIM"].getNumPages=function(self, fmsID)
 	return 1
 end
 

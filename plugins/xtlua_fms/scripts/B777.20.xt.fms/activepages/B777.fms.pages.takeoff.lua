@@ -146,7 +146,7 @@ fmsPages["TAKEOFF"].getPage=function(self,pgNo,fmsID)
       "                        ",
       "                        ",
       "                        ",
-      "                     ON;g2>",
+      "                     ON;g02>",
       "                        ",
       "<INDEX       THRUST LIM>"
     }
@@ -206,7 +206,7 @@ fmsPages["TAKEOFF"].getSmallPage=function(self,pgNo,fmsID)
   end
 end
 
-fmsPages["TAKEOFF"].getNumPages=function(self)
+fmsPages["TAKEOFF"].getNumPages=function(self, fmsID)
 	return 1
 end
 

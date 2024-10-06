@@ -57,26 +57,26 @@ fmsPages["PAGE_NAME"].getPage=function(self,pgNo,fmsID)
         }
     elseif pgNo == 2 then
         return { 
-            "WHATEVER IS ON SECOND PAGE  ",
-            "                            ",
-            "                            ",
-            "                            ",
-            "                            ",
-            "                            ",
-            "                            ",
-            "                            ",
-            "                            "
-            "                            ",
-            "                            ",
-            "                            ",
-            "                            "
+            "WHATEVER IS ON SECOND PAGE",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        ",
+            "                        "
         }
     end
 end
 ```
 Next, you need to define the number of pages you have. Do this by using this function at the end of your script:
 ```lua
-fmsPages["PAGE_NAME"].getNumPages=function(self)
+fmsPages["PAGE_NAME"].getNumPages=function(self, fmsID)
   return number_of_pages
 end
 ```
@@ -123,7 +123,7 @@ return {
     "                            ",
     "                            ",
     "                            ",
-    "ONGROUND DATAREF: " .. simDR_onGround, -- this will display "ONGROUND DATAREF: 0" or 1.
+    "ONGROUND DATAREF: "..simDR_onGround, -- this will display "ONGROUND DATAREF: 0" or 1.
     "                            ",
     "                            ",
     "                            ",

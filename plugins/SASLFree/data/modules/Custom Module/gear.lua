@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: gear
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for landing gear and brakes
 *****************************************************************************************
 --]]
@@ -573,7 +573,6 @@ function UpdateActuatorPress()
 			nose_door_tgt = 1
 			UpdateGearDoors()
 			if IsNoseReady() == true then
-				print(nose_door_tgt, nose_gear_target)
 				ldg_extend = 1
 				nose_gear_locked = 0
 				if get(sys_C_press) >= 100 and get(altn_gear) == 0 then

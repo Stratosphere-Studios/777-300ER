@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: fctl
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Code for flight controls.
 *****************************************************************************************
 --]]
@@ -9,11 +9,11 @@
 addSearchPath(moduleDirectory .. "/Custom Module/")
 
 include("misc_tools.lua")
+include("constants.lua")
 
 --Finding sim datarefs
 
 --Cockpit controls
-speedbrake_handle = globalPropertyf("sim/cockpit2/controls/speedbrake_ratio")
 yoke_roll_ratio = globalPropertyf("sim/cockpit2/controls/yoke_roll_ratio")
 yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
 yoke_heading_ratio = globalPropertyf("sim/cockpit2/controls/yoke_heading_ratio")
@@ -35,14 +35,27 @@ speed_x = globalPropertyf("sim/flightmodel/forces/vx_air_on_acf")
 speed_y = globalPropertyf("sim/flightmodel/forces/vy_air_on_acf")
 speed_z = globalPropertyf("sim/flightmodel/forces/vz_air_on_acf")
 --Flight controls
+
+--Ailerons, flaperons
+
 outbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 5)
 inbd_ail_L = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 1)
 outbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron2_deg", 6)
 inbd_ail_R = globalPropertyfae("sim/flightmodel2/wing/aileron1_deg", 2)
+
+--Spoilers
+
 spoiler_L1 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 3)
 spoiler_L2 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 3)
+spoiler_6 = globalPropertyfae("sim/flightmodel2/wing/speedbrake1_deg", 1)
+spoiler_7 = globalPropertyfae("sim/flightmodel2/wing/speedbrake2_deg", 1)
 spoiler_R1 = globalPropertyfae("sim/flightmodel2/wing/spoiler2_deg", 4)
 spoiler_R2 = globalPropertyfae("sim/flightmodel2/wing/spoiler1_deg", 4)
+spoiler_8 = globalPropertyfae("sim/flightmodel2/wing/speedbrake2_deg", 2)
+spoiler_9 = globalPropertyfae("sim/flightmodel2/wing/speedbrake1_deg", 2)
+
+--Flaps, slats
+
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 2)
 inbd_flap_L = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 inbd_flap_R = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 2)
@@ -50,8 +63,14 @@ outbd_flap_L = globalPropertyfae("sim/flightmodel2/wing/flap2_deg", 3)
 outbd_flap_R = globalPropertyfae("sim/flightmodel2/wing/flap2_deg", 4)
 slat_1 = globalPropertyf("sim/flightmodel2/controls/slat1_deploy_ratio")
 slat_2 = globalPropertyf("sim/flightmodel2/controls/slat2_deploy_ratio")
+
+--Elevators
+
 elevator_L = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",9)
 elevator_R = globalPropertyfae("sim/flightmodel2/wing/elevator1_deg",10)
+
+--Rudders
+
 upper_rudder = globalPropertyfae("sim/flightmodel2/wing/rudder1_deg", 12)
 bottom_rudder = globalPropertyfae("sim/flightmodel2/wing/rudder2_deg", 12)
 --Reversers
@@ -105,7 +124,7 @@ flap_tgt = globalPropertyf("Strato/777/flaps/tgt")
 flap_load_relief = createGlobalPropertyi("Strato/777/flaps/load_relief", 0) --set to 1 when load relief system is operating
 flap_handle_used = createGlobalPropertyf("Strato/777/flaps/handle_used", 0)
 
-flap_settings = {0, 1, 5, 15, 20, 25, 30}  
+flap_settings = {0, 1, 9, 15, 20, 25, 30}  
 
 vec3d = {x = 0, y = 0, z = 0}
 
@@ -119,7 +138,7 @@ end
 --Control_sfc description:
 --dref_ace - dataref for ACE command, NOT ACE status
 --rt stands for response time
---vab, vab are velocity airborne begin and velocity airborne done respectively
+--vab, vad are velocity airborne begin and velocity airborne done respectively
 --rt_coeff_damped - coefficient for calculation of response time as function of airspeed
 
 Control_sfc = {full_up = 0, full_dn = 0, dref_pos = 0, dref_ace = 0, dref_pcu = 0, rt_nml = 0, rt_damped = 0, rt_coeff_damped = 0, vab = 0, vad = 0, load_idx = 1, load_max = 0.1} 
@@ -331,8 +350,12 @@ end
 airspeed_vec = vec3d:new{x = 0, y = 0, z = 0}
 sp_L1 = Control_sfc:new{full_up = 60, full_dn = 0, dref_pos = spoiler_L1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
 sp_L2 = Control_sfc:new{full_up = 45, full_dn = 0, dref_pos = spoiler_L2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_6 = Control_sfc:new{full_up = 60, full_dn = 0, dref_pos = spoiler_6, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_7 = Control_sfc:new{full_up = 60, full_dn = 0, dref_pos = spoiler_7, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
 sp_R1 = Control_sfc:new{full_up = 60, full_dn = 0, dref_pos = spoiler_R1, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 2, load_max = 0.025}
 sp_R2 = Control_sfc:new{full_up = 45, full_dn = 0, dref_pos = spoiler_R2, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 0.47, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 2, load_max = 0.025}
+sp_8 = Control_sfc:new{full_up = 60, full_dn = 0, dref_pos = spoiler_8, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
+sp_9 = Control_sfc:new{full_up = 60, full_dn = 0, dref_pos = spoiler_9, dref_ace = ace_spoiler, dref_pcu = pcu_sp, rt_nml = 1.4, rt_damped = 0.01, rt_coeff_damped = 0.001, vab = 0, vad = 0, load_idx = 1, load_max = 0.025}
 ail_L = Control_sfc:new{full_up = -33, full_dn = 19, dref_pos = outbd_ail_L, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 30, vad = 50, load_idx = 3, load_max = 0.08}
 ail_R = Control_sfc:new{full_up = -33, full_dn = 19, dref_pos = outbd_ail_R, dref_ace = ace_aileron, dref_pcu = pcu_aileron, rt_nml = 0.45, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 10, vad = 20, load_idx = 3, load_max = 0.08}
 flprn_L = Control_sfc:new{full_up = -11, full_dn = 37, dref_pos = inbd_ail_L, dref_ace = ace_flaperon, dref_pcu = pcu_flaperon, rt_nml = 0.4, rt_damped = 0.008, rt_coeff_damped = 0.001, vab = 20, vad = 41, load_idx = 4, load_max = 0.07}
@@ -346,10 +369,14 @@ function update()
 	airspeed_vec.z = get(speed_z)
 	ResetLoad()
 	--Move flight controls in sim
-	sp_L1:updatePositionAil(airspeed_vec, 2)
-	sp_L2:updatePositionAil(airspeed_vec, 1)
-	sp_R1:updatePositionAil(airspeed_vec, 4)
-	sp_R2:updatePositionAil(airspeed_vec, 3)
+	sp_L1:updatePositionAil(airspeed_vec, SPOILER_1_5)
+	sp_L2:updatePositionAil(airspeed_vec, SPOILER_4)
+	sp_6:updatePositionAil(airspeed_vec, SPOILER_6)
+	sp_7:updatePositionAil(airspeed_vec, SPOILER_7)
+	sp_R1:updatePositionAil(airspeed_vec, SPOILER_10_14)
+	sp_R2:updatePositionAil(airspeed_vec, SPOILER_11)
+	sp_8:updatePositionAil(airspeed_vec, SPOILER_8)
+	sp_9:updatePositionAil(airspeed_vec, SPOILER_9)
 	ail_L:updatePositionAil(airspeed_vec, 1)
 	ail_R:updatePositionAil(airspeed_vec, 2)
 	flprn_L:updatePositionAil(airspeed_vec, 1)

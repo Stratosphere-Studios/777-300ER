@@ -1,5 +1,6 @@
 fmsPages["POSINIT"]=createPage("POSINIT")
 fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
+
   if pgNo == 1 then
 
     fmsFunctionsDefs["POSINIT"]["R1"]={"getdata","lastpos"}
@@ -10,24 +11,22 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
     fmsFunctionsDefs["POSINIT"]["R6"]={"setpage", "RTE1"}
     fmsFunctionsDefs["POSINIT"]["R4"]={"getdata","gpspos"}
 
-
     local hrs, mins = hh < 10 and "0"..hh or hh, mm < 10 and "0"..mm or mm
     -- position is updated in after_physics()
     return {
       "      POS INIT          ",
       "                        ",
-      "      "..fmsModules["data"].lastpos,
+      "       "..fmsModules["data"].lastpos,
       "                        ",
       fmsModules["data"].airportpos.."  "..fmsModules["data"].aptLat..fmsModules["data"].aptLon,
       "                        ",
       fmsModules["data"].airportgate.."                    ",
       "                        ",
-      hrs..mins.."  "..fmsModules["data"].pos,
+      hrs..mins.."   "..fmsModules["data"].pos,
       "                        ",
       "      ***`**.* ****`**.*",
       "                        ",
       "<INDEX            ROUTE>"
-
     }
 
   elseif pgNo==2 then
@@ -79,8 +78,8 @@ fmsPages["POSINIT"].getPage=function(self,pgNo,fmsID)
       "                        ",
       "                        ", --irsSystem.getLine("gpsL"),
       "                        ",
+      "                     ON;g02>",
       "                        ", --irsSystem.getLine("gpsR"),
-      "                     ON;gr2>",
       "<INDEX          LAT/LON>"
     }
   end
@@ -144,9 +143,9 @@ fmsPages["POSINIT"].getSmallPage=function(self,pgNo,fmsID)
   end
 end
 
-fmsPages["POSINIT"].getNumPages=function(self)
-  return 3
-end
-
 fmsFunctionsDefs["POSINIT"]={}
 fmsFunctionsDefs["POSINIT"]["L6"]={"setpage","INITREF"}
+
+fmsPages["POSINIT"].getNumPages=function(self, fmsID)
+  return 3
+end

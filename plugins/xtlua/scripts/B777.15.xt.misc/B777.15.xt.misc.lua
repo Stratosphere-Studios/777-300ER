@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: misc
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Script Description: Misc system code for systems that don't have enough for their own module.
 *****************************************************************************************
 --]]
@@ -196,8 +196,6 @@ end
 
 function aircraft_load()
    print("misc loaded")
-   os.execute("mshta javascript:alert(\"Please read the readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\");close();")
-   os.execute("notify-send \"Please read the 777 readme before asking questions. It's located in the 777's folder. To unlock the aircraft, find the unlocking instructions in the readme. Do not close the black console window. Happy flying!\"")
 end
 
 --function aircraft_unload()
@@ -214,7 +212,7 @@ end
 --function before_physics()
 
 function after_physics()
-   print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.")
+   if jit.os == "Windows" then print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.") end
    gear()
 
    B777DR_rud_tab_pos = simDR_rud_tab[11] - simDR_rud[11];

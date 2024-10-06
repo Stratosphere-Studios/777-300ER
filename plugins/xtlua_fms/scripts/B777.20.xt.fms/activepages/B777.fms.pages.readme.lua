@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Page Name: readme verification
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Page Description:
 *****************************************************************************************
 --]]
@@ -23,7 +23,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            "<"..fmsModules["data"].readmeCodeInput..";m5                  "
+            "<"..fmsModules["data"].readmeCodeInput..";m06                 "
         }
     else
         return {
@@ -39,7 +39,7 @@ fmsPages["README"].getPage = function(self,pgNo,fmsID)
             "                        ",
             "                        ",
             "                        ",
-            "<"..fmsModules["data"].readmeCodeInput..";g5             MENU>"
+            "<"..fmsModules["data"].readmeCodeInput..";g06            MENU>"
         }
     end
 end
@@ -48,7 +48,7 @@ fmsPages["README"].getSmallPage = function(self,pgNo,fmsID)
     local unlocked = "-- LOCKED"
 
     if getSimConfig("FMC", "unlocked") == 1 then
-        unlocked = " UNLOCKED;h8"
+        unlocked = " UNLOCKED;h08"
     end
 
 	return {
@@ -73,6 +73,6 @@ fmsFunctionsDefs["README"]={}
 fmsFunctionsDefs["README"]["R6"]={"setpage2","MENU"}
 fmsFunctionsDefs["README"]["L6"]={"setdata","readmeCode"}
 
-fmsPages["README"].getNumPages = function(self)
+fmsPages["README"].getNumPages = function(self, fmsID)
     return 1
 end

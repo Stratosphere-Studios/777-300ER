@@ -1,10 +1,24 @@
 local kgs_to_lbs = 2.204623
+local minFuelSmall = ""
+local fuelWeightSmall = ""
 
 fmsPages["PERFINIT"]=createPage("PERFINIT")
 fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 
+	local minFuelBig = ""
+	local minFuelTempNum = getSimConfig("FMC", "min_fuel_temp")
+	local minFuelTempStr = (minFuelTempNum > -10 and " "..minFuelTempNum or tostring(minFuelTempNum))
+
+	if fmsModules["data"].customMinFuelTemp then
+		minFuelBig = minFuelTempStr.."`"
+		minFuelSmall = string.rep(" ", minFuelTempStr:len()).." C"
+	else
+		minFuelBig = string.rep(" ", minFuelTempStr:len())
+		minFuelSmall = minFuelTempStr.."`C"
+	end
+
 	local costIndex = fmsModules["data"].costindex
-	costIndex = string.rep(" ", 4 - costIndex:len())..costIndex
+	costIndex = pad(costIndex, 4, true)
 
 	local crzAlt = fmsModules["data"].crzalt
 	local crzAltNum = tonumber(crzAlt)
@@ -13,7 +27,7 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 			crzAlt = "FL"..math.floor(crzAltNum / 100)
 		end
 	end
-	crzAlt = string.rep(" ", 5 - crzAlt:len())..crzAlt
+	crzAlt = pad(crzAlt, 5, true)
 
 	local grwt = fmsModules["data"].grwt
 	local zfw = fmsModules["data"].zfw
@@ -28,34 +42,41 @@ fmsPages["PERFINIT"].getPage=function(self,pgNo,fmsID)
 		fuelWeight = string.format("%3.1f", fuelWeight * kgs_to_lbs)
 	end
 
-	grwt = string.rep(" ", 5 - grwt:len())..grwt
-	zfw = string.rep(" ", 5 - zfw:len())..zfw
-	rsv = string.rep(" ", 5 - rsv:len())..rsv
-	fuelWeight = string.rep(" ", 5 - fuelWeight:len())..fuelWeight
+	grwt = pad(grwt, 5, true)
+	zfw = pad(zfw, 5, true)
+	rsv = pad(rsv, 5, true)
+	fuelWeight = pad(fuelWeight, 5, true)
+
+	local fuelWeightBig = ""
+	if fmsModules["data"].fmcFuel.mode == "MANUAL" then
+		fuelWeightBig = fuelWeight
+		fuelWeightSmall = string.rep(" ", fuelWeight:len())
+	else
+		fuelWeightBig = string.rep(" ", fuelWeight:len())
+		fuelWeightSmall = fuelWeight
+	end
 
 	return {
 		"       PERF INIT        ",
 		"                         ",
 		grwt.."              "..crzAlt,
 		"                        ",
-		fuelWeight.."               "..costIndex,
+		fuelWeightBig.."               "..costIndex,
 		"                        ",
-		zfw.."                   ",
+		zfw.."              "..minFuelBig,
 		"                        ",
 		rsv.."                   ",
 		"                        ",
-		"<REQUEST;r8            "..getFMSData("stepsize"),
+		"<REQUEST;r08            "..getFMSData("stepsize"),
 		"                        ",
 		"<INDEX       THRUST LIM>"
 	}
 end
 
 fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
-	local minFuelTemp = getSimConfig("FMC", "min_fuel_temp")
-	minFuelTemp = (minFuelTemp > -10 and " "..minFuelTemp or minFuelTemp).."`C"
 
 	local crzCG = fmsModules["data"].crzcg
-	crzCG = string.rep(" ", 5 - crzCG:len())..crzCG
+	crzCG = pad(crzCG, 5, true)
 
 	local weightUnits = getSimConfig("PLANE", "weight_display_units"):sub(1, 2)
 
@@ -64,9 +85,9 @@ fmsPages["PERFINIT"].getSmallPage=function(self,pgNo,fmsID)
 		" GR WT           CRZ ALT",
 		"                        ",
 		" FUEL         COST INDEX",
-		"     "..weightUnits.." "..fmsModules["data"].fmcFuel.mode,
+		fuelWeightSmall..weightUnits.." "..fmsModules["data"].fmcFuel.mode,
 		" ZFW       MIN FUEL TEMP",
-		"                   "..minFuelTemp,
+		"                   "..minFuelSmall,
 		" RESERVES         CRZ CG",
 		"                   "..crzCG,
 		"PERF INIT      STEP SIZE",
@@ -89,6 +110,6 @@ fmsFunctionsDefs["PERFINIT"]["R5"]={"setdata","stepsize"}
 fmsFunctionsDefs["PERFINIT"]["L6"]={"setpage","INITREF"}
 fmsFunctionsDefs["PERFINIT"]["R6"]={"setpage","THRUSTLIM"}
 
-fmsPages["PERFINIT"].getNumPages=function(self)
+fmsPages["PERFINIT"].getNumPages=function(self, fmsID)
 	return 1
 end

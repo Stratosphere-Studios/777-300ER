@@ -1,13 +1,14 @@
 --[[
 *****************************************************************************************
 * Script Name: misc_tools
-* Author Name: @bruh
+* Author Name: discord/bruh4096#4512(Tim G.)
 * Script Description: Functions that are used frequently
 *****************************************************************************************
 --]]
 
 ac_heading = globalPropertyf("sim/flightmodel/position/magpsi")
 wind_dir = globalPropertyf("sim/weather/wind_direction_degt")
+f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 
 --Generic utilities
 
@@ -62,6 +63,16 @@ function indexOf(array, value, round_) --returns index of a value in an array.
     return nil
 end
 
+function getFPA(gs_kts, vs_fpm)
+	local fpv_pitch_rad = 0
+    if gs_kts ~= 0 then
+        local gs_fpm = (gs_kts * 6076.12) / 60
+        fpv_pitch_rad = math.atan(vs_fpm/gs_fpm)
+    end
+
+	return math.deg(fpv_pitch_rad)
+end
+
 function PID_Compute(kp, ki, kd, target, current, errtotal, errlast, lim1, lim2)
 	local current_error = target - current
 	local et = errtotal + current_error --total error
@@ -92,6 +103,15 @@ function EvenChange(val, tgt, step)
 	else
 		return val + (bool2num(val < tgt) - bool2num(val > tgt)) * tmp_step
 	end
+end
+
+function rotate(px, py, cx, cy, theta)
+	local rad_ang = math.rad(theta)
+	local vec_x = px - cx
+	local vec_y = py - cy
+	local tmp_x = vec_x * math.cos(rad_ang) - vec_y * math.sin(rad_ang)
+	local tmp_y = vec_x * math.sin(rad_ang) + vec_y * math.cos(rad_ang)
+	return {tmp_x + cx, tmp_y + cy}
 end
 
 --Sim only utilities

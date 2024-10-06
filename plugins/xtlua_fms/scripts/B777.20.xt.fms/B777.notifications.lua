@@ -34,7 +34,7 @@ _G.alertMsgs = {
   "VERIFY POSITION",
   "VERIFY RNP - POS REF 2/3", -- doc 2 doesn't include " - POS REF 2/3"
   "VIA OFFSET INVALID",
-  "KEY/FUNCTION INOP", -- custom
+
 }
 
 _G.commMsgs = {
@@ -71,7 +71,8 @@ _G.advsMsgs = {
   "ROUTE 2 UPLINK LOADING", -- entry error in doc 1
   "STANDBY ONE", -- both docs have duplicate entry error of this
   "TIMEOUT - RESELECT",
-  "UNABLE CRZ ALT"
+  "UNABLE CRZ ALT",
+  "KEY/FUNCTION INOP", -- custom
 }
 
 _G.entryMsgs = {
@@ -81,7 +82,7 @@ _G.entryMsgs = {
   "ILS TUNE INHIBITED - MCP",
   "INVALID DELETE",
   "INVALID ENTRY",
-  "NOT IN DATABASE",
+  "NOT IN DATABASE", -- May be NOT IN DATA BASE according to PMDG and sometimes in doc
   "ROUTE FULL",
   "RUNWAY N/A FOR SID",
   "TAKEOFF FLAPS DELETED",

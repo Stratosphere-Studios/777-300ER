@@ -1,7 +1,7 @@
 --[[
 *****************************************************************************************
 * Script Name: flightInstruments
-* Author Name: remenkemi (crazytimtimtim)
+* Author Name: remenkemi 
 * Script Description: Inis script for cockpit instruments
 *****************************************************************************************
 --]]
@@ -33,6 +33,8 @@ B777CMD_fltInst_adiru_align_now      = deferred_command("Strato/777/adiru_align_
 
 B777CMD_ap_alt_up                    = deferred_command("Strato/777/autopilot/alt_up", "Autopilot Altitude Up", B777_alt_up_CMDhandler)
 B777CMD_ap_alt_dn                    = deferred_command("Strato/777/autopilot/alt_dn", "Autopilot Altitude Down", B777_alt_dn_CMDhandler)
+B777CMD_ap_vs_up                     = deferred_command("Strato/777/autopilot/vs_up", "Autopilot Vertical Speed Up", B777_vs_up_CMDhandler)
+B777CMD_ap_vs_dn                     = deferred_command("Strato/777/autopilot/vs_dn", "Autopilot Vertical Speed Down", B777_vs_dn_CMDhandler)
 B777CMD_minimums_up                  = deferred_command("Strato/777/minimums_up_capt", "Captain Minimums Up", B777_minimums_up_capt_CMDhandler)
 B777CMD_minimums_dn                  = deferred_command("Strato/777/minimums_dn_capt", "Captain Minimums Down", B777_minimums_dn_capt_CMDhandler)
 B777CMD_minimums_up_fo               = deferred_command("Strato/777/minimums_up_fo", "F/O Minimums Up", B777_minimums_up_fo_CMDhandler)
@@ -96,12 +98,15 @@ B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn"
 --*************************************************************************************--
 --**                              CREATE CUSTOM DATAREFS                             **--
 --*************************************************************************************--
+B777DR_fpv_capt                        = deferred_dataref("Strato/777/displays/fpv_capt", "number")
+B777DR_fpv_fo                          = deferred_dataref("Strato/777/displays/fpv_fo", "number")
+
 B777DR_rudder_trim_total               = deferred_dataref("Strato/777/rudder_trim_total", "number")
 B777DR_rudder_trim_total_abs           = deferred_dataref("Strato/777/rudder_trim_total_abs", "number")
 B777DR_cdu_eicas_ctl_any               = deferred_dataref("Strato/777/cdu_eicas_ctl_any", "number")
 B777DR_nd_mode_selector                = deferred_dataref("Strato/777/fltInst/nd_mode_selector", "array[2]")
-B777DR_fuel_lbs_kgs                        = deferred_dataref("Strato/777/displays/fuel_lbs_kgs", "array[3]")
-B777DR_fuel_lbs_kgs_total                  = deferred_dataref("Strato/777/displays/fuel_lbs_kgs_total", "number")
+B777DR_fuel_lbs_kgs                    = deferred_dataref("Strato/777/displays/fuel_lbs_kgs", "array[3]")
+B777DR_fuel_lbs_kgs_total              = deferred_dataref("Strato/777/displays/fuel_lbs_kgs_total", "number")
 B777DR_alt_mtrs                        = deferred_dataref("Strato/777/displays/alt_mtrs", "array[2]")
 B777DR_autopilot_alt_mtrs              = deferred_dataref("Strato/777/displays/autopilot_alt_mtrs", "number")
 B777DR_eicas_mode                      = deferred_dataref("Strato/777/displays/eicas_mode", "number") -- what page the lower eicas is on

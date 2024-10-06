@@ -1,7 +1,8 @@
+---@diagnostic disable: assign-type-mismatch
 --[[
 *****************************************************************************************
 *        COPYRIGHT � 2020 Mark Parker/mSparks CC-BY-NC4
-*         Converted for 777 by remenkemi (crazytimtimtim)
+*         Converted for 777 by remenkemi 
 *****************************************************************************************
 ]]
 --Marauder28
@@ -22,26 +23,6 @@ B777DR_refuel							= deferred_dataref("Strato/B777/fuel/refuel", "number")
 
 fmsFunctions={}
 --dofile("stuff/acars/acars.lua")
-
---[[fmsFunctionsDefs["RTE1"]["L1"]={"custom2fmc","L1"}
---fmsFunctionsDefs["RTE1"]["L1"]={"setdata","origin"}
-fmsFunctionsDefs["RTE1"]["L2"]={"setdata","runway"}
-
-fmsFunctionsDefs["RTE1"]["L3"]={"custom2fmc","L3"}
-fmsFunctionsDefs["RTE1"]["L4"]={"custom2fmc","L4"}
-fmsFunctionsDefs["RTE1"]["L5"]={"custom2fmc","L5"}
-
-fmsFunctionsDefs["RTE1"]["R1"]={"custom2fmc","R1"}
-fmsFunctionsDefs["RTE1"]["R2"]={"custom2fmc","R3"}
-fmsFunctionsDefs["RTE1"]["R3"]={"custom2fmc","L2"}
-fmsFunctionsDefs["RTE1"]["R4"]={"custom2fmc","R4"}
-fmsFunctionsDefs["RTE1"]["R5"]={"custom2fmc","R5"}
-fmsFunctionsDefs["RTE1"]["R6"]={"setpage","PERFINIT"}
-
-fmsFunctionsDefs["RTE1"]["next"]={"custom2fmc","next"}
-fmsFunctionsDefs["RTE1"]["prev"]={"custom2fmc","prev"}
-fmsFunctionsDefs["RTE1"]["exec"]={"custom2fmc","exec"}]]
-
 --dofile("activepages/B777.fms.pages.legs.lua")
 --dofile("activepages/B777.fms.pages.maint.lua")
 --dofile("activepages/B777.fms.pages.maintbite.lua")
@@ -66,10 +47,14 @@ dofile("activepages/B777.fms.pages.perfinit.lua")
 dofile("activepages/B777.fms.pages.efisctl.lua")
 dofile("activepages/B777.fms.pages.thrustlim.lua")
 dofile("activepages/B777.fms.pages.refnavdata.lua")
+dofile("activepages/B777.fms.pages.selwpt.lua")
 dofile("activepages/B777.fms.pages.index.lua")
 dofile("activepages/B777.fms.pages.initref.lua")
---dofile("activepages/B777.fms.pages.navrad.lua")
+dofile("activepages/B777.fms.pages.navrad.lua")
 dofile("activepages/B777.fms.pages.rte1.lua")
+dofile("activepages/B777.fms.pages.deparrindex.lua")
+dofile("activepages/B777.fms.pages.departures.lua")
+dofile("activepages/B777.fms.pages.arrivals.lua")
 
 --[[
 dofile("activepages/B777.fms.pages.maintirsmonitor.lua")
@@ -88,7 +73,6 @@ dofile("B777.fms.pages.actrte1hold.lua")
 dofile("B777.fms.pages.actrte1legs.lua")
 dofile("B777.fms.pages.altnnavradio.lua")
 dofile("B777.fms.pages.approach.lua")
-dofile("B777.fms.pages.arrivals.lua")
 
 
 dofile("B777.fms.pages.atcrejectdueto.lua")
@@ -96,8 +80,7 @@ dofile("B777.fms.pages.atcrejectdueto.lua")
 dofile("B777.fms.pages.atcreport2.lua")
 dofile("B777.fms.pages.atcuplink.lua")
 dofile("B777.fms.pages.atcverifyresponse.lua")
-dofile("B777.fms.pages.deparrindex.lua")
-dofile("B777.fms.pages.departures.lua")
+
 dofile("B777.fms.pages.fixinfo.lua")
 
 dofile("B777.fms.pages.identpage.lua")
@@ -112,142 +95,29 @@ dofile("B777.fms.pages.waypointwinds.lua")
 
 ----- FMS FUNCTIONS ---------------
 
+function fmsFunctions.setpage_no(fmsO,valueIn) -- set page with target page number
+	print("setpage_no="..valueIn)
+    local valueSplit=split(valueIn,"_")
+    print(valueSplit[1].." "..valueSplit[2])
+	fmsO["targetpgNo"]=tonumber(valueSplit[2])
+	local value=valueSplit[1]
 
-function fmsFunctions.setpage_no(fmsO,valueA) -- set page with target page number
-	print("setpage_no="..valueA)
-    local valueO=split(valueA,"_")
-    print(valueO[1].." "..valueO[2])
-	--fmsO["pgNo"]=tonumber(valueO[2])
-	fmsO["targetpgNo"]=tonumber(valueO[2])
-	local value=valueO[1]
-
-	if value=="IDENT" then
+	if value == "IDENT" then -- this may crash on linux
 		simCMD_fmsL_key_index:once()
 		simCMD_fmsL_key_l1:once()
 	end
-
-	--[[if value=="FMC" then
-		fmsO["targetCustomFMC"]=false
-		fmsO["targetPage"]="FMC"
-		simCMD_FMS_key[fmsO.id]["fpln"]:once()
-		simCMD_FMS_key[fmsO.id]["L6"]:once()
-		simCMD_FMS_key[fmsO.id]["L2"]:once()
-	elseif value=="PROGRESS" then
-		fmsModules[fmsO.id].targetCustomFMC=false
-		simCMD_FMS_key[fmsO.id]["prog"]:once()
-		fmsModules[fmsO.id].targetPage="PROGRESS"
-		fmsModules[fmsO.id].targetpgNo=1
-	elseif value=="VHFCONTROL" then
-		fmsO["targetCustomFMC"]=false
-		fmsO["targetPage"]="VHFCONTROL"
-		simCMD_FMS_key[fmsO.id]["navrad"]:once()
-	elseif value=="IDENT" then
-		fmsO["targetCustomFMC"]=true
-		fmsO["targetPage"]="IDENT"
-		simCMD_FMS_key[fmsO.id]["index"]:once()
-		simCMD_FMS_key[fmsO.id]["L1"]:once()
-	elseif value=="DATABASE" then
-		fmsO["targetCustomFMC"]=false
-		fmsO["targetPage"]="DATABASE"
-		simCMD_FMS_key[fmsO.id]["index"]:once()
-		simCMD_FMS_key[fmsO.id]["R2"]:once()
-	elseif value=="RTE1" then
-		simCMD_FMS_key[fmsO.id]["fpln"]:once()
-		fmsO["targetCustomFMC"]=true
-		fmsO["targetPage"]="RTE1"
-	elseif value=="RTE2" then
-		fmsO["targetCustomFMC"]=false
-		fmsO["targetPage"]="RTE2"
-		simCMD_FMS_key[fmsO.id]["dir_intc"]:once()
-	elseif value=="LEGS" then
-		fmsModules[fmsO.id].targetCustomFMC=true
-		fmsModules[fmsO.id].targetPage="LEGS"
-		simCMD_FMS_key[fmsO.id]["legs"]:once()
-		fmsModules[fmsO.id].targetpgNo=1
-	else]]
-		--fmsO["targetCustomFMC"]=true
 		fmsO["targetPage"]=value
 	--end
 
-	print("setpage " .. value)
-	--run_after_time(switchCustomMode, 0.5)
-	switchCustomMode() -- moved delay
+	print("setpage "..value)
+	print("setpage?")
+	switchCustomMode()
 end
 
 function fmsFunctions.setpage(fmsO,value) -- set page
 	value=value.."_1"
 	fmsFunctions["setpage_no"](fmsO,value)
-	--sim/FMS/navrad
-	--sim/FMS2/navrad
 end
-
---function fmsFunctions.custom2fmc(fmsO,value)
---	print("custom2fmc" .. value)
---	simCMD_FMS_key[fmsO["id"]]["del"]:once()
---	simCMD_FMS_key[fmsO["id"]]["clear"]:once()
---	if value~="next" and value~="prev" and string.len(fmsO["scratchpad"])>0 then
---		for c in string.gmatch(fmsO["scratchpad"],".") do
---			local v = c
---			if v == "/" then v = "slash" end
---			simCMD_FMS_key[fmsO["id"]][v]:once()
---		end
---	elseif value=="next" then
---		fmsO["targetpgNo"]=fmsO["pgNo"]+1
---		run_after_time(switchCustomMode, 0.5)
---	elseif value=="prev" then 
---		fmsO["targetpgNo"]=fmsO["pgNo"]-1	run_after_time(switchCustomMode, 0.5)
---	end
---	simCMD_FMS_key[fmsO["id"]][value]:once()
---	fmsO["scratchpad"]=""
---end
---
---function fmsFunctions.key2fmc(fmsO,value)
---	print("key2fmc" .. value)
---	if string.len(fmsO["scratchpad"])>0 then
---		simCMD_FMS_key[fmsO["id"]]["del"]:once()
---		simCMD_FMS_key[fmsO["id"]]["clear"]:once()
---		if value~="next" and value~="prev" then
---			for c in string.gmatch(fmsO["scratchpad"],".") do
---			local v=c
---			if v=="/" then v="slash" end
---				simCMD_FMS_key[fmsO["id"]][v]:once()
---			end
---		end
---	end
---	simCMD_FMS_key[fmsO["id"]][value]:once()
---	fmsO["scratchpad"]=""
---	fmsModules[fmsO.id].dispMSG = {} -- clear notifications
-
---end
-
---[[local updateFrom="fmsL"
-local lastCrz=0
-function checkCRZ()
-	if lastCrz==B777BR_cruiseAlt then return end
-	if is_timer_scheduled(updateCRZ)==true then return end
-	simCMD_FMS_key[fmsL.id]["fpln"]:once()--make sure we arent on the vnav page
-    simCMD_FMS_key[fmsL.id]["clb"]:once()--go to the vnav page
-    simCMD_FMS_key[fmsL.id]["next"]:once() --go to the vnav page 2
-
-    fmsFunctions["custom2fmc"](fmsL,"R1")
-    updateFrom=fmsL.id
-    local toGet=B777DR_srcfms[updateFrom][3] --make sure we update it
-    run_after_time(updateCRZ,0.5)
-
-end
-
-function updateCRZ()
-	local setVal=string.sub(B777DR_srcfms[updateFrom][3],20,24)
-	print("from line".. updateFrom.." "..B777DR_srcfms[updateFrom][3])
-	print("to:"..setVal)
-	local alt=validAlt(setVal)
-	if alt~=nil then 
-		B777BR_cruiseAlt=alt
-		lastCrz=alt
-	end
-  fmsModules:setData("crzalt",setVal)
-end
-]]
 
 function fmsFunctions.getdata(fmsO,value) -- getdata
 	local data = ""
@@ -348,7 +218,19 @@ function validateDragFF(entry)
     return {true, results[1].."/"..results[2]}
 end
 
---timer_start = 0 unnecessary
+local valIN_fmsO
+
+function validate() -- this function kinda sucks tbh
+	if B777DR_backend_notInDatabase[valIN_fmsO.id == "fmsL" and 1 or 2] == 0 then
+		valIN_fmsO.scratchpad = ""
+	end
+end
+
+function validatePOI(fmsO) -- there is lag from backend, so params must be variables and this must be run after some time
+	valIN_fmsO = fmsO
+	run_after_time(validate, 0.1)
+end
+
 local kgs_to_lbs = 2.204623
 
 function fmsFunctions.setdata(fmsO,value)
@@ -426,20 +308,63 @@ function fmsFunctions.setdata(fmsO,value)
 	if value == "readmeCode" then
 		if getSimConfig("FMC", "unlocked") == 0 then
 			setFMSData("readmeCodeInput", fmsO["scratchpad"])
-			if string.len(fmsO["scratchpad"]) == 5 then
-				if fmsO["scratchpad"] == B777DR_readme_code or fmsO["scratchpad"] == "BIRDS" then
-					fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
-					fmsModules[fmsO.id]:notify("alert", "UNLOCKED")
-					fmsO["scratchpad"] = ""
-					setSimConfig("FMC", "unlocked", 1)
-				else
-					fmsModules[fmsO.id]:notify("alert", "INCORRECT CODE")
-				end
+			if fmsO["scratchpad"] == "BOEING" then
+				--fmsModules[fmsO.id].dispMSG = {} -- reset messages from previous attempts
+				fmsModules[fmsO.id]:notify("advs", "UNLOCKED")
+				fmsO["scratchpad"] = ""
+				setSimConfig("FMC", "unlocked", 1)
 			else
-				fmsModules[fmsO.id]:notify("alert", "INVALID ENTRY")
+				fmsModules[fmsO.id]:notify("advs", "INCORRECT CODE")
 			end
 		else
-			fmsModules[fmsO.id]:notify("alert", "ALREADY UNLOCKED")
+			fmsModules[fmsO.id]:notify("advs", "ALREADY UNLOCKED")
+		end
+		return
+	end
+
+	if value == "depIcao" then
+		local input = fmsO["scratchpad"]
+		local id = fmsO.id == "fmsL" and 1 or 2
+		if input:len() == 4 and not input:match('%d') then
+			B777DR_backend_depIcao_in[id] = input
+			validatePOI(fmsO)
+		elseif input == "" and B777DR_backend_depIcao_out:match('%a') then
+			fmsO["scratchpad"] = B777DR_backend_depIcao_out
+		else
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
+		end
+		return
+	elseif value == "arrIcao" then
+		local input = fmsO["scratchpad"]
+		local id = fmsO.id == "fmsL" and 1 or 2
+		if input:len() == 4 and not input:match('%d') then
+			B777DR_backend_arrIcao_in[id] = input
+			validatePOI(fmsO)
+		elseif input == "" and B777DR_backend_arrIcao_out:match('%d') then
+			fmsO["scratchpad"] = B777DR_backend_arrIcao_out
+		else
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
+		end
+		return
+	elseif value == "depRwy" then
+		local input = fmsO["scratchpad"];
+		if (input:len() == 3 and input:match('%d%d%a')) or (input:len() == 2 and input:match('%d%d')) then
+			B777DR_backend_repRwy_in[fmsO.id == "fmsL" and 1 or 2] = input
+			validatePOI(fmsO)
+		elseif input == "" and B777DR_backend_depRwy_out:match('%d') then
+			fmsO["scratchpad"] = B777DR_backend_depRwy_out
+		else
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
+		end
+	elseif value == "flightNum" then
+		local input = fmsO["scratchpad"]
+		if input:len() <= 10 and input >= "" then
+			fmsModules["data"].fltno = pad(input, 10, true)
+			fmsO["scratchpad"] = ""
+		elseif input == "" and fmsModules["data"].fltno ~= "----------" then
+			fmsO["scratchpad"] = fmsModules["data"].fltno
+		else
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6]) -- INVALID ENTRY
 		end
 		return
 	end
@@ -751,6 +676,7 @@ function fmsFunctions.setdata(fmsO,value)
 		if numInput then
 			if numInput <= -1 and numInput >= -99 then
 				fmsO["scratchpad"] = ""
+				fmsModules["data"].customMinFuelTemp = true
 				setSimConfig("FMC", "min_fuel_temp", numInput)
 				return
 			end
@@ -899,6 +825,59 @@ function fmsFunctions.setdata(fmsO,value)
 	elseif value=="tafreq" then	
 		fmsFunctions["acarsATCRequest"](fmsO,"REQUEST TAF")	
 	end
+	local idNum = fmsO.id == "fmsL" and 1 or fmsO.id == "fmsR" and 2 or 3
+
+	--0 for ON, 1 for VOR and 2 for OFF
+	if value == "radNavInhibit" then
+		B777DR_backend_radNavInhibit = B777DR_backend_radNavInhibit == 2 and 0 or B777DR_backend_radNavInhibit + 1
+		return
+	elseif value == "refnavdata_poi" then
+		-- garbage code
+		local input = fmsO.scratchpad
+		if B777DR_backend_arrIcao_out:match('%a') and (#input == 3 and input:match("%d%d%a") or (#input == 2 and input:match("%d%d"))) -- RWY
+		or #input == 2 and input:match("%a%a") -- NDB
+		or #input == 3 and input:match("%a%a%a") -- VOR
+		or #input == 4 and input:match("%a%a%a%a") -- APT
+		or #input == 5 and input:match("%a%a%a%a%a") then -- FIX
+			B777DR_backend_inIcao[idNum] = fmsO["scratchpad"]
+			validatePOI(fmsO)
+		else
+			fmsModules[fmsO.id]:notify("entry", entryMsgs[6])
+		end
+		return
+	elseif value == "inhibitNavaid1" then
+		if B777DR_backend_radNavInhibit > 1 then
+			B777DR_backend_navaidInhibit1_in[idNum] = fmsO["scratchpad"]
+			fmsO["scratchpad"] = ""
+		else
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
+		end
+		return
+	elseif value == "inhibitNavaid2" then
+		if B777DR_backend_radNavInhibit > 1 then
+			B777DR_backend_navaidInhibit2_in[idNum] = fmsO["scratchpad"]
+			fmsO["scratchpad"] = ""
+		else
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
+		end
+		return
+	elseif value == "inhibitVor1" then
+		if B777DR_backend_radNavInhibit == 2 then
+			B777DR_backend_vorInhibit1_in[idNum] = fmsO["scratchpad"]
+			fmsO["scratchpad"] = ""
+		else
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
+		end
+		return
+	elseif value == "inhibitVor2" then
+		if B777DR_backend_radNavInhibit == 2 then
+			B777DR_backend_vorInhibit2_in[idNum] = fmsO["scratchpad"]
+			fmsO["scratchpad"] = ""
+		else
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
+		end
+		return
+	end
 end
 
 function fmsFunctions.setDref(fmsO,value)
@@ -912,19 +891,19 @@ function fmsFunctions.setDref(fmsO,value)
 			if B777DR_cdu_eicas_ctl[1] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[0] = 1 - B777DR_cdu_eicas_ctl[0]
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		elseif fmsO.id == "fmsC" then
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[2] == 0 then
 				B777DR_cdu_eicas_ctl[1] = 1 - B777DR_cdu_eicas_ctl[1]
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		else
 			if B777DR_cdu_eicas_ctl[0] == 0 and B777DR_cdu_eicas_ctl[1] == 0 then
 				B777DR_cdu_eicas_ctl[2] = 1 - B777DR_cdu_eicas_ctl[2]
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		end
 		return
@@ -936,7 +915,7 @@ function fmsFunctions.setDref(fmsO,value)
 		elseif fmsO.id == "fmsR" then
 			B777DR_cdu_efis_ctl[1] = 1 - B777DR_cdu_efis_ctl[1]
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -1032,23 +1011,29 @@ function fmsFunctions.setDref(fmsO,value)
   fmsO["scratchpad"]=""
 end
 
-function fmsFunctions.showmessage(fmsO,value)
-  acarsSystem.currentMessage=value
-  --fmsO["inCustomFMC"]=true
-  fmsO["targetPage"]="VIEWACARSMSG"
-  run_after_time(switchCustomMode, 0.5)
-end
-
 function fmsFunctions.doCMD(fmsO,value)
-  --[[if fmsModules["cmds"][value] ~= nil then
-	fmsModules["cmds"][value]:once()
-	fmsModules["lastcmd"]=fmsModules["cmdstrings"][value]
-  end]]
 	find_command(value):once()
 	print("do fmc command "..value)
 end
 
-function setEicasPage(id)
+function fmsFunctions.setDataref(fmsO, input)
+	local value = split(input, "___")
+	local dr = find_dataref(value[1])
+	dr = value[2]
+end
+
+function fmsFunctions.selectWPT(fmsO, wpt)
+	--print(fmsPages["SELWPT"]:getPage(fmsModules[fmsO.id]["pgNo"], fmsO.id)[wpt*2+3])
+	if string.match(fmsPages["SELWPT"]:getPage(fmsModules[fmsO.id]["pgNo"], fmsO.id)[wpt*2+3], '%d%d%d') then
+		B777DR_backend_selwpt_pickedWpt[fmsO.id] = wpt
+		print("selected. returning to previous: "..fmsModules[fmsO.id]["prevPage"])
+		fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
+	else
+		fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
+	end
+end
+
+function fmsFunctions.setEicasPage(fmsO, id)
 	print(id)
 	if B777DR_eicas_mode == id then
 		B777DR_eicas_mode = 0
@@ -1058,51 +1043,6 @@ function setEicasPage(id)
 end
 
 function fmsFunctions.setDisp(fmsO, value)
-
-	if value == "eicasEng" then
-		setEicasPage(4)
-		return
-	end
-	if value == "eicasStat" then
-		setEicasPage(9)
-		return
-	end
-	if value == "eicasChkl" then
-		setEicasPage(10)
-		return
-	end
-	if value == "eicasDoor" then
-		setEicasPage(2)
-		return
-	end
-	if value == "eicasGear" then
-		setEicasPage(7)
-		return
-	end
-	if value == "eicasElec" then
-		setEicasPage(3)
-		return
-	end
-	if value == "eicasHyd" then
-		setEicasPage(8)
-		return
-	end
-	if value == "eicasFuel" then
-		setEicasPage(6)
-		return
-	end
-	if value == "eicasAir" then
-		setEicasPage(1)
-		return
-	end
-	if value == "eicasFctl" then
-		setEicasPage(5)
-		return
-	end
-	if value == "eicasEng" then
-		setEicasPage(4)
-		return
-	end
 
 	if value=="adfvor" then
 		if fmsO.id=="fmsL" then
@@ -1201,39 +1141,30 @@ end
 function fmsFunctions.setpage2(fmsO, value)
 	if value == "FMC" then
 		if fmsO.id ~= "fmsC" then
-			local excludedPages = "EFISCTL152, EFISOPTIONS152, EICASMODES, EICASSYN, README, INDEX"
+			local excludedPages = "EFISCTL152, EFISOPTIONS152, EICASMODES, EICASSYN, README, INDEX, SELWPT"
 			local idNum = fmsO.id == "fmsL" and 0 or 1
-			if excludedPages:match(fmsModules[fmsO.id]["prevPage"]) then
+			if excludedPages:match(fmsModules[fmsO.id]["prevPage"]:sub(1, -3)) then
 				B777DR_cdu_act[idNum] = 1
 				fmsFunctions["setpage"](fmsO,"IDENT")
 			else
 				fmsFunctions["setpage"](fmsO,fmsModules[fmsO.id]["prevPage"])
 			end
+			if simDR_fms_line13[fmsO.id]:match("DATA OUT OF DATE")then
+				fmsModules[fmsO.id]:notify("alert", alertMsgs[16]) -- NAV DATA OUT OF DATE
+				simCMD_fms_key_clr[fmsO.id]:once()
+			end
 			return
 		end
-		fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+		fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		return
 	end
 
 	if value == "EICASMODES" then
-		if fmsO.id == "fmsL" then
-			if B777DR_cdu_eicas_ctl[0] == 1 then
-				fmsFunctions["setpage"](fmsO,value)
-			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-			end
-		elseif fmdO.id == "fmsC" then
-			if B777DR_cdu_eicas_ctl[1] == 1 then
-				fmsFunctions["setpage"](fmsO,value)
-			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-			end
+		local idNum = fmsO.id == "fmsL" and 0 or fmsO.id == "fmsC" and 1 or 2
+		if B777DR_cdu_eicas_ctl[idNum] == 1 then
+			fmsFunctions["setpage"](fmsO,value)
 		else
-			if B777DR_cdu_eicas_ctl[2] == 1 then
-				fmsFunctions["setpage"](fmsO,value)
-			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
-			end
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -1243,16 +1174,16 @@ function fmsFunctions.setpage2(fmsO, value)
 			if B777DR_cdu_efis_ctl[0] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		elseif fmsO.id == "fmsR" then
 			if B777DR_cdu_efis_ctl[1] == 1 then
 				fmsFunctions["setpage"](fmsO,value)
 			else
-				fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+				fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 			end
 		else
-			fmsModules[fmsO.id]:notify("alert", alertMsgs[36]) -- KEY/FUNCTION INOP
+			fmsModules[fmsModule]:notify("advs", advsMsgs[18]) -- KEY/FUNCTION INOP
 		end
 		return
 	end
@@ -1267,11 +1198,8 @@ function fmsFunctions.setpage2(fmsO, value)
 end
 
 function lim(val, upper, lower)
-	if val > upper then
-		return upper
-	elseif val < lower then
-		return lower
-	end
+	val = math.max(val, lower)
+	val = math.min(val, upper)
 	return val
 end
 
@@ -1302,10 +1230,6 @@ function animate(target, variable, speed)
 	if math.abs(target - variable) < 0.1 then return target end
 	variable = variable + ((target - variable) * (speed * SIM_PERIOD))
 	return variable
-end
-
-function ternary(condition, ifTrue, ifFalse)
-	if condition then return ifTrue else return ifFalse end
 end
 
 --[[B777DR_print_input = find_dataref("Strato/777/print_input");

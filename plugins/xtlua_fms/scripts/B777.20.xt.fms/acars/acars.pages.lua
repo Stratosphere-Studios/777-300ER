@@ -94,7 +94,7 @@ fmsPages["VIEWMISCACARS"].getSmallPage=function(self,pgNo,fmsID)
     local page=acarsSystem.getMiscMessages(pgNo)
     return page.templateSmall 
  end
-  fmsPages["VIEWMISCACARS"].getNumPages=function(self)
+  fmsPages["VIEWMISCACARS"].getNumPages=function(self, fmsID)
     noPages=math.ceil(table.getn(acarsSystem.messages.values)/4)
     if noPages<1 then noPages=1 end
     return noPages 
@@ -111,7 +111,7 @@ fmsPages["VIEWMISCACARS"].getSmallPage=function(self,pgNo,fmsID)
     local page=acarsSystem.getUpMessages(pgNo)
     return page.templateSmall 
   end
-  fmsPages["VIEWUPACARS"].getNumPages=function(self)
+  fmsPages["VIEWUPACARS"].getNumPages=function(self, fmsID)
     noPages=math.ceil(table.getn(acarsSystem.messages.values)/4)
     if noPages<1 then noPages=1 end
     return noPages 
@@ -165,7 +165,7 @@ fmsPages["VIEWMISCACARS"].getSmallPage=function(self,pgNo,fmsID)
     }
     return fmsPages["VIEWACARSMSG"]["templateSmall"]
   end
-  fmsPages["VIEWACARSMSG"].getNumPages=function(self)
+  fmsPages["VIEWACARSMSG"].getNumPages=function(self, fmsID)
     local msg=acarsSystem.messages[acarsSystem.currentMessage]
     noPages=math.ceil(string.len(msg["msg"])/168)
     if noPages<1 then noPages=1 end

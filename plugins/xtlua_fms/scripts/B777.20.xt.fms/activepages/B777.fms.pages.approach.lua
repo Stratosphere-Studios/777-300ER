@@ -19,7 +19,7 @@ string.format("%4.1f              %3d", acf_weight/1000,B777DR_airspeed_Vf25),
         "                        ",
         "             25`        ",
         "                        ",
-        "<      QNH;g3   30`        ",
+        "<      QNH;g03   30`        ",
         "                        ",
         "                 --/---",
         "                        ",
@@ -47,7 +47,7 @@ fmsPages["APPROACH"].getSmallPage=function(self,pgNo,fmsID)
     }
 end
 
-fmsPages["APPROACH"].getNumPages=function(self)
+fmsPages["APPROACH"].getNumPages=function(self, fmsID)
 	return 1
 end
 
