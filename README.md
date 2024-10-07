@@ -100,24 +100,26 @@ No further steps are required.
 
 [**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear, autopilot), C++ systems (FMC plugin), flight model improvements, cockpit instruments(pfd)
 
-[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, bleed air system), displays and efb, flight model + other aircraft data, readme, GitHub management.
+[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, Lua systems (Air), displays and efb, flight model + other aircraft data, readme, GitHub management.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
-**kudosi**: references, testing.
-
-**y4nn**: Mac installation video.
-
-**Laminar Research**: Default 737 display textures.
-
-[**Cactus2456 (IASXP)**](https://github.com/IASXP): MFD Checklists, SASL integration.
+[**Ker**](https://github.com/Ker1010): MFD Checklists, CPDLC
 
 [**zeta976**](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
 **[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors**: [XTLua](https://github.com/mSparks43/XTLua), help, and some borrowed code.
 
-**Potatohead123**: Cockpit help.
+**Laminar Research**: Default 737 display textures.
+
+[**IASXP**](https://github.com/IASXP): Begin MFD Checklists, SASL integration.
 
 **Phil Paysse**: Fuselage.
 
+**Potatohead123**: Cockpit help.
+
 [**Spherrrical**](https://github.com/Spherrrical/): Logo design.
+
+**y4nn**: Mac installation video.
+
+**kudosi**: references, testing.
