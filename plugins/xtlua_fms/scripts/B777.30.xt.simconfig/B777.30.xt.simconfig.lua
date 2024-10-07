@@ -119,6 +119,17 @@ function baro_sync()
 	end
 end
 
+function readmeCode() -- sets file to boeing for any users used to the old system. will eventually delete that file
+	local file = io.open("Output/777 Readme Code.txt", "r")
+	if file then
+		file:close()
+		file = io.open("Output/777 Readme Code.txt", "w")
+		file:write("Enter this code into the FMS to unlock the flight instruments: \"BOEING\"")
+		file:close()
+	end
+	--print("created readme code "..B777DR_readme_code)
+end
+
 function setSoundOption(key,value)
 	if key == "paOption" then B777DR_SNDoptions[2] = value end
 	if key == "musicOption" then B777DR_SNDoptions[3] = value end
@@ -193,10 +204,12 @@ function setLoadedConfigs()
 end
 
 -- for possible performance improvement
+-- TODO: make this less stupid. tried to improve perforamce do to weird stuff happening but i'm pretty sure it was jsut due to multithreading...
 local open = io.open
 local close = io.close
 
 function loadSimConfig()
+	readmeCode()
 	--os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
 	--print("File = "..fileLocation)
 	local file = open(fileLocation, "r")
