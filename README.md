@@ -16,9 +16,9 @@ Anyone can also help by reporting issues, bugs, or improvements in the issues ta
 
 If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it. The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the exterior modeling is mostly complete, it's still subject to some changes.
 
-## Current development update (as of July 2024)
+## Current development update (as of November  2024)
 
-The systems we're currently focusing are FMC routing and navigation, autopilot, and bleed air/pressurization systems, as well as a quick-n-dirty electrical system (this will be redone later). Modeling, textures, and animations are mostly complete but are still being improved. The hydraulic system and fly by wire are fully simulated. **THE AIRCRAFT IS NOT YET IFR READY AND YOU CANNOT FLY A ROUTE OR USE THE AUTOPILOT!!! Please don't download if you're expecting that. This GitHub repository is intended for developers to contribute and for anybody feeling curious to try out and is not intended for actual flying yet.**
+The systems we're currently focusing are FMC routing and navigation, autopilot, and bleed air/pressurization systems (which means engine start coming soon). Modeling, textures, and animations are mostly complete but are still being improved. The hydraulic and fly by wire systems are fully simulated, and we have a custom autopilot although it can't do VNAV, LNAV, or VOR/ILS yet. The FMC is also partially implemented but is still in progress. **THE AIRCRAFT IS NOT YET IFR READY AND YOU CANNOT FLY A ROUTE!!! Please don't download if you're expecting that. This GitHub repository is intended for developers to contribute and for anybody feeling curious to try out and is not intended for actual flying yet.**
 
 ## **FAQ**
 
