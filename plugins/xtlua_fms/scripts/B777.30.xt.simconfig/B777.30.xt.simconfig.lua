@@ -11,7 +11,7 @@
 --]]
 
 -- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
-local version = 4
+local version = 5
 
 --replace create_command
 function deferred_command(name,desc,realFunc)
@@ -91,7 +91,8 @@ function defaultValues()
 		FMC = {
 			drag_ff = "+0.0/+0.0",
 			unlocked = 0, -- 1 if readme code unlocked, 0 if locked
-			min_fuel_temp = -37 -- options are -37 (Jet A), -44 (Jet A1), and -60 (Jet B), in addition to other
+			min_fuel_temp = -37, -- options are -37 (Jet A), -44 (Jet A1), and -60 (Jet B), in addition to other
+			keyboard_input = 0 -- use keyboard for fmc and lower eicas cpdlc input, 0 off 1 on
 		},
 		PLANE = {
 			aircraft_type = 0, -- 0 = pax, 1 = Freighter
@@ -106,7 +107,7 @@ function defaultValues()
 			transponder_type = 0, -- 0, 1
 			nosewheel_ctrl = 0, -- 0 = independant, 1 = yaw, 2 = roll; will also link rudder to roll while on ground when in roll mode
 			gasper_switch = 0, -- 0 = not installed, 1 = installed
-			takeoff_chk_btn = 0 -- 0 = not installed, 1 = installed
+			takeoff_chk_btn = 0, -- 0 = not installed, 1 = installed
 		}
 	}
 end
