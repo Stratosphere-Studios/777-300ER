@@ -547,7 +547,6 @@ function printer(text)
         os.execute("powershell.exe -Command \"\""..text.."\" | out-printer\"")
         os.execute("mshta javascript:alert(\"Stratosphere 777: check your printer!\");close();")
     elseif jit.os == "Linux" then
-        print("Linux")
         os.execute("lpr "..text)
         os.execute("notify-send \"Stratosphere 777: check your printer!\"")
     elseif jis.os == "OSX" then
