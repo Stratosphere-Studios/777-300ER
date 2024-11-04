@@ -125,7 +125,7 @@ function readmeCode() -- sets file to boeing for any users used to the old syste
 	if file then
 		file:close()
 		file = io.open("Output/777 Readme Code.txt", "w")
-		file:write("Enter this code into the FMS to unlock the flight instruments: \"BOEING\"")
+		file:write("Enter this code into the FMS to unlock the flight instruments: \"BOEING\"\nNOTE: the code has moved to the readme itself and this file will soon be removed.")
 		file:close()
 	end
 	--print("created readme code "..B777DR_readme_code)
