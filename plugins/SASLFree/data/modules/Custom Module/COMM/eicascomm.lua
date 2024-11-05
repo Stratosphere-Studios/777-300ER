@@ -19,7 +19,9 @@ mm = globalPropertyi("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss = globalPropertyi("sim/cockpit2/clock_timer/zulu_time_seconds")
 addSearchPath(moduleDirectory .. "/Custom Module/COMM/assets")
 include("menu.lua")
+include("eiascommfunction.lua")
 local selectkey = loadImage("selectkey.png")
+local selectedkey = loadImage("selectedkey.png")
 local downarrow = loadImage("downarrow.png")
 local fullarrow = loadImage("fullarrow.png")
 
@@ -30,6 +32,9 @@ local selectingX = 0
 local selectingY = 0
 local selectingW = 0
 local selectingH = 0
+
+local selectionX = 0
+local selectionY = 0
 
 local previouspage = get(page)
 local previousdetailpage = get(detailpage)
@@ -148,6 +153,10 @@ function draw()
         if get(selectingX) ~= 0 then
             inputborder(get(selectingX), get(selectingY), get(selectingW), get(selectingH))
         end
+
+        if get(selectionX) ~= 0 then
+            drawRotatedTexture(selectedkey, 45, selectionX, selectionY, 30, 30, white)
+        end
 	end
 
     components[#components + 1] = interactive {
@@ -231,10 +240,10 @@ function ShowPage(page)
         Displayitem(4, "Lower Alt:", 1, false, 0, 0, 0, false, 0)
         Displayitem(5, "Speed:", 2, false, 20, 3, 0, false, 0)
         Displayitem(6, "Back on route", 2, false, 0, 0, 0, false, 0)
-        FreeText(7)
+        FreeText(7, true)
     elseif page == 6 then
         Displayitem(1, "Request Clearance", 2, false, 0, 0, 0, false, 0)
-        FreeText(7)
+        FreeText(7, true)
     elseif page == 7 then
         Displayitem(1, "Active center:", 0, false, 0, 0, 0, false, 0)
         Displayitem(2, "Next center:", 0, false, 0, 0, 0, false, 0)
@@ -370,15 +379,65 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
         fixboxposition = 10 * string.len(text)
     end
 
+    local fontsize = 33
+    local Textlenght = string.len(text) * fontsize
+
     if (selecttype == 1) then
         drawRotatedTexture(selectkey, 45, 50 + 25 + subposition + offsetfromstart,  1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300, 40, 40, white)
     elseif (selecttype == 2) then
         drawRotatedTexture(selectkey, 0, 50 + 25 + subposition + offsetfromstart,  1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300, 40, 40, white)
     end
     drawText(opensans, 50 + 25 + 40 + 20 + subposition + offsetfromstart,  1188 + 17 - 4 - 25 + 2 +- (count * 87) + -300, text, 45, false, false, TEXT_ALIGN_LEFT, white)
+
+    components[#components + 1] = interactive {
+        position = { 50 + 25 + subposition + offsetfromstart, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300, 40, 40 },
+        onMouseDown = function()
+            if (selecttype == 0) then
+                return
+            end
+            subposition = 0
+
+            if (sub) then
+                subposition = 50
+            end
+            selectionX = 50 + 25 + subposition + offsetfromstart + 5 + subposition
+            selectionY = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 + 5
+            clickmain(count, "asdfasfasfd", selecttype, selectionX, selectionY)
+            return true
+        end,
+
+        onMouseMove = function()
+            -- position = { 50 + subposition + offsetfromstart, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 20, 25 + 25 + Textlenght, 75 } bugging
+
+            -- if (selecttype == 0) then
+            --     return
+            -- end
+
+            -- local fontsize = 33
+            -- local Textlenght = string.len(text) * fontsize
+
+            -- startposition = 90
+            -- subposition = 0
+            -- fixboxposition = 0
+            -- if (sub) then
+            --     subposition = 100
+            -- end
+            -- if (string.len(text) <= 4) then
+            --     fixboxposition = 10 * string.len(text)
+            -- end
+            -- selectingX = 50 + subposition + offsetfromstart
+            -- selectingY = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 20
+            -- selectingW = Textlenght
+            -- selectingH = 75
+            return true
+        end,
+
+        onMouseLeave = function()
+            return true
+        end
+    }
+
     if (lenght ~= 0) then
-        local fontsize = 33
-        local Textlenght = string.len(text) * fontsize
         drawRectangle(25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) - 12 + -300, lenght * 30, 60, grey)
         components[#components + 1] = interactive {
             position = { 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) - 12 + -300, lenght * 30, 60 },
@@ -413,31 +472,47 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
         for i = 1, lenght, 1 do
             table.insert(inputlength, "-")
         end
-        drawText(opensans, 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + ((lenght * 30) / 2) + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) + -300, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
+
+        local entry = Tabledata(inputData, count)
+        if entry then
+            print(entry)
+            drawText(opensans, 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + ((lenght * 30) / 2) + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) + -300, entry.data, 45, false, false, TEXT_ALIGN_CENTER, white)
+        else
+            drawText(opensans, 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + ((lenght * 30) / 2) + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) + -300, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
+        end
     end
 end
 
-function FreeText(count)
+function FreeText(count, sub)
+    offset = 0
     count = count or 5 --for default
-    drawText(opensans, 50 + 25, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300, "Free text:", 45, false, false, TEXT_ALIGN_LEFT, white)
-    drawRectangle(25 + 25 + 260, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 125, 600, 60 * 3, grey) --standard 3 lines
+    sub = sub or false --for default
+    if (sub) then
+        offset = 100
+    end
+    drawText(opensans, 50 + 25 + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300, "Free text:", 45, false, false, TEXT_ALIGN_LEFT, white)
+    drawRectangle(25 + 25 + 260 + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 125, 600, 60 * 3, grey) --standard 3 lines
 
     local inputlength = {}
     for i = 1, 25, 1 do
         table.insert(inputlength, "-")
     end
-    drawText(opensans, 25 + 25 + 260 + (600 / 2), 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 110, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
-    drawText(opensans, 25 + 25 + 260 + (600 / 2), 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 110 + 60, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
-    drawText(opensans, 25 + 25 + 260 + (600 / 2), 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 110 + 60 + 60, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
+
+    drawText(opensans, 25 + 25 + 260 + (600 / 2) + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 110, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
+    drawText(opensans, 25 + 25 + 260 + (600 / 2) + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 110 + 60, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
+    drawText(opensans, 25 + 25 + 260 + (600 / 2) + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 110 + 60 + 60, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
 
     components[#components + 1] = interactive {
-        position = { 25 + 25 + 260, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 125, 600, 60 * 3 },
+        position = { 25 + 25 + 260 + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 125, 600, 60 * 3 },
         onMouseDown = function()
             return true
         end,
 
         onMouseMove = function()
-            selectingX = 25 + 25 + 260
+            if (sub) then
+                offset = 100
+            end
+            selectingX = 25 + 25 + 260 + offset
             selectingY = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 125
             selectingW = 600
             selectingH = 60 * 3
