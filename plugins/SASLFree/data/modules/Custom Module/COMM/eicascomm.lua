@@ -158,7 +158,7 @@ function draw()
             drawRotatedTexture(selectedkey, 45, selectionX, selectionY, 30, 30, white)
         end
 	end
-
+    --ATC
     components[#components + 1] = interactive {
         position = { 1100 - 450 + 70 - 90 + 17 + 15 - 655, 1188 + 17 - 4 - 25 + 2 - 1 - 76, 390, 92 },
         onMouseDown = function()
@@ -174,6 +174,27 @@ function draw()
         end,
 
         onMouseLeave = function()
+            return true
+        end
+    }
+    --Footer
+    --reset
+    components[#components + 1] = interactive {
+        position = { 605 + 5, 10, 180, 92 },
+        onMouseMove = function()
+            selectingX = 605 + 5
+            selectingY = 10
+            selectingW = 180
+            selectingH = 92
+            return true
+        end,
+
+        onMouseLeave = function()
+            return true
+        end,
+
+        onMouseDown = function()
+            inputData = {}
             return true
         end
     }
@@ -402,7 +423,6 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
             end
             selectionX = 50 + 25 + subposition + offsetfromstart + 5 + subposition
             selectionY = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 + 5
-            clickmain(count, "asdfasfasfd", selecttype, selectionX, selectionY)
             return true
         end,
 
@@ -442,6 +462,7 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
         components[#components + 1] = interactive {
             position = { 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) - 12 + -300, lenght * 30, 60 },
             onMouseDown = function()
+                clickmain(count, text, selecttype)
                 return true
             end,
 
@@ -468,16 +489,14 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
         }
 
         --input text box "---""
-        local inputlength = {}
-        for i = 1, lenght, 1 do
-            table.insert(inputlength, "-")
-        end
-
-        local entry = Tabledata(inputData, count)
+        local entry = Tabledata(count, get(page))
         if entry then
-            print(entry)
             drawText(opensans, 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + ((lenght * 30) / 2) + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) + -300, entry.data, 45, false, false, TEXT_ALIGN_CENTER, white)
         else
+            local inputlength = {}
+            for i = 1, lenght, 1 do
+                table.insert(inputlength, "-")
+            end
             drawText(opensans, 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + ((lenght * 30) / 2) + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) + -300, table.concat(inputlength), 45, false, false, TEXT_ALIGN_CENTER, white)
         end
     end
@@ -605,5 +624,4 @@ function update()
         selectingX = 0
         previousdetailpage = currentdetailpage
     end
-
 end

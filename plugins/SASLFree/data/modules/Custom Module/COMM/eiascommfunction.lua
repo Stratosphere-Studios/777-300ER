@@ -11,13 +11,13 @@ function update()
     components = {}
 end
 
-function clickmain(count, data, selecttype, x, y)
-    table.insert(inputData, count, {id = count, data = "asdasdasd", selecttype = selecttype })
+function clickmain(count, page, data, selecttype)
+    table.insert(inputData, {id = count, page = page, data = data, selecttype = selecttype })
 end
 
-function Tabledata(count)
+function Tabledata(count, page)
     for i, v in ipairs(inputData) do
-        if v.id == count then
+        if v.id == count and v.page == page then
           return v
         end
       end
