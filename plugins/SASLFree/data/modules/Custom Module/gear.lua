@@ -391,7 +391,7 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 		skid_ratio_R = get(tire_skid_speed_R) / get(ground_speed)
 	end
 	if skid_ratio_R * 2 * bool2num(skid_ratio_R > 0.15) < tgt_R then
-		local tgt = tgt_L - skid_ratio_R * 2 * bool2num(skid_ratio_R > 0.15)
+		local tgt = tgt_R - skid_ratio_R * 2 * bool2num(skid_ratio_R > 0.15)
 		if effect_R * tgt > 0 and get(R_wheel_brake) == 0 then
 			tmp[2] = get(c_time)
 		end
