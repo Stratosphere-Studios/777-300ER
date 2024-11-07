@@ -197,9 +197,12 @@ simDR_total_fuel_kgs                   = find_dataref("sim/flightmodel/weight/m_
 simDR_gross_wt_kgs                     = find_dataref("sim/flightmodel/weight/m_total")
 simDR_payload_wt_kgs                   = find_dataref("sim/flightmodel/weight/m_fixed")
 simDR_viewIsExternal                   = find_dataref("sim/graphics/view/view_is_external")
+simDR_gear_deployed = find_dataref("sim/cockpit2/tcas/targets/position/gear_deploy")
+
 --*************************************************************************************--
 --**                              FIND CUSTOM DATAREFS                               **--
 --*************************************************************************************--
+B777DR_gear_door_pos = find_dataref("Strato/777/gear/doors")
 
 B777DR_autopilot_fpa                   = find_dataref("Strato/777/mcp/tgt_fpa")
 B777DR_ap_vsFPA_sw                     = find_dataref("Strato/777/mcp/vs_fpa")
@@ -316,6 +319,7 @@ B777DR_acf_is_freighter                = find_dataref("Strato/777/acf_is_freight
 
 B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_pax_interior", "number")
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
+B777DR_kill_gear                       = deferred_dataref("Strato/777/kill_gear", "number")
 B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
 B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
 B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[35]")
@@ -481,6 +485,17 @@ function B777_efis_lEicas_chkl_switch_CMDhandler(phase, duration)
 			B777DR_efis_button_target[31] = 1
 		elseif phase == 2 then
 			B777DR_efis_button_target[31] = 0
+		end
+	end
+end
+
+function B777_efis_lEicas_comm_switch_CMDhandler(phase, duration)
+	if B777DR_cdu_eicas_ctl_any == 0 then
+		if phase == 0 then
+			setEicasPage(11)
+			B777DR_efis_button_target[32] = 1
+		elseif phase == 2 then
+			B777DR_efis_button_target[32] = 0
 		end
 	end
 end
@@ -1076,6 +1091,7 @@ B777CMD_efis_lEicas_gear             = deferred_command("Strato/777/button_switc
 B777CMD_efis_lEicas_fctl             = deferred_command("Strato/777/button_switch/efis/lEicas/fctl", "Lower Eicas FCTL Page", B777_efis_lEicas_fctl_switch_CMDhandler)
 --B777CMD_efis_lEicas_cam              = deferred_command("Strato/777/button_switch/efis/lEicas/cam", "Lower Eicas CAM Page", B777_efis_lEicas_cam_switch_CMDhandler)
 B777CMD_efis_lEicas_chkl             = deferred_command("Strato/777/button_switch/efis/lEicas/chkl", "Lower Eicas CHKL Page", B777_efis_lEicas_chkl_switch_CMDhandler)
+B777CMD_efis_lEicas_comm             = deferred_command("Strato/777/button_switch/efis/lEicas/comm", "Lower Eicas COMM Page", B777_efis_lEicas_comm_switch_CMDhandler)
 B777CMD_efis_lEicas_rcl              = deferred_command("Strato/777/button_switch/efis/lEicas/rcl", "Lower Eicas RECALL Button", B777_efis_lEicas_rcl_switch_CMDhandler)
 
 B777CMD_efis_wxr_button              = deferred_command("Strato/777/button_switch/efis/wxr", "Captain ND Weather Radar Button", B777_efis_wxr_switch_CMDhandler)
@@ -1631,12 +1647,17 @@ end
 --function before_physics()
 
 -- TODO: make this better
-function killer()
 
+function killer()
 	-- if view external
 	if simDR_viewIsExternal == 1 then
 		B777DR_kill_pax = 0
 		B777DR_kill_cargo = 0
+		if simDR_gear_deployed[0] == 0 and B777DR_gear_door_pos[1] == 0 and B777DR_gear_door_pos[2] == 0 then
+			B777DR_kill_gear = 1
+		else
+			B777DR_kill_gear = 0
+		end
 		if B777DR_acf_is_freighter == 1 then
 			B777DR_kill_pax = 1
 			B777DR_kill_pax_interior = 1
@@ -1654,6 +1675,7 @@ function killer()
 	-- if view internal
 	B777DR_kill_pax = 1
 	B777DR_kill_cargo = 1
+	B777DR_kill_gear = 1
 	if B777DR_acf_is_freighter == 1 then
 		B777DR_kill_pax_interior = 1
 		if B777DR_cockpit_door_pos > 0 then

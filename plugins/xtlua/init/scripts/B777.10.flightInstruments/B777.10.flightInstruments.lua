@@ -195,3 +195,5 @@ B777DR_rudder_trim_pos                 = deferred_dataref("Strato/777/cockpit/ru
 
 B777DR_gross_wt_lbs_kgs                          = deferred_dataref("Strato/777/displays/grwt_lbs_kgs", "number")
 B777DR_payload_lbs_kgs                           = deferred_dataref("Strato/777/displays/payload_lbs_kgs", "number")
+B777CMD_efis_lEicas_comm             = deferred_command("Strato/777/button_switch/efis/lEicas/comm", "Lower Eicas COMM Page", B777_efis_lEicas_comm_switch_CMDhandler)
+B777DR_kill_gear                       = deferred_dataref("Strato/777/kill_gear", "number")
