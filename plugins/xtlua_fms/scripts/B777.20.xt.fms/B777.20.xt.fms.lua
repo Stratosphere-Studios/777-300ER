@@ -17,6 +17,8 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
+B777DR_fmsL_scratchpad = deferred_dataref("Strato/777/FMC/scratchpad_L", "string")
+B777DR_fmsR_scratchpad = deferred_dataref("Strato/777/FMC/scratchpad_R", "string")
 totalizerInitkgs = 0.0
 totalizerSumkgs = 0.0
 local totalizerInited = false
@@ -571,10 +573,13 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 
-	checkSelWPT(1)
+	checkSelWPT(1) -- this is stupid, fix
 	checkSelWPT(2)
 
 	fuel()
+
+	B777DR_fmsL_scratchpad = fmsModules.fmsL.scratchpad
+	B777DR_fmsR_scratchpad = fmsModules.fmsR.scratchpad
 
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
@@ -584,38 +589,12 @@ function after_physics()
 
 	fmsModules["data"].pos = toDMS(simDR_latitude, true)..toDMS(simDR_longitude, false)
 
---     for i =1,24,1 do
---       print(string.byte(fms_style,i))
---     end
-	--refresh time
 	local cM = hh
 	cM = mm
 	cM = ss
 
     doNotifications()
 
---[[    if acarsSystem.provider.online() then
-		-- B777DR_CAS_memo_status[40]=0
-		acars = 1 --for radio
-		acarsSystem.provider.receive()
-		local hasNew = 0
-		for i = table.getn(acarsSystem.messages.values), 1, -1 do
-			if not acarsSystem.messages[i]["read"] then
-				hasNew = 1
-			end
-		end
-		B777DR_CAS_memo_status[0] = hasNew
-    else
-		if B777DR_rtp_C_off == 0 then ss777 comment
-			B777DR_CAS_memo_status[40] = 1 --for CAS
-		else
-			B777DR_CAS_memo_status[40] = 0
-		end
-		acars = 0 --for radio
-    end
-]]
-
-	--print(fmsModules["fmsL"]["prevPage"], fmsModules["fmsC"]["prevPage"], fmsModules["fmsR"]["prevPage"])
 	B777DR_readme_unlocked = getSimConfig("FMC", "unlocked")
 
 	if B777DR_cdu_efis_ctl[0] == 1 then

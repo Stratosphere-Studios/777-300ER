@@ -32,8 +32,6 @@ end
 
 B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
 --B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
-B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
-
 B777DR_oil_press_psi                    = deferred_dataref("Strato/777/oil_press_psi", "array[2]")
 
 B777DR_rud_tab_pos                      = deferred_dataref("Strato/777/controls/rud_tab_pos", "number")

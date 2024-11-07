@@ -25,6 +25,8 @@ acars                           = create_dataref("Strato/B777/comm/acars","numbe
 B777DR_cdu_act              = deferred_dataref("Strato/777/cdu_fmc_act", "array[3]")
 B777DR_TAS_pilot                = deferred_dataref("Strato/B777/nd/TAS_pilot", "number")
 B777DR_readme_unlocked          = deferred_dataref("Strato/777/readme_unlocked", "number")
+B777DR_fmsL_scratchpad = deferred_dataref("Strato/777/FMC/scratchpad_L", "string")
+B777DR_fmsR_scratchpad = deferred_dataref("Strato/777/FMC/scratchpad_R", "string")
 
 function createFMSDatarefs(fmsid)
 	-- white

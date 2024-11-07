@@ -4,7 +4,7 @@ OBJ
 
 GLOBAL_cockpit_lit
 TEXTURE	panel.png
-POINT_COUNTS	8831	0	0	10917
+POINT_COUNTS	8835	0	0	10923
 
 VT	0.20461035	0.3084881	-33.31739	0	0.93008196	0.3673521	1	1
 VT	0.20461035	0.30363056	-33.305092	0	0.93008196	0.3673521	1	0
@@ -8439,6 +8439,10 @@ VT	0.067397699	0.84031785	-33.346531	0	0.25832602	0.96605778	1	1
 VT	0.067397699	0.82117319	-33.341412	0	0.25832602	0.96605778	1	0
 VT	0.046461981	0.82117319	-33.341412	0	0.25832602	0.96605778	0	0
 VT	0.046461981	0.84031785	-33.346531	0	0.25832602	0.96605778	0	1
+VT	0.24282168	0.82983285	-33.344677	0	0.25803873	0.96613461	1	1
+VT	0.24282168	0.81946355	-33.341908	0	0.25803873	0.96613461	1	0
+VT	0.2274607	0.81946355	-33.341908	0	0.25803873	0.96613461	0	0
+VT	0.2274607	0.82983285	-33.344677	0	0.25803873	0.96613461	0	1
 VT	-0.14149289	0.32460877	-33.355946	0	0.92736149	0.37416667	1	1
 VT	-0.14149289	0.31955734	-33.343426	0	0.92736149	0.37416667	1	0
 VT	-0.15104537	0.31955734	-33.343426	0	0.92736149	0.37416667	0	0
@@ -9883,15 +9887,15 @@ IDX10	8488	8485	8487	8489	8490	8491	8492	8489	8491	8493
 IDX10	8494	8495	8496	8493	8495	8497	8498	8499	8500	8497
 IDX10	8499	8501	8502	8503	8504	8501	8503	8505	8506	8507
 IDX10	8508	8505	8507	8509	8510	8511	8512	8509	8511	8513
-IDX10	8514	8515	8516	8517	8518	8519	8520	8521	8522	8519
-IDX10	8521	8523	8524	8525	8526	8523	8525	8527	8528	8529
+IDX10	8514	8515	8516	8513	8515	8517	8518	8519	8520	8521
+IDX10	8522	8523	8524	8525	8526	8523	8525	8527	8528	8529
 IDX10	8530	8527	8529	8531	8532	8533	8534	8531	8533	8535
 IDX10	8536	8537	8538	8535	8537	8539	8540	8541	8542	8539
 IDX10	8541	8543	8544	8545	8546	8543	8545	8547	8548	8549
-IDX10	8550	8547	8549	8551	8552	8553	8554	8555	8556	8557
-IDX10	8558	8559	8560	8557	8559	8561	8562	8563	8564	8561
-IDX10	8563	8565	8566	8567	8568	8569	8570	8571	8572	8573
-IDX10	8574	8571	8573	8575	8576	8577	8578	8575	8577	8579
+IDX10	8550	8547	8549	8551	8552	8553	8554	8551	8553	8555
+IDX10	8556	8557	8558	8559	8560	8561	8562	8563	8564	8561
+IDX10	8563	8565	8566	8567	8568	8565	8567	8569	8570	8571
+IDX10	8572	8573	8574	8575	8576	8577	8578	8575	8577	8579
 IDX10	8580	8581	8582	8579	8581	8583	8584	8585	8586	8583
 IDX10	8585	8587	8588	8589	8590	8587	8589	8591	8592	8593
 IDX10	8594	8591	8593	8595	8596	8597	8598	8595	8597	8599
@@ -9929,13 +9933,10 @@ IDX10	8800	8801	8802	8799	8801	8803	8804	8805	8806	8803
 IDX10	8805	8807	8808	8809	8810	8807	8809	8811	8812	8813
 IDX10	8814	8811	8813	8815	8816	8817	8818	8815	8817	8819
 IDX10	8820	8821	8822	8819	8821	8823	8824	8825	8826	8823
-IDX	8825
-IDX	8827
-IDX	8828
-IDX	8829
-IDX	8830
-IDX	8827
-IDX	8829
+IDX10	8825	8827	8828	8829	8830	8827	8829	8831	8832	8833
+IDX	8834
+IDX	8831
+IDX	8833
 
 	ANIM_begin
 	ANIM_trans	0.21362001	0.49504	-33.548351	0.21362001	0.49504	-33.548351
@@ -11140,201 +11141,203 @@ IDX	8829
 	TRIS	10317 6
 	ATTR_manip_command	button	Strato/B777/button_switch/mcp/ap/vs	Vertical Speed Mode
 	TRIS	10323 6
-	ATTR_manip_command	right	Strato/777/fmsL_brt_up	Left CDU Brightness Up
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/comm	Eicas Comm Page
 	TRIS	10329 6
-	ATTR_manip_command	left	Strato/777/fmsR_brt_dn	Right CDU Brightness Down
+	ATTR_manip_command	right	Strato/777/fmsL_brt_up	Left CDU Brightness Up
 	TRIS	10335 6
-	ATTR_manip_command	right	Strato/777/fmsR_brt_up	Right CDU Brightness Up
+	ATTR_manip_command	left	Strato/777/fmsR_brt_dn	Right CDU Brightness Down
 	TRIS	10341 6
-	ATTR_manip_command	right	Strato/777/fmsC_brt_up	Center CDU Brightness Up
+	ATTR_manip_command	right	Strato/777/fmsR_brt_up	Right CDU Brightness Up
 	TRIS	10347 6
-	ATTR_manip_command	button	Strato/B777/fms2/ls_key/R6	
+	ATTR_manip_command	right	Strato/777/fmsC_brt_up	Center CDU Brightness Up
 	TRIS	10353 6
-	ATTR_manip_command	left	Strato/777/fmsC_brt_dn	Center CDU Brightness Down
+	ATTR_manip_command	button	Strato/B777/fms2/ls_key/R6	
 	TRIS	10359 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/crz	
+	ATTR_manip_command	left	Strato/777/fmsC_brt_dn	Center CDU Brightness Down
 	TRIS	10365 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/des	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/crz	
 	TRIS	10371 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/sta	Show stations on ND
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/des	
 	TRIS	10377 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/wpt	Show GPS Waypoints on ND
+	ATTR_manip_command	button	Strato/777/button_switch/efis/sta	Show stations on ND
 	TRIS	10383 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/wxr	Show Weather Radar on ND
+	ATTR_manip_command	button	Strato/777/button_switch/efis/wpt	Show GPS Waypoints on ND
 	TRIS	10389 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/hold	
+	ATTR_manip_command	button	Strato/777/button_switch/efis/wxr	Show Weather Radar on ND
 	TRIS	10395 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/arpt	Show Airports on ND
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/hold	
 	TRIS	10401 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/elec	Eicas Electrical Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/arpt	Show Airports on ND
 	TRIS	10407 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/hyd	Eicas Hydraulic Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/elec	Eicas Electrical Page
 	TRIS	10413 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/fuel	Eicas Fuel Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/hyd	Eicas Hydraulic Page
 	TRIS	10419 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/air	Eicas Air Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/fuel	Eicas Fuel Page
 	TRIS	10425 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/chkl	Eicas Checklist Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/air	Eicas Air Page
 	TRIS	10431 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/gear	Eicas Gear Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/chkl	Eicas Checklist Page
 	TRIS	10437 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/fctl	Eicas Flight Control Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/gear	Eicas Gear Page
 	TRIS	10443 6
-	ATTR_manip_command	button	Strato/777/options/weight_mode_toggle	Switch between pounds and kilograms
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/fctl	Eicas Flight Control Page
 	TRIS	10449 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/eng	Eicas Engine Page
+	ATTR_manip_command	button	Strato/777/options/weight_mode_toggle	Switch between pounds and kilograms
 	TRIS	10455 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/stat	Eicas STAT Page
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/eng	Eicas Engine Page
 	TRIS	10461 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/fpln	
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/stat	Eicas STAT Page
 	TRIS	10467 6
-	ATTR_manip_command	button	Strato/777/options/smartKnobs_toggle	Toggle "Smart" MCP Knobs
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/fpln	
 	TRIS	10473 6
-	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/door	EIcas Checklist Page
+	ATTR_manip_command	button	Strato/777/options/smartKnobs_toggle	Toggle "Smart" MCP Knobs
 	TRIS	10479 6
-	ATTR_manip_command	button	Strato/777/options/prkBrk_mode_toggle	Toggle realistic parking brakes
+	ATTR_manip_command	button	Strato/777/button_switch/efis/lEicas/door	EIcas Checklist Page
 	TRIS	10485 6
-	ATTR_manip_command	left	Strato/777/fmsL_brt_dn	Left CDU Brightness Down
+	ATTR_manip_command	button	Strato/777/options/prkBrk_mode_toggle	Toggle realistic parking brakes
 	TRIS	10491 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/navrad	
+	ATTR_manip_command	left	Strato/777/fmsL_brt_dn	Left CDU Brightness Down
 	TRIS	10497 6
-	ATTR_manip_command	button	Strato/777/options/gsInd_mode_toggle	Toggle Mach and Groundspeed indicator on PFD
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/navrad	
 	TRIS	10503 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/prev_pg	
+	ATTR_manip_command	button	Strato/777/options/gsInd_mode_toggle	Toggle Mach and Groundspeed indicator on PFD
 	TRIS	10509 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/next_pg	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/prev_pg	
 	TRIS	10515 6
-	ATTR_manip_command	button	Strato/777/options/trsInd_toggle	Toggle trim reference speed bug on PFD
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/next_pg	
 	TRIS	10521 6
-	ATTR_manip_command	button	Strato/777/options/aoaInd_toggle	Toggle Angle of Attack indicator on PFD
+	ATTR_manip_command	button	Strato/777/options/trsInd_toggle	Toggle trim reference speed bug on PFD
 	TRIS	10527 6
-	ATTR_manip_command	button	Strato/777/adiru_align_now	Align ADIRU Instantly
+	ATTR_manip_command	button	Strato/777/options/aoaInd_toggle	Toggle Angle of Attack indicator on PFD
 	TRIS	10533 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/crz	
+	ATTR_manip_command	button	Strato/777/adiru_align_now	Align ADIRU Instantly
 	TRIS	10539 6
-	ATTR_manip_command	right	Strato/777/fmsC_brt_up	Right CDU Brightness Up
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/crz	
 	TRIS	10545 6
-	ATTR_manip_command	left	Strato/777/fmsC_brt_dn	Right CDU Brightness Down
+	ATTR_manip_command	right	Strato/777/fmsC_brt_up	Right CDU Brightness Up
 	TRIS	10551 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R6	
+	ATTR_manip_command	left	Strato/777/fmsC_brt_dn	Right CDU Brightness Down
 	TRIS	10557 6
-	ATTR_manip_command	button	Strato/B777/fms3/key/execute	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R6	
 	TRIS	10563 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R5	
+	ATTR_manip_command	button	Strato/B777/fms3/key/execute	
 	TRIS	10569 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R4	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R5	
 	TRIS	10575 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R3	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R4	
 	TRIS	10581 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R2	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R3	
 	TRIS	10587 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R1	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R2	
 	TRIS	10593 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L1	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/R1	
 	TRIS	10599 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L2	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L1	
 	TRIS	10605 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L3	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L2	
 	TRIS	10611 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L4	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L3	
 	TRIS	10617 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L5	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L4	
 	TRIS	10623 6
-	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L6	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L5	
 	TRIS	10629 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/fix	
+	ATTR_manip_command	button	Strato/B777/fms3/ls_key/L6	
 	TRIS	10635 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/des	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/fix	
 	TRIS	10641 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/hold	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/des	
 	TRIS	10647 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/index	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/hold	
 	TRIS	10653 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/prog	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/index	
 	TRIS	10659 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/dep_arr	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/prog	
 	TRIS	10665 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/legs	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/dep_arr	
 	TRIS	10671 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/dir_intc	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/legs	
 	TRIS	10677 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/clb	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/dir_intc	
 	TRIS	10683 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/fix	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/clb	
 	TRIS	10689 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/next_pg	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/fix	
 	TRIS	10695 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/prev_pg	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/next_pg	
 	TRIS	10701 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/navrad	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/prev_pg	
 	TRIS	10707 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/fpln	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/navrad	
 	TRIS	10713 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/hold	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/fpln	
 	TRIS	10719 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/des	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/hold	
 	TRIS	10725 6
-	ATTR_manip_command	button	Strato/B777/fms2/func_key/crz	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/des	
 	TRIS	10731 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/clb	
+	ATTR_manip_command	button	Strato/B777/fms2/func_key/crz	
 	TRIS	10737 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/dir_intc	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/clb	
 	TRIS	10743 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/legs	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/dir_intc	
 	TRIS	10749 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/dep_arr	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/legs	
 	TRIS	10755 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/prog	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/dep_arr	
 	TRIS	10761 6
-	ATTR_manip_command	button	Strato/B777/fms3/func_key/index	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/prog	
 	TRIS	10767 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/fpln	
+	ATTR_manip_command	button	Strato/B777/fms3/func_key/index	
 	TRIS	10773 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/navrad	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/fpln	
 	TRIS	10779 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R6	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/navrad	
 	TRIS	10785 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/prev_pg	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R6	
 	TRIS	10791 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/next_pg	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/prev_pg	
 	TRIS	10797 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/fix	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/next_pg	
 	TRIS	10803 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/clb	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/fix	
 	TRIS	10809 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/dir_intc	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/clb	
 	TRIS	10815 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/legs	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/dir_intc	
 	TRIS	10821 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/dep_arr	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/legs	
 	TRIS	10827 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/prog	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/dep_arr	
 	TRIS	10833 6
-	ATTR_manip_command	button	Strato/B777/fms1/key/execute	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/prog	
 	TRIS	10839 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R5	
+	ATTR_manip_command	button	Strato/B777/fms1/key/execute	
 	TRIS	10845 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R4	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R5	
 	TRIS	10851 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R3	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R4	
 	TRIS	10857 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R2	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R3	
 	TRIS	10863 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R1	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R2	
 	TRIS	10869 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L1	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/R1	
 	TRIS	10875 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L2	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L1	
 	TRIS	10881 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L3	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L2	
 	TRIS	10887 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L4	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L3	
 	TRIS	10893 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L5	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L4	
 	TRIS	10899 6
-	ATTR_manip_command	button	Strato/B777/fms1/func_key/index	
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L5	
 	TRIS	10905 6
-	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L6	
+	ATTR_manip_command	button	Strato/B777/fms1/func_key/index	
 	TRIS	10911 6
+	ATTR_manip_command	button	Strato/B777/fms1/ls_key/L6	
+	TRIS	10917 6
 
-# Build with Blender 3.6.16 (build b'54d0e53a369b'). Exported with XPlane2Blender 4.3.3-rc.1+120.20240721221521
+# Build with Blender 3.6.17 (build b'f26e6dc62a7b'). Exported with XPlane2Blender 4.3.3-rc.1+120.20240721221521

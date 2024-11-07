@@ -79,7 +79,6 @@ simDR_rud                                 = find_dataref("sim/flightmodel2/wing/
 
 --B777DR_custom_eagle_claw                = deferred_dataref("Strato/777/custom_eagle_claw", "array[3]")
 --B777DR_dome_light                       = deferred_dataref("Strato/777/cockpit/cockpit_dome_light", "number")
-B777DR_ldg_gear_kill                    = deferred_dataref("Strato/777/kill_gear", "number")
 
 B777DR_oil_press_psi                    = deferred_dataref("Strato/777/oil_press_psi", "array[2]")
 
@@ -180,16 +179,6 @@ function B777_rescale(in1, out1, in2, out2, x)
 
 end
 
-function gear()
-   avg_gear_pos = (simDR_ldg_gear_pos[1] + simDR_ldg_gear_pos[2]) / 2
-   avg_gear_door_pos = (B777DR_gear_door_pos[1] + B777DR_gear_door_pos[2]) / 2
-   if avg_gear_pos == 0 and avg_gear_door_pos == 0 then
-      B777DR_ldg_gear_kill = 1
-   else
-      B777DR_ldg_gear_kill = 0
-   end
-end
-
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
 --*************************************************************************************--
@@ -213,7 +202,6 @@ end
 
 function after_physics()
    if jit.os == "Windows" then print("This window helps developers find and fix bugs. Closing it will cause X-Plane to crash!!! Just minimize this window and everything will be ok.") end
-   gear()
 
    B777DR_rud_tab_pos = simDR_rud_tab[11] - simDR_rud[11];
 
