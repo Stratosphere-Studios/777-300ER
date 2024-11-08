@@ -7,6 +7,7 @@ sasl.options.set3DRendering(true)
 sasl.options.setAircraftPanelRendering(true)
 sasl.options.setInteractivity(true)
 addSearchPath(moduleDirectory.."/Custom Module/EICASCHECK")
+addSearchPath(moduleDirectory.."/Custom Module/COMM")
 addSearchPath(moduleDirectory.."/Custom Module/CURSOR")
 addSearchPath(moduleDirectory.."/Custom Module/HYD")
 addSearchPath(moduleDirectory.."/Custom Module/FCTL")
@@ -102,6 +103,16 @@ components = {
 	eec {},
 	gear {},
 	eicascheck {
+		position = {2730 , 0, 1365, 1365},
+		visible = true,
+		fpsLimit = 50
+	},
+	eicascomm {
+		position = {2730 , 0, 1365, 1365},
+		visible = true,
+		fpsLimit = 50
+	},
+	eiascommfunction {
 		position = {2730 , 0, 1365, 1365},
 		visible = true,
 		fpsLimit = 50
