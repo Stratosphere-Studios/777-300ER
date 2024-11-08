@@ -17,6 +17,7 @@ eicas_mode = globalPropertyi("Strato/777/displays/eicas_mode")
 hh = globalPropertyi("sim/cockpit2/clock_timer/zulu_time_hours")
 mm = globalPropertyi("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss = globalPropertyi("sim/cockpit2/clock_timer/zulu_time_seconds")
+B777DR_fmsL_scratchpad = globalProperty("Strato/777/FMC/scratchpad_L")
 addSearchPath(moduleDirectory .. "/Custom Module/COMM/assets")
 include("menu.lua")
 include("eiascommfunction.lua")
@@ -24,6 +25,13 @@ local selectkey = loadImage("selectkey.png")
 local selectedkey = loadImage("selectedkey.png")
 local downarrow = loadImage("downarrow.png")
 local fullarrow = loadImage("fullarrow.png")
+
+--create global properties
+cpdlc_hoppie_id = createGlobalPropertys("Strato/777/cpdlc/hoppie_id", "") --todo hoppie login from efb or somewhere
+cpdlc_connect = createGlobalPropertyi("Strato/777/cpdlc/connect", 0)
+cpdlc_ready_to_send = createGlobalPropertyi("Strato/777/cpdlc/ready_to_send", 0)
+
+cpdlc_hoppie_id = "" --hardcode first
 
 local page = 0
 local detailpage = 1
@@ -38,9 +46,6 @@ local selectionY = 0
 
 local previouspage = get(page)
 local previousdetailpage = get(detailpage)
-
-local connected = false
-local readytosend = false
 
 function inputborder(X, Y, W, H)
     drawRectangle(X, Y, W, 5, white) --top
@@ -113,10 +118,32 @@ function draw()
             drawText(opensans, 1100 - 400 + 150 + 15 - 15 - 655 + 393 + 393 + 12, 1100 - 150 + 475 - 200 + 10 - 30 - 1 - 75 - 97 - 6, "NEW MESSAGES", 45, false, false, TEXT_ALIGN_CENTER, white)
             ShowPage(get(page))
 
-            if (connected) then
-                if (readytosend) then
+            if (get(cpdlc_connect) == 1) then
+                if (get(cpdlc_ready_to_send) == 1) then
                     drawRectangle(10, 10, 180, 92, grey)
                     drawText(opensans, 100, 37,"Send", 45, false, false, TEXT_ALIGN_CENTER, white)
+                    components[#components + 1] = interactive {
+                        position = { 10, 10, 180, 92 },
+                        onMouseDown = function()
+                            if (get(cpdlc_connect) == 1) then
+                                if (get(cpdlc_ready_to_send) == 1) then
+                                    sendcpdlc(get(page))
+                                end
+                            end
+                        end,
+                
+                        onMouseMove = function()
+                            selectingX = 10
+                            selectingY = 10
+                            selectingW = 180
+                            selectingH = 92
+                            return true
+                        end,
+                
+                        onMouseLeave = function()
+                            return true
+                        end
+                    }
                 else
                     drawRectangle(10, 10, 180, 5, cyan) --top
                     drawRectangle(10, 10, 5, 92, cyan) --left
@@ -136,7 +163,7 @@ function draw()
                 drawText(opensans, 100, 37,"Send", 45, false, false, TEXT_ALIGN_CENTER, cyan)
             end
 
-            if (get(page) == 7 and connected == false and readytosend == true) then
+            if (get(page) == 7 and get(cpdlc_connect) == 0 and get(cpdlc_ready_to_send) == 1) then
                 drawRectangle(10, 10, 180, 92, grey)
                 drawText(opensans, 100, 37,"Send", 45, false, false, TEXT_ALIGN_CENTER, white)
             end
@@ -154,8 +181,12 @@ function draw()
             inputborder(get(selectingX), get(selectingY), get(selectingW), get(selectingH))
         end
 
-        if get(selectionX) ~= 0 then
-            drawRotatedTexture(selectedkey, 45, selectionX, selectionY, 30, 30, white)
+        if selectdata ~= nil then
+            for i, v in pairs(selectdata) do
+                if v.page == get(page) then
+                    drawRotatedTexture(selectedkey, 45, v.x, v.y, 30, 30, white)
+                end
+            end
         end
 	end
     --ATC
@@ -194,7 +225,9 @@ function draw()
         end,
 
         onMouseDown = function()
-            inputData = {}
+            clearselect(get(page))
+            clearinputdata(get(page))
+            set(cpdlc_ready_to_send, 0)
             return true
         end
     }
@@ -267,11 +300,9 @@ function ShowPage(page)
         FreeText(7, true)
     elseif page == 7 then
         Displayitem(1, "Active center:", 0, false, 0, 0, 0, false, 0)
-        Displayitem(2, "Next center:", 0, false, 0, 0, 0, false, 0)
-        Displayitem(3, "ATC Connection:", 0, true, 0, 0, 0, false, 0)
-        Displayitem(4, "Logon to:", 0, true, 0, 4, 0, false, 0)
-        Displayitem(5, "Flight Number:", 0, false, -65, 8, 0, false, 0)
-        Displayitem(6, "Tail Number:", 0, false, -50, 6, 0, false, 0)
+        Displayitem(2, "ATC Connection:", 0, true, 0, 0, 0, false, 0)
+        Displayitem(3, "Logon to:", 0, true, 0, 4, 0, false, 0)
+        Displayitem(4, "Flight Number:", 0, false, -65, 8, 0, false, 0)
     elseif page == 8 then
         Displayitem(1, "Mayday", 1, false, 0, 0, 0, false, 0)
         Displayitem(1, "Pan", 1, false, 0, 0, 400, false, 0)
@@ -421,8 +452,11 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
             if (sub) then
                 subposition = 50
             end
-            selectionX = 50 + 25 + subposition + offsetfromstart + 5 + subposition
-            selectionY = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 + 5
+            if (sub == false) then
+                selectdata[1] = {id = count, page = page, x = 50 + subposition + offsetfromstart + 30, y = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 + 5 }
+            else
+                selectdata[count] = {id = count, page = page, x = 50 + 25 + subposition + offsetfromstart + 5 + subposition, y = 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 + 5 }
+            end
             return true
         end,
 
@@ -462,7 +496,8 @@ function Displayitem(count, text, selecttype, sub, offsetinputbox, lenght, offse
         components[#components + 1] = interactive {
             position = { 25 + 25 + Textlenght + 20 + subposition + offsetfromstart + fixboxposition + offsetinputbox,  1188 + 17 - 4 - 25 + 2 +- (count * 87) - 12 + -300, lenght * 30, 60 },
             onMouseDown = function()
-                clickmain(count, text, selecttype)
+                clickmain(count, page, sub,get(B777DR_fmsL_scratchpad), selecttype, 50 + subposition + offsetfromstart + 30, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 + 5)
+                --todo waiting clear data
                 return true
             end,
 
@@ -524,6 +559,8 @@ function FreeText(count, sub)
     components[#components + 1] = interactive {
         position = { 25 + 25 + 260 + offset, 1188 + 17 - 4 - 25 + 2 +- (count * 87) - 5 + -300 - 125, 600, 60 * 3 },
         onMouseDown = function()
+            local input = get(B777DR_fmsL_scratchpad)
+            inserdata(count, page, input, 0) --buggy
             return true
         end,
 

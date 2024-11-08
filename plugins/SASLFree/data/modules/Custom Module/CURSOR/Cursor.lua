@@ -26,7 +26,7 @@ end
 
 
 function draw()
-	if get(battery) == 1 and get(eicas_mode) == 10 then
+	if get(battery) == 1 and (get(eicas_mode) == 10 or get(eicas_mode) == 11) then
 		setClipArea(0, 0, 4096, 4096) 
 		sasl.gl.drawTexture(
 			cursors.cpt_default.texture, 
