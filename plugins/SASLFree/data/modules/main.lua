@@ -31,7 +31,7 @@ pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
---ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
+ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0) -- uncommented as possible bug fix by remenkemi -  user reported an error that mcp/ap_on was nil in pfc_logic.lua and I don't see it created anywhere. even though these files have not been changed in a while.
 
 show_fpv = createGlobalPropertyi("Strato/777/EFIS/fpv_on", 0)
 
