@@ -60,3 +60,19 @@ function utils.pad(str, len, indent) -- constant string length
         return str..string.rep(" ", len - str:len())
     end
 end
+
+function utils.getOrDefault(var, default)
+    return var or default
+end
+
+function utils.animate_const(target, variable, speed)
+    if math.abs(target - variable) <= 0.05 then return target end
+    if variable < target then
+        variable = variable + (speed * SIM_PERIOD)
+    else
+        variable = variable - (speed * SIM_PERIOD)
+    end
+    return variable
+end
+
+return utils

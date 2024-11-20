@@ -33,23 +33,23 @@ end
 
 local newText = {fmsL = false, fmsC = false, fmsR = false}
 
-local keyCallStack = {} -- actually a queue but whatever
+local keyQueue = {} -- actually a queue but whatever
 
 function delayKeyDown(fmsModule, key, ovrd) -- simulates realistic input lag
-  table.insert(keyCallStack, {fmsModule, key})
   if ovrd then
     keyDown(fmsModule, key)
   else
+    table.insert(keyQueue, {fmsModule, key})
     stop_timer(keyDowner)
     run_after_time(keyDowner, 0.2) -- got 0.2 from somwhere, 0.1 is less annoying
   end
 end
 
 function keyDowner()
-  for k, v in ipairs(keyCallStack) do
+  for _, v in pairs(keyQueue) do
     keyDown(v[1], v[2])
   end
-  keyCallStack = {} -- reset call stack after all keys actuated
+  keyQueue = {} -- reset call stack after all keys actuated
 end
 
 function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
@@ -141,11 +141,11 @@ function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
     elseif next(commStack) then
       table.remove(commStack, 1)
     elseif next(fmsModules[fmsModule].dispMSG) then
-      if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
+      --if fmsModules[fmsModule].dispMSG[1].msg == "NOT IN DATABASE" then
         --B777DR_backend_clr[fmsModule == "fmsL" and 1 or 2] = 1
         --nidModule = fmsModule
         --run_after_time(notindatabaseClear, 1) -- fix this nonsense
-      end
+      --end
       table.remove(fmsModules[fmsModule].dispMSG, 1)
     else
       fmsModules[fmsModule].scratchpad = fmsModules[fmsModule].scratchpad:sub(1, -2)
@@ -542,6 +542,13 @@ end
 
 B777DR_backend_showSelWpt = {find_dataref("Strato/777/FMC/FMC_L/SEL_WPT/is_active"), find_dataref("Strato/777/FMC/FMC_R/SEL_WPT/is_active")}
 
+local coloredDRs = {
+  g = B777DR_fms_gn,
+  h = B777DR_fms_hl,
+  r = B777DR_fms_gy,
+  m = B777DR_fms_m,
+  c = B777DR_fms_c
+}
 function fms:B777_fms_display()
 
   local thisID = self.id
@@ -550,87 +557,37 @@ function fms:B777_fms_display()
   local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
   local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
 
-  for i= 1, #fmsPage do
-    local input = ""
-    local greenText = ""
-    local highlightText = ""
-    local magentaText = ""
-    local greyText = ""
-    local cyanText = ""
-    local whiteText = ""
-    local code = ""
-    local color = ""
-    local codePos = 0
-    local numChars = ""
-    local result = ""
-    local colorOutput = ""
+  for i, input in pairs(fmsPage) do
+    -- could use gmatch iterator to allow multiple colorations in one line, or find to find occurances
+    local before, color, numChars, after = input:match("(.+);([ghrmc])(%d?%d)(.*)")
+    -- syntax: ;cn where c = color (g/h/r/m/c) and n = num previous chars to color
+    if color then
+      numChars = tostring(numChars)
+      local charsToColor = before:sub(-numChars, -1)
+      local colorOutput = string.rep(" ", #before-numChars)..charsToColor
+      local whiteOutput = before:sub(1, -numChars-1)..string.rep(" ", numChars)..after
 
-    input = fmsPage[i] -- read the line
-    code = string.match(input, ';...')
-    -- check if there's a color command. constructed like this: ;[color][num chars to color] so ;m05 means make the previous 5 characters magenta
-
-    if code ~= nil then -- if there is a color code
-        codePos = string.find(input, code) -- find where the code is located
-        color = string.sub(code, 2, 2) -- find the commanded color
-        numChars = string.sub(code, 3, 4) -- find the number of chars to color
-        result = string.sub(input, codePos - numChars, codePos - 1) -- find the chars to be colored
-        colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", #input - codePos + 1)
-        -- generate blank spaces where white text would have been to make colored text line up with white text
-        whiteText = string.gsub(input, result..code, string.rep(" ", #result))
-        -- generate blanks where colored text and color command were
-
-        -- save colors to respective datarefs
-        if color == "g" then
-          greenText = colorOutput
-        elseif color == "h" then
-          highlightText = colorOutput
-        elseif color == "r" then
-          greyText = colorOutput
-        elseif color == "m" then
-          magentaText = colorOutput
-        elseif color == "c" then
-          cyanText = colorOutput
-        end
+      coloredDRs[color][thisID][i] = colorOutput
+      B777DR_fms[thisID][i] = whiteOutput
     else
-      whiteText = input
+      for _, dr in pairs(coloredDRs) do
+        dr[thisID][i] = ""
+      end
+      B777DR_fms[thisID][i] = input
     end
-    B777DR_fms[thisID][i]=whiteText
-    B777DR_fms_hl[thisID][i]=highlightText
-    B777DR_fms_m[thisID][i]=magentaText
-    B777DR_fms_gn[thisID][i]=greenText
-    B777DR_fms_c[thisID][i]=cyanText
-    B777DR_fms_gy[thisID][i]=greyText
   end
 
-  for i=1, #fmsPagesmall do
-    local input = ""
-    local highlightText = ""
-    local whiteText = ""
-    local code = ""
-    local color = ""
-    local codePos = 0
-    local numChars = ""
-    local result = ""
-    local colorOutput = ""
-
-    input = fmsPagesmall[i]
-    code = string.match(input, ';...')
-
-    if code ~= nil then
-        codePos = string.find(input, code)
-        color = string.sub(code, 2, 2)
-        numChars = string.sub(code, 3, 4)
-        result = string.sub(input, codePos - numChars, codePos - 1)
-        colorOutput = string.rep(" ", codePos - 1 - numChars)..result..string.rep(" ", #input - codePos + 1)
-        whiteText = string.gsub(input, result..code, string.rep(" ", #result))
-        if color == "h" then
-          highlightText = colorOutput
-        end
+  for i, input in pairs(fmsPagesmall) do
+    local before, color, numChars, after = input:match("(.+);(h)(%d?%d)(.*)")
+    if color then
+        numChars = tostring(numChars)
+        local charsToColor = before:sub(-numChars, -1)
+        B777DR_fms_s_hl[thisID][i] = string.rep(" ", #before-numChars)..charsToColor
+        B777DR_fms_s[thisID][i] = before:sub(1, -numChars-1)..string.rep(" ", numChars)..after
     else
-      whiteText = input
+        B777DR_fms_s_hl[thisID][i] = ""
+        B777DR_fms_s[thisID][i] = input
     end
-    B777DR_fms_s[thisID][i]=whiteText
-    B777DR_fms_s_hl[thisID][i]=highlightText
   end
 
   if newText[thisID] and (self.scratchpad == "" or not next(alertStack) or B777DR_cdu_act[thisID == "fmsL" and 0 or thisID == "fmsR" and 1 or 2] ~= 1) then

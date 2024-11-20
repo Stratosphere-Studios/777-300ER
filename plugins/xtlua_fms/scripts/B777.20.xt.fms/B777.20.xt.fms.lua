@@ -544,20 +544,6 @@ function fuel()
     end
 end
 
-function printer(text)
-    if jit.os == "Windows" then
-        os.execute("powershell.exe -Command \"\""..text.."\" | out-printer\"")
-        os.execute("mshta javascript:alert(\"Stratosphere 777: check your printer!\");close();")
-    elseif jit.os == "Linux" then
-        os.execute("lpr "..text)
-        os.execute("notify-send \"Stratosphere 777: check your printer!\"")
-    elseif jis.os == "OSX" then
-        os.execute("lpr "..text)
-        os.execute("osascript -e 'display alert \"Stratosphere 777\" message \"Check your printer!\"")
-    end
-    print("finished printing")
-end
-
 local selOnce = {true, true}
 function checkSelWPT(i)
 	if B777DR_backend_showSelWpt[i] == 1 and selOnce[i] then
@@ -573,6 +559,7 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 
+	local temp = B777DR_backend_showSelWpt
 	checkSelWPT(1) -- this is stupid, fix
 	checkSelWPT(2)
 

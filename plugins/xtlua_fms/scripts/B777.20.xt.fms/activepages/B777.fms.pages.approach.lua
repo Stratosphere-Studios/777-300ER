@@ -24,7 +24,7 @@ string.format("%4.1f              %3d", acf_weight/1000,B777DR_airspeed_Vf25),
         "                 --/---",
         "                        ",
         "                        ",
-        "------------------------",
+        "                        ",
         "<INDEX       THRUST LIM>"
     }
 end

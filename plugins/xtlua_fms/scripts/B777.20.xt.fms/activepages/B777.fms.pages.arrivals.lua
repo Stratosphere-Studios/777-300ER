@@ -12,7 +12,7 @@ fmsPages["ARRIVALS"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be
         "                        ",
         "                        ",
         "                        ",
-        "------------------------",
+        "                        ",
         "<INDEX            ROUTE>"
     }
 end
