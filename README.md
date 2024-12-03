@@ -90,7 +90,8 @@ You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.
 Some Windows antivirus software may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
 ### **Mac**
-MacOS will block the xtlua aircraft plugin (which is used by other add-ons too) if it hasn't been whitelisted before. To whitelist it, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.
+The 777 is currently incompatible with macOS. Mac compatibility will be coming soon.
+~~MacOS will block the xtlua aircraft plugin (which is used by other add-ons too) if it hasn't been whitelisted before. To whitelist it, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.~~
 
 ### **Linux**
 No further steps are required.
