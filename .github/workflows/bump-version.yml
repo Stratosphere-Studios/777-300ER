@@ -21,7 +21,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: bump-version
         run: |
-          git config user.name "Version Bumper"
+          git config user.name "github-actions[bot]"
           git config user.email "vbump@stratosphere.studios"
           BRANCH="$(git branch --show-current)"
           COMMIT="$(git rev-list --count HEAD)"
