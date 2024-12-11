@@ -22,7 +22,7 @@ jobs:
       - name: Save version file
         run: |
           BRANCH="$(git branch --show-current)"
-          COMMIT="$(git rev-list --count --origin)"
+          COMMIT="$(git rev-list --count --remotes)"
           echo "Branch: ${BRANCH}
           Commit: ${COMMIT}" >| version.txt
       - name: Push and commit
