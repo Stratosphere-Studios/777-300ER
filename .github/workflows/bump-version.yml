@@ -17,16 +17,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
+      - name: Check if there are any changes
+        id: verify_diff
+        run: |
+          git diff --quiet . || echo "changed=true" >> $GITHUB_OUTPUT
       # Runs a set of commands using the runners shell
       - name: bump-version
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "vbump@stratosphere.studios"
-          git remote add https://github.com/Stratosphere-Studios/777-300ER.git
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           BRANCH="$(git branch --show-current)"
           COMMIT="$(git rev-list --count HEAD)"
           echo "Branch: ${BRANCH}\\nCommit: ${COMMIT}" >| version.txt
-          git add version.txt
-          git commit -m "Auto version bump"
+          git commit -m "Auto version bump" -a
           git push
