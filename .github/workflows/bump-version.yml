@@ -23,7 +23,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "vbump@stratosphere.studios"
-          git remote add origin https://github.com/Stratosphere-Studios/777-300ER.git
+          git remote add https://github.com/Stratosphere-Studios/777-300ER.git
           BRANCH="$(git branch --show-current)"
           COMMIT="$(git rev-list --count HEAD)"
           echo "Branch: ${BRANCH}\\nCommit: ${COMMIT}" >| version.txt
