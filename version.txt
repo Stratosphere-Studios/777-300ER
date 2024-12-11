@@ -1,2 +1,1 @@
-Branch: master
-Commit: 1198
+Branch: master\nCommit: 1
