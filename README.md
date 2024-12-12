@@ -31,7 +31,7 @@ After putting the 777 in the X-Plane's aicraft folder and before running X-Plane
 
 **Without terminal:**
 Open macOS System Settings, go to Privacy & Security, and scroll all the way down. Then run the 777 in X-Plane. Each time a "Not Opened" popup appears, click "Done" (**not** move to trash!) and switch to the settings window. You will see a message show up right under the "Allow application from" setting with an "Open Anyway" button. Click "Open Anyway", then repeat the process for the remaining two popups that will appear. Then restart X-Plane.
-Although for an older version of macOS, [this video](https://youtu.be/FPdd7IPFoNk?si=8Nd5lZ3H67rvcAnN) demonstrates the process althought a few.
+Although for an older version of macOS, [this video](https://youtu.be/FPdd7IPFoNk?si=8Nd5lZ3H67rvcAnN) demonstrates the general process.
 
 ### **Linux**
 No further steps are required.
