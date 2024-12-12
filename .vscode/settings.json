@@ -5,7 +5,8 @@
         "deprecated",
         "need-check-nil",
         "duplicate-set-field",
-        "param-type-mismatch"
+        "param-type-mismatch",
+        "cast-local-type"
     ],
     "Lua.runtime.version": "LuaJIT"
 }
