@@ -1,6 +1,5 @@
 *.acf~
 777_prefs.txt
-*SASLog.txt
+*SASLLog.txt
 *state.txt
 *.DS_Store
-plugins/SASLFree/data/output/SASLLog.txt
