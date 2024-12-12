@@ -7,21 +7,31 @@ Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere St
 <br> [Our Discord Server](https://discord.gg/eU2vWCtmFX)
 
 ## **Installation**
-Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.
-Then extract the aircraft folder and move it to your X-Plane aircraft folder as with any other aircraft.
+**IMPORTANT: read the FAQ and the OS-specific instructions too!**
 
-If the Github download doesn't work, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
+Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.
+Then extract the aircraft and move it to your X-Plane aircraft folder as with any other aircraft.
+
+If the Github download doesn't finish or gives you an error when trying to extract, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
 
 We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
 
 ### **Windows**
-You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
+- You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
 
-Some Windows antivirus software may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
+- Some Windows antivirus software may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup notification when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
 ### **Mac**
-The 777 is currently incompatible with macOS. Mac compatibility will be coming soon.
-~~MacOS will block the xtlua aircraft plugin (which is used by other add-ons too) if it hasn't been whitelisted before. To whitelist it, run the command `sudo xattr -dr com.apple.quarantine *` from a terminal inside the root X-Plane folder (either by `cd`-ing to it or Rightclick > Services > New Terminal at Folder). For a more visual explanation without the terminal, watch [this video](https://youtu.be/FPdd7IPFoNk). This only needs to be done the first time you install the 777.~~
+None of our developers use macOS, so we don't know if this actually works. Please let us know!
+
+MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. 
+
+**With terminal:**
+After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane. This will need to be done every time you install/update the 777.
+
+**Without terminal:**
+Open macOS System Settings, go to Privacy & Security, and scroll all the way down. Then run the 777 in X-Plane. Each time a "Not Opened" popup appears, click "Done" (**not** move to trash!) and switch to the settings window. You will see a message show up right under the "Allow application from" setting with an "Open Anyway" button. Click "Open Anyway", then repeat the process for the remaining two popups that will appear. Then restart X-Plane.
+Although for an older version of macOS, [this video](https://youtu.be/FPdd7IPFoNk?si=8Nd5lZ3H67rvcAnN) demonstrates the process althought a few.
 
 ### **Linux**
 No further steps are required.
