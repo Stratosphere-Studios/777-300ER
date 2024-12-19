@@ -317,18 +317,18 @@ end
 function request(name, forceInstance)
     logInfo("requesting", name)
     name = appendDefaultFileExtension(name)
+    local fInst = forceInstance or false
     if _SLOADED[name] then
         if _SLOADED[name] == _SGUARD then
             logError("Loop during script request or error on previous script request")
             return nil
         end
-        local fInst = forceInstance or false
         if not fInst then
             return _SLOADED[name]
         end
     end
     local oName = name
-    local f, subdir = openFile(name, true)
+    local f, subdir = openFile(name, not fInst)
     if not f then
         logError("Can't request script "..oName)
         return nil
@@ -1122,6 +1122,7 @@ function loadModule(fileName, panelWidth, panelHeight, popupWidth, popupHeight)
     popups.size = { popupWidth, popupHeight }
 
     contextWindows = private.createComponent("contextWindows")
+    avionicsDevices = private.createComponent("avionicsDevices")
     private.loadState()
 
     local c = loadComponent("module", fileName, isRoot)
@@ -1131,6 +1132,7 @@ function loadModule(fileName, panelWidth, panelHeight, popupWidth, popupHeight)
     panel = c({ position = { 0, 0, panelWidth, panelHeight } })
     popups._P = panel
     contextWindows._P = panel
+    avionicsDevices._P = panel
     return panel
 end
 

@@ -20,8 +20,8 @@ local function initDefDecoreRes(headerHeight)
 end
 
 local function contextWindowHeaderDrawDef(window, w, h)
-    local bckColor = { 0.25, 0.25, 0.25, 1 }
-    local elColor = { 0.9, 0.9, 0.9, 1 }
+    local bckColor = { 0.2, 0.2, 0.2, 1 }
+    local elColor = { 1, 1, 1, 1 }
 
     sasl.gl.drawRectangle(0, 0, w, h, bckColor)
     sasl.gl.drawTexture(cwDecoreRes.clT, 2, 2, h - 4, h - 4, elColor)
@@ -93,6 +93,7 @@ local defaultWindowName = "cWindow"
 --- @field proportional boolean
 --- @field gravity number[]
 --- @field noBackground boolean
+--- @field noFocus boolean
 --- @field layer CWLayerID
 --- @field noDecore boolean
 --- @field customDecore boolean
@@ -123,6 +124,7 @@ local defaultWindowName = "cWindow"
 --- @field setGravity fun(self:ContextWindow, left:number, top:number, right:number, bottom:number)
 --- @field setPosition fun(self:ContextWindow, x:number, y:number, w:number, h:number)
 --- @field getPosition fun(self:ContextWindow):number, number, number, number
+--- @field setPassthroughEvents fun(self:ContextWindow, eventsMask:number)
 --- @field setMode fun(self:ContextWindow, mode:CWModeID, monitor:number)
 --- @field getMode fun(self:ContextWindow):CWModeID, number
 --- @field isPoppedOut fun(self:ContextWindow):boolean
@@ -136,46 +138,46 @@ local defaultWindowName = "cWindow"
 --- @field destroy fun(self:ContextWindow)
 
 --- Creates modern 2D context window with attached components hierarchy.
---- @param tbl ContextWindowParams
+--- @param params ContextWindowParams
 --- @return ContextWindow
 --- @see reference
 --- : https://1-sim.com/files/SASL3Manual.pdf#contextWindow
-function contextWindow(tbl)
+function contextWindow(params)
     local window = {}
     local wTitle = ""
     local cName = defaultWindowName
-    if tbl.name ~= nil then
-        cName = tbl.name
+    if params.name ~= nil then
+        cName = params.name
         wTitle = cName
     end
     local c = private.createComponent(cName)
     c.position = createProperty { 0, 0, 0, 0 }
 
     local cwDecoration = SASL_CW_DECORATED_XP
-    if get(tbl.noDecore) then
+    if get(params.noDecore) then
         cwDecoration = SASL_CW_NON_DECORATED
-    elseif get(tbl.customDecore) then
+    elseif get(params.customDecore) then
         cwDecoration = SASL_CW_DECORATED
     end
 
     local layer = SASL_CW_LAYER_FLOATING_WINDOWS
-    if tbl.layer ~= nil then
-        layer = tbl.layer
+    if params.layer ~= nil then
+        layer = params.layer
     end
 
-    set(c.position, { 0, 0, tbl.position[3], tbl.position[4] })
-    set(c.clip, tbl.clip)
-    set(c.clipSize, tbl.clipSize)
-    if tbl.visible ~= nil then
-        set(c.visible, tbl.visible)
+    set(c.position, { 0, 0, params.position[3], params.position[4] })
+    set(c.clip, params.clip)
+    set(c.clipSize, params.clipSize)
+    if params.visible ~= nil then
+        set(c.visible, params.visible)
     else
         set(c.visible, false)
     end
-    c.size = { tbl.position[3], tbl.position[4] }
-    c.components = tbl.components
+    c.size = { params.position[3], params.position[4] }
+    c.components = params.components
 
-    private.startComponentsCreation(tbl)
-    if not get(tbl.noBackground) then
+    private.startComponentsCreation(params)
+    if not get(params.noBackground) then
         if not rectangle then
             rectangle = loadComponent("rectangle")
         end
@@ -224,7 +226,7 @@ function contextWindow(tbl)
         return resultCursor
     end
 
-    local resizeCallback = tbl.resizeCallback
+    local resizeCallback = params.resizeCallback
     function onContextWindowResize(_, width, height, mode, proportional)
         if resizeCallback then
             return resizeCallback(c, width, height, mode, proportional)
@@ -271,7 +273,7 @@ function contextWindow(tbl)
 
     -------------------------------------------------------------------------------
 
-    local p = tbl.position
+    local p = params.position
     window.id = sasl.windows.createContextWindow(cwDecoration, layer, p[1], p[2], p[3], p[4],
         drawContextWindow,
         onMouseDownContextWindow,
@@ -280,7 +282,7 @@ function contextWindow(tbl)
         onMouseMoveContextWindow,
         onMouseWheelContextWindow,
         onContextWindowResize,
-        onContextWindowLayoutChange)
+        params.noFocus and function() end or onContextWindowLayoutChange)
 
     window.component = c
 
@@ -308,7 +310,7 @@ function contextWindow(tbl)
                 decor.main.draw, decor.main.onMouseDown, decor.main.onMouseUp,
                 decor.main.onMouseHold, decor.main.onMouseMove, decor.main.onMouseWheel)
         end
-        window:setDecoration(tbl.decoration)
+        window:setDecoration(params.decoration)
     else
         window.setDecoration = function(self) end
     end
@@ -327,19 +329,19 @@ function contextWindow(tbl)
     end
 
     local sLimits = { 100, 100, 2048, 2048 }
-    if get(tbl.minimumSize) then
-        sLimits[1] = tbl.minimumSize[1]
-        sLimits[2] = tbl.minimumSize[2]
+    if get(params.minimumSize) then
+        sLimits[1] = params.minimumSize[1]
+        sLimits[2] = params.minimumSize[2]
     end
-    if get(tbl.maximumSize) then
-        sLimits[3] = tbl.maximumSize[1]
-        sLimits[4] = tbl.maximumSize[2]
+    if get(params.maximumSize) then
+        sLimits[3] = params.maximumSize[1]
+        sLimits[4] = params.maximumSize[2]
     end
     window:setSizeLimits(sLimits[1], sLimits[2], sLimits[3], sLimits[4])
 
     local resizeMode = SASL_CW_RESIZE_ALL_BOUNDS
-    if tbl.resizeMode ~= nil then
-        resizeMode = tbl.resizeMode
+    if params.resizeMode ~= nil then
+        resizeMode = params.resizeMode
     end
     window:setResizeMode(resizeMode)
 
@@ -369,8 +371,8 @@ function contextWindow(tbl)
     -------------------------------------------------------------------------------
 
     window.cmd = nil
-    if get(tbl.command) then
-        local command = sasl.createCommand(get(tbl.command), get(tbl.description))
+    if get(params.command) then
+        local command = sasl.createCommand(get(params.command), get(params.description))
 
         function commandHandler(phase)
             if phase == SASL_COMMAND_BEGIN then
@@ -394,8 +396,8 @@ function contextWindow(tbl)
     window.setGravity = function(self, left, top, right, bottom)
         sasl.windows.setContextWindowGravity(self.id, left, top, right, bottom)
     end
-    if get(tbl.gravity) then
-        local gr = get(tbl.gravity)
+    if get(params.gravity) then
+        local gr = get(params.gravity)
         window:setGravity(gr[1], gr[2], gr[3], gr[4])
     end
 
@@ -404,6 +406,10 @@ function contextWindow(tbl)
     end
     window.getPosition = function(self)
         return sasl.windows.getContextWindowPosition(self.id)
+    end
+
+    window.setPassthroughEvents = function(self, eventsMask)
+        sasl.windows.setContextWindowPassthroughEvents(self.id, eventsMask)
     end
 
     -------------------------------------------------------------------------------
@@ -431,8 +437,8 @@ function contextWindow(tbl)
     window.setVrAutoHandling = function(self, auto)
         sasl.windows.setContextWindowVrAutoHandling(self.id, auto)
     end
-    if tbl.vrAuto ~= nil then
-        autoVr = tbl.vrAuto
+    if params.vrAuto ~= nil then
+        autoVr = params.vrAuto
     end
     window:setVrAutoHandling(autoVr)
 
@@ -444,8 +450,8 @@ function contextWindow(tbl)
     -------------------------------------------------------------------------------
 
     local proportional = true
-    if tbl.proportional ~= nil then
-        proportional = tbl.proportional
+    if params.proportional ~= nil then
+        proportional = params.proportional
     end
     window.setProportional = function(self, isProportional)
         sasl.windows.setContextWindowProportional(self.id, isProportional)
@@ -455,7 +461,7 @@ function contextWindow(tbl)
     window.setResizable = function(self, isResizable)
         sasl.windows.setContextWindowResizable(self.id, isResizable)
     end
-    if tbl.noResize then
+    if params.noResize then
         window:setResizable(false)
         window:setSizeLimits(p[3], p[4], p[3], p[4])
     end
@@ -463,7 +469,7 @@ function contextWindow(tbl)
     window.setMovable = function(self, isMovable)
         sasl.windows.setContextWindowMovable(self.id, isMovable)
     end
-    if tbl.noMove then
+    if params.noMove then
         window:setMovable(false)
     end
 
@@ -472,8 +478,8 @@ function contextWindow(tbl)
     window.setCallback = function(self, callback)
         sasl.windows.setContextWindowCallback(self.id, callback)
     end
-    if tbl.callback ~= nil then
-        window:setCallback(tbl.callback)
+    if params.callback ~= nil then
+        window:setCallback(params.callback)
     end
 
     -------------------------------------------------------------------------------
@@ -483,10 +489,12 @@ function contextWindow(tbl)
         if self.cmd ~= nil then
             sasl.unregisterCommandHandler(self.cmd, 0)
         end
-        for k, v in ipairs(contextWindows.components) do
-            if v == c then
-                table.remove(contextWindows.components, k)
-                break
+        if contextWindows ~= nil then
+            for k, v in ipairs(contextWindows.components) do
+                if v == c then
+                    table.remove(contextWindows.components, k)
+                    break
+                end
             end
         end
     end
@@ -495,12 +503,14 @@ function contextWindow(tbl)
 
     c.window = window
     c.saveState = createProperty(false)
-    if get(tbl.saveState) then
+    if get(params.saveState) then
         set(c.saveState, true)
         private.applyContextWindowState(c)
     end
 
-    contextWindows.component(c)
+    if contextWindows ~= nil then
+        contextWindows.component(c)
+    end
     return window
 end
 
