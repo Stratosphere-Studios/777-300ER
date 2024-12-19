@@ -542,13 +542,6 @@ end
 
 B777DR_backend_showSelWpt = {find_dataref("Strato/777/FMC/FMC_L/SEL_WPT/is_active"), find_dataref("Strato/777/FMC/FMC_R/SEL_WPT/is_active")}
 
-local coloredDRs = {
-  g = B777DR_fms_gn,
-  h = B777DR_fms_hl,
-  r = B777DR_fms_gy,
-  m = B777DR_fms_m,
-  c = B777DR_fms_c
-}
 function fms:B777_fms_display()
 
   local thisID = self.id
@@ -557,7 +550,7 @@ function fms:B777_fms_display()
   local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
   local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
 
-  for i, input in pairs(fmsPage) do
+  for i, input in ipairs(fmsPage) do
     -- could use gmatch iterator to allow multiple colorations in one line, or find to find occurances
     local before, color, numChars, after = input:match("(.+);([ghrmc])(%d?%d)(.*)")
     -- syntax: ;cn where c = color (g/h/r/m/c) and n = num previous chars to color
@@ -567,17 +560,26 @@ function fms:B777_fms_display()
       local colorOutput = string.rep(" ", #before-numChars)..charsToColor
       local whiteOutput = before:sub(1, -numChars-1)..string.rep(" ", numChars)..after
 
-      coloredDRs[color][thisID][i] = colorOutput
+      B777DR_fms_gn[thisID][i] = color == "g" and colorOutput or ""
+      B777DR_fms_hl[thisID][i] = color == "h" and colorOutput or ""
+      B777DR_fms_gy[thisID][i] = color == "r" and colorOutput or ""
+      B777DR_fms_m[thisID][i] = color == "m" and colorOutput or ""
+      B777DR_fms_c[thisID][i] = color == "c" and colorOutput or ""
+
       B777DR_fms[thisID][i] = whiteOutput
     else
-      for _, dr in pairs(coloredDRs) do
-        dr[thisID][i] = ""
-      end
+      B777DR_fms_gn[thisID][i] = ""
+      B777DR_fms_hl[thisID][i] = ""
+      B777DR_fms_gy[thisID][i] = ""
+      B777DR_fms_m[thisID][i] =  ""
+      B777DR_fms_c[thisID][i] =  ""
+
       B777DR_fms[thisID][i] = input
     end
   end
+  -- need to recur to get all colors if multiple. maybe use helper function that will do colored string and retrn white remainder to be called again
 
-  for i, input in pairs(fmsPagesmall) do
+  for i, input in ipairs(fmsPagesmall) do
     local before, color, numChars, after = input:match("(.+);(h)(%d?%d)(.*)")
     if color then
         numChars = tostring(numChars)
