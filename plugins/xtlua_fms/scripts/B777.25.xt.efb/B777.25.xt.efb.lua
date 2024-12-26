@@ -19,7 +19,7 @@ function deferred_dataref(name,nilType,callFunction)
    return find_dataref(name)
 end
 
-dofile("json/json.lua")
+dofile("../../../libs/json/json.lua")
 
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--

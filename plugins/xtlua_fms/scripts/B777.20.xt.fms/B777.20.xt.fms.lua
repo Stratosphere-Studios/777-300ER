@@ -185,7 +185,7 @@ function toDMS(value,isLat) -- multiplies each remaining decimal by 60, the conv
 	end
 end
 
-dofile("json/json.lua")
+dofile("../../../libs/json/json.lua")
 hh=find_dataref("sim/cockpit2/clock_timer/zulu_time_hours")
 mm=find_dataref("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss=find_dataref("sim/cockpit2/clock_timer/zulu_time_seconds")

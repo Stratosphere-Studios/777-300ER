@@ -35324,7 +35324,7 @@ P acf/_ap_crs_src 0
 P acf/_apt_req_plane 1
 P acf/_asi_is_kts 1
 P acf/_author Stratosphere Studios
-P acf/_auto_cowl_flaps_EQ 32766
+P acf/_auto_cowl_flaps_EQ 32767
 P acf/_auto_engage_BC_deg 0.000000000
 P acf/_auto_omega_fire 0.000000000
 P acf/_auto_omega_idle 0.000000000
@@ -36777,7 +36777,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 121211
+P acf/_file_writer_version 121313
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -43385,6 +43385,8 @@ GROUP Captain ND
 END_GROUP
 GROUP Lower Eicas
   HIDE
+  CHAINED
+  GROUP_OPEN
   GROUP AIR
     SHOW_EQUAL 1.000000 Strato/777/displays/eicas_mode
     GROUP_OPEN
@@ -43409,13 +43411,32 @@ GROUP Lower Eicas
       CLICK_DX 0
       CLICK_DY 0
 
-    GROUP Open
+    gen_needle fd trim needle
+      POS 2981.000000 765.000000
+      IMAGE PFD/aoa_needle
+      DATAREF sim/flightmodel2/misc/AoA_angle_degrees
+      SHOW_GREATER 80.000000 Strato/777/displays/ias[0]
+      SIZE 2.300000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 0
+      BUS_SRC 1
+      KEY_FRAME -5.000000 -90.000000 1.000000
+      KEY_FRAME -5.000000 -90.000000 1.000000
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 5.000000 90.000000 1.000000
+      KEY_FRAME 5.000000 90.000000
+      IS_DRAGGABLE 0
+      OFFSET 14.000000
+
+    GROUP other open
+      SHOW_GREATER 1.000000 testNum
+      HIDE
       CHAINED
       gen_rotary ISO L OPEN
         POS 3229.500000 337.500000
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
-        SHOW_GREATER 1.000000 testNum
+        SHOW_GREATER 1.000000 Strato/777/air/isolation_valves_status[0]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43437,6 +43458,7 @@ GROUP Lower Eicas
         POS 3412.500000 337.500000
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
+        SHOW_GREATER 1.000000 Strato/777/air/isolation_valves_status[1]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43458,6 +43480,7 @@ GROUP Lower Eicas
         POS 3593.500000 337.500000
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
+        SHOW_GREATER 1.000000 Strato/777/air/isolation_valves_status[2]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43479,6 +43502,7 @@ GROUP Lower Eicas
         POS 3559.500000 587.500000
         IMAGE EICAS lower/AIR/open_vertical
         DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/trim_air_valves_status[1]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43500,6 +43524,7 @@ GROUP Lower Eicas
         POS 3263.500000 587.500000
         IMAGE EICAS lower/AIR/open_vertical
         DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/trim_air_valves_status[0]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43521,6 +43546,7 @@ GROUP Lower Eicas
         POS 3115.500000 587.500000
         IMAGE EICAS lower/AIR/pack_on
         DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/pack_valves_status[0]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43542,6 +43568,7 @@ GROUP Lower Eicas
         POS 3708.500000 587.500000
         IMAGE EICAS lower/AIR/pack_on
         DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/pack_valves_status[1]
         SIZE 1.360000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43564,6 +43591,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43585,6 +43613,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43606,6 +43635,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_vertical
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43627,6 +43657,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_vertical
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43648,6 +43679,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43669,6 +43701,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43690,6 +43723,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_vertical
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43712,6 +43746,7 @@ GROUP Lower Eicas
         DATAREF 
         SHOW_GREATER 1.000000 testNum
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43733,7 +43768,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
         SIZE 1.360000
-        LOCKED
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43755,6 +43790,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/open_horizontal
         DATAREF 
         SIZE 1.360000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43772,16 +43808,174 @@ GROUP Lower Eicas
         CLICK_DY 0
 
     END_GROUP
-    GROUP flow
-      LOCKED
+    GROUP Open
       CHAINED
-      GROUP_OPEN
+      gen_rotary ISO L OPEN
+        POS 3229.500000 337.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SHOW_GREATER 1.000000 Strato/777/air/isolation_valves_status[0]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ISO C OPEN
+        POS 3412.500000 337.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SHOW_GREATER 1.000000 Strato/777/air/isolation_valves_status[1]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary ISO R OPEN
+        POS 3593.500000 337.500000
+        IMAGE EICAS lower/AIR/open_horizontal
+        DATAREF 
+        SHOW_GREATER 1.000000 Strato/777/air/isolation_valves_status[2]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary TRIM R OPEN
+        POS 3559.500000 587.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/trim_air_valves_status[1]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary TRIM L OPEN
+        POS 3263.500000 587.500000
+        IMAGE EICAS lower/AIR/open_vertical
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/trim_air_valves_status[0]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary PACK L OPEN
+        POS 3115.500000 587.500000
+        IMAGE EICAS lower/AIR/pack_on
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/pack_valves_status[0]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary PACK R OPEN
+        POS 3708.500000 587.500000
+        IMAGE EICAS lower/AIR/pack_on
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/pack_valves_status[1]
+        SIZE 1.360000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+    END_GROUP
+    GROUP other flow
+      SHOW_GREATER 1.000000 testNum
+      HIDE
+      CHAINED
       gen_needle fd trim needle
         POS 2981.000000 765.000000
         IMAGE PFD/aoa_needle
         DATAREF sim/flightmodel2/misc/AoA_angle_degrees
         SHOW_GREATER 80.000000 Strato/777/displays/ias[0]
         SIZE 2.300000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -43798,6 +43992,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/apustart
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43819,6 +44014,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/apu_on
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43840,6 +44036,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/apu_to_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43861,6 +44058,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/apu-hyd
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43882,6 +44080,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/engStartL_from_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43903,6 +44102,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/waiL_from_eng
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43924,6 +44124,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/waiL_from_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -43944,6 +44145,7 @@ GROUP Lower Eicas
         POS 3116.500000 519.500000
         IMAGE EICAS lower/AIR/pack_from_tie
         DATAREF 
+        SHOW_GREATER 3.000000 Strato/777/air/pack_valves_status[0]
         SIZE 1.350000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43965,6 +44167,7 @@ GROUP Lower Eicas
         POS 3204.500000 519.500000
         IMAGE EICAS lower/AIR/trimL_from_tie
         DATAREF 
+        SHOW_GREATER 3.000000 Strato/777/air/trim_air_valves_status[0]
         SIZE 1.350000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -43987,6 +44190,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/EAI_L
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44008,6 +44212,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/iso_L
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44029,6 +44234,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/iso_C
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44050,6 +44256,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/iso_R
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44071,6 +44278,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/hydC1_from_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44092,6 +44300,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/hydC2_from_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44113,6 +44322,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/engL_to_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44134,6 +44344,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/engStartR_from_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44155,6 +44366,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/waiR_from_eng
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44176,6 +44388,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/waiR_from_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44196,6 +44409,7 @@ GROUP Lower Eicas
         POS 3708.500000 519.500000
         IMAGE EICAS lower/AIR/pack_from_tie
         DATAREF 
+        SHOW_GREATER 3.000000 Strato/777/air/pack_valves_status[1]
         SIZE 1.350000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -44217,6 +44431,7 @@ GROUP Lower Eicas
         POS 3620.500000 519.500000
         IMAGE EICAS lower/AIR/trimR_from_tie
         DATAREF 
+        SHOW_GREATER 3.000000 Strato/777/air/trim_air_valves_status[1]
         SIZE 1.350000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
@@ -44239,6 +44454,7 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/EAI_R
         DATAREF 
         SIZE 1.350000
+        HIDE
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44260,6 +44476,98 @@ GROUP Lower Eicas
         IMAGE EICAS lower/AIR/engR_to_tie
         DATAREF 
         SIZE 1.350000
+        HIDE
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+    END_GROUP
+    GROUP Flow
+      CHAINED
+      gen_rotary L PACK from TIE
+        POS 3116.500000 519.500000
+        IMAGE EICAS lower/AIR/pack_from_tie
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/pack_valves_status[0]
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary L TRIM AIR from TIE
+        POS 3204.500000 519.500000
+        IMAGE EICAS lower/AIR/trimL_from_tie
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/trim_air_valves_status[0]
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary R PACK from TIE
+        POS 3708.500000 519.500000
+        IMAGE EICAS lower/AIR/pack_from_tie
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/pack_valves_status[1]
+        SIZE 1.350000
+        LIGHT_MODE GLASS_AUTO
+        LIGHT_RHEOSTAT 5
+        BUS_SRC 1
+        KEY_FRAME 0.000000 0.000000 1.000000
+        KEY_FRAME 1.000000 6.000000
+        DIGITS 1
+        ROTARY_TYPE NO_CLICK
+        CLICK_RADIUS 10.000000
+        CLICK_RADIUS_DY 0.000000
+        OFFSET 0.000000
+        STEP1 1.000000
+        STEP2 1.000000
+        CURSOR DEFAULT
+        CLICK_DX 0
+        CLICK_DY 0
+
+      gen_rotary R TRIM AIR from TIE
+        POS 3620.500000 519.500000
+        IMAGE EICAS lower/AIR/trimR_from_tie
+        DATAREF 
+        SHOW_GREATER 2.000000 Strato/777/air/trim_air_valves_status[1]
+        SIZE 1.350000
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44278,7 +44586,6 @@ GROUP Lower Eicas
 
     END_GROUP
     GROUP actual temps
-      LOCKED
       CHAINED
       gen_LED fd temp act
         POS 3016.000000 912.000000
@@ -44286,7 +44593,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[0]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44304,7 +44610,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[1]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44322,7 +44627,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[2]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44340,7 +44644,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[3]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44358,7 +44661,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[4]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44376,7 +44678,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[5]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44394,7 +44695,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[6]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44412,7 +44712,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[7]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44430,7 +44729,6 @@ GROUP Lower Eicas
         DATAREF Strato/777/air/zone_temps_status[8]
         SHOW_LESS 115.000000 [1]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 5
         BUS_SRC 1
@@ -44444,14 +44742,12 @@ GROUP Lower Eicas
 
     END_GROUP
     GROUP set temps
-      LOCKED
       CHAINED
       gen_LED fd temp target
         POS 2914.000000 909.000000
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[0]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44468,7 +44764,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[1]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44485,7 +44780,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[2]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44502,7 +44796,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[3]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44519,7 +44812,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[4]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44536,7 +44828,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[5]
         SIZE 2.150000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44553,7 +44844,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[6]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44570,7 +44860,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[7]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44587,7 +44876,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_target[8]
         SIZE 2.050000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -44604,7 +44892,6 @@ GROUP Lower Eicas
         IMAGE PFD/magenta_type
         DATAREF Strato/777/air/zone_temps_targe[10]
         SIZE 2.600000
-        LOCKED
         LIGHT_MODE GLASS_AUTO
         LIGHT_RHEOSTAT 0
         BUS_SRC 1
@@ -48325,7 +48612,6 @@ GROUP MCP
   LOCKED
   HIDE
   CHAINED
-  GROUP_OPEN
   gen_rotary VS_label
     POS 3702.000000 2811.000000
     IMAGE MCP/VS
@@ -60447,7 +60733,6 @@ GROUP READ THE README
 END_GROUP
 GROUP ISFD
   HIDE
-  GROUP_OPEN
   gen_needle Horizon
     POS 3821.500000 3583.000000
     IMAGE ISFD/horizon
