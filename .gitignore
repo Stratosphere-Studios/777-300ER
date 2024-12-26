@@ -1,5 +1,5 @@
 *.acf~
-777_prefs.txt
+*prefs.txt
 *SASLLog.txt
 *state.txt
 *.DS_Store

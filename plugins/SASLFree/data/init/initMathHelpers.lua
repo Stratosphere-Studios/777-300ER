@@ -1,3 +1,4 @@
+---@diagnostic disable
 -------------------------------------------------------------------------------
 -- Interpolation helpers
 -------------------------------------------------------------------------------
@@ -37,7 +38,7 @@ function newInterpolator(...)
         return nil
     end
 
-    return sasl.newCPPInterpolator(input, value)
+    return sasl.newCPPInterpolator(input, value), value
 end
 
 -------------------------------------------------------------------------------
@@ -85,7 +86,7 @@ end
 --- : https://1-sim.com/files/SASL3Manual.pdf#selfInterpolator
 function selfInterpolator(...)
     local r = {}
-    r.interp = newInterpolator(...)
+    r.interp, r.values = newInterpolator(...)
     r.interpolate = function(x, flag)
         return interpolate(x, r.interp, flag)
     end

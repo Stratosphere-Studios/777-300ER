@@ -1,6 +1,6 @@
 Scriptable Aviation Simulation Library
 Lua scripting environment for X-Plane add-ons (Free Edition)
-Version: 3.16.2+f664438
+Version: 3.18.0+705e7c5
 
 
-© 2012-2023 FlightFactor, © 2015-2023 StepToSky
+© 2012-2024 FlightFactor, © 2015-2024 StepToSky
