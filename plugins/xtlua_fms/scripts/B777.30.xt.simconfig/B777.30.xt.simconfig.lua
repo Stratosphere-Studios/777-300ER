@@ -25,8 +25,6 @@ function deferred_dataref(name,nilType,callFunction)
     return find_dataref(name)
 end
 
-math.randomseed(os.time())
-
 --*************************************************************************************--
 --**                                Find Datarefs                                    **--
 --*************************************************************************************--
@@ -93,7 +91,20 @@ function defaultValues()
 			unlocked = 0, -- 1 if readme code unlocked, 0 if locked
 			min_fuel_temp = -37, -- options are -37 (Jet A), -44 (Jet A1), and -60 (Jet B), in addition to other
 			keyboard_input = 0 -- use keyboard for fmc and lower eicas cpdlc input, 0 off 1 on
+			--autoGRWT = 1,
+			--TO_derates = 1,
+			--CLB_derates = 1,
+			--CLB_derate_washout = 12000, -- ft, this is from pmdg. other option is 30000ft
+			--company_spd = 300, -- pmdg
+			--CRZ_thr_lim = "CRZ", -- pmdg, other option is CLB
+			--dflt_accel_ht = 1500,
+			--dflt_eng_out_ht = 800,
+			--dflt_flap_alt = 1500,
+			--dflt_trans_alt = 18000
 		},
+		--INSTRUMENTS = {},
+		--SYSTEMS = {},
+		--OPTIONS = {},
 		PLANE = {
 			aircraft_type = 0, -- 0 = pax, 1 = Freighter
 			weight_display_units = "LBS", --"LBS", "KGS"
@@ -104,13 +115,24 @@ function defaultValues()
 			smart_knobs = 0, -- 0 = disabled, 1 = enabled
 			baro_mins_sync = 0, -- 0 = no sync, 1 = sync to capt, 2 = sync to fo
 			gs_mach_indicator = 1, -- 0 = disabled, 1 = enabled
-			transponder_type = 0, -- 0, 1
+			transponder_type = 0, -- 0, 1, 2, 3, 4
 			nosewheel_ctrl = 0, -- 0 = independant, 1 = yaw, 2 = roll; will also link rudder to roll while on ground when in roll mode
 			gasper_switch = 0, -- 0 = not installed, 1 = installed
 			takeoff_chk_btn = 0, -- 0 = not installed, 1 = installed
+			--raas = 1,
+			--satcom = 1,
+			--tailskid = 1,
+			--apu_to_pack = 1, -- this is an option?
+			--temp units = 1, -- for ac info
+			--cabin signs = 1,
+			--clock_digital = 0,
+			--adf_installed = 1,
+			--capture_gs_before_loc = 1, -- allow/deny
+			--auto_lnav_GA = 1, -- automatic lnav on go around
 		}
 	}
 end
+local defaultValuesJSON = json.encode(defaultValues())
 
 function baro_sync()
 	if getSimConfig("PLANE","baro_mins_sync") == 1 then
@@ -151,12 +173,6 @@ function setSoundOption(key,value)
 	if key == "GPWS20" then B777DR_SNDoptions_gpws[13] = value end
 	if key == "GPWS10" then B777DR_SNDoptions_gpws[14] = value end
 	if key == "GPWS5" then B777DR_SNDoptions_gpws[15] = value end
-end
-
-function randomChar()
-	local chars = "23456789ABCDEFGHJKMNPQRSTUVWXYZ"
-	local num = math.random(1, chars:len())
-	return chars:sub(num, num)
 end
 
 function getSimConfig(p1, p2)
@@ -204,24 +220,18 @@ function setLoadedConfigs()
 	end
 end
 
--- for possible performance improvement
--- TODO: make this less stupid. tried to improve perforamce do to weird stuff happening but i'm pretty sure it was jsut due to multithreading...
-local open = io.open
-local close = io.close
-
 function loadSimConfig()
 	readmeCode()
 	--os.remove("Output/preferences/Strato_777_config.dat") -- remove .dat version (switched to .json)
 	--print("File = "..fileLocation)
-	local file = open(fileLocation, "r")
+	local file = io.open(fileLocation, "r")
 
 	if file then
-		local data = ""
-		data = file:read()
-		close(file)
+		local data = file:read()
+
 		if data:match("\"VERSION\":"..version) then
 			B777DR_simconfig_data = data
-		else
+		else -- this is very dumb
 			if jit.os == "Windows" then
 				os.execute("mshta javascript:alert(\"The 777's settings file is from an older version. Settings have been reset.\");close();")
 			elseif jit.os == "Linux" then
@@ -229,16 +239,16 @@ function loadSimConfig()
 			elseif jit.os == "OSX" then
 				os.execute("osascript -e 'display alert \"Out Of Date 777 Settings\" message \"The 777's settings file is from an older version. Settings have been reset.\"")
 			end
-			B777DR_simconfig_data = json.encode(defaultValues())
+			B777DR_simconfig_data = defaultValuesJSON
 		end
 	else
-		local newFile = open(fileLocation, "w")
-		local data = {}
-		data = json.encode(defaultValues())
-		B777DR_simconfig_data = data
-		newFile:write(data)
-		close(newFile)
+		local newFile = io.open(fileLocation, "w")
+		B777DR_simconfig_data = defaultValuesJSON
+		newFile:write(defaultValuesJSON)
+		newFile:close()
 	end
+
+	file:close()
 
 	--print("simconfig: "..B777DR_simconfig_data)
 	B777DR_newsimconfig_data = 1
@@ -257,12 +267,12 @@ end
 
 function hasSimConfig()
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
-		local file = open(fileLocation, "w")
+		local file = io.open(fileLocation, "w")
 		local data = B777DR_simconfig_data
 		simConfigData = json.decode(data)
 		--print(data)
 		file:write(data)
-		close(file)
+		file:close()
 		if not is_timer_scheduled(noNewData) then run_after_time(noNewData, 0.2) end
 	end
 end
