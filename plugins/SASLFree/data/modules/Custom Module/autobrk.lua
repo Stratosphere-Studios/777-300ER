@@ -24,7 +24,7 @@ autobrk_fail = globalPropertyi("Strato/777/failures/gear/autobrake")
 man_brakes_L = globalPropertyf("Strato/777/gear/manual_braking_L")
 man_brakes_R = globalPropertyf("Strato/777/gear/manual_braking_R")
 gear_lever = globalPropertyi("Strato/777/cockpit/switches/gear_tgt")
-
+spoiler_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
 sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
 
 --Sim datarefs
@@ -46,6 +46,7 @@ gs_last_kts = 0
 brk_apply = 0
 brk_wait = 0
 abrk_fail = 0
+sp_last = 0
 
 function resetAutoBrk()
     abrk_err_last = 0
@@ -120,7 +121,8 @@ function updateMode(gnd_l, gnd_r, gear_lvr, abrk_pos, thr_pos)
         return
     end
     if brk_wait == 0 and brk_apply == 1 and 
-    ((get(man_brakes_L)+get(man_brakes_R)) / 2 > 0.1 or thr_pos > ABRK_THR_DISARM_MIN) then
+    ((get(man_brakes_L)+get(man_brakes_R)) / 2 > 0.1 or thr_pos > ABRK_THR_DISARM_MIN
+    or get(spoiler_handle) < SB_THRESH and sp_last >= SB_THRESH) then
         abrk_mode_cr = ABRK_MD_DISARM
         return
     end
@@ -163,4 +165,5 @@ function update()
         set(autobrk_mode, abrk_mode_cr)
     end
     gs_last_kts = gs_kts
+    sp_last = get(spoiler_handle)
 end
