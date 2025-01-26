@@ -6,6 +6,7 @@
 *****************************************************************************************
 --]]
 
+include("constants.lua")
 include("misc_tools.lua")
 
 --X plane datarefs
@@ -74,18 +75,16 @@ altn_gear = globalPropertyi("Strato/777/gear/altn_extnsn")
 gear_lever = globalPropertyi("Strato/777/cockpit/switches/gear_tgt")
 normal_gear = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
 act_press = globalPropertyi("Strato/777/gear/actuator_press")
+kill_gear = globalPropertyi("Strato/777/kill_gear")
 
 handle_pos = createGlobalPropertyf("Strato/777/gear/norm_extnsn", 0)
-autobrk_pos = createGlobalPropertyi("Strato/777/gear/autobrake_pos", 0)
 lock_ovrd = createGlobalPropertyi("Strato/777/gear/lock_ovrd", 0)
 realistic_prk_brk = createGlobalPropertyi("Strato/777/gear/park_brake_realistic", 1)
 main_s_locked = createGlobalPropertyi("Strato/777/gear/main_s_locked", 1)
-man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
 brake_press_L = createGlobalPropertyi("Strato/777/gear/brake_press_L", 0)
 truck_L_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_L_temp", {0, 0, 0})
 truck_L_max = createGlobalPropertyf("Strato/777/gear/truck_L_max", 0)
 truck_L_psi = createGlobalPropertyfa("Strato/777/gear/truck_L_psi", {0, 0, 0, 0, 0, 0}) --psi for each pair of tires
-man_brakes_R = createGlobalPropertyf("Strato/777/gear/manual_braking_R", 0)
 brake_press_R = createGlobalPropertyi("Strato/777/gear/brake_press_R", 0)
 truck_R_brake_temp = createGlobalPropertyfa("Strato/777/gear/truck_R_temp", {0, 0, 0})
 truck_R_max = createGlobalPropertyf("Strato/777/gear/truck_R_max", 0)
@@ -101,6 +100,13 @@ acc_load_current = createGlobalPropertyf("Strato/777/gear/acc_load_current", 0)
 acc_load_past = createGlobalPropertyf("Strato/777/gear/acc_load_past", 0)
 eicas_brake_temp = createGlobalPropertyi("Strato/777/eicas/brake_temp", 0)
 eicas_tire_press = createGlobalPropertyi("Strato/777/eicas/tire_press", 0)
+man_brakes_L = globalPropertyf("Strato/777/gear/manual_braking_L")
+man_brakes_R = globalPropertyf("Strato/777/gear/manual_braking_R")
+
+autobrk_mode = globalPropertyi("Strato/777/gear/autobrake_mode")
+autobrk_act = globalPropertyf("Strato/777/gear/autobrk_cmd")
+autobrk_apply = globalPropertyi("Strato/777/gear/autobrk_apply")
+
 
 mlg_door_tgt = 0
 nose_door_tgt = 0
@@ -391,7 +397,7 @@ function ApplyBrakingWithAntiSkid(tgt_L, tgt_R)
 		skid_ratio_R = get(tire_skid_speed_R) / get(ground_speed)
 	end
 	if skid_ratio_R * 2 * bool2num(skid_ratio_R > 0.15) < tgt_R then
-		local tgt = tgt_R - skid_ratio_R * 2 * bool2num(skid_ratio_R > 0.15)
+		local tgt = tgt_L - skid_ratio_R * 2 * bool2num(skid_ratio_R > 0.15)
 		if effect_R * tgt > 0 and get(R_wheel_brake) == 0 then
 			tmp[2] = get(c_time)
 		end
@@ -448,8 +454,10 @@ function UpdateLdgTarget()
 end
 
 function UpdateBrakeTgt()
+	local man_tgt_l = get(man_brakes_L)
+	local man_tgt_r = get(man_brakes_R)
 	if get(rmw_onground) == 1 then
-		R_brake_tgt = get(man_brakes_R)
+		R_brake_tgt = man_tgt_r
 	elseif get(rmw_onground) == 0 and mlg_target == 0 then --Slowing the wheels down before landing gear is retracted
 		if get(rmw_speed) / 6.28 > 0.5 then
 			R_brake_tgt = 0.5
@@ -458,13 +466,18 @@ function UpdateBrakeTgt()
 		end
 	end
 	if get(lmw_onground) == 1 then
-		L_brake_tgt = get(man_brakes_L)
+		L_brake_tgt = man_tgt_l
 	elseif get(lmw_onground) == 0 and mlg_target == 0 then
 		if get(lmw_speed) / 6.28 > 0.5 then
 			L_brake_tgt = 0.5
 		else
 			L_brake_tgt = 0
 		end
+	end
+	
+	if get(autobrk_apply) == 1 then
+		L_brake_tgt = get(autobrk_act)
+		R_brake_tgt = get(autobrk_act)
 	end
 end
 
@@ -607,6 +620,7 @@ function UpdateActuatorPress()
 				end
 			end
 		elseif mlg_target == 1 then
+			set(kill_gear, 0)
 			mlg_door_tgt = 1
 			if AreMlgReady() then
 				--Gear extension
@@ -621,6 +635,12 @@ function UpdateActuatorPress()
 			end
 		end
 	else
+		if mlg_target == 0 then
+			local avg_gear_pos = (get(nw_actual) + get(mlg_actual_L)) / 2
+			if avg_gear_pos == 0 then
+				set(kill_gear, 1)
+			end
+		end
 		if get(sys_C_press) > 1000 and get(altn_gear) == 0 then --raise doors if pressure is normal and alternate extension is not used
 			mlg_door_tgt = 0
 		elseif get(altn_gear) == 1 then
@@ -712,6 +732,7 @@ function onAirportLoaded()
 		set(brake_press_R, 3100)
 		set(brake_qty_L, 0.02)
 		set(brake_qty_R, 0.02)
+		set(kill_gear, 0)
 		set(gear_lever, 1)
 	end
 end

@@ -29,6 +29,8 @@ brake_press_L = globalPropertyi("Strato/777/gear/brake_press_L")
 man_brakes_R = globalPropertyf("Strato/777/gear/manual_braking_R")
 brake_qty_R = globalPropertyf("Strato/777/gear/qty_brake_R") --overall fluid quantity in left brakes
 brake_press_R = globalPropertyi("Strato/777/gear/brake_press_R")
+autobrk_mode = globalPropertyi("Strato/777/gear/autobrake_mode")
+autobrk_sw_pos = globalPropertyf("Strato/777/gear/autobrake_pos")
 --Stab trim
 stab_trim = globalPropertyf("sim/cockpit2/controls/elevator_trim")
 ths_degrees = globalPropertyf("sim/flightmodel2/controls/stabilizer_deflection_degrees")
@@ -98,10 +100,15 @@ ap_disc_btn = sasl.createCommand("Strato/777/commands/yoke/otto_disc",
 										"Command for autopilot disconnect switch")
 ap_disc_bar_btn = sasl.createCommand("Strato/777/commands/mcp/otto_off", 
 										"Command for autopilot disconnect bar")
+abrk_incr = sasl.createCommand("Strato/777/commands/pedestal/abrk_incr", 
+	"Command for increasing autobrake mode")
+abrk_decr = sasl.createCommand("Strato/777/commands/pedestal/abrk_decr", 
+	"Command for increasing autobrake mode")
 
 park_brake_past = 0
 
 sb_handle_detents = {SPEEDBRK_HANDLE_ARMED, 0, 0.5, 1}
+
 
 --Command handler declaration:
 
@@ -157,6 +164,18 @@ function ParkBrakeHandler(phase)
 		end
 	elseif phase == SASL_COMMAND_END then
 		park_brake_past = get(park_brake_valve)
+	end
+end
+
+function AutoBrkIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(autobrk_mode, math.min(get(autobrk_mode)+1, ABRK_MD_MAX))
+	end
+end
+
+function AutoBrkDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(autobrk_mode, math.max(get(autobrk_mode)-1, ABRK_MD_RTO))
 	end
 end
 
@@ -442,9 +461,12 @@ sasl.registerCommandHandler(altn_trim_dn, 1, PitchTrimDnAltn)
 sasl.registerCommandHandler(ap_on_btn, 1, APOnHandler)
 sasl.registerCommandHandler(ap_disc_btn, 1, APDiscHandler)
 sasl.registerCommandHandler(ap_disc_bar_btn, 1, APDiscBarHandler)
+sasl.registerCommandHandler(abrk_incr, 1, AutoBrkIncrHandler)
+sasl.registerCommandHandler(abrk_decr, 1, AutoBrkDecrHandler)
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
+	set(autobrk_sw_pos, get(autobrk_sw_pos) + (get(autobrk_mode) - get(autobrk_sw_pos)) * get(f_time) * 4)
 	if get(on_ground) == 0 then
 		set(normal_gear, get(gear_lever))
 	end

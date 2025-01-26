@@ -16,6 +16,8 @@ dark_blue = {0.01, 0.05, 0.15}
 light_blue = {0, 0.808, 1}
 magenta = {1, 0.451, 1}
 
+MPS_TO_KTS = 1.944
+
 --Autopilot
 --Vertical
 VERT_MODE_OFF = 0
@@ -40,6 +42,19 @@ AT_MODE_HOLD = 3
 AT_MODE_THR_REF = 4
 AT_MODE_FLC_RETARD = 5
 AT_MODE_FLC_REF = 6
+--Autobrake
+ABRK_MD_RTO = -2
+ABRK_MD_OFF = -1
+ABRK_MD_DISARM = 0
+ABRK_MD_1 = 1
+ABRK_MD_2 = 2
+ABRK_MD_3 = 3
+ABRK_MD_4 = 4
+ABRK_MD_MAX = 5
+ABRK_RTO_LIM_KTS = 85
+ABRK_THR_DISARM_MIN = 0.05
+ABRK_SYS_C_MIN_PSI = 1000
+ABRK_MODE_STRS = {"RTO", "", "", "1", "2", "3", "4", "MAX"}
 
 --Cockpit
 

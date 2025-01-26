@@ -57,6 +57,15 @@ act_press = createGlobalPropertyi("Strato/777/gear/actuator_press", 0)
 brake_sys = createGlobalPropertyi("Strato/777/gear/shuttle_valve", 3)
 brake_qty_L = createGlobalPropertyf("Strato/777/gear/qty_brake_L", 0)
 brake_qty_R = createGlobalPropertyf("Strato/777/gear/qty_brake_R", 0)
+man_brakes_L = createGlobalPropertyf("Strato/777/gear/manual_braking_L", 0)
+man_brakes_R = createGlobalPropertyf("Strato/777/gear/manual_braking_R", 0)
+
+autobrk_sw_pos = createGlobalPropertyf("Strato/777/gear/autobrake_pos", 0)
+autobrk_mode = createGlobalPropertyi("Strato/777/gear/autobrake_mode", -1)
+autobrk_act = createGlobalPropertyf("Strato/777/gear/autobrk_cmd", 0)
+autobrk_apply = createGlobalPropertyi("Strato/777/gear/autobrk_apply", 0)
+autobrk_inop = createGlobalPropertyi("Strato/777/gear/autobrk_inop", 0)
+
 stab_cutout_C = createGlobalPropertyi("Strato/777/fctl/stab_cutout_C", 0)
 stab_cutout_R = createGlobalPropertyi("Strato/777/fctl/stab_cutout_R", 0)
 
@@ -70,10 +79,18 @@ fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
 
 fbw_secondary_fail = createGlobalPropertyi("Strato/777/failures/fctl/secondary", 0)
 fbw_direct_fail = createGlobalPropertyi("Strato/777/failures/fctl/direct", 0)
+autobrk_fail = createGlobalPropertyi("Strato/777/failures/gear/autobrake", 0)
 goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
 
 --test
 
+--input_icao = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/input_icao")
+
+--apt_lat = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_lat")
+--apt_lon = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_lon")
+--apt_elev = globalPropertys("Strato/777/FMC/FMC_R/REF_NAV/apt_elev")
+
+--ui_1 = globalProperty("Strato/777/UI/messages/creating_databases")
 
 --Overrides
 
@@ -88,6 +105,11 @@ set(brk_ovrd, 1)
 set(throttle_ovrd, 1)
 
 components = {
+	--test{
+	--	position = {20 , 1384, 1337, 1337},
+	--	visible = true,
+	--	fpsLimit = 50
+	--},
 	timers {},
 	elec_main {},
 	tcas_main {},
@@ -100,6 +122,7 @@ components = {
 	fctl {},
 	auto_thr {},
 	eec {},
+	autobrk {},
 	gear {},
 	eicascheck {
 		position = {2730 , 0, 1365, 1365},
