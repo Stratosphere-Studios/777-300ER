@@ -178,7 +178,8 @@ end
 
 function UpdateTruckBrakes() --updates current TBRS brake index
 	if get(ground_speed) ~= gs_past then
-		if get(ground_speed) >= 23.15 and (get(man_brakes_L) > 0 or get(man_brakes_R) > 0) and TBRS_landing_decel == false then
+		if get(ground_speed) >= 23.15 and (get(man_brakes_L) > 0 or get(man_brakes_R) > 0 
+		or get(autobrk_apply)) and TBRS_landing_decel == false then
 			TBRS_landing_decel = true
 		elseif get(ground_speed) < 23.15 and get(man_brakes_L) == 0 and get(man_brakes_R) == 0 and TBRS_landing_decel == true then
 			TBRS_landing_decel = false
