@@ -29,7 +29,7 @@ end
 --**                                Find Datarefs                                    **--
 --*************************************************************************************--
 
-dofile("json/json.lua")
+dofile("../../../libs/json/json.lua")
 
 --simDR_livery_path			= find_dataref("sim/aircraft/view/acf_livery_path")
 
