@@ -25,7 +25,7 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 - If you want to run this on an ARM (Apple Silicon) Mac you will need to enable Rosetta by right-clicking on your X-Plane.app > Get info > check the "Open with Rosetta" box. This is not necessary on Intel-based Macs.
   
-- MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. Whitelisting instructios:
+- MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. Whitelisting instructions:
 
 **With terminal:**
 After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane. This will need to be done every time you install/update the 777.
