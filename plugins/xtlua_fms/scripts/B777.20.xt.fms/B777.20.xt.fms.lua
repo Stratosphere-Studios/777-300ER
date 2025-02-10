@@ -399,6 +399,7 @@ function createPage(page)
 	retVal.getPage=function(self,pgNo) return self.template end
 	retVal.getSmallPage=function(self,pgNo) return self.templateSmall end
 	retVal.getNumPages=function(self, fmsID) return 1 end
+	retVal.pageType=0
 	fmsFunctionsDefs[page]={}
 	return retVal
 end
