@@ -110,7 +110,11 @@ end
 
 function updateMode(gnd_l, gnd_r, gear_lvr, abrk_pos, thr_pos)
     updateFail()
-    if abrk_fail == 1 then
+    if abrk_mode_cr == ABRK_MD_OFF and abrk_pos == abrk_mode_cr then
+        return
+    end
+    
+    if abrk_fail == 1 and abrk_pos ~= ABRK_MD_OFF then
         abrk_mode_cr = ABRK_MD_DISARM
         return
     end

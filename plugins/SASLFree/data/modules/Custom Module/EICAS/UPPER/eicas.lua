@@ -576,13 +576,13 @@ function UpdateMemo(messages, msg_avail)
 		table.insert(messages, 1, "PARKING BRAKE SET")
 		c_avail = c_avail - 1
 	end
+	if get(spoiler_handle) < 0 and c_avail >= 1 then
+		table.insert(messages, 1, "SPEEDBRAKE ARMED")
+		c_avail = c_avail - 1
+	end
 	local abrk_str = ABRK_MODE_STRS[get(autobrk_mode)+3]
 	if abrk_str ~= "" and c_avail >= 1 then
 		table.insert(messages, 1, "AUTOBRAKE " .. abrk_str)
-		c_avail = c_avail - 1
-	end
-	if get(spoiler_handle) < 0 and c_avail >= 1 then
-		table.insert(messages, 1, "SPEEDBRAKE ARMED")
 		c_avail = c_avail - 1
 	end
 	if get(on_ground) == 1 and get(throttle_pos) < 0.5 and c_avail >= 1 then
