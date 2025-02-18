@@ -559,6 +559,7 @@ end
 function after_physics()
 	if debug_fms > 0 then return end
 
+---@diagnostic disable-next-line: unused-local
 	local temp = B777DR_backend_showSelWpt
 	checkSelWPT(1) -- this is stupid, fix
 	checkSelWPT(2)
@@ -568,6 +569,7 @@ function after_physics()
 	B777DR_fmsL_scratchpad = fmsModules.fmsL.scratchpad
 	B777DR_fmsR_scratchpad = fmsModules.fmsR.scratchpad
 
+---@diagnostic disable-next-line: unused-local
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
 		--print("fms: "..B777DR_simconfig_data)
@@ -576,6 +578,7 @@ function after_physics()
 
 	fmsModules["data"].pos = toDMS(simDR_latitude, true)..toDMS(simDR_longitude, false)
 
+---@diagnostic disable-next-line: unused-local
 	local cM = hh
 	cM = mm
 	cM = ss

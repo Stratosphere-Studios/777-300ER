@@ -278,6 +278,7 @@ function hasSimConfig()
 end
 
 function after_physics()
+---@diagnostic disable-next-line: unused-local
 	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
 	hasSimConfig()
 	baro_sync()

@@ -96,7 +96,6 @@ B777DR_maint_doors                     = deferred_dataref("Strato/777/maint/door
 --*************************************************************************************--
 --**                                      CODE                                       **--
 --*************************************************************************************--
-local temp = {}
 function efb_boot()
    B777DR_efb_page = 2
 end
@@ -301,6 +300,7 @@ end
 --function before_physics()
 
 function after_physics()
+---@diagnostic disable-next-line: unused-local
    local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
    if B777DR_newsimconfig_data == 1 and B777DR_simconfig_data:len() > 2 then
       simConfigData = json.decode(B777DR_simconfig_data)
