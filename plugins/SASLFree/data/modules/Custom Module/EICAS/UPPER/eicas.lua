@@ -50,6 +50,7 @@ efis_ctrl = globalProperty("Strato/777/cdu_efis_ctl")
 dsp_ctrl = globalProperty("Strato/777/cdu_eicas_ctl")
 eicas_power_upper = globalPropertyi("Strato/777/elec/eicas_power_upper")
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
+--Flight controls
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
 tac_fail = globalPropertyi("Strato/777/fctl/ace/tac_fail")
 fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
@@ -58,12 +59,15 @@ stall_speed = globalPropertyi("Strato/777/fctl/vstall")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
 flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 c_time = globalPropertyf("Strato/777/time/current")
+--Gear&brakes
 eicas_brake_temp = globalPropertyi("Strato/777/eicas/brake_temp")
 eicas_tire_press = globalPropertyi("Strato/777/eicas/tire_press")
 altn_gear = globalPropertyi("Strato/777/gear/altn_extnsn")
 main_s_locked = globalPropertyi("Strato/777/gear/main_s_locked")
 handle_pos = globalPropertyf("Strato/777/gear/norm_extnsn")
 acc = globalPropertyi("Strato/777/gear/brake_acc_in_use")
+autobrk_mode = globalPropertyi("Strato/777/gear/autobrake_mode")
+--Hydraulics
 sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
 sys_R_press = globalPropertyfae("Strato/777/hydraulics/press", 3)
 stab_cutout_C = globalPropertyi("Strato/777/fctl/stab_cutout_C")
@@ -524,6 +528,9 @@ function UpdateEicasAdvisory(messages)
 	if get(tac_fail) == 1 then
 		table.insert(messages, tlen(messages) + 1, "THRUST ASYM COMP")
 	end
+	if get(autobrk_mode) == ABRK_MD_DISARM then
+		table.insert(messages, tlen(messages) + 1, "AUTOBRAKE")
+	end
 	UpdateStabCutoutAdvisory(messages)
 	local door_stat = checkGearDoors()
 	if door_stat == 1 then
@@ -571,6 +578,11 @@ function UpdateMemo(messages, msg_avail)
 	end
 	if get(spoiler_handle) < 0 and c_avail >= 1 then
 		table.insert(messages, 1, "SPEEDBRAKE ARMED")
+		c_avail = c_avail - 1
+	end
+	local abrk_str = ABRK_MODE_STRS[get(autobrk_mode)+3]
+	if abrk_str ~= "" and c_avail >= 1 then
+		table.insert(messages, 1, "AUTOBRAKE " .. abrk_str)
 		c_avail = c_avail - 1
 	end
 	if get(on_ground) == 1 and get(throttle_pos) < 0.5 and c_avail >= 1 then

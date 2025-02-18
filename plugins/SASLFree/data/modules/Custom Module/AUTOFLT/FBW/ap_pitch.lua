@@ -41,6 +41,8 @@ mcp_alt_val = globalPropertyf("sim/cockpit/autopilot/altitude")
 
 vs_pred_sec = createGlobalPropertyf("Strato/777/pitch_dbg/vs_pred_sec", 8)
 vs_pred_fpm = createGlobalPropertyf("Strato/777/pitch_dbg/vs_pred_fpm", 0)
+k_ias = createGlobalPropertyf("Strato/777/pitch_dbg/k_ias", -2)
+k_spoil = createGlobalPropertyf("Strato/777/pitch_dbg/k_spoil", 0.5)
 
 pitch_pilot = globalPropertyf("sim/cockpit/gyros/the_ind_ahars_pilot_deg")
 pitch_copilot = globalPropertyf("sim/cockpit/gyros/the_ind_ahars_copilot_deg")
@@ -89,7 +91,8 @@ FLC_CLB_PITCH_MIN_DEG = 5
 ALT_HOLD_ALT_REACH_SEC = 10
 ALT_HOLD_DECEL = 10
 ALT_HOLD_CAPTURE_ALT_FT = 150
-ALT_HOLD_VS_CMD_MAX_FPM = 1000
+ALT_HOLD_VS_CMD_MAX_FPM = 2600
+ALT_HOLD_VS_ENTRY_MAX_FPM = 1000
 ALT_HOLD_ALT_MRGN_FT = 350
 ALT_ACQ_ALT_PENALTY_FT = 250 -- Alt penalty per 1000 fpm
 
@@ -113,6 +116,8 @@ FLC_CLB_KD = -0.74
 FLC_DES_KP = -0.02
 FLC_DES_KD = -0.37
 
+flap_corr_pitch_deg = {0, -1, -0.5, -0.4, -0.3, -0.3, -0.24}
+flap_settings = {0, 1, 9, 15, 20, 25, 30}
 vert_mode = VERT_MODE_OFF
 
 function getIASCorrection()
@@ -122,7 +127,7 @@ function getIASCorrection()
 
         ias_last = ias_avg_kts
 
-        return ias_accel * -1
+        return ias_accel * get(k_ias)
     else
         return 0
     end
@@ -132,13 +137,18 @@ function getSpoilerCorrection()
     local sp_avg = (get(spoiler_L1_act) + get(spoiler_L2_act) + 
         get(spoiler_R1_act) + get(spoiler_R2_act) + get(spoiler_6_act) + 
         get(spoiler_7_act) + get(spoiler_8_act) + get(spoiler_9_act)) / 8
-    return sp_avg * 0.07
+    return sp_avg * get(k_spoil)
+end
+
+function getPitchCorrectionAP()
+    local flap_idx = lim(getGreaterThan(flap_settings, get(pfc_flaps)), 8, 1)
+    return getSpoilerCorrection() + flap_corr_pitch_deg[flap_idx]*get(pfc_flaps)
 end
 
 function getAltIntcAlt(vs_avg_fpm)
     local vs_avg = math.abs(vs_avg_fpm)
     local alt_intcpt_mrgn_ft = ALT_HOLD_ALT_MRGN_FT
-    local lim_vspeed = ALT_HOLD_VS_CMD_MAX_FPM
+    local lim_vspeed = ALT_HOLD_VS_ENTRY_MAX_FPM
     if vs_avg > lim_vspeed then
         alt_intcpt_mrgn_ft = alt_intcpt_mrgn_ft + (vs_avg - lim_vspeed) * (ALT_ACQ_ALT_PENALTY_FT/lim_vspeed)
     end
@@ -226,7 +236,7 @@ function getAutopilotAltHoldCmd()
     local alt_avg_ft = (get(alt_pilot) + get(alt_copilot)) / 2
     local vs_avg_fpm = (get(vs_pilot_fpm) + get(vs_copilot_fpm)) / 2
     local alt_err = alt_hold_alt_tgt - alt_avg_ft
-    vs_hold_vs_tgt = (alt_err - vs_avg_fpm / 20) * 2
+    vs_hold_vs_tgt = (alt_err - vs_avg_fpm / 4) * 2.6
     if math.abs(alt_err) > 200 then
         set(alt_alert, 1)  --EICAS ALTITUDE ALERT
     else
@@ -457,6 +467,7 @@ function getAutopilotPitchCmd()
         vs_last_ft = (get(vs_pilot_fpm) + get(vs_copilot_fpm)) / 2
         ias_last = (get(cas_pilot) + get(cas_pilot)) / 2
     end
+    pitch_cmd_deg = getPitchCorrectionAP() + pitch_cmd_deg
     gs_last = get(gs_dref)
 
     if vert_mode == VERT_MODE_VSHOLD and get(vs_fpa) == 1 then

@@ -91,6 +91,7 @@ curr_at_mode = AT_MODE_OFF
 at_engaged = false
 flc_thr_ratio = 1
 mcp_alt_last = 0
+thr_joy_last = 0
 
 function getThrottleIdleAltitudeFt(vs_entry)
     local curr_vs = lim(vs_entry, 0, -1500)
@@ -182,7 +183,7 @@ function updateMode(v_mode)
 
     if get(autothr_arm) == 1 and (avg_ias < get(stall_speed) or avg_ias > get(max_allowable)) then
         if curr_at_mode == AT_MODE_OFF and avg_ra > 200 then
-            curr_at_mode = AT_MODE_IAS_HOLD
+            set(spd_hold, 1)
             return
         end
     end
