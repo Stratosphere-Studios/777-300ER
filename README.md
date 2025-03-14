@@ -23,7 +23,7 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 ### **Mac**
 
-- If you want to run this on an ARM (Apple Silicon) Mac you will need to enable Rosetta by right-clicking on your X-Plane.app > Get info > check the "Open with Rosetta" box. This is not necessary on Intel-based Macs.
+- If you want to run this on an ARM (Apple Silicon) Mac you will need to enable Rosetta by right-clicking on your X-Plane.app > Get info > check the "Open with Rosetta" box. This is not necessary on Intel-based Macs. We have tried to make an Apple Silicon version but we need someone to help us test it. If you have an M-series Mac and are willing to help out, please let us know!
   
 - MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. Whitelisting instructions:
 
