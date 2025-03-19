@@ -112,7 +112,7 @@ Thanks for reading! The соde to unlоck the flight instruments is "BOEING".
 
 [**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear, autopilot), C++ systems (FMC plugin), flight model improvements, cockpit instruments(pfd)
 
-[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, Lua systems (Air), displays and efb, flight model + other aircraft data, readme, GitHub management.
+[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, Pneumatics, displays, and efb), flight model + other aircraft data, readme, GitHub management.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
