@@ -126,6 +126,8 @@ Thanks for reading! The соde to unlоck the flight instruments is "BOEING".
 
 [**IASXP**](https://github.com/IASXP): Begin MFD Checklists, SASL integration.
 
+[**VII (Aleks)**](https://github.com/certifiedgithubhater): In-progress EFB design and implementation
+
 **Phil Paysse**: Fuselage.
 
 **Potatohead123**: Cockpit help.
