@@ -67,10 +67,6 @@ A: If you're using X-Plane 11, please read the "Sim Compatibility" section below
 
 A: We have removed X-Plane 11 support to make it easier for us to focus on X-Plane 12 development and utilize v12-only features. By the time the aircraft is decently flyable, X-Plane 12 will have been out for a while and we expect more people to have switched by then and for the sim to be more polished. We may publish an X-Plane 11 backport once we release version 1 depending on demand.
 
-**Q: Why do I get an error whenever I load the aircraft? What do I do with it?**
-
-A: This error is a known FMOD bug. As the sound developer is no longer contributing, we don't have anyone to fix this bug. Just click "Understood" and the popup will close.
-
 **Q: Why are my liveries broken?**
 
 A: You are using a freighter livery with a passenger aircraft or vice versa. Make sure the livery you are using is correct for the type of aircraft you're flying. You can toggle the aircraft type on the EFB.
