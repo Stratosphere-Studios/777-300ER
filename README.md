@@ -21,11 +21,9 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 - Some Windows antivirus software may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup notification when first loading the aircraft and when aircraft configurations are reset. Some people may use mshta.exe maliciously but in our case it is simply for notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
-### **Mac**
+### **Mac**  
 
-- If you want to run this on an ARM (Apple Silicon) Mac you will need to enable Rosetta by right-clicking on your X-Plane.app > Get info > check the "Open with Rosetta" box. This is not necessary on Intel-based Macs.
-  
-- MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. Whitelisting instructions:
+MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. Whitelisting instructions:
 
 **With terminal:**
 After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane. This will need to be done every time you install/update the 777.
