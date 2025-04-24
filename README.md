@@ -23,10 +23,10 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 ### **Mac**  
 
-MacOS will block the plugins if they havn't been whitelisted before since we don't pay their $100/year fee. Whitelisting instructions:
+MacOS will block the plugins if they since we don't pay their $100/year fee. The plugins will be need to be whitelisted each time the plane is installed or updated. Whitelisting instructions:
 
 **With terminal:**
-After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane. This will need to be done every time you install/update the 777.
+After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane.
 
 **Without terminal:**
 Open macOS System Settings, go to Privacy & Security, and scroll all the way down. Then run the 777 in X-Plane. Each time a "Not Opened" popup appears, click "Done" (**not** move to trash!) and switch to the settings window. You will see a message show up right under the "Allow application from" setting with an "Open Anyway" button. Click "Open Anyway", then repeat the process for the remaining two popups that will appear. Then restart X-Plane.
