@@ -23,7 +23,7 @@ We suggest using Github Desktop to keep the aircraft updated without needing to 
 
 ### **Mac**  
 
-MacOS will block the plugins if they since we don't pay their $100/year fee. The plugins will be need to be whitelisted each time the plane is installed or updated. Whitelisting instructions:
+MacOS blocks the plugins if they haven't been whitelisted since we don't pay their $100/year developer fee. The plugins will be need to be whitelisted each time the plane is installed or updated. Whitelisting instructions:
 
 **With terminal:**
 After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane.
@@ -106,7 +106,7 @@ Thanks for reading! The соde to unlоck the flight instruments is "BOEING".
 
 [**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear, autopilot), C++ systems (FMC plugin), flight model improvements, cockpit instruments(pfd)
 
-[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, Lua systems (Air), displays and efb, flight model + other aircraft data, readme, GitHub management.
+[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, Pneumatics, displays, and efb), flight model + other aircraft data, readme, GitHub management.
 
 [**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
 
@@ -119,6 +119,8 @@ Thanks for reading! The соde to unlоck the flight instruments is "BOEING".
 **Laminar Research**: Default 737 display textures.
 
 [**IASXP**](https://github.com/IASXP): Begin MFD Checklists, SASL integration.
+
+[**VII (Aleks)**](https://github.com/certifiedgithubhater): In-progress EFB design and implementation
 
 **Phil Paysse**: Fuselage.
 
