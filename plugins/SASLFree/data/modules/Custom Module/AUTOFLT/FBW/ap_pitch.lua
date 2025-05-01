@@ -42,7 +42,7 @@ mcp_alt_val = globalPropertyf("sim/cockpit/autopilot/altitude")
 vs_pred_sec = createGlobalPropertyf("Strato/777/pitch_dbg/vs_pred_sec", 8)
 vs_pred_fpm = createGlobalPropertyf("Strato/777/pitch_dbg/vs_pred_fpm", 0)
 k_ias = createGlobalPropertyf("Strato/777/pitch_dbg/k_ias", -2)
-k_spoil = createGlobalPropertyf("Strato/777/pitch_dbg/k_spoil", 0.5)
+k_spoil = createGlobalPropertyf("Strato/777/pitch_dbg/k_spoil", 0.06)
 
 pitch_pilot = globalPropertyf("sim/cockpit/gyros/the_ind_ahars_pilot_deg")
 pitch_copilot = globalPropertyf("sim/cockpit/gyros/the_ind_ahars_copilot_deg")
@@ -170,8 +170,10 @@ function getAutopilotVSHoldCmd(pitch_cmd_prev, vs_cmd_fpm)
         set(vs_pred_fpm, vs_pred)
 
         local tgt_kp = 0.0005
-        if round(get(pfc_flaps)) >= 5 then
+        if round(get(pfc_flaps)) >= 5 and round(get(pfc_flaps)) <= 20 then
             tgt_kp = 0.001
+        elseif round(get(pfc_flaps)) > 20 then
+            tgt_kp = 0.002
         end
 
         --vshold_pid:update{kp=tgt_kp, tgt=vs_cmd_fpm, curr=vs_pred}
@@ -229,7 +231,7 @@ end
 
 function getAutopilotFlcCmdFull()
     vshold_pitch_deg = getAutopilotFlcCmd(vshold_pitch_deg)
-    return vshold_pitch_deg + getIASCorrection() + getSpoilerCorrection()
+    return vshold_pitch_deg + getIASCorrection()
 end
 
 function getAutopilotAltHoldCmd()
@@ -400,10 +402,10 @@ function updateVsFpa()
     end
 end
 
-function updatePitchFltDirCmd()
+function updatePitchFltDirCmd(pitch_cmd_deg)
     if vert_mode ~= VERT_MODE_OFF then
         local avg_pitch_deg = (get(pitch_pilot) + get(pitch_copilot)) / 2
-        local flt_dir_cmd = lim(vshold_pitch_deg - avg_pitch_deg, 20, -20)
+        local flt_dir_cmd = lim(pitch_cmd_deg - avg_pitch_deg, 20, -20)
         set(yoke_pitch, flt_dir_cmd/20)
         set(pitch_tgt, flt_dir_cmd)
     else
@@ -477,7 +479,7 @@ function getAutopilotPitchCmd()
     end
     
     set(alt_acq, bool2num(mcp_alt_acq))
-    updatePitchFltDirCmd()
+    updatePitchFltDirCmd(pitch_cmd_deg)
     updatePitchFltDir()
     return pitch_cmd_deg
 end

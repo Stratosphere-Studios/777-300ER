@@ -181,6 +181,16 @@ function GetPitchCorrection(mass, m_idx, thrust, trim_speed)
 	return ias_correction_linear + thrust_correction
 end
 
+function GetAutopilotPitchKoeff(ias)
+	if ias > 190 then
+		return 0.15
+	elseif ias > 160 and ias <= 190 then
+		return 0.23
+	else
+		return 0.28
+	end
+end
+
 function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare, flare_pitch_change)
 	local avg_ra = get(pfc_ra)
 	if avg_ra > 5 then
@@ -269,7 +279,7 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 
 		local tmp_int = d_int[m_i] + ((d_int[m_i] - d_int[m_i-1]) * (tmp_mass - 
 				no_pitch_speeds[m_i-1][1])) / (no_pitch_speeds[m_i][1] - no_pitch_speeds[m_i-1][1])
-		local k_fbw = 0.15
+		local k_fbw = 0
 		if not ap_pitch_is_on then
 			k_fbw = 0.05
 			if math.abs(get(pfc_pilot_input, 3)) > 0.08 then
@@ -277,6 +287,7 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 				commanded_pitch = get(pfc_pilot_input, 3) * k_man
 			end
 		else
+			k_fbw = GetAutopilotPitchKoeff(avg_cas)
 			fbw_pitch = ap_pitch_cmd
 			air2gnd = false
 			gnd2air = false
@@ -353,7 +364,7 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 	local rud_out = get(pfc_pilot_input, 2) * 27
 	if not bank_prot_active then
 		rud_out = rud_out + ail_component * 8
-		if ail_component < 2 then
+		if ail_component < 0.5 then
 			--[[local supr_out = 0
 			if Round(math.abs(get(pfc_pilot_input, 1)), 2) <= 0.07 and get(fbw_mode) == 1 then
 				gust_supr_pid:update{tgt = ((avg_roll - fbw_roll_past) * 0.6), curr = avg_roll - fbw_roll_past}
@@ -363,9 +374,14 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 			local sign_term = bool2num(avg_roll > 0) - bool2num(avg_roll < 0)
 			local yaw_term = 0.011 * avg_roll^2 * sign_term
 			local tgt_yaw = lim((yaw_term - get(pfc_flt_axes, 3)) * 0.17 + supr_out, yaw_def_max, -yaw_def_max) + ail_component * 8]]--
-			yaw_damp_pid:update{tgt=0, curr=get(yaw_rate_accel)}
-			set(dr_errtotal, yaw_damp_pid.errtotal)
+			if get(pfc_flaps) <= 15 then
+				yaw_damp_pid:update{tgt=0, curr=get(yaw_rate_accel)}
+			else
+				yaw_damp_pid:update{tgt=0, kp=-2, ki=0, kd=0.8, curr=get(yaw_rate_accel)}
+			end
 			
+			set(dr_errtotal, yaw_damp_pid.errtotal)
+			set(act_rudder, yaw_damp_pid.output)
 			local tgt_yaw = yaw_damp_pid.output
 			rud_out = rud_out + tgt_yaw * 0.7 * get(f_time)
 		end
@@ -375,6 +391,8 @@ function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past
 	end
 	rud_out = lim(rud_out, 27, -27)
 	set(pfc_rudder_command, rud_out / 27)
+	
+
 	local fbw_roll_past = avg_roll
 	return {roll_input_last, heading_input_last, fbw_roll_past}
 end

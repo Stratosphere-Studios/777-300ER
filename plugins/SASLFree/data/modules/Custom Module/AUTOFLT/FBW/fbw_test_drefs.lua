@@ -9,7 +9,8 @@
 
 dr_kp = createGlobalPropertyf("Strato/777/test/kp", -0.8)
 dr_ki = createGlobalPropertyf("Strato/777/test/ki", -0.2)
-dr_kd = createGlobalPropertyf("Strato/777/test/kd", 0)
+dr_kd = createGlobalPropertyf("Strato/777/test/kd", -0.15)
+act_rudder = createGlobalPropertyf("Strato/777/test/yaw/act_rudder", 0)
 lp_alpha = createGlobalPropertyf("Strato/777/test/lp_alpha", 1)
 r_delta_curr = createGlobalPropertyf("Strato/777/test/rdc", 0)
 roll_maint = createGlobalPropertyf("Strato/777/test/rm", 0)

@@ -56,6 +56,7 @@ ABRK_THR_DISARM_MIN = 0.05
 ABRK_SYS_C_MIN_PSI = 1000
 SB_THRESH = 0.015
 ABRK_MODE_STRS = {"RTO", "", "", "1", "2", "3", "4", "MAX"}
+ABRK_SW_DELAY_SEC = 1
 
 --Cockpit
 
