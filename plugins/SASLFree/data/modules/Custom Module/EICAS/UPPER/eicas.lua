@@ -81,6 +81,11 @@ ace_spoiler_fail_5 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_5", 0
 ace_elevator_fail_L = globalPropertyi("Strato/777/fctl/ace/elevator_fail_L", 0)
 ace_elevator_fail_R = globalPropertyi("Strato/777/fctl/ace/elevator_fail_R", 0)
 spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ace_spoiler_fail_4, ace_spoiler_fail_5}
+--Lights:
+lt_caut_cap = globalPropertyi("Strato/777/cockpit/lights/caut_cap")
+lt_warn_cap = globalPropertyi("Strato/777/cockpit/lights/warn_cap")
+lt_caut_fo = globalPropertyi("Strato/777/cockpit/lights/caut_fo")
+lt_warn_fo = globalPropertyi("Strato/777/cockpit/lights/warn_fo")
 --Autpoilot
 ap_disc = globalPropertyi("Strato/777/autopilot/disc")
 alt_alert = globalPropertyi("Strato/777/autopilot/alt_alert")
@@ -114,7 +119,6 @@ altn_gear_past = 0
 n_conf_warns_past = 0
 conf_warns_past = {}
 advisories_past = {}
-n_dsp = 0
 conf_time = 0
 advisories_start = 1
 flap_retract_time = -11
@@ -123,6 +127,7 @@ park_brake_time_set = false
 gear_display_time = -11
 gear_transit_time = -26
 gear_dn = true
+n_adv_last = 0
 
 function UpdateAdvisorySide(messages, text_L, text_R, text_both, dref_l, dref_r)
 	if round(get(dref_l)) == 1 and round(get(dref_r)) == 0 then
@@ -618,6 +623,24 @@ function DisplayMessages(messages, offset, color, step, start_p, end_p)
 	end
 end
 
+function UpdateCautionLights(n_advisories, n_warnings)
+	if n_advisories ~= n_adv_last and n_advisories ~= 0 then
+		set(lt_caut_cap, 1)
+		set(lt_caut_fo, 1)
+	elseif n_advisories == 0 then
+		set(lt_caut_cap, 0)
+		set(lt_caut_fo, 0)
+	end
+	if n_warnings ~= 0 then
+		set(lt_warn_cap, 1)
+		set(lt_warn_fo, 1)
+	else
+		set(lt_warn_cap, 0)
+		set(lt_warn_fo, 0)
+	end
+	n_adv_last = n_advisories
+end
+
 function draw()
 	UpdateWindows()
 	if get(eicas_power_upper) == 1 then
@@ -639,6 +662,9 @@ function draw()
 		n_warnings = tlen(warnings)
 		n_advisories = tlen(advisories_past)
 		n_dsp = n_advisories + n_warnings
+
+		UpdateCautionLights(n_advisories, n_warnings)
+
 		UpdateMemo(memo, 11 - n_dsp)
 		UpdateCanc(n_advisories, n_warnings)
 		DisplayMessages(warnings, offset, {1, 0, 0}, 50, 1, n_warnings)

@@ -392,7 +392,7 @@ function update()
 end
 
 function onAirportLoaded()
-	if get(ra_pilot) > 100 or get(ra_copilot) > 100 then
+	if (get(ra_pilot) > 100 or get(ra_copilot) > 100) and (get(cas_copilot)+get(cas_pilot)) < 200 then
 		UpdateFlaps(5)
 		set(flap_tgt, 5)
 		UpdateSlats()

@@ -14,7 +14,17 @@ include("constants.lua")
 --ND
 --hdg_src = globalPropertyi("Strato/777/cockpit/switches/mag_hdg")
 --EICAS control:
-recall = globalPropertyi("Strato/777/eicas/rcl", 0)
+recall = globalPropertyi("Strato/777/eicas/rcl")
+caut_cap = globalPropertyi("Strato/777/glareshield/caut_cap")
+caut_fo = globalPropertyi("Strato/777/glareshield/caut_fo")
+
+caut_cap_anim = globalPropertyf("Strato/777/cockpit/switches/caut_cap")
+caut_fo_anim = globalPropertyf("Strato/777/cockpit/switches/caut_fo")
+--EICAS warning lights:
+lt_caut_cap = globalPropertyi("Strato/777/cockpit/lights/caut_cap")
+lt_warn_cap = globalPropertyi("Strato/777/cockpit/lights/warn_cap")
+lt_caut_fo = globalPropertyi("Strato/777/cockpit/lights/caut_fo")
+lt_warn_fo = globalPropertyi("Strato/777/cockpit/lights/warn_fo")
 --Landing gear
 gear_lever = globalPropertyi("Strato/777/cockpit/switches/gear_tgt")
 normal_gear = globalPropertyi("sim/cockpit2/controls/gear_handle_down")
@@ -104,6 +114,10 @@ abrk_incr = sasl.createCommand("Strato/777/commands/pedestal/abrk_incr",
 	"Command for increasing autobrake mode")
 abrk_decr = sasl.createCommand("Strato/777/commands/pedestal/abrk_decr", 
 	"Command for increasing autobrake mode")
+mast_wc_capt = sasl.createCommand("Strato/777/commands/glareshield/mast_wc_capt", 
+	"Command not for captain's toilet flush button, but the master warning button")
+mast_wc_fo = sasl.createCommand("Strato/777/commands/glareshield/mast_wc_fo", 
+	"Command first officer's master warning button")
 
 park_brake_past = 0
 
@@ -431,6 +445,24 @@ function APDiscBarHandler(phase)
 	end
 end
 
+function WCCapHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(caut_cap, 1)
+		set(lt_caut_cap, 0)
+	elseif phase == SASL_COMMAND_END then
+		set(caut_cap, 0)
+	end
+end
+
+function WCFOHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(caut_fo, 1)
+		set(lt_caut_fo, 0)
+	elseif phase == SASL_COMMAND_END then
+		set(caut_fo, 0)
+	end
+end
+
 --Registering own command handlers
 --Sim commands
 sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
@@ -463,10 +495,14 @@ sasl.registerCommandHandler(ap_disc_btn, 1, APDiscHandler)
 sasl.registerCommandHandler(ap_disc_bar_btn, 1, APDiscBarHandler)
 sasl.registerCommandHandler(abrk_incr, 1, AutoBrkIncrHandler)
 sasl.registerCommandHandler(abrk_decr, 1, AutoBrkDecrHandler)
+sasl.registerCommandHandler(mast_wc_capt, 1, WCCapHandler)
+sasl.registerCommandHandler(mast_wc_fo, 1, WCFOHandler)
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
 	set(autobrk_sw_pos, get(autobrk_sw_pos) + (get(autobrk_mode) - get(autobrk_sw_pos)) * get(f_time) * 4)
+	set(caut_cap_anim, get(caut_cap_anim) + (get(caut_cap)-get(caut_cap_anim)) * get(f_time) * 4)
+	set(caut_fo_anim, get(caut_fo_anim) + (get(caut_fo)-get(caut_fo_anim)) * get(f_time) * 4)
 	if get(on_ground) == 0 then
 		set(normal_gear, get(gear_lever))
 	end

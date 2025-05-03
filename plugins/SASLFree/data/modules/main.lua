@@ -31,6 +31,8 @@ pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
+caut_cap_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_cap", 0)
+caut_fo_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_fo", 0)
 --ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
 
 show_fpv = createGlobalPropertyi("Strato/777/EFIS/fpv_on", 0)
@@ -45,6 +47,8 @@ ap_disc_bar = createGlobalPropertyi("Strato/777/mcp/ap_disc_bar", 0)
 flt_dir_pilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
 flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
 
+caut_cap = createGlobalPropertyi("Strato/777/glareshield/caut_cap", 0)
+caut_fo = createGlobalPropertyi("Strato/777/glareshield/caut_fo", 0)
 
 --Systems datarefs
 
@@ -74,6 +78,12 @@ alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
 
 fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
 fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
+
+--Lights:
+lt_caut_cap = createGlobalPropertyi("Strato/777/cockpit/lights/caut_cap", 0)
+lt_warn_cap = createGlobalPropertyi("Strato/777/cockpit/lights/warn_cap", 0)
+lt_caut_fo = createGlobalPropertyi("Strato/777/cockpit/lights/caut_fo", 0)
+lt_warn_fo = createGlobalPropertyi("Strato/777/cockpit/lights/warn_fo", 0)
 
 --Failure datarefs
 
