@@ -57,8 +57,10 @@ fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
+--Flaps:
 flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 c_time = globalPropertyf("Strato/777/time/current")
+flap_mode = globalPropertyi("Strato/777/flaps/mode")
 --Gear&brakes
 eicas_brake_temp = globalPropertyi("Strato/777/eicas/brake_temp")
 eicas_tire_press = globalPropertyi("Strato/777/eicas/tire_press")
@@ -128,6 +130,9 @@ gear_display_time = -11
 gear_transit_time = -26
 gear_dn = true
 n_adv_last = 0
+
+adv_main = {"PRI FLIGHT COMPUTERS", "HYD PRESS SYS L", "HYD PRESS SYS C", "HYD PRESS SYS R",
+	"FLIGHT CONTROLS", "FLAP/SLAT CONTROL"} -- Advisories after which to shift to the right
 
 function UpdateAdvisorySide(messages, text_L, text_R, text_both, dref_l, dref_r)
 	if round(get(dref_l)) == 1 and round(get(dref_r)) == 0 then
@@ -506,7 +511,7 @@ function UpdateEicasAdvisory(messages)
 	local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
 	local avg_ra = (get(ra_pilot) + get(ra_copilot)) / 2
 	local nest_strg = ""
-	--Draw cautions
+	--Update cautions
 	if get(autothr_arm) == 0 then
 		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC")
 	end
@@ -520,6 +525,9 @@ function UpdateEicasAdvisory(messages)
 		table.insert(messages, tlen(messages) + 1, "FLIGHT CONTROL MODE")
 	elseif get(fbw_mode) == 3 then
 		table.insert(messages, tlen(messages) + 1, "PRI FLIGHT COMPUTERS")
+	end
+	if get(flap_mode) ~= FLAP_MD_PRI then
+		table.insert(messages, tlen(messages) + 1, "FLAP/SLAT CONTROL")
 	end
 	if avg_cas < get(manuever_speed) and avg_cas > get(stall_speed) and get(on_ground) == 0 then
 		table.insert(messages, tlen(messages) + 1, "AIRSPEED LOW")
@@ -597,25 +605,17 @@ end
 
 function DisplayMessages(messages, offset, color, step, start_p, end_p)
 	if end_p >= start_p then
-		local hyd_idx = nil
-		local fctl_mode_idx = indexOf(messages, "PRI FLIGHT COMPUTERS")
-		local hyd_press_idx1 = indexOf(messages, "HYD PRESS SYS L")
-		local hyd_press_idx2 = indexOf(messages, "HYD PRESS SYS C")
-		local hyd_press_idx3 = indexOf(messages, "HYD PRESS SYS R")
-		if hyd_press_idx1 ~= nil then
-			hyd_idx = hyd_press_idx1
-		elseif hyd_press_idx2 ~= nil then
-			hyd_idx = hyd_press_idx2
-		elseif hyd_press_idx3 ~= nil then
-			hyd_idx = hyd_press_idx3
+		local idxmin = 100000
+		for i, v in ipairs(adv_main) do
+			local tmp = indexOf(messages, v)
+			if tmp ~= nil then
+				idxmin = math.min(idxmin, tmp)
+			end
 		end
-		local fctl_idx = indexOf(messages, "FLIGHT CONTROLS")
 		for i=1,end_p - start_p + 1 do
 			local curr_idx = start_p + i - 1
 			local curr_msg = messages[curr_idx]
-			if (fctl_idx ~= nil and curr_idx > fctl_idx) or 
-			   (fctl_idx == nil and hyd_idx ~= nil and curr_idx > hyd_idx) or 
-			   (fctl_idx == nil and hyd_idx == nil and fctl_mode_idx ~= nil and curr_idx > fctl_mode_idx) then
+			if curr_idx > idxmin then
 				curr_msg = " "..curr_msg
 			end
 			drawText(font, 830, offset - step * (i - 1), curr_msg, 50, false, false, TEXT_ALIGN_LEFT, color)

@@ -49,6 +49,8 @@ flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
 
 caut_cap = createGlobalPropertyi("Strato/777/glareshield/caut_cap", 0)
 caut_fo = createGlobalPropertyi("Strato/777/glareshield/caut_fo", 0)
+flap_altn = createGlobalPropertyi("Strato/777/pedestal/flap_altn", 0)
+flap_altn_re = createGlobalPropertyi("Strato/777/pedestal/flap_altn_re", 0)
 
 --Systems datarefs
 
@@ -78,6 +80,7 @@ alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
 
 fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
 fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
+flap_mode = createGlobalPropertyi("Strato/777/flaps/mode", 0)
 
 --Lights:
 lt_caut_cap = createGlobalPropertyi("Strato/777/cockpit/lights/caut_cap", 0)

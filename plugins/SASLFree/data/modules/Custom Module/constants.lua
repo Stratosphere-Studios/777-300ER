@@ -95,6 +95,19 @@ TCAS_SW_ALT_ON = 2
 TCAS_SW_TA_ONLY = 3
 TCAS_SW_TA_RA = 4
 
+--Flaps&slats:
+FLAP_MD_PRI = 1
+FLAP_MD_SEC = 2
+FLAP_MD_ALTN = 3
+SLAT_ALTN_RT = 0.1 * 0.004
+SLAT_NML_RT = 0.4 * 0.004
+FLAP_RE_SW_RETR = -1
+FLAP_RE_SW_EXT = 1
+FLAP_RE_SW_OFF = 0
+FLAP_ALTN_EXT_MAX = 20
+SLAT_SEC_TO_MID_KTS = 239 --Above this speed slats will be retracted to 0.5
+AUTOSLAT_HO_SEC = 3 --Autoslats will retract this many seconds after out of stall
+
 --XPLM
 
 XPLM_CMD_START = 0
