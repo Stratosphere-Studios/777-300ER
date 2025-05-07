@@ -69,7 +69,6 @@ d_int = {2.8, 2.9, 2.9, 3.1, 3.1, 3.9, 3.5, 3.3, 3.3}
 pid_trs_maintain = {-0.19, -0.023, 0}
 pid_gust_supr = {0.12, 0.03, 0}
 pid_coefficients_rudder = {0.38, 0.08, 0}
-flap_settings = {0, 1, 9, 15, 20, 25, 30}
 --Fly by wire pitch gains
 linear_corrections = {0.075, 0.095, 0.135, 0.19, 0.21, 0.225, 0.225}
 --Zero pitch speeds per total mass in kg / 10000
@@ -169,7 +168,7 @@ function GetMassIndex(T, mass)
 end
 
 function GetPitchCorrection(mass, m_idx, thrust, trim_speed)
-	local flap_idx = lim(getGreaterThan(flap_settings, get(pfc_flaps)), 8, 1)
+	local flap_idx = lim(getGreaterThan(FLAP_STGS, get(pfc_flaps)), 8, 1)
 	local r1 = (no_pitch_speeds[m_idx][2 + flap_idx - 1] - no_pitch_speeds[m_idx-1][2 + flap_idx - 1]) / (no_pitch_speeds[m_idx][1] - no_pitch_speeds[m_idx-1][1])
 	local r2 = (thrust_corrections[m_idx][2] - thrust_corrections[m_idx-1][2]) / (thrust_corrections[m_idx][1] - thrust_corrections[m_idx-1][1])
 	local speed = (mass - no_pitch_speeds[m_idx-1][1]) * r1 + no_pitch_speeds[m_idx-1][2 + flap_idx - 1]

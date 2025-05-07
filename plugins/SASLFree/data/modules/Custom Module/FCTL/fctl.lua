@@ -110,6 +110,7 @@ pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
 flap_mode = globalPropertyi("Strato/777/flaps/mode")
 flap_altn = globalPropertyi("Strato/777/pedestal/flap_altn")
 flap_altn_re = globalPropertyi("Strato/777/pedestal/flap_altn_re")
+slat_tgt = globalPropertyf("Strato/777/flaps/slat_tgt")
 --Hydraulics:
 sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
 --Indicators:
@@ -267,7 +268,7 @@ function GetClosestFlapSetting()
 	local tmp = 1
 	for i=1,7 do
 		tmp = tmp + 1
-		if flap_settings[i] >= get(flaps) then
+		if FLAP_STGS[i] >= get(flaps) then
 			return i
 		end
 	end
@@ -277,14 +278,16 @@ end
 function UpdateFlapMode()
 	if get(flap_altn) == 1 then
 		flap_sys_md = FLAP_MD_ALTN
+		set(flap_load_relief, 0)
 	else
 		local sec_inh = 0
 		if (get(sys_C_press) < 1000 and get(gs_kts) < 40 and 
 			(get(engn_n2, 1) <= 50 or get(engn_n2, 1) <= 50)) then
 			sec_inh = 1
 		end
-		if get(sys_C_press) < 1000 and sec_inh == 0 and get(flaps) >= 0.0001 then
+		if get(sys_C_press) < 1000 and sec_inh == 0 and (get(flaps) >= 0.0001 or get(slat_1) >= 0.001) then
 			flap_sys_md = FLAP_MD_SEC
+			set(flap_load_relief, 0)
 		else
 			flap_sys_md = FLAP_MD_PRI
 		end
@@ -292,11 +295,10 @@ function UpdateFlapMode()
 end
 
 function SetFlapTarget()
-	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
-	cas_limits = {-1, 265, 245, 230, 225, 200, 180} --limits in meters per second for load relief system
+	cas_limits = {-1, 265, 245, 230, 225, 200, 180} --limits in knots for load relief system
 	local h_load = globalPropertyfae("Strato/777/hydraulics/load", 7)
 	local flap_pos = get(flaps)
-	local index = indexOf(detents, get(flap_handle), 1)
+	local index = indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)
 	if flap_sys_md == FLAP_MD_PRI then
 		local avg_cas = (get(cas_pilot) + get(cas_copilot)) / 2
 		if index ~= nil then
@@ -307,7 +309,7 @@ function SetFlapTarget()
 				if flap_pos > 5 then
 					for i = index,3,-1 do
 						if cas_limits[i] > avg_cas or i == 3 then --load relief retraction is limited to flap 5 idk why but the fcom says it
-							set(flap_tgt, flap_settings[i])
+							set(flap_tgt, FLAP_STGS[i])
 							break
 						end
 					end
@@ -316,13 +318,13 @@ function SetFlapTarget()
 				if get(flap_load_relief) ~= 0 then
 					set(flap_load_relief, 0)
 				end
-				set(flap_tgt, flap_settings[index])
+				set(flap_tgt, FLAP_STGS[index])
 			end
 		else
 			set(flap_tgt, flap_pos)
 		end
 	elseif flap_sys_md == FLAP_MD_SEC and index ~= nil then
-		set(flap_tgt, flap_settings[index])
+		set(flap_tgt, FLAP_STGS[index])
 	else
 		set(flap_tgt, flap_pos)
 	end
@@ -371,16 +373,18 @@ function UpdateSlats()
 	local flap_target = get(flap_tgt)
 	local flap_actual = get(flaps)
 	local avg_cas = (get(cas_copilot)+get(cas_pilot))/2
+	local c_tgt = get(slat_1)
+	local t_resp = SLAT_NML_RT
 	if flap_sys_md == FLAP_MD_PRI then
-		if avg_cas <= get(stall_speed) and flap_actual <= 20 and flap_actual > 0.9 then
+		if avg_cas <= get(stall_speed) and flap_actual <= 20 and flap_actual > 0.9 and get(on_ground) == 0 and avg_cas >= 40 then
 			autoslat_last_sec = get(c_time)
 		end
 		if get(c_time) < autoslat_last_sec + AUTOSLAT_HO_SEC then
-			set(slat_1, EvenChange(get(slat_1), 1, SLAT_NML_RT))
-			set(slat_2, EvenChange(get(slat_2), 1, SLAT_NML_RT))
+			set(slat_1, EvenChange(get(slat_1), 1, t_resp))
+			set(slat_2, EvenChange(get(slat_2), 1, t_resp))
+			set(slat_tgt, 1)
 			return
 		end
-		local c_tgt = 0
 		if flap_actual < 1 then
 			c_tgt = 0.5
 			if flap_target < 1 then
@@ -396,39 +400,37 @@ function UpdateSlats()
 		elseif flap_actual >= 25 then
 			c_tgt = 1
 		end
-		set(slat_1, EvenChange(get(slat_1), c_tgt, SLAT_NML_RT))
-		set(slat_2, EvenChange(get(slat_2), c_tgt, SLAT_NML_RT))
+		
 	else
-		local flp_is_retr = 0
-		if ((flap_sys_md == FLAP_MD_ALTN and get(flap_altn_re) == FLAP_RE_SW_RETR) or 
-			(flap_sys_md == FLAP_MD_SEC and flap_actual > flap_target)) then
-			flp_is_retr = 1
-		end
+		t_resp = SLAT_ALTN_RT
 		if flap_actual <= 1 then
-			if flp_is_retr == 1 then
-				set(slat_1, EvenChange(get(slat_1), 0, SLAT_ALTN_RT))
-				set(slat_2, EvenChange(get(slat_2), 0, SLAT_ALTN_RT))
+			if flap_actual <= 0.01 then
+				if (flap_sys_md == FLAP_MD_SEC) or 
+				(flap_sys_md == FLAP_MD_ALTN and get(flap_altn_re) ~= FLAP_RE_SW_OFF) then
+					c_tgt = 0
+				end
 			else
-				if flap_sys_md == FLAP_MD_ALTN then
-					set(slat_1, EvenChange(get(slat_1), 0.5, SLAT_ALTN_RT))
-					set(slat_2, EvenChange(get(slat_1), 0.5, SLAT_ALTN_RT))
-				else
+				if flap_sys_md == FLAP_MD_ALTN and get(flap_altn_re) ~= FLAP_RE_SW_OFF then
+					c_tgt = 0.5
+				elseif flap_sys_md == FLAP_MD_SEC then
 					if avg_cas > SLAT_SEC_TO_MID_KTS then
-						set(slat_1, EvenChange(get(slat_1), 0.5, SLAT_ALTN_RT))
-						set(slat_2, EvenChange(get(slat_1), 0.5, SLAT_ALTN_RT))
+						c_tgt = 0.5
 					else
-						set(slat_1, EvenChange(get(slat_1), 1, SLAT_ALTN_RT))
-						set(slat_2, EvenChange(get(slat_1), 1, SLAT_ALTN_RT))
+						c_tgt = 1
 					end
 				end
 			end
 		elseif flap_sys_md == FLAP_MD_SEC then
-			if flap_actual >= 20 then
-				set(slat_1, EvenChange(get(slat_1), 1, SLAT_ALTN_RT))
-				set(slat_2, EvenChange(get(slat_2), 1, SLAT_ALTN_RT))
+			if flap_actual >= 20 or get(slat_1) > 0.5009 then
+				c_tgt = 1
+			elseif get(slat_1) > 0.001 then
+				c_tgt = 0.5
 			end
 		end
 	end
+	set(slat_tgt, c_tgt)
+	set(slat_1, EvenChange(get(slat_1), c_tgt, t_resp))
+	set(slat_2, EvenChange(get(slat_2), c_tgt, t_resp))
 end
 
 function UpdateFlaps(value)

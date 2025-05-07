@@ -402,11 +402,10 @@ function FlprnTOHandler(sfc, idx)
 end
 
 function GetRollNeutral(flap_pos, neutral)
-    local flap_settings = {0, 1, 5, 15, 20, 25, 30}
-    local idx = getGreaterThan(flap_settings, flap_pos)
+    local idx = getGreaterThan(FLAP_STGS, flap_pos)
     if idx ~= 1 then
-        local tmp = (neutral[idx] - neutral[idx - 1]) / (flap_settings[idx] - flap_settings[idx - 1])
-        return tmp * (flap_pos - flap_settings[idx - 1]) + neutral[idx - 1]
+        local tmp = (neutral[idx] - neutral[idx - 1]) / (FLAP_STGS[idx] - FLAP_STGS[idx - 1])
+        return tmp * (flap_pos - FLAP_STGS[idx - 1]) + neutral[idx - 1]
     end
     return neutral[1]
 end

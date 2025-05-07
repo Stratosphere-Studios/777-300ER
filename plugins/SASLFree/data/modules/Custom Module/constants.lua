@@ -8,13 +8,14 @@
 
 --Colors
 
-white = {1, 1, 1}
-amber = {1, 0.741, 0.161}
-green = {0, 1, 0}
-dark_green = {0.02, 0.91, 0.07}
-dark_blue = {0.01, 0.05, 0.15}
-light_blue = {0, 0.808, 1}
-magenta = {1, 0.451, 1}
+CL_WHITE = {1, 1, 1}
+CL_AMBER = {1, 0.741, 0.161}
+CL_GREEN = {0, 1, 0}
+CL_BLACK = {0, 0, 0}
+CL_DARK_GREEN = {0.02, 0.91, 0.07}
+CL_DARK_BLUE = {0.01, 0.05, 0.15}
+CL_LIGHT_BLUE = {0, 0.808, 1}
+CL_MAGENTA = {1, 0.451, 1}
 
 MPS_TO_KTS = 1.944
 
@@ -107,6 +108,10 @@ FLAP_RE_SW_OFF = 0
 FLAP_ALTN_EXT_MAX = 20
 SLAT_SEC_TO_MID_KTS = 239 --Above this speed slats will be retracted to 0.5
 AUTOSLAT_HO_SEC = 3 --Autoslats will retract this many seconds after out of stall
+
+FLAP_STGS_DSP = {0, 1, 5, 15, 20, 25, 30}
+FLAP_STGS = {0, 1, 9, 15, 20, 25, 30}
+FLAP_HDL_DTTS = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 
 --XPLM
 

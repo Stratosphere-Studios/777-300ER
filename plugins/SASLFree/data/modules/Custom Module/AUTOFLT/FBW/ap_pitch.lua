@@ -6,6 +6,8 @@
 *****************************************************************************************
 --]]
 
+include("constants.lua")
+
 pitch_kp = createGlobalPropertyf("Strato/777/pitch_dbg/kp", 0.00037)
 pitch_ki = createGlobalPropertyf("Strato/777/pitch_dbg/ki", -1)
 pitch_kd = createGlobalPropertyf("Strato/777/pitch_dbg/kd", 0.0013)
@@ -117,7 +119,6 @@ FLC_DES_KP = -0.02
 FLC_DES_KD = -0.37
 
 flap_corr_pitch_deg = {0, -1, -0.5, -0.4, -0.3, -0.3, -0.24}
-flap_settings = {0, 1, 9, 15, 20, 25, 30}
 vert_mode = VERT_MODE_OFF
 
 function getIASCorrection()
@@ -141,7 +142,7 @@ function getSpoilerCorrection()
 end
 
 function getPitchCorrectionAP()
-    local flap_idx = lim(getGreaterThan(flap_settings, get(pfc_flaps)), 8, 1)
+    local flap_idx = lim(getGreaterThan(FLAP_STGS, get(pfc_flaps)), 8, 1)
     return getSpoilerCorrection() + flap_corr_pitch_deg[flap_idx]*get(pfc_flaps)
 end
 

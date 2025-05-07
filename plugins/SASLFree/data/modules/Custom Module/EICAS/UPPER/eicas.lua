@@ -37,6 +37,8 @@ pressure_R = globalPropertyiae("Strato/777/hydraulics/press", 3)
 --Flight controls
 flaps = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
 flap_handle = globalPropertyf("sim/cockpit2/controls/flap_ratio")
+inbd_flap_L = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 1)
+inbd_flap_R = globalPropertyfae("sim/flightmodel2/wing/flap1_deg", 2)
 --Gear positions
 nw_actual = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 1)
 mlg_actual_R = globalPropertyfae("sim/aircraft/parts/acf_gear_deploy", 2)
@@ -57,10 +59,13 @@ fbw_self_test = globalPropertyi("Strato/777/fctl/pfc/selftest")
 max_allowable = globalPropertyi("Strato/777/fctl/vmax")
 stall_speed = globalPropertyi("Strato/777/fctl/vstall")
 manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
---Flaps:
+--Flaps&slats:
 flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 c_time = globalPropertyf("Strato/777/time/current")
 flap_mode = globalPropertyi("Strato/777/flaps/mode")
+slat_1 = globalPropertyf("sim/flightmodel2/controls/slat1_deploy_ratio")
+slat_2 = globalPropertyf("sim/flightmodel2/controls/slat2_deploy_ratio")
+slat_tgt = globalPropertyf("Strato/777/flaps/slat_tgt")
 --Gear&brakes
 eicas_brake_temp = globalPropertyi("Strato/777/eicas/brake_temp")
 eicas_tire_press = globalPropertyi("Strato/777/eicas/tire_press")
@@ -107,9 +112,6 @@ font = loadFont("BoeingFont.ttf")
 tmp = 0
 tmp1 = 0
 
-flap_settings = {0, 1, 5, 15, 20, 25, 30}
-detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
-
 THS_greenband_min_val = 2.5
 THS_greenband_max_val = 9
 stab_c_past = 0
@@ -131,6 +133,11 @@ gear_transit_time = -26
 gear_dn = true
 n_adv_last = 0
 
+FLP_FR_THCK = 3
+FLP_TXT_LIST = {"F", "L", "A", "P", "S"}
+FLP_AD_THCK = 2
+
+flap_nml_rat = {0, 1/8, 1/5, 2/5, 3/5, 4/5, 1}
 adv_main = {"PRI FLIGHT COMPUTERS", "HYD PRESS SYS L", "HYD PRESS SYS C", "HYD PRESS SYS R",
 	"FLIGHT CONTROLS", "FLAP/SLAT CONTROL"} -- Advisories after which to shift to the right
 
@@ -388,27 +395,134 @@ end
 
 function Flap_pos2Tape(pos, t_height) --calculates an offset from the top of the flap position bar
 	for i=1,7 do
-		if flap_settings[i] > pos then
-			local delta = round((detents[i] - detents[i - 1]) * t_height)
-			return round(detents[i-1] * t_height + ((pos - flap_settings[i-1]) / (flap_settings[i] - flap_settings[i - 1])) * delta)
-		elseif flap_settings[i] == pos then
-			return round(detents[i] * t_height)
+		if FLAP_STGS_DSP[i] > pos then
+			local delta = round((FLAP_HDL_DTTS[i] - FLAP_HDL_DTTS[i - 1]) * t_height)
+			return round(FLAP_HDL_DTTS[i-1] * t_height + ((pos - FLAP_STGS_DSP[i-1]) / (FLAP_STGS_DSP[i] - FLAP_STGS_DSP[i - 1])) * delta)
+		elseif FLAP_STGS_DSP[i] == pos then
+			return round(FLAP_HDL_DTTS[i] * t_height)
 		end
 	end
 	return 0
 end
 
+function GetSfcHt(h, psc, dfl, psp)
+	local cv = Round(psc, 2)
+	local ps_rat = 0
+	for i=2,tlen(psp) do
+		if psp[i] >= cv then
+			ps_rat = ps_rat + (cv-psp[i-1])/(psp[i]-psp[i-1])*(dfl[i]-dfl[i-1])
+			break
+		else
+			ps_rat = dfl[i]
+		end
+	end
+	return h*ps_rat
+end
+
+function DrawSlatPos(x, y, w, h, psc, clr, lt, is_altn)
+	local v_offs = 15
+	local k_ps = 0.4
+	cl_upper = clr
+	cl_lwr = CL_DARK_BLUE
+	sasl.gl.drawRectangle(x, y, w, h*psc, clr)
+	local s_tps = get(slat_tgt)*h
+	if lt == 1 then
+		sasl.gl.drawTriangle(x, y+h*psc, x+w, y+h*psc, x+w, y+h*psc+v_offs, cl_upper)
+		sasl.gl.drawTriangle(x, y, x+w, y, x+w, y+v_offs, cl_lwr)
+		if is_altn == 0 then
+			sasl.gl.drawWideLine(x-w*k_ps, y+s_tps-w*k_ps*(v_offs/w), x+w, y+s_tps+v_offs, FLP_FR_THCK, clr)
+		end
+		-- Draw the frame
+		if is_altn == 1 then
+			for i=0,2 do
+				sasl.gl.drawWideLine(x-w*k_ps, y+h*i/2-w*k_ps*(v_offs/w), x, y+h*i/2, FLP_AD_THCK, clr)
+			end
+		end
+		sasl.gl.drawWideLine(x, y, x, y+h, FLP_FR_THCK, clr)
+		sasl.gl.drawWideLine(x, y+h, x+w, y+h+v_offs, FLP_FR_THCK, clr)
+		sasl.gl.drawWideLine(x+w, y+h+v_offs, x+w, y+v_offs, FLP_FR_THCK, clr)
+		sasl.gl.drawWideLine(x+w, y+v_offs, x, y, FLP_FR_THCK, clr)
+	else
+		sasl.gl.drawTriangle(x, y+h*psc+v_offs, x, y+h*psc, x+w, y+h*psc, cl_upper)
+		sasl.gl.drawTriangle(x, y, x+w, y, x, y+v_offs, cl_lwr)
+		if is_altn == 0 then
+			sasl.gl.drawWideLine(x+w+w*k_ps, y+s_tps-w*k_ps*(v_offs/w), x, y+s_tps+v_offs, FLP_FR_THCK, clr)
+		end
+		-- Draw the frame
+		if is_altn == 1 then
+			for i=0,2 do
+				sasl.gl.drawWideLine(x+w+w*k_ps, y+h*i/2-w*k_ps*(v_offs/w), x+w, y+h*i/2, FLP_AD_THCK, clr)
+			end
+		end
+		sasl.gl.drawWideLine(x, y+v_offs, x, y+h+v_offs, FLP_FR_THCK, clr)
+		sasl.gl.drawWideLine(x, y+h+v_offs, x+w, y+h, FLP_FR_THCK, clr)
+		sasl.gl.drawWideLine(x+w, y+h, x+w, y, FLP_FR_THCK, clr)
+		sasl.gl.drawWideLine(x+w, y, x, y+v_offs, FLP_FR_THCK, clr)
+	end
+	
+end
+
+function DrawSfcPos(x, y, w, h, psc, clr, dfl, psp)
+	sasl.gl.drawRectangle(x, y, w, -GetSfcHt(h, psc, dfl, psp), clr)
+end
+
+function DrawFlapSecAltn(st_disp, hdl_idx, hdl_clr, is_altn)
+	local tape_height_altn = 190
+	local altn_hdl_offs = 18
+
+	local handle_on_screen = 415-GetSfcHt(tape_height_altn, hdl_idx, flap_nml_rat, FLAP_STGS)
+	local pos_l = get(inbd_flap_L)
+	local pos_r = get(inbd_flap_R)
+	local pos_slat1 = get(slat_1)
+	DrawRect(944, 415, 50, tape_height_altn, FLP_FR_THCK, CL_WHITE, false)
+	DrawRect(1064, 415, 50, tape_height_altn, FLP_FR_THCK, CL_WHITE, false)
+	DrawSfcPos(944, 415, 50, tape_height_altn, pos_l, CL_WHITE, flap_nml_rat, FLAP_STGS)
+	DrawSfcPos(1064, 415, 50, tape_height_altn, pos_r, CL_WHITE, flap_nml_rat, FLAP_STGS)
+
+	if is_altn == 0 then
+		sasl.gl.drawWideLine(944-altn_hdl_offs, handle_on_screen, 994, handle_on_screen, 6, hdl_clr)
+		sasl.gl.drawWideLine(1064, handle_on_screen, 1114+altn_hdl_offs, handle_on_screen, 6, hdl_clr)
+	else
+		for i=0,5 do
+			local cps = 415-tape_height_altn*i/5
+			sasl.gl.drawWideLine(944-altn_hdl_offs, cps, 944, cps, FLP_AD_THCK, CL_WHITE)
+			sasl.gl.drawWideLine(1114, cps, 1114+altn_hdl_offs, cps, FLP_AD_THCK, CL_WHITE)
+			if i == 1 then
+				drawText(font, 1151, cps - 15, "5", 45, false, false, TEXT_ALIGN_LEFT, hdl_clr)
+				drawText(font, 910, cps - 15, "5", 45, false, false, TEXT_ALIGN_RIGHT, hdl_clr)
+			elseif i == 3 then
+				drawText(font, 1151, cps - 15, "20", 45, false, false, TEXT_ALIGN_LEFT, hdl_clr)
+				drawText(font, 910, cps - 15, "20", 45, false, false, TEXT_ALIGN_RIGHT, hdl_clr)
+			end
+		end
+	end
+	
+	DrawSlatPos(944, 440, 50, 70, pos_slat1, CL_WHITE, 1, is_altn)
+	DrawSlatPos(1064, 440, 50, 70, pos_slat1, CL_WHITE, 0, is_altn)
+
+	if is_altn == 0 then
+		if hdl_idx ~= 0 then
+			drawText(font, 1141, handle_on_screen - 15, tostring(st_disp), 45, false, false, TEXT_ALIGN_LEFT, hdl_clr)
+		else
+			drawText(font, 1141, handle_on_screen - 15, "UP", 45, false, false, TEXT_ALIGN_LEFT, hdl_clr)
+		end
+	end
+	
+	for i=1,5 do --Draw flaps text vertically
+		drawText(font, 1020, 430 - 35 * (i - 1), FLP_TXT_LIST[i], 40, false, false, TEXT_ALIGN_LEFT, {0.17, 0.71, 0.83})
+	end
+end
+
 function UpdateFlaps() --this is for updating flap position on eicas
 	local tape_height = 300
-	local color = {0, 1, 0}
+	local ftx_x = 965
+	local handle_color = {0, 1, 0}
 	local magenta = {0.94, 0.57, 1}
-	flap_settings_disp = {0, 1, 5, 15, 20, 25, 30}
-	flap_settings = {0, 1, 9, 15, 20, 25, 30}
-	text = {"F", "L", "A", "P", "S"}
-	detents = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
-	local setting = flap_settings[indexOf(detents, get(flap_handle), 1)]
-	local setting_disp = flap_settings_disp[indexOf(detents, get(flap_handle), 1)]
+	
+	local setting = FLAP_STGS[indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)]
+	local setting_disp = FLAP_STGS_DSP[indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)]
 	local cur_flap = 0
+	local cur_md = get(flap_mode)
 	if get(flaps) ~= nil then
 		cur_flap = get(flaps)
 	end
@@ -416,29 +530,36 @@ function UpdateFlaps() --this is for updating flap position on eicas
 		setting = 0
 	end
 	if cur_flap ~= flaps_past then
-		if cur_flap == 0 then
+		if cur_flap <= 0.001 then
 			flap_retract_time = get(c_time)
 		end
 		flaps_past = cur_flap
 	end
-	if setting > 0 or cur_flap > 0 or get(c_time) < flap_retract_time + 10 then
-		if math.abs(cur_flap - setting) > 0.0002 then
-			color = magenta
+
+	if math.abs(cur_flap - setting) > 0.0002 then
+		handle_color = magenta
+	else
+		handle_color = {0, 1, 0}
+	end
+
+	if setting > 0 or cur_flap > 0.01 or get(slat_1) > 0.01 or get(c_time) < flap_retract_time + 10 or cur_md == FLAP_MD_ALTN then
+		if cur_md == FLAP_MD_PRI then
+			local handle_on_screen = 530-GetSfcHt(tape_height, setting, flap_nml_rat, FLAP_STGS)
+			DrawRect(1000, 530, 50, tape_height, FLP_FR_THCK, CL_WHITE, false)
+			DrawSfcPos(1000, 530, 50, tape_height, cur_flap, CL_WHITE, flap_nml_rat, FLAP_STGS)
+			sasl.gl.drawWideLine(990, handle_on_screen, 1060, handle_on_screen, 6, handle_color)
+			if setting ~= 0 then
+				drawText(font, 1070, handle_on_screen - 15, tostring(setting_disp), 45, false, false, TEXT_ALIGN_LEFT, handle_color)
+			else
+				drawText(font, 1070, handle_on_screen - 15, "UP", 45, false, false, TEXT_ALIGN_LEFT, handle_color)
+			end
+			for i=1,5 do --Draw flaps text vertically
+				drawText(font, 965, 430 - 35 * (i - 1), FLP_TXT_LIST[i], 40, false, false, TEXT_ALIGN_LEFT, {0.17, 0.71, 0.83})
+			end
+		elseif cur_md == FLAP_MD_SEC then
+			DrawFlapSecAltn(setting_disp, setting, handle_color, 0)
 		else
-			color = {0, 1, 0}
-		end
-		handle_on_screen = round(530 - tape_height * get(flap_handle)) --position of flap handle on screen
-		flaps_on_screen = round(530 - Flap_pos2Tape(cur_flap, tape_height))
-		DrawRect(1000, 530, 50, tape_height, 3, {1, 1, 1}, false)
-		sasl.gl.drawRectangle(1000, 530, 50,  - 530 + flaps_on_screen, {1, 1, 1})
-		sasl.gl.drawWideLine(990, handle_on_screen, 1060, handle_on_screen, 6, color)
-		if setting ~= 0 then
-			drawText(font, 1070, handle_on_screen - 15, tostring(setting_disp), 45, false, false, TEXT_ALIGN_LEFT, color)
-		else
-			drawText(font, 1070, handle_on_screen - 15, "UP", 45, false, false, TEXT_ALIGN_LEFT, color)
-		end
-		for i=1,5 do --Draw flaps text vertically
-			drawText(font, 965, 430 - 35 * (i - 1), text[i], 40, false, false, TEXT_ALIGN_LEFT, {0.17, 0.71, 0.83})
+			DrawFlapSecAltn(setting_disp, setting, handle_color, 1)
 		end
 	end
 end

@@ -233,8 +233,12 @@ function updateMode(v_mode)
                 curr_at_mode = AT_MODE_IAS_HOLD
             end
         end
+    elseif get(spd_hold) == 0 and curr_at_mode == AT_MODE_IAS_HOLD then
+        curr_at_mode = AT_MODE_OFF
+        at_engaged = false
     elseif get(autothr_arm) ~= 1 then
         curr_at_mode = AT_MODE_OFF
+        at_engaged = false
     end
     ra_last = avg_ra
 end

@@ -80,7 +80,9 @@ alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
 
 fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
 fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
+--Flaps&slats
 flap_mode = createGlobalPropertyi("Strato/777/flaps/mode", 0)
+slat_tgt = createGlobalPropertyf("Strato/777/flaps/slat_tgt", 0)
 
 --Lights:
 lt_caut_cap = createGlobalPropertyi("Strato/777/cockpit/lights/caut_cap", 0)
