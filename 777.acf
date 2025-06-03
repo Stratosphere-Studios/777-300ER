@@ -37035,9 +37035,9 @@ P acf/_green_lo_stator 0.000000000
 P acf/_green_lo_vac 3.200000048
 P acf/_green_lo_xmsn_P 0.000000000
 P acf/_green_lo_xmsn_T 0.000000000
-P acf/_ground_pwr/0 -20.000000000
-P acf/_ground_pwr/1 0.000000000
-P acf/_ground_pwr/2 160.000000000
+P acf/_ground_pwr/0 -14.000000000
+P acf/_ground_pwr/1 -2.000000000
+P acf/_ground_pwr/2 -8.000000000
 P acf/_ground_pwr/count 3
 P acf/_gyro_spooldown_time 60.000000000
 P acf/_gyro_spoolup_time 5.000000000
