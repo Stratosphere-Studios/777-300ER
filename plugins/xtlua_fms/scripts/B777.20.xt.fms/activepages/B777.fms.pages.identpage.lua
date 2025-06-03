@@ -53,8 +53,6 @@ fmsPages["IDENT"].getPage=function(self,pgNo,fmsID)--dynamic pages need to be th
 end
 
 fmsPages["IDENT"].getSmallPage=function(self,pgNo,fmsID)
-	local dragffArmed = "   "
-	
 	return {
 		"                        ",
 		" MODEL        ENG RATING",

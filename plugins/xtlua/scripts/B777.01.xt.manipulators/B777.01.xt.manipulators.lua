@@ -293,7 +293,7 @@ function B777_ap_hdgHold_switch_CMDhandler(phase, duration)    -- A/P HEADING HO
     if phase == 0 then
       B777DR_mcp_button_target[7] = 1
       print("hldA "..B777DR_ap_hdgHld_sw)
-      B777DR_ap_hdgHld_sw = B777DR_ap_hdgHld_sw
+      --B777DR_ap_hdgHld_sw = B777DR_ap_hdgHld_sw -- what
       print("hldB "..B777DR_ap_hdgHld_sw)
    elseif phase == 2 then
       B777DR_mcp_button_target[7] = 0
@@ -305,7 +305,7 @@ function B777_ap_hdgSel_switch_CMDhandler(phase, duration)     -- A/P HEADING SE
     if phase == 0 then
       B777DR_mcp_button_target[8] = 1
       print("selA "..B777DR_ap_hdgSel_sw)
-      B777DR_ap_hdgSel_sw = B777DR_ap_hdgSel_sw
+      --B777DR_ap_hdgSel_sw = B777DR_ap_hdgSel_sw -- what
       print("selB "..B777DR_ap_hdgSel_sw)
    elseif phase == 2 then
       B777DR_ap_hdgSel_sw = 1
@@ -512,6 +512,7 @@ function coverPhysics() -- moves switches under switch covers when switch covers
 end
 
 function refreshDrs() -- read drs to make sure they're up to date
+---@diagnostic disable-next-line: unused-local
    local temp = B777CMD_ap_on
    temp = B777CMD_disco_bar
    temp = B777CMD_ap_disengage
