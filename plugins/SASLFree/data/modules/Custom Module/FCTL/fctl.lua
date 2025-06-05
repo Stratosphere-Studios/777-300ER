@@ -108,6 +108,7 @@ pcu_rudder = globalProperty("Strato/777/fctl/pcu/rudder")
 pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
 --Flaps:
 flap_mode = globalPropertyi("Strato/777/flaps/mode")
+slat_mode = globalPropertyi("Strato/777/slats/mode")
 flap_altn = globalPropertyi("Strato/777/pedestal/flap_altn")
 flap_altn_re = globalPropertyi("Strato/777/pedestal/flap_altn_re")
 slat_tgt = globalPropertyf("Strato/777/flaps/slat_tgt")
@@ -115,6 +116,9 @@ slat_tgt = globalPropertyf("Strato/777/flaps/slat_tgt")
 sys_C_press = globalPropertyiae("Strato/777/hydraulics/press", 2)
 --Indicators:
 stall_speed = globalPropertyi("Strato/777/fctl/vstall") --For autoslats
+--Failures:
+flaps_jam_all_lt = globalPropertyi("Strato/777/failures/fctl/flap_jam_l")
+flaps_jam_all_rt = globalPropertyi("Strato/777/failures/fctl/flap_jam_r")
 
 --creating our own datarefs
 
@@ -141,6 +145,7 @@ flap_handle_used = createGlobalPropertyf("Strato/777/flaps/handle_used", 0)
 flap_settings = {0, 1, 9, 15, 20, 25, 30}
 flap_times = {0.4, 1.4, 8, 4.8, 1.9, 3.17}
 flap_sys_md = FLAP_MD_PRI
+slat_sys_md = FLAP_MD_PRI
 autoslat_last_sec = -AUTOSLAT_HO_SEC
 
 vec3d = {x = 0, y = 0, z = 0}
@@ -280,6 +285,14 @@ function UpdateFlapMode()
 		flap_sys_md = FLAP_MD_ALTN
 		set(flap_load_relief, 0)
 	else
+		local absdiff = math.abs((get(inbd_flap_L)+get(outbd_flap_L))-
+			(get(inbd_flap_R)+get(outbd_flap_R)))
+
+		if absdiff > FLAP_MAX_LK_DEV then
+			flap_sys_md = FLAP_MD_SEC_LOCK
+			set(flap_load_relief, 0)
+			return
+		end
 		local sec_inh = 0
 		if (get(sys_C_press) < 1000 and get(gs_kts) < 40 and 
 			(get(engn_n2, 1) <= 50 or get(engn_n2, 1) <= 50)) then
@@ -290,6 +303,18 @@ function UpdateFlapMode()
 			set(flap_load_relief, 0)
 		else
 			flap_sys_md = FLAP_MD_PRI
+		end
+	end
+end
+
+function UpdateSlatMode()
+	if get(flap_altn) == 1 then
+		slat_sys_md = FLAP_MD_ALTN
+	else
+		if flap_sys_md == FLAP_MD_PRI then
+			slat_sys_md = FLAP_MD_PRI
+		else
+			slat_sys_md = FLAP_MD_SEC
 		end
 	end
 end
@@ -336,31 +361,42 @@ function SetFlapTarget()
 end
 
 function GetFlapCurrent()
-	local target = 0
-	local actual = get(flaps)
+	local target_l = 0
+	local target_r = 0
+	local actual_l = get(inbd_flap_L)
+	local actual_r = get(inbd_flap_R)
 	local step = 0
 	local closest = lim(GetClosestFlapSetting(), 7, 2)
 	if flap_sys_md == FLAP_MD_PRI then
-		target = get(flap_tgt)
+		target_l = get(flap_tgt)
+		target_r = target_l
 		step = flap_times[closest - 1] * 0.004
 	elseif flap_sys_md == FLAP_MD_SEC then
-		target = get(flap_tgt)
+		target_l = get(flap_tgt)
+		target_r = target_l
 		step = flap_times[closest - 1] * 0.004 / 3
-	else
+	elseif flap_sys_md == FLAP_MD_ALTN then
 		if get(flap_altn_re) == FLAP_RE_SW_RETR then
-			target = 0
+			target_l = 0
+			target_r = 0
 		elseif get(flap_altn_re) == FLAP_RE_SW_OFF then
-			target = actual
+			target_l = actual_l
+			target_r = actual_r
 		else
-			target = math.max(FLAP_ALTN_EXT_MAX, actual)
+			target_l = math.max(FLAP_ALTN_EXT_MAX, actual_l)
+			target_r = math.max(FLAP_ALTN_EXT_MAX, actual_r)
 		end
 		step = flap_times[closest - 1] * 0.004 / 3
 	end
-	if math.abs(target - actual) <= 2*step then
-		return target
-	else
-		return actual + step * (-bool2num(target < actual) + bool2num(target > actual)) * get(f_time) / 0.0166
+	local gtp_l = target_l
+	local gtp_r = target_r
+	if math.abs(target_l - actual_l) > 2*step then
+		gtp_l = actual_l + step * (-bool2num(target_l < actual_l) + bool2num(target_l > actual_l)) * get(f_time) / 0.0166
 	end
+	if math.abs(target_r - actual_r) > 2*step then
+		gtp_r = actual_r + step * (-bool2num(target_r < actual_r) + bool2num(target_r > actual_r)) * get(f_time) / 0.0166
+	end
+	return {gtp_l, gtp_r}
 end
 
 --these functions set a bunch of datarefs for flight controls to the same value. I guess this is needed because of something in plane maker
@@ -375,7 +411,7 @@ function UpdateSlats()
 	local avg_cas = (get(cas_copilot)+get(cas_pilot))/2
 	local c_tgt = get(slat_1)
 	local t_resp = SLAT_NML_RT
-	if flap_sys_md == FLAP_MD_PRI then
+	if slat_sys_md == FLAP_MD_PRI then
 		if avg_cas <= get(stall_speed) and flap_actual <= 20 and flap_actual > 0.9 and get(on_ground) == 0 and avg_cas >= 40 then
 			autoslat_last_sec = get(c_time)
 		end
@@ -405,14 +441,14 @@ function UpdateSlats()
 		t_resp = SLAT_ALTN_RT
 		if flap_actual <= 1 then
 			if flap_actual <= 0.01 then
-				if (flap_sys_md == FLAP_MD_SEC) or 
-				(flap_sys_md == FLAP_MD_ALTN and get(flap_altn_re) ~= FLAP_RE_SW_OFF) then
+				if (slat_sys_md == FLAP_MD_SEC) or 
+				(slat_sys_md == FLAP_MD_ALTN and get(flap_altn_re) ~= FLAP_RE_SW_OFF) then
 					c_tgt = 0
 				end
 			else
-				if flap_sys_md == FLAP_MD_ALTN and get(flap_altn_re) ~= FLAP_RE_SW_OFF then
+				if slat_sys_md == FLAP_MD_ALTN and get(flap_altn_re) ~= FLAP_RE_SW_OFF then
 					c_tgt = 0.5
-				elseif flap_sys_md == FLAP_MD_SEC then
+				elseif slat_sys_md == FLAP_MD_SEC then
 					if avg_cas > SLAT_SEC_TO_MID_KTS then
 						c_tgt = 0.5
 					else
@@ -420,7 +456,7 @@ function UpdateSlats()
 					end
 				end
 			end
-		elseif flap_sys_md == FLAP_MD_SEC then
+		elseif slat_sys_md == FLAP_MD_SEC then
 			if flap_actual >= 20 or get(slat_1) > 0.5009 then
 				c_tgt = 1
 			elseif get(slat_1) > 0.001 then
@@ -433,12 +469,21 @@ function UpdateSlats()
 	set(slat_2, EvenChange(get(slat_2), c_tgt, t_resp))
 end
 
-function UpdateFlaps(value)
-	--set(flaps, value)
-	set(inbd_flap_L, value)
-	set(outbd_flap_L, value)
-	set(inbd_flap_R, value)
-	set(outbd_flap_R, value)
+function UpdateFlaps(values)
+	if get(flaps_jam_all_lt) == 0 and flap_sys_md ~= FLAP_MD_SEC_LOCK then
+		set(inbd_flap_L, values[1])
+		set(outbd_flap_L, values[1])
+	else
+		set(inbd_flap_L, get(inbd_flap_L))
+		set(outbd_flap_L, get(outbd_flap_L))
+	end
+	if get(flaps_jam_all_rt) == 0 and flap_sys_md ~= FLAP_MD_SEC_LOCK then
+		set(inbd_flap_R, values[2])
+		set(outbd_flap_R, values[2])
+	else
+		set(inbd_flap_R, get(inbd_flap_R))
+		set(outbd_flap_R, get(outbd_flap_R))
+	end
 end
 
 airspeed_vec = vec3d:new{x = 0, y = 0, z = 0}
@@ -479,11 +524,13 @@ function update()
 	elev_R:updatePositionAil(airspeed_vec, 2)
 	rudder_top:updatePositionRud(airspeed_vec)
 	UpdateFlapMode()
+	UpdateSlatMode()
 	UpdateReversers()
 	SetFlapTarget()
 	UpdateFlaps(GetFlapCurrent())
 	UpdateSlats()
 	set(bottom_rudder, get(upper_rudder))
+	set(slat_mode, slat_sys_md)
 	set(flap_mode, flap_sys_md)
 end
 

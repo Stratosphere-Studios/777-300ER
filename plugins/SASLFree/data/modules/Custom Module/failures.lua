@@ -10,6 +10,8 @@ This is the only way to get the menu stuff working with sasl. There will be a pr
 fbw_secondary_fail = globalPropertyi("Strato/777/failures/fctl/secondary")
 fbw_direct_fail = globalPropertyi("Strato/777/failures/fctl/direct")
 autobrk_fail = globalPropertyi("Strato/777/failures/gear/autobrake")
+flaps_jam_all_lt = globalPropertyi("Strato/777/failures/fctl/flap_jam_l")
+flaps_jam_all_rt = globalPropertyi("Strato/777/failures/fctl/flap_jam_r")
 
 ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
 
@@ -25,6 +27,8 @@ function ResetFailures()
     set(fbw_secondary_fail, 0)
     set(fbw_direct_fail, 0)
     set(autobrk_fail, 0)
+    set(flaps_jam_all_rt, 0)
+    set(flaps_jam_all_rt, 0)
     for i=1,4 do
         set(ace_fail, 0, i)
     end
@@ -58,6 +62,14 @@ function autoBrakeFail()
     set(autobrk_fail, 1 - get(autobrk_fail))
 end
 
+function flapLtJam()
+    set(flaps_jam_all_lt, 1 - get(flaps_jam_all_lt))
+end
+
+function flapRtJam()
+    set(flaps_jam_all_rt, 1 - get(flaps_jam_all_rt))
+end
+
 failures_btn = sasl.appendMenuItem(PLUGINS_MENU_ID, "Failures")
 failures_menu = sasl.createMenu("", PLUGINS_MENU_ID, failures_btn)
 reset_failures = sasl.appendMenuItem(failures_menu, "Reset all", ResetFailures)
@@ -72,6 +84,8 @@ l2fail = sasl.appendMenuItem(fctl_failures_menu, "ACE L2 fail", ACEL2Fail)
 cfail = sasl.appendMenuItem(fctl_failures_menu, "ACE C fail", ACECFail)
 rfail = sasl.appendMenuItem(fctl_failures_menu, "ACE R fail", ACERFail)
 abrk_fail = sasl.appendMenuItem(ldgr_failures_menu, "Autobrake fail", autoBrakeFail)
+fjal = sasl.appendMenuItem(fctl_failures_menu, "Flaps jam(all left side)", flapLtJam)
+fjar = sasl.appendMenuItem(fctl_failures_menu, "Flaps jam(all right side)", flapRtJam)
 
 function update()
     UpdateCheckMark(fbw_secondary_fail, 1, fctl_failures_menu, secondary_mode, 1)
@@ -80,5 +94,7 @@ function update()
     UpdateCheckMark(ace_fail, 2, fctl_failures_menu, l2fail, 1)
     UpdateCheckMark(ace_fail, 3, fctl_failures_menu, cfail, 1)
     UpdateCheckMark(ace_fail, 4, fctl_failures_menu, rfail, 1)
+    UpdateCheckMark(flaps_jam_all_lt, 1, fctl_failures_menu, fjal, 1)
+    UpdateCheckMark(flaps_jam_all_rt, 1, fctl_failures_menu, fjar, 1)
     UpdateCheckMark(autobrk_fail, 1, ldgr_failures_menu, abrk_fail, 1)
 end

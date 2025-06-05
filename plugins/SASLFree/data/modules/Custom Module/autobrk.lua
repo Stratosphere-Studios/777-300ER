@@ -52,6 +52,7 @@ brk_apply = 0
 brk_wait = 0
 abrk_fail = 0
 sp_last = 0
+gear_lvr_last = 0
 
 function resetAutoBrk()
     abrk_err_last = 0
@@ -125,7 +126,11 @@ function updateMode(gnd_l, gnd_r, gear_lvr, abrk_pos, thr_pos)
     end
     updateWait(gnd_l, gnd_r, thr_pos)
     abrk_mode_pr = abrk_mode_cr
-    if gear_lvr == 0 and (abrk_mode_cr > ABRK_MD_DISARM or abrk_mode_cr == ABRK_MD_RTO) then
+    local is_raised = 0
+    if gear_lvr < gear_lvr_last then
+        is_raised = 1
+    end
+    if is_raised == 1 and (abrk_mode_cr > ABRK_MD_DISARM or abrk_mode_cr == ABRK_MD_RTO) then
         abrk_mode_cr = ABRK_MD_OFF
         return
     end
@@ -142,6 +147,7 @@ function updateMode(gnd_l, gnd_r, gear_lvr, abrk_pos, thr_pos)
     else
         brk_apply = 0
     end
+    gear_lvr_last = gear_lvr
 end
 
 function updateAutoBrk(gs_decel_kts, f_time)
