@@ -82,6 +82,7 @@ fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
 fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
 --Flaps&slats
 flap_mode = createGlobalPropertyi("Strato/777/flaps/mode", 0)
+slat_mode = createGlobalPropertyi("Strato/777/slats/mode", 0)
 slat_tgt = createGlobalPropertyf("Strato/777/flaps/slat_tgt", 0)
 
 --Lights:
@@ -96,6 +97,11 @@ fbw_secondary_fail = createGlobalPropertyi("Strato/777/failures/fctl/secondary",
 fbw_direct_fail = createGlobalPropertyi("Strato/777/failures/fctl/direct", 0)
 autobrk_fail = createGlobalPropertyi("Strato/777/failures/gear/autobrake", 0)
 goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
+--Flaps
+flaps_jam_all_lt = createGlobalPropertyi("Strato/777/failures/fctl/flap_jam_l", 0)
+flaps_jam_all_rt = createGlobalPropertyi("Strato/777/failures/fctl/flap_jam_r", 0)
+-- Use the devmode dataref for a more comprehensive overview of what's happening
+devmode = createGlobalPropertyi("Strato/777/goku_area/devmode", 0)
 
 --test
 
