@@ -61,14 +61,7 @@ no_smok = globalPropertyi("Strato/777/overhead/no_smok")
 
 pass_sgn_anim = globalPropertyf("Strato/777/cockpit/switches/pass_sgn")
 no_smok_anim = globalPropertyf("Strato/777/cockpit/switches/no_smok")
---Anti ice
-wai = globalPropertyi("Strato/777/overhead/wai")
-eai_l = globalPropertyi("Strato/777/overhead/eai_l")
-eai_r = globalPropertyi("Strato/777/overhead/eai_r")
 
-wing_ai_anim = globalPropertyf("Strato/777/cockpit/switches/wai")
-eng_ai_l_anim = globalPropertyf("Strato/777/cockpit/switches/eai_l")
-eng_ai_r_anim = globalPropertyf("Strato/777/cockpit/switches/eai_r")
 --Spoilers:
 speedbrake_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
 --Autopilot
@@ -76,8 +69,8 @@ ap_disc = globalPropertyi("Strato/777/autopilot/disc")
 ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
 
-autothr_arm_l = globalPropertyi("Strato/777/overhead/autothr_arm_l", 0)
-autothr_arm_r = globalPropertyi("Strato/777/overhead/autothr_arm_r", 0)
+autothr_arm_l = globalPropertyi("Strato/777/mcp/autothr_arm_l", 0)
+autothr_arm_r = globalPropertyi("Strato/777/mcp/autothr_arm_r", 0)
 
 autothr_arm_l_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_l", 0)
 autothr_arm_r_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_r", 0)
@@ -166,13 +159,6 @@ pass_sgn_btn_incr = sasl.createCommand("Strato/777/commands/overhead/pass_sgn_in
 pass_sgn_btn_decr = sasl.createCommand("Strato/777/commands/overhead/pass_sgn_decr", "")
 no_smok_btn_incr = sasl.createCommand("Strato/777/commands/overhead/no_smok_incr", "")
 no_smok_btn_decr = sasl.createCommand("Strato/777/commands/overhead/no_smok_decr", "")
---Anti ice:
-wai_btn_incr = sasl.createCommand("Strato/777/commands/overhead/wai_incr", "")
-wai_btn_decr = sasl.createCommand("Strato/777/commands/overhead/wai_decr", "")
-eai_l_btn_incr = sasl.createCommand("Strato/777/commands/overhead/eai_l_incr", "")
-eai_l_btn_decr = sasl.createCommand("Strato/777/commands/overhead/eai_l_decr", "")
-eai_r_btn_incr = sasl.createCommand("Strato/777/commands/overhead/eai_r_incr", "")
-eai_r_btn_decr = sasl.createCommand("Strato/777/commands/overhead/eai_r_decr", "")
 
 park_brake_past = 0
 
@@ -659,13 +645,8 @@ sasl.registerCommandHandler(pass_sgn_btn_incr, 1, PassSignIncrHandler)
 sasl.registerCommandHandler(pass_sgn_btn_decr, 1, PassSignDecrHandler)
 sasl.registerCommandHandler(no_smok_btn_incr, 1, NoSmokIncrHandler)
 sasl.registerCommandHandler(no_smok_btn_decr, 1, NoSmokDecrHandler)
---Anti ice
-sasl.registerCommandHandler(wai_btn_incr, 1, WAIIncrHandler)
-sasl.registerCommandHandler(wai_btn_decr, 1, WAIDecrHandler)
-sasl.registerCommandHandler(eai_l_btn_incr, 1, EAI_LIncrHandler)
-sasl.registerCommandHandler(eai_l_btn_decr, 1, EAI_LDecrHandler)
-sasl.registerCommandHandler(eai_r_btn_incr, 1, EAI_RIncrHandler)
-sasl.registerCommandHandler(eai_r_btn_decr, 1, EAI_RDecrHandler)
+--Anti ice. No no anti 🧊 here
+
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
@@ -681,10 +662,6 @@ function update()
 
 	set(pass_sgn_anim, get(pass_sgn_anim) + (get(pass_sgn)-get(pass_sgn_anim)) * get(f_time) * 4)
 	set(no_smok_anim, get(no_smok_anim) + (get(no_smok)-get(no_smok_anim)) * get(f_time) * 4)
-
-	set(wing_ai_anim, get(wing_ai_anim) + (get(wai)-get(wing_ai_anim)) * get(f_time) * 4)
-	set(eng_ai_l_anim, get(eng_ai_l_anim) + (get(eai_l)-get(eng_ai_l_anim)) * get(f_time) * 4)
-	set(eng_ai_r_anim, get(eng_ai_r_anim) + (get(eai_r)-get(eng_ai_r_anim)) * get(f_time) * 4)
 
 	if get(on_ground) == 0 then
 		set(normal_gear, get(gear_lever))

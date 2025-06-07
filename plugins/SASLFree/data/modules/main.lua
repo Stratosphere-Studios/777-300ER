@@ -37,9 +37,6 @@ caut_fo_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_fo", 0)
 -- 0 off, 1 auto, 2 on
 pass_sgn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/pass_sgn", 0)
 no_smok_anim = createGlobalPropertyf("Strato/777/cockpit/switches/no_smok", 0)
-wing_ai_anim = createGlobalPropertyf("Strato/777/cockpit/switches/wai", 0)
-eng_ai_l_anim = createGlobalPropertyf("Strato/777/cockpit/switches/eai_l", 0)
-eng_ai_r_anim = createGlobalPropertyf("Strato/777/cockpit/switches/eai_r", 0)
 --0 off 1 on
 flap_altn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/altn_flaps", 0)
 autothr_arm_l_anim = createGlobalPropertyf("Strato/777/cockpit/switches/autothr_arm_l", 0)
@@ -67,12 +64,9 @@ flap_altn_re = createGlobalPropertyi("Strato/777/pedestal/flap_altn_re", 0)
 
 pass_sgn = createGlobalPropertyi("Strato/777/overhead/pass_sgn", 0)
 no_smok = createGlobalPropertyi("Strato/777/overhead/no_smok", 0)
-wai = createGlobalPropertyi("Strato/777/overhead/wai", 0)
-eai_l = createGlobalPropertyi("Strato/777/overhead/eai_l", 0)
-eai_r = createGlobalPropertyi("Strato/777/overhead/eai_r", 0)
 
-autothr_arm_l = createGlobalPropertyi("Strato/777/overhead/autothr_arm_l", 0)
-autothr_arm_r = createGlobalPropertyi("Strato/777/overhead/autothr_arm_r", 0)
+autothr_arm_l = createGlobalPropertyi("Strato/777/mcp/autothr_arm_l", 0)
+autothr_arm_r = createGlobalPropertyi("Strato/777/mcp/autothr_arm_r", 0)
 
 --Systems datarefs
 
