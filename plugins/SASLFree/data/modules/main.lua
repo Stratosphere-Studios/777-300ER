@@ -34,6 +34,19 @@ rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
 caut_cap_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_cap", 0)
 caut_fo_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_fo", 0)
 --ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
+-- 0 off, 1 auto, 2 on
+pass_sgn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/pass_sgn", 0)
+no_smok_anim = createGlobalPropertyf("Strato/777/cockpit/switches/no_smok", 0)
+wing_ai_anim = createGlobalPropertyf("Strato/777/cockpit/switches/wai", 0)
+eng_ai_l_anim = createGlobalPropertyf("Strato/777/cockpit/switches/eai_l", 0)
+eng_ai_r_anim = createGlobalPropertyf("Strato/777/cockpit/switches/eai_r", 0)
+--0 off 1 on
+flap_altn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/altn_flaps", 0)
+autothr_arm_l_anim = createGlobalPropertyf("Strato/777/cockpit/switches/autothr_arm_l", 0)
+autothr_arm_r_anim = createGlobalPropertyf("Strato/777/cockpit/switches/autothr_arm_r", 0)
+-- -1 retract 0 off 1 extend
+flap_altn_re_anim = createGlobalPropertyf("Strato/777/cockpit/switches/altn_re", 0)
+
 
 show_fpv = createGlobalPropertyi("Strato/777/EFIS/fpv_on", 0)
 
@@ -51,6 +64,15 @@ caut_cap = createGlobalPropertyi("Strato/777/glareshield/caut_cap", 0)
 caut_fo = createGlobalPropertyi("Strato/777/glareshield/caut_fo", 0)
 flap_altn = createGlobalPropertyi("Strato/777/pedestal/flap_altn", 0)
 flap_altn_re = createGlobalPropertyi("Strato/777/pedestal/flap_altn_re", 0)
+
+pass_sgn = createGlobalPropertyi("Strato/777/overhead/pass_sgn", 0)
+no_smok = createGlobalPropertyi("Strato/777/overhead/no_smok", 0)
+wai = createGlobalPropertyi("Strato/777/overhead/wai", 0)
+eai_l = createGlobalPropertyi("Strato/777/overhead/eai_l", 0)
+eai_r = createGlobalPropertyi("Strato/777/overhead/eai_r", 0)
+
+autothr_arm_l = createGlobalPropertyi("Strato/777/overhead/autothr_arm_l", 0)
+autothr_arm_r = createGlobalPropertyi("Strato/777/overhead/autothr_arm_r", 0)
 
 --Systems datarefs
 
@@ -90,6 +112,8 @@ lt_caut_cap = createGlobalPropertyi("Strato/777/cockpit/lights/caut_cap", 0)
 lt_warn_cap = createGlobalPropertyi("Strato/777/cockpit/lights/warn_cap", 0)
 lt_caut_fo = createGlobalPropertyi("Strato/777/cockpit/lights/caut_fo", 0)
 lt_warn_fo = createGlobalPropertyi("Strato/777/cockpit/lights/warn_fo", 0)
+lt_cab_ps = createGlobalPropertyi("Strato/777/cabin/lights/pass_sgn", 0)
+lt_cab_ns = createGlobalPropertyi("Strato/777/cabin/lights/no_smok", 0)
 
 --Failure datarefs
 

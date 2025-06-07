@@ -118,6 +118,14 @@ FLAP_STGS_DSP = {0, 1, 5, 15, 20, 25, 30}
 FLAP_STGS = {0, 1, 9, 15, 20, 25, 30}
 FLAP_HDL_DTTS = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 
+--Passenger stuff
+PASS_SGN_OFF = 0
+PASS_SGN_AUTO = 1
+PASS_SGN_ON = 2
+PASS_AUTO_FLP_HDL_THR = 0.02 --If flap handle is more than this, pass signs on when auto
+PASS_AUTO_GEAR_THR = 0.01
+PASS_AUTO_BARO_THR_FT = 10000
+
 --XPLM
 
 XPLM_CMD_START = 0

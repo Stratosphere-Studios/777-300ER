@@ -49,12 +49,38 @@ pitch_trim_B = globalPropertyi("Strato/777/cockpit/switches/strim_B")
 pitch_trim_altn = globalPropertyi("Strato/777/cockpit/switches/strim_altn")
 stab_cutout_C = globalPropertyi("Strato/777/fctl/stab_cutout_C")
 stab_cutout_R = globalPropertyi("Strato/777/fctl/stab_cutout_R")
+--Flaps
+flap_altn = globalPropertyi("Strato/777/pedestal/flap_altn")
+flap_altn_re = globalPropertyi("Strato/777/pedestal/flap_altn_re")
+
+flap_altn_anim = globalPropertyf("Strato/777/cockpit/switches/altn_flaps")
+flap_altn_re_anim = globalPropertyf("Strato/777/cockpit/switches/altn_re")
+--Pass signs
+pass_sgn = globalPropertyi("Strato/777/overhead/pass_sgn")
+no_smok = globalPropertyi("Strato/777/overhead/no_smok")
+
+pass_sgn_anim = globalPropertyf("Strato/777/cockpit/switches/pass_sgn")
+no_smok_anim = globalPropertyf("Strato/777/cockpit/switches/no_smok")
+--Anti ice
+wai = globalPropertyi("Strato/777/overhead/wai")
+eai_l = globalPropertyi("Strato/777/overhead/eai_l")
+eai_r = globalPropertyi("Strato/777/overhead/eai_r")
+
+wing_ai_anim = globalPropertyf("Strato/777/cockpit/switches/wai")
+eng_ai_l_anim = globalPropertyf("Strato/777/cockpit/switches/eai_l")
+eng_ai_r_anim = globalPropertyf("Strato/777/cockpit/switches/eai_r")
 --Spoilers:
 speedbrake_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
 --Autopilot
 ap_disc = globalPropertyi("Strato/777/autopilot/disc")
 ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
+
+autothr_arm_l = globalPropertyi("Strato/777/overhead/autothr_arm_l", 0)
+autothr_arm_r = globalPropertyi("Strato/777/overhead/autothr_arm_r", 0)
+
+autothr_arm_l_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_l", 0)
+autothr_arm_r_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_r", 0)
 --Operation
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
@@ -71,53 +97,82 @@ rud_trim_reset = globalPropertyi("Strato/777/fctl/ace/rud_trim_reset")
 
 
 --Finding simulator commands
+--Brakes:
 toggle_regular = sasl.findCommand("sim/flight_controls/brakes_toggle_regular")
 hold_regular = sasl.findCommand("sim/flight_controls/brakes_regular")
 toggle_max = sasl.findCommand("sim/flight_controls/brakes_toggle_max")
+--Gear:
 gear_down = sasl.findCommand("sim/flight_controls/landing_gear_down")
 gear_up = sasl.findCommand("sim/flight_controls/landing_gear_up")
 gear_toggle = sasl.findCommand("sim/flight_controls/landing_gear_toggle")
+--Stab trim:
 ptA_up = sasl.findCommand("sim/flight_controls/pitch_trimA_up")
 ptB_up = sasl.findCommand("sim/flight_controls/pitch_trimB_up")
 ptA_dn = sasl.findCommand("sim/flight_controls/pitch_trimA_down")
 ptB_dn = sasl.findCommand("sim/flight_controls/pitch_trimB_down")
 stab_trim_up = sasl.findCommand("sim/flight_controls/pitch_trim_up")
 stab_trim_down = sasl.findCommand("sim/flight_controls/pitch_trim_down")
+--Speedbrakes:
 sb_ret_one = sasl.findCommand("sim/flight_controls/speed_brakes_up_one")
 sb_ext_one = sasl.findCommand("sim/flight_controls/speed_brakes_down_one")
 sb_ret_full = sasl.findCommand("sim/flight_controls/speed_brakes_up_all")
 sb_ext_full = sasl.findCommand("sim/flight_controls/speed_brakes_down_all")
 sb_toggle = sasl.findCommand("sim/flight_controls/speed_brakes_toggle")
+--Rudder:
 rudder_trim_left = sasl.findCommand("sim/flight_controls/rudder_trim_left")
 rudder_trim_right = sasl.findCommand("sim/flight_controls/rudder_trim_right")
 rudder_trim_center = sasl.findCommand("sim/flight_controls/rudder_trim_center")
 --Creating own commands
 --mag_hdg_btn = sasl.createCommand("Strato/777/commands/ND/mag_hdg", 
 --									"Command for the magnetic heading switch")
+--Flight controls:
 pfc_disc_switch = sasl.createCommand("Strato/777/commands/overhead/pfc_disc", 
 										"Command for the PFC disc switch")
 tac_switch = sasl.createCommand("Strato/777/commands/overhead/tac", 
 										"Command for the TAC button")
-recall_btn = sasl.createCommand("Strato/777/commands/glareshield/recall", 
-										"Command for the recall button")
 altn_trim_up = sasl.createCommand("Strato/777/commands/pedestal/pitch_trim_altn_up", 
 										"Command for the alternate stab trim switch")
 altn_trim_dn = sasl.createCommand("Strato/777/commands/pedestal/pitch_trim_altn_down", 
 										"Command for the alternate stab trim switch")
+--Flaps:
+altn_flaps_btn = sasl.createCommand("Strato/777/commands/pedestal/altn_flaps", "")
+altn_flaps_re_btn_incr = sasl.createCommand("Strato/777/commands/pedestal/altn_flaps_re_incr", "")
+altn_flaps_re_btn_decr = sasl.createCommand("Strato/777/commands/pedestal/altn_flaps_re_decr", "")
+--Autopilot:
 ap_on_btn = sasl.createCommand("Strato/777/commands/mcp/otto_on", 
 										"Command for autopilot on switch")
 ap_disc_btn = sasl.createCommand("Strato/777/commands/yoke/otto_disc", 
 										"Command for autopilot disconnect switch")
 ap_disc_bar_btn = sasl.createCommand("Strato/777/commands/mcp/otto_off", 
 										"Command for autopilot disconnect bar")
+autothr_arm_l_btn = sasl.createCommand("Strato/777/commands/mcp/autothr_arm_l", 
+										"")
+autothr_arm_r_btn = sasl.createCommand("Strato/777/commands/mcp/autothr_arm_r", 
+										"")
+--Autobrake:
 abrk_incr = sasl.createCommand("Strato/777/commands/pedestal/abrk_incr", 
 	"Command for increasing autobrake mode")
 abrk_decr = sasl.createCommand("Strato/777/commands/pedestal/abrk_decr", 
 	"Command for increasing autobrake mode")
+--Master caution and recall:
 mast_wc_capt = sasl.createCommand("Strato/777/commands/glareshield/mast_wc_capt", 
 	"Command not for captain's toilet flush button, but the master warning button")
 mast_wc_fo = sasl.createCommand("Strato/777/commands/glareshield/mast_wc_fo", 
 	"Command first officer's master warning button")
+recall_btn = sasl.createCommand("Strato/777/commands/glareshield/recall", 
+	"Command for the recall button")
+--Pass signs:
+pass_sgn_btn_incr = sasl.createCommand("Strato/777/commands/overhead/pass_sgn_incr", "")
+pass_sgn_btn_decr = sasl.createCommand("Strato/777/commands/overhead/pass_sgn_decr", "")
+no_smok_btn_incr = sasl.createCommand("Strato/777/commands/overhead/no_smok_incr", "")
+no_smok_btn_decr = sasl.createCommand("Strato/777/commands/overhead/no_smok_decr", "")
+--Anti ice:
+wai_btn_incr = sasl.createCommand("Strato/777/commands/overhead/wai_incr", "")
+wai_btn_decr = sasl.createCommand("Strato/777/commands/overhead/wai_decr", "")
+eai_l_btn_incr = sasl.createCommand("Strato/777/commands/overhead/eai_l_incr", "")
+eai_l_btn_decr = sasl.createCommand("Strato/777/commands/overhead/eai_l_decr", "")
+eai_r_btn_incr = sasl.createCommand("Strato/777/commands/overhead/eai_r_incr", "")
+eai_r_btn_decr = sasl.createCommand("Strato/777/commands/overhead/eai_r_decr", "")
 
 park_brake_past = 0
 
@@ -463,6 +518,101 @@ function WCFOHandler(phase)
 	end
 end
 
+--Autothrottle
+function ATLeftHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(autothr_arm_l, 1-get(autothr_arm_l))
+	end
+end
+
+function ATRightHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(autothr_arm_r, 1-get(autothr_arm_r))
+	end
+end
+
+--Flaps:
+function AltnFlapExtHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(flap_altn, 1-get(flap_altn))
+	end
+end
+
+function AltnFlapExtReIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(flap_altn_re, math.min(1, 1+get(flap_altn_re)))
+	end
+end
+
+function AltnFlapExtReDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(flap_altn_re, math.max(-1, -1+get(flap_altn_re)))
+	end
+end
+
+--Pass signs:
+function PassSignIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(pass_sgn, math.min(2, get(pass_sgn)+1))
+	end
+end
+
+function PassSignDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(pass_sgn, math.max(0, get(pass_sgn)-1))
+	end
+end
+
+function NoSmokIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(no_smok, math.min(2, get(no_smok)+1))
+	end
+end
+
+function NoSmokDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(no_smok, math.max(0, get(no_smok)-1))
+	end
+end
+
+--Anti ice:
+function WAIIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(wai, math.min(2, get(wai)+1))
+	end
+end
+
+function WAIDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(wai, math.max(0, get(wai)-1))
+	end
+end
+
+function EAI_LIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(eai_l, math.min(2, get(eai_l)+1))
+	end
+end
+
+function EAI_LDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(eai_l, math.max(0, get(eai_l)-1))
+	end
+end
+
+function EAI_RIncrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(eai_r, math.min(2, get(eai_r)+1))
+	end
+end
+
+function EAI_RDecrHandler(phase)
+	if phase == SASL_COMMAND_BEGIN then
+		set(eai_r, math.max(0, get(eai_r)-1))
+	end
+end
+
+
 --Registering own command handlers
 --Sim commands
 sasl.registerCommandHandler(toggle_regular, 1, BrakeHandler)
@@ -497,12 +647,45 @@ sasl.registerCommandHandler(abrk_incr, 1, AutoBrkIncrHandler)
 sasl.registerCommandHandler(abrk_decr, 1, AutoBrkDecrHandler)
 sasl.registerCommandHandler(mast_wc_capt, 1, WCCapHandler)
 sasl.registerCommandHandler(mast_wc_fo, 1, WCFOHandler)
+--Autothrottle:
+sasl.registerCommandHandler(autothr_arm_l_btn, 1, ATLeftHandler)
+sasl.registerCommandHandler(autothr_arm_r_btn, 1, ATRightHandler)
+--Flaps
+sasl.registerCommandHandler(altn_flaps_btn, 1, AltnFlapExtHandler)
+sasl.registerCommandHandler(altn_flaps_re_btn_decr, 1, AltnFlapExtReDecrHandler)
+sasl.registerCommandHandler(altn_flaps_re_btn_incr, 1, AltnFlapExtReIncrHandler)
+--Pass signs:
+sasl.registerCommandHandler(pass_sgn_btn_incr, 1, PassSignIncrHandler)
+sasl.registerCommandHandler(pass_sgn_btn_decr, 1, PassSignDecrHandler)
+sasl.registerCommandHandler(no_smok_btn_incr, 1, NoSmokIncrHandler)
+sasl.registerCommandHandler(no_smok_btn_decr, 1, NoSmokDecrHandler)
+--Anti ice
+sasl.registerCommandHandler(wai_btn_incr, 1, WAIIncrHandler)
+sasl.registerCommandHandler(wai_btn_decr, 1, WAIDecrHandler)
+sasl.registerCommandHandler(eai_l_btn_incr, 1, EAI_LIncrHandler)
+sasl.registerCommandHandler(eai_l_btn_decr, 1, EAI_LDecrHandler)
+sasl.registerCommandHandler(eai_r_btn_incr, 1, EAI_RIncrHandler)
+sasl.registerCommandHandler(eai_r_btn_decr, 1, EAI_RDecrHandler)
 
 function update()
 	set(park_brake_handle, get(park_brake_handle) + (get(park_brake_valve) - get(park_brake_handle)) * get(f_time) * 4)
 	set(autobrk_sw_pos, get(autobrk_sw_pos) + (get(autobrk_mode) - get(autobrk_sw_pos)) * get(f_time) * 4)
 	set(caut_cap_anim, get(caut_cap_anim) + (get(caut_cap)-get(caut_cap_anim)) * get(f_time) * 4)
 	set(caut_fo_anim, get(caut_fo_anim) + (get(caut_fo)-get(caut_fo_anim)) * get(f_time) * 4)
+	
+	set(flap_altn_anim, get(flap_altn_anim) + (get(flap_altn)-get(flap_altn_anim)) * get(f_time) * 4)
+	set(flap_altn_re_anim, get(flap_altn_re_anim) + (get(flap_altn_re)-get(flap_altn_re_anim)) * get(f_time) * 4)
+	
+	set(autothr_arm_l_anim, get(autothr_arm_l_anim) + (get(autothr_arm_l)-get(autothr_arm_l_anim)) * get(f_time) * 4)
+	set(autothr_arm_r_anim, get(autothr_arm_r_anim) + (get(autothr_arm_r)-get(autothr_arm_r_anim)) * get(f_time) * 4)
+
+	set(pass_sgn_anim, get(pass_sgn_anim) + (get(pass_sgn)-get(pass_sgn_anim)) * get(f_time) * 4)
+	set(no_smok_anim, get(no_smok_anim) + (get(no_smok)-get(no_smok_anim)) * get(f_time) * 4)
+
+	set(wing_ai_anim, get(wing_ai_anim) + (get(wai)-get(wing_ai_anim)) * get(f_time) * 4)
+	set(eng_ai_l_anim, get(eng_ai_l_anim) + (get(eai_l)-get(eng_ai_l_anim)) * get(f_time) * 4)
+	set(eng_ai_r_anim, get(eng_ai_r_anim) + (get(eai_r)-get(eng_ai_r_anim)) * get(f_time) * 4)
+
 	if get(on_ground) == 0 then
 		set(normal_gear, get(gear_lever))
 	end

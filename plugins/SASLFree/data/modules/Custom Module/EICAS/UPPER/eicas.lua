@@ -88,6 +88,9 @@ ace_spoiler_fail_5 = globalPropertyi("Strato/777/fctl/ace/ace_spoiler_fail_5", 0
 ace_elevator_fail_L = globalPropertyi("Strato/777/fctl/ace/elevator_fail_L", 0)
 ace_elevator_fail_R = globalPropertyi("Strato/777/fctl/ace/elevator_fail_R", 0)
 spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ace_spoiler_fail_4, ace_spoiler_fail_5}
+--Cabin stuff:
+pass_sgn = globalPropertyi("Strato/777/overhead/pass_sgn")
+no_smok = globalPropertyi("Strato/777/overhead/no_smok")
 --Lights:
 lt_caut_cap = globalPropertyi("Strato/777/cockpit/lights/caut_cap")
 lt_warn_cap = globalPropertyi("Strato/777/cockpit/lights/warn_cap")
@@ -732,6 +735,19 @@ function UpdateMemo(messages, msg_avail)
 		table.insert(messages, 1, "AUTOBRAKE " .. abrk_str)
 		c_avail = c_avail - 1
 	end
+	if c_avail >= 1 then
+		if get(no_smok) ~= PASS_SGN_ON and get(pass_sgn) == PASS_SGN_ON then
+			table.insert(messages, 1, "SEATBELTS ON")
+			c_avail = c_avail - 1
+		elseif get(no_smok) == PASS_SGN_ON and get(pass_sgn) ~= PASS_SGN_ON then
+			table.insert(messages, 1, "NO SMOKING ON")
+			c_avail = c_avail - 1
+		elseif get(no_smok) == PASS_SGN_ON and get(pass_sgn) == PASS_SGN_ON then
+			table.insert(messages, 1, "PASS SIGNS ON")
+			c_avail = c_avail - 1
+		end
+	end
+	
 	if get(on_ground) == 1 and get(throttle_pos) < 0.5 and c_avail >= 1 then
 		table.insert(messages, 1, "DOORS AUTO")
 	end

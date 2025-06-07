@@ -406,6 +406,7 @@ function UpdateRudder(value)
 end
 
 function UpdateSlats()
+	local hdl_pos = get(flap_handle)
 	local flap_target = get(flap_tgt)
 	local flap_actual = get(flaps)
 	local avg_cas = (get(cas_copilot)+get(cas_pilot))/2
@@ -436,9 +437,12 @@ function UpdateSlats()
 		elseif flap_actual >= 25 then
 			c_tgt = 1
 		end
-		
 	else
 		t_resp = SLAT_ALTN_RT
+		if flap_sys_md == FLAP_MD_SEC_LOCK then
+			local index = indexOf(FLAP_HDL_DTTS, hdl_pos, 1)
+			flap_actual = FLAP_STGS[index]
+		end
 		if flap_actual <= 1 then
 			if flap_actual <= 0.01 then
 				if (slat_sys_md == FLAP_MD_SEC) or 
@@ -470,6 +474,7 @@ function UpdateSlats()
 end
 
 function UpdateFlaps(values)
+	--print(values)
 	if get(flaps_jam_all_lt) == 0 and flap_sys_md ~= FLAP_MD_SEC_LOCK then
 		set(inbd_flap_L, values[1])
 		set(outbd_flap_L, values[1])
@@ -536,10 +541,11 @@ end
 
 function onAirportLoaded()
 	if (get(ra_pilot) > 100 or get(ra_copilot) > 100) and (get(cas_copilot)+get(cas_pilot)) < 200 then
-		UpdateFlaps(5)
+		UpdateFlaps({FLAP_STGS[2], FLAP_STGS[2]})
 		set(flap_tgt, 5)
 		UpdateSlats()
 	end
+	set(slat_mode, slat_sys_md)
 	set(flap_mode, flap_sys_md)
 end
 

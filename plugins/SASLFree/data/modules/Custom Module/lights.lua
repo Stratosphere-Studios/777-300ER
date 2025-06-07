@@ -7,6 +7,7 @@
 --]]
 
 include("misc_tools.lua")
+include("constants.lua")
 
 --Light datarefs:
 
@@ -22,6 +23,10 @@ pfc_disc_light = globalPropertyi("Strato/777/cockpit/lights/pfc_disc")
 
 light_primary = globalProperty("Strato/777/hydraulics/pump/primary/fault")
 light_demand = globalProperty("Strato/777/hydraulics/pump/demand/fault")
+
+--Cabin lights:
+lt_cab_ps = globalPropertyi("Strato/777/cabin/lights/pass_sgn")
+lt_cab_ns = globalPropertyi("Strato/777/cabin/lights/no_smok")
 
 --System datarefs:
 
@@ -44,6 +49,16 @@ demand_switch = globalProperty("Strato/777/hydraulics/pump/demand/state")
 demand_fail = globalProperty("Strato/777/hydraulics/pump/demand/fail") 
 demand_past = globalProperty("Strato/777/hydraulics/pump/demand/past")
 demand_temperature = globalProperty("Strato/777/hydraulics/pump/demand/ovht")
+--Cabin lights switches:
+pass_sgn = globalPropertyi("Strato/777/overhead/pass_sgn")
+no_smok = globalPropertyi("Strato/777/overhead/no_smok")
+--Indicators:
+alt_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_pilot")
+alt_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/altitude_ft_copilot")
+--Flaps switches:
+flap_handle = globalPropertyf("sim/cockpit2/controls/flap_ratio")
+--Gear:
+gear_pos_actual = globalProperty("sim/aircraft/parts/acf_gear_deploy")
 
 --Time:
 
@@ -112,8 +127,35 @@ function UpdateHydLights()
 	end
 end
 
+function GetCabinLtStat(sw_cr, alt, gear_out, flap_hdl_pos)
+	if sw_cr == PASS_SGN_ON then
+		return 1
+	elseif sw_cr == PASS_SGN_AUTO then
+		if gear_out == 1 or alt >= PASS_AUTO_BARO_THR_FT or flap_hdl_pos > PASS_AUTO_FLP_HDL_THR then
+			return 1
+		end
+	end
+	return 0
+end
+
+function UpdateCabinLights()
+	local avg_alt = (get(alt_pilot)+get(alt_copilot))/2
+	local gear_out = 0
+	local flap_hdl_pos = get(flap_handle)
+	for i=1,3 do
+		if get(gear_pos_actual, i) > PASS_AUTO_GEAR_THR then
+			gear_out = 1
+		end
+	end
+	local pass_sw = get(pass_sgn)
+	local no_sm_sw = get(no_smok)
+	set(lt_cab_ps, GetCabinLtStat(pass_sw, avg_alt, gear_out, flap_hdl_pos))
+	set(lt_cab_ns, GetCabinLtStat(no_sm_sw, avg_alt, gear_out, flap_hdl_pos))
+end
+
 function update()
 	--set(mag_hdg_light, 1 - get(mag_hdg))
     set(pfc_disc_light, get(pfc_disc))
     UpdateHydLights()
+	UpdateCabinLights()
 end
