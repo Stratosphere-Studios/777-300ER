@@ -131,7 +131,7 @@ function GetCabinLtStat(sw_cr, alt, gear_out, flap_hdl_pos)
 	if sw_cr == PASS_SGN_ON then
 		return 1
 	elseif sw_cr == PASS_SGN_AUTO then
-		if gear_out == 1 or alt >= PASS_AUTO_BARO_THR_FT or flap_hdl_pos > PASS_AUTO_FLP_HDL_THR then
+		if gear_out == 1 or alt <= PASS_AUTO_BARO_THR_FT or flap_hdl_pos > PASS_AUTO_FLP_HDL_THR then
 			return 1
 		end
 	end
