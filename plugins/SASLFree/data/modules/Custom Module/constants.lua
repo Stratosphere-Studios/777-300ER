@@ -104,7 +104,8 @@ FLAP_MD_SEC_LOCK = 4
 --FLAP_MAX_LK_DEV is the maximum allowable
 --difference between left and right sides of flaps before
 --they are locked out(FLAP_MD_SEC_LOCK) by FSEU
-FLAP_MAX_LK_DEV = 0.07 
+FLAP_MAX_LK_DEV = 0.07
+SLAT_MAX_LK_DEV = 0.03
 SLAT_ALTN_RT = 0.1 * 0.004
 SLAT_NML_RT = 0.4 * 0.004
 FLAP_RE_SW_RETR = -1

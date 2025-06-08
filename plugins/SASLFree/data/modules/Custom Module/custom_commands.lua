@@ -69,11 +69,11 @@ ap_disc = globalPropertyi("Strato/777/autopilot/disc")
 ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
 
-autothr_arm_l = globalPropertyi("Strato/777/mcp/autothr_arm_l", 0)
-autothr_arm_r = globalPropertyi("Strato/777/mcp/autothr_arm_r", 0)
+autothr_arm_l = globalPropertyi("Strato/777/mcp/autothr_arm_l")
+autothr_arm_r = globalPropertyi("Strato/777/mcp/autothr_arm_r")
 
-autothr_arm_l_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_l", 0)
-autothr_arm_r_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_r", 0)
+autothr_arm_l_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_l")
+autothr_arm_r_anim = globalPropertyf("Strato/777/cockpit/switches/autothr_arm_r")
 --Operation
 on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")

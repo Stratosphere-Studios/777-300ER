@@ -63,6 +63,7 @@ manuever_speed = globalPropertyi("Strato/777/fctl/vmanuever")
 flap_load_relief = globalPropertyi("Strato/777/flaps/load_relief")
 c_time = globalPropertyf("Strato/777/time/current")
 flap_mode = globalPropertyi("Strato/777/flaps/mode")
+slat_mode = globalPropertyi("Strato/777/slats/mode")
 slat_1 = globalPropertyf("sim/flightmodel2/controls/slat1_deploy_ratio")
 slat_2 = globalPropertyf("sim/flightmodel2/controls/slat2_deploy_ratio")
 slat_tgt = globalPropertyf("Strato/777/flaps/slat_tgt")
@@ -100,7 +101,8 @@ lt_warn_fo = globalPropertyi("Strato/777/cockpit/lights/warn_fo")
 ap_disc = globalPropertyi("Strato/777/autopilot/disc")
 alt_alert = globalPropertyi("Strato/777/autopilot/alt_alert")
 --Autothrottle
-autothr_arm = globalPropertyi("Strato/777/mcp/at_arm")
+autothr_arm_l = globalPropertyi("Strato/777/mcp/autothr_arm_l")
+autothr_arm_r = globalPropertyi("Strato/777/mcp/autothr_arm_r")
 --Faults and misc
 devmode = globalPropertyi("Strato/777/goku_area/devmode")
 
@@ -289,6 +291,18 @@ function UpdateWindowAdvisory(messages)
 	UpdateAdvisorySide(messages, "WINDOW FLT DECK L", "WINDOW FLT DECK R", "WINDOWS", pos_w_l, pos_w_r)
 end
 
+function UpdateAutoThrAdvisory(messages)
+	local pos_sw_l = get(autothr_arm_l)
+	local pos_sw_r = get(autothr_arm_r)
+	if pos_sw_l == 0 and pos_sw_r == 1 then
+		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC L")
+	elseif pos_sw_l == 1 and pos_sw_r == 0 then
+		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC R")
+	elseif pos_sw_l == 0 and pos_sw_r == 0 then
+		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC")
+	end
+end
+
 function UpdateSpoilerAdvisory(messages)
 	sp_inop = false
 	for i, v in ipairs(spoiler_fail) do
@@ -424,7 +438,7 @@ function GetSfcHt(h, psc, dfl, psp)
 	return h*ps_rat
 end
 
-function DrawSlatPos(x, y, w, h, psc, clr, lt, is_altn)
+function DrawSlatPos(x, y, w, h, psc, clr, lt, is_altn, is_lock)
 	local v_offs = 15
 	local k_ps = 0.4
 	cl_upper = clr
@@ -434,7 +448,7 @@ function DrawSlatPos(x, y, w, h, psc, clr, lt, is_altn)
 	if lt == 1 then
 		sasl.gl.drawTriangle(x, y+h*psc, x+w, y+h*psc, x+w, y+h*psc+v_offs, cl_upper)
 		sasl.gl.drawTriangle(x, y, x+w, y, x+w, y+v_offs, cl_lwr)
-		if is_altn == 0 then
+		if is_altn == 0 and is_lock == 0 then
 			sasl.gl.drawWideLine(x-w*k_ps, y+s_tps-w*k_ps*(v_offs/w), x+w, y+s_tps+v_offs, FLP_FR_THCK, clr)
 		end
 		-- Draw the frame
@@ -450,7 +464,7 @@ function DrawSlatPos(x, y, w, h, psc, clr, lt, is_altn)
 	else
 		sasl.gl.drawTriangle(x, y+h*psc+v_offs, x, y+h*psc, x+w, y+h*psc, cl_upper)
 		sasl.gl.drawTriangle(x, y, x+w, y, x, y+v_offs, cl_lwr)
-		if is_altn == 0 then
+		if is_altn == 0 and is_lock == 0 then
 			sasl.gl.drawWideLine(x+w+w*k_ps, y+s_tps-w*k_ps*(v_offs/w), x, y+s_tps+v_offs, FLP_FR_THCK, clr)
 		end
 		-- Draw the frame
@@ -471,24 +485,36 @@ function DrawSfcPos(x, y, w, h, psc, clr, dfl, psp)
 	sasl.gl.drawRectangle(x, y, w, -GetSfcHt(h, psc, dfl, psp), clr)
 end
 
-function DrawFlapSecAltn(st_disp, hdl_idx, hdl_clr, is_altn, is_lock)
+function DrawFlapSecAltn(st_disp, hdl_idx, hdl_clr, flap_md, slat_md)
 	local tape_height_altn = 190
 	local altn_hdl_offs = 18
 
 	local handle_on_screen = 415-GetSfcHt(tape_height_altn, hdl_idx, flap_nml_rat, FLAP_STGS)
 	local pos_l = get(inbd_flap_L)
 	local pos_r = get(inbd_flap_R)
-	local pos_slat1 = get(slat_1)
+	local pos_slat = (get(slat_1)+get(slat_2))/2
 	
-	local tp_clr = CL_WHITE
-	if is_lock == 1 and is_altn == 0 then
-		tp_clr = CL_AMBER
+	local flp_clr = CL_WHITE
+	if flap_md == FLAP_MD_SEC_LOCK then
+		flp_clr = CL_AMBER
+	end
+	local slt_clr = CL_WHITE
+	if slat_md == FLAP_MD_SEC_LOCK then
+		slt_clr = CL_AMBER
+	end
+	local is_altn = 0
+	local is_slat_lock = 0
+	if flap_md == FLAP_MD_ALTN or slat_md == FLAP_MD_ALTN then
+		is_altn = 1
+	end
+	if slat_md == FLAP_MD_SEC_LOCK then
+		is_slat_lock = 1
 	end
 
-	DrawRect(944, 415, 50, tape_height_altn, FLP_FR_THCK, tp_clr, false)
-	DrawRect(1064, 415, 50, tape_height_altn, FLP_FR_THCK, tp_clr, false)
-	DrawSfcPos(944, 415, 50, tape_height_altn, pos_l, tp_clr, flap_nml_rat, FLAP_STGS)
-	DrawSfcPos(1064, 415, 50, tape_height_altn, pos_r, tp_clr, flap_nml_rat, FLAP_STGS)
+	DrawRect(944, 415, 50, tape_height_altn, FLP_FR_THCK, flp_clr, false)
+	DrawRect(1064, 415, 50, tape_height_altn, FLP_FR_THCK, flp_clr, false)
+	DrawSfcPos(944, 415, 50, tape_height_altn, pos_l, flp_clr, flap_nml_rat, FLAP_STGS)
+	DrawSfcPos(1064, 415, 50, tape_height_altn, pos_r, flp_clr, flap_nml_rat, FLAP_STGS)
 
 	if is_altn == 0 then
 		sasl.gl.drawWideLine(944-altn_hdl_offs, handle_on_screen, 994, handle_on_screen, 6, hdl_clr)
@@ -496,8 +522,8 @@ function DrawFlapSecAltn(st_disp, hdl_idx, hdl_clr, is_altn, is_lock)
 	else
 		for i=0,5 do
 			local cps = 415-tape_height_altn*i/5
-			sasl.gl.drawWideLine(944-altn_hdl_offs, cps, 944, cps, FLP_AD_THCK, tp_clr)
-			sasl.gl.drawWideLine(1114, cps, 1114+altn_hdl_offs, cps, FLP_AD_THCK, tp_clr)
+			sasl.gl.drawWideLine(944-altn_hdl_offs, cps, 944, cps, FLP_AD_THCK, CL_WHITE)
+			sasl.gl.drawWideLine(1114, cps, 1114+altn_hdl_offs, cps, FLP_AD_THCK, CL_WHITE)
 			if i == 1 then
 				drawText(font, 1151, cps - 15, "5", 45, false, false, TEXT_ALIGN_LEFT, hdl_clr)
 				drawText(font, 910, cps - 15, "5", 45, false, false, TEXT_ALIGN_RIGHT, hdl_clr)
@@ -508,8 +534,8 @@ function DrawFlapSecAltn(st_disp, hdl_idx, hdl_clr, is_altn, is_lock)
 		end
 	end
 	
-	DrawSlatPos(944, 440, 50, 70, pos_slat1, CL_WHITE, 1, is_altn)
-	DrawSlatPos(1064, 440, 50, 70, pos_slat1, CL_WHITE, 0, is_altn)
+	DrawSlatPos(944, 440, 50, 70, pos_slat, slt_clr, 1, is_altn, is_slat_lock)
+	DrawSlatPos(1064, 440, 50, 70, pos_slat, slt_clr, 0, is_altn, is_slat_lock)
 
 	if is_altn == 0 then
 		if hdl_idx ~= 0 then
@@ -533,7 +559,18 @@ function UpdateFlaps() --this is for updating flap position on eicas
 	local setting = FLAP_STGS[indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)]
 	local setting_disp = FLAP_STGS_DSP[indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)]
 	local cur_flap = 0
-	local cur_md = get(flap_mode)
+	local cur_md_fp = get(flap_mode)
+	local cur_md_st = get(slat_mode)
+	local draw_pri = 0
+	if get(devmode) == 0 then
+		if cur_md_fp == FLAP_MD_PRI and cur_md_st == FLAP_MD_PRI then
+			draw_pri = 1
+		end
+	else
+		cur_md_fp = FLAP_MD_SEC
+		cur_md_st = FLAP_MD_SEC
+	end
+
 	if get(flaps) ~= nil then
 		cur_flap = get(flaps)
 	end
@@ -553,8 +590,8 @@ function UpdateFlaps() --this is for updating flap position on eicas
 		handle_color = {0, 1, 0}
 	end
 
-	if setting > 0 or cur_flap > 0.01 or get(slat_1) > 0.01 or get(c_time) < flap_retract_time + 10 or cur_md == FLAP_MD_ALTN then
-		if cur_md == FLAP_MD_PRI and get(devmode) == 0 then
+	if setting > 0 or cur_flap > 0.01 or get(slat_1) > 0.01 or get(c_time) < flap_retract_time + 10 or draw_pri ~= 1 then
+		if draw_pri == 1 then
 			local handle_on_screen = 530-GetSfcHt(tape_height, setting, flap_nml_rat, FLAP_STGS)
 			DrawRect(1000, 530, 50, tape_height, FLP_FR_THCK, CL_WHITE, false)
 			DrawSfcPos(1000, 530, 50, tape_height, cur_flap, CL_WHITE, flap_nml_rat, FLAP_STGS)
@@ -567,12 +604,8 @@ function UpdateFlaps() --this is for updating flap position on eicas
 			for i=1,5 do --Draw flaps text vertically
 				drawText(font, 965, 430 - 35 * (i - 1), FLP_TXT_LIST[i], 40, false, false, TEXT_ALIGN_LEFT, {0.17, 0.71, 0.83})
 			end
-		elseif cur_md == FLAP_MD_SEC or get(devmode) == 1 then
-			DrawFlapSecAltn(setting_disp, setting, handle_color, 0, 0)
-		elseif cur_md == FLAP_MD_SEC_LOCK then
-			DrawFlapSecAltn(setting_disp, setting, handle_color, 0, 1)
 		else
-			DrawFlapSecAltn(setting_disp, setting, handle_color, 1, 0)
+			DrawFlapSecAltn(setting_disp, setting, handle_color, cur_md_fp, cur_md_st)
 		end
 	end
 end
@@ -646,9 +679,7 @@ function UpdateEicasAdvisory(messages)
 	local avg_ra = (get(ra_pilot) + get(ra_copilot)) / 2
 	local nest_strg = ""
 	--Update cautions
-	if get(autothr_arm) == 0 then
-		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC")
-	end
+	UpdateAutoThrAdvisory(messages)
 	if get(alt_alert) == 1 then
 		table.insert(messages, tlen(messages) + 1, "ALTITUDE ALERT")
 	end
@@ -665,6 +696,9 @@ function UpdateEicasAdvisory(messages)
 	end
 	if get(flap_mode) == FLAP_MD_SEC_LOCK then
 		table.insert(messages, tlen(messages) + 1, "FLAPS DRIVE")
+	end
+	if get(slat_mode) == FLAP_MD_SEC_LOCK then
+		table.insert(messages, tlen(messages) + 1, "SLATS DRIVE")
 	end
 	if avg_cas < get(manuever_speed) and avg_cas > get(stall_speed) and get(on_ground) == 0 then
 		table.insert(messages, tlen(messages) + 1, "AIRSPEED LOW")

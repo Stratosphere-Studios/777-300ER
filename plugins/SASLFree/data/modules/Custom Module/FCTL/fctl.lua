@@ -119,6 +119,8 @@ stall_speed = globalPropertyi("Strato/777/fctl/vstall") --For autoslats
 --Failures:
 flaps_jam_all_lt = globalPropertyi("Strato/777/failures/fctl/flap_jam_l")
 flaps_jam_all_rt = globalPropertyi("Strato/777/failures/fctl/flap_jam_r")
+slats_jam_all_inn = globalPropertyi("Strato/777/failures/fctl/slat_jam_inn")
+slats_jam_all_out = globalPropertyi("Strato/777/failures/fctl/slat_jam_out")
 
 --creating our own datarefs
 
@@ -311,6 +313,11 @@ function UpdateSlatMode()
 	if get(flap_altn) == 1 then
 		slat_sys_md = FLAP_MD_ALTN
 	else
+		local s_dev = math.abs(get(slat_1)-get(slat_2))
+		if s_dev > SLAT_MAX_LK_DEV then
+			slat_sys_md = FLAP_MD_SEC_LOCK
+			return
+		end
 		if flap_sys_md == FLAP_MD_PRI then
 			slat_sys_md = FLAP_MD_PRI
 		else
@@ -405,6 +412,19 @@ function UpdateRudder(value)
 	set(bottom_rudder, value)
 end
 
+function SetSlatPos(tgt, resp)
+	if get(slats_jam_all_out) == 0 and slat_sys_md ~= FLAP_MD_SEC_LOCK then
+		set(slat_2, EvenChange(get(slat_2), tgt, resp))
+	else
+		set(slat_2, get(slat_2))
+	end
+	if get(slats_jam_all_inn) == 0 and slat_sys_md ~= FLAP_MD_SEC_LOCK then
+		set(slat_1, EvenChange(get(slat_1), tgt, resp))
+	else
+		set(slat_1, get(slat_1))
+	end
+end
+
 function UpdateSlats()
 	local hdl_pos = get(flap_handle)
 	local flap_target = get(flap_tgt)
@@ -437,7 +457,7 @@ function UpdateSlats()
 		elseif flap_actual >= 25 then
 			c_tgt = 1
 		end
-	else
+	elseif slat_sys_md ~= FLAP_MD_SEC_LOCK then
 		t_resp = SLAT_ALTN_RT
 		if flap_sys_md == FLAP_MD_SEC_LOCK then
 			local index = indexOf(FLAP_HDL_DTTS, hdl_pos, 1)
@@ -469,12 +489,10 @@ function UpdateSlats()
 		end
 	end
 	set(slat_tgt, c_tgt)
-	set(slat_1, EvenChange(get(slat_1), c_tgt, t_resp))
-	set(slat_2, EvenChange(get(slat_2), c_tgt, t_resp))
+	SetSlatPos(c_tgt, t_resp)
 end
 
 function UpdateFlaps(values)
-	--print(values)
 	if get(flaps_jam_all_lt) == 0 and flap_sys_md ~= FLAP_MD_SEC_LOCK then
 		set(inbd_flap_L, values[1])
 		set(outbd_flap_L, values[1])

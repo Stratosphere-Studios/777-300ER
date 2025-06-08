@@ -65,8 +65,8 @@ flap_altn_re = createGlobalPropertyi("Strato/777/pedestal/flap_altn_re", 0)
 pass_sgn = createGlobalPropertyi("Strato/777/overhead/pass_sgn", 0)
 no_smok = createGlobalPropertyi("Strato/777/overhead/no_smok", 0)
 
-autothr_arm_l = createGlobalPropertyi("Strato/777/mcp/autothr_arm_l", 0)
-autothr_arm_r = createGlobalPropertyi("Strato/777/mcp/autothr_arm_r", 0)
+autothr_arm_l = createGlobalPropertyi("Strato/777/mcp/autothr_arm_l", 1)
+autothr_arm_r = createGlobalPropertyi("Strato/777/mcp/autothr_arm_r", 1)
 
 --Systems datarefs
 
@@ -118,6 +118,9 @@ goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
 --Flaps
 flaps_jam_all_lt = createGlobalPropertyi("Strato/777/failures/fctl/flap_jam_l", 0)
 flaps_jam_all_rt = createGlobalPropertyi("Strato/777/failures/fctl/flap_jam_r", 0)
+--Slats
+slats_jam_all_inn = createGlobalPropertyi("Strato/777/failures/fctl/slat_jam_inn", 0)
+slats_jam_all_out = createGlobalPropertyi("Strato/777/failures/fctl/slat_jam_out", 0)
 -- Use the devmode dataref for a more comprehensive overview of what's happening
 devmode = createGlobalPropertyi("Strato/777/goku_area/devmode", 0)
 
