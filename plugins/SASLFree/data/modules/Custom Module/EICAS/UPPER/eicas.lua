@@ -50,7 +50,7 @@ on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 
 efis_ctrl = globalProperty("Strato/777/cdu_efis_ctl")
 dsp_ctrl = globalProperty("Strato/777/cdu_eicas_ctl")
-eicas_power_upper = globalPropertyi("Strato/777/elec/eicas_power_upper")
+--eicas_power_upper = globalPropertyi("Strato/777/elec/eicas_power_upper")
 park_brake_valve = globalPropertyi("Strato/777/gear/park_brake_valve")
 --Flight controls
 fbw_mode = globalPropertyi("Strato/777/fctl/pfc/mode")
@@ -92,6 +92,14 @@ spoiler_fail = {ace_spoiler_fail_17, ace_spoiler_fail_2, ace_spoiler_fail_36, ac
 --Cabin stuff:
 pass_sgn = globalPropertyi("Strato/777/overhead/pass_sgn")
 no_smok = globalPropertyi("Strato/777/overhead/no_smok")
+--Doors:
+--Passenger:
+pax_drs_l_anim = globalProperty("Strato/777/doors/cabin_ent_L_anim")
+pax_drs_r_anim = globalProperty("Strato/777/doors/cabin_ent_R_anim")
+pax_drs_arm_l = globalProperty("Strato/777/doors/cabin_ent_L_arm")
+pax_drs_arm_r = globalProperty("Strato/777/doors/cabin_ent_R_arm")
+--Cargo:
+cargo_drs_anim = globalProperty("Strato/777/doors/cargo_anim")
 --Lights:
 lt_caut_cap = globalPropertyi("Strato/777/cockpit/lights/caut_cap")
 lt_warn_cap = globalPropertyi("Strato/777/cockpit/lights/warn_cap")
@@ -300,6 +308,25 @@ function UpdateAutoThrAdvisory(messages)
 		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC R")
 	elseif pos_sw_l == 0 and pos_sw_r == 0 then
 		table.insert(messages, tlen(messages) + 1, "AUTOTHROTTLE DISC")
+	end
+end
+
+function UpdateEntryDoorAdvisory(messages)
+	for i=1,5 do
+		if get(pax_drs_l_anim, i) > EICAS_DOOR_THRESH then
+			table.insert(messages, tlen(messages) + 1, "DOOR ENTRY " .. tostring(i) .. "L")
+		end
+		if get(pax_drs_r_anim, i) > EICAS_DOOR_THRESH then
+			table.insert(messages, tlen(messages) + 1, "DOOR ENTRY " .. tostring(i) .. "R")
+		end
+	end
+end
+
+function UpdateCargoDoorAdvisory(messages)
+	for i=1,3 do
+		if get(cargo_drs_anim, i) > EICAS_DOOR_THRESH then
+			table.insert(messages, tlen(messages) + 1, "DOOR " .. CARGO_DRS_EICAS_NM[i] .. " CARGO")
+		end
 	end
 end
 
@@ -703,6 +730,8 @@ function UpdateEicasAdvisory(messages)
 	if avg_cas < get(manuever_speed) and avg_cas > get(stall_speed) and get(on_ground) == 0 then
 		table.insert(messages, tlen(messages) + 1, "AIRSPEED LOW")
 	end
+	UpdateEntryDoorAdvisory(messages)
+	UpdateCargoDoorAdvisory(messages)
 	UpdatePress(messages)
 	if get(spoiler_handle) > 0 then
 		if avg_ra > 15 and (avg_ra < 800 or get(flap_handle) >= 0.5 or get(throttle_pos) > 0.1) then
@@ -781,9 +810,24 @@ function UpdateMemo(messages, msg_avail)
 			c_avail = c_avail - 1
 		end
 	end
-	
+	local has_doors_auto = 0
+	local has_doors_man = 0
+	for i=1,4 do
+		if get(pax_drs_arm_l, i)+get(pax_drs_arm_r, i) >= 1 then
+			has_doors_auto = 1
+		end
+		if get(pax_drs_arm_l, i)+get(pax_drs_arm_r, i) ~= 2 then
+			has_doors_man = 1
+		end
+	end
 	if get(on_ground) == 1 and get(throttle_pos) < 0.5 and c_avail >= 1 then
-		table.insert(messages, 1, "DOORS AUTO")
+		if has_doors_auto == 1 and has_doors_man == 0 then
+			table.insert(messages, 1, "DOORS AUTO")
+		elseif has_doors_auto == 0 and has_doors_man == 1 then
+			table.insert(messages, 1, "DOORS MANUAL")
+		else
+			table.insert(messages, 1, "DOORS AUTO/MANUAL")
+		end
 	end
 end
 
@@ -827,52 +871,50 @@ end
 
 function draw()
 	UpdateWindows()
-	if get(eicas_power_upper) == 1 then
-		local offset = 1275
-		local n_dsp = 0
-		local curr_end = 0
-		local n_warnings = 0
-		local n_advisories = 0
-		local warnings = {}
-		local advisories = {}
-		local memo = {}
-		UpdateGearPos()
-		UpdateFlaps()
-		conf_warns_past = UpdateEicasWarnings(warnings, conf_warns_past)
-		if get(c_time) >= tmp1 + 1 then
-			UpdateEicasAdvisory(advisories)
-			advisories_past = advisories
-		end
-		n_warnings = tlen(warnings)
-		n_advisories = tlen(advisories_past)
-		n_dsp = n_advisories + n_warnings
+	local offset = 1275
+	local n_dsp = 0
+	local curr_end = 0
+	local n_warnings = 0
+	local n_advisories = 0
+	local warnings = {}
+	local advisories = {}
+	local memo = {}
+	UpdateGearPos()
+	UpdateFlaps()
+	conf_warns_past = UpdateEicasWarnings(warnings, conf_warns_past)
+	if get(c_time) >= tmp1 + 1 then
+		UpdateEicasAdvisory(advisories)
+		advisories_past = advisories
+	end
+	n_warnings = tlen(warnings)
+	n_advisories = tlen(advisories_past)
+	n_dsp = n_advisories + n_warnings
 
-		UpdateCautionLights(n_advisories, n_warnings)
+	UpdateCautionLights(n_advisories, n_warnings)
 
-		UpdateMemo(memo, 11 - n_dsp)
-		UpdateCanc(n_advisories, n_warnings)
-		DisplayMessages(warnings, offset, {1, 0, 0}, 50, 1, n_warnings)
-		offset = offset - 50 * n_warnings
-		if get(canc) == 0 or get(recall_past) == 1 then
-			if n_dsp > 11 then
-				local curr_pg = math.floor(advisories_start / (11 - n_warnings)) + 1
-				drawText(font, 1280, 740, "PG "..tostring(curr_pg), 30, false, false, TEXT_ALIGN_CENTER, {1, 1, 1})
-			end
-			if n_dsp - advisories_start < 10 then
-				curr_end = n_dsp - n_warnings
-			else
-				curr_end = advisories_start + 10 - n_warnings
-			end
-			DisplayMessages(advisories_past, offset, {1, 0.96, 0.07}, 50, advisories_start, curr_end)
+	UpdateMemo(memo, 11 - n_dsp)
+	UpdateCanc(n_advisories, n_warnings)
+	DisplayMessages(warnings, offset, {1, 0, 0}, 50, 1, n_warnings)
+	offset = offset - 50 * n_warnings
+	if get(canc) == 0 or get(recall_past) == 1 then
+		if n_dsp > 11 then
+			local curr_pg = math.floor(advisories_start / (11 - n_warnings)) + 1
+			drawText(font, 1280, 740, "PG "..tostring(curr_pg), 30, false, false, TEXT_ALIGN_CENTER, {1, 1, 1})
 		end
-		DisplayMessages(memo, 775, {1, 1, 1}, -50, 1, tlen(memo))
-		if get(recall_past) == 1 and get(canc) == 1 then
-			drawText(font, 830, 740, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+		if n_dsp - advisories_start < 10 then
+			curr_end = n_dsp - n_warnings
+		else
+			curr_end = advisories_start + 10 - n_warnings
 		end
-		if get(flap_load_relief) == 1 then
-			drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
-			drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
-		end
+		DisplayMessages(advisories_past, offset, {1, 0.96, 0.07}, 50, advisories_start, curr_end)
+	end
+	DisplayMessages(memo, 775, {1, 1, 1}, -50, 1, tlen(memo))
+	if get(recall_past) == 1 and get(canc) == 1 then
+		drawText(font, 830, 740, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+	end
+	if get(flap_load_relief) == 1 then
+		drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+		drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 	end
 	if get(c_time) >= tmp1 + 2 then
 		tmp1 = get(c_time)

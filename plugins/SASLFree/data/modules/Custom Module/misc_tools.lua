@@ -176,6 +176,15 @@ function GetSysIdx(num) --matches pump index with system index
 	end
 end
 
+--X-Plane menu items:
+function UpdateCheckMark(dref, idx, menu, item, value)
+    if get(dref, idx) == value then
+        sasl.setMenuItemState(menu, item, MENU_CHECKED)
+    else
+        sasl.setMenuItemState(menu, item, MENU_UNCHECKED)
+    end
+end
+
 --Drawing utilities
 
 function DrawRect(x, y, width, height, thickness, color, bottom) --draws rectangle with definable line thickness

@@ -2,10 +2,11 @@
 *****************************************************************************************
 * Script Name: failures
 * Author Name: discord/bruh4096#4512(Tim G.)
-* Script Description: Code for some basic faults. Don't blame me for writing this garbage.
-This is the only way to get the menu stuff working with sasl. There will be a proper GUI eventually. 
+* Script Description: Code for the custom failure menu
 *****************************************************************************************
 --]]
+
+include("misc_tools.lua")
 
 fbw_secondary_fail = globalPropertyi("Strato/777/failures/fctl/secondary")
 fbw_direct_fail = globalPropertyi("Strato/777/failures/fctl/direct")
@@ -16,14 +17,6 @@ slats_jam_all_inn = globalPropertyi("Strato/777/failures/fctl/slat_jam_inn")
 slats_jam_all_out = globalPropertyi("Strato/777/failures/fctl/slat_jam_out")
 
 ace_fail = globalProperty("Strato/777/failures/fctl/ace") --L1, L2, C, R
-
-function UpdateCheckMark(dref, idx, menu, item, value)
-    if get(dref, idx) == value then
-        sasl.setMenuItemState(menu, item, MENU_CHECKED)
-    else
-        sasl.setMenuItemState(menu, item, MENU_UNCHECKED)
-    end
-end
 
 function ResetFailures()
     set(fbw_secondary_fail, 0)

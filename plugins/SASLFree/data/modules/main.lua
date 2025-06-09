@@ -108,6 +108,27 @@ lt_caut_fo = createGlobalPropertyi("Strato/777/cockpit/lights/caut_fo", 0)
 lt_warn_fo = createGlobalPropertyi("Strato/777/cockpit/lights/warn_fo", 0)
 lt_cab_ps = createGlobalPropertyi("Strato/777/cabin/lights/pass_sgn", 0)
 lt_cab_ns = createGlobalPropertyi("Strato/777/cabin/lights/no_smok", 0)
+--Door values: 1 open, 0 closed. 1 armed, 0 disarmed. Emergency slides: 1 deployed, 0 stowed
+--Pax doors:
+pax_drs_l_anim = createGlobalPropertyfa("Strato/777/doors/cabin_ent_L_anim", {0, 0, 0, 0, 0})
+pax_drs_r_anim = createGlobalPropertyfa("Strato/777/doors/cabin_ent_R_anim", {0, 0, 0, 0, 0})
+pax_drs_tgt_l = createGlobalPropertyia("Strato/777/doors/cabin_ent_L_tgt", {0, 0, 0, 0, 0})
+pax_drs_tgt_r = createGlobalPropertyia("Strato/777/doors/cabin_ent_R_tgt", {0, 0, 0, 0, 0})
+pax_drs_arm_l = createGlobalPropertyia("Strato/777/doors/cabin_ent_L_arm", {1, 1, 1, 1, 1})
+pax_drs_arm_r = createGlobalPropertyia("Strato/777/doors/cabin_ent_R_arm", {1, 1, 1, 1, 1})
+pax_drs_slide_l_anim = createGlobalPropertyfa("Strato/777/doors/cabin_L_slide_anim", {0, 0, 0, 0, 0})
+pax_drs_slide_r_anim = createGlobalPropertyfa("Strato/777/doors/cabin_R_slide_anim", {0, 0, 0, 0, 0})
+pax_drs_slide_l_tgt = createGlobalPropertyia("Strato/777/doors/cabin_L_slide_tgt", {0, 0, 0, 0, 0})
+pax_drs_slide_r_tgt = createGlobalPropertyia("Strato/777/doors/cabin_R_slide_tgt", {0, 0, 0, 0, 0})
+
+--Cargo doors&misc
+--Indexing: 1 front 2 aft, 3 bulk
+cargo_drs_anim = createGlobalPropertyfa("Strato/777/doors/cargo_anim", {0, 0, 0})
+cargo_drs_tgt = createGlobalPropertyia("Strato/777/doors/cargo_tgt", {0, 0, 0})
+--Hatches:
+--Indexing: 1 left engine cowl, 2 right engine cowl, 3 apu maint doors
+hatch_anim = createGlobalPropertyfa("Strato/777/doors/hatch_anim", {0, 0, 0})
+hatch_tgt = createGlobalPropertyia("Strato/777/doors/hatch_tgt", {0, 0, 0})
 
 --Failure datarefs
 
@@ -153,7 +174,7 @@ components = {
 	--	fpsLimit = 50
 	--},
 	timers {},
-	elec_main {},
+	doors {},
 	tcas_main {},
 	speed_calc {},
 	hydraulics {},
