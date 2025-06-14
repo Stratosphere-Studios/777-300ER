@@ -583,11 +583,15 @@ function UpdateFlaps() --this is for updating flap position on eicas
 	local handle_color = {0, 1, 0}
 	local magenta = {0.94, 0.57, 1}
 	
-	local setting = FLAP_STGS[indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)]
-	local setting_disp = FLAP_STGS_DSP[indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)]
+	local hdl_idx = indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)
+	local setting = FLAP_STGS[hdl_idx]
+	local setting_disp = FLAP_STGS_DSP[hdl_idx]
 	local cur_flap = 0
 	local cur_md_fp = get(flap_mode)
 	local cur_md_st = get(slat_mode)
+
+	local avg_slat = (get(slat_1)+get(slat_2))/2
+
 	local draw_pri = 0
 	if get(devmode) == 0 then
 		if cur_md_fp == FLAP_MD_PRI and cur_md_st == FLAP_MD_PRI then
@@ -598,11 +602,11 @@ function UpdateFlaps() --this is for updating flap position on eicas
 		cur_md_st = FLAP_MD_SEC
 	end
 
-	if get(flaps) ~= nil then
+	if draw_pri == 1 then
+		cur_flap = get(flaps)+avg_slat
+		setting = FLAP_STGS_CMB[hdl_idx]
+	else
 		cur_flap = get(flaps)
-	end
-	if setting == nil then
-		setting = 0
 	end
 	if cur_flap ~= flaps_past then
 		if cur_flap <= 0.001 then
@@ -617,11 +621,11 @@ function UpdateFlaps() --this is for updating flap position on eicas
 		handle_color = {0, 1, 0}
 	end
 
-	if setting > 0 or cur_flap > 0.01 or get(slat_1) > 0.01 or get(c_time) < flap_retract_time + 10 or draw_pri ~= 1 then
+	if setting > 0 or cur_flap > 0.01 or get(c_time) < flap_retract_time + 10 or draw_pri ~= 1 then
 		if draw_pri == 1 then
-			local handle_on_screen = 530-GetSfcHt(tape_height, setting, flap_nml_rat, FLAP_STGS)
+			local handle_on_screen = 530-GetSfcHt(tape_height, setting, flap_nml_rat, FLAP_STGS_CMB)
 			DrawRect(1000, 530, 50, tape_height, FLP_FR_THCK, CL_WHITE, false)
-			DrawSfcPos(1000, 530, 50, tape_height, cur_flap, CL_WHITE, flap_nml_rat, FLAP_STGS)
+			DrawSfcPos(1000, 530, 50, tape_height, cur_flap, CL_WHITE, flap_nml_rat, FLAP_STGS_CMB)
 			sasl.gl.drawWideLine(990, handle_on_screen, 1060, handle_on_screen, 6, handle_color)
 			if setting ~= 0 then
 				drawText(font, 1070, handle_on_screen - 15, tostring(setting_disp), 45, false, false, TEXT_ALIGN_LEFT, handle_color)
@@ -718,8 +722,16 @@ function UpdateEicasAdvisory(messages)
 	elseif get(fbw_mode) == 3 then
 		table.insert(messages, tlen(messages) + 1, "PRI FLIGHT COMPUTERS")
 	end
-	if get(flap_mode) ~= FLAP_MD_PRI then
+	local flap_md = get(flap_mode)
+	local slat_md = get(slat_mode)
+	if flap_md == FLAP_MD_ALTN then
 		table.insert(messages, tlen(messages) + 1, "FLAP/SLAT CONTROL")
+	end
+	if flap_md == FLAP_MD_SEC_LOCK or flap_md == FLAP_MD_SEC then
+		table.insert(messages, tlen(messages) + 1, "FLAPS PRIMARY FAIL")
+	end
+	if slat_md == FLAP_MD_SEC_LOCK or slat_md == FLAP_MD_SEC then
+		table.insert(messages, tlen(messages) + 1, "SLATS PRIMARY FAIL")
 	end
 	if get(flap_mode) == FLAP_MD_SEC_LOCK then
 		table.insert(messages, tlen(messages) + 1, "FLAPS DRIVE")

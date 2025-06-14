@@ -289,6 +289,7 @@ function UpdateFlapMode()
 	else
 		local absdiff = math.abs((get(inbd_flap_L)+get(outbd_flap_L))-
 			(get(inbd_flap_R)+get(outbd_flap_R)))
+		local avg_pos = (get(inbd_flap_L)+get(outbd_flap_L)+get(inbd_flap_R)+get(outbd_flap_R))/4
 
 		if absdiff > FLAP_MAX_LK_DEV then
 			flap_sys_md = FLAP_MD_SEC_LOCK
@@ -300,7 +301,8 @@ function UpdateFlapMode()
 			(get(engn_n2, 1) <= 50 or get(engn_n2, 1) <= 50)) then
 			sec_inh = 1
 		end
-		if get(sys_C_press) < 1000 and sec_inh == 0 and (get(flaps) >= 0.0001 or get(slat_1) >= 0.001) then
+		local tgt_dev = math.abs(get(flap_tgt)-avg_pos)
+		if get(sys_C_press) < 1000 and sec_inh == 0 and (tgt_dev >= 0.1 or flap_sys_md == FLAP_MD_SEC) then
 			flap_sys_md = FLAP_MD_SEC
 			set(flap_load_relief, 0)
 		else
@@ -318,10 +320,17 @@ function UpdateSlatMode()
 			slat_sys_md = FLAP_MD_SEC_LOCK
 			return
 		end
-		if flap_sys_md == FLAP_MD_PRI then
-			slat_sys_md = FLAP_MD_PRI
-		else
+		local sec_inh = 0
+		if (get(sys_C_press) < 1000 and get(gs_kts) < 40 and 
+			(get(engn_n2, 1) <= 50 or get(engn_n2, 1) <= 50)) then
+			sec_inh = 1
+		end
+		local avg_pos = (get(slat_1)+get(slat_2))/2
+		local tgt_dev = math.abs(get(slat_tgt)-avg_pos)
+		if get(sys_C_press) < 1000 and sec_inh == 0 and (tgt_dev >= 0.1 or slat_sys_md == FLAP_MD_SEC) then
 			slat_sys_md = FLAP_MD_SEC
+		else
+			slat_sys_md = FLAP_MD_PRI
 		end
 	end
 end
@@ -432,37 +441,41 @@ function UpdateSlats()
 	local avg_cas = (get(cas_copilot)+get(cas_pilot))/2
 	local c_tgt = get(slat_1)
 	local t_resp = SLAT_NML_RT
+	local autoslat_is_eng = 0
+
+	if flap_sys_md == FLAP_MD_SEC_LOCK then
+		local index = indexOf(FLAP_HDL_DTTS, hdl_pos, 1)
+		flap_actual = FLAP_STGS[index]
+		flap_target = flap_actual
+	end
+
 	if slat_sys_md == FLAP_MD_PRI then
 		if avg_cas <= get(stall_speed) and flap_actual <= 20 and flap_actual > 0.9 and get(on_ground) == 0 and avg_cas >= 40 then
 			autoslat_last_sec = get(c_time)
 		end
 		if get(c_time) < autoslat_last_sec + AUTOSLAT_HO_SEC then
-			set(slat_1, EvenChange(get(slat_1), 1, t_resp))
-			set(slat_2, EvenChange(get(slat_2), 1, t_resp))
-			set(slat_tgt, 1)
-			return
+			c_tgt = 1
+			autoslat_is_eng = 1
 		end
-		if flap_actual < 1 then
-			c_tgt = 0.5
-			if flap_target < 1 then
-				c_tgt = 0
-			end
-		elseif flap_actual >= 1 and flap_actual <= 20 then
-			c_tgt = 0.5
-		elseif flap_actual > 20 and flap_actual < 25 then
-			c_tgt = 1
-			if flap_target < 25 then
+		if autoslat_is_eng == 0 then
+			if flap_actual < 1 then
 				c_tgt = 0.5
+				if flap_target < 1 then
+					c_tgt = 0
+				end
+			elseif flap_actual >= 1 and flap_actual <= 20 then
+				c_tgt = 0.5
+			elseif flap_actual > 20 and flap_actual < 25 then
+				c_tgt = 1
+				if flap_target < 25 then
+					c_tgt = 0.5
+				end
+			elseif flap_actual >= 25 then
+				c_tgt = 1
 			end
-		elseif flap_actual >= 25 then
-			c_tgt = 1
 		end
 	elseif slat_sys_md ~= FLAP_MD_SEC_LOCK then
 		t_resp = SLAT_ALTN_RT
-		if flap_sys_md == FLAP_MD_SEC_LOCK then
-			local index = indexOf(FLAP_HDL_DTTS, hdl_pos, 1)
-			flap_actual = FLAP_STGS[index]
-		end
 		if flap_actual <= 1 then
 			if flap_actual <= 0.01 then
 				if (slat_sys_md == FLAP_MD_SEC) or 
