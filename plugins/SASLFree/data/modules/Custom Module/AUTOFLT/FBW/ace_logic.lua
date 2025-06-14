@@ -9,7 +9,6 @@
 include("misc_tools.lua")
 include("constants.lua")
 include("thrust_asym_comp.lua")
-include("fbw_bite.lua")
 
 --Cockpit controls
 yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
@@ -653,8 +652,6 @@ function update()
     lmw_onground_past = tmp[1]
     rmw_onground_past = tmp[2]
     spoiler_special_cmd = tmp[3]
-    UpdateSelfTest()
-	DoSelfTest()
     sendFLTdata()
     UpdateSpoilers(avg_cas, spoilers, spoiler_fail, ace_spoiler, spoiler_special_cmd, 0.32)
     UpdateRoll(avg_cas, avg_alt_baro, ail_L, ail_R, flp_L, flp_R, spoiler_special_cmd)

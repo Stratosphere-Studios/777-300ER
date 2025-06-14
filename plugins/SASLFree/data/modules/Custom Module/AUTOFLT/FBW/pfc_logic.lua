@@ -12,6 +12,7 @@ include("fbw_controllers.lua")
 include("constants.lua")
 include("ap_roll.lua")
 include("ap_pitch.lua")
+include("fbw_bite.lua")
 
 --Switches
 pitch_trim_A = globalPropertyi("Strato/777/cockpit/switches/strim_A")
@@ -424,16 +425,20 @@ function UpdateStabTrim()
 end
 
 function UpdateMode()
+	local rst_bite = false
 	if get(fbw_secondary_fail) == 1 or get(fbw_direct_fail) == 1 then
 		if get(fbw_secondary_fail) == 1 then
 			set(fbw_mode, 2)
+			rst_bite = true
 		end
 		if get(fbw_direct_fail) == 1 then
 			set(fbw_mode, 3)
+			rst_bite = true
 		end
 	else
 		if get(pfc_disc) == 1 then
 			set(fbw_mode, 3)
+			rst_bite = true
 		else
 			local n_ace_fail = 0
 			for i=1,4 do
@@ -443,12 +448,21 @@ function UpdateMode()
 			end
 			if n_ace_fail == 3 then
 				set(fbw_mode, 2)
+				rst_bite = true
 			elseif n_ace_fail == 4 then
 				set(fbw_mode, 3)
+				rst_bite = true
 			else
-				set(fbw_mode, 1)
+				UpdateSelfTest()
+				DoSelfTest()
+				if self_test_init == false then
+					set(fbw_mode, 1)
+				end
 			end
 		end
+	end
+	if rst_bite == true and self_test_init == true then
+		ResetSelfTest()
 	end
 end
 

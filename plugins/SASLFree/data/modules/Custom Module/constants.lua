@@ -79,6 +79,8 @@ PCU_BYPASS = 0
 PCU_NML = 1
 PCU_BLOCKING = 2
 
+PFC_BITE_DELAY_SEC = 120
+
 --ND
 
 ND_POI_DISPLAYED_LIMIT = 70
@@ -117,6 +119,7 @@ AUTOSLAT_HO_SEC = 3 --Autoslats will retract this many seconds after out of stal
 
 FLAP_STGS_DSP = {0, 1, 5, 15, 20, 25, 30}
 FLAP_STGS = {0, 1, 9, 15, 20, 25, 30}
+FLAP_STGS_CMB = {0, 1.5, 9.5, 15.5, 20.5, 26, 31}
 FLAP_HDL_DTTS = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
 
 --Passenger stuff
