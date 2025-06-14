@@ -583,7 +583,8 @@ function UpdateFlaps() --this is for updating flap position on eicas
 	local handle_color = {0, 1, 0}
 	local magenta = {0.94, 0.57, 1}
 	
-	local hdl_idx = indexOf(FLAP_HDL_DTTS, get(flap_handle), 1)
+	local hdl_idx = indexGR(FLAP_HDL_DTTS, get(flap_handle), 2)
+	--print(hdl_idx, get(flap_handle))
 	local setting = FLAP_STGS[hdl_idx]
 	local setting_disp = FLAP_STGS_DSP[hdl_idx]
 	local cur_flap = 0

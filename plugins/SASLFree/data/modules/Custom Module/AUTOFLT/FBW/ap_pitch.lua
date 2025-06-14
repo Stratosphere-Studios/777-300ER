@@ -355,10 +355,11 @@ function updateMode()
                 set(flch_eng, 0)
                 set(vs_tgt, vs_avg_fpm)
             end
-            if math.abs(alt_tgt_err) <= ALT_HOLD_CAPTURE_ALT_FT and mcp_alt_acq then
+            if math.abs(alt_tgt_err) <= ALT_HOLD_CAPTURE_ALT_FT and mcp_alt_acq
+                and get(mcp_alt_val) ~= alt_hold_alt_blacklist then
                 set(alt_hold_eng, 1)
                 set(vshold_eng, 0)
-            elseif not mcp_alt_acq then
+            elseif (not mcp_alt_acq) or get(mcp_alt_val) == alt_hold_alt_blacklist then
                 vs_hold_vs_tgt = get(vs_tgt)
             end
         end

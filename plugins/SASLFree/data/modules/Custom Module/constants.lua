@@ -20,6 +20,9 @@ CL_MAGENTA = {1, 0.451, 1}
 MPS_TO_KTS = 1.944
 
 --Autopilot
+--General
+AP_JOY_MN_ABS_DEV = 0.8 --Minimum absolute deflection from ctr to disconnect autopilot
+AP_HYD_PR_RQD_PSI = 1000
 --Vertical
 VERT_MODE_OFF = 0
 VERT_MODE_VSHOLD = 1
@@ -142,3 +145,8 @@ CARGO_DRS_EICAS_NM = {"FWD", "AFT", "BULK"}
 XPLM_CMD_START = 0
 XPLM_CMD_CONTINUE = 1
 XPLM_CMD_END = 2
+
+--Joystick axes for sim/joystick/joy_mapped_axis_value
+JOY_PITCH_IDX = 2
+JOY_ROLL_IDX = 3
+JOY_HEADING_IDX = 4

@@ -63,6 +63,21 @@ function indexOf(array, value, round_) --returns index of a value in an array.
     return nil
 end
 
+function indexGR(array, value, round_)
+	value = Round(value, round_)
+	local out = 1
+	for i, v in ipairs(array) do
+        if v >= value then
+            if i == 1 then
+				return 1
+			elseif array[i-1] < value then
+				return i
+			end
+        end
+    end
+	return out
+end
+
 function getFPA(gs_kts, vs_fpm)
 	local fpv_pitch_rad = 0
     if gs_kts ~= 0 then

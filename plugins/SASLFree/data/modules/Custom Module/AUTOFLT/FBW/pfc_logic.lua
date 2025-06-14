@@ -30,6 +30,8 @@ flt_dir_pilot_pfd = globalPropertyi("Strato/777/pfd/flt_dir_pilot")
 flt_dir_copilot_pfd = globalPropertyi("Strato/777/pfd/flt_dir_copilot")
 flt_dir_pilot = globalPropertyi("Strato/777/mcp/flt_dir_pilot")
 flt_dir_copilot = globalPropertyi("Strato/777/mcp/flt_dir_copilot")
+--Hydraulics
+hyd_pressure = globalProperty("Strato/777/hydraulics/press")
 --Data bus
 pfc_calc = globalPropertyi("Strato/777/fctl/databus/calc")
 pfc_pilot_input = globalProperty("Strato/777/fctl/databus/pilot_input")
@@ -60,6 +62,8 @@ yaw_rate_accel = globalPropertyf("sim/flightmodel/position/R_dot")
 --Operation
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 c_time = globalPropertyf("Strato/777/time/current")
+--Joystick:
+joy_dr = globalProperty("sim/joystick/joy_mapped_axis_value")
 
 --Failures
 fbw_secondary_fail = globalPropertyi("Strato/777/failures/fctl/secondary")
@@ -466,10 +470,31 @@ function UpdateMode()
 	end
 end
 
-function updateMCP()
+function getAPDiscSts() -- Only for normal fbw mode
 	if ((get(pitch_trim_A) ~= 0 and get(pitch_trim_B) ~= 0) or 
-		get(pitch_trim_altn) ~= 0)
-		and get(ap_engaged) == 1 then
+		get(pitch_trim_altn) ~= 0) then
+		return 1
+	end
+	local r_dev = math.abs(get(joy_dr, JOY_ROLL_IDX))
+	local p_dev = math.abs(get(joy_dr, JOY_PITCH_IDX))
+	local h_dev = math.abs(get(joy_dr, JOY_HEADING_IDX))
+	local absdev = r_dev+p_dev+h_dev
+	if absdev >= AP_JOY_MN_ABS_DEV then
+		return 1
+	end
+	local hpr_psi = 0
+	for i=1,3 do
+		hpr_psi = math.max(hpr_psi, get(hyd_pressure, i))
+	end
+	if hpr_psi < AP_HYD_PR_RQD_PSI then
+		return 1
+	end
+
+	return 0
+end
+
+function updateMCP()
+	if getAPDiscSts() == 1 and get(ap_engaged) == 1 then
 		local avg_spd = (get(cas_pilot) + get(cas_copilot)) / 2
 		set(fbw_trim_speed, avg_spd)
 		set(ap_engaged, 0)
