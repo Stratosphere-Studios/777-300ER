@@ -65,11 +65,11 @@ BEGIN_SOUND_ATTACHMENT
     	EVENT_START_COND sim/cockpit2/engine/actuators/throttle_ratio[1] == 1
 END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Cockpit/Controls/Levers/flap_lever
-	VEH_XYZ 0.1 1 -26.7
-    	EVENT_START_COND ABS_DELTA=anim/flap
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Cockpit/Controls/Levers/flap_lever
+#	VEH_XYZ 0.1 1 -26.7
+#    	EVENT_START_COND ABS_DELTA=anim/flap
+#END_SOUND_ATTACHMENT
 
 BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /Cockpit/Controls/Levers/gear_lever
@@ -197,13 +197,13 @@ END_SOUND_ATTACHMENT
 #WARNINGS
 ###########
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Warnings/ground_horn
-	VEH_XYZ 0 -3 -23
-	EVENT_START_COND anim/88/button == 1
-	EVENT_START_COND sim/cockpit2/switches/avionics_power_on == 0
-	EVENT_AUTO_END_FROM_START_COND
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Warnings/ground_horn
+#	VEH_XYZ 0 -3 -23
+#	EVENT_START_COND anim/88/button == 1
+#	EVENT_START_COND sim/cockpit2/switches/avionics_power_on == 0
+#	EVENT_AUTO_END_FROM_START_COND
+#END_SOUND_ATTACHMENT
 
 BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /Warnings/aural_warning_test
@@ -219,29 +219,29 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_END_COND sim/cockpit2/switches/avionics_power_on == 0
 END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Warnings/chime
-	VEH_XYZ 0 0 0
-	EVENT_START_COND anim/12/switch > 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Warnings/chime
+#	VEH_XYZ 0 0 0
+#	EVENT_START_COND anim/12/switch > 0
+#END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Warnings/chime
-	VEH_XYZ 0 0 0
-	EVENT_START_COND anim/12/switch == 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Warnings/chime
+#	VEH_XYZ 0 0 0
+#	EVENT_START_COND anim/12/switch == 0
+#END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Warnings/chime
-	VEH_XYZ 0 0 0
-	EVENT_START_COND anim/13/switch > 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Warnings/chime
+#	VEH_XYZ 0 0 0
+#	EVENT_START_COND anim/13/switch > 0
+#END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Warnings/chime
-	VEH_XYZ 0 0 0
-	EVENT_START_COND anim/13/switch == 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Warnings/chime
+#	VEH_XYZ 0 0 0
+#	EVENT_START_COND anim/13/switch == 0
+#END_SOUND_ATTACHMENT
 
 ##################
 #GPWS
@@ -376,12 +376,12 @@ BEGIN_SOUND_ATTACHMENT
 	EVENT_AUTO_END_FROM_START_COND
 END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-	EVENT_NAME /Warnings/GPWS/too_low_flaps
-	VEH_XYZ 0 2.4 -29.5
-	EVENT_START_COND anim/flap == 1
-	EVENT_END_COND anim/flap =! 1
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#	EVENT_NAME /Warnings/GPWS/too_low_flaps
+#	VEH_XYZ 0 2.4 -29.5
+#	EVENT_START_COND anim/flap == 1
+#	EVENT_END_COND anim/flap =! 1
+#END_SOUND_ATTACHMENT
 
 BEGIN_SOUND_ATTACHMENT
 	EVENT_NAME /Warnings/GPWS/too_low_gear
@@ -424,26 +424,26 @@ END_SOUND_ATTACHMENT
 #CABIN
 ################
 
-BEGIN_SOUND_ATTACHMENT
-        EVENT_NAME /Cabin/Packs/packL
-        VEH_XYZ 0 0 0
-        EVENT_START_COND 1-sim/sound/packR > 0
-        EVENT_END_COND 1-sim/sound/packR == 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#        EVENT_NAME /Cabin/Packs/packL
+#        VEH_XYZ 0 0 0
+#        EVENT_START_COND 1-sim/sound/packR > 0
+#        EVENT_END_COND 1-sim/sound/packR == 0
+#END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-        EVENT_NAME /Cabin/Packs/packR
-        VEH_XYZ 0 0 0
-        EVENT_START_COND 1-sim/sound/packR > 0
-        EVENT_END_COND 1-sim/sound/packR == 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#        EVENT_NAME /Cabin/Packs/packR
+#        VEH_XYZ 0 0 0
+#        EVENT_START_COND 1-sim/sound/packR > 0
+#        EVENT_END_COND 1-sim/sound/packR == 0
+#END_SOUND_ATTACHMENT
 
-BEGIN_SOUND_ATTACHMENT
-        EVENT_NAME /Cabin/Packs/packL
-        VEH_XYZ 0 0 0
-        EVENT_START_COND 1-sim/sound/packR > 0
-        EVENT_END_COND 1-sim/sound/packR == 0
-END_SOUND_ATTACHMENT
+#BEGIN_SOUND_ATTACHMENT
+#        EVENT_NAME /Cabin/Packs/packL
+#        VEH_XYZ 0 0 0
+#        EVENT_START_COND 1-sim/sound/packR > 0
+#        EVENT_END_COND 1-sim/sound/packR == 0
+#END_SOUND_ATTACHMENT
 
 #################
 #AMBIENCE
