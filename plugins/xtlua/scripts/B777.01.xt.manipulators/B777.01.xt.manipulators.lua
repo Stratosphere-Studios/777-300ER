@@ -349,7 +349,7 @@ end
 
 function B777_autothrottle_spd_switch_CMDhandler(phase, duration)
    if phase == 0 then
-      B777DR_ap_spdHld_sw = 1
+      B777DR_ap_spdHld_sw = 1-B777DR_ap_spdHld_sw
       B777DR_mcp_button_target[16] = 1
    elseif phase == 2 then
       B777DR_mcp_button_target[16] = 0

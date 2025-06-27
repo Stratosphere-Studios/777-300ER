@@ -727,7 +727,7 @@ function onAirportLoaded()
 		truck_brake_temp_L[i] = get(oat)
 		truck_brake_temp_R[i] = get(oat)
 	end
-	if get(ra_pilot) < 5 or get(ra_copilot) < 5 then
+	if get(on_ground) == 1 then
 		set(park_brake_valve, 1)
 		set(brake_press_L, 3100)
 		set(brake_press_R, 3100)

@@ -17,7 +17,7 @@ battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
 
 c_time = globalPropertyf("Strato/777/time/current")
 brake_acc_in_use = globalPropertyi("Strato/777/gear/brake_acc_in_use")
-eicas_power_lower = globalPropertyi("Strato/777/elec/eicas_power_lower")
+--eicas_power_lower = globalPropertyi("Strato/777/elec/eicas_power_lower")
 
 --Creating our own
 
@@ -268,62 +268,60 @@ function DrawDoorStatus()
 end
 
 function draw()
-	if get(eicas_power_lower) == 1 then
-		local eicas_mode = globalPropertyi("Strato/777/displays/eicas_mode")
-		if get(eicas_mode) == 8 then 
-			--drawing the valves. For now they are just static
-			sasl.gl.drawTexture(valve_open, 41, 374, 68, 68, {0, 1, 0})
-			sasl.gl.drawTexture(valve_open, 1255, 374, 68, 68, {0, 1, 0})
-			sasl.gl.drawRotatedTexture(valve_open, 90, 491, 930, 68, 68, {0, 1, 0})
-			sasl.gl.drawRotatedTexture(valve_open, 90, 341, 930, 68, 68, {0, 1, 0})
-			--Drawing pressure and quantity
-			for i=1,3 do
-				local color = white 
-				local pressure = globalPropertyiae("Strato/777/hydraulics/press", i)
-				local quantity = globalPropertyfae("Strato/777/hydraulics/qty", i)
-				if get(pressure) < 1200 then
-					color = amber
-				else
-					color = white
-				end
-				local qty = Round(get(quantity), 2)
-				local qty_displayed = tostring(qty)
-				if qty % 1 == 0 then
-					qty_displayed = qty_displayed .. ".00"
-				elseif qty % 0.1 == 0 then
-					qty_displayed = qty_displayed .. "0"
-				end
-				drawText(font, 113 + 527 * (i - 1), 256, qty_displayed, 45, false, false, TEXT_ALIGN_LEFT, white)
-				--Making pressure output rounded.
-				drawText(font, 150 + 527 * (i - 1), 140, tostring(round(get(pressure) * 0.1) * 10), 45, false, false, TEXT_ALIGN_CENTER, color)
+	local eicas_mode = globalPropertyi("Strato/777/displays/eicas_mode")
+	if get(eicas_mode) == 8 then 
+		--drawing the valves. For now they are just static
+		sasl.gl.drawTexture(valve_open, 41, 374, 68, 68, {0, 1, 0})
+		sasl.gl.drawTexture(valve_open, 1255, 374, 68, 68, {0, 1, 0})
+		sasl.gl.drawRotatedTexture(valve_open, 90, 491, 930, 68, 68, {0, 1, 0})
+		sasl.gl.drawRotatedTexture(valve_open, 90, 341, 930, 68, 68, {0, 1, 0})
+		--Drawing pressure and quantity
+		for i=1,3 do
+			local color = white 
+			local pressure = globalPropertyiae("Strato/777/hydraulics/press", i)
+			local quantity = globalPropertyfae("Strato/777/hydraulics/qty", i)
+			if get(pressure) < 1200 then
+				color = amber
+			else
+				color = white
 			end
-			for i=1,4 do
-				local primary_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
-				local demand_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
-				local primary_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/actual", i)
-				local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/actual", i)
-				local sys_idx = GetSysIdx(i)
-				if get(primary_state) == 1 then
-					DrawRect(primary_coords[1 + 2 * (i - 1)], primary_coords[2 + 2 * (i - 1)], 74, 99, 7, green, false)
-				elseif get(primary_state) == -1 then --Draw crossed rectangle if pump is inop
-					DrawCrossedRect(primary_coords[1 + 2 * (i - 1)], primary_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)
-				end
-				if get(demand_state) == 1 then
-					DrawRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, green, false)
-				elseif get(demand_state) == -1 then --Draw crossed rectangle if pump is inop
-					DrawCrossedRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)	
-				end
-				if get(demand_pump_ovht) == 1 then
-					drawText(font, ovht_d[1 + 2 * (i - 1)], ovht_d[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
-				end
-				if get(primary_pump_ovht) == 1 then
-					drawText(font, ovht_p[1 + 2 * (i - 1)], ovht_p[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
-				end
+			local qty = Round(get(quantity), 2)
+			local qty_displayed = tostring(qty)
+			if qty % 1 == 0 then
+				qty_displayed = qty_displayed .. ".00"
+			elseif qty % 0.1 == 0 then
+				qty_displayed = qty_displayed .. "0"
 			end
-			DrawLinesEICAS()
-		elseif get(eicas_mode) == 7 then --Updating gear synoptic page
-			DrawBrakes()
-			DrawDoorStatus()
+			drawText(font, 113 + 527 * (i - 1), 256, qty_displayed, 45, false, false, TEXT_ALIGN_LEFT, white)
+			--Making pressure output rounded.
+			drawText(font, 150 + 527 * (i - 1), 140, tostring(round(get(pressure) * 0.1) * 10), 45, false, false, TEXT_ALIGN_CENTER, color)
 		end
+		for i=1,4 do
+			local primary_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/primary/ovht", i)
+			local demand_pump_ovht = globalPropertyfae("Strato/777/hydraulics/pump/demand/ovht", i)
+			local primary_state = globalPropertyiae("Strato/777/hydraulics/pump/primary/actual", i)
+			local demand_state = globalPropertyiae("Strato/777/hydraulics/pump/demand/actual", i)
+			local sys_idx = GetSysIdx(i)
+			if get(primary_state) == 1 then
+				DrawRect(primary_coords[1 + 2 * (i - 1)], primary_coords[2 + 2 * (i - 1)], 74, 99, 7, green, false)
+			elseif get(primary_state) == -1 then --Draw crossed rectangle if pump is inop
+				DrawCrossedRect(primary_coords[1 + 2 * (i - 1)], primary_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)
+			end
+			if get(demand_state) == 1 then
+				DrawRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, green, false)
+			elseif get(demand_state) == -1 then --Draw crossed rectangle if pump is inop
+				DrawCrossedRect(demand_coords[1 + 2 * (i - 1)], demand_coords[2 + 2 * (i - 1)], 74, 99, 7, amber)	
+			end
+			if get(demand_pump_ovht) == 1 then
+				drawText(font, ovht_d[1 + 2 * (i - 1)], ovht_d[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
+			end
+			if get(primary_pump_ovht) == 1 then
+				drawText(font, ovht_p[1 + 2 * (i - 1)], ovht_p[2 + 2 * (i - 1)], "OVHT", 38, false, false, TEXT_ALIGN_CENTER, amber)
+			end
+		end
+		DrawLinesEICAS()
+	elseif get(eicas_mode) == 7 then --Updating gear synoptic page
+		DrawBrakes()
+		DrawDoorStatus()
 	end
 end

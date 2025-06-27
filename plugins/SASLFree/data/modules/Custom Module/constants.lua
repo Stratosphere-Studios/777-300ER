@@ -8,17 +8,21 @@
 
 --Colors
 
-white = {1, 1, 1}
-amber = {1, 0.741, 0.161}
-green = {0, 1, 0}
-dark_green = {0.02, 0.91, 0.07}
-dark_blue = {0.01, 0.05, 0.15}
-light_blue = {0, 0.808, 1}
-magenta = {1, 0.451, 1}
+CL_WHITE = {1, 1, 1}
+CL_AMBER = {1, 0.741, 0.161}
+CL_GREEN = {0, 1, 0}
+CL_BLACK = {0, 0, 0}
+CL_DARK_GREEN = {0.02, 0.91, 0.07}
+CL_DARK_BLUE = {0.01, 0.05, 0.15}
+CL_LIGHT_BLUE = {0, 0.808, 1}
+CL_MAGENTA = {1, 0.451, 1}
 
 MPS_TO_KTS = 1.944
 
 --Autopilot
+--General
+AP_JOY_MN_ABS_DEV = 0.8 --Minimum absolute deflection from ctr to disconnect autopilot
+AP_HYD_PR_RQD_PSI = 1000
 --Vertical
 VERT_MODE_OFF = 0
 VERT_MODE_VSHOLD = 1
@@ -56,6 +60,7 @@ ABRK_THR_DISARM_MIN = 0.05
 ABRK_SYS_C_MIN_PSI = 1000
 SB_THRESH = 0.015
 ABRK_MODE_STRS = {"RTO", "", "", "1", "2", "3", "4", "MAX"}
+ABRK_SW_DELAY_SEC = 1
 
 --Cockpit
 
@@ -77,6 +82,8 @@ PCU_BYPASS = 0
 PCU_NML = 1
 PCU_BLOCKING = 2
 
+PFC_BITE_DELAY_SEC = 120
+
 --ND
 
 ND_POI_DISPLAYED_LIMIT = 70
@@ -94,8 +101,52 @@ TCAS_SW_ALT_ON = 2
 TCAS_SW_TA_ONLY = 3
 TCAS_SW_TA_RA = 4
 
+--Flaps&slats:
+FLAP_MD_PRI = 1
+FLAP_MD_SEC = 2
+FLAP_MD_ALTN = 3
+FLAP_MD_SEC_LOCK = 4
+--FLAP_MAX_LK_DEV is the maximum allowable
+--difference between left and right sides of flaps before
+--they are locked out(FLAP_MD_SEC_LOCK) by FSEU
+FLAP_MAX_LK_DEV = 0.07
+SLAT_MAX_LK_DEV = 0.03
+SLAT_ALTN_RT = 0.1 * 0.004
+SLAT_NML_RT = 0.4 * 0.004
+FLAP_RE_SW_RETR = -1
+FLAP_RE_SW_EXT = 1
+FLAP_RE_SW_OFF = 0
+FLAP_ALTN_EXT_MAX = 20
+SLAT_SEC_TO_MID_KTS = 239 --Above this speed slats will be retracted to 0.5
+AUTOSLAT_HO_SEC = 3 --Autoslats will retract this many seconds after out of stall
+
+FLAP_STGS_DSP = {0, 1, 5, 15, 20, 25, 30}
+FLAP_STGS = {0, 1, 9, 15, 20, 25, 30}
+FLAP_STGS_CMB = {0, 1.5, 9.5, 15.5, 20.5, 26, 31}
+FLAP_HDL_DTTS = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
+
+--Passenger stuff
+PASS_SGN_OFF = 0
+PASS_SGN_AUTO = 1
+PASS_SGN_ON = 2
+PASS_AUTO_FLP_HDL_THR = 0.02 --If flap handle is more than this, pass signs on when auto
+PASS_AUTO_GEAR_THR = 0.01
+PASS_AUTO_BARO_THR_FT = 10000
+--Doors:
+PAX_DRS_RESP = 0.004
+CARGO_DRS_RESP = PAX_DRS_RESP/2
+EMER_SLIDE_RESP = 0.01
+HATCH_RESP = CARGO_DRS_RESP
+EICAS_DOOR_THRESH = 0.0001
+CARGO_DRS_EICAS_NM = {"FWD", "AFT", "BULK"}
+
 --XPLM
 
 XPLM_CMD_START = 0
 XPLM_CMD_CONTINUE = 1
 XPLM_CMD_END = 2
+
+--Joystick axes for sim/joystick/joy_mapped_axis_value
+JOY_PITCH_IDX = 2
+JOY_ROLL_IDX = 3
+JOY_HEADING_IDX = 4

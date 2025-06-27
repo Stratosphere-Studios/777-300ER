@@ -31,7 +31,19 @@ pitch_trim_A = createGlobalPropertyi("Strato/777/cockpit/switches/strim_A", 0)
 pitch_trim_B = createGlobalPropertyi("Strato/777/cockpit/switches/strim_B", 0)
 pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn", 0)
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
+caut_cap_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_cap", 0)
+caut_fo_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_fo", 0)
 --ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
+-- 0 off, 1 auto, 2 on
+pass_sgn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/pass_sgn", 0)
+no_smok_anim = createGlobalPropertyf("Strato/777/cockpit/switches/no_smok", 0)
+--0 off 1 on
+flap_altn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/altn_flaps", 0)
+autothr_arm_l_anim = createGlobalPropertyf("Strato/777/cockpit/switches/autothr_arm_l", 0)
+autothr_arm_r_anim = createGlobalPropertyf("Strato/777/cockpit/switches/autothr_arm_r", 0)
+-- -1 retract 0 off 1 extend
+flap_altn_re_anim = createGlobalPropertyf("Strato/777/cockpit/switches/altn_re", 0)
+
 
 show_fpv = createGlobalPropertyi("Strato/777/EFIS/fpv_on", 0)
 
@@ -45,6 +57,16 @@ ap_disc_bar = createGlobalPropertyi("Strato/777/mcp/ap_disc_bar", 0)
 flt_dir_pilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
 flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)
 
+caut_cap = createGlobalPropertyi("Strato/777/glareshield/caut_cap", 0)
+caut_fo = createGlobalPropertyi("Strato/777/glareshield/caut_fo", 0)
+flap_altn = createGlobalPropertyi("Strato/777/pedestal/flap_altn", 0)
+flap_altn_re = createGlobalPropertyi("Strato/777/pedestal/flap_altn_re", 0)
+
+pass_sgn = createGlobalPropertyi("Strato/777/overhead/pass_sgn", 0)
+no_smok = createGlobalPropertyi("Strato/777/overhead/no_smok", 0)
+
+autothr_arm_l = createGlobalPropertyi("Strato/777/mcp/autothr_arm_l", 1)
+autothr_arm_r = createGlobalPropertyi("Strato/777/mcp/autothr_arm_r", 1)
 
 --Systems datarefs
 
@@ -74,6 +96,39 @@ alt_alert = createGlobalPropertyi("Strato/777/autopilot/alt_alert", 0)
 
 fpv_pitch = createGlobalPropertyf("Strato/777/autopilot/fpv_pitch", 0)
 fpv_roll = createGlobalPropertyf("Strato/777/autopilot/fpv_roll", 0)
+--Flaps&slats
+flap_mode = createGlobalPropertyi("Strato/777/flaps/mode", 0)
+slat_mode = createGlobalPropertyi("Strato/777/slats/mode", 0)
+slat_tgt = createGlobalPropertyf("Strato/777/flaps/slat_tgt", 0)
+
+--Lights:
+lt_caut_cap = createGlobalPropertyi("Strato/777/cockpit/lights/caut_cap", 0)
+lt_warn_cap = createGlobalPropertyi("Strato/777/cockpit/lights/warn_cap", 0)
+lt_caut_fo = createGlobalPropertyi("Strato/777/cockpit/lights/caut_fo", 0)
+lt_warn_fo = createGlobalPropertyi("Strato/777/cockpit/lights/warn_fo", 0)
+lt_cab_ps = createGlobalPropertyi("Strato/777/cabin/lights/pass_sgn", 0)
+lt_cab_ns = createGlobalPropertyi("Strato/777/cabin/lights/no_smok", 0)
+--Door values: 1 open, 0 closed. 1 armed, 0 disarmed. Emergency slides: 1 deployed, 0 stowed
+--Pax doors:
+pax_drs_l_anim = createGlobalPropertyfa("Strato/777/doors/cabin_ent_L_anim", {0, 0, 0, 0, 0})
+pax_drs_r_anim = createGlobalPropertyfa("Strato/777/doors/cabin_ent_R_anim", {0, 0, 0, 0, 0})
+pax_drs_tgt_l = createGlobalPropertyia("Strato/777/doors/cabin_ent_L_tgt", {0, 0, 0, 0, 0})
+pax_drs_tgt_r = createGlobalPropertyia("Strato/777/doors/cabin_ent_R_tgt", {0, 0, 0, 0, 0})
+pax_drs_arm_l = createGlobalPropertyia("Strato/777/doors/cabin_ent_L_arm", {1, 1, 1, 1, 1})
+pax_drs_arm_r = createGlobalPropertyia("Strato/777/doors/cabin_ent_R_arm", {1, 1, 1, 1, 1})
+pax_drs_slide_l_anim = createGlobalPropertyfa("Strato/777/doors/cabin_L_slide_anim", {0, 0, 0, 0, 0})
+pax_drs_slide_r_anim = createGlobalPropertyfa("Strato/777/doors/cabin_R_slide_anim", {0, 0, 0, 0, 0})
+pax_drs_slide_l_tgt = createGlobalPropertyia("Strato/777/doors/cabin_L_slide_tgt", {0, 0, 0, 0, 0})
+pax_drs_slide_r_tgt = createGlobalPropertyia("Strato/777/doors/cabin_R_slide_tgt", {0, 0, 0, 0, 0})
+
+--Cargo doors&misc
+--Indexing: 1 front 2 aft, 3 bulk
+cargo_drs_anim = createGlobalPropertyfa("Strato/777/doors/cargo_anim", {0, 0, 0})
+cargo_drs_tgt = createGlobalPropertyia("Strato/777/doors/cargo_tgt", {0, 0, 0})
+--Hatches:
+--Indexing: 1 left engine cowl, 2 right engine cowl, 3 apu maint doors
+hatch_anim = createGlobalPropertyfa("Strato/777/doors/hatch_anim", {0, 0, 0})
+hatch_tgt = createGlobalPropertyia("Strato/777/doors/hatch_tgt", {0, 0, 0})
 
 --Failure datarefs
 
@@ -81,6 +136,14 @@ fbw_secondary_fail = createGlobalPropertyi("Strato/777/failures/fctl/secondary",
 fbw_direct_fail = createGlobalPropertyi("Strato/777/failures/fctl/direct", 0)
 autobrk_fail = createGlobalPropertyi("Strato/777/failures/gear/autobrake", 0)
 goofy_fault_haha = createGlobalPropertyi("Strato/777/failures/737max", 1)
+--Flaps
+flaps_jam_all_lt = createGlobalPropertyi("Strato/777/failures/fctl/flap_jam_l", 0)
+flaps_jam_all_rt = createGlobalPropertyi("Strato/777/failures/fctl/flap_jam_r", 0)
+--Slats
+slats_jam_all_inn = createGlobalPropertyi("Strato/777/failures/fctl/slat_jam_inn", 0)
+slats_jam_all_out = createGlobalPropertyi("Strato/777/failures/fctl/slat_jam_out", 0)
+-- Use the devmode dataref for a more comprehensive overview of what's happening
+devmode = createGlobalPropertyi("Strato/777/goku_area/devmode", 0)
 
 --test
 
@@ -111,7 +174,7 @@ components = {
 	--	fpsLimit = 50
 	--},
 	timers {},
-	elec_main {},
+	doors {},
 	tcas_main {},
 	speed_calc {},
 	hydraulics {},

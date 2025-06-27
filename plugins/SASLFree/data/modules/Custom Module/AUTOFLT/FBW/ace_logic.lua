@@ -9,7 +9,6 @@
 include("misc_tools.lua")
 include("constants.lua")
 include("thrust_asym_comp.lua")
-include("fbw_bite.lua")
 
 --Cockpit controls
 yoke_pitch_ratio = globalPropertyf("sim/cockpit2/controls/yoke_pitch_ratio")
@@ -267,7 +266,7 @@ function sendFLTdata()
     end
 end
 
-function SetSpeedbrkHandle(ext_cmd, hyd_sys_C_press, fctl_mode, lmw_past, rmw_past) --this is just some code for the speedbrake handle
+function SetSpeedbrkHandle(avg_cas, ext_cmd, hyd_sys_C_press, fctl_mode, lmw_past, rmw_past) --this is just some code for the speedbrake handle
     local all_onground = get(nw_onground) == 1 and get(lmw_onground) == 1 and get(rmw_onground) == 1
     local rev_deployed = (get(L_reverser_deployed) or get(R_reverser_deployed)) == 1
     local arm_mode_ext_cmd = ext_cmd
@@ -284,6 +283,9 @@ function SetSpeedbrkHandle(ext_cmd, hyd_sys_C_press, fctl_mode, lmw_past, rmw_pa
 	    	set(spoiler_handle, 0)
             arm_mode_ext_cmd = 0
 	    end
+    end
+    if get(throttle_pos) > 0.2 or avg_cas <= 100 or get(spoiler_handle) >= 0 then
+        arm_mode_ext_cmd = 0
     end
     return {get(lmw_onground), get(rmw_onground), arm_mode_ext_cmd}
 end
@@ -399,11 +401,10 @@ function FlprnTOHandler(sfc, idx)
 end
 
 function GetRollNeutral(flap_pos, neutral)
-    local flap_settings = {0, 1, 5, 15, 20, 25, 30}
-    local idx = getGreaterThan(flap_settings, flap_pos)
+    local idx = getGreaterThan(FLAP_STGS, flap_pos)
     if idx ~= 1 then
-        local tmp = (neutral[idx] - neutral[idx - 1]) / (flap_settings[idx] - flap_settings[idx - 1])
-        return tmp * (flap_pos - flap_settings[idx - 1]) + neutral[idx - 1]
+        local tmp = (neutral[idx] - neutral[idx - 1]) / (FLAP_STGS[idx] - FLAP_STGS[idx - 1])
+        return tmp * (flap_pos - FLAP_STGS[idx - 1]) + neutral[idx - 1]
     end
     return neutral[1]
 end
@@ -647,12 +648,10 @@ function update()
     set(sim_spoiler_handle, 1)
     local avg_alt_baro = (get(altitude_pilot) + get(altitude_stdby) + get(altitude_copilot)) / 3
     local avg_cas = lim((get(cas_pilot) + get(cas_copilot)) / 2, 1000, 0)
-    tmp = SetSpeedbrkHandle(spoiler_special_cmd, get(hyd_pressure, 2), get(fbw_mode), lmw_onground_past, rmw_onground_past)
+    tmp = SetSpeedbrkHandle(avg_cas, spoiler_special_cmd, get(hyd_pressure, 2), get(fbw_mode), lmw_onground_past, rmw_onground_past)
     lmw_onground_past = tmp[1]
     rmw_onground_past = tmp[2]
     spoiler_special_cmd = tmp[3]
-    UpdateSelfTest()
-	DoSelfTest()
     sendFLTdata()
     UpdateSpoilers(avg_cas, spoilers, spoiler_fail, ace_spoiler, spoiler_special_cmd, 0.32)
     UpdateRoll(avg_cas, avg_alt_baro, ail_L, ail_R, flp_L, flp_R, spoiler_special_cmd)

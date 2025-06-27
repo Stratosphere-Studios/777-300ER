@@ -26,6 +26,7 @@ man_brakes_R = globalPropertyf("Strato/777/gear/manual_braking_R")
 gear_lever = globalPropertyi("Strato/777/cockpit/switches/gear_tgt")
 spoiler_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
 sys_C_press = globalPropertyfae("Strato/777/hydraulics/press", 2)
+c_time = globalPropertyf("Strato/777/time/current")
 
 --Sim datarefs
 throttle_pos = globalPropertyf("sim/cockpit2/engine/actuators/throttle_jet_rev_ratio_all")
@@ -42,11 +43,16 @@ abrk_decel_kt_sec = {-2, -2.9, -3.6, -4.4, -5, -6}
 abrk_mode_cr = ABRK_MD_DISARM
 abrk_mode_pr = ABRK_MD_DISARM
 
+abrk_sw_pos_last = ABRK_MD_OFF
+abrk_time = ABRK_MD_OFF
+abrk_sw_pos_cr = ABRK_MD_OFF
+
 gs_last_kts = 0
 brk_apply = 0
 brk_wait = 0
 abrk_fail = 0
 sp_last = 0
+gear_lvr_last = 0
 
 function resetAutoBrk()
     abrk_err_last = 0
@@ -120,7 +126,11 @@ function updateMode(gnd_l, gnd_r, gear_lvr, abrk_pos, thr_pos)
     end
     updateWait(gnd_l, gnd_r, thr_pos)
     abrk_mode_pr = abrk_mode_cr
-    if gear_lvr == 0 and (abrk_mode_cr > ABRK_MD_DISARM or abrk_mode_cr == ABRK_MD_RTO) then
+    local is_raised = 0
+    if gear_lvr < gear_lvr_last then
+        is_raised = 1
+    end
+    if is_raised == 1 and (abrk_mode_cr > ABRK_MD_DISARM or abrk_mode_cr == ABRK_MD_RTO) then
         abrk_mode_cr = ABRK_MD_OFF
         return
     end
@@ -137,10 +147,11 @@ function updateMode(gnd_l, gnd_r, gear_lvr, abrk_pos, thr_pos)
     else
         brk_apply = 0
     end
+    gear_lvr_last = gear_lvr
 end
 
 function updateAutoBrk(gs_decel_kts, f_time)
-    updateMode(get(lmw_onground), get(rmw_onground), get(gear_lever), get(autobrk_mode), get(throttle_pos))
+    updateMode(get(lmw_onground), get(rmw_onground), get(gear_lever), abrk_sw_pos_cr, get(throttle_pos))
     if abrk_mode_cr > ABRK_MD_DISARM or abrk_mode_cr == ABRK_MD_RTO then
         if brk_apply == 1 then
             local cmd = getDecelCmd(get(t_theta))
@@ -155,6 +166,15 @@ end
 
 
 function update()
+    if get(c_time) > abrk_time+ABRK_SW_DELAY_SEC then
+        abrk_sw_pos_cr = abrk_sw_pos_last
+    end
+
+    if get(autobrk_mode) ~= abrk_sw_pos_last then
+        abrk_time = get(c_time)
+        abrk_sw_pos_last = get(autobrk_mode)
+    end
+
     local gs_kts = get(ground_speed_mps) * MPS_TO_KTS
     local f_t_sec = get(f_time)
     if f_t_sec ~= 0 then
@@ -165,8 +185,9 @@ function update()
     set(autobrk_act, abrk_tgt_cr)
     set(brk_act, abrk_tgt_cr)
     set(brk_wt, brk_wait)
-    if get(autobrk_mode) ~= abrk_mode_cr then
+    if abrk_sw_pos_cr ~= abrk_mode_cr then
         set(autobrk_mode, abrk_mode_cr)
+        abrk_sw_pos_last = abrk_mode_cr
     end
     gs_last_kts = gs_kts
     sp_last = get(spoiler_handle)
