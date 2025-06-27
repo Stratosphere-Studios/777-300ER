@@ -38,8 +38,7 @@ IN_REPLAY - evaluates to 0 if replay is off, 1 if replay mode is on
 
 --[[local B777_eag_claw_sync = 1
 local B777_eag_target = 0]]
-local avg_gear_pos;
-local avg_gear_door_pos;
+
 --*************************************************************************************--
 --**                              FIND X-PLANE DATAREFS                              **--
 --*************************************************************************************--
