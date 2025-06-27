@@ -353,10 +353,10 @@ end
 
 function switchCustomMode()
 	for i = 1, 3 do
-		local fms = i == 1 and "fmsL" or i == 2 and "fmsC" or "fmsR"
-		fmsModules[fms]["prevPage"] = fmsModules[fms]["currentPage"].."_"..fmsModules[fms]["pgNo"]
-		fmsModules[fms]["currentPage"] = fmsModules[fms]["targetPage"]
-		fmsModules[fms]["pgNo"] = fmsModules[fms]["targetpgNo"]
+		local fmsID = i == 1 and "fmsL" or i == 2 and "fmsC" or "fmsR"
+		fmsModules[fmsID]["prevPage"] = fmsModules[fmsID]["currentPage"].."_"..fmsModules[fmsID]["pgNo"]
+		fmsModules[fmsID]["currentPage"] = fmsModules[fmsID]["targetPage"]
+		fmsModules[fmsID]["pgNo"] = fmsModules[fmsID]["targetpgNo"]
 	end
 	print("updated display")
 end

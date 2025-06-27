@@ -551,44 +551,87 @@ function fms:B777_fms_display()
   local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
 
   for i, input in ipairs(fmsPage) do
-    -- could use gmatch iterator to allow multiple colorations in one line, or find to find occurances
-    local before, color, numChars, after = input:match("(.+);([ghrmc])(%d?%d)(.*)")
-    -- syntax: ;cn where c = color (g/h/r/m/c) and n = num previous chars to color
-    if color then
-      numChars = tostring(numChars)
-      local charsToColor = before:sub(-numChars, -1)
-      local colorOutput = string.rep(" ", #before-numChars)..charsToColor
-      local whiteOutput = before:sub(1, -numChars-1)..string.rep(" ", numChars)..after
+    local colorCount = select(2, input:gsub( ";", "")) -- how many ;'s are there
+    if colorCount ~= 0 then -- if any
+      local colorsCounted = 0
+      local remainingInput = input
 
-      B777DR_fms_gn[thisID][i] = color == "g" and colorOutput or ""
-      B777DR_fms_hl[thisID][i] = color == "h" and colorOutput or ""
-      B777DR_fms_gy[thisID][i] = color == "r" and colorOutput or ""
-      B777DR_fms_m[thisID][i] = color == "m" and colorOutput or ""
-      B777DR_fms_c[thisID][i] = color == "c" and colorOutput or ""
+      local colors = {
+        g = "",
+        h = "",
+        r = "",
+        m = "",
+        c = ""
+      }
+      local white = ""
 
-      B777DR_fms[thisID][i] = whiteOutput
+      for match in input:gmatch(";") do
+        colorsCounted = colorsCounted + 1
+        local before, color, numChars, after = remainingInput:match("(.-);([ghrmc])(%d?%d)(.*)") -- syntax: ;cn where c = color (g/h/r/m/c) and n = num previous chars to color
+        remainingInput = after
+        numChars = tostring(numChars)
+        local charsToColor = before:sub(-numChars, -1)
+
+        local spaces = string.rep(" ", #before)
+
+        for k, v in pairs(colors) do
+          if k == color then
+            colors[k] = v..string.rep(" ", #before-numChars)..charsToColor
+          else
+            colors[k] = v..spaces
+          end
+        end
+        white = white..before:sub(1, -numChars-1)..string.rep(" ", numChars)
+
+        if colorCount == colorsCounted then
+          white = white..remainingInput
+        end
+      end
+
+      B777DR_fms[thisID][i] = white
+      B777DR_fms_gn[thisID][i] = colors.g
+      B777DR_fms_hl[thisID][i] = colors.h
+      B777DR_fms_gy[thisID][i] = colors.r
+      B777DR_fms_m[thisID][i] =  colors.m
+      B777DR_fms_c[thisID][i] =  colors.c
     else
+      B777DR_fms[thisID][i] = input
       B777DR_fms_gn[thisID][i] = ""
       B777DR_fms_hl[thisID][i] = ""
       B777DR_fms_gy[thisID][i] = ""
       B777DR_fms_m[thisID][i] =  ""
       B777DR_fms_c[thisID][i] =  ""
-
-      B777DR_fms[thisID][i] = input
     end
   end
-  -- need to recur to get all colors if multiple. maybe use helper function that will do colored string and retrn white remainder to be called again
-
+  -- TODO: print an error message when invalid input. if you ever get an error around here check your color input... there is no safety in this code lol
+  -- maybe i can check for chars to color being <= #previous chars as well as an cases where it doesn't match ;g00
   for i, input in ipairs(fmsPagesmall) do
-    local before, color, numChars, after = input:match("(.+);(h)(%d?%d)(.*)")
-    if color then
+    local colorCount = select(2, input:gsub( ";", ""))
+    if colorCount ~= 0 then
+      local colorsCounted = 0
+      local hl = ""
+      local white = ""
+      local remainingInput = input
+
+      for match in input:gmatch(";") do
+        colorsCounted = colorsCounted + 1
+        local before, numChars, after = remainingInput:match("(.-);h(%d?%d)(.*)")
+        remainingInput = after
         numChars = tostring(numChars)
         local charsToColor = before:sub(-numChars, -1)
-        B777DR_fms_s_hl[thisID][i] = string.rep(" ", #before-numChars)..charsToColor
-        B777DR_fms_s[thisID][i] = before:sub(1, -numChars-1)..string.rep(" ", numChars)..after
+
+        hl = hl..string.rep(" ", #before-numChars)..charsToColor
+        white = white..before:sub(1, -numChars-1)..string.rep(" ", numChars)
+
+        if colorCount == colorsCounted then
+          white = white..remainingInput
+        end
+      end
+      B777DR_fms_s_hl[thisID][i] = hl
+      B777DR_fms_s[thisID][i] = white
     else
-        B777DR_fms_s_hl[thisID][i] = ""
-        B777DR_fms_s[thisID][i] = input
+      B777DR_fms_s_hl[thisID][i] = ""
+      B777DR_fms_s[thisID][i] = input
     end
   end
 
@@ -618,12 +661,11 @@ function fms:B777_fms_display()
 end
 
 -- test vors not showing frequency
-
 --[[  overview
 clr needs extra click
-key not active and readme dont show up until fmc act (change category)
+key not active and readme dont show up until fmc act (change category)]]
 
 
-
-
-]]
+--[[
+either throw an exception when bad input (error())
+or catch any exeptions when trying to do colors and output]]
