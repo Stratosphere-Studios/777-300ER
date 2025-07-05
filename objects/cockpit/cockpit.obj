@@ -11527,7 +11527,7 @@ IDX	9427
 	TRIS	3018 36
 	ATTR_manip_command	button	Strato/B777/button_switch/ovhd_c/eng_gen1	Left Engine Generator
 	TRIS	3054 36
-	ATTR_manip_command	up_down	Strato/777/commands/mcp/autothr_arm_l	Autothrottle Arm (Right)
+	ATTR_manip_command	up_down	Strato/777/commands/mcp/autothr_arm_r	Autothrottle Arm (Right)
 	TRIS	3090 36
 	ATTR_manip_toggle	button	1.000	0.000	sim/cockpit2/switches/ram_air_turbine_on	Ram Air Turbine
 	TRIS	3126 36
