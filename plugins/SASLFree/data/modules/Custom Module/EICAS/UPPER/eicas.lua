@@ -22,7 +22,20 @@ spoiler_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
 stab_trim = globalPropertyf("sim/cockpit2/controls/elevator_trim")
 ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
 --Electrical
-battery = globalPropertyiae("sim/cockpit2/electrical/battery_on", 1)
+battery_pos = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 1)
+battery = globalPropertyi("sim/cockpit/electrical/battery_on")
+left_main_bus_volts = globalPropertyf("Strato/777/cockpit/elec/left_main_bus_volts")
+left_xfr_bus_volts = globalPropertyf("Strato/777/cockpit/elec/left_xfr_bus_volts")
+right_main_bus_volts = globalPropertyf("Strato/777/cockpit/elec/right_main_bus_volts")
+right_xfr_bus_volts = globalPropertyf("Strato/777/cockpit/elec/right_xfr_bus_volts")
+bus_volts           = globalPropertyfae("sim/cockpit2/electrical/bus_volts", 1)
+apu_gen_off = globalPropertyi("Strato/777/cockpit/annunciator/elec/apu_gen_off")
+battery_amps = globalPropertyfae("sim/cockpit2/electrical/battery_amps", 1)
+left_bus_tie = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 13)
+right_bus_tie = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 14)
+pass_seats = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 11)
+cabin_util = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 12)
+
 gen_1 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 1)
 gen_2 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 2)
 --Indicators
@@ -153,7 +166,7 @@ FLP_TXT_LIST = {"F", "L", "A", "P", "S"}
 FLP_AD_THCK = 2
 
 flap_nml_rat = {0, 1/8, 1/5, 2/5, 3/5, 4/5, 1}
-adv_main = {"PRI FLIGHT COMPUTERS", "HYD PRESS SYS L", "HYD PRESS SYS C", "HYD PRESS SYS R",
+adv_main = { "PRI FLIGHT COMPUTERS", "HYD PRESS SYS L", "HYD PRESS SYS C", "HYD PRESS SYS R",
 	"FLIGHT CONTROLS", "FLAP/SLAT CONTROL"} -- Advisories after which to shift to the right
 
 function UpdateAdvisorySide(messages, text_L, text_R, text_both, dref_l, dref_r)
@@ -202,6 +215,54 @@ function UpdateCanc(n_adv, n_warn) --Updating cancel/recall
 	if get(c_time) >= tmp + 1 then
 		tmp = get(c_time)
 	end
+end
+
+
+function UpdateElec(messages)
+    if get(battery_pos) == 0 then
+        table.insert(messages, tlen(messages) + 1, "ELEC BATTERY OFF")
+	end
+
+	if get(battery) == 1 and get(battery_amps) < 0 then
+        table.insert(messages, tlen(messages) + 1, "MAIN BATTERY DISCH")
+	end
+
+	if get(gen_1) == 0 then
+		table.insert(messages, tlen(messages) + 1, "ELEC GEN OFF L")
+	end
+
+	if get(gen_2) == 0 then
+		table.insert(messages, tlen(messages) + 1, "ELEC GEN OFF R")
+	end
+
+	if get(apu_gen_off) == 1 then
+		table.insert(messages, tlen(messages) + 1, "ELEC GEN OFF APU")
+	end
+
+	if get(gen_1) == 0 then
+		table.insert(messages, tlen(messages) + 1, "ELEC GEN DRIVE L")
+	end
+
+	if get(gen_2) == 0 then
+		table.insert(messages, tlen(messages) + 1, "ELEC GEN DRIVE R")
+	end
+
+	if get(left_bus_tie) < 0.25 then
+		table.insert(messages, tlen(messages) + 1, "ELEC BUS ISLN L")
+	end
+
+	if get(right_bus_tie) < 0.25 then
+		table.insert(messages, tlen(messages) + 1, "ELEC BUS ISLN R")
+	end
+
+	if get(cabin_util) < 0.25 then
+		table.insert(messages, tlen(messages) + 1, "ELEC CABIN/UTIL OFF")
+	end
+
+	if get(pass_seats) < 0.25 then
+		table.insert(messages, tlen(messages) + 1, "ELEC IFE/SEATS OFF")
+	end
+
 end
 
 function UpdatePress(messages) --Update pressure advisories
@@ -743,6 +804,7 @@ function UpdateEicasAdvisory(messages)
 	if avg_cas < get(manuever_speed) and avg_cas > get(stall_speed) and get(on_ground) == 0 then
 		table.insert(messages, tlen(messages) + 1, "AIRSPEED LOW")
 	end
+	UpdateElec(messages)
 	UpdateEntryDoorAdvisory(messages)
 	UpdateCargoDoorAdvisory(messages)
 	UpdatePress(messages)
@@ -892,44 +954,47 @@ function draw()
 	local warnings = {}
 	local advisories = {}
 	local memo = {}
-	UpdateGearPos()
-	UpdateFlaps()
-	conf_warns_past = UpdateEicasWarnings(warnings, conf_warns_past)
-	if get(c_time) >= tmp1 + 1 then
-		UpdateEicasAdvisory(advisories)
-		advisories_past = advisories
-	end
-	n_warnings = tlen(warnings)
-	n_advisories = tlen(advisories_past)
-	n_dsp = n_advisories + n_warnings
 
-	UpdateCautionLights(n_advisories, n_warnings)
+	if get(bus_volts) > 0 then
+		UpdateGearPos()
+		UpdateFlaps()
+		conf_warns_past = UpdateEicasWarnings(warnings, conf_warns_past)
+		if get(c_time) >= tmp1 + 1 then
+			UpdateEicasAdvisory(advisories)
+			advisories_past = advisories
+		end
+		n_warnings = tlen(warnings)
+		n_advisories = tlen(advisories_past)
+		n_dsp = n_advisories + n_warnings
 
-	UpdateMemo(memo, 11 - n_dsp)
-	UpdateCanc(n_advisories, n_warnings)
-	DisplayMessages(warnings, offset, {1, 0, 0}, 50, 1, n_warnings)
-	offset = offset - 50 * n_warnings
-	if get(canc) == 0 or get(recall_past) == 1 then
-		if n_dsp > 11 then
-			local curr_pg = math.floor(advisories_start / (11 - n_warnings)) + 1
-			drawText(font, 1280, 740, "PG "..tostring(curr_pg), 30, false, false, TEXT_ALIGN_CENTER, {1, 1, 1})
+		UpdateCautionLights(n_advisories, n_warnings)
+
+		UpdateMemo(memo, 11 - n_dsp)
+		UpdateCanc(n_advisories, n_warnings)
+		DisplayMessages(warnings, offset, {1, 0, 0}, 50, 1, n_warnings)
+		offset = offset - 50 * n_warnings
+		if get(canc) == 0 or get(recall_past) == 1 then
+			if n_dsp > 11 then
+				local curr_pg = math.floor(advisories_start / (11 - n_warnings)) + 1
+				drawText(font, 1280, 740, "PG "..tostring(curr_pg), 30, false, false, TEXT_ALIGN_CENTER, {1, 1, 1})
+			end
+			if n_dsp - advisories_start < 10 then
+				curr_end = n_dsp - n_warnings
+			else
+				curr_end = advisories_start + 10 - n_warnings
+			end
+			DisplayMessages(advisories_past, offset, {1, 0.96, 0.07}, 50, advisories_start, curr_end)
 		end
-		if n_dsp - advisories_start < 10 then
-			curr_end = n_dsp - n_warnings
-		else
-			curr_end = advisories_start + 10 - n_warnings
+		DisplayMessages(memo, 775, {1, 1, 1}, -50, 1, tlen(memo))
+		if get(recall_past) == 1 and get(canc) == 1 then
+			drawText(font, 830, 740, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
 		end
-		DisplayMessages(advisories_past, offset, {1, 0.96, 0.07}, 50, advisories_start, curr_end)
-	end
-	DisplayMessages(memo, 775, {1, 1, 1}, -50, 1, tlen(memo))
-	if get(recall_past) == 1 and get(canc) == 1 then
-		drawText(font, 830, 740, "RECALL", 30, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
-	end
-	if get(flap_load_relief) == 1 then
-		drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
-		drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
-	end
-	if get(c_time) >= tmp1 + 2 then
-		tmp1 = get(c_time)
+		if get(flap_load_relief) == 1 then
+			drawText(font, 1130, 380, "LOAD", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+			drawText(font, 1130, 330, "RELIEF", 50, false, false, TEXT_ALIGN_LEFT, {1, 1, 1})
+		end
+		if get(c_time) >= tmp1 + 2 then
+			tmp1 = get(c_time)
+		end
 	end
 end
