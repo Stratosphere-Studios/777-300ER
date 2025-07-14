@@ -705,13 +705,16 @@ function B777_annunciators()
         B777DR_annun_mode = 0
     end
 
-    if annun_pwr == 1 then
+    local apu_self_test_active = simDR_apu_N1_percent > 0 and simDR_apu_N1_percent < 7
+    local apu_real_fault = simDR_apu_failed == 1 or B777DR_annun_mode == 1
 
-        if simDR_apu_failed == 1 or B777DR_annun_mode == 1 then
-            B777DR_annun_elec_apu_failed = 1
-        else
-            B777DR_annun_elec_apu_failed = 0
-        end
+    if simDR_battery[0] == 1 and (apu_real_fault or apu_self_test_active) then
+        B777DR_annun_elec_apu_failed = 1
+    else
+        B777DR_annun_elec_apu_failed = 0
+    end
+
+    if annun_pwr == 1 then
 
         if B777DR_ovhd_elec_button_pos[0] < 0.05 or B777DR_annun_mode == 1 then
             B777DR_annun_elec_battery_off = 1
@@ -752,7 +755,6 @@ function B777_annunciators()
 
         
     else
-        B777DR_annun_elec_apu_failed = 0
         B777DR_annun_elec_battery_off = 0
         B777DR_annun_elec_apu_gen_off = 0
 
@@ -769,6 +771,7 @@ function B777_annunciators()
         end
 
     end
+
 
     if simDR_battery[0] == 1 then
 
