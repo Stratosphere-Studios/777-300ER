@@ -707,8 +707,9 @@ function B777_annunciators()
 
     local apu_self_test_active = simDR_apu_N1_percent > 0 and simDR_apu_N1_percent < 7
     local apu_real_fault = simDR_apu_failed == 1 or B777DR_annun_mode == 1
+    local start_status = simDR_apu_switch_status == 1 or simDR_apu_switch_status == 2
 
-    if simDR_battery[0] == 1 and (apu_real_fault or apu_self_test_active) then
+    if simDR_battery[0] == 1 and start_status and (apu_real_fault or apu_self_test_active) then
         B777DR_annun_elec_apu_failed = 1
     else
         B777DR_annun_elec_apu_failed = 0
