@@ -750,15 +750,7 @@ function B777_annunciators()
             end
         end
 
-        for i = 0, 1 do
-            if B777DR_ovhd_elec_button_pos[5 + (i * 2)] > 0.95 and B777DR_ovhd_elec_button_pos[4 + (i * 2)] < 0.05 and simDR_eng_oil_pressure_low[i] == 0 and B777DR_annun_mode == 0 then
-                B777DR_annun_elec_gen_ctrl_off[i] = 0
-                B777DR_annun_elec_gen_drive[i] = 0
-            else
-                B777DR_annun_elec_gen_ctrl_off[i] = 1
-                B777DR_annun_elec_gen_drive[i] = 1
-            end
-        end
+        
     else
         B777DR_annun_elec_apu_failed = 0
         B777DR_annun_elec_battery_off = 0
@@ -776,11 +768,29 @@ function B777_annunciators()
             B777DR_annun_elec_gen_drive[i] = 0
         end
 
+    end
+
+    if simDR_battery[0] == 1 then
+
+        for i = 0, 1 do
+            if B777DR_ovhd_elec_button_pos[5 + (i * 2)] > 0.95 and B777DR_ovhd_elec_button_pos[4 + (i * 2)] < 0.05 and simDR_N2_percent_indicators[i] >= 60 and B777DR_annun_mode == 0 then
+                B777DR_annun_elec_gen_ctrl_off[i] = 0
+                B777DR_annun_elec_gen_drive[i] = 0
+            else
+                B777DR_annun_elec_gen_ctrl_off[i] = 1
+                B777DR_annun_elec_gen_drive[i] = 1
+            end
+        end
+
+    else
+
         for i = 0, 1 do
             B777DR_annun_elec_gen_ctrl_off[i] = 0
             B777DR_annun_elec_gen_drive[i] = 0
         end
+
     end
+
 end
 
 
