@@ -1,4 +1,4 @@
---[[ 
+--[[
 *****************************************************************************************
 * Script Name: Electrical System
 * Author Name: nathroxer
@@ -23,7 +23,7 @@ end
 --**                             FIND X-PLANE DATAREFS                               **--
 --*************************************************************************************--
 
-
+simDR_time_elapsed                             = find_dataref("sim/time/total_running_time_sec")
 simDR_startup_running                           = find_dataref("sim/operation/prefs/startup_running")
 simDR_battery                                   = find_dataref("sim/cockpit2/electrical/battery_on")
 simDR_gpu_on                                    = find_dataref("sim/cockpit/electrical/gpu_on")
@@ -151,6 +151,9 @@ B777DR_apu_batt_charging_status                 = deferred_dataref("Strato/777/c
 -- MISC
 
 B777DR_autoland_status                          = deferred_dataref("Strato/777/cockpit/autoland/status", "number") -- 0 = off, 2 = active
+
+B777DR_batt_amps_indicated                      = deferred_dataref("Strato/777/cockpit/elec/battery_amps_indicated", "number") -- Indicated battery amps
+B777DR_apu_batt_amps_indicated                  = deferred_dataref("Strato/777/cockpit/elec/battery_apu_amps_indicated", "number") -- Indicated battery amps
 
 
 function B777_battery()
@@ -378,10 +381,6 @@ function B777_bus_tie()
     -- Track each side separately
     local left_sources_taken = (simDR_generator_on[0] == 1) and 1 or 0
     local right_sources_taken = (simDR_generator_on[1] == 1) and 1 or 0
-
-    -- Set IDG statuses
-    AC_source_list[1].status = simDR_generator_on[1] -- RIGHT IDG
-    AC_source_list[2].status = simDR_generator_on[0] -- LEFT IDG
 
     for i = 3, 5 do
         local source = AC_source_list[i]
@@ -681,7 +680,7 @@ function B777_idg_gen()---------------------------------------------------------
         simDR_generator_on[0] = 0
     end
 
-    if B777DR_ovhd_elec_button_pos[6] < 0.05 and B777DR_ovhd_elec_button_pos[7] > 0.95 and simDR_N2_percent_indicators[0] > 60 then
+    if B777DR_ovhd_elec_button_pos[6] < 0.05 and B777DR_ovhd_elec_button_pos[7] > 0.95 and simDR_N2_percent_indicators[1] > 60 then
         simDR_generator_on[1] = 1
     else
         simDR_generator_on[1] = 0
@@ -797,8 +796,9 @@ function B777_annunciators()
 
 end
 
+function B777_battery_indications()
 
-
+end
 
 function B777_ext_pwr_primary_cmdHandler(phase, duration)
     if phase == 0 then
@@ -926,20 +926,21 @@ function flight_start()
 
     end
 
+
+    B777DR_left_main_bus_volts = 115
+    B777DR_right_main_bus_volts = 115
+    B777DR_left_xfr_bus_volts = 115
+    B777DR_right_xfr_bus_volts = 115
     annun_pwr = 0
     B777DR_annun_pos = 1
 	B777DR_annun_target = 1
     B777DR_annun_mode = 0
     B777DR_load_shed = 0
     B777DR_autoland_status = 0
-    B777DR_left_main_bus_volts = 0
-    B777DR_right_main_bus_volts = 0
-    B777DR_left_xfr_bus_volts = 0
-    B777DR_right_xfr_bus_volts = 0
-    
 end
 
 function after_physics()
+    --[[
     print(simDR_generator_on[0], simDR_generator_on[1], simDR_apu_gen_on, B777DR_ext_pwr_primary_switch_mode, B777DR_ext_pwr_secondary_switch_mode)
     print("load shed              " .. B777DR_load_shed)
     print("bus tie switches              " .. B777DR_bus_tie_test[0], B777DR_bus_tie_test[1])
@@ -947,6 +948,8 @@ function after_physics()
     print("right taken              " .. B777DR_right_AC_proximity[0], B777DR_right_AC_proximity[1], B777DR_right_AC_proximity[2], B777DR_right_AC_proximity[3])
     print("total AC                 " .. B777DR_AC_status[0], B777DR_AC_status[1], B777DR_AC_status[2], B777DR_AC_status[3], B777DR_AC_status[4])
     print("right idg gen status " .. simDR_generator_on[1], "left idg gen status " .. simDR_generator_on[0], "apu gen status " .. simDR_apu_gen_on, "ext pwr primary status " .. B777DR_primary_ext_pwr_on , "ext pwr secondary status " .. B777DR_secondary_ext_pwr_on)
+
+    ]]--
 
     B777DR_ovhd_elec_button_pos[0] = B777_animate(B777DR_ovhd_elec_button_target[0], B777DR_ovhd_elec_button_pos[0], 15)---battery
     B777DR_ovhd_elec_button_pos[3] = B777_animate(B777DR_ovhd_elec_button_target[3], B777DR_ovhd_elec_button_pos[3], 15)---apu gen
@@ -979,6 +982,6 @@ function after_physics()
     B777_bus_tie()            -- builds AC tables, must follow the above
     B777_apu()                -- uses ctr_AC from bus_tie()
     B777_annunciators()
-
+    B777_battery_indications()
     
 end

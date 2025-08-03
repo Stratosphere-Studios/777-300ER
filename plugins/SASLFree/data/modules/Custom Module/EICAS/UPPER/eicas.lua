@@ -35,9 +35,24 @@ left_bus_tie = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 13)
 right_bus_tie = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 14)
 pass_seats = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 11)
 cabin_util = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 12)
-
 gen_1 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 1)
 gen_2 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 2)
+--Fuel
+fuel_pump_left_fwd_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 1)
+fuel_pump_left_aft_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 2)
+fuel_pump_ctr_left_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 3)
+fuel_pump_ctr_right_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 4)
+fuel_pump_right_aft_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 5)
+fuel_pump_right_fwd_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 6)
+before_mix_left = globalPropertyiae("sim/flightmodel2/engines/has_fuel_flow_before_mixture", 1)
+before_mix_right = globalPropertyiae("sim/flightmodel2/engines/has_fuel_flow_before_mixture", 2)
+
+left_ctr_pump = globalPropertyiae("Strato/777/cockpit/fuel/pump/avail", 2) --Left center pump
+right_ctr_pump = globalPropertyiae("Strato/777/cockpit/fuel/pump/avail", 3) --Right center pump
+
+left_fuel_quantity = globalPropertyfae("sim/cockpit2/fuel/fuel_quantity", 1) --Left tank
+center_fuel_quantity = globalPropertyfae("sim/cockpit2/fuel/fuel_quantity", 2) --Center tank
+right_fuel_quantity = globalPropertyfae("sim/cockpit2/fuel/fuel_quantity", 3) --Right tank
 --Indicators
 ra_pilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_pilot")
 ra_copilot = globalPropertyf("sim/cockpit2/gauges/indicators/radio_altimeter_height_ft_copilot")
@@ -228,7 +243,7 @@ function UpdateElec(messages)
 	end
 
 	if get(gen_1) == 0 then
-		table.insert(messages, tlen(messages) + 1, "ELEC GEN OFF L")
+		table.insert(messages, tlen(messages) + 1, "FUEL QTY LOW")
 	end
 
 	if get(gen_2) == 0 then
@@ -290,6 +305,63 @@ function UpdatePress(messages) --Update pressure advisories
 	elseif get(pressure_L) >= 1200 and get(pressure_C) >= 1200 and get(pressure_R) < 1200 then
 		table.insert(messages, tlen(messages) + 1, "HYD PRESS SYS R")
 	end
+end
+
+function UpdateFuel(messages)
+    if get(before_mix_left) == 0 and get(before_mix_right) == 0 then
+        table.insert(messages, tlen(messages) + 1, "FUEL PRESS ENG L+R")
+	else
+		if get(before_mix_left) == 0 then
+			table.insert(messages, tlen(messages) + 1, "FUEL PRESS ENG L")
+		end
+		if get(before_mix_right) == 0 then
+			table.insert(messages, tlen(messages) + 1, "FUEL PRESS ENG R")
+		end
+	end
+
+	if get(left_fuel_quantity) < 4500 or get(right_fuel_quantity) < 4500 then --
+        table.insert(messages, tlen(messages) + 1, "FUEL QTY LOW")
+	end
+
+	local imbalance = math.abs(get(left_fuel_quantity) - get(right_fuel_quantity))
+
+	if imbalance > 1135 then
+		table.insert(messages, tlen(messages) + 1, "FUEL IMBALANCE")
+	end
+
+	if get(fuel_pump_ctr_left_powered) == 0 and get(fuel_pump_ctr_right_powered) == 0 and get(center_fuel_quantity) > 1500 then
+		table.insert(messages, tlen(messages) + 1, "FUEL IN CENTER")
+	end
+
+	if get(fuel_pump_ctr_left_powered) == 1 and get(fuel_pump_ctr_right_powered) == 1 and get(center_fuel_quantity) <= 1500 then
+		table.insert(messages, tlen(messages) + 1, "FUEL LOW CENTER")
+	end
+
+
+	if get(fuel_pump_ctr_left_powered) == 0 then
+		table.insert(messages, tlen(messages) + 1, "FUEL PUMP CENTER L")
+	end
+
+	if get(fuel_pump_ctr_right_powered) == 0 then
+		table.insert(messages, tlen(messages) + 1, "FUEL PUMP CENTER R")
+	end
+
+	if get(fuel_pump_left_fwd_powered) == 0 then
+		table.insert(messages, tlen(messages) + 1, "FUEL PUMP L FWD")
+	end
+
+	if get(fuel_pump_left_aft_powered) == 0 then
+		table.insert(messages, tlen(messages) + 1, "FUEL PUMP L AFT")
+	end
+
+	if get(fuel_pump_right_fwd_powered) == 0 then
+		table.insert(messages, tlen(messages) + 1, "FUEL PUMP R FWD")
+	end
+
+	if get(fuel_pump_right_aft_powered) == 0 then
+		table.insert(messages, tlen(messages) + 1, "FUEL PUMP R AFT")
+	end
+
 end
 
 function checkGearDoors()
@@ -804,10 +876,13 @@ function UpdateEicasAdvisory(messages)
 	if avg_cas < get(manuever_speed) and avg_cas > get(stall_speed) and get(on_ground) == 0 then
 		table.insert(messages, tlen(messages) + 1, "AIRSPEED LOW")
 	end
+	
 	UpdateElec(messages)
 	UpdateEntryDoorAdvisory(messages)
 	UpdateCargoDoorAdvisory(messages)
 	UpdatePress(messages)
+	UpdateFuel(messages)
+
 	if get(spoiler_handle) > 0 then
 		if avg_ra > 15 and (avg_ra < 800 or get(flap_handle) >= 0.5 or get(throttle_pos) > 0.1) then
 			table.insert(messages, tlen(messages) + 1, "SPEEDBRAKE EXTENDED")

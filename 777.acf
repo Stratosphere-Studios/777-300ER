@@ -11110,9 +11110,9 @@ P _strut_t1 0.128906250
 P _strut_t2 0.252929688
 P _wing/0/_Croot 43.110000610
 P _wing/0/_Ctip 27.200000763
-P _wing/0/_afl_file_1 root.afl
-P _wing/0/_afl_file_2 root.afl
-P _wing/0/_afl_file_3 mid1.afl
+P _wing/0/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/0/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/0/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/0/_ailn1/0 0
 P _wing/0/_ailn1/1 0
 P _wing/0/_ailn1/2 0
@@ -12913,9 +12913,9 @@ P _wing/0/_yawbr/count 10
 P _wing/0/_yawbr_hyd0123 0
 P _wing/1/_Croot 43.110000610
 P _wing/1/_Ctip 27.200000763
-P _wing/1/_afl_file_1 root.afl
-P _wing/1/_afl_file_2 root.afl
-P _wing/1/_afl_file_3 mid1.afl
+P _wing/1/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/1/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/1/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/1/_ailn1/0 0
 P _wing/1/_ailn1/1 0
 P _wing/1/_ailn1/2 0
@@ -14716,9 +14716,9 @@ P _wing/1/_yawbr/count 10
 P _wing/1/_yawbr_hyd0123 0
 P _wing/11/_Croot 29.350000381
 P _wing/11/_Ctip 8.810000420
-P _wing/11/_afl_file_1 vstab.afl
-P _wing/11/_afl_file_2 vstab.afl
-P _wing/11/_afl_file_3 vstab.afl
+P _wing/11/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/11/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/11/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/11/_ailn1/0 0
 P _wing/11/_ailn1/1 0
 P _wing/11/_ailn1/2 0
@@ -16519,9 +16519,9 @@ P _wing/11/_yawbr/count 10
 P _wing/11/_yawbr_hyd0123 0
 P _wing/2/_Croot 27.200000763
 P _wing/2/_Ctip 13.390000343
-P _wing/2/_afl_file_1 mid1.afl
-P _wing/2/_afl_file_2 mid1.afl
-P _wing/2/_afl_file_3 mid2.afl
+P _wing/2/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/2/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/2/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/2/_ailn1/0 0
 P _wing/2/_ailn1/1 0
 P _wing/2/_ailn1/2 0
@@ -18322,9 +18322,9 @@ P _wing/2/_yawbr/count 10
 P _wing/2/_yawbr_hyd0123 0
 P _wing/3/_Croot 27.200000763
 P _wing/3/_Ctip 13.390000343
-P _wing/3/_afl_file_1 mid1.afl
-P _wing/3/_afl_file_2 mid1.afl
-P _wing/3/_afl_file_3 mid2.afl
+P _wing/3/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/3/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/3/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/3/_ailn1/0 0
 P _wing/3/_ailn1/1 0
 P _wing/3/_ailn1/2 0
@@ -23731,9 +23731,9 @@ P _wing/33/_yawbr/count 10
 P _wing/33/_yawbr_hyd0123 0
 P _wing/4/_Croot 13.390000343
 P _wing/4/_Ctip 6.989999771
-P _wing/4/_afl_file_1 mid2.afl
-P _wing/4/_afl_file_2 mid2.afl
-P _wing/4/_afl_file_3 tip.afl
+P _wing/4/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/4/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/4/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/4/_ailn1/0 0
 P _wing/4/_ailn1/1 0
 P _wing/4/_ailn1/2 0
@@ -25534,9 +25534,9 @@ P _wing/4/_yawbr/count 10
 P _wing/4/_yawbr_hyd0123 0
 P _wing/5/_Croot 13.390000343
 P _wing/5/_Ctip 6.989999771
-P _wing/5/_afl_file_1 mid2.afl
-P _wing/5/_afl_file_2 mid2.afl
-P _wing/5/_afl_file_3 tip.afl
+P _wing/5/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/5/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/5/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/5/_ailn1/0 0
 P _wing/5/_ailn1/1 0
 P _wing/5/_ailn1/2 0
@@ -27337,9 +27337,9 @@ P _wing/5/_yawbr/count 10
 P _wing/5/_yawbr_hyd0123 0
 P _wing/6/_Croot 6.989999771
 P _wing/6/_Ctip 2.299999952
-P _wing/6/_afl_file_1 tip.afl
-P _wing/6/_afl_file_2 tip.afl
-P _wing/6/_afl_file_3 tip.afl
+P _wing/6/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/6/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/6/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/6/_ailn1/0 0
 P _wing/6/_ailn1/1 0
 P _wing/6/_ailn1/2 0
@@ -29140,9 +29140,9 @@ P _wing/6/_yawbr/count 10
 P _wing/6/_yawbr_hyd0123 0
 P _wing/7/_Croot 6.989999771
 P _wing/7/_Ctip 2.299999952
-P _wing/7/_afl_file_1 tip.afl
-P _wing/7/_afl_file_2 tip.afl
-P _wing/7/_afl_file_3 tip.afl
+P _wing/7/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/7/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/7/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/7/_ailn1/0 0
 P _wing/7/_ailn1/1 0
 P _wing/7/_ailn1/2 0
@@ -30943,9 +30943,9 @@ P _wing/7/_yawbr/count 10
 P _wing/7/_yawbr_hyd0123 0
 P _wing/8/_Croot 23.489999771
 P _wing/8/_Ctip 7.909999847
-P _wing/8/_afl_file_1 hstabroot.afl
-P _wing/8/_afl_file_2 hstabroot.afl
-P _wing/8/_afl_file_3 hstabtip.afl
+P _wing/8/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/8/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/8/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/8/_ailn1/0 0
 P _wing/8/_ailn1/1 0
 P _wing/8/_ailn1/2 0
@@ -32746,9 +32746,9 @@ P _wing/8/_yawbr/count 10
 P _wing/8/_yawbr_hyd0123 0
 P _wing/9/_Croot 23.489999771
 P _wing/9/_Ctip 7.909999847
-P _wing/9/_afl_file_1 hstabroot.afl
-P _wing/9/_afl_file_2 hstabroot.afl
-P _wing/9/_afl_file_3 hstabtip.afl
+P _wing/9/_afl_file_1 NACA 0012 (symmetrical).afl
+P _wing/9/_afl_file_2 NACA 0012 (symmetrical).afl
+P _wing/9/_afl_file_3 NACA 0012 (symmetrical).afl
 P _wing/9/_ailn1/0 0
 P _wing/9/_ailn1/1 0
 P _wing/9/_ailn1/2 0
@@ -36776,7 +36776,7 @@ P acf/_feathered_pitch 0.000000000
 P acf/_ff_rat_idle_JET 0.100000001
 P acf/_ff_rat_idle_PRP 0.250000000
 P acf/_ff_rat_idle_turbo 0.250000000
-P acf/_file_writer_version 122015
+P acf/_file_writer_version 122103
 P acf/_fixed_max/0 1.5E5
 P acf/_fixed_max/1 1.5E5
 P acf/_fixed_max/2 8.75E4
@@ -37718,7 +37718,7 @@ P acf/_tank_part_en/7 -8
 P acf/_tank_part_en/8 -8
 P acf/_tank_part_en/count 9
 P acf/_tank_psi/0 25.000000000
-P acf/_tank_psi/1 35.000000000
+P acf/_tank_psi/1 30.000000000
 P acf/_tank_psi/2 25.000000000
 P acf/_tank_psi/3 10.000000000
 P acf/_tank_psi/4 10.000000000
@@ -37747,9 +37747,9 @@ P acf/_tank_rat_def/6 0.500000000
 P acf/_tank_rat_def/7 0.500000000
 P acf/_tank_rat_def/8 0.500000000
 P acf/_tank_rat_def/count 9
-P acf/_tank_role/0 0
+P acf/_tank_role/0 1
 P acf/_tank_role/1 0
-P acf/_tank_role/2 0
+P acf/_tank_role/2 1
 P acf/_tank_role/3 0
 P acf/_tank_role/4 0
 P acf/_tank_role/5 0
@@ -45179,13 +45179,15 @@ GROUP Lower Eicas
   GROUP ELEC
     SHOW_EQUAL 3.000000 Strato/777/displays/eicas_mode
     LOCKED
-    GROUP_OPEN
+    HIDE
+    CHAINED
     gen_rotary Background
       POS 3410.000000 414.000000
       IMAGE EICAS lower/ELEC/elec_background
       DATAREF 
       SIZE 1.350000
       LOCKED
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45208,6 +45210,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/gpu_on
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/gpu_on[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45230,6 +45233,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/gpu_on
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/gpu_on
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45253,6 +45257,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [0]
       SHOW_GREATER 95.000000 sim/cockpit2/electrical/APU_N1_percent
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45275,6 +45280,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/bus_tie_left_open
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/bus_tie_left_open[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45297,6 +45303,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/bus_tie_right_open
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/bus_tie_right_open[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45321,6 +45328,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 0.000000 [0]
       SHOW_GREATER 30.000000 Strato/777/cockpit/elec/left_main_bus_volts[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45343,6 +45351,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/left_xfr_bus_volts[1]
       SHOW_GREATER 30.000000 Strato/777/cockpit/elec/left_xfr_bus_volts[1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45365,6 +45374,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/right_main_bus_volts[3]
       SHOW_GREATER 30.000000 Strato/777/cockpit/elec/right_main_bus_volts[3]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45387,6 +45397,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/right_xfr_bus_volts[2]
       SHOW_GREATER 30.000000 Strato/777/cockpit/elec/right_xfr_bus_volts[2]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45410,6 +45421,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [0]
       SHOW_GREATER 60.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45432,6 +45444,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/electrical/generator_on[0]
       SHOW_EQUAL 1.000000 sim/cockpit2/electrical/generator_on[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45455,6 +45468,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [0]
       SHOW_GREATER 60.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45478,6 +45492,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [0]
       SHOW_GREATER 60.000000 sim/cockpit2/engine/indicators/N2_percent[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45502,6 +45517,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/oil_pressure_low[0]
       SHOW_GREATER 60.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45525,6 +45541,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [1]
       SHOW_GREATER 60.000000 sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45547,6 +45564,7 @@ GROUP Lower Eicas
       DATAREF sim/cockpit2/electrical/generator_on[1]
       SHOW_EQUAL 1.000000 sim/cockpit2/electrical/generator_on[1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45570,6 +45588,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [1]
       SHOW_GREATER 60.000000 sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45593,6 +45612,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/autoland/status[1]
       SHOW_GREATER 60.000000 [1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45616,6 +45636,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 [1]
       SHOW_GREATER 60.000000 sim/cockpit2/engine/indicators/N2_percent[1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45640,6 +45661,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 sim/cockpit2/annunciators/oil_pressure_low[1]
       SHOW_GREATER 60.000000 [1]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45662,6 +45684,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/primary_ext_pwr_on
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/primary_ext_pwr_on[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45684,6 +45707,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/sec_ext_pwr_direction
       SHOW_EQUAL 0.000000 Strato/777/cockpit/elec/sec_ext_pwr_direction[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45706,6 +45730,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/sec_ext_pwr_direction
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/sec_ext_pwr_direction[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45728,6 +45753,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/apu_gen_direction
       SHOW_EQUAL 0.000000 Strato/777/cockpit/elec/apu_gen_direction[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45750,6 +45776,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/apu_gen_direction
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/apu_gen_direction[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45772,6 +45799,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/flow_sharing
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/flow_sharing[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45794,6 +45822,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/left_TBB
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/left_TBB[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45816,6 +45845,7 @@ GROUP Lower Eicas
       DATAREF Strato/777/cockpit/elec/right_TBB
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/right_TBB[0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45840,6 +45870,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/left_util_avail[0]
       SHOW_GREATER 95.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45864,6 +45895,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/right_util_avail[0]
       SHOW_GREATER 95.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45888,6 +45920,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/load_shed[0]
       SHOW_GREATER 95.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45912,6 +45945,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/load_shed[0]
       SHOW_GREATER 95.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45936,6 +45970,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/batt_charging_status[0]
       SHOW_GREATER 95.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45960,6 +45995,7 @@ GROUP Lower Eicas
       SHOW_EQUAL 1.000000 Strato/777/cockpit/elec/apu_batt_charging_status[0]
       SHOW_GREATER 95.000000 [0]
       SIZE 1.350000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45981,6 +46017,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/battery_amps[1]
       SIZE 2.000000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -45997,6 +46034,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/battery_amps[0]
       SIZE 2.000000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -46013,6 +46051,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/battery_voltage_actual_volts[0]
       SIZE 2.000000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -46029,6 +46068,7 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF sim/cockpit2/electrical/battery_voltage_actual_volts[1]
       SIZE 2.000000
+      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48353,16 +48393,1114 @@ GROUP Lower Eicas
   END_GROUP
   GROUP FUEL
     SHOW_EQUAL 6.000000 Strato/777/displays/eicas_mode
-    LOCKED
-    HIDE
-    CHAINED
+    GROUP_OPEN
     gen_rotary Background
-      POS 3411.000000 414.000000
+      POS 3411.333252 414.000000
       IMAGE EICAS lower/FUEL/fuel_background
       DATAREF 
       SIZE 1.350000
-      LOCKED
-      HIDE
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary fwd_crossfeed_close
+      POS 3411.500000 795.500000
+      IMAGE EICAS lower/FUEL/valve_closed_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/open[0]
+      SHOW_EQUAL 0.000000 Strato/777/cockpit/fuel/crossfeed/open[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary fwd_crossfeed_open
+      POS 3413.000000 795.666687
+      IMAGE EICAS lower/FUEL/valve_open_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/open[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/crossfeed/open[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary aft_crossfeed_close
+      POS 3411.500000 658.500000
+      IMAGE EICAS lower/FUEL/valve_closed_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/open[1]
+      SHOW_EQUAL 0.000000 Strato/777/cockpit/fuel/crossfeed/open[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary aft_crossfeed_open
+      POS 3413.000000 658.666687
+      IMAGE EICAS lower/FUEL/valve_open_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/open[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/crossfeed/open[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_eng_valve_clo
+      POS 3694.500000 881.500000
+      IMAGE EICAS lower/FUEL/valve_closed
+      DATAREF sim/cockpit2/engine/actuators/mixture_ratio[1]
+      SHOW_EQUAL 0.000000 sim/cockpit2/engine/actuators/mixture_ratio[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_eng_valve_ope
+      POS 3695.500000 878.500000
+      IMAGE EICAS lower/FUEL/valve_open
+      DATAREF sim/cockpit2/engine/actuators/mixture_ratio[1]
+      SHOW_EQUAL 1.000000 [1]
+      SHOW_GREATER 0.050000 sim/cockpit2/engine/actuators/mixture_ratio[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_spar_valve_cl
+      POS 3694.500000 1007.500000
+      IMAGE EICAS lower/FUEL/valve_closed
+      DATAREF Strato/777/cockpit/fuel/spar_valve_open[1]
+      SHOW_EQUAL 0.000000 Strato/777/cockpit/fuel/spar_valve_open[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_spar_valve_op
+      POS 3695.500000 1004.500000
+      IMAGE EICAS lower/FUEL/valve_open
+      DATAREF Strato/777/cockpit/fuel/spar_valve_open[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/spar_valve_open[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_spar_valve_clo
+      POS 3128.500000 1007.500000
+      IMAGE EICAS lower/FUEL/valve_closed
+      DATAREF Strato/777/cockpit/fuel/spar_valve_open[0]
+      SHOW_EQUAL 0.000000 Strato/777/cockpit/fuel/spar_valve_open[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_spar_valve_ope
+      POS 3129.500000 1004.500000
+      IMAGE EICAS lower/FUEL/valve_open
+      DATAREF Strato/777/cockpit/fuel/spar_valve_open[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/spar_valve_open[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_eng_valve_clos
+      POS 3128.500000 881.500000
+      IMAGE EICAS lower/FUEL/valve_closed
+      DATAREF sim/cockpit2/engine/actuators/mixture_ratio[0]
+      SHOW_EQUAL 0.000000 sim/cockpit2/engine/actuators/mixture_ratio[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_eng_valve_open
+      POS 3129.500000 878.500000
+      IMAGE EICAS lower/FUEL/valve_open
+      DATAREF sim/cockpit2/engine/actuators/mixture_ratio[0]
+      SHOW_EQUAL 1.000000 [0]
+      SHOW_GREATER 0.050000 sim/cockpit2/engine/actuators/mixture_ratio[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary apu_fuel
+      POS 3002.500000 855.000000
+      IMAGE EICAS lower/FUEL/apu
+      DATAREF Strato/777/cockpit/fuel/apu/active
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/apu/active
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_fwd_supply
+      POS 2955.000000 846.500000
+      IMAGE EICAS lower/FUEL/left_fwd_pump_flow
+      DATAREF Strato/777/cockpit/fuel/pump/supply[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/supply[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_aft_supply
+      POS 2955.000000 777.000000
+      IMAGE EICAS lower/FUEL/left_aft_pump_flow
+      DATAREF Strato/777/cockpit/fuel/pump/supply[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/supply[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_ctr_supply
+      POS 3250.500000 571.000000
+      IMAGE EICAS lower/FUEL/ctr_left_pump_flow
+      DATAREF Strato/777/cockpit/fuel/pump/supply[2]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/supply[2]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_fwd_supply
+      POS 3869.000000 846.500000
+      IMAGE EICAS lower/FUEL/right_fwd_pump_flow
+      DATAREF Strato/777/cockpit/fuel/pump/supply[5]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/supply[5]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_aft_supply
+      POS 3869.000000 777.000000
+      IMAGE EICAS lower/FUEL/right_aft_pump_flow
+      DATAREF Strato/777/cockpit/fuel/pump/supply[4]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/supply[4]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_ctr_supply
+      POS 3573.500000 571.000000
+      IMAGE EICAS lower/FUEL/ctr_right_pump_flow
+      DATAREF Strato/777/cockpit/fuel/pump/supply[3]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/supply[3]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary apu_supply
+      POS 3026.000000 856.000000
+      IMAGE EICAS lower/FUEL/apu_flow
+      DATAREF Strato/777/cockpit/fuel/apu/synoptic
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/apu/synoptic[3]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_eng_supply
+      POS 3129.500000 905.000000
+      IMAGE EICAS lower/FUEL/eng_flow
+      DATAREF Strato/777/cockpit/fuel/spar_valve_open[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/spar_valve_open[0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_eng_supply
+      POS 3693.500000 905.000000
+      IMAGE EICAS lower/FUEL/eng_flow
+      DATAREF Strato/777/cockpit/fuel/spar_valve_open[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/spar_valve_open[1]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_crossfeed_nor
+      POS 3128.500000 727.500000
+      IMAGE EICAS lower/FUEL/left_crossfeed_normal
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_crossfeed_T
+      POS 3412.000000 726.500000
+      IMAGE EICAS lower/FUEL/left_crossfeed_T
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_EQUAL 2.000000 Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_down_crossfeed
+      POS 3411.000000 726.500000
+      IMAGE EICAS lower/FUEL/left_down_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_EQUAL 3.000000 Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_up_crossfeed
+      POS 3411.000000 726.500000
+      IMAGE EICAS lower/FUEL/left_up_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_EQUAL 4.000000 Strato/777/cockpit/fuel/crossfeed/dir[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_crossfeed_nor
+      POS 3694.500000 727.500000
+      IMAGE EICAS lower/FUEL/right_crossfeed_normal
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_crossfeed_T
+      POS 3411.000000 726.500000
+      IMAGE EICAS lower/FUEL/right_crossfeed_T
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_EQUAL 2.000000 Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_down_crossfee
+      POS 3412.000000 726.500000
+      IMAGE EICAS lower/FUEL/right_down_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_EQUAL 3.000000 Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_up_crossfee
+      POS 3411.000000 726.500000
+      IMAGE EICAS lower/FUEL/right_up_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_EQUAL 4.000000 Strato/777/cockpit/fuel/crossfeed/dir[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_fwd_avail
+      POS 2819.500000 651.500000
+      IMAGE EICAS lower/FUEL/pump_avail
+      DATAREF Strato/777/cockpit/fuel/pump/avail[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/avail[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_fwd_fail
+      POS 2819.500000 651.500000
+      IMAGE EICAS lower/FUEL/pump_fail
+      DATAREF Strato/777/cockpit/fuel/pump/failure[0]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/failure[0]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_aft_avail
+      POS 2819.500000 513.500000
+      IMAGE EICAS lower/FUEL/pump_avail
+      DATAREF Strato/777/cockpit/fuel/pump/avail[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/avail[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_aft_fail
+      POS 2819.500000 513.500000
+      IMAGE EICAS lower/FUEL/pump_fail
+      DATAREF Strato/777/cockpit/fuel/pump/failure[1]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/failure[1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_ctr_avail
+      POS 3329.500000 452.500000
+      IMAGE EICAS lower/FUEL/pump_avail
+      DATAREF Strato/777/cockpit/fuel/pump/avail[2]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/avail[2]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary left_ctr_fail
+      POS 3328.500000 452.500000
+      IMAGE EICAS lower/FUEL/pump_fail
+      DATAREF Strato/777/cockpit/fuel/pump/failure[2]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/failure[2]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_ctr_avail
+      POS 3495.500000 452.500000
+      IMAGE EICAS lower/FUEL/pump_avail
+      DATAREF Strato/777/cockpit/fuel/pump/avail[3]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/avail[3]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_ctr_fail
+      POS 3494.500000 452.500000
+      IMAGE EICAS lower/FUEL/pump_fail
+      DATAREF Strato/777/cockpit/fuel/pump/failure[3]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/failure[3]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_aft_avail
+      POS 4004.500000 513.500000
+      IMAGE EICAS lower/FUEL/pump_avail
+      DATAREF Strato/777/cockpit/fuel/pump/avail[4]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/avail[4]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_aft_fail
+      POS 4002.500000 512.500000
+      IMAGE EICAS lower/FUEL/pump_fail
+      DATAREF Strato/777/cockpit/fuel/pump/failure[4]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/failure[4]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_fwd_avail
+      POS 4004.500000 651.500000
+      IMAGE EICAS lower/FUEL/pump_avail
+      DATAREF Strato/777/cockpit/fuel/pump/avail[5]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/avail[5]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary right_fwd_fail
+      POS 4002.500000 651.500000
+      IMAGE EICAS lower/FUEL/pump_fail
+      DATAREF Strato/777/cockpit/fuel/pump/failure[5]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/pump/failure[5]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary fwd_crossfeed_suppl
+      POS 3412.500000 762.000000
+      IMAGE EICAS lower/FUEL/fwd_crossfeed
+      DATAREF Strato/777/cockpit/fuel/crossfeed/active[3]
+      SHOW_EQUAL 1.000000 Strato/777/cockpit/fuel/crossfeed/active[3]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary aft_crossfeed_suppl
+      POS 3414.500000 693.000000
+      IMAGE EICAS lower/FUEL/aft_crossfeed
+      DATAREF sim/aircraft/engine/acf_APU_fuelflow_kgh
+      SHOW_EQUAL 2.000000 Strato/777/cockpit/fuel/crossfeed/active[3]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED min fuel temp
+      POS 3161.000000 -165.000000
+      IMAGE White_size23_stretched_vert_no_lead0
+      DATAREF Strato/777/cockpit/fuel/min_temp[0]
+      SIZE 2.000000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 0
+      ROUNDING ROUND_ROUND
+
+    gen_rotary min fuel temp negat
+      POS 3094.000000 -163.999985
+      IMAGE EICAS lower/FUEL/negative
+      DATAREF sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+      SHOW_LESS -0.400000 sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+      SHOW_EQUAL 1.000000 [1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_LED fuel temp
+      POS 3161.000000 -213.000000
+      IMAGE White_size23_stretched_vert_no_lead0
+      DATAREF Strato/777/cockpit/fuel/temp[0]
+      SIZE 2.000000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 360.000000 360.000000
+      DIGITS 3
+      DECIMALS 0
+      PERIOD_WIDTH 0
+      LED_ROWS 0
+      ROUNDING ROUND_ROUND
+
+    gen_rotary fuel temp negative
+      POS 3094.000000 -212.000000
+      IMAGE EICAS lower/FUEL/negative
+      DATAREF sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+      SHOW_LESS -1.000000 sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+      SHOW_EQUAL 1.000000 [1]
+      SHOW_GREATER 0.050000 [0]
+      SIZE 1.350000
+      LIGHT_MODE GLASS_AUTO
+      LIGHT_RHEOSTAT 5
+      BUS_SRC 1
+      KEY_FRAME 0.000000 0.000000 1.000000
+      KEY_FRAME 1.000000 6.000000
+      DIGITS 1
+      ROTARY_TYPE NO_CLICK
+      CLICK_RADIUS 10.000000
+      CLICK_RADIUS_DY 0.000000
+      OFFSET 0.000000
+      STEP1 1.000000
+      STEP2 1.000000
+      CURSOR DEFAULT
+      CLICK_DX 0
+      CLICK_DY 0
+
+    gen_rotary fuel temp positive
+      POS 3094.333252 -211.666656
+      IMAGE EICAS lower/FUEL/positive
+      DATAREF sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+      SHOW_LESS -0.400000 [0]
+      SHOW_EQUAL 1.000000 [1]
+      SHOW_GREATER 1.000000 sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+      SIZE 1.350000
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48385,8 +49523,6 @@ GROUP Lower Eicas
       DATAREF 
       SHOW_EQUAL 0.000000 Strato/777/lbs_kgs
       SIZE 1.360000
-      LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 1
       BUS_SRC 1
@@ -48408,8 +49544,6 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs_kgs_total
       SIZE 2.000000
-      LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48426,8 +49560,6 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs_kgs[0]
       SIZE 2.000000
-      LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48444,8 +49576,6 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs_kgs[1]
       SIZE 2.000000
-      LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48462,8 +49592,6 @@ GROUP Lower Eicas
       IMAGE White_size23_stretched_vert_no_lead0
       DATAREF Strato/777/displays/fuel_lbs_kgs[2]
       SIZE 2.000000
-      LOCKED
-      HIDE
       LIGHT_MODE GLASS_AUTO
       LIGHT_RHEOSTAT 5
       BUS_SRC 1
@@ -48710,16 +49838,12 @@ GROUP Lower Eicas
   END_GROUP
 END_GROUP
 GROUP Upper Eicas
-  LOCKED
-  HIDE
-  CHAINED
+  GROUP_OPEN
   gen_rotary Background
     POS 3414.000000 1800.000000
-    IMAGE EICAS upper/eng_background
+    IMAGE EICAS upper/EICAS_background
     DATAREF 
     SIZE 1.360000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48736,14 +49860,60 @@ GROUP Upper Eicas
     CLICK_DX 0
     CLICK_DY 0
 
+  gen_LED fuel_L
+    POS 3735.000000 1291.000000
+    IMAGE White_size23_stretched_vert_no_lead0
+    DATAREF Strato/777/displays/fuel_lbs_kgs[0]
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 5
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1000.000000 1.000000
+    DIGITS 3
+    DECIMALS 1
+    PERIOD_WIDTH 12
+    LED_ROWS 0
+    ROUNDING ROUND_ROUND
+
+  gen_LED fuel_C
+    POS 3891.000000 1291.000000
+    IMAGE White_size23_stretched_vert_no_lead0
+    DATAREF Strato/777/displays/fuel_lbs_kgs[1]
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 5
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1000.000000 1.000000
+    DIGITS 3
+    DECIMALS 1
+    PERIOD_WIDTH 12
+    LED_ROWS 0
+    ROUNDING ROUND_ROUND
+
+  gen_LED fuel_R
+    POS 4035.000000 1291.000000
+    IMAGE White_size23_stretched_vert_no_lead0
+    DATAREF Strato/777/displays/fuel_lbs_kgs[2]
+    SIZE 2.000000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 5
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1000.000000 1.000000
+    DIGITS 3
+    DECIMALS 1
+    PERIOD_WIDTH 12
+    LED_ROWS 0
+    ROUNDING ROUND_ROUND
+
   gen_rotary KGS
-    POS 4011.500000 1224.500000
+    POS 4012.500000 1223.500000
     IMAGE EICAS upper/KGS
     DATAREF 
     SHOW_EQUAL 0.000000 Strato/777/lbs_kgs
     SIZE 1.360000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48766,8 +49936,6 @@ GROUP Upper Eicas
     DATAREF sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
     SHOW_GREATER 0.010000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
     SIZE 3.000000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48791,8 +49959,6 @@ GROUP Upper Eicas
     DATAREF sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
     SHOW_GREATER 0.010000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
     SIZE 3.000000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48816,8 +49982,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/actuators/N1_target_bug[0]
     SHOW_EQUAL 0.000000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[0]
     SIZE 2.400000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48835,8 +49999,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/actuators/N1_target_bug[1]
     SHOW_EQUAL 0.000000 sim/flightmodel2/engines/thrust_reverser_deploy_ratio[1]
     SIZE 2.400000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48854,8 +50016,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/N1_percent[0]
     SHOW_LESS 107.989998 sim/cockpit2/engine/indicators/N1_percent[0]
     SIZE 2.300000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48873,8 +50033,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/N1_percent[1]
     SHOW_LESS 107.989998 sim/cockpit2/engine/indicators/N1_percent[1]
     SIZE 2.300000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48892,8 +50050,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/N1_percent[0]
     SHOW_GREATER 108.000000 sim/cockpit2/engine/indicators/N1_percent[0]
     SIZE 2.300000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48912,8 +50068,6 @@ GROUP Upper Eicas
     SHOW_EQUAL 108.000000 [1]
     SHOW_GREATER 108.000000 sim/cockpit2/engine/indicators/N1_percent[1]
     SIZE 2.300000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48930,8 +50084,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_pie
     DATAREF sim/cockpit2/engine/indicators/N1_percent[0]
     SIZE 2.980000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48950,8 +50102,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_pie
     DATAREF sim/cockpit2/engine/indicators/N1_percent[1]
     SIZE 2.980000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48970,8 +50120,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_needle
     DATAREF sim/cockpit2/engine/indicators/N1_percent[0]
     SIZE 2.900000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -48986,8 +50134,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_needle
     DATAREF sim/cockpit2/engine/indicators/N1_percent[1]
     SIZE 2.900000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49002,8 +50148,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/N1_limit_needle
     DATAREF sim/cockpit2/engine/actuators/N1_target_bug[0]
     SIZE 2.900000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49018,8 +50162,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/N1_limit_needle
     DATAREF sim/cockpit2/engine/actuators/N1_target_bug[1]
     SIZE 2.900000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49034,8 +50176,6 @@ GROUP Upper Eicas
     IMAGE White_size23_stretched_vert_no_lead0
     DATAREF sim/cockpit2/temperature/outside_air_LE_temp_degc[0]
     SIZE 2.200000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49053,8 +50193,6 @@ GROUP Upper Eicas
     DATAREF 
     SHOW_GREATER 0.000000 sim/cockpit2/temperature/outside_air_LE_temp_degc
     SIZE 2.000000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49077,8 +50215,6 @@ GROUP Upper Eicas
     DATAREF 
     SHOW_LESS -0.010000 sim/cockpit2/temperature/outside_air_LE_temp_degc
     SIZE 2.000000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49100,8 +50236,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/TAT_degC_label
     DATAREF 
     SIZE 2.500000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49124,8 +50258,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.400000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49143,8 +50275,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SHOW_LESS 978.989990 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.400000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49162,8 +50292,6 @@ GROUP Upper Eicas
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.400000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49182,8 +50310,6 @@ GROUP Upper Eicas
     SHOW_EQUAL 108.000000 [1]
     SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.400000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49200,8 +50326,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_pie
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.980000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49222,8 +50346,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_pie
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.980000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49244,8 +50366,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_needle
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 2.900000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49262,8 +50382,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/EICAS_needle
     DATAREF sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 2.900000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49280,8 +50398,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/red
     DATAREF 
     SIZE 0.250000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49304,8 +50420,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/red
     DATAREF 
     SIZE 0.250000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49328,8 +50442,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/red
     DATAREF 
     SIZE 0.250000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49352,8 +50464,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/amber
     DATAREF 
     SIZE 0.500000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49376,8 +50486,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/red
     DATAREF 
     SIZE 0.250000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49400,8 +50508,6 @@ GROUP Upper Eicas
     IMAGE EICAS upper/amber
     DATAREF 
     SIZE 0.500000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49425,8 +50531,6 @@ GROUP Upper Eicas
     DATAREF 
     SHOW_GREATER 108.000000 sim/cockpit2/engine/indicators/N1_percent[0]
     SIZE 3.100000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -49450,8 +50554,6 @@ GROUP Upper Eicas
     DATAREF 
     SHOW_GREATER 108.000000 sim/cockpit2/engine/indicators/N1_percent[1]
     SIZE 3.100000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -49475,8 +50577,6 @@ GROUP Upper Eicas
     DATAREF 
     SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[0]
     SIZE 3.100000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -49500,8 +50600,6 @@ GROUP Upper Eicas
     DATAREF 
     SHOW_GREATER 979.000000 sim/cockpit2/engine/indicators/EGT_deg_C[1]
     SIZE 3.100000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
     BUS_SRC 1
@@ -49519,13 +50617,73 @@ GROUP Upper Eicas
     CLICK_DX 0
     CLICK_DY 0
 
+  gen_rotary fuel temp positive
+    POS 3848.000000 1147.000000
+    IMAGE EICAS upper/positive
+    DATAREF sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+    SHOW_GREATER 1.000000 sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+    SIZE 1.360000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 2
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_rotary fuel temp negative
+    POS 3848.000000 1147.000000
+    IMAGE EICAS upper/negative
+    DATAREF sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+    SHOW_LESS -1.000000 sim/cockpit2/fuel/fuel_temp_at_fuel_tank[0]
+    SHOW_GREATER 0.400000 [0]
+    SIZE 1.360000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 2
+    BUS_SRC 1
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1.000000 6.000000
+    DIGITS 1
+    ROTARY_TYPE NO_CLICK
+    CLICK_RADIUS 10.000000
+    CLICK_RADIUS_DY 0.000000
+    OFFSET 0.000000
+    STEP1 1.000000
+    STEP2 1.000000
+    CURSOR DEFAULT
+    CLICK_DX 0
+    CLICK_DY 0
+
+  gen_LED fuel temp
+    POS 3939.000000 1152.500000
+    IMAGE EICAS upper/white_size20_stretched_vert_no_lead0
+    DATAREF Strato/777/cockpit/fuel/temp
+    SIZE 2.500000
+    LIGHT_MODE GLASS_AUTO
+    LIGHT_RHEOSTAT 2
+    BUS_SRC 1
+    CORNERS 0.000000 0.000000  0.000000 -7.000000  -15.000004 -7.000000  -15.000004 0.000000
+    KEY_FRAME 0.000000 0.000000 1.000000
+    KEY_FRAME 1000.000000 1.000000
+    DIGITS 3
+    DECIMALS 0
+    PERIOD_WIDTH 20
+    LED_ROWS 0
+    ROUNDING ROUND_ROUND
+
   gen_LED fuel
-    POS 3983.000000 1212.000000
+    POS 3989.000000 1209.000000
     IMAGE White_size23_stretched_vert_no_lead0
     DATAREF Strato/777/displays/fuel_lbs_kgs_total
     SIZE 2.500000
-    LOCKED
-    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 2
     BUS_SRC 1
@@ -49533,7 +50691,7 @@ GROUP Upper Eicas
     KEY_FRAME 1000.000000 1.000000
     DIGITS 4
     DECIMALS 1
-    PERIOD_WIDTH 20
+    PERIOD_WIDTH 12
     LED_ROWS 0
     ROUNDING ROUND_ROUND
 
@@ -61737,6 +62895,7 @@ GROUP ISFD
     DATAREF sim/cockpit2/gauges/indicators/roll_AHARS_deg_pilot
     SIZE 1.950000
     LOCKED
+    HIDE
     CLIP
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
@@ -61756,8 +62915,10 @@ GROUP ISFD
     DATAREF 
     SIZE 1.900000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
+    BUS_SRC 1
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 1.000000 6.000000
     DIGITS 1
@@ -61777,8 +62938,10 @@ GROUP ISFD
     DATAREF 
     SIZE 1.950000
     LOCKED
+    HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
+    BUS_SRC 1
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 1.000000 6.000000
     DIGITS 1
@@ -61798,6 +62961,7 @@ GROUP ISFD
     DATAREF sim/cockpit2/gauges/indicators/heading_AHARS_deg_mag_pilot
     SIZE 1.850000
     LOCKED
+    HIDE
     CLIP
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 0
@@ -61818,6 +62982,7 @@ GROUP ISFD
     HIDE
     LIGHT_MODE GLASS_AUTO
     LIGHT_RHEOSTAT 10
+    BUS_SRC 1
     KEY_FRAME 0.000000 0.000000 1.000000
     KEY_FRAME 1.000000 6.000000
     DIGITS 1
