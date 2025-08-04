@@ -95,13 +95,11 @@ B777DR_right_TBB                                = deferred_dataref("Strato/777/c
 B777DR_right_util_avail                         = deferred_dataref("Strato/777/cockpit/elec/right_util_avail", "number")
 B777DR_left_util_avail                         = deferred_dataref("Strato/777/cockpit/elec/left_util_avail", "number")
 B777DR_batt_charging_status                     = deferred_dataref("Strato/777/cockpit/elec/batt_charging_status", "number") -- 0 = not charging, 1 = charging, 2 = charged
-B777DR_apu_batt_charging_status                     = deferred_dataref("Strato/777/cockpit/elec/apu_batt_charging_status", "number") -- 0 = not charging, 1 = charging, 2 = charged
 
 -- MISC
 
 B777DR_autoland_status                          = deferred_dataref("Strato/777/cockpit/autoland/status", "number") -- 0 = off, 2 = active
-B777DR_batt_amps_indicated                      = deferred_dataref("Strato/777/cockpit/elec/battery_amps_indicated", "number") -- Indicated battery amps
-B777DR_apu_batt_amps_indicated                  = deferred_dataref("Strato/777/cockpit/elec/battery_apu_amps_indicated", "number") -- Indicated battery amps
+B777DR_batt_amps_indicated                      = deferred_dataref("Strato/777/cockpit/elec/battery_amps_indicated", "array[2]")
 
 
 B777CMD_ext_pwr_primary                         = deferred_command("Strato/777/cockpit/ovhd/elec/ext_pwr_primary", "external power primary", B777_ext_pwr_primary_cmdHandler)

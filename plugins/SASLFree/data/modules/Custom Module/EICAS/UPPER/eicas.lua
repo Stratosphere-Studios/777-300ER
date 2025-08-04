@@ -30,7 +30,7 @@ right_main_bus_volts = globalPropertyf("Strato/777/cockpit/elec/right_main_bus_v
 right_xfr_bus_volts = globalPropertyf("Strato/777/cockpit/elec/right_xfr_bus_volts")
 bus_volts           = globalPropertyfae("sim/cockpit2/electrical/bus_volts", 1)
 apu_gen_off = globalPropertyi("Strato/777/cockpit/annunciator/elec/apu_gen_off")
-battery_amps = globalPropertyfae("sim/cockpit2/electrical/battery_amps", 1)
+battery_amps = globalPropertyiae("Strato/777/cockpit/elec/battery_amps_indicated", 1)
 left_bus_tie = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 13)
 right_bus_tie = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 14)
 pass_seats = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 11)
@@ -243,7 +243,7 @@ function UpdateElec(messages)
 	end
 
 	if get(gen_1) == 0 then
-		table.insert(messages, tlen(messages) + 1, "FUEL QTY LOW")
+		table.insert(messages, tlen(messages) + 1, "ELEC GEN OFF L")
 	end
 
 	if get(gen_2) == 0 then

@@ -300,7 +300,7 @@ function B777_crossfeed()
         center_pumps[i].eng_2 = 0
     end
 
-    if simDR_N2_percent_indicators[0] > 45 then
+    if simDR_N2_percent_indicators[0] > 45 and simDR_fuel_cutoff[0] > 0 then
         if left_priority_order[1].crossfeed == 1 and center_left_tank_power == 1 and simDR_fuel_tank_weight_kg[1] > 1500 then
             fuel_tanks[2].eng_1 = 1
             center_pumps[1].eng_1 = 1
@@ -318,7 +318,7 @@ function B777_crossfeed()
         end
     end
 
-    if simDR_N2_percent_indicators[1] > 45 then
+    if simDR_N2_percent_indicators[1] > 45 and simDR_fuel_cutoff[1] > 0 then
         if left_priority_order[1].crossfeed == 1 and center_right_tank_power == 1 and simDR_fuel_tank_weight_kg[1] > 1500 then
             fuel_tanks[2].eng_2 = 1
             center_pumps[2].eng_2 = 1

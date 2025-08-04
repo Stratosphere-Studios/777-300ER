@@ -151,9 +151,7 @@ B777DR_apu_batt_charging_status                 = deferred_dataref("Strato/777/c
 -- MISC
 
 B777DR_autoland_status                          = deferred_dataref("Strato/777/cockpit/autoland/status", "number") -- 0 = off, 2 = active
-
-B777DR_batt_amps_indicated                      = deferred_dataref("Strato/777/cockpit/elec/battery_amps_indicated", "number") -- Indicated battery amps
-B777DR_apu_batt_amps_indicated                  = deferred_dataref("Strato/777/cockpit/elec/battery_apu_amps_indicated", "number") -- Indicated battery amps
+B777DR_batt_amps_indicated                      = deferred_dataref("Strato/777/cockpit/elec/battery_amps_indicated", "array[2]") -- Indicated battery amps
 
 
 function B777_battery()
@@ -437,12 +435,10 @@ function B777_bus_tie()
         end
 
     end
-    
 
     AC_sources_taken_total = left_sources_taken + right_sources_taken
 
     -- Load shedding logic
-
 
     local left_bus_powered = false
     local right_bus_powered = false
@@ -467,11 +463,6 @@ function B777_bus_tie()
             break
         end
     end
-
-    -- Set load shed:
-    -- If both buses powered, but by the same source (like "apu_gen"), then load shed = 1 (on)
-    -- If either bus unpowered, load shed = 1 (on)
-    -- Else load shed = 0 (off)
 
     if left_bus_powered and right_bus_powered then
         if left_source == right_source then
@@ -548,8 +539,6 @@ function B777_bus_tie()
             end
         end
     end
-
-    ---THE BELOW FUNCTIONS DONT ACCOUNT FOR A COMPLETE LOSS OF SOURCES
 
     if B777DR_apu_gen_dir == 1 or B777DR_sec_ext_pwr_dir == 1 or B777DR_elec_flow_sharing == 1 then
         B777DR_bus_tie_right_open = 0
@@ -797,7 +786,19 @@ function B777_annunciators()
 end
 
 function B777_battery_indications()
-
+    for i = 0, 1 do
+        if simDR_battery_amps[i] < 1.6 and simDR_battery_amps[i] > -1.6 then
+            B777DR_batt_amps_indicated[i] = 0 
+        else
+            if simDR_battery_amps[i] >= 1.6 then
+                B777DR_batt_amps_indicated[i] = math.floor(simDR_battery_amps[i])
+            end
+    
+            if simDR_battery_amps[i] <= -1.6 then
+                B777DR_batt_amps_indicated[i] = math.ceil(simDR_battery_amps[i])
+            end
+        end
+    end
 end
 
 function B777_ext_pwr_primary_cmdHandler(phase, duration)
