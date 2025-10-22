@@ -687,7 +687,7 @@ function B777_annunciators()
         annun_pwr = 0  -- not powered
     end
 
-    if B777DR_annun_pos < 0.05 then
+    if B777DR_annun_pos < 0.05 and annun_pwr == 1 then
         B777DR_annun_mode = 1
     else
         B777DR_annun_mode = 0

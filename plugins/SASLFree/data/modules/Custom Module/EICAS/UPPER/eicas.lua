@@ -333,16 +333,16 @@ function UpdateFuel(messages)
 		table.insert(messages, tlen(messages) + 1, "FUEL IN CENTER")
 	end
 
-	if get(fuel_pump_ctr_left_powered) == 1 and get(fuel_pump_ctr_right_powered) == 1 and get(center_fuel_quantity) <= 1500 then
+	if (get(fuel_pump_ctr_left_powered) == 1 or get(fuel_pump_ctr_right_powered) == 1) and get(center_fuel_quantity) <= 1500 then
 		table.insert(messages, tlen(messages) + 1, "FUEL LOW CENTER")
 	end
 
 
-	if get(fuel_pump_ctr_left_powered) == 0 then
+	if get(fuel_pump_ctr_left_powered) == 0 and get(center_fuel_quantity) > 1500 then
 		table.insert(messages, tlen(messages) + 1, "FUEL PUMP CENTER L")
 	end
 
-	if get(fuel_pump_ctr_right_powered) == 0 then
+	if get(fuel_pump_ctr_right_powered) == 0 and get(center_fuel_quantity) > 1500 then
 		table.insert(messages, tlen(messages) + 1, "FUEL PUMP CENTER R")
 	end
 

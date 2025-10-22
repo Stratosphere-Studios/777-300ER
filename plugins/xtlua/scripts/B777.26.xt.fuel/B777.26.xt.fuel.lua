@@ -56,6 +56,7 @@ B777DR_load_shed                               = find_dataref("Strato/777/cockpi
 B777DR_annun_pos                               = find_dataref("Strato/777/cockpit/annunciator/pos")
 B777DR_annun_mode                              = find_dataref("Strato/777/cockpit/annunciator/test_mode")
 B777DR_ovhd_apu_switch_pos                     = find_dataref("Strato/777/cockpit/ovhd/elec/apu/position")
+B777DR_EEC_status                              = find_dataref("Strato/777/cockpit/ovhd/eec/status")
 
 
 --*************************************************************************************--
@@ -172,13 +173,13 @@ function B777_fuel_flow()
         end
     end
 
-    if simDR_fuel_tank_weight_kg[0] <= 550 or left_avail == 0 then
+    if simDR_fuel_tank_weight_kg[0] <= 550 and left_avail == 0 then
         simDR_before_mix[0] = 0
     else
         simDR_before_mix[0] = 1
     end
 
-    if simDR_fuel_tank_weight_kg[2] <= 550 or right_avail == 0 then
+    if simDR_fuel_tank_weight_kg[2] <= 550 and right_avail == 0 then
         simDR_before_mix[1] = 0
     else
         simDR_before_mix[1] = 1
@@ -201,14 +202,6 @@ function B777_fuel_flow()
     simDR_fuel_tank_weight_kg[0] = fuel_tanks[1].quantity
     simDR_fuel_tank_weight_kg[1] = fuel_tanks[2].quantity
     simDR_fuel_tank_weight_kg[2] = fuel_tanks[3].quantity
-
-    for i = 0, 1 do
-        if (B777DR_fuel_cutoff_switch_pos[i] > 0.95) then
-            simDR_fuel_cutoff[i] = 0.5
-        elseif (B777DR_fuel_cutoff_switch_pos[i] < 0.05) then
-            simDR_fuel_cutoff[i] = 0
-        end
-    end
 
     for i = 0, 1 do
         if simDR_fuel_cutoff[i] > 0 and simDR_before_mix[i] == 1 then
@@ -348,13 +341,6 @@ function B777_crossfeed()
         scavenge[2].powered = 0
     end
 
-    B777DR_eng_flag_test[0] = center_pumps[1].eng_1
-    B777DR_eng_flag_test[1] = fuel_tanks[2].eng_1
-    B777DR_eng_flag_test[2] = fuel_tanks[3].eng_1
-    B777DR_eng_flag_test[3] = fuel_tanks[1].eng_2
-    B777DR_eng_flag_test[4] = fuel_tanks[2].eng_2
-    B777DR_eng_flag_test[5] = fuel_tanks[3].eng_2
-
 end
 
 function B777_apu()
@@ -471,10 +457,6 @@ function B777_synoptics()
             in_use[i] = 0
         end
     end
-
-    B777DR_eng_flag_test[6] = in_use[1]
-    B777DR_eng_flag_test[7] = in_use[2]
-    B777DR_eng_flag_test[8] = in_use[3]
 
     local ctr_in_use = {0,0}
 
@@ -717,11 +699,6 @@ function flight_start()
 end
 
 function after_physics()
-
-
-    for i = 0, 8 do 
-        print(B777DR_eng_flag_test[i])
-    end
 
     B777DR_ovhd_fuel_button_pos[0] = B777_animate(B777DR_ovhd_fuel_button_target[0], B777DR_ovhd_fuel_button_pos[0], 15)--L fwd
     B777DR_ovhd_fuel_button_pos[1] = B777_animate(B777DR_ovhd_fuel_button_target[1], B777DR_ovhd_fuel_button_pos[1], 15)--L aft
