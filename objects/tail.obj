@@ -38314,7 +38314,7 @@ IDX	34813
 IDX	34814
 
 	ANIM_begin
-	ANIM_trans_begin	sim/flightmodel2/wing/rudder1_deg[0]
+	ANIM_trans_begin	sim/flightmodel2/wing/rudder1_deg[11]
 	ANIM_trans_key	20	-0.00014	7.1771698	34.357189
 	ANIM_trans_key	17.777779	-0.00007	7.1771698	34.357189
 	ANIM_trans_key	15.555556	-0.00005	7.1771698	34.357189
@@ -38336,7 +38336,7 @@ IDX	34814
 	ANIM_trans_key	-18	0.00007	7.1771698	34.357189
 	ANIM_trans_key	-20	0.00014	7.1771698	34.357189
 	ANIM_trans_end
-	ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/rudder1_deg[0]
+	ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/rudder1_deg[11]
 	ANIM_rotate_key	20	-15.625132
 	ANIM_rotate_key	17.777779	-13.864433
 	ANIM_rotate_key	15.555556	-12.112328
@@ -38358,7 +38358,7 @@ IDX	34814
 	ANIM_rotate_key	-18	15.625132
 	ANIM_rotate_key	-20	17.394999
 	ANIM_rotate_end
-	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/rudder1_deg[0]
+	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/rudder1_deg[11]
 	ANIM_rotate_key	20	9.0504412
 	ANIM_rotate_key	17.777779	8.0655271
 	ANIM_rotate_key	15.555556	7.0737371
@@ -38380,7 +38380,7 @@ IDX	34814
 	ANIM_rotate_key	-18	-9.0504412
 	ANIM_rotate_key	-20	-10.026188
 	ANIM_rotate_end
-	ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/rudder1_deg[0]
+	ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/rudder1_deg[11]
 	ANIM_rotate_key	20	29.355494
 	ANIM_rotate_key	17.777779	29.617333
 	ANIM_rotate_key	15.555556	29.848237
@@ -38405,7 +38405,7 @@ IDX	34814
 		ANIM_begin
 		ANIM_trans	-0	-23.6667	-25.91939	-0	-23.6667	-25.91939
 		ANIM_rotate	1	0	0	-30.599384	-30.599384
-		ANIM_trans_begin	sim/flightmodel2/wing/rudder1_deg[0]
+		ANIM_trans_begin	sim/flightmodel2/wing/rudder1_deg[11]
 		ANIM_trans_key	20	-0.0003	3.9992294	33.886736
 		ANIM_trans_key	17.777779	-0.00032999999	3.9995496	33.886064
 		ANIM_trans_key	15.555556	-0.00034999997	3.9998696	33.885404
@@ -38427,7 +38427,7 @@ IDX	34814
 		ANIM_trans_key	-18	-0.00001	3.9905696	33.904615
 		ANIM_trans_key	-20	-0.00001	3.9905696	33.904615
 		ANIM_trans_end
-		ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/rudder1_deg[0]
+		ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/rudder1_deg[11]
 		ANIM_rotate_key	20	-9.0183555
 		ANIM_rotate_key	17.777779	-10.831194
 		ANIM_rotate_key	15.555556	-12.649189
@@ -38449,7 +38449,7 @@ IDX	34814
 		ANIM_rotate_key	-18	16.302369
 		ANIM_rotate_key	-20	18.139271
 		ANIM_rotate_end
-		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/rudder1_deg[0]
+		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/rudder1_deg[11]
 		ANIM_rotate_key	20	4.3384363
 		ANIM_rotate_key	17.777779	5.1967272
 		ANIM_rotate_key	15.555556	6.0498614
@@ -38471,7 +38471,7 @@ IDX	34814
 		ANIM_rotate_key	-18	-7.7372221
 		ANIM_rotate_key	-20	-8.569157
 		ANIM_rotate_end
-		ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/rudder1_deg[0]
+		ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/rudder1_deg[11]
 		ANIM_rotate_key	20	25.485162
 		ANIM_rotate_key	17.777779	25.334474
 		ANIM_rotate_key	15.555556	25.156285
