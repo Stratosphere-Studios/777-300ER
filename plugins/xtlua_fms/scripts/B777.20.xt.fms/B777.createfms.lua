@@ -202,6 +202,7 @@ function keyDown(fmsModule, key) -- only page keys have delay, not entry ones
       fmsModules[fmsModule].targetpgNo = 1
     end
     print(fmsModule.. " did " .. key .. " for " .. page)
+    switchCustomMode()
     return
   elseif key=="prev" then
     if fmsModules[fmsModule].pgNo > 1 then

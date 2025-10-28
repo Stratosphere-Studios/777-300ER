@@ -40,3 +40,6 @@ fmsFunctionsDefs["DEPARRINDEX"]={}
 fmsPages["DEPARRINDEX"].getNumPages=function(self, fmsID)
 	return 1
 end
+
+fmsFunctionsDefs["DEPARRINDEX"]["L1"]={"setpage","DEPARTURES"}
+fmsFunctionsDefs["DEPARRINDEX"]["R2"]={"setpage","ARRIVALS"}

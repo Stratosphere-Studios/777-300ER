@@ -15,6 +15,14 @@ include("constants.lua")
 
 --mag_hdg_light = createGlobalPropertyi("Strato/777/cockpit/lights/mag_hdg", 0)
 
+--Elec
+
+bus_volts           = globalPropertyfae("sim/cockpit2/electrical/bus_volts", 1)
+
+--Misc
+
+annun_test_mode = globalPropertyi("Strato/777/cockpit/annunciator/test_mode")
+
 --FBW:
 
 pfc_disc_light = globalPropertyi("Strato/777/cockpit/lights/pfc_disc")
@@ -79,50 +87,58 @@ demand_shutdown = {0, 0, 0, 0}
 demand_was_working = {0, 0, 0, 0} --Was the demand pump working at time of shut down?
 
 function UpdateHydLights()
-	for i=1,4 do
-        local s_idx = GetSysIdx(i)
-		--Low pressure logic
-		if get(primary_switch, i) ~= primary_past[i] then
-			if get(primary_switch, i) == 0 then
-				primary_shutdown[i] = get(c_time)
+
+	if get(annun_test_mode) == 0 then
+		for i=1,4 do
+			local s_idx = GetSysIdx(i)
+			--Low pressure logic
+			if get(primary_switch, i) ~= primary_past[i] then
+				if get(primary_switch, i) == 0 then
+					primary_shutdown[i] = get(c_time)
+				end
+				primary_past[i] = get(primary_switch, i)
 			end
-			primary_past[i] = get(primary_switch, i)
+			--Overheat logic
+			if get(primary_temperature, i) == 1 and primary_ovht[i] == 0 then
+				primary_shutdown[i] = get(c_time)
+				primary_ovht[i] = 1
+			elseif get(primary_temperature, i) == 0 then
+				primary_ovht[i] = 0
+			end
+			if get(primary_switch, i) == 0 and get(c_time) >= primary_shutdown[i] + 5 or 
+			get(primary_fail, i) == 1 or get(hyd_pressure, s_idx) < 1200 then
+				set(light_primary, 1, i)
+			elseif get(c_time) >= primary_shutdown[i] + 5 and get(primary_temperature, i) == 1 then
+				set(light_primary, 1, i)
+			else
+				set(light_primary, 0, i)
+			end
+			--Wait 5 seconds if a working demand pump was shut down
+			if get(demand_past, i) == 1 and get(demand_switch, i) == 0 and demand_was_working[i] == 0 then
+				demand_shutdown[i] = get(c_time)
+				demand_was_working[i] = 1
+			elseif get(demand_past, i) == 0 and get(demand_switch, i) == 0 and demand_was_working[i] == 0 then
+				demand_shutdown[i] = get(c_time) - 5
+			end
+			--Demand pump overheat logic
+			if get(demand_temperature, i) == 1 and demand_ovht[i] == 0 then
+				demand_ovht[i] = 1
+				demand_time[i] = get(c_time)
+			elseif get(demand_temperature, i) == 0 then
+				demand_ovht[i] = 0
+			end
+			if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch, i) == 0) or 
+			(get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) or 
+			get(demand_fail, i) == 1 or get(hyd_pressure, s_idx) < 1200 then
+				set(light_demand, 1, i)
+			else
+				set(light_demand, 0, i)
+			end
 		end
-		--Overheat logic
-		if get(primary_temperature, i) == 1 and primary_ovht[i] == 0 then
-			primary_shutdown[i] = get(c_time)
-			primary_ovht[i] = 1
-		elseif get(primary_temperature, i) == 0 then
-			primary_ovht[i] = 0
-		end
-		if get(primary_switch, i) == 0 and get(c_time) >= primary_shutdown[i] + 5 or 
-           get(primary_fail, i) == 1 or get(hyd_pressure, s_idx) < 1200 then
+	else
+		for i=1,4 do
 			set(light_primary, 1, i)
-		elseif get(c_time) >= primary_shutdown[i] + 5 and get(primary_temperature, i) == 1 then
-			set(light_primary, 1, i)
-		else
-			set(light_primary, 0, i)
-		end
-		--Wait 5 seconds if a working demand pump was shut down
-		if get(demand_past, i) == 1 and get(demand_switch, i) == 0 and demand_was_working[i] == 0 then
-			demand_shutdown[i] = get(c_time)
-			demand_was_working[i] = 1
-		elseif get(demand_past, i) == 0 and get(demand_switch, i) == 0 and demand_was_working[i] == 0 then
-			demand_shutdown[i] = get(c_time) - 5
-		end
-		--Demand pump overheat logic
-		if get(demand_temperature, i) == 1 and demand_ovht[i] == 0 then
-			demand_ovht[i] = 1
-			demand_time[i] = get(c_time)
-		elseif get(demand_temperature, i) == 0 then
-			demand_ovht[i] = 0
-		end
-		if (get(c_time) >= demand_shutdown[i] + 5 and get(demand_switch, i) == 0) or 
-           (get(c_time) >= demand_time[i] + 5 and demand_ovht[i] == 1) or 
-           get(demand_fail, i) == 1 or get(hyd_pressure, s_idx) < 1200 then
 			set(light_demand, 1, i)
-		else
-			set(light_demand, 0, i)
 		end
 	end
 end
@@ -155,7 +171,14 @@ end
 
 function update()
 	--set(mag_hdg_light, 1 - get(mag_hdg))
-    set(pfc_disc_light, get(pfc_disc))
-    UpdateHydLights()
-	UpdateCabinLights()
+	if get(bus_volts) > 0 then
+		set(pfc_disc_light, get(pfc_disc))
+		UpdateHydLights()
+		UpdateCabinLights()
+	else
+		for i=1,4 do
+			set(light_primary, 0, i)
+			set(light_demand, 0, i)
+		end
+	end
 end
