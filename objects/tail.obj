@@ -38315,183 +38315,183 @@ IDX	34814
 
 	ANIM_begin
 	ANIM_trans_begin	sim/flightmodel2/wing/rudder1_deg[11]
-	ANIM_trans_key	20	-0.00014	7.1771698	34.357189
-	ANIM_trans_key	17.777779	-0.00007	7.1771698	34.357189
-	ANIM_trans_key	15.555556	-0.00005	7.1771698	34.357189
-	ANIM_trans_key	13.333334	-0.00003	7.1771698	34.357189
-	ANIM_trans_key	11.111112	-0.00002	7.1771698	34.357189
-	ANIM_trans_key	8.8888893	-0.00001	7.1771698	34.357189
-	ANIM_trans_key	6.666667	-0	7.1771698	34.357189
-	ANIM_trans_key	4.4444447	-0	7.1771698	34.357189
-	ANIM_trans_key	2.2222223	-0	7.1771698	34.357189
-	ANIM_trans_key	0	0	7.1771698	34.357189
+	ANIM_trans_key	-20	-0.00014	7.1771698	34.357189
+	ANIM_trans_key	-18	-0.00007	7.1771698	34.357189
+	ANIM_trans_key	-16	-0.00005	7.1771698	34.357189
+	ANIM_trans_key	-14	-0.00003	7.1771698	34.357189
+	ANIM_trans_key	-12	-0.00002	7.1771698	34.357189
+	ANIM_trans_key	-10	-0.00001	7.1771698	34.357189
+	ANIM_trans_key	-8	-0	7.1771698	34.357189
+	ANIM_trans_key	-6	-0	7.1771698	34.357189
+	ANIM_trans_key	-4	-0	7.1771698	34.357189
 	ANIM_trans_key	-2	0	7.1771698	34.357189
-	ANIM_trans_key	-4	0	7.1771698	34.357189
-	ANIM_trans_key	-6	0	7.1771698	34.357189
-	ANIM_trans_key	-8	0.00001	7.1771698	34.357189
-	ANIM_trans_key	-10	0.00001	7.1771698	34.357189
-	ANIM_trans_key	-12	0.00002	7.1771698	34.357189
-	ANIM_trans_key	-14	0.00003	7.1771698	34.357189
-	ANIM_trans_key	-16	0.00005	7.1771698	34.357189
-	ANIM_trans_key	-18	0.00007	7.1771698	34.357189
-	ANIM_trans_key	-20	0.00014	7.1771698	34.357189
+	ANIM_trans_key	0	0	7.1771698	34.357189
+	ANIM_trans_key	2.2222223	0	7.1771698	34.357189
+	ANIM_trans_key	4.4444447	0	7.1771698	34.357189
+	ANIM_trans_key	6.666667	0.00001	7.1771698	34.357189
+	ANIM_trans_key	8.8888893	0.00001	7.1771698	34.357189
+	ANIM_trans_key	11.111112	0.00002	7.1771698	34.357189
+	ANIM_trans_key	13.333334	0.00003	7.1771698	34.357189
+	ANIM_trans_key	15.555556	0.00005	7.1771698	34.357189
+	ANIM_trans_key	17.777779	0.00007	7.1771698	34.357189
+	ANIM_trans_key	20	0.00014	7.1771698	34.357189
 	ANIM_trans_end
 	ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/rudder1_deg[11]
-	ANIM_rotate_key	20	-15.625132
-	ANIM_rotate_key	17.777779	-13.864433
-	ANIM_rotate_key	15.555556	-12.112328
-	ANIM_rotate_key	13.333334	-10.368244
-	ANIM_rotate_key	11.111112	-8.6298902
-	ANIM_rotate_key	8.8888893	-6.8978388
-	ANIM_rotate_key	6.666667	-5.169225
-	ANIM_rotate_key	4.4444447	-3.4446223
-	ANIM_rotate_key	2.2222223	-1.7217382
-	ANIM_rotate_key	0	-0
-	ANIM_rotate_key	-2	1.7217382
-	ANIM_rotate_key	-4	3.4446223
-	ANIM_rotate_key	-6	5.169225
-	ANIM_rotate_key	-8	6.8978388
-	ANIM_rotate_key	-10	8.6298902
-	ANIM_rotate_key	-12	10.368244
-	ANIM_rotate_key	-14	12.112328
-	ANIM_rotate_key	-16	13.864433
-	ANIM_rotate_key	-18	15.625132
-	ANIM_rotate_key	-20	17.394999
+	ANIM_rotate_key	-20	-15.625132
+	ANIM_rotate_key	-18	-13.864433
+	ANIM_rotate_key	-16	-12.112328
+	ANIM_rotate_key	-14	-10.368244
+	ANIM_rotate_key	-12	-8.6298902
+	ANIM_rotate_key	-10	-6.8978388
+	ANIM_rotate_key	-8	-5.169225
+	ANIM_rotate_key	-6	-3.4446223
+	ANIM_rotate_key	-4	-1.7217382
+	ANIM_rotate_key	-2	-0
+	ANIM_rotate_key	0	1.7217382
+	ANIM_rotate_key	2.2222223	3.4446223
+	ANIM_rotate_key	4.4444447	5.169225
+	ANIM_rotate_key	6.666667	6.8978388
+	ANIM_rotate_key	8.8888893	8.6298902
+	ANIM_rotate_key	11.111112	10.368244
+	ANIM_rotate_key	13.333334	12.112328
+	ANIM_rotate_key	15.555556	13.864433
+	ANIM_rotate_key	17.777779	15.625132
+	ANIM_rotate_key	20	17.394999
 	ANIM_rotate_end
 	ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/rudder1_deg[11]
-	ANIM_rotate_key	20	9.0504412
-	ANIM_rotate_key	17.777779	8.0655271
-	ANIM_rotate_key	15.555556	7.0737371
-	ANIM_rotate_key	13.333334	6.0750716
-	ANIM_rotate_key	11.111112	5.0712494
-	ANIM_rotate_key	8.8888893	4.0622708
-	ANIM_rotate_key	6.666667	3.0498543
-	ANIM_rotate_key	4.4444447	2.035146
-	ANIM_rotate_key	2.2222223	1.018146
-	ANIM_rotate_key	0	-0
-	ANIM_rotate_key	-2	-1.018146
-	ANIM_rotate_key	-4	-2.035146
-	ANIM_rotate_key	-6	-3.0498543
-	ANIM_rotate_key	-8	-4.0622708
-	ANIM_rotate_key	-10	-5.0712494
-	ANIM_rotate_key	-12	-6.0750716
-	ANIM_rotate_key	-14	-7.0737371
-	ANIM_rotate_key	-16	-8.0655271
-	ANIM_rotate_key	-18	-9.0504412
-	ANIM_rotate_key	-20	-10.026188
+	ANIM_rotate_key	-20	9.0504412
+	ANIM_rotate_key	-18	8.0655271
+	ANIM_rotate_key	-16	7.0737371
+	ANIM_rotate_key	-14	6.0750716
+	ANIM_rotate_key	-12	5.0712494
+	ANIM_rotate_key	-10	4.0622708
+	ANIM_rotate_key	-8	3.0498543
+	ANIM_rotate_key	-6	2.035146
+	ANIM_rotate_key	-4	1.018146
+	ANIM_rotate_key	-2	-0
+	ANIM_rotate_key	0	-1.018146
+	ANIM_rotate_key	2.2222223	-2.035146
+	ANIM_rotate_key	4.4444447	-3.0498543
+	ANIM_rotate_key	6.666667	-4.0622708
+	ANIM_rotate_key	8.8888893	-5.0712494
+	ANIM_rotate_key	11.111112	-6.0750716
+	ANIM_rotate_key	13.333334	-7.0737371
+	ANIM_rotate_key	15.555556	-8.0655271
+	ANIM_rotate_key	17.777779	-9.0504412
+	ANIM_rotate_key	20	-10.026188
 	ANIM_rotate_end
 	ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/rudder1_deg[11]
-	ANIM_rotate_key	20	29.355494
-	ANIM_rotate_key	17.777779	29.617333
-	ANIM_rotate_key	15.555556	29.848237
-	ANIM_rotate_key	13.333334	30.047624
-	ANIM_rotate_key	11.111112	30.216648
-	ANIM_rotate_key	8.8888893	30.35473
-	ANIM_rotate_key	6.666667	30.461875
-	ANIM_rotate_key	4.4444447	30.538076
-	ANIM_rotate_key	2.2222223	30.584487
-	ANIM_rotate_key	0	30.599384
-	ANIM_rotate_key	-2	30.584487
-	ANIM_rotate_key	-4	30.538076
-	ANIM_rotate_key	-6	30.461875
-	ANIM_rotate_key	-8	30.35473
-	ANIM_rotate_key	-10	30.216648
-	ANIM_rotate_key	-12	30.047624
-	ANIM_rotate_key	-14	29.848237
-	ANIM_rotate_key	-16	29.617333
-	ANIM_rotate_key	-18	29.355494
-	ANIM_rotate_key	-20	29.062137
+	ANIM_rotate_key	-20	29.355494
+	ANIM_rotate_key	-18	29.617333
+	ANIM_rotate_key	-16	29.848237
+	ANIM_rotate_key	-14	30.047624
+	ANIM_rotate_key	-12	30.216648
+	ANIM_rotate_key	-10	30.35473
+	ANIM_rotate_key	-8	30.461875
+	ANIM_rotate_key	-6	30.538076
+	ANIM_rotate_key	-4	30.584487
+	ANIM_rotate_key	-2	30.599384
+	ANIM_rotate_key	0	30.584487
+	ANIM_rotate_key	2.2222223	30.538076
+	ANIM_rotate_key	4.4444447	30.461875
+	ANIM_rotate_key	6.666667	30.35473
+	ANIM_rotate_key	8.8888893	30.216648
+	ANIM_rotate_key	11.111112	30.047624
+	ANIM_rotate_key	13.333334	29.848237
+	ANIM_rotate_key	15.555556	29.617333
+	ANIM_rotate_key	17.777779	29.355494
+	ANIM_rotate_key	20	29.062137
 	ANIM_rotate_end
 		ANIM_begin
 		ANIM_trans	-0	-23.6667	-25.91939	-0	-23.6667	-25.91939
 		ANIM_rotate	1	0	0	-30.599384	-30.599384
 		ANIM_trans_begin	sim/flightmodel2/wing/rudder1_deg[11]
-		ANIM_trans_key	20	-0.0003	3.9992294	33.886736
-		ANIM_trans_key	17.777779	-0.00032999999	3.9995496	33.886064
-		ANIM_trans_key	15.555556	-0.00034999997	3.9998696	33.885404
-		ANIM_trans_key	13.333334	-0.00030999998	3.9945695	33.896364
-		ANIM_trans_key	11.111112	-0.00025999999	3.9899094	33.905985
-		ANIM_trans_key	8.8888893	-0.00020999999	3.9859095	33.914255
-		ANIM_trans_key	6.666667	-0.00015999999	3.9825594	33.921163
-		ANIM_trans_key	4.4444447	-0.00010999999	3.9798796	33.926695
-		ANIM_trans_key	2.2222223	-0.00005	3.9778695	33.930853
-		ANIM_trans_key	0	-0.00001	3.9768095	33.933042
-		ANIM_trans_key	-2	0	3.9765296	33.933626
-		ANIM_trans_key	-4	-0	3.9771996	33.932233
-		ANIM_trans_key	-6	-0	3.9785395	33.929464
-		ANIM_trans_key	-8	-0	3.9805496	33.925314
-		ANIM_trans_key	-10	-0	3.9832296	33.919775
-		ANIM_trans_key	-12	-0.00001	3.9865694	33.912874
-		ANIM_trans_key	-14	-0.00001	3.9905696	33.904615
-		ANIM_trans_key	-16	-0.00001	3.9905696	33.904615
-		ANIM_trans_key	-18	-0.00001	3.9905696	33.904615
-		ANIM_trans_key	-20	-0.00001	3.9905696	33.904615
+		ANIM_trans_key	-20	-0.0003	3.9992294	33.886736
+		ANIM_trans_key	-18	-0.00032999999	3.9995496	33.886064
+		ANIM_trans_key	-16	-0.00034999997	3.9998696	33.885404
+		ANIM_trans_key	-14	-0.00030999998	3.9945695	33.896364
+		ANIM_trans_key	-12	-0.00025999999	3.9899094	33.905985
+		ANIM_trans_key	-10	-0.00020999999	3.9859095	33.914255
+		ANIM_trans_key	-8	-0.00015999999	3.9825594	33.921163
+		ANIM_trans_key	-6	-0.00010999999	3.9798796	33.926695
+		ANIM_trans_key	-4	-0.00005	3.9778695	33.930853
+		ANIM_trans_key	-2	-0.00001	3.9768095	33.933042
+		ANIM_trans_key	0	0	3.9765296	33.933626
+		ANIM_trans_key	2.2222223	-0	3.9771996	33.932233
+		ANIM_trans_key	4.4444447	-0	3.9785395	33.929464
+		ANIM_trans_key	6.666667	-0	3.9805496	33.925314
+		ANIM_trans_key	8.8888893	-0	3.9832296	33.919775
+		ANIM_trans_key	11.111112	-0.00001	3.9865694	33.912874
+		ANIM_trans_key	13.333334	-0.00001	3.9905696	33.904615
+		ANIM_trans_key	15.555556	-0.00001	3.9905696	33.904615
+		ANIM_trans_key	17.777779	-0.00001	3.9905696	33.904615
+		ANIM_trans_key	20	-0.00001	3.9905696	33.904615
 		ANIM_trans_end
 		ANIM_rotate_begin	0	1	-0	sim/flightmodel2/wing/rudder1_deg[11]
-		ANIM_rotate_key	20	-9.0183555
-		ANIM_rotate_key	17.777779	-10.831194
-		ANIM_rotate_key	15.555556	-12.649189
-		ANIM_rotate_key	13.333334	-10.831194
-		ANIM_rotate_key	11.111112	-9.0183555
-		ANIM_rotate_key	8.8888893	-7.2095276
-		ANIM_rotate_key	6.666667	-5.4041379
-		ANIM_rotate_key	4.4444447	-3.6016125
-		ANIM_rotate_key	2.2222223	-1.8002334
-		ANIM_rotate_key	0	-0
-		ANIM_rotate_key	-2	1.8002334
-		ANIM_rotate_key	-4	3.6016125
-		ANIM_rotate_key	-6	5.4041379
-		ANIM_rotate_key	-8	7.2095276
-		ANIM_rotate_key	-10	9.0183555
-		ANIM_rotate_key	-12	10.831194
-		ANIM_rotate_key	-14	12.649189
-		ANIM_rotate_key	-16	14.472341
-		ANIM_rotate_key	-18	16.302369
-		ANIM_rotate_key	-20	18.139271
+		ANIM_rotate_key	-20	-9.0183555
+		ANIM_rotate_key	-18	-10.831194
+		ANIM_rotate_key	-16	-12.649189
+		ANIM_rotate_key	-14	-10.831194
+		ANIM_rotate_key	-12	-9.0183555
+		ANIM_rotate_key	-10	-7.2095276
+		ANIM_rotate_key	-8	-5.4041379
+		ANIM_rotate_key	-6	-3.6016125
+		ANIM_rotate_key	-4	-1.8002334
+		ANIM_rotate_key	-2	-0
+		ANIM_rotate_key	0	1.8002334
+		ANIM_rotate_key	2.2222223	3.6016125
+		ANIM_rotate_key	4.4444447	5.4041379
+		ANIM_rotate_key	6.666667	7.2095276
+		ANIM_rotate_key	8.8888893	9.0183555
+		ANIM_rotate_key	11.111112	10.831194
+		ANIM_rotate_key	13.333334	12.649189
+		ANIM_rotate_key	15.555556	14.472341
+		ANIM_rotate_key	17.777779	16.302369
+		ANIM_rotate_key	20	18.139271
 		ANIM_rotate_end
 		ANIM_rotate_begin	0	0	-1	sim/flightmodel2/wing/rudder1_deg[11]
-		ANIM_rotate_key	20	4.3384363
-		ANIM_rotate_key	17.777779	5.1967272
-		ANIM_rotate_key	15.555556	6.0498614
-		ANIM_rotate_key	13.333334	5.1967272
-		ANIM_rotate_key	11.111112	4.3384363
-		ANIM_rotate_key	8.8888893	3.4761349
-		ANIM_rotate_key	6.666667	2.6098228
-		ANIM_rotate_key	4.4444447	1.7412187
-		ANIM_rotate_key	2.2222223	0.87089586
-		ANIM_rotate_key	0	-0
-		ANIM_rotate_key	-2	-0.87089586
-		ANIM_rotate_key	-4	-1.7412187
-		ANIM_rotate_key	-6	-2.6098228
-		ANIM_rotate_key	-8	-3.4761349
-		ANIM_rotate_key	-10	-4.3384363
-		ANIM_rotate_key	-12	-5.1967272
-		ANIM_rotate_key	-14	-6.0498614
-		ANIM_rotate_key	-16	-6.896693
-		ANIM_rotate_key	-18	-7.7372221
-		ANIM_rotate_key	-20	-8.569157
+		ANIM_rotate_key	-20	4.3384363
+		ANIM_rotate_key	-18	5.1967272
+		ANIM_rotate_key	-16	6.0498614
+		ANIM_rotate_key	-14	5.1967272
+		ANIM_rotate_key	-12	4.3384363
+		ANIM_rotate_key	-10	3.4761349
+		ANIM_rotate_key	-8	2.6098228
+		ANIM_rotate_key	-6	1.7412187
+		ANIM_rotate_key	-4	0.87089586
+		ANIM_rotate_key	-2	-0
+		ANIM_rotate_key	0	-0.87089586
+		ANIM_rotate_key	2.2222223	-1.7412187
+		ANIM_rotate_key	4.4444447	-2.6098228
+		ANIM_rotate_key	6.666667	-3.4761349
+		ANIM_rotate_key	8.8888893	-4.3384363
+		ANIM_rotate_key	11.111112	-5.1967272
+		ANIM_rotate_key	13.333334	-6.0498614
+		ANIM_rotate_key	15.555556	-6.896693
+		ANIM_rotate_key	17.777779	-7.7372221
+		ANIM_rotate_key	20	-8.569157
 		ANIM_rotate_end
 		ANIM_rotate_begin	1	0	-0	sim/flightmodel2/wing/rudder1_deg[11]
-		ANIM_rotate_key	20	25.485162
-		ANIM_rotate_key	17.777779	25.334474
-		ANIM_rotate_key	15.555556	25.156285
-		ANIM_rotate_key	13.333334	25.334474
-		ANIM_rotate_key	11.111112	25.485162
-		ANIM_rotate_key	8.8888893	25.608348
-		ANIM_rotate_key	6.666667	25.704032
-		ANIM_rotate_key	4.4444447	25.772788
-		ANIM_rotate_key	2.2222223	25.813467
-		ANIM_rotate_key	0	25.827218
-		ANIM_rotate_key	-2	25.813467
-		ANIM_rotate_key	-4	25.772788
-		ANIM_rotate_key	-6	25.704032
-		ANIM_rotate_key	-8	25.608348
-		ANIM_rotate_key	-10	25.485162
-		ANIM_rotate_key	-12	25.334474
-		ANIM_rotate_key	-14	25.156285
-		ANIM_rotate_key	-16	24.950594
-		ANIM_rotate_key	-18	24.717399
-		ANIM_rotate_key	-20	24.456703
+		ANIM_rotate_key	-20	25.485162
+		ANIM_rotate_key	-18	25.334474
+		ANIM_rotate_key	-16	25.156285
+		ANIM_rotate_key	-14	25.334474
+		ANIM_rotate_key	-12	25.485162
+		ANIM_rotate_key	-10	25.608348
+		ANIM_rotate_key	-8	25.704032
+		ANIM_rotate_key	-6	25.772788
+		ANIM_rotate_key	-4	25.813467
+		ANIM_rotate_key	-2	25.827218
+		ANIM_rotate_key	0	25.813467
+		ANIM_rotate_key	2.2222223	25.772788
+		ANIM_rotate_key	4.4444447	25.704032
+		ANIM_rotate_key	6.666667	25.608348
+		ANIM_rotate_key	8.8888893	25.485162
+		ANIM_rotate_key	11.111112	25.334474
+		ANIM_rotate_key	13.333334	25.156285
+		ANIM_rotate_key	15.555556	24.950594
+		ANIM_rotate_key	17.777779	24.717399
+		ANIM_rotate_key	20	24.456703
 		ANIM_rotate_end
 			TRIS	32031 156
 		ANIM_end
