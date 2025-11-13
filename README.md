@@ -39,15 +39,15 @@ No further steps are required.
 
 Please feel free to fork, modify, and make a pull request if you want to make any changes, fixes, or new features to the aircraft.
 
-If you want to continue contributing on a longer term or are working on a big task and need to collaborate, please join our Discord server for easier communication. We're especially looking for FMOD sound and flightmodel developers, but we'd appreciate any help!
+If you want to continue contributing on a longer term or are working on a big project and need to collaborate, please join our Discord server for easier communication. We're especially looking for FMOD sound and flightmodel developers, but we'd appreciate any help!
 
 Anyone can also help by reporting issues, bugs, or improvements in the issues tab.
 
 If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it. The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the exterior modeling is mostly complete, it's still subject to some changes.
 
-## Current development update (as of November  2024)
+## Current development status (as of November  2025)
 
-The systems we're currently focusing are FMC routing and navigation, autopilot, and bleed air/pressurization systems (which means engine start coming soon). Modeling, textures, and animations are mostly complete but are still being improved. The hydraulic and fly by wire systems are fully simulated, and we have a custom autopilot although it can't do VNAV, LNAV, or VOR/ILS yet. The FMC is also partially implemented but is still in progress. **THE AIRCRAFT IS NOT YET IFR READY AND YOU CANNOT FLY A ROUTE!!! Please don't download if you're expecting that. This GitHub repository is intended for developers to contribute and for anybody feeling curious to try out and is not intended for actual flying yet.**
+The systems we're currently focusing are FMC routing and navigation, autopilot, and bleed air/pressurization systems (which means engine start coming soon). Modeling, textures, and animations are mostly complete but are still being improved, and lights are in progess. The hydraulic and fly by wire systems are fully simulated, and we have a custom autopilot although it can't do VNAV, LNAV, or VOR/ILS yet. Electrical and fuel systems are also mostly simulated. The FMC is also partially implemented but is still in progress. **THE AIRCRAFT IS NOT YET IFR READY AND YOU CANNOT FLY A ROUTE!!! Please don't download if you're expecting that. This GitHub repository is intended for people to contribute to the project and for anybody feeling curious to try out and is not intended for actual flying yet.**
 
 ## **FAQ**
 
@@ -87,7 +87,7 @@ A: Don't close it. It helps the developers find bugs and fix them. Closing this 
 
 **Q: How do I start the aircraft?**
 
-A: Currently, you can't start from cold and dark because not all required systems have been implemented yet. For now, enable "Start with engines running" in X-Plane's aircraft menu.
+A: Currently, you can't start from cold and dark because not all required systems have been implemented yet. Enable "Start with engines running" in X-Plane's aircraft menu for now.
 
 **Q: Is there a cargo version available?**
 
