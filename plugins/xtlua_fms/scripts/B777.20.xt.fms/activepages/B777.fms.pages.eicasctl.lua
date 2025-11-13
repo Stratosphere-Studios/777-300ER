@@ -7,7 +7,7 @@ fmsPages["EICASMODES"].getPage=function(self,pgNo,fmsID)
         "                        ",
         "<LWR CTR<SEL>      COMM>;r05",
         "                        ",
-        "<R INBD             NAV>;r04",
+        "<R INBD;r07             NAV>;r04",
         "                        ",
         "<ENG                    ",
         "                        ",
