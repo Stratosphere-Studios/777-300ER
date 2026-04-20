@@ -327,7 +327,7 @@ function namespace_len(table)
 	for _ in namespace_ipairs(table) do count = count + 1 end
 	return count
 end
-  
+
 
 function namespace_pairs(table, key, value)
 	local function namespace_next(table, index)
@@ -362,7 +362,8 @@ function namespace_write(table, key, value)
 	--print("Namespace write of "..key)
 	ftable = rawget(table,'functions')
 	vtable = rawget(table,'values')
-
+	rkeys = rawget(table,'raw_table_keys')
+	
 	func = ftable[key]
 	if func ~= nil then
 		func.__set(func,value)
@@ -370,7 +371,7 @@ function namespace_write(table, key, value)
 		if seems_like_prop(value) then
 			ftable[key] = value
 		else
-			if not seems_like_object(value) and type(value) == "table" and getmetatable(value) == nil then
+			if not seems_like_object(value) and type(value) == "table" and getmetatable(value) == nil and rkeys[key] == nil then
 				--print("Bare table wrap for "..key)
 				v = {
 					functions = {},
@@ -415,6 +416,7 @@ function create_namespace()
 	ret = { 
 		functions = {}, 
 		values = {},
+		raw_table_keys = {},
 		create_prop = function(self,name, func)
 			self.functions[name] = func
 		end,
@@ -443,6 +445,21 @@ function get_run_file_in_namespace(ns)
 	end
 end
 
+-- Built in custom closure to build _real_ tables.
+function get_real_table_in_namespace(ns)
+	return function(key,real_table)
+		vtable = rawget(ns,'values')
+		vtable[key] = real_table
+	end
+end
+
+function get_raw_table_in_namespace(ns)
+	return function(key)
+		rkeys = rawget(ns,'raw_table_keys')
+		rkeys[key] = true
+	end
+end
+
 --------------------------------------------------------------------------------
 
 function run_module_in_namespace(fn)
@@ -465,6 +482,8 @@ function run_module_in_namespace(fn)
 	n.run_after_time = run_after_time
 	n.run_at_interval = run_at_interval
 	n.dofile = get_run_file_in_namespace(n)
+	n.real_table = get_real_table_in_namespace(n)
+	n.raw_table = get_raw_table_in_namespace(n)
 	
 	setfenv(fn,n)
 	fn()

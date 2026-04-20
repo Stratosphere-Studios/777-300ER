@@ -370,7 +370,7 @@ function after_physics()
     simDR_N2[0] = 30
     
     for i = 0, 8 do 
-        print("test value" .. i .. "     " .. B777DR_eng_flag_test[i])
+        --print("test value" .. i .. "     " .. B777DR_eng_flag_test[i])
     end
 
     for i = 0, 2 do
