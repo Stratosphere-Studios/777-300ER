@@ -128,22 +128,23 @@ B777DR_pack_trim_sw_pos = deferred_dataref("Strato/777/air/pack_trim_sw_pos", "a
 
 
 local producers = {
-    engine1 = {switchState = 0, state = 1, prod = 40}, -- depends on throttle, up to 60 or 70
-    engine2 = {switchState = 0, state = 1, prod = 60},
+    engine1 = {switchState = 0, state = 1, prod = 60}, -- depends on throttle, up to 60 or 70
+    engine2 = {switchState = 0, state = 1, prod = 20},
     apu = {switchState = 0, state = 0, prod = 25} -- boosts for engine start
 }
-
-B777CMD_btn_engL = deferred_command("Strato/777/air/eng_L_sw", "Left Engine Bleed Switch", B777_engL_bleed_cmdHandler)
-B777CMD_btn_apu = deferred_command("Strato/777/air/apu_sw", "APU Bleed Switch", B777_apu_bleed_cmdHandler)
-B777CMD_btn_engR = deferred_command("Strato/777/air/eng_R_sw", "Right Engine Bleed Switch", B777_engR_bleed_cmdHandler)
-B777DR_bleed_valves_sw_pos = deferred_dataref("Strato/777/air/bleed_valves_sw_pos", "array[3]") -- L, C, R
 
 function B777_engL_bleed_cmdHandler(phase, duration)
     if phase == 0 then
         
     end
 end
-B777DR_air_hyd_pump_state = find_dataref("Strato/777/hydraulics/pump/primary/actual")
+--B777CMD_btn_engL = deferred_command("Strato/777/air/eng_L_sw", "Left Engine Bleed Switch", B777_engL_bleed_cmdHandler)
+--B777CMD_btn_apu = deferred_command("Strato/777/air/apu_sw", "APU Bleed Switch", B777_apu_bleed_cmdHandler)
+--B777CMD_btn_engR = deferred_command("Strato/777/air/eng_R_sw", "Right Engine Bleed Switch", B777_engR_bleed_cmdHandler)
+B777DR_bleed_valves_sw_pos = deferred_dataref("Strato/777/air/bleed_valves_sw_pos", "array[3]") -- L, C, R
+
+
+B777DR_air_hyd_pump_state = find_dataref("Strato/777/hydraulics/pump/demand/actual")
 
 -- B777DR_landing_alt_man = deferred_dataref("Strato/777/air/landing_alt_man", "number") -- 0 = auto, 1 = manual -- switch will be command, go up to 500 after certain duration
 -- B777DR_outflow_valve_auto_sw = deferred_dataref("Strato/777/air/outflow_valve_auto", "array[2]")
@@ -154,31 +155,29 @@ B777DR_air_hyd_pump_state = find_dataref("Strato/777/hydraulics/pump/primary/act
 -- B777CMD_landing_alt_up = deferred_command("Strato/777/air/landing_alt_up", "Landing Altitude Up")
 -- B777CMD_landing_alt_dn = deferred_command("Strato/777/air/landing_alt_dn", "Landing Altitude Down")
 
-
-
 local iso_sw_status = {0, 0, 0}
 
 B777DR_iso_valves_sw_pos = deferred_dataref("Strato/777/air/isolation_valves_sw_pos", "array[3]") -- L, C, R
-DR_iso_vlv_stat = deferred_dataref("Strato/777/air/isolation_valves_status", "array[3]") -- L, C, R
+B777DR_iso_vlv_status = deferred_dataref("Strato/777/air/isolation_valves_status", "array[3]") -- L, C, R
 
 function B777_isoL_cmdHandler(phase, duration)
     if phase == 0 then
         iso_sw_status[1] = 1 - iso_sw_status[1]
-        run_after_time(function() DR_iso_vlv_stat[0] = DR_iso_vlv_stat[0] >= 1 and 0 or 1; announceSourceUpdate() end, 2)
+        run_after_time(function() B777DR_iso_vlv_status[0] = B777DR_iso_vlv_status[0] >= 1 and 0 or 1; announceSourceUpdate() end, 2)
     end
 end
 
 function B777_isoC_cmdHandler(phase, duration)
     if phase == 0 then
         iso_sw_status[2] = 1 - iso_sw_status[2]
-        run_after_time(function() DR_iso_vlv_stat[1] = DR_iso_vlv_stat[1] >= 1 and 0 or 1; announceSourceUpdate() end, 2)
+        run_after_time(function() B777DR_iso_vlv_status[1] = B777DR_iso_vlv_status[1] >= 1 and 0 or 1; announceSourceUpdate() end, 2)
     end
 end
 
 function B777_isoR_cmdHandler(phase, duration)
     if phase == 0 then
         iso_sw_status[3] = 1 - iso_sw_status[3]
-        run_after_time(function() DR_iso_vlv_stat[2] = DR_iso_vlv_stat[2] >= 1 and 0 or 1; announceSourceUpdate() end, 2)
+        run_after_time(function() B777DR_iso_vlv_status[2] = B777DR_iso_vlv_status[2] >= 1 and 0 or 1; announceSourceUpdate() end, 2)
     end
 end
 
@@ -195,8 +194,8 @@ end
 function rightSourceListener(self)
     if self.valveState == 1 and -- do i want air?
     (producers.engine2.state == 1 -- right engine
-    or (producers.apu.state == 1 and DR_iso_vlv_stat[1] == 1 and DR_iso_vlv_stat[2] == 1) -- apu and left iso
-    or (producers.engine1.state == 1 and DR_iso_vlv_stat[0] == 1 and DR_iso_vlv_stat[1] == 1 and DR_iso_vlv_stat[2] == 1)) then -- right engine and all isos
+    or (producers.apu.state == 1 and B777DR_iso_vlv_status[1] == 1 and B777DR_iso_vlv_status[2] == 1) -- apu and left iso
+    or (producers.engine1.state == 1 and B777DR_iso_vlv_status[0] == 1 and B777DR_iso_vlv_status[1] == 1 and B777DR_iso_vlv_status[2] == 1)) then -- right engine and all isos
     -- replace the whole thing with just duct press?
         --run_after_time(function() self.actConsumption = self.consumption end, 1)
         self.flow = true
@@ -209,8 +208,8 @@ end
 function leftSourceListener(self)
     if self.valveState == 1 and -- do i want air?
     (producers.engine1.state == 1 -- left engine
-    or (producers.apu.state == 1 and DR_iso_vlv_stat[0] == 1) -- apu and left iso
-    or (producers.engine2.state == 1 and DR_iso_vlv_stat[0] == 1 and DR_iso_vlv_stat[1] == 1 and DR_iso_vlv_stat[2] == 1)) then -- right engine and all isos
+    or (producers.apu.state == 1 and B777DR_iso_vlv_status[0] == 1) -- apu and left iso
+    or (producers.engine2.state == 1 and B777DR_iso_vlv_status[0] == 1 and B777DR_iso_vlv_status[1] == 1 and B777DR_iso_vlv_status[2] == 1)) then -- right engine and all isos
     -- replace the whole thing with just duct press?
         --run_after_time(function() self.actConsumption = self.consumption end, 1)
         self.flow = true
@@ -232,6 +231,7 @@ local Consumer = {
         if phase == 0 then
             if self.switchState == 0 then
                 self.switchState = 1
+                self:automanager()
             else
                 self.switchState = 0
                 run_after_time(function()
@@ -310,6 +310,7 @@ function updateConsumption()
     packR.consumption = packR.flow and packR.actConsumption or 0
     trimL.consumption = trimL.flow and trimL.actConsumption or 0
     trimR.consumption = trimR.flow and trimR.actConsumption or 0
+    
 end
 
 function autoManager()
@@ -341,44 +342,25 @@ function calcPressure()
     local available = {0, 0}
     local consumption = {0, 0}
 
-    -- calculate total available
-    if DR_iso_vlv_stat[0] == 1 and DR_iso_vlv_stat[2] == 1 and DR_iso_vlv_stat[1] == 1 then -- all open
-        available[1] = producers.apu.prod + producers.engine1.prod + producers.engine2.prod -- total
+    available[1] = producers.engine1.prod + producers.apu.prod*B777DR_iso_vlv_status[0]
+
+    consumption[1] = packL.actConsumption + trimL.actConsumption + waiL.actConsumption + eng1Starter.actConsumption -- normally on left side
+        + (apuStarter.actConsumption + demandPumpL.actConsumption) * B777DR_iso_vlv_status[0] -- on left side if left iso valve is open
+        + demandPumpR.actConsumption * math.floor((B777DR_iso_vlv_status[0] + B777DR_iso_vlv_status[1]) / 2) -- on left side if left and center iso valves are open
+
+    if B777DR_iso_vlv_status[0] == 1 and B777DR_iso_vlv_status[1] == 1 and B777DR_iso_vlv_status[2] == 1 then -- all iso valves open; this means all the calcs arent done on the right side if not needed
+        available[1] = available[1] + producers.engine2.prod
         available[2] = available[1]
-    else
-        if DR_iso_vlv_stat[0] == 0 then -- left closed (between eng1 and apu)
-            available[1] = producers.engine1.prod -- only engine
-        else -- left open (eng1 not isolated from apu)
-            available[1] = producers.engine1.prod + producers.apu.prod -- engine and apu
-        end
 
-        if DR_iso_vlv_stat[2] == 0 or DR_iso_vlv_stat[1] == 0 then -- center or right closed (between eng2 and apu)
-            available[2] = producers.engine2.prod
-        else -- eng2 not isolated from apu
-            available[2] = producers.engine2.prod + producers.apu.prod
-        end
-    end
-
-    -- calculate consumption
-    consumption[1] = packL.actConsumption + trimL.actConsumption + waiL.actConsumption + eng1Starter.actConsumption -- l side
-    consumption[2] = packR.actConsumption + trimR.actConsumption + waiR.actConsumption + eng2Starter.actConsumption -- r side
-    if DR_iso_vlv_stat[0] == 1 and DR_iso_vlv_stat[2] == 0 then -- left valve open and right closed
-        consumption[1] = consumption[1] + demandPumpL.actConsumption + apuStarter.actConsumption -- add left demand pump and apu starter to left side
-        if DR_iso_vlv_stat[1] == 1 then -- if c valve open, also add right demand pump
-            consumption[1] = consumption[1] + demandPumpR.actConsumption
-        end
-    end
-
-    if DR_iso_vlv_stat[2] == 1 and DR_iso_vlv_stat[0] == 0 then -- right open and left closed
-        consumption[2] = consumption[2] + demandPumpR.actConsumption -- add right demand pump to right side
-        if DR_iso_vlv_stat[1] == 1 then -- if c also open, add left demand pump and apu starter
-            consumption[2] = consumption[2] + demandPumpL.actConsumption + apuStarter.actConsumption
-        end
-    end
-
-    if DR_iso_vlv_stat[2] == 1 and DR_iso_vlv_stat[0] == 1 and DR_iso_vlv_stat[1] == 1 then -- if everything open add everthing together
-        consumption[1] = consumption[1] + consumption[2] + demandPumpL.actConsumption + apuStarter.actConsumption + demandPumpR.actConsumption
+        consumption[1] = consumption[1] + packR.actConsumption + trimR.actConsumption + waiR.actConsumption + eng2Starter.actConsumption
         consumption[2] = consumption[1]
+    else
+        available[2] = producers.engine2.prod
+            + producers.apu.prod * math.floor((B777DR_iso_vlv_status[1] + B777DR_iso_vlv_status[2]) / 2)
+
+        consumption[2] = packR.actConsumption + trimR.actConsumption + waiR.actConsumption + eng2Starter.actConsumption
+            + demandPumpR.actConsumption * B777DR_iso_vlv_status[2]
+            + (apuStarter.actConsumption + demandPumpL.actConsumption) * math.floor((B777DR_iso_vlv_status[1] + B777DR_iso_vlv_status[2]) / 2)
     end
 
     return utils.lim(utils.round(available[1]-consumption[1]), 60, 0), utils.lim(utils.round(available[2]-consumption[2]), 60, 0)
