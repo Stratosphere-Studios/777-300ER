@@ -1,0 +1,17 @@
+Animation daterefs(Nathroxer area):
+Strato/777/cockpit/switches/pass_sgn(0 off, 1 auto 2 on)
+Strato/777/cockpit/switches/no_smok(same as pass_sgn)
+Strato/777/cockpit/switches/altn_flaps --alternate flaps push button on the pedestal. 1 pressed, 0 not pressed
+Strato/777/cockpit/switches/altn_re -- alternate retract/extend switch(-1 retract, 0 off, 1 deploy)
+Strato/777/cockpit/switches/autothr_arm_l - autothrottle left arm(0 down, 1 up)
+Strato/777/cockpit/switches/autothr_arm_l - autothrottle right arm
+
+Lights(also Nathroxer area ig):
+Strato/777/cabin/lights/pass_sgn --seatbelts sign in the cabin
+Strato/777/cabin/lights/no_smok --no vape light also in the cabin
+
+Commands:
+
+Strato/777/commands/pedestal/pitch_trim_altn_up -- alternate trim up(lever to the left of the throttles that no one will ever use(except me))
+
+Strato/777/commands/pedestal/pitch_trim_altn_down -- alternate trim down(look at the labels to know which direction is which))

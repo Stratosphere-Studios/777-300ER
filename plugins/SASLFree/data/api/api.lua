@@ -1,4 +1,3 @@
----@diagnostic disable
 -------------------------------------------------------------------------------
 -- API
 -------------------------------------------------------------------------------
@@ -15,6 +14,12 @@ net = {}
 --- @class options
 options = {}
 
+--- @class aircraft
+aircraft = {}
+
+--- @class weather
+weather = {}
+
 --- @class windows
 windows = {}
 
@@ -28,6 +33,8 @@ sasl = {
     al = al,
     net = net,
     options = options,
+    aircraft = aircraft,
+    weather = weather,
     windows = windows
 }
 
@@ -178,10 +185,11 @@ sasl.getClipboardText = getClipboardText;
 
 --- Returns data about directories and files located in the specified path.
 --- @param path string
+--- @param includeAllEntries boolean
 --- @return FileEntry[]
 --- @see reference
 --- : https://1-sim.com/files/SASL3Manual.pdf#listFiles
-function listFiles(path) end;
+function listFiles(path, includeAllEntries) end;
 sasl.listFiles = listFiles;
 
 -------------------------------------------------------------------------------
@@ -629,7 +637,7 @@ SASL_TIMEOUT_SPEEDLIMIT = nil
 
 SASL_TIMEOUT_VALUE_DEFAULT = nil
 
---- Synchronously downloads contents from file, specified by url.
+--- Sets timeout values/modes for all functions downloading files/contents
 --- @param type TimeoutType
 --- @param time number
 --- @param speed number
@@ -638,6 +646,13 @@ SASL_TIMEOUT_VALUE_DEFAULT = nil
 --- : https://1-sim.com/files/SASL3Manual.pdf#setDownloadTimeout
 function setDownloadTimeout(type, time, speed) end;
 net.setDownloadTimeout = setDownloadTimeout;
+
+--- Enables/disables automatic request failure in case of returned HTTP error codes
+--- @param enabled boolean
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#setDownloadFailOnHttpError
+function setDownloadFailOnHttpError(type, time, speed) end;
+net.setDownloadFailOnHttpError = setDownloadFailOnHttpError;
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -861,6 +876,10 @@ TYPE_UNKNOWN = nil
 TYPE_INT_ARRAY = nil
 TYPE_FLOAT_ARRAY = nil
 TYPE_STRING = nil
+
+XP_MSG_ENTERED_VR = nil
+XP_MSG_EXITING_VR = nil
+XP_MSG_RELEASE_PLANES = nil
 
 --- Registers new message handler for message with unique specified messageID.
 --- @param messageID number
@@ -2062,6 +2081,7 @@ gl.getTargetTextureData = getTargetTextureData;
 --- Creates new texture data storage object and returns its numeric identifier id.
 --- @param width number
 --- @param height number
+--- @overload fun(fileName:string): number, number, number
 --- @return number
 --- @see reference
 --- : https://1-sim.com/files/SASL3Manual.pdf#createTextureDataStorage
@@ -2108,6 +2128,14 @@ gl.setRawTextureData = setRawTextureData;
 --- : https://1-sim.com/files/SASL3Manual.pdf#imageFromTexture
 function imageFromTexture(filename, texID) end;
 gl.imageFromTexture = imageFromTexture;
+
+--- Saves texture storage contents, specified by numeric handle texStorageID, in file.
+--- @param filename string
+--- @param texStorageID number
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#imageFromTexture
+function imageFromTextureStorage(filename, texStorageID) end;
+gl.imageFromTextureStorage = imageFromTextureStorage;
 
 --- @class FontHinterPreference
 FONT_HINTER_AUTO = nil
@@ -2490,6 +2518,42 @@ gl.drawFontTexture = drawFontTexture;
 --- : https://1-sim.com/files/SASL3Manual.pdf#getFontInfo
 function getFontInfo(id) end;
 gl.getFontInfo = getFontInfo;
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- @class CursorID
+
+CURSOR_XP_ROTATE_SMALL = nil
+CURSOR_XP_ROTATE_SMALL_LEFT = nil
+CURSOR_XP_ROTATE_SMALL_RIGHT = nil
+CURSOR_XP_ROTATE_MEDIUM = nil
+CURSOR_XP_ROTATE_MEDIUM_LEFT = nil
+CURSOR_XP_ROTATE_MEDIUM_RIGHT = nil
+CURSOR_XP_ROTATE_LARGE = nil
+CURSOR_XP_ROTATE_LARGE_LEFT = nil
+CURSOR_XP_ROTATE_LARGE_RIGHT = nil
+CURSOR_XP_UP_DOWN = nil
+CURSOR_XP_DOWN = nil
+CURSOR_XP_UP = nil
+CURSOR_XP_LEFT_RIGHT = nil
+CURSOR_XP_LEFT = nil
+CURSOR_XP_RIGHT = nil
+CURSOR_XP_BUTTON = nil
+CURSOR_XP_HANDLE = nil
+CURSOR_XP_FOUR_ARROWS = nil
+CURSOR_XP_SPLITTER_H = nil
+CURSOR_XP_SPLITTER_V = nil
+CURSOR_XP_TEXT = nil
+CURSOR_CUSTOM = nil
+
+--- Loads native cursor from specified CursorID
+--- @param id CursorID
+--- @return Cursor
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#loadCursor
+function loadCursor(id) end;
+gl.loadCursor = loadCursor
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
@@ -3219,6 +3283,61 @@ sasl.readConfig = readConfig;
 --- : https://1-sim.com/files/SASL3Manual.pdf#writeConfig
 function writeConfig(pathToFile, format, t) end
 sasl.writeConfig = writeConfig;
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+--- Returns METAR information string for the airport
+--- @param icao string
+--- @return string
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#getMETARForAirport
+function getMETARForAirport(icao) end
+weather.getMETARForAirport = getMETARForAirport;
+
+--- @class WindLayer
+--- @field alt number
+--- @field speed number
+--- @field direction number
+--- @field gustSpeed number
+--- @field shear number
+--- @field turbulence number
+
+--- @class CloudLayer
+--- @field altBase number
+--- @field altTop number
+--- @field cloudType number
+--- @field coverage number
+
+--- @class WeatherInfo
+--- @field isDetailed boolean
+--- @field temperature number
+--- @field dewPoint number
+--- @field pressure number
+--- @field precipRate number
+--- @field windDir number
+--- @field windSpeed number
+--- @field turbulence number
+--- @field waveHeight number
+--- @field waveLength number
+--- @field waveDir number
+--- @field waveSpeed number
+--- @field thermalClimb number
+--- @field baseVisibility number
+--- @field basePrecipRate number
+--- @field basePressure number
+--- @field windLayers WindLayer[]
+--- @field cloudLayers CloudLayer[]
+
+--- Returns information about weather conditions in provided spatial position
+--- @param latitude number
+--- @param longitude number
+--- @param altitude number
+--- @return WeatherInfo
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#getWeatherAtLocation
+function getWeatherAtLocation(latitude, longitude, altitude) end
+weather.getWeatherAtLocation = getWeatherAtLocation;
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------

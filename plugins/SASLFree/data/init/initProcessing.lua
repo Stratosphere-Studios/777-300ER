@@ -1,4 +1,3 @@
----@diagnostic disable
 -------------------------------------------------------------------------------
 -- Draw
 -------------------------------------------------------------------------------
@@ -247,7 +246,7 @@ end
 --- Called whenever user plane is crashed.
 function onPlaneCrash()
     local planeCrashHandler = rawget(panel, 'onPlaneCrash')
-    needReload = 1
+    local needReload = 1
     if planeCrashHandler then
         needReload = planeCrashHandler()
     end
@@ -266,8 +265,8 @@ end
 -------------------------------------------------------------------------------
 
 --- Called on module shutdown.
-function shutdownModules()
-    private.callCallbackForAllLayers("onModuleShutdown", false)
+function shutdownModules(isError)
+    private.callCallbackForAllLayers("onModuleShutdown", false, isError)
 end
 
 -------------------------------------------------------------------------------

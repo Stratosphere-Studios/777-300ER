@@ -1,4 +1,3 @@
----@diagnostic disable
 -------------------------------------------------------------------------------
 -- Setup paths for additional packages and 3-rd party libraries
 -------------------------------------------------------------------------------
@@ -32,6 +31,7 @@ _SLOADED = {}
 --- @field defineProperty fun(name:string, dflt:any)
 --- @field include fun(name:string)
 --- @field fbo Property | boolean
+--- @field fboAA Property | number
 --- @field fpsLimit Property | number
 --- @field noRenderSignal Property | boolean
 --- @field clip Property | boolean
@@ -66,6 +66,7 @@ function private.createComponent(name, parent)
     local data = {
         components = {},
         fbo = createProperty(false),
+        fboAA = createProperty(0),
         renderTarget = -1,
         fpsLimit = createProperty(-1),
         frames = 0,
@@ -266,7 +267,8 @@ function loadComponent(name, source, isRoot)
         end
 
         if toboolean(get(t.fbo)) then
-            t.renderTarget = sasl.gl.createRenderTarget(t.size[1], t.size[2])
+            local aaLevel = get(t.fboAA)
+            t.renderTarget = sasl.gl.createRenderTarget(t.size[1], t.size[2], aaLevel)
         end
 
         if subdir then
@@ -289,7 +291,7 @@ function include(component, name)
     logInfo("including", name)
     name = appendDefaultFileExtension(name)
 
-    local f, subdir = openFile(name, true)
+    local f, subdir = openFile(name)
     if not f then
         logError("Can't include script "..name)
     else
@@ -306,29 +308,31 @@ function include(component, name)
     end
 end
 
---- Loads and provides SASL Lua module. Mimics standard
---- 'require' behavior, but loads only Lua scripts using current SASL project
---- search paths and scripts naming conventions.
---- @param name string
---- @param forceInstance boolean
---- @return any
---- @see reference
---- : https://1-sim.com/files/SASL3Manual.pdf#request
-function request(name, forceInstance)
-    logInfo("requesting", name)
+local loadMode = {
+    cache = 1,
+    instance = 2,
+    reload = 3
+}
+
+local loadModeStr = {
+    "", "instance", "reload"
+}
+
+local function requestScript(name, mode)
+    logInfo("requesting", name .. " " .. loadModeStr[mode])
     name = appendDefaultFileExtension(name)
-    local fInst = forceInstance or false
     if _SLOADED[name] then
         if _SLOADED[name] == _SGUARD then
             logError("Loop during script request or error on previous script request")
             return nil
         end
-        if not fInst then
+        if mode == loadMode.cache then
             return _SLOADED[name]
         end
     end
     local oName = name
-    local f, subdir = openFile(name, not fInst)
+    local reload = mode == loadMode.reload
+    local f, subdir = openFile(name, reload)
     if not f then
         logError("Can't request script "..oName)
         return nil
@@ -350,6 +354,27 @@ function request(name, forceInstance)
         end
         return _SLOADED[oName]
     end
+end
+
+--- Loads and provides SASL Lua module. Mimics standard
+--- 'require' behavior, but loads only Lua scripts using current SASL project
+--- search paths and scripts naming conventions.
+--- @param name string
+--- @param forceInstance boolean
+--- @return any
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#request
+function request(name, forceInstance)
+    return requestScript(name, forceInstance and loadMode.instance or loadMode.cache)
+end
+
+--- Version of 'request' function that forces the script to be reloaded from filesystem
+--- @param name string
+--- @return any
+--- @see reference
+--- : https://1-sim.com/files/SASL3Manual.pdf#requestReload
+function requestReload(name)
+    return requestScript(name, loadMode.reload)
 end
 
 -------------------------------------------------------------------------------
@@ -571,6 +596,15 @@ function private.isOSCursorHidden()
         end
     end
     return false
+end
+
+--- Gets current native cursor ID if one is selected or nil otherwise.
+--- @return number | nil
+function private.nativeCursorId()
+    local sh = private.cursor
+    if sh ~= nil then
+        return sh.nativeId
+    end
 end
 
 -------------------------------------------------------------------------------
