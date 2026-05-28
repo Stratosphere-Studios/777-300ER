@@ -3,3 +3,4 @@
 *SASLLog.txt
 *state.txt
 *.DS_Store
+*xtlua_debugging.txt
