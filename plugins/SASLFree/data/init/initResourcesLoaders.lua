@@ -1,4 +1,3 @@
----@diagnostic disable
 -------------------------------------------------------------------------------
 -- Resources loaders
 -------------------------------------------------------------------------------
@@ -257,6 +256,22 @@ function loadShader(shaderID, fileName, shType)
 end
 
 sasl.gl.loadShader = loadShader
+
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+
+function loadCursor(cursorId)
+    if cursorId < CURSOR_XP_HIDDEN or cursorId > CURSOR_XP_LAST then
+        logError("Incorrect cursor ID")
+        return nil
+    end
+    local cs = {
+        nativeId = cursorId
+    }
+    return cs
+end
+
+sasl.gl.loadCursor = loadCursor
 
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------

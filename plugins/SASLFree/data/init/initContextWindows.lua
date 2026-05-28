@@ -1,4 +1,3 @@
----@diagnostic disable
 -------------------------------------------------------------------------------
 -- Context windows
 -------------------------------------------------------------------------------
@@ -102,7 +101,6 @@ local defaultWindowName = "cWindow"
 --- @field resizeMode CWResizeModeID
 --- @field noMove boolean
 --- @field vrAuto boolean
---- @field fbo boolean
 --- @field clip boolean
 --- @field clipSize number[]
 --- @field command string
@@ -222,6 +220,9 @@ function contextWindow(params)
         processMouseMove(c, x, y)
         if private.isOSCursorHidden() then
             resultCursor = 2
+        else
+            local nativeCsId = private.nativeCursorId()
+            resultCursor = (nativeCsId ~= nil) and nativeCsId or resultCursor
         end
         return resultCursor
     end
@@ -502,6 +503,11 @@ function contextWindow(params)
     -------------------------------------------------------------------------------
 
     c.window = window
+
+    c.initState = {
+        position = { p[1], p[2], p[3], p[4] },
+        visible = get(c.visible)
+    }
     c.saveState = createProperty(false)
     if get(params.saveState) then
         set(c.saveState, true)
@@ -511,6 +517,7 @@ function contextWindow(params)
     if contextWindows ~= nil then
         contextWindows.component(c)
     end
+
     return window
 end
 
@@ -531,7 +538,8 @@ function private.saveContextWindowsState()
                 cw[name] = {
                     mode = { modeId, modeMonitor },
                     position = { x, y, w, h },
-                    visible = vis
+                    visible = vis,
+                    initState = c.initState
                 }
             else
                 logWarning("Context window requsted saving its state, but 'name' wasn't provided at CW creation")
@@ -545,21 +553,39 @@ end
 -------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
+local function cwInitStateEqual(c, st)
+    if st.initState == nil then
+        return true
+    end
+
+    local stP = c.initState.position
+    local initStP = st.initState.position
+    local stVis = c.initState.visible
+    local initStVis = st.initState.visible
+
+    return stP[1] == initStP[1] and stP[2] == initStP[2] and
+           stP[3] == initStP[3] and stP[4] == initStP[4] and
+           stVis == initStVis
+end
+
 --- Applies saved state for context window associated with component
 function private.applyContextWindowState(c)
     local name = c.name
     if name ~= defaultWindowName then
         local st = private.savedState.contextWindows[name]
         if st then
+            if not cwInitStateEqual(c, st) then
+                return
+            end
             local mode = st.mode
             local p = st.position
             local visible = st.visible
-            if mode and p and mode[1] ~= SASL_CW_MODE_VR then
-                c.window:setMode(mode[1], mode[2])
-                c.window:setPosition(p[1], p[2], p[3], p[4])
-                if visible ~= nil then
-                    c.window:setIsVisible(visible)
+            if (visible ~= nil) and mode and p and mode[1] ~= SASL_CW_MODE_VR then
+                c.window:setIsVisible(visible)
+                if visible then
+                    c.window:setMode(mode[1], mode[2])
                 end
+                c.window:setPosition(p[1], p[2], p[3], p[4])
             end
         end
     end
