@@ -1,4 +1,3 @@
----@diagnostic disable
 -------------------------------------------------------------------------------
 -- Filesystem helpers
 -------------------------------------------------------------------------------
@@ -77,12 +76,11 @@ _SFCACHE = {}
 --- Loads chunk of Lua code from specified file.
 --- Will be searched according to the current list of search paths.
 --- @param fileName string
---- @param cache boolean
+--- @param reload boolean
 --- @return function
 --- @see reference
 --- : https://1-sim.com/files/SASL3Manual.pdf#openFile
-function openFile(fileName, cache)
-    local ch = cache or false
+function openFile(fileName, reload)
     local name = extractFileName(fileName)
 
     for _, v in ipairs(private.searchPath) do
@@ -96,13 +94,12 @@ function openFile(fileName, cache)
             subdir = name
         end
 
-        if ch and _SFCACHE[fullName] then return _SFCACHE[fullName] end
+        local ch = _SFCACHE[fullName]
+        if not reload and ch then return ch[1], ch[2] end
         if isFileExists(fullName) then
             local f, errorMsg = loadfile(fullName)
             if f then
-                if ch then
-                    _SFCACHE[fullName] = f
-                end
+                _SFCACHE[fullName] = { f, nil }
                 return f
             else
                 logError(errorMsg)
@@ -110,13 +107,12 @@ function openFile(fileName, cache)
         end
 
         local subFullName = subdir .. '/' .. fileName
-        if ch and _SFCACHE[subFullName] then return _SFCACHE[subFullName] end
+        ch = _SFCACHE[subFullName]
+        if not reload and ch then return ch[1], ch[2] end
         if isFileExists(subFullName) then
             local f, errorMsg = loadfile(subFullName)
             if f then
-                if ch then
-                    _SFCACHE[subFullName] = f
-                end
+                _SFCACHE[subFullName] = { f, subdir }
                 return f, subdir
             else
                 logError(errorMsg)

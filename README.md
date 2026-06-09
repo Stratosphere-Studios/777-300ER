@@ -1,5 +1,5 @@
 # **Stratosphere Studios 777-300ER**
-Freeware Boeing 777-300ER for the X-Plane 12 flight simulator by Stratosphere Studios.
+Freeware Boeing 777-300ER & ERSF for the X-Plane 12 flight simulator by Stratosphere Studios.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>
 
@@ -91,7 +91,7 @@ A: Currently, you can't start from cold and dark because not all required system
 
 **Q: Is there a cargo version available?**
 
-A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERF. Note that not all cockpit changes are modeled yet.
+A: Yes! Enable the freighter option on the EFB and the plane will become a 300ERSF. Note that not all cockpit changes are modeled yet.
 
 **Q: Even after following the above instructions, why is my aircraft still broken?**
 
