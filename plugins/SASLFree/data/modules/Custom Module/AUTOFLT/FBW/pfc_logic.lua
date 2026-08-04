@@ -526,8 +526,8 @@ function update()
 
 	updateFltDir()
 	UpdateMode()
-	if get(pfc_calc) == 1 and get(f_time) ~= 0 then
-		if get(fbw_mode) == 1 then
+	if get(fbw_mode) == 1 then
+		if get(pfc_calc) == 1 and get(f_time) ~= 0 then
 			updateMCP()
 
 			local tmp = UpdatePFCElevatorCommand(pitch_input_last, aoa_last, 
@@ -542,14 +542,14 @@ function update()
 			if get(ap_engaged) == 1 then
 				set(ap_disc, 0)
 			end
-		elseif get(ap_engaged) == 1 then
-			set(ap_engaged, 0)
-			set(ap_disc, 1)
+			local tmp = UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past)
+			roll_input_last = tmp[1]
+			heading_input_last = tmp[2]
+			fbw_roll_past = tmp[3]
 		end
-		local tmp = UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past)
-		roll_input_last = tmp[1]
-		heading_input_last = tmp[2]
-		fbw_roll_past = tmp[3]
+	elseif get(ap_engaged) == 1 then
+		set(ap_engaged, 0)
+		set(ap_disc, 1)
 	end
 	if not ap_roll_set then
 		local ap_roll_cmd = getAutopilotRollCmd()

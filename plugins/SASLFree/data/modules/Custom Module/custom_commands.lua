@@ -459,7 +459,7 @@ end
 --Autopilot
 function APOnHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
-		if get(ap_disc_bar) == 0 and get(on_ground) == 0 then
+		if get(ap_disc_bar) == 0 and get(on_ground) == 0 and get(fbw_mode) == 1 then
 			set(ap_engaged, 1)
 		end
 	end 

@@ -145,6 +145,8 @@ pcu_elevator = globalProperty("Strato/777/fctl/pcu/elev")
 pcu_rudder = globalProperty("Strato/777/fctl/pcu/rudder")
 pcu_sp = globalProperty("Strato/777/fctl/pcu/sp")
 
+pfc_test_coeff = createGlobalPropertyf("Strato/777/test/pfc_test_coeff", 1)
+
 --Test
 gear_untilted = createGlobalPropertyi("Strato/777/test/spoiler_arm_test", 0)
 
@@ -159,6 +161,7 @@ rud_trim_auto_past = 0
 lmw_onground_past = 1
 rmw_onground_past = 1
 spoiler_special_cmd = 0
+pfc_coeff = 1
 Control_surface = {aces = {0, 0}, hyd_sys = {0, 0}, full_up = 18, full_dn = 18, mode = 0}
 
 function Control_surface:new(tmp)
@@ -339,7 +342,7 @@ function GetFBWAilRatio(fctl_mode, avg_alt, avg_cas, flap_pos)
 			return (1 - ((avg_cas - speed_lim_min) / (speed_lim_max - speed_lim_min)))
 		end
 	else
-		if flap_pos ~= 0 then
+		if flap_pos > 0.00001 then
 			return 1
 		end
 	end
@@ -550,13 +553,17 @@ end
 
 function UpdatePitch(elev_L, elev_R)
     local direct_coefficients = {{0.21, 0.3}, {0.27, 0.33}} --{push, pull}
-    local elevator_cmd = 0
+    local elevator_cmd_pfc = 0
+    local elevator_cmd_direct = 0
     local fail_handler = ElevatorFailHandler
+    set(pfc_test_coeff, pfc_coeff)
     if get(fbw_mode) == 1 and get(on_ground) == 0 then
-        elevator_cmd = lim(-get(pfc_elevator_command), 27, -33) 
+        elevator_cmd_pfc = lim(-get(pfc_elevator_command), 27, -33)
+        pfc_coeff = EvenChange(pfc_coeff, 1, ACE_ELEVATOR_MODE_TRANS_RT)
     else
         local upper_ratio = 0
         local lower_rato = 0
+        pfc_coeff = EvenChange(pfc_coeff, 0, ACE_ELEVATOR_MODE_TRANS_RT)
         if get(on_ground) == 0 then
             lower_rato = (direct_coefficients[1][1] + get(flaps) * (direct_coefficients[2][1] - direct_coefficients[1][1]) / 30) * 100
             upper_ratio = (direct_coefficients[1][2] + get(flaps) * (direct_coefficients[2][2] - direct_coefficients[1][2]) / 30) * 100
@@ -564,8 +571,9 @@ function UpdatePitch(elev_L, elev_R)
             upper_ratio = elev_L.full_up
             lower_rato = elev_L.full_dn
         end
-        elevator_cmd = getPosition(-get(yoke_pitch_ratio), 0, upper_ratio, lower_rato)
+        elevator_cmd_direct = getPosition(-get(yoke_pitch_ratio), 0, upper_ratio, lower_rato)
     end
+    elevator_cmd = pfc_coeff * elevator_cmd_pfc + (1 - pfc_coeff) * elevator_cmd_direct
     elev_L:setCmd(ace_elevator, ace_elevator_fail_L, elevator_cmd, 1, ElevatorFailHandler)
     elev_R:setCmd(ace_elevator, ace_elevator_fail_R, elevator_cmd, 2, ElevatorFailHandler)
 end
