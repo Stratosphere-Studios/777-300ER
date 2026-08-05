@@ -103,6 +103,7 @@ TCAS_SW_TA_ONLY = 3
 TCAS_SW_TA_RA = 4
 
 --Flaps&slats:
+FLAP_MIN_SYS_C_PRESS_PSI = 1000
 FLAP_MD_PRI = 1
 FLAP_MD_SEC = 2
 FLAP_MD_ALTN = 3
@@ -125,6 +126,8 @@ FLAP_STGS_DSP = {0, 1, 5, 15, 20, 25, 30}
 FLAP_STGS = {0, 1, 9, 15, 20, 25, 30}
 FLAP_STGS_CMB = {0, 1.5, 9.5, 15.5, 20.5, 26, 31}
 FLAP_HDL_DTTS = {0, 0.17, 0.33, 0.5, 0.67, 0.83, 1}
+--Hydraulics:
+HYD_EDP_MIN_N2 = 50
 
 --Passenger stuff
 PASS_SGN_OFF = 0

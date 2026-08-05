@@ -32,7 +32,6 @@ pitch_trim_altn = createGlobalPropertyi("Strato/777/cockpit/switches/strim_altn"
 rud_pedals = createGlobalPropertyf("Strato/777/cockpit/switches/rud_pedals", 0)
 caut_cap_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_cap", 0)
 caut_fo_anim = createGlobalPropertyf("Strato/777/cockpit/switches/caut_fo", 0)
---ap_engaged = createGlobalPropertyi("Strato/777/mcp/ap_on", 0)
 -- 0 off, 1 auto, 2 on
 pass_sgn_anim = createGlobalPropertyf("Strato/777/cockpit/switches/pass_sgn", 0)
 no_smok_anim = createGlobalPropertyf("Strato/777/cockpit/switches/no_smok", 0)
@@ -52,6 +51,7 @@ flch = createGlobalPropertyi("Strato/777/mcp/flch", 0)
 toga = createGlobalPropertyi("Strato/777/mcp/toga", 0)
 at_disc = createGlobalPropertyi("Strato/777/mcp/at_disc", 0)
 ap_disc_bar = createGlobalPropertyi("Strato/777/mcp/ap_disc_bar", 0)
+ap_disc_reg = createGlobalPropertyi("Strato/777/mcp/ap_disc_reg", 0)
 
 flt_dir_pilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_pilot", 0)
 flt_dir_copilot = createGlobalPropertyi("Strato/777/mcp/flt_dir_copilot", 0)

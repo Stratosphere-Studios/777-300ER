@@ -137,7 +137,8 @@ function getAutopilotHdgTrkHoldCmd()
 end
 
 function updateRollMode()
-    local auto_level = get(ap_engaged) + get(flt_dir_pilot) + get(flt_dir_copilot)
+    --auto_level is the current level of automation requested by the flight crew
+    local auto_level = get(ap_engaged) + get(flt_dir_pilot) + get(flt_dir_copilot) 
     if auto_level == 0 then
         curr_lat_mode = LAT_MODE_OFF
         set(hdg_hold_eng, 0)

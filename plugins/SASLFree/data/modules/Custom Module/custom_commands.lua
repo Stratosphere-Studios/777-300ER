@@ -68,6 +68,7 @@ speedbrake_handle = globalPropertyf("Strato/777/cockpit/switches/sb_handle")
 ap_disc = globalPropertyi("Strato/777/autopilot/disc")
 ap_engaged = globalPropertyi("Strato/777/mcp/ap_on")
 ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
+ap_disc_reg = globalPropertyi("Strato/777/mcp/ap_disc_reg")
 
 autothr_arm_l = globalPropertyi("Strato/777/mcp/autothr_arm_l")
 autothr_arm_r = globalPropertyi("Strato/777/mcp/autothr_arm_r")
@@ -116,8 +117,6 @@ rudder_trim_left = sasl.findCommand("sim/flight_controls/rudder_trim_left")
 rudder_trim_right = sasl.findCommand("sim/flight_controls/rudder_trim_right")
 rudder_trim_center = sasl.findCommand("sim/flight_controls/rudder_trim_center")
 --Creating own commands
---mag_hdg_btn = sasl.createCommand("Strato/777/commands/ND/mag_hdg", 
---									"Command for the magnetic heading switch")
 --Flight controls:
 pfc_disc_switch = sasl.createCommand("Strato/777/commands/overhead/pfc_disc", 
 										"Command for the PFC disc switch")
@@ -233,14 +232,6 @@ function AutoBrkDecrHandler(phase)
 		set(autobrk_mode, math.max(get(autobrk_mode)-1, ABRK_MD_RTO))
 	end
 end
-
---ND
-
---function MagHdgBtn(phase)
---	if phase == SASL_COMMAND_BEGIN then
---		set(hdg_src_switch, 1 - get(hdg_src_switch))
---	end
---end
 
 --EICAS control
 
@@ -466,23 +457,16 @@ function APOnHandler(phase)
 end
 
 function APDiscHandler(phase)
-	if phase == SASL_COMMAND_BEGIN then
-		if get(ap_engaged) == 1 then
-			set(ap_engaged, 0)
-			set(ap_disc, 1)
-		elseif get(ap_disc) == 1 then
-			set(ap_disc, 0)
-		end
+	if phase == SASL_COMMAND_CONTINUE then
+		set(ap_disc_reg, 1)
+	elseif phase == SASL_COMMAND_END then
+		set(ap_disc_reg, 0)
 	end
 end
 
 function APDiscBarHandler(phase)
 	if phase == SASL_COMMAND_BEGIN then
 		set(ap_disc_bar, 1 - get(ap_disc_bar))
-		if get(ap_disc_bar) == 1 and get(ap_engaged) == 1 then
-			set(ap_engaged, 0)
-			set(ap_disc, 1)
-		end
 	end
 end
 

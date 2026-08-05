@@ -297,12 +297,12 @@ function UpdateFlapMode()
 			return
 		end
 		local sec_inh = 0
-		if (get(sys_C_press) < 1000 and get(gs_kts) < 40 and 
+		if (get(sys_C_press) < FLAP_MIN_SYS_C_PRESS_PSI and get(gs_kts) < 40 and 
 			(get(engn_n2, 1) <= 50 or get(engn_n2, 1) <= 50)) then
 			sec_inh = 1
 		end
 		local tgt_dev = math.abs(get(flap_tgt)-avg_pos)
-		if get(sys_C_press) < 1000 and sec_inh == 0 and (tgt_dev >= 0.1 or flap_sys_md == FLAP_MD_SEC) then
+		if get(sys_C_press) < FLAP_MIN_SYS_C_PRESS_PSI and sec_inh == 0 and (tgt_dev >= 0.1 or flap_sys_md == FLAP_MD_SEC) then
 			flap_sys_md = FLAP_MD_SEC
 			set(flap_load_relief, 0)
 		else
@@ -321,13 +321,13 @@ function UpdateSlatMode()
 			return
 		end
 		local sec_inh = 0
-		if (get(sys_C_press) < 1000 and get(gs_kts) < 40 and 
+		if (get(sys_C_press) < FLAP_MIN_SYS_C_PRESS_PSI and get(gs_kts) < 40 and 
 			(get(engn_n2, 1) <= 50 or get(engn_n2, 1) <= 50)) then
 			sec_inh = 1
 		end
 		local avg_pos = (get(slat_1)+get(slat_2))/2
 		local tgt_dev = math.abs(get(slat_tgt)-avg_pos)
-		if get(sys_C_press) < 1000 and sec_inh == 0 and (tgt_dev >= 0.1 or slat_sys_md == FLAP_MD_SEC) then
+		if get(sys_C_press) < FLAP_MIN_SYS_C_PRESS_PSI and sec_inh == 0 and (tgt_dev >= 0.1 or slat_sys_md == FLAP_MD_SEC) then
 			slat_sys_md = FLAP_MD_SEC
 		else
 			slat_sys_md = FLAP_MD_PRI
@@ -421,13 +421,22 @@ function UpdateRudder(value)
 	set(bottom_rudder, value)
 end
 
+function DoLiftDevHavePower(curr_md) 
+	if get(sys_C_press) >= FLAP_MIN_SYS_C_PRESS_PSI or 
+		(curr_md ~= FLAP_MD_SEC_LOCK  and curr_md ~= FLAP_MD_PRI) then
+		return 1
+	end
+	return 0
+end
+
 function SetSlatPos(tgt, resp)
-	if get(slats_jam_all_out) == 0 and slat_sys_md ~= FLAP_MD_SEC_LOCK then
+	local have_power = DoLiftDevHavePower(slat_sys_md)
+	if get(slats_jam_all_out) == 0 and have_power == 1 then
 		set(slat_2, EvenChange(get(slat_2), tgt, resp))
 	else
 		set(slat_2, get(slat_2))
 	end
-	if get(slats_jam_all_inn) == 0 and slat_sys_md ~= FLAP_MD_SEC_LOCK then
+	if get(slats_jam_all_inn) == 0 and have_power == 1 then
 		set(slat_1, EvenChange(get(slat_1), tgt, resp))
 	else
 		set(slat_1, get(slat_1))
@@ -506,14 +515,15 @@ function UpdateSlats()
 end
 
 function UpdateFlaps(values)
-	if get(flaps_jam_all_lt) == 0 and flap_sys_md ~= FLAP_MD_SEC_LOCK then
+	local have_power = DoLiftDevHavePower(flap_sys_md)
+	if get(flaps_jam_all_lt) == 0 and have_power == 1 then
 		set(inbd_flap_L, values[1])
 		set(outbd_flap_L, values[1])
 	else
 		set(inbd_flap_L, get(inbd_flap_L))
 		set(outbd_flap_L, get(outbd_flap_L))
 	end
-	if get(flaps_jam_all_rt) == 0 and flap_sys_md ~= FLAP_MD_SEC_LOCK then
+	if get(flaps_jam_all_rt) == 0 and have_power == 1 then
 		set(inbd_flap_R, values[2])
 		set(outbd_flap_R, values[2])
 	else

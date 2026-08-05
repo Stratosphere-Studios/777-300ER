@@ -37,6 +37,9 @@ pass_seats = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 11)
 cabin_util = globalPropertyiae("Strato/777/cockpit/ovhd/elec/position", 12)
 gen_1 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 1)
 gen_2 = globalPropertyiae("sim/cockpit2/electrical/generator_on", 2)
+--Engines
+engine_1_n2 = globalPropertyfae("sim/flightmodel/engine/ENGN_N2_", 1)
+engine_2_n2 = globalPropertyfae("sim/flightmodel/engine/ENGN_N2_", 2)
 --Fuel
 fuel_pump_left_fwd_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 1)
 fuel_pump_left_aft_powered = globalPropertyiae("Strato/777/cockpit/fuel/pump/powered", 2)
@@ -183,6 +186,13 @@ FLP_AD_THCK = 2
 flap_nml_rat = {0, 1/8, 1/5, 2/5, 3/5, 4/5, 1}
 adv_main = { "PRI FLIGHT COMPUTERS", "HYD PRESS SYS L", "HYD PRESS SYS C", "HYD PRESS SYS R",
 	"FLIGHT CONTROLS", "FLAP/SLAT CONTROL"} -- Advisories after which to shift to the right
+
+function IsShutDown() 
+	if get(on_ground) == 1 and get(engine_1_n2) < HYD_EDP_MIN_N2 and get(engine_1_n2) < HYD_EDP_MIN_N2 then
+		return 1
+	end
+	return 0
+end
 
 function UpdateAdvisorySide(messages, text_L, text_R, text_both, dref_l, dref_r)
 	if round(get(dref_l)) == 1 and round(get(dref_r)) == 0 then
@@ -829,13 +839,16 @@ function UpdateEicasWarnings(messages, conf_warn)
 	if avg_ra < 800 and get(throttle_pos) < 0.05 and gear_dn == false then
 		table.insert(messages, tlen(messages) + 1, "CONFIG GEAR")
 	end
-	if get(sys_C_press) < 900 and get(sys_R_press) < 900 and get(stab_cutout_C) * get(stab_cutout_R) == 0 then
-		if get(c_time) > stab_time_no_pwr + 5 then
-			table.insert(messages, tlen(messages) + 1, "STABILIZER")
+	if IsShutDown() == 0 then
+		if get(sys_C_press) < 900 and get(sys_R_press) < 900 and get(stab_cutout_C) * get(stab_cutout_R) == 0 then
+			if get(c_time) > stab_time_no_pwr + 5 then
+				table.insert(messages, tlen(messages) + 1, "STABILIZER")
+			end
+		else
+			stab_time_no_pwr = get(c_time)
 		end
-	else
-		stab_time_no_pwr = get(c_time)
 	end
+	
 	return conf_warn
 end
 

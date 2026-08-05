@@ -10,6 +10,7 @@ addSearchPath(moduleDirectory .. "/Custom Module/HYD/graphics")
 addSearchPath(moduleDirectory .. "/Custom Module/")
 
 include("misc_tools.lua")
+include("constants.lua")
 
 --Finding sim datarefs
 
@@ -114,7 +115,7 @@ function GetPrimaryPumpState(idx) --this function defines primary pump logic.
 		return -1
 	end
 	if idx == 1 then
-		if get(pump_state) == 1 and get(engine_1_n2) >= 10 then
+		if get(pump_state) == 1 and get(engine_1_n2) >= HYD_EDP_MIN_N2 then
 			return 1
 		end
 	elseif idx == 2 then
@@ -123,11 +124,11 @@ function GetPrimaryPumpState(idx) --this function defines primary pump logic.
 		end
 	elseif idx == 3 then 
 		if get(globalPropertyi("sim/flightmodel/failures/onground_any")) == 1 and get(pump_state) == 1 then
-			if get(engine_1_n2) < 18 and get(engine_2_n2) < 18 then
+			if get(engine_1_n2) < HYD_EDP_MIN_N2 and get(engine_2_n2) < HYD_EDP_MIN_N2 then
 				if get(apu_running) == 1 and IsAcConnected() == 1 then
 					return 1
 				end
-			elseif get(engine_1_n2) > 18 and get(engine_2_n2) > 18 and IsAcConnected() == 1 then --C2 pump only activates when there are 2 power sources
+			elseif get(engine_1_n2) > HYD_EDP_MIN_N2 and get(engine_2_n2) > HYD_EDP_MIN_N2 and IsAcConnected() == 1 then --C2 pump only activates when there are 2 power sources
 				return 1
 			end
 		elseif get(on_ground) == 0 and get(pump_state) == 1 then
@@ -136,7 +137,7 @@ function GetPrimaryPumpState(idx) --this function defines primary pump logic.
 			end
 		end
 	else
-		if get(pump_state) == 1 and get(engine_2_n2) >= 10 then
+		if get(pump_state) == 1 and get(engine_2_n2) >= HYD_EDP_MIN_N2 then
 			return 1
 		end
 	end

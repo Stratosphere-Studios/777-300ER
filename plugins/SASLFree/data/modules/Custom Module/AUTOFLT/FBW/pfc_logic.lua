@@ -19,6 +19,7 @@ pitch_trim_A = globalPropertyi("Strato/777/cockpit/switches/strim_A")
 pitch_trim_B = globalPropertyi("Strato/777/cockpit/switches/strim_B")
 pitch_trim_altn = globalPropertyi("Strato/777/cockpit/switches/strim_altn")
 ap_disc_bar = globalPropertyi("Strato/777/mcp/ap_disc_bar")
+ap_disc_reg = globalPropertyi("Strato/777/mcp/ap_disc_reg")
 
 fbw_iasln = globalProperty("Strato/777/fctl/iasln_table")
 ace_fail = globalProperty("Strato/777/failures/fctl/ace")
@@ -58,7 +59,7 @@ fbw_trim_speed = globalPropertyf("Strato/777/fctl/trs")
 
 --position
 yaw_rate_accel = globalPropertyf("sim/flightmodel/position/R_dot")
-
+on_ground = globalPropertyi("sim/flightmodel/failures/onground_any")
 --Operation
 f_time = globalPropertyf("sim/operation/misc/frame_rate_period")
 c_time = globalPropertyf("Strato/777/time/current")
@@ -141,7 +142,8 @@ r_error_total = 0
 --Yaw damper
 yaw_def_max = 8
 bank_prot_active = false
-
+--Mcp
+ap_disc_reg_val_last = 0
 
 trs_pid = PID:new{kp = -0.19, ki = -0.023, kd = 0, errtotal = 0, errlast = 0, lim_out = 25,  lim_et = 1000}
 p_delta_pid = PID:new{kp = 4.1, ki = 0, kd = 0.01, errtotal = 0, errlast = 0, lim_out = 33,  lim_et = 100}
@@ -323,7 +325,7 @@ function UpdatePFCElevatorCommand(pitch_input_last, pitch_last, k_pitch, k_flare
 end
 
 function UpdateRollYawCommand(roll_input_last, heading_input_last, fbw_roll_past)
-    local avg_roll = get(pfc_flt_axes, 2)
+  local avg_roll = get(pfc_flt_axes, 2)
 	local avg_cas = get(pfc_cas)
 	local r_delta = get(pfc_pilot_input, 1) - roll_input_last
 	local h_delta = get(pfc_pilot_input, 2) - heading_input_last
@@ -471,6 +473,9 @@ function UpdateMode()
 end
 
 function getAPDiscSts() -- Only for normal fbw mode
+	if get(ap_disc_reg) == 1 or get(ap_disc_bar) == 1 then
+		return 1
+	end
 	if ((get(pitch_trim_A) ~= 0 and get(pitch_trim_B) ~= 0) or 
 		get(pitch_trim_altn) ~= 0) then
 		return 1
@@ -494,19 +499,31 @@ function getAPDiscSts() -- Only for normal fbw mode
 end
 
 function updateMCP()
+	local curr_disc_reg = get(ap_disc_reg)
+	if curr_disc_reg == 1 and ap_disc_reg_val_last == 0 then
+		if get(ap_engaged) == 1 or get(ap_disc) == 1 then
+			set(ap_disc, 1 - get(ap_disc))
+		end
+	end
+	ap_disc_reg_val_last = curr_disc_reg
 	if getAPDiscSts() == 1 and get(ap_engaged) == 1 then
 		local avg_spd = (get(cas_pilot) + get(cas_copilot)) / 2
 		set(fbw_trim_speed, avg_spd)
 		set(ap_engaged, 0)
 		set(ap_disc, 1)
+		return
 	end
 
-	if get(ap_engaged) == 1 and vert_mode == VERT_MODE_OFF then
-		set(vshold_eng, 1)
-	end
+	if get(on_ground) == 0 then
+		local auto_level = get(ap_engaged) + get(flt_dir_pilot) + get(flt_dir_copilot)
 
-	if get(ap_engaged) == 1 and curr_lat_mode == LAT_MODE_OFF then
-		set(hdg_hold_eng, 1)
+		if auto_level ~= 0 and vert_mode == VERT_MODE_OFF then
+			set(vshold_eng, 1)
+		end
+
+		if auto_level ~= 0 and curr_lat_mode == LAT_MODE_OFF then
+			set(hdg_hold_eng, 1)
+		end
 	end
 end
 
@@ -526,10 +543,11 @@ function update()
 
 	updateFltDir()
 	UpdateMode()
+	if get(f_time) ~= 0 then
+		updateMCP()
+	end
 	if get(fbw_mode) == 1 then
 		if get(pfc_calc) == 1 and get(f_time) ~= 0 then
-			updateMCP()
-
 			local tmp = UpdatePFCElevatorCommand(pitch_input_last, aoa_last, 
 												k_fbw_pitch, k_fbw_flare, flare_aoa_change)
 			pitch_input_last = tmp[1]
