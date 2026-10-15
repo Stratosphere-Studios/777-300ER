@@ -7,26 +7,26 @@ Freeware Boeing 777-300ER & ERSF for the X-Plane 12 flight simulator by Stratosp
 <br> [Our Discord Server](https://discord.gg/eU2vWCtmFX)
 
 ## **Installation**
-**IMPORTANT: read the FAQ and the OS-specific instructions too!**
+**IMPORTANT: read the FAQ and the OS-specific instructions!**
 
-Go to our [GitHub repository](https://github.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.
+Go to our [GitHub repository](https://GitHub.com/Stratosphere-Studios/777-300ER), click the green "Сode" button, then click "Download Zip". This version gets updated frequently.
 Then extract the aircraft and move it to your X-Plane aircraft folder as with any other aircraft.
 
-If the Github download doesn't finish or gives you an error when trying to extract, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the Github one.
+If the GitHub download doesn't finish or gives you an error when trying to extract, you can use the [alternate Google Drive download](https://bit.ly/Strato777_alt_download_GDrive). This version lags behind the GitHub one.
 
-We suggest using Github Desktop to keep the aircraft updated without needing to redownload it every time.
+We suggest using GitHub Desktop to keep the aircraft updated without needing to redownload it every time.
 
 ### **Windows**
 - You'll need to install [C++ Support](https://aka.ms/vs/16/release/vc_redist.x64.exe) to use this aircraft if your computer doesn't have it. (It probably already does!)
 
-- Some Windows antivirus software (esp. Bitdefender) may flag [this line of code](https://github.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup notification when first loading the aircraft and when aircraft configurations are reset. Some antiviruses block any use of mshta.exe since it _can_ be used maliciously. However, in our case, it simply triggers pop-up notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
+- Some Windows antivirus software (esp. Bitdefender) may flag [this line of code](https://GitHub.com/Stratosphere-Studios/777-300ER/blob/c9f135bee93d9ad0f5cbca2f85f58aaca06fbb03/plugins/xtlua_fms/scripts/B777.30.xt.simconfig/B777.30.xt.simconfig.lua#L205C11-L205C11) as malware. This is a false positive and you should add it to your antivirus's exceptions. This 777 uses a built-into-Windows program called mshta.exe to display a popup notification when first loading the aircraft and when aircraft configurations are reset. Some antiviruses block any use of mshta.exe since it _can_ be used maliciously. However, in our case, it simply triggers pop-up notifications. This project is fully open source and anyone may check the source code if he/she wishes. We are working on a workaround for this.
 
 ### **Mac**  
 
 MacOS blocks the plugins if they haven't been whitelisted since we don't pay their $100/year developer fee. The plugins will be need to be whitelisted each time the plane is installed or updated. Whitelisting instructions:
 
 **With terminal:**
-After putting the 777 in the X-Plane's aicraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane.
+After putting the 777 in the X-Plane's aircraft folder and before running X-Plane, right-click the 777 folder and choose "Open New Terminal at Folder". Paste `sudo xattr -dr com.apple.quarantine *` in the terminal and press enter. Then type your computer password since it needs admin priveleges and hit enter again. Now you can close the terminal and launch X-Plane.
 
 **Without terminal:**
 Open macOS System Settings, go to Privacy & Security, and scroll all the way down. Then run the 777 in X-Plane. Each time a "Not Opened" popup appears, click "Done" (**not** move to trash!) and switch to the settings window. You will see a message show up right under the "Allow application from" setting with an "Open Anyway" button. Click "Open Anyway", then repeat the process for the remaining two popups that will appear. Then restart X-Plane.
@@ -43,7 +43,7 @@ If you want to continue contributing on a longer term or are working on a big pr
 
 Anyone can also help by reporting issues, bugs, or improvements in the issues tab.
 
-If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://github.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it. The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the exterior modeling is mostly complete, it's still subject to some changes.
+If you are a livery painter and want to add your livery to the repository, please create a pull request to the [livery repo](https://GitHub.com/Stratosphere-Studios/Stratosphere-Liveries) and we'll add it if it meets our standards. (and if it doesn't, we'll provide feedback to help!). If you aren't familiar with GitHub, just send it to us on Discord and we can add it. The paintkit is located in the repo. There's a channel in the Discord server named "livery-requests" where you can see what liveries people want. Note that while the exterior modeling is mostly complete, it's still subject to some changes.
 
 ## Current development status (as of November  2025)
 
@@ -75,11 +75,11 @@ A: That notification means that key doesn't do anything. If it's supposed to, th
 
 **Q: Where can I download liveries?**
 
-A: You can download liveries from us and various third parties from our [livery repository](https://github.com/Stratosphere-Studios/Stratosphere-Liveries)
+A: You can download liveries from us and various third parties from our [livery repository](https://GitHub.com/Stratosphere-Studios/Stratosphere-Liveries)
 
 **Q: Where can I follow progress and announcements for this aircraft?**
 
-A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwMRt) You can also see a detailed changelog [here](https://github.com/Stratosphere-Studios/777/commits/main).
+A: Keep up with the project on our [Discord Server!](https://discord.gg/s25sxgwMRt) You can also see a detailed changelog in the [commit history](https://GitHub.com/Stratosphere-Studios/777/commits/main).
 
 **Q: What is the black console window that appears when I load the aircraft?**
 
@@ -102,32 +102,34 @@ A: Please remember this aircraft is still in the works. By downloading from GitH
 Thanks for reading! The соde to unlоck the flight instruments is "BOEING".
 
 ## **Credits**
-[**Nathroxer (Founder)**](https://github.com/nathroxer): Modeling, animations, textures, lights.
+[**Nathroxer (Founder)**](https://GitHub.com/nathroxer): Modeling, animations, textures, lights
 
-[**BRUHegg**](https://github.com/BRUHegg): SASL systems (hyd, fbw, gear, autopilot), C++ systems (FMC plugin), flight model improvements, cockpit instruments(pfd)
+[**BRUHegg**](https://GitHub.com/BRUHegg): SASL systems (HYD, FBW, gear, autopilot), C++ systems (WIP FMC and navigation plugin), flight model improvements, cockpit instruments
 
-[**remenkemi**](https://github.com/crazytimtimtim): XTLua systems (cockpit instruments and buttons, CDU, Air systems, displays, and efb), flight model + other aircraft data, readme, GitHub management.
+[**remenkemi**](https://GitHub.com/crazytimtimtim): XTLua systems (cockpit instruments, displays, and buttons, CDU, Air systems, and EFB), flight model + other aircraft data, readme, GitHub management
 
-[**Matt726**](https://github.com/Matt726-S): Sounds, Documentation, display textures.
+[**Matt726**](https://GitHub.com/Matt726-S): Sounds, display textures
 
-[**Ker**](https://github.com/Ker1010): MFD Checklists, CPDLC
+[**Ker**](https://GitHub.com/Ker1010): MFD Checklists and CPDLC
 
-[**zeta976**](https://github.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
+[**zeta976**](https://GitHub.com/zeta976): Modeling, animation, airfoils, flight model, documentation.
 
-**[mSparks43](https://github.com/msparks43/), the [Sparky744 Project](https://github.com/mSparks43/747-400), and its contributors**: [XTLua](https://github.com/mSparks43/XTLua), help, and some borrowed code.
+**[mSparks43](https://GitHub.com/msparks43/), the [Sparky744 Project](https://GitHub.com/mSparks43/747-400), and its contributors**: [XTLua](https://GitHub.com/mSparks43/XTLua), help, and some borrowed code
 
-**Laminar Research**: Default 737 display textures.
+**Laminar Research**: Default 737 display textures
 
-[**IASXP**](https://github.com/IASXP): Begin MFD Checklists, SASL integration.
+[**IASXP**](https://GitHub.com/IASXP): MFD Checklists, EFB (not yet implemented)
 
-[**VII (Aleks)**](https://github.com/certifiedgithubhater): In-progress EFB design and implementation
+[**VII (Aleks)**](https://GitHub.com/certifiedGitHubhater): EFB design and textures (not yet implemented)
 
-**Phil Paysse**: Fuselage.
+**Phil Paysse**: Old (previous) fuselage
 
-**Potatohead123**: Cockpit help.
+**Potatohead123**: Cockpit help
 
-[**Spherrrical**](https://github.com/Spherrrical/): Logo design.
+[**Spherrrical**](https://GitHub.com/Spherrrical/): Logo design
 
-**y4nn**: Mac installation video.
+**y4nn**: Mac installation video
 
-**kudosi**: references, testing.
+**kudosi**: references, testing
+
+Thank you to all our contributors! If you are interested in helping out, please let us know!
