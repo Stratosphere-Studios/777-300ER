@@ -12,18 +12,8 @@ adjust brightness accordingly
 *****************************************************************************************
 --]]
 
---replace create_command
-function deferred_command(name,desc,realFunc)
-	return replace_command(name,realFunc)
-end
+dofile("../../../libs/utils.lua")
 
---replace create_dataref
-function deferred_dataref(name,nilType,callFunction)
-	if callFunction~=nil then
-		print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-	end
-	return find_dataref(name)
-end
 --[[
 B777DR_inboard_disp_sel_target_capt    = deferred_dataref("Strato/777/inboard_disp_sel_target_capt", "number")
 B777DR_inboard_disp_sel_target_fo      = deferred_dataref("Strato/777/inboard_disp_sel_target_fo", "number")
@@ -218,8 +208,8 @@ B777DR_ace_fail                        = find_dataref("Strato/777/failures/fctl/
 
 B777DR_unlocked                        = find_dataref("Strato/777/readme_unlocked")
 B777DR_cockpit_door_pos                = find_dataref("Strato/777/cockpit_door_pos")
-B777R_rudder_trim_man                  = find_dataref("Strato/777/fctl/ace/rud_trim_man")
-B777R_rudder_trim_auto                 = find_dataref("Strato/777/fctl/ace/rud_trim_auto")
+B777DR_rudder_trim_man                  = find_dataref("Strato/777/fctl/ace/rud_trim_man")
+B777DR_rudder_trim_auto                 = find_dataref("Strato/777/fctl/ace/rud_trim_auto")
 
 B777DR_lbs_kgs                         = find_dataref("Strato/777/lbs_kgs")
 B777DR_trs_bug_enabled                 = find_dataref("Strato/777/displays/trs_bug_enabled")
@@ -665,7 +655,7 @@ function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 			if simDR_groundSpeed < 1 then
 				adiru_time_remaining_min = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
 				B777DR_adiru_status = 1
-				countdown()
+				run_at_interval(countdown, 1)
 			end
 		end
 	end
@@ -768,8 +758,8 @@ end
 
 function B777_minimums_rst_capt_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
-		stop_timer("minimums_flash_on_capt")
-		stop_timer("minimums_flash_off_capt")
+		stop_timer(minimums_flash_on_capt)
+		stop_timer(minimums_flash_off_capt)
 		B777DR_minimums_visible[0] = 0
 		B777DR_amber_minimums[0] = 0
 		minsFlashed[1] = false
@@ -779,8 +769,8 @@ end
 
 function B777_minimums_rst_fo_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
-		stop_timer("minimums_flash_on_fo")
-		stop_timer("minimums_flash_off_fo")
+		stop_timer(minimums_flash_on_fo)
+		stop_timer(minimums_flash_off_fo)
 		B777DR_minimums_visible[1] = 0
 		B777DR_amber_minimums[1] = 0
 		minsFlashed[2] = false
@@ -790,8 +780,8 @@ end
 
 function B777_minimums_rst_capt_fmc_CMDhandler(phase, duration)
 	if phase == 0 then
-		stop_timer("minimums_flash_on_capt")
-		stop_timer("minimums_flash_off_capt")
+		stop_timer(minimums_flash_on_capt)
+		stop_timer(minimums_flash_off_capt)
 		B777DR_minimums_visible[0] = 0
 		B777DR_amber_minimums[0] = 0
 		minsFlashed[1] = false
@@ -801,8 +791,8 @@ end
 
 function B777_minimums_rst_fo_fmc_CMDhandler(phase, duration)
 	if phase == 0 then
-		stop_timer("minimums_flash_on_fo")
-		stop_timer("minimums_flash_off_fo")
+		stop_timer(minimums_flash_on_fo)
+		stop_timer(minimums_flash_off_fo)
 		B777DR_minimums_visible[1] = 0
 		B777DR_amber_minimums[1] = 0
 		minsFlashed[2] = false
@@ -1137,20 +1127,29 @@ B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn"
 --- Clocks ----------
 
 --- ADIRU ----------
-function countdown()
-	if B777DR_adiru_status == 1 then
-		if adiru_time_remaining_min > 1 then
-			adiru_time_remaining_min = adiru_time_remaining_min - 1
-			run_after_time(countdown2, 1)
-		else
-			B777_align_adiru()
-		end
-	end
-end
+-- function countdown()
+-- 	if B777DR_adiru_status == 1 then
+-- 		if adiru_time_remaining_min > 1 then
+-- 			adiru_time_remaining_min = adiru_time_remaining_min - 1
+-- 			run_after_time(countdown2, 1)
+-- 			run_at_interval(countdown2, 1);
+-- 		else
+-- 			B777_align_adiru()
+-- 		end
+-- 	end
+-- end
 
-function countdown2()
+-- function countdown2()
+-- 	adiru_time_remaining_min = adiru_time_remaining_min - 1
+-- 	run_after_time(countdown, 1)
+-- end
+
+function countdown()
 	adiru_time_remaining_min = adiru_time_remaining_min - 1
-	run_after_time(countdown, 1)
+	if adiru_time_remaining_min < 1 then
+		stop_timer(countdown)
+		B777_align_adiru()
+	end
 end
 
 function B777_adiru_off()
@@ -1164,7 +1163,7 @@ function B777_align_adiru()
 end
 
 ---MINIMUMS----------
-
+-- TODO: replace all these dual flash functions with one recursive flash function (like countdown())
 function minimums_flash_on_capt()
 	if minimumsFlashCount[1] < 5 then
 		minimumsFlashCount[1] = minimumsFlashCount[1] + 1
@@ -1218,11 +1217,11 @@ function minimums()
 
 		if (B777DR_minimums_diff[i] < 0 or simDR_onGround == 1) and minsFlashed[i+1] then
 			if i == 0 then
-				stop_timer("minimums_flash_on_capt")
-				stop_timer("minimums_flash_off_capt")
+				stop_timer(minimums_flash_on_capt)
+				stop_timer(minimums_flash_off_capt)
 			else
-				stop_timer("minimums_flash_on_fo")
-				stop_timer("minimums_flash_off_fo")
+				stop_timer(minimums_flash_on_fo)
+				stop_timer(minimums_flash_off_fo)
 			end
 			B777DR_minimums_visible[i] = 1
 			B777DR_amber_minimums[i] = 0
@@ -1236,10 +1235,10 @@ end
 
 function setAnimations()
 	for i = 0, 1 do
-		B777DR_minimums_mode_knob_anim[i] = B777_animate(B777DR_minimums_mode[i], B777DR_minimums_mode_knob_anim[i], 15)
-		B777DR_baro_mode_knob_anim[i] = B777_animate(B777DR_baro_mode_knob[i], B777DR_baro_mode_knob_anim[i], 15)
+		B777DR_minimums_mode_knob_anim[i] = utils.animate(B777DR_minimums_mode[i], B777DR_minimums_mode_knob_anim[i], 15)
+		B777DR_baro_mode_knob_anim[i] = utils.animate(B777DR_baro_mode_knob[i], B777DR_baro_mode_knob_anim[i], 15)
 	end
-	B777DR_rudder_trim_pos = B777_animate(rudderTrimTarget, B777DR_rudder_trim_pos, 15)
+	B777DR_rudder_trim_pos = utils.animate(rudderTrimTarget, B777DR_rudder_trim_pos, 15)
 end
 
 function setDispAlt()
@@ -1347,13 +1346,6 @@ function altimiter()
 	end
 end
 
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-	if math.abs(target - variable) < 0.1 then return target end
-	variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-	return variable
-end
-
 function dispIncrmt(input, increment)
 	local inptMod = input % increment
 	return input - (inptMod) + increment * roundNearest(inptMod / increment)
@@ -1363,40 +1355,41 @@ function roundNearest(x)
 	return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end
 
-
 function iasFlashCapt()
 	if iasFlashCount[1] < 10 then
 		iasFlashCount[1] = iasFlashCount[1] + 1
-		B777DR_spd_flash[0] = 1
-		run_after_time(iasFlashCapt2, 0.2)
+		B777DR_spd_flash[0] = 1 - B777DR_spd_flash[0]
+		--run_after_time(iasFlashCapt2, 0.2)
 	else
+		stop_timer(iasFlashCapt)
 		B777DR_spd_flash[0] = 1
 		iasFlashCount[1] = 0
 		iasFlashed[1] = true
 	end
 end
 
-function iasFlashCapt2()
-	B777DR_spd_flash[0] = 0
-	run_after_time(iasFlashCapt, 0.2)
-end
+-- function iasFlashCapt2()
+-- 	B777DR_spd_flash[0] = 0
+-- 	run_after_time(iasFlashCapt, 0.2)
+-- end
 
 function iasFlashFo()
 	if iasFlashCount[2] < 10 then
 		iasFlashCount[2] = iasFlashCount[2] + 1
-		B777DR_spd_flash[1] = 1
-		run_after_time(iasFlashFo2, 0.2)
+		B777DR_spd_flash[1] = 1 - B777DR_spd_flash[1]
+		--run_after_time(iasFlashFo2, 0.2)
 	else
+		stop_timer(iasFlashFo)
 		B777DR_spd_flash[1] = 1
 		iasFlashCount[2] = 0
 		iasFlashed[2] = true
 	end
 end
 
-function iasFlashFo2()
-	B777DR_spd_flash[1] = 0
-	run_after_time(iasFlashFo, 0.2)
-end
+-- function iasFlashFo2()
+-- 	B777DR_spd_flash[1] = 0
+-- 	run_after_time(iasFlashFo, 0.2)
+-- end
 
 --- MINIMUM MANEUVERING SPEED -----------
 function vManeuverMin()
@@ -1404,19 +1397,19 @@ function vManeuverMin()
 		if simDR_onGround == 0 and simDR_spd_trend[i+1] <= 0.4 and B777DR_vman_tape_min_diff[i] > 0 and iasFlashCount[i+1] == 0 and not iasFlashed[i+1] then
 			B777DR_spd_amber[i] = 1
 			if i == 0 then
-				iasFlashCapt()
+				run_at_interval(iasFlashCapt, 1)
 			else
-				iasFlashFo()
+				run_at_interval(iasFlashFo, 1)
 			end
 		end
 
 		if simDR_onGround == 1 or B777DR_vman_tape_min_diff[i] < 0 then
 			if i == 0 then
-				stop_timer("iasFlashCapt")
-				stop_timer("iasFlashCapt2")
+				stop_timer(iasFlashCapt)
+				--stop_timer(iasFlashCapt2)
 			else
-				stop_timer("iasFlashFo")
-				stop_timer("iasFlashFo2")
+				stop_timer(iasFlashFo)
+				--stop_timer(iasFlashFo2)
 			end
 			B777DR_spd_flash[i] = 0
 			iasFlashCount[i+1] = 0
@@ -1554,12 +1547,12 @@ end
 
 function efis()
 	--[[for i = 0, 13 do
-		B777DR_efis_button_positions[i] = B777_animate(B777DR_efis_button_target[i], B777DR_efis_button_positions[i], 20)
+		B777DR_efis_button_positions[i] = utils.animate(B777DR_efis_button_target[i], B777DR_efis_button_positions[i], 20)
 	end
-	B777DR_efis_button_positions[14] = B777_animate(B777DR_efis_vor_adf[0], B777DR_efis_button_positions[14], 20)
-	B777DR_efis_button_positions[15] = B777_animate(B777DR_efis_vor_adf[1], B777DR_efis_button_positions[15], 20)
-	B777DR_efis_button_positions[16] = B777_animate(B777DR_efis_vor_adf[2], B777DR_efis_button_positions[16], 20)
-	B777DR_efis_button_positions[17] = B777_animate(B777DR_efis_vor_adf[3], B777DR_efis_button_positions[17], 20)]]
+	B777DR_efis_button_positions[14] = utils.animate(B777DR_efis_vor_adf[0], B777DR_efis_button_positions[14], 20)
+	B777DR_efis_button_positions[15] = utils.animate(B777DR_efis_vor_adf[1], B777DR_efis_button_positions[15], 20)
+	B777DR_efis_button_positions[16] = utils.animate(B777DR_efis_vor_adf[2], B777DR_efis_button_positions[16], 20)
+	B777DR_efis_button_positions[17] = utils.animate(B777DR_efis_vor_adf[3], B777DR_efis_button_positions[17], 20)]]
 
 	for i = 0, 13 do
 		B777DR_efis_button_positions[i] = B777DR_efis_button_target[i]
@@ -1731,7 +1724,7 @@ function after_physics()
 	spdTrend()
 	altimiter()
 	efis()
-	killer()
+	--killer() -- buggy
 
 	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
 		B777DR_hyd_press_low_any = 1
@@ -1769,7 +1762,7 @@ function after_physics()
 	simDR_instrument_brt[7] = 0.5 + B777DR_cdu_brt[1] / 46
 	simDR_instrument_brt[8] = 0.5 + B777DR_cdu_brt[2] / 46
 
-	B777DR_rudder_trim_total = B777R_rudder_trim_man + B777R_rudder_trim_auto
+	B777DR_rudder_trim_total = B777DR_rudder_trim_man + B777DR_rudder_trim_auto
 	B777DR_rudder_trim_total_abs = math.abs(B777DR_rudder_trim_total)
 end
 
