@@ -183,8 +183,8 @@ B777DR_kill_pax_interior               = deferred_dataref("Strato/777/misc/kill_
 B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_pax", "number")
 B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
 B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
-B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[35]")
-B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[35]")
+B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[31]")
+B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[31]")
 
 B777DR_pfd_mtrs                        = deferred_dataref("Strato/777/displays/mtrs", "array[2]")
 B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta", "array[2]")

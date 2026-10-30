@@ -128,7 +128,7 @@ local ft_to_mtrs = 0.3048
 local kts_to_mach = 0.001512
 local INHG_PER_QNH = 0.029530
 
-local adiru_time_remaining_min = 0
+local adiru_time_remaining_sec = 0
 
 local press_counter = 0
 local knob_is_fast = 0
@@ -312,8 +312,8 @@ B777DR_kill_pax                        = deferred_dataref("Strato/777/misc/kill_
 B777DR_kill_gear                       = deferred_dataref("Strato/777/kill_gear", "number")
 B777DR_kill_cargo_interior             = deferred_dataref("Strato/777/misc/kill_cargo_interior", "number")
 B777DR_kill_cargo                      = deferred_dataref("Strato/777/misc/kill_cargo", "number")
-B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[35]")
-B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[35]")
+B777DR_efis_button_positions           = deferred_dataref("Strato/777/cockpit/efis/buttons/position", "array[31]")
+B777DR_efis_button_target              = deferred_dataref("Strato/777/cockpit/efis/buttons/target", "array[31]")
 
 B777DR_pfd_mtrs                        = deferred_dataref("Strato/777/displays/mtrs", "array[2]")
 B777DR_nd_sta                          = deferred_dataref("Strato/777/EFIS/sta", "array[2]")
@@ -359,134 +359,134 @@ B777CMD_efis_rcl                         = find_command("Strato/777/commands/gla
 ---EFIS----------
 
 function B777_efis_lEicas_rcl_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
-			B777DR_efis_button_target[32] = 1
+	if phase == 0 then
+		B777DR_efis_button_target[18] = 1
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			B777CMD_efis_rcl:once()
-		elseif phase == 2 then
-			B777DR_efis_button_target[32] = 0
 		end
+	elseif phase == 2 then
+		B777DR_efis_button_target[18] = 0
 	end
 end
 
 function B777_efis_lEicas_eng_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(4)
-			B777DR_efis_button_target[21] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[21] = 0
 		end
+		B777DR_efis_button_target[19] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[19] = 0
 	end
 end
 
 function B777_efis_lEicas_stat_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(9)
-			B777DR_efis_button_target[22] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[22] = 0
 		end
+		B777DR_efis_button_target[20] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[20] = 0
 	end
 end
 
 function B777_efis_lEicas_elec_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(3)
-			B777DR_efis_button_target[23] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[23] = 0
 		end
+		B777DR_efis_button_target[21] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[21] = 0
 	end
 end
 
 function B777_efis_lEicas_hyd_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(8)
-			B777DR_efis_button_target[24] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[24] = 0
 		end
+		B777DR_efis_button_target[22] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[22] = 0
 	end
 end
 
 function B777_efis_lEicas_fuel_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(6)
-			B777DR_efis_button_target[25] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[25] = 0
 		end
+		B777DR_efis_button_target[23] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[23] = 0
 	end
 end
 
 function B777_efis_lEicas_air_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(1)
-			B777DR_efis_button_target[26] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[26] = 0
 		end
+		B777DR_efis_button_target[24] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[24] = 0
 	end
 end
 
 function B777_efis_lEicas_door_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(2)
-			B777DR_efis_button_target[27] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[27] = 0
 		end
+		B777DR_efis_button_target[25] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[25] = 0
 	end
 end
 
 function B777_efis_lEicas_gear_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(7)
-			B777DR_efis_button_target[28] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[28] = 0
 		end
+		B777DR_efis_button_target[26] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[26] = 0
 	end
 end
 
 function B777_efis_lEicas_fctl_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(5)
-			B777DR_efis_button_target[29] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[29] = 0
 		end
+		B777DR_efis_button_target[27] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[27] = 0
 	end
 end
 
 function B777_efis_lEicas_chkl_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(10)
-			B777DR_efis_button_target[31] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[31] = 0
 		end
+		B777DR_efis_button_target[28] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[28] = 0
 	end
 end
 
 function B777_efis_lEicas_comm_switch_CMDhandler(phase, duration)
-	if B777DR_cdu_eicas_ctl_any == 0 then
-		if phase == 0 then
+	if phase == 0 then
+		if B777DR_cdu_eicas_ctl_any == 0 then
 			setEicasPage(11)
-			B777DR_efis_button_target[32] = 1
-		elseif phase == 2 then
-			B777DR_efis_button_target[32] = 0
 		end
+	B777DR_efis_button_target[29] = 1
+	elseif phase == 2 then
+		B777DR_efis_button_target[29] = 0
 	end
 end
 
@@ -503,23 +503,23 @@ end]]
 
 function B777_efis_wxr_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[1] = 1
+		B777DR_efis_button_target[0] = 1
 		if B777DR_cdu_efis_ctl[0] == 0 then
 			simCMD_efis_wxr:once()
 		end
 	elseif phase == 2 then
-		B777DR_efis_button_target[1] = 0
+		B777DR_efis_button_target[0] = 0
 	end
 end
 
 function B777_efis_sta_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[2] = 1
+		B777DR_efis_button_target[1] = 1
 			if B777DR_cdu_efis_ctl[0] == 0 then
 				B777DR_nd_sta[0] = 1 - B777DR_nd_sta[0]
 			end
 	elseif phase == 2 then
-		B777DR_efis_button_target[2] = 0
+		B777DR_efis_button_target[1] = 0
 	end
 end
 
@@ -531,43 +531,65 @@ end
 
 function B777_efis_wpt_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[3] = 1
+		B777DR_efis_button_target[2] = 1
 			if B777DR_cdu_efis_ctl[0] == 0 then
 				simCMD_efis_fix:once()
+			end
+	elseif phase == 2 then
+		B777DR_efis_button_target[2] = 0
+	end
+end
+
+function B777_efis_tfc_switch_CMDhandler(phase, duration)
+	if phase == 0 then
+		B777DR_efis_button_target[3] = 1
+			if B777DR_cdu_efis_ctl[0] == 0 then
+				simCMD_efis_tfc:once()
 			end
 	elseif phase == 2 then
 		B777DR_efis_button_target[3] = 0
 	end
 end
 
-function B777_efis_tfc_switch_CMDhandler(phase, duration)
+function B777_efis_arpt_switch_CMDhandler(phase, duration)
 	if phase == 0 then
 		B777DR_efis_button_target[4] = 1
 			if B777DR_cdu_efis_ctl[0] == 0 then
-				simCMD_efis_tfc:once()
+				simCMD_efis_apt:once()
 			end
 	elseif phase == 2 then
 		B777DR_efis_button_target[4] = 0
 	end
 end
 
-function B777_efis_arpt_switch_CMDhandler(phase, duration)
+function B777_efis_terr_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[6] = 1
+		B777DR_efis_button_target[5] = 1
 			if B777DR_cdu_efis_ctl[0] == 0 then
-				simCMD_efis_apt:once()
+				simCMD_efis_terr:once()
 			end
+	elseif phase == 2 then
+		B777DR_efis_button_target[5] = 0
+	end
+end
+
+function B777_efis_mtrs_capt_CMDhandler(phase, duration)
+	if phase == 0 then
+		if B777DR_cdu_efis_ctl[0] == 0 then
+			B777DR_pfd_mtrs[0] = 1 - B777DR_pfd_mtrs[0]
+		end
+		B777DR_efis_button_target[6] = 1
 	elseif phase == 2 then
 		B777DR_efis_button_target[6] = 0
 	end
 end
 
-function B777_efis_terr_switch_CMDhandler(phase, duration)
+function B777_efis_mtrs_fo_CMDhandler(phase, duration)
 	if phase == 0 then
+		if B777DR_cdu_efis_ctl[1] == 0 then
+			B777DR_pfd_mtrs[1] = 1 - B777DR_pfd_mtrs[1]
+		end
 		B777DR_efis_button_target[7] = 1
-			if B777DR_cdu_efis_ctl[0] == 0 then
-				simCMD_efis_terr:once()
-			end
 	elseif phase == 2 then
 		B777DR_efis_button_target[7] = 0
 	end
@@ -575,23 +597,23 @@ end
 
 function B777_efis_wxr_fo_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[10] = 1
+		B777DR_efis_button_target[8] = 1
 		if B777DR_cdu_efis_ctl[1] == 0 then
 			simCMD_efis_fo_wxr:once()
 		end
 	elseif phase == 2 then
-		B777DR_efis_button_target[10] = 0
+		B777DR_efis_button_target[8] = 0
 	end
 end
 
 function B777_efis_sta_fo_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[11] = 1
+		B777DR_efis_button_target[9] = 1
 		if B777DR_cdu_efis_ctl[1] == 0 then
 			B777DR_nd_sta[1] = 1 - B777DR_nd_sta[1]
 		end
 	elseif phase == 2 then
-		B777DR_efis_button_target[11] = 0
+		B777DR_efis_button_target[9] = 0
 	end
 end
 
@@ -603,34 +625,34 @@ end
 
 function B777_efis_wpt_fo_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[12] = 1
+		B777DR_efis_button_target[10] = 1
 			if B777DR_cdu_efis_ctl[1] == 0 then
 				simCMD_efis_fo_fix:once()
 			end
 	elseif phase == 2 then
-		B777DR_efis_button_target[12] = 0
+		B777DR_efis_button_target[10] = 0
 	end
 end
 
 function B777_efis_tfc_fo_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[13] = 1
+		B777DR_efis_button_target[11] = 1
 			if B777DR_cdu_efis_ctl[1] == 0 then
 				simCMD_efis_fo_tfc:once()
 			end
 	elseif phase == 2 then
-		B777DR_efis_button_target[13] = 0
+		B777DR_efis_button_target[11] = 0
 	end
 end
 
 function B777_efis_arpt_fo_switch_CMDhandler(phase, duration)
 	if phase == 0 then
-		B777DR_efis_button_target[13] = 1
+		B777DR_efis_button_target[12] = 1
 			if B777DR_cdu_efis_ctl[1] == 0 then
 				simCMD_efis_fo_apt:once()
 			end
 	elseif phase == 2 then
-		B777DR_efis_button_target[13] = 0
+		B777DR_efis_button_target[12] = 0
 	end
 end
 
@@ -649,11 +671,14 @@ function B777_fltInst_adiru_switch_CMDhandler(phase, duration)
 	if phase == 0 then
 		if B777DR_ovhd_aft_button_target[1] == 1 then
 			B777DR_ovhd_aft_button_target[1] = 0												-- move button to off
-			if simDR_ias[1] <= 30 then run_after_time(B777_adiru_off, 2) end					-- turn adiru off
+			if simDR_ias[1] <= 30 then
+				run_after_time(B777_adiru_off, 2)									-- turn adiru off
+			end
 		elseif B777DR_ovhd_aft_button_target[1] == 0 then
 			B777DR_ovhd_aft_button_target[1] = 1												-- move button to on
 			if simDR_groundSpeed < 1 then
-				adiru_time_remaining_min = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
+				stop_timer(B777_adiru_off)
+				adiru_time_remaining_sec = 60 * (5 + math.abs(simDR_latitude) / 8.182)	-- set adiru alignment time to 5 + (distance from equator / 8.182)
 				B777DR_adiru_status = 1
 				run_at_interval(countdown, 1)
 			end
@@ -758,8 +783,8 @@ end
 
 function B777_minimums_rst_capt_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
-		stop_timer(minimums_flash_on_capt)
-		stop_timer(minimums_flash_off_capt)
+		stop_timer(minimums_flash_capt)
+		--stop_timer(minimums_flash_off_capt)
 		B777DR_minimums_visible[0] = 0
 		B777DR_amber_minimums[0] = 0
 		minsFlashed[1] = false
@@ -769,8 +794,8 @@ end
 
 function B777_minimums_rst_fo_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
-		stop_timer(minimums_flash_on_fo)
-		stop_timer(minimums_flash_off_fo)
+		stop_timer(minimums_flash_fo)
+		--stop_timer(minimums_flash_off_fo)
 		B777DR_minimums_visible[1] = 0
 		B777DR_amber_minimums[1] = 0
 		minsFlashed[2] = false
@@ -780,8 +805,8 @@ end
 
 function B777_minimums_rst_capt_fmc_CMDhandler(phase, duration)
 	if phase == 0 then
-		stop_timer(minimums_flash_on_capt)
-		stop_timer(minimums_flash_off_capt)
+		stop_timer(minimums_flash_capt)
+		--stop_timer(minimums_flash_off_capt)
 		B777DR_minimums_visible[0] = 0
 		B777DR_amber_minimums[0] = 0
 		minsFlashed[1] = false
@@ -791,34 +816,12 @@ end
 
 function B777_minimums_rst_fo_fmc_CMDhandler(phase, duration)
 	if phase == 0 then
-		stop_timer(minimums_flash_on_fo)
-		stop_timer(minimums_flash_off_fo)
+		stop_timer(minimums_flash_fo)
+		--stop_timer(minimums_flash_off_fo)
 		B777DR_minimums_visible[1] = 0
 		B777DR_amber_minimums[1] = 0
 		minsFlashed[2] = false
 		minimumsFlashCount[2] = 0
-	end
-end
-
-function B777_efis_mtrs_capt_CMDhandler(phase, duration)
-	if phase == 0 then
-		if B777DR_cdu_efis_ctl[0] == 0 then
-			B777DR_pfd_mtrs[0] = 1 - B777DR_pfd_mtrs[0]
-		end
-		B777DR_efis_button_target[8] = 1
-	elseif phase == 2 then
-		B777DR_efis_button_target[8] = 0
-	end
-end
-
-function B777_efis_mtrs_fo_CMDhandler(phase, duration)
-	if phase == 0 then
-		if B777DR_cdu_efis_ctl[1] == 0 then
-			B777DR_pfd_mtrs[1] = 1 - B777DR_pfd_mtrs[1]
-		end
-		B777DR_efis_button_target[9] = 1
-	elseif phase == 2 then
-		B777DR_efis_button_target[9] = 0
 	end
 end
 
@@ -855,7 +858,7 @@ function B777_spd_dn_cmdHandler(phase, duration)
 end
 
 function holdCduBrtIncr() -- runs @ 2hz if brightness up is held down. can't pass args thru timers hence loop
-	for i = 0, 3 do
+	for i = 0, 2 do
 		if B777DR_show_cdu_brt[i] == 1 then
 			B777DR_cdu_brt[i] = math.min(B777DR_cdu_brt[i] + 1, 23)
 		end
@@ -863,7 +866,7 @@ function holdCduBrtIncr() -- runs @ 2hz if brightness up is held down. can't pas
 end
 
 function holdCduBrtDecr() -- runs @ 2hz if brightness down is held down
-	for i = 0, 3 do
+	for i = 0, 2 do
 		if B777DR_show_cdu_brt[i] == 1 then
 			B777DR_cdu_brt[i] = math.max(B777DR_cdu_brt[i] - 1, 0)
 		end
@@ -877,7 +880,7 @@ function releaseBrtButton() -- when any cdu brightness button is released
 end
 
 function cduHideBrt() -- hides brightness indicator after 2 sec
-	for i = 0, 3 do
+	for i = 0, 2 do
 		B777DR_show_cdu_brt[i] = 0
 	end
 end
@@ -964,9 +967,9 @@ end
 function B777_altm_baro_up_capt_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
 		if B777DR_baro_mode[0] == 0 then
-			simDR_altimiter_setting[1] = smartKnobUp(0.01, 0.02, 31, simDR_altimiter_setting[1])
+			simDR_altimiter_setting[1] = smartKnobUp(0.01, 0.02, 32, simDR_altimiter_setting[1])
 		else
-			simDR_altimiter_setting[1] = smartKnobUp(INHG_PER_QNH, INHG_PER_QNH * 2, 31, simDR_altimiter_setting[1])
+			simDR_altimiter_setting[1] = smartKnobUp(INHG_PER_QNH, INHG_PER_QNH * 2, 32, simDR_altimiter_setting[1])
 		end
 	end
 end
@@ -974,9 +977,9 @@ end
 function B777_altm_baro_dn_capt_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[0] == 0 then
 		if B777DR_baro_mode[0] == 0 then
-			simDR_altimiter_setting[1] = smartKnobDn(0.01, 0.02, 29, simDR_altimiter_setting[1])
+			simDR_altimiter_setting[1] = smartKnobDn(0.01, 0.02, 22, simDR_altimiter_setting[1])
 		else
-			simDR_altimiter_setting[1] = smartKnobDn(INHG_PER_QNH, INHG_PER_QNH * 2, 29, simDR_altimiter_setting[1])
+			simDR_altimiter_setting[1] = smartKnobDn(INHG_PER_QNH, INHG_PER_QNH * 2, 22, simDR_altimiter_setting[1])
 		end
 	end
 end
@@ -984,9 +987,9 @@ end
 function B777_altm_baro_up_fo_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
 		if B777DR_baro_mode[1] == 0 then
-			simDR_altimiter_setting[2] = smartKnobUp(0.01, 0.02, 31, simDR_altimiter_setting[2])
+			simDR_altimiter_setting[2] = smartKnobUp(0.01, 0.02, 32, simDR_altimiter_setting[2])
 		else
-			simDR_altimiter_setting[2] = smartKnobUp(INHG_PER_QNH, INHG_PER_QNH * 2, 31, simDR_altimiter_setting[2])
+			simDR_altimiter_setting[2] = smartKnobUp(INHG_PER_QNH, INHG_PER_QNH * 2, 32, simDR_altimiter_setting[2])
 		end
 	end
 end
@@ -994,9 +997,9 @@ end
 function B777_altm_baro_dn_fo_CMDhandler(phase, duration)
 	if phase == 0 and B777DR_cdu_efis_ctl[1] == 0 then
 		if B777DR_baro_mode[1] == 0 then
-			simDR_altimiter_setting[2] = smartKnobDn(0.01, 0.02, 29, simDR_altimiter_setting[2])
+			simDR_altimiter_setting[2] = smartKnobDn(0.01, 0.02, 22, simDR_altimiter_setting[2])
 		else
-			simDR_altimiter_setting[2] = smartKnobFn(INHG_PER_QNH, INHG_PER_QNH * 2, 29, simDR_altimiter_setting[2])
+			simDR_altimiter_setting[2] = smartKnobDn(INHG_PER_QNH, INHG_PER_QNH * 2, 22, simDR_altimiter_setting[2])
 		end
 	end
 end
@@ -1145,58 +1148,60 @@ B777CMD_fmsR_brt_dn                  = deferred_command("Strato/777/fmsR_brt_dn"
 -- end
 
 function countdown()
-	adiru_time_remaining_min = adiru_time_remaining_min - 1
-	if adiru_time_remaining_min < 1 then
+	adiru_time_remaining_sec = adiru_time_remaining_sec - 1
+	if adiru_time_remaining_sec < 1 then
 		stop_timer(countdown)
 		B777_align_adiru()
 	end
 end
 
 function B777_adiru_off()
+	stop_timer(countdown)
 	B777DR_adiru_status = 0
-	adiru_time_remaining_min = 0
+	adiru_time_remaining_sec = 0
 end
 
 function B777_align_adiru()
 	B777DR_adiru_status = 2
-	adiru_time_remaining_min = 0
+	adiru_time_remaining_sec = 0
 end
 
 ---MINIMUMS----------
--- TODO: replace all these dual flash functions with one recursive flash function (like countdown())
-function minimums_flash_on_capt()
-	if minimumsFlashCount[1] < 5 then
+function minimums_flash_capt()
+	if minimumsFlashCount[1] < 10 then -- 5 flashes; increments both when turning on and off
 		minimumsFlashCount[1] = minimumsFlashCount[1] + 1
-		B777DR_minimums_visible[0] = 1
-		run_after_time(minimums_flash_off_capt, 0.3)
+		B777DR_minimums_visible[0] = 1 - B777DR_minimums_visible[0]
+		--run_after_time(minimums_flash_off_capt, 0.3)
 	else
+		stop_timer(minimums_flash_capt)
 		B777DR_minimums_visible[0] = 1
 		minimumsFlashCount[1] = 0
 		minsFlashed[1] = true
 	end
 end
 
-function minimums_flash_off_capt()
-	B777DR_minimums_visible[0] = 0
-	run_after_time(minimums_flash_on_capt, 0.3)
-end
+-- function minimums_flash_off_capt()
+-- 	B777DR_minimums_visible[0] = 0
+-- 	run_after_time(minimums_flash_on_capt, 0.3)
+-- end
 
-function minimums_flash_on_fo()
-	if minimumsFlashCount[2] < 5 then
+function minimums_flash_fo()
+	if minimumsFlashCount[2] < 10 then
 		minimumsFlashCount[2] = minimumsFlashCount[2] + 1
-		B777DR_minimums_visible[1] = 1
-		run_after_time(minimums_flash_off_fo, 0.3)
+		B777DR_minimums_visible[1] = 1 - B777DR_minimums_visible[1]
+		--run_after_time(minimums_flash_off_fo, 0.3)
 	else
+		stop_timer(minimums_flash_fo)
 		B777DR_minimums_visible[1] = 1
 		minimumsFlashCount[2] = 0
 		minsFlashed[2] = true
 	end
 end
 
-function minimums_flash_off_fo()
-	B777DR_minimums_visible[1] = 0
-	run_after_time(minimums_flash_on_fo, 0.3)
-end
+-- function minimums_flash_off_fo()
+-- 	B777DR_minimums_visible[1] = 0
+-- 	run_after_time(minimums_flash_fo, 0.3)
+-- end
 
 function minimums()
 	for i = 0, 1 do
@@ -1206,22 +1211,30 @@ function minimums()
 			B777DR_minimums_diff[i] = B777DR_minimums_mda[i] - B777DR_displayed_alt[i]
 		end
 
-		if B777DR_minimums_diff[i] > 0 and B777DR_minimums_visible[i] == 1 and simDR_vertical_speed[i+1] < 0 and minimumsFlashCount[i+1] == 0 and not minsFlashed[i+1] then
+		if B777DR_minimums_diff[i] > 0 and B777DR_minimums_diff[i] < 10 -- at minimums (with some range)
+		  and B777DR_minimums_visible[i] == 1 -- visible
+		  and simDR_vertical_speed[i+1] < -5 -- descending
+		  and simDR_onGround ~= 0-- not on ground (redundant?)
+		  and minimumsFlashCount[i+1] == 0 and not minsFlashed[i+1] then -- not already flashed/flashing
 			B777DR_amber_minimums[i] = 1
 			if i == 0 then
-				minimums_flash_off_capt()
+				if not is_timer_scheduled(minimums_flash_capt) then
+					run_at_interval(minimums_flash_capt, 0.3)
+				end
 			else
-				minimums_flash_off_fo()
+				if not is_timer_scheduled(minimums_flash_fo) then
+					run_at_interval(minimums_flash_fo, 0.3)
+				end
 			end
 		end
 
-		if (B777DR_minimums_diff[i] < 0 or simDR_onGround == 1) and minsFlashed[i+1] then
+		if B777DR_minimums_diff[i] < 0 and minsFlashed[i+1] then
 			if i == 0 then
-				stop_timer(minimums_flash_on_capt)
-				stop_timer(minimums_flash_off_capt)
+				stop_timer(minimums_flash_capt)
+				--stop_timer(minimums_flash_off_capt)
 			else
-				stop_timer(minimums_flash_on_fo)
-				stop_timer(minimums_flash_off_fo)
+				stop_timer(minimums_flash_fo)
+				--stop_timer(minimums_flash_off_fo)
 			end
 			B777DR_minimums_visible[i] = 1
 			B777DR_amber_minimums[i] = 0
@@ -1269,7 +1282,7 @@ function setTXT()
 end
 
 function getHeadingDifference(desireddirection,current_heading)
-	diff = current_heading - desireddirection
+	local diff = current_heading - desireddirection
 	if diff >  180 then diff = diff - 360 end
 	if diff < -180 then diff = diff + 360 end
 	return diff
@@ -1356,7 +1369,7 @@ function roundNearest(x)
 end
 
 function iasFlashCapt()
-	if iasFlashCount[1] < 10 then
+	if iasFlashCount[1] < 20 then -- 10 flashes; increments both when flashing on and off
 		iasFlashCount[1] = iasFlashCount[1] + 1
 		B777DR_spd_flash[0] = 1 - B777DR_spd_flash[0]
 		--run_after_time(iasFlashCapt2, 0.2)
@@ -1374,7 +1387,7 @@ end
 -- end
 
 function iasFlashFo()
-	if iasFlashCount[2] < 10 then
+	if iasFlashCount[2] < 20 then
 		iasFlashCount[2] = iasFlashCount[2] + 1
 		B777DR_spd_flash[1] = 1 - B777DR_spd_flash[1]
 		--run_after_time(iasFlashFo2, 0.2)
@@ -1394,27 +1407,34 @@ end
 --- MINIMUM MANEUVERING SPEED -----------
 function vManeuverMin()
 	for i = 0, 1 do
-		if simDR_onGround == 0 and simDR_spd_trend[i+1] <= 0.4 and B777DR_vman_tape_min_diff[i] > 0 and iasFlashCount[i+1] == 0 and not iasFlashed[i+1] then
+		if simDR_onGround == 0 and B777DR_vman_tape_min_diff[i] > 0 then --and iasFlashCount[i+1] == 0 and not iasFlashed[i+1] then
 			B777DR_spd_amber[i] = 1
-			if i == 0 then
-				run_at_interval(iasFlashCapt, 1)
-			else
-				run_at_interval(iasFlashFo, 1)
-			end
+			B777DR_spd_flash[i] = 1 -- TODO: This is temporary because I have too many local ACF changes. need to remove.
+			-- if i == 0 then
+			-- 	if not is_timer_scheduled(iasFlashCapt) then
+			-- 		run_at_interval(iasFlashCapt, 0.2)
+			-- 	end
+			-- else
+			-- 	if not is_timer_scheduled(iasFlashFo) then
+			-- 		run_at_interval(iasFlashFo, 0.2)
+			-- 	end
+			-- end
 		end
 
 		if simDR_onGround == 1 or B777DR_vman_tape_min_diff[i] < 0 then
-			if i == 0 then
-				stop_timer(iasFlashCapt)
-				--stop_timer(iasFlashCapt2)
-			else
-				stop_timer(iasFlashFo)
-				--stop_timer(iasFlashFo2)
-			end
-			B777DR_spd_flash[i] = 0
-			iasFlashCount[i+1] = 0
+			-- if i == 0 then
+			-- 	stop_timer(iasFlashCapt)
+			-- 	--stop_timer(iasFlashCapt2)
+			-- else
+			-- 	stop_timer(iasFlashFo)
+			-- 	--stop_timer(iasFlashFo2)
+			-- end
+			-- B777DR_spd_flash[i] = 0
+			-- iasFlashCount[i+1] = 0
 			B777DR_spd_amber[i] = 0
-			iasFlashed[i+1] = false
+			B777DR_spd_flash[i] = 0 -- TODO: This is temporary because I have too many local ACF changes. need to remove.
+
+			--iasFlashed[i+1] = false
 		end
 	end
 end
@@ -1557,10 +1577,15 @@ function efis()
 	for i = 0, 13 do
 		B777DR_efis_button_positions[i] = B777DR_efis_button_target[i]
 	end
+
 	B777DR_efis_button_positions[14] = B777DR_efis_vor_adf[0]
 	B777DR_efis_button_positions[15] = B777DR_efis_vor_adf[1]
 	B777DR_efis_button_positions[16] = B777DR_efis_vor_adf[2]
 	B777DR_efis_button_positions[17] = B777DR_efis_vor_adf[3]
+
+	for i = 18, 30 do
+		B777DR_efis_button_positions[i] = B777DR_efis_button_target[i]
+	end
 
 	if B777DR_cdu_eicas_ctl[0] == 1 or B777DR_cdu_eicas_ctl[1] == 1 or B777DR_cdu_eicas_ctl[2] == 1 then
 		B777DR_cdu_eicas_ctl_any = 1
@@ -1581,10 +1606,6 @@ function efis()
 			B777DR_baro_mode[i] = B777DR_baro_mode_knob[i]
 			simDR_efis_vor[i+1], simDR_efis_ndb[i+1] = B777DR_nd_sta[i], B777DR_nd_sta[i]
 		end
-	end
-
-	for i = 21, 32 do
-		B777DR_efis_button_positions[i] = B777DR_efis_button_target[i]
 	end
 end
 
@@ -1615,7 +1636,7 @@ function aircraft_load()
 	B777DR_trs_bug_enabled = 1
 	B777DR_smart_knobs = 1
 	B777DR_pfd_mach_gs = 1
-	B777CMD_efis_mtrs_capt:once()
+	B777DR_pfd_mtrs[0] = 1 -- B777CMD_efis_mtrs_capt:once()
 	B777DR_minimums_dh[0] = 200
 	B777DR_minimums_mda[0] = 400
 	B777DR_minimums_dh[1] = 200
@@ -1687,6 +1708,13 @@ function killer()
 end
 
 function after_physics()
+	-- keep externally updated datarefs fresh. i will verify whether this is necessary.
+	local temp = simDR_autopilot_vs
+	temp = B777DR_autopilot_fpa
+	temp = B777DR_ap_vsFPA_sw
+	temp = B777DR_smart_knobs
+	temp = B777DR_ovhd_aft_button_target[1]
+
 	B777DR_displayed_com1_act_khz = simDR_com1_act_khz / 1000
 	B777DR_displayed_com1_stby_khz = simDR_com1_stby_khz / 1000
 
@@ -1694,12 +1722,12 @@ function after_physics()
 	B777DR_displayed_com2_stby_khz = simDR_com2_stby_khz / 1000
 
 	if (simDR_groundSpeed >= 1 or (simDR_bus_voltage[0] == 0 and simDR_bus_voltage[1] == 0)) and B777DR_adiru_status == 1 then
-		stop_timer(B777_align_adiru)
+		--stop_timer(B777_align_adiru)
 		B777_adiru_off()
 	end
 
-	B777DR_adiru_time_remaining_min = string.format("%2.0f", math.floor(adiru_time_remaining_min / 60)) -- %0.2f
-	B777DR_adiru_time_remaining_sec = math.floor(adiru_time_remaining_min / 60 % 1 * 60)
+	B777DR_adiru_time_remaining_min = math.floor(adiru_time_remaining_sec / 60) --string.format("%2.0f", math.floor(adiru_time_remaining_sec / 60)) -- %0.2f
+	B777DR_adiru_time_remaining_sec = math.floor(adiru_time_remaining_sec % 60)
 
 	if B777DR_adiru_status == 1 then B777DR_temp_adiru_is_aligning = 1 else B777DR_temp_adiru_is_aligning = 0 end
 
@@ -1724,7 +1752,7 @@ function after_physics()
 	spdTrend()
 	altimiter()
 	efis()
-	--killer() -- buggy
+	--killer() -- TODO: buggy
 
 	if B777DR_hyd_press[0] < 1200 or B777DR_hyd_press[1] < 1200 or B777DR_hyd_press[2] < 1200 then
 		B777DR_hyd_press_low_any = 1
@@ -1736,10 +1764,6 @@ function after_physics()
 		B777DR_txt_PAX_FREIGHT = "PAX"
 	else
 		B777DR_txt_PAX_FREIGHT = "FREIGHT"
-	end
-
-	if B777DR_alt_is_fast_ovrd == 1 then
-		alt_is_fast = 10
 	end
 
 	if B777DR_ace_fail[0] == 1 or B777DR_ace_fail[1] == 1 or B777DR_ace_fail[2] == 1 or B777DR_ace_fail[3] == 1 then
