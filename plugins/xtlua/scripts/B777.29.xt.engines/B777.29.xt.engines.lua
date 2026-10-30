@@ -6,21 +6,7 @@
 *****************************************************************************************
 --]]
 
--- Replace create_command function
-function deferred_command(name, desc, realFunc)
-    return replace_command(name, realFunc)
-end
-
--- Replace create_dataref function
-function deferred_dataref(name, nilType, callFunction)
-    if callFunction ~= nil then
-        print("WARN: " .. name .. " is trying to wrap a function to a dataref -> use xlua")
-    end
-    return find_dataref(name)
-end
-
-
-
+dofile("../../../libs/utils.lua")
 
 --*************************************************************************************--
 --**                             FIND X-PLANE DATAREFS                               **--
@@ -77,16 +63,6 @@ B777DR_N1                                       = deferred_dataref("Strato/777/e
 ---synoptic
 
 B777DR_fuel_flow_indicated                      = deferred_dataref("Strato/777/cockpit/engines/fuel_flow_indicated", "array[2]")
-
-
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-    if math.abs(target - variable) < 0.1 then return target end
-    variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-    return variable
-end
-
---------------------------------------------------------------------------------
 
 
 --*************************************************************************************--

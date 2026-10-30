@@ -6,19 +6,7 @@
 *****************************************************************************************
 --]]
 
---replace create_command
-function deferred_command(name,desc,realFunc)
-   return replace_command(name,realFunc)
-end
-
---replace create_dataref
-function deferred_dataref(name,nilType,callFunction)
-   if callFunction~=nil then
-      print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-   end
-   return find_dataref(name)
-end
-
+dofile("../../../libs/utils.lua")
 
 --*************************************************************************************--
 --**                             XTLUA GLOBAL VARIABLES                              **--
@@ -157,26 +145,6 @@ end]]
 --**                                      CODE                                       **--
 --*************************************************************************************--
 
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-   if math.abs(target - variable) < 0.1 then return target end
-   variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-   return variable
-end
-
------ TERNARY CONDITIONAL ---------------------------------------------------------------
-function B777_ternary(condition, ifTrue, ifFalse)
-   if condition then return ifTrue else return ifFalse end
-end
-
------ RESCALE ---------------------------------------------------------------------------
-function B777_rescale(in1, out1, in2, out2, x)
-
-   if x < in1 then return out1 end
-   if x > in2 then return out2 end
-   return out1 + (out2 - out1) * (x - in1) / (in2 - in1)
-
-end
 
 --*************************************************************************************--
 --**                                  EVENT CALLBACKS                                **--
@@ -207,13 +175,13 @@ function after_physics()
    if simDR_oil_press_fail_0 ~= 6 then
       B777DR_oil_press_psi[0] = -0.0027*(simDR_N1[0]*simDR_N1[0]) + 0.6464*simDR_N1[0] + 30
    else
-      B777DR_oil_press_psi[0] = B777_animate(0, B777DR_oil_press_psi[0], 1)
+      B777DR_oil_press_psi[0] = utils.animate(0, B777DR_oil_press_psi[0], 1)
    end
 
    if simDR_oil_press_fail_1 ~= 6 then
       B777DR_oil_press_psi[1] = -0.0027*(simDR_N1[1]*simDR_N1[1]) + 0.6464*simDR_N1[1] + 30
    else
-      B777DR_oil_press_psi[1] = B777_animate(0, B777DR_oil_press_psi[1], 1)
+      B777DR_oil_press_psi[1] = utils.animate(0, B777DR_oil_press_psi[1], 1)
    end
 end
 

@@ -6,21 +6,7 @@
 *****************************************************************************************
 --]]
 
--- Replace create_command function
-function deferred_command(name, desc, realFunc)
-    return replace_command(name, realFunc)
-end
-
--- Replace create_dataref function
-function deferred_dataref(name, nilType, callFunction)
-    if callFunction ~= nil then
-        print("WARN: " .. name .. " is trying to wrap a function to a dataref -> use xlua")
-    end
-    return find_dataref(name)
-end
-
-
-
+dofile("../../../libs/utils.lua")
 
 --*************************************************************************************--
 --**                             FIND X-PLANE DATAREFS                               **--
@@ -87,16 +73,6 @@ simCMD_starter_off_2        = find_command("sim/starters/shut_down_2")
 --*************************************************************************************--
 --**                            ADD DEFERRED COMMANDS                                 **--
 --*************************************************************************************--
-
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-    if math.abs(target - variable) < 0.1 then return target end
-    variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-    return variable
-end
-
---------------------------------------------------------------------------------
-
 
 --create datarefs
 
@@ -374,11 +350,11 @@ function after_physics()
     end
 
     for i = 0, 2 do
-        B777DR_ovhd_eec_button_pos[i] = B777_animate(B777DR_ovhd_eec_button_target[i], B777DR_ovhd_eec_button_pos[i], 15)
+        B777DR_ovhd_eec_button_pos[i] = utils.animate(B777DR_ovhd_eec_button_target[i], B777DR_ovhd_eec_button_pos[i], 15)
     end
 
     for i = 0, 1 do
-        B777DR_ovhd_ign_switch_pos[i] = B777_animate(B777DR_ovhd_ign_switch_target[i], B777DR_ovhd_ign_switch_pos[i], 15)
+        B777DR_ovhd_ign_switch_pos[i] = utils.animate(B777DR_ovhd_ign_switch_target[i], B777DR_ovhd_ign_switch_pos[i], 15)
     end
 
     B777_ignition()

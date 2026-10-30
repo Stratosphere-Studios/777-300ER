@@ -6,21 +6,7 @@
 *****************************************************************************************
 --]]
 
--- Replace create_command function
-function deferred_command(name, desc, realFunc)
-    return replace_command(name, realFunc)
-end
-
--- Replace create_dataref function
-function deferred_dataref(name, nilType, callFunction)
-    if callFunction ~= nil then
-        print("WARN: " .. name .. " is trying to wrap a function to a dataref -> use xlua")
-    end
-    return find_dataref(name)
-end
-
-
-
+dofile("../../../libs/utils.lua")
 
 --*************************************************************************************--
 --**                             FIND X-PLANE DATAREFS                               **--
@@ -58,7 +44,6 @@ B777DR_annun_mode                              = find_dataref("Strato/777/cockpi
 B777DR_ovhd_apu_switch_pos                     = find_dataref("Strato/777/cockpit/ovhd/elec/apu/position")
 B777DR_EEC_status                              = find_dataref("Strato/777/cockpit/ovhd/eec/status")
 
-
 --*************************************************************************************--
 --**                          FUEL SYSTEM LOGIC AND FUNCTIONS                        **--
 --*************************************************************************************--
@@ -78,15 +63,6 @@ B777DR_EEC_status                              = find_dataref("Strato/777/cockpi
 --*************************************************************************************--
 --**                            ADD DEFERRED COMMANDS                                 **--
 --*************************************************************************************--
-
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-    if math.abs(target - variable) < 0.1 then return target end
-    variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-    return variable
-end
-
---------------------------------------------------------------------------------
 
 ---CODE IN THIS FILE IS IN KILOGRAMS
 
@@ -700,20 +676,20 @@ end
 
 function after_physics()
 
-    B777DR_ovhd_fuel_button_pos[0] = B777_animate(B777DR_ovhd_fuel_button_target[0], B777DR_ovhd_fuel_button_pos[0], 15)--L fwd
-    B777DR_ovhd_fuel_button_pos[1] = B777_animate(B777DR_ovhd_fuel_button_target[1], B777DR_ovhd_fuel_button_pos[1], 15)--L aft
-    B777DR_ovhd_fuel_button_pos[2] = B777_animate(B777DR_ovhd_fuel_button_target[2], B777DR_ovhd_fuel_button_pos[2], 15)--CTR L
-    B777DR_ovhd_fuel_button_pos[3] = B777_animate(B777DR_ovhd_fuel_button_target[3], B777DR_ovhd_fuel_button_pos[3], 15)--CTR R
-    B777DR_ovhd_fuel_button_pos[4] = B777_animate(B777DR_ovhd_fuel_button_target[4], B777DR_ovhd_fuel_button_pos[4], 15)--R aft
-    B777DR_ovhd_fuel_button_pos[5] = B777_animate(B777DR_ovhd_fuel_button_target[5], B777DR_ovhd_fuel_button_pos[5], 15)--R fwd
-    B777DR_ovhd_fuel_button_pos[6] = B777_animate(B777DR_ovhd_fuel_button_target[6], B777DR_ovhd_fuel_button_pos[6], 15)--crossfeed fwd
-    B777DR_ovhd_fuel_button_pos[7] = B777_animate(B777DR_ovhd_fuel_button_target[7], B777DR_ovhd_fuel_button_pos[7], 15)--crossfeed aft
-    B777DR_ovhd_fuel_button_pos[8] = B777_animate(B777DR_ovhd_fuel_button_target[8], B777DR_ovhd_fuel_button_pos[8], 15)--jett arm
-    B777DR_ovhd_fuel_button_pos[9] = B777_animate(B777DR_ovhd_fuel_button_target[9], B777DR_ovhd_fuel_button_pos[9], 15)--L nozzle
-    B777DR_ovhd_fuel_button_pos[10] = B777_animate(B777DR_ovhd_fuel_button_target[10], B777DR_ovhd_fuel_button_pos[10], 15)--R nozzle
+    B777DR_ovhd_fuel_button_pos[0] = utils.animate(B777DR_ovhd_fuel_button_target[0], B777DR_ovhd_fuel_button_pos[0], 15)--L fwd
+    B777DR_ovhd_fuel_button_pos[1] = utils.animate(B777DR_ovhd_fuel_button_target[1], B777DR_ovhd_fuel_button_pos[1], 15)--L aft
+    B777DR_ovhd_fuel_button_pos[2] = utils.animate(B777DR_ovhd_fuel_button_target[2], B777DR_ovhd_fuel_button_pos[2], 15)--CTR L
+    B777DR_ovhd_fuel_button_pos[3] = utils.animate(B777DR_ovhd_fuel_button_target[3], B777DR_ovhd_fuel_button_pos[3], 15)--CTR R
+    B777DR_ovhd_fuel_button_pos[4] = utils.animate(B777DR_ovhd_fuel_button_target[4], B777DR_ovhd_fuel_button_pos[4], 15)--R aft
+    B777DR_ovhd_fuel_button_pos[5] = utils.animate(B777DR_ovhd_fuel_button_target[5], B777DR_ovhd_fuel_button_pos[5], 15)--R fwd
+    B777DR_ovhd_fuel_button_pos[6] = utils.animate(B777DR_ovhd_fuel_button_target[6], B777DR_ovhd_fuel_button_pos[6], 15)--crossfeed fwd
+    B777DR_ovhd_fuel_button_pos[7] = utils.animate(B777DR_ovhd_fuel_button_target[7], B777DR_ovhd_fuel_button_pos[7], 15)--crossfeed aft
+    B777DR_ovhd_fuel_button_pos[8] = utils.animate(B777DR_ovhd_fuel_button_target[8], B777DR_ovhd_fuel_button_pos[8], 15)--jett arm
+    B777DR_ovhd_fuel_button_pos[9] = utils.animate(B777DR_ovhd_fuel_button_target[9], B777DR_ovhd_fuel_button_pos[9], 15)--L nozzle
+    B777DR_ovhd_fuel_button_pos[10] = utils.animate(B777DR_ovhd_fuel_button_target[10], B777DR_ovhd_fuel_button_pos[10], 15)--R nozzle
 
-    B777DR_fuel_cutoff_switch_pos[0] = B777_animate(B777DR_fuel_cutoff_switch_target[0], B777DR_fuel_cutoff_switch_pos[0], 15)--L
-    B777DR_fuel_cutoff_switch_pos[1] = B777_animate(B777DR_fuel_cutoff_switch_target[1], B777DR_fuel_cutoff_switch_pos[1], 15)--R
+    B777DR_fuel_cutoff_switch_pos[0] = utils.animate(B777DR_fuel_cutoff_switch_target[0], B777DR_fuel_cutoff_switch_pos[0], 15)--L
+    B777DR_fuel_cutoff_switch_pos[1] = utils.animate(B777DR_fuel_cutoff_switch_target[1], B777DR_fuel_cutoff_switch_pos[1], 15)--R
 
     B777_fuel_flow()
     B777_crossfeed()

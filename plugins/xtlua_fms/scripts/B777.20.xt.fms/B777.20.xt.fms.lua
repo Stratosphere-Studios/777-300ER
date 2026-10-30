@@ -5,17 +5,8 @@
 *****************************************************************************************
 ]]
 
-function deferred_command(name,desc,realFunc)
-	return replace_command(name,realFunc)
-end
-
---replace deferred_dataref
-function deferred_dataref(name,nilType,callFunction)
-	if callFunction~=nil then
-		print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-    end
-    return find_dataref(name)
-end
+dofile("../../../libs/utils.lua")
+dofile("../../../libs/json/json.lua")
 
 B777DR_fmsL_scratchpad = deferred_dataref("Strato/777/FMC/scratchpad_L", "string")
 B777DR_fmsR_scratchpad = deferred_dataref("Strato/777/FMC/scratchpad_R", "string")
@@ -185,7 +176,6 @@ function toDMS(value,isLat) -- multiplies each remaining decimal by 60, the conv
 	end
 end
 
-dofile("../../../libs/json/json.lua")
 hh=find_dataref("sim/cockpit2/clock_timer/zulu_time_hours")
 mm=find_dataref("sim/cockpit2/clock_timer/zulu_time_minutes")
 ss=find_dataref("sim/cockpit2/clock_timer/zulu_time_seconds")
@@ -562,7 +552,7 @@ function after_physics()
 
 ---@diagnostic disable-next-line: unused-local
 	local temp = B777DR_backend_showSelWpt
-	checkSelWPT(1) -- this is stupid, fix
+	checkSelWPT(1) -- TODO: this is stupid, fix
 	checkSelWPT(2)
 
 	fuel()

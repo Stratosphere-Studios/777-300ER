@@ -551,6 +551,7 @@ function fms:B777_fms_display()
   local fmsPage = fmsPages[page]:getPage(self.pgNo,thisID);
   local fmsPagesmall = fmsPages[page]:getSmallPage(self.pgNo,thisID);
 
+  --TODO: Coloring code below is janky! Would like to replace with a stack-based system.
   for i, input in ipairs(fmsPage) do
     local colorCount = select(2, input:gsub( ";", "")) -- how many ;'s are there
     if colorCount ~= 0 then -- if any

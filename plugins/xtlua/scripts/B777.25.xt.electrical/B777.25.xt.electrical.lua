@@ -6,18 +6,7 @@
 *****************************************************************************************
 --]]
 
---replace create_command
-function deferred_command(name,desc,realFunc)
-	return replace_command(name,realFunc)
-end
-
---replace create_dataref
-function deferred_dataref(name,nilType,callFunction)
-   if callFunction~=nil then
-      print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-   end
-   return find_dataref(name)
-end
+dofile("../../../libs/utils.lua")
 
 --*************************************************************************************--
 --**                             FIND X-PLANE DATAREFS                               **--
@@ -70,17 +59,6 @@ B777DR_hydraulic_demand_fault                   = find_dataref("Strato/777/hydra
 --*************************************************************************************--
 --**                            ADD DEFERRED COMMANDS                                 **--
 --*************************************************************************************--
-
------ ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-    if math.abs(target - variable) < 0.1 then return target end
-    variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-    return variable
- end
-
-
-
---------------------------------------------------------------------------------
 
 --create datarefs
 
@@ -952,29 +930,29 @@ function after_physics()
 
     ]]--
 
-    B777DR_ovhd_elec_button_pos[0] = B777_animate(B777DR_ovhd_elec_button_target[0], B777DR_ovhd_elec_button_pos[0], 15)---battery
-    B777DR_ovhd_elec_button_pos[3] = B777_animate(B777DR_ovhd_elec_button_target[3], B777DR_ovhd_elec_button_pos[3], 15)---apu gen
+    B777DR_ovhd_elec_button_pos[0] = utils.animate(B777DR_ovhd_elec_button_target[0], B777DR_ovhd_elec_button_pos[0], 15)---battery
+    B777DR_ovhd_elec_button_pos[3] = utils.animate(B777DR_ovhd_elec_button_target[3], B777DR_ovhd_elec_button_pos[3], 15)---apu gen
 
 
-    B777DR_ovhd_elec_button_pos[4] = B777_animate(B777DR_ovhd_elec_button_target[4], B777DR_ovhd_elec_button_pos[4], 15)---IDG 1 DISC
-    B777DR_ovhd_elec_button_pos[5] = B777_animate(B777DR_ovhd_elec_button_target[5], B777DR_ovhd_elec_button_pos[5], 15)---IDG 1 gen ctrl
-    B777DR_ovhd_elec_button_pos[6] = B777_animate(B777DR_ovhd_elec_button_target[6], B777DR_ovhd_elec_button_pos[6], 15)---IDG 2 DISC
-    B777DR_ovhd_elec_button_pos[7] = B777_animate(B777DR_ovhd_elec_button_target[7], B777DR_ovhd_elec_button_pos[7], 15)---IDG 2 gen ctrl
-    B777DR_ovhd_elec_button_pos[8] = B777_animate(B777DR_ovhd_elec_button_target[8], B777DR_ovhd_elec_button_pos[8], 15)---backup IDG 1
-    B777DR_ovhd_elec_button_pos[9] = B777_animate(B777DR_ovhd_elec_button_target[9], B777DR_ovhd_elec_button_pos[9], 15)---backup IDG 2
+    B777DR_ovhd_elec_button_pos[4] = utils.animate(B777DR_ovhd_elec_button_target[4], B777DR_ovhd_elec_button_pos[4], 15)---IDG 1 DISC
+    B777DR_ovhd_elec_button_pos[5] = utils.animate(B777DR_ovhd_elec_button_target[5], B777DR_ovhd_elec_button_pos[5], 15)---IDG 1 gen ctrl
+    B777DR_ovhd_elec_button_pos[6] = utils.animate(B777DR_ovhd_elec_button_target[6], B777DR_ovhd_elec_button_pos[6], 15)---IDG 2 DISC
+    B777DR_ovhd_elec_button_pos[7] = utils.animate(B777DR_ovhd_elec_button_target[7], B777DR_ovhd_elec_button_pos[7], 15)---IDG 2 gen ctrl
+    B777DR_ovhd_elec_button_pos[8] = utils.animate(B777DR_ovhd_elec_button_target[8], B777DR_ovhd_elec_button_pos[8], 15)---backup IDG 1
+    B777DR_ovhd_elec_button_pos[9] = utils.animate(B777DR_ovhd_elec_button_target[9], B777DR_ovhd_elec_button_pos[9], 15)---backup IDG 2
 
-    B777DR_ovhd_elec_button_pos[10] = B777_animate(B777DR_ovhd_elec_button_target[10], B777DR_ovhd_elec_button_pos[10], 15)---ife/pass seats
-    B777DR_ovhd_elec_button_pos[11] = B777_animate(B777DR_ovhd_elec_button_target[11], B777DR_ovhd_elec_button_pos[11], 15)---cabin/util
+    B777DR_ovhd_elec_button_pos[10] = utils.animate(B777DR_ovhd_elec_button_target[10], B777DR_ovhd_elec_button_pos[10], 15)---ife/pass seats
+    B777DR_ovhd_elec_button_pos[11] = utils.animate(B777DR_ovhd_elec_button_target[11], B777DR_ovhd_elec_button_pos[11], 15)---cabin/util
 
-    B777DR_ovhd_elec_button_pos[12] = B777_animate(B777DR_ovhd_elec_button_target[12], B777DR_ovhd_elec_button_pos[12], 15)---Bus tie 1
-    B777DR_ovhd_elec_button_pos[13] = B777_animate(B777DR_ovhd_elec_button_target[13], B777DR_ovhd_elec_button_pos[13], 15)---Bus tie 2
+    B777DR_ovhd_elec_button_pos[12] = utils.animate(B777DR_ovhd_elec_button_target[12], B777DR_ovhd_elec_button_pos[12], 15)---Bus tie 1
+    B777DR_ovhd_elec_button_pos[13] = utils.animate(B777DR_ovhd_elec_button_target[13], B777DR_ovhd_elec_button_pos[13], 15)---Bus tie 2
 
-    B777DR_ovhd_apu_switch_pos = B777_animate(B777DR_ovhd_apu_switch_target, B777DR_ovhd_apu_switch_pos, 15)---apu
+    B777DR_ovhd_apu_switch_pos = utils.animate(B777DR_ovhd_apu_switch_target, B777DR_ovhd_apu_switch_pos, 15)---apu
 
-    B777DR_ovhd_elec_button_pos[1] = B777_animate(B777DR_ovhd_elec_button_target[1], B777DR_ovhd_elec_button_pos[1], 15)---ext pwr 1
-    B777DR_ovhd_elec_button_pos[2] = B777_animate(B777DR_ovhd_elec_button_target[2], B777DR_ovhd_elec_button_pos[2], 15)---ext pwr 2
+    B777DR_ovhd_elec_button_pos[1] = utils.animate(B777DR_ovhd_elec_button_target[1], B777DR_ovhd_elec_button_pos[1], 15)---ext pwr 1
+    B777DR_ovhd_elec_button_pos[2] = utils.animate(B777DR_ovhd_elec_button_target[2], B777DR_ovhd_elec_button_pos[2], 15)---ext pwr 2
 
-    B777DR_annun_pos = B777_animate(B777DR_annun_target, B777DR_annun_pos, 15)---annunciators
+    B777DR_annun_pos = utils.animate(B777DR_annun_target, B777DR_annun_pos, 15)---annunciators
 
 
     B777_idg_gen()            -- sets simDR_generator_on[], affects left_AC

@@ -1,3 +1,16 @@
+-- Replace create_command function
+function deferred_command(name, desc, realFunc)
+    return replace_command(name, realFunc)
+end
+
+-- Replace create_dataref function
+function deferred_dataref(name, nilType, callFunction)
+    if callFunction ~= nil then
+        print("WARN: " .. name .. " is trying to wrap a function to a dataref -> use xlua")
+    end
+    return find_dataref(name)
+end
+
 _G.utils = {}
 
 function utils.animate(target, variable, speed)
@@ -73,6 +86,10 @@ function utils.animate_const(target, variable, speed)
         variable = variable - (speed * SIM_PERIOD)
     end
     return variable
+end
+
+function utils.animate_switch()
+--TODO: should start slow, then "snap" (speed up to final position, then maybe slow again at the end)
 end
 
 return utils

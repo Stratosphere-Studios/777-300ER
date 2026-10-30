@@ -177655,7 +177655,7 @@ IDX	161402
 	ANIM_trans_key	0	0.13585	0.87739013	-33.169075
 	ANIM_trans_key	1	0.13585	0.8770601	-33.170025
 	ANIM_trans_end
-		ATTR_light_level 0 1	testnum
+		ATTR_light_level 0 1	testNum
 		TRIS	93255 24
 		ATTR_light_level 0 1	Strato/777/cockpit/cockpit_panel_lights[4]
 		TRIS	95655 1104
@@ -178473,7 +178473,7 @@ IDX	161402
 	ANIM_trans_end
 		ATTR_light_level 0 1	Strato/777/cockpit/cockpit_panel_lights[4]
 		TRIS	89316 1104
-		ATTR_light_level 0 1	testnum
+		ATTR_light_level 0 1	testNum
 		TRIS	93351 24
 	ANIM_end
 	ANIM_begin
@@ -178482,7 +178482,7 @@ IDX	161402
 	ANIM_trans_key	1	0.13585	0.89698009	-33.176964
 	ANIM_trans_end
 	5
-		ATTR_light_level 0 1	testnum
+		ATTR_light_level 0 1	testNum
 		TRIS	69192 24
 		ATTR_light_level 0 1	Strato/777/cockpit/cockpit_panel_lights[4]
 		TRIS	96759 1104
@@ -178517,7 +178517,7 @@ IDX	161402
 	ANIM_trans_end
 		ATTR_light_level 0 1	Strato/777/cockpit/cockpit_panel_lights[4]
 		TRIS	88212 1104
-		ATTR_light_level 0 1	testnum
+		ATTR_light_level 0 1	testNum
 		TRIS	93423 24
 	ANIM_end
 	ANIM_begin

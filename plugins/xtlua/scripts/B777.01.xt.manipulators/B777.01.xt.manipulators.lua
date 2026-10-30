@@ -8,19 +8,8 @@
 *****************************************************************************************
 --]]
 -- RUDDER TRIM KNOB IS IN FLIGHT INSTRUMENTS
---replace create_command
-function deferred_command(name,desc,realFunc)
-	return replace_command(name,realFunc)
-end
 
---replace create_dataref
-function deferred_dataref(name,nilType,callFunction)
-   if callFunction~=nil then
-      print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-   end
-   return find_dataref(name)
-end
-
+dofile("../../../libs/utils.lua")
 
 --*************************************************************************************--
 --**                            XTLUA GLOBAL VARIABLES                               **--
@@ -487,11 +476,6 @@ B777CMD_cockpit_door                      = deferred_command("Strato/B777/knob_s
 --*************************************************************************************--
 
 ----- ANIMATION UTILITY -----------------------------------------------------------------
-function B777_animate(target, variable, speed)
-   if math.abs(target - variable) < 0.1 then return target end
-   variable = variable + ((target - variable) * (speed * SIM_PERIOD))
-   return variable
-end
 
 function coverPhysics() -- moves switches under switch covers when switch covers are closed
    if B777DR_main_cover_positions[4] < 0.1 then -- manual gear extension
@@ -511,12 +495,10 @@ function coverPhysics() -- moves switches under switch covers when switch covers
    end
 end
 
+--TODO: Figure out where this is actually necessary and apply where needed.
 function refreshDrs() -- read drs to make sure they're up to date
 ---@diagnostic disable-next-line: unused-local
-   local temp = B777CMD_ap_on
-   temp = B777CMD_disco_bar
-   temp = B777CMD_ap_disengage
-   temp = B777DR_ap_spdHld_sw
+   local temp = B777DR_ap_spdHld_sw
    temp = B777DR_ap_flch_sw
    temp = B777DR_ap_altHld_sw
    temp = B777DR_ap_vsHld_sw
@@ -556,65 +538,65 @@ end
 --function before_physics()
 
 function after_physics()
-   refreshDrs()
-   B777DR_cockpit_door_pos = B777_animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 3)
+   --refreshDrs() -- not sure if this actually does anything
+   B777DR_cockpit_door_pos = utils.animate(B777DR_cockpit_door_target, B777DR_cockpit_door_pos, 3)
 
-   B777DR_mcp_button_pos[13] = B777_animate(B777DR_ap_fltDir_sw_capt, B777DR_mcp_button_pos[13], 30)
-   B777DR_mcp_button_pos[14] = B777_animate(B777DR_ap_fltDir_sw_fo, B777DR_mcp_button_pos[14], 30)
-   B777DR_mcp_button_pos[15] = B777_animate(B777DR_at_arm_sw, B777DR_mcp_button_pos[15], 30)
+   B777DR_mcp_button_pos[13] = utils.animate(B777DR_ap_fltDir_sw_capt, B777DR_mcp_button_pos[13], 30)
+   B777DR_mcp_button_pos[14] = utils.animate(B777DR_ap_fltDir_sw_fo, B777DR_mcp_button_pos[14], 30)
+   B777DR_mcp_button_pos[15] = utils.animate(B777DR_at_arm_sw, B777DR_mcp_button_pos[15], 30)
 
    for i = 1, 17 do
       if i < 13 or i > 15 then
-         B777DR_mcp_button_pos[i] = B777_animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 30)
+         B777DR_mcp_button_pos[i] = utils.animate(B777DR_mcp_button_target[i], B777DR_mcp_button_pos[i], 30)
       end
    end
 
    for i = 1, 5 do
-      B777DR_ctr1_button_pos[i] = B777_animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 20)
+      B777DR_ctr1_button_pos[i] = utils.animate(B777_ctr1_button_target[i], B777DR_ctr1_button_pos[i], 20)
    end
-   B777DR_ctr1_button_pos[6] = B777_animate(B777DR_stab_cutout_C, B777DR_ctr1_button_pos[6], 20)
-   B777DR_ctr1_button_pos[7] = B777_animate(B777DR_stab_cutout_R, B777DR_ctr1_button_pos[7], 20)
+   B777DR_ctr1_button_pos[6] = utils.animate(B777DR_stab_cutout_C, B777DR_ctr1_button_pos[6], 20)
+   B777DR_ctr1_button_pos[7] = utils.animate(B777DR_stab_cutout_R, B777DR_ctr1_button_pos[7], 20)
 
-   B777DR_ovhd_aft_button_positions[1] = B777_animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 15)
-   B777DR_ovhd_aft_button_positions[2] = B777_animate(B777DR_ace_tac_eng,  B777DR_ovhd_aft_button_positions[2], 15)
-   B777DR_ovhd_aft_button_positions[3] = B777_animate(B777DR_pfc_disc,  B777DR_ovhd_aft_button_positions[3], 15)
+   B777DR_ovhd_aft_button_positions[1] = utils.animate(B777DR_ovhd_aft_button_target[1], B777DR_ovhd_aft_button_positions[1], 15)
+   B777DR_ovhd_aft_button_positions[2] = utils.animate(B777DR_ace_tac_eng,  B777DR_ovhd_aft_button_positions[2], 15)
+   B777DR_ovhd_aft_button_positions[3] = utils.animate(B777DR_pfc_disc,  B777DR_ovhd_aft_button_positions[3], 15)
 
    for i = 1, 5 do
-      B777DR_ovhd_fwd_button_positions[i] = B777_animate(simDR_landing_light_switches[i], B777DR_ovhd_fwd_button_positions[i], 20)
+      B777DR_ovhd_fwd_button_positions[i] = utils.animate(simDR_landing_light_switches[i], B777DR_ovhd_fwd_button_positions[i], 20)
    end
-   B777DR_ovhd_fwd_button_positions[6] = B777_animate(simDR_taxi_light_switch, B777DR_ovhd_fwd_button_positions[6], 20)
-   B777DR_ovhd_fwd_button_positions[7] = B777_animate(simDR_nav_light_switch, B777DR_ovhd_fwd_button_positions[7], 20)
-   B777DR_ovhd_fwd_button_positions[8] = B777_animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 20)
-   B777DR_ovhd_fwd_button_positions[9] = B777_animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 20)
+   B777DR_ovhd_fwd_button_positions[6] = utils.animate(simDR_taxi_light_switch, B777DR_ovhd_fwd_button_positions[6], 20)
+   B777DR_ovhd_fwd_button_positions[7] = utils.animate(simDR_nav_light_switch, B777DR_ovhd_fwd_button_positions[7], 20)
+   B777DR_ovhd_fwd_button_positions[8] = utils.animate(simDR_strobe_light_switch, B777DR_ovhd_fwd_button_positions[8], 20)
+   B777DR_ovhd_fwd_button_positions[9] = utils.animate(simDR_beacon_light_switch, B777DR_ovhd_fwd_button_positions[9], 20)
 
-   B777DR_ovhd_fwd_button_positions[10] = B777_animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[10], 20)
-   B777DR_ovhd_fwd_button_positions[11] = B777_animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[11], 20)
+   B777DR_ovhd_fwd_button_positions[10] = utils.animate(simDR_wiper_switch[0], B777DR_ovhd_fwd_button_positions[10], 20)
+   B777DR_ovhd_fwd_button_positions[11] = utils.animate(simDR_wiper_switch[1], B777DR_ovhd_fwd_button_positions[11], 20)
 
-   B777DR_ovhd_fwd_button_positions[12] = B777_animate(B777DR_ovhd_fwd_button_target[12], B777DR_ovhd_fwd_button_positions[12], 20)
-   B777DR_ovhd_fwd_button_positions[13] = B777_animate(B777DR_ovhd_fwd_button_target[13], B777DR_ovhd_fwd_button_positions[13], 20)
+   B777DR_ovhd_fwd_button_positions[12] = utils.animate(B777DR_ovhd_fwd_button_target[12], B777DR_ovhd_fwd_button_positions[12], 20)
+   B777DR_ovhd_fwd_button_positions[13] = utils.animate(B777DR_ovhd_fwd_button_target[13], B777DR_ovhd_fwd_button_positions[13], 20)
 
    for i = 0, 3 do
-      B777DR_hyd_primary_switch_pos[i] = B777_animate(B777DR_primary_hyd_pump_sw[i], B777DR_hyd_primary_switch_pos[i], 20)
+      B777DR_hyd_primary_switch_pos[i] = utils.animate(B777DR_primary_hyd_pump_sw[i], B777DR_hyd_primary_switch_pos[i], 20)
    end
 
    for i = 0, 3 do
-      B777DR_hyd_demand_switch_pos[i] = B777_animate(B777DR_demand_hyd_pump_sw[i], B777DR_hyd_demand_switch_pos[i], 20)
+      B777DR_hyd_demand_switch_pos[i] = utils.animate(B777DR_demand_hyd_pump_sw[i], B777DR_hyd_demand_switch_pos[i], 20)
    end
 
    for i = 0, 5 do
-      B777DR_ovhd_ctr_cover_positions[i] = B777_animate(B777DR_ovhd_ctr_cover_target[i], B777DR_ovhd_ctr_cover_positions[i], 15)
+      B777DR_ovhd_ctr_cover_positions[i] = utils.animate(B777DR_ovhd_ctr_cover_target[i], B777DR_ovhd_ctr_cover_positions[i], 15)
    end
    for i = 0, 6 do
-         B777DR_ovhd_aft_cover_positions[i] = B777_animate(B777DR_ovhd_aft_cover_target[i], B777DR_ovhd_aft_cover_positions[i], 15)
+         B777DR_ovhd_aft_cover_positions[i] = utils.animate(B777DR_ovhd_aft_cover_target[i], B777DR_ovhd_aft_cover_positions[i], 15)
    end
    for i = 0, 5 do
-      B777DR_main_cover_positions[i] = B777_animate(B777DR_main_cover_target[i], B777DR_main_cover_positions[i], 15)
+      B777DR_main_cover_positions[i] = utils.animate(B777DR_main_cover_target[i], B777DR_main_cover_positions[i], 15)
    end
    for i = 0, 4 do
-      B777DR_ctr_cover_positions[i] = B777_animate(B777DR_ctr_cover_target[i], B777DR_ctr_cover_positions[i], 15)
+      B777DR_ctr_cover_positions[i] = utils.animate(B777DR_ctr_cover_target[i], B777DR_ctr_cover_positions[i], 15)
    end
 
-   B777DR_gear_altn_extnsn_pos = B777_animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 20)
+   B777DR_gear_altn_extnsn_pos = utils.animate(B777DR_gear_altn_extnsn_target, B777DR_gear_altn_extnsn_pos, 20)
 
    for i = 0, 5 do
       if simDR_bus_volts[0] >=5 or simDR_bus_volts[1] >=5 or simDR_bus_volts[2] >=5 then
@@ -624,9 +606,9 @@ function after_physics()
       end
    end
 
-   B777DR_ail_trim = B777_animate(ailTrimPos, B777DR_ail_trim, 15)
+   B777DR_ail_trim = utils.animate(ailTrimPos, B777DR_ail_trim, 15)
 
-   B777DR_ovhd_ctr_button_positions[0] = B777_animate(B777DR_grd_pwr_primary, B777DR_ctr_cover_positions[0], 10)
+   B777DR_ovhd_ctr_button_positions[0] = utils.animate(B777DR_grd_pwr_primary, B777DR_ctr_cover_positions[0], 10)
 
 	coverPhysics()
 

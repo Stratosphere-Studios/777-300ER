@@ -13,24 +13,12 @@
 -- update any time the data being written to the config file is changed. makes sure config file is same version as aircraft
 local version = 5
 
---replace create_command
-function deferred_command(name,desc,realFunc)
-	return replace_command(name,realFunc)
-end
---replace deferred_dataref
-function deferred_dataref(name,nilType,callFunction)
-	if callFunction~=nil then
-		print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-	end
-    return find_dataref(name)
-end
+dofile("../../../libs/utils.lua")
+dofile("../../../libs/json/json.lua")
 
 --*************************************************************************************--
 --**                                Find Datarefs                                    **--
 --*************************************************************************************--
-
-dofile("../../../libs/json/json.lua")
-
 --simDR_livery_path			= find_dataref("sim/aircraft/view/acf_livery_path")
 
 --Baro Sync
@@ -279,7 +267,8 @@ end
 
 function after_physics()
 ---@diagnostic disable-next-line: unused-local
-	local temp1, temp2 = B777DR_newsimconfig_data, B777DR_simconfig_data -- keep data fresh
+	local temp = B777DR_newsimconfig_data
+	temp = B777DR_simconfig_data -- keep data fresh
 	hasSimConfig()
 	baro_sync()
 end

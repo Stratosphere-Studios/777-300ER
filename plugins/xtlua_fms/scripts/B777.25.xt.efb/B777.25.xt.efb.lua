@@ -6,19 +6,7 @@
 *****************************************************************************************
 --]]
 
---replace create_command
-function deferred_command(name,desc,realFunc)
-   return replace_command(name,realFunc)
-end
-
---replace create_dataref
-function deferred_dataref(name,nilType,callFunction)
-   if callFunction~=nil then
-      print("WARN:" .. name .. " is trying to wrap a function to a dataref -> use xlua")
-   end
-   return find_dataref(name)
-end
-
+dofile("../../../libs/utils.lua")
 dofile("../../../libs/json/json.lua")
 
 --*************************************************************************************--
