@@ -218,7 +218,7 @@ local Consumer = {
         if phase == 0 then
             if self.switchState == 0 then
                 self.switchState = 1
-                self:automanager()
+                self:autoManager()
             else
                 self.switchState = 0
                 run_after_time(function()
